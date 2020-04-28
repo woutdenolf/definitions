@@ -20,6 +20,7 @@ from local_utilities import printf, replicate
 
 INDENTATION_UNIT = '  '
 listing_category = None
+lexicon = []
 
 
 def fmtTyp( node ):
@@ -224,6 +225,29 @@ def printAttribute( ns, kind, node, optional, indent ):
     node_list = node.xpath('nx:enumeration', namespaces=ns)
     if len(node_list) == 1:
         printEnumeration( indent+INDENTATION_UNIT, ns, node_list[0] )
+    parent = node.getparent()
+    lexicon.append(
+        dict(
+            parent=parent.tag.split("}")[-1],
+            category="attribute", 
+            name=name, 
+            index_name=index_name, 
+            kind=kind, 
+            optional=optional,
+            type=node.get("type", "NX_CHAR"),
+            units=node.get("units", ""),
+            base=relativeBase(node),
+            sourceline=node.sourceline,
+            deprecated=node.get("deprecated", False)
+        )
+    )
+
+
+def relativeBase(node):
+    path = os.path.abspath(os.path.join(__file__, ".."))
+    base = os.path.abspath(node.base)
+    brief = base.lstrip(path)
+    return brief
 
 
 def printIfDeprecated( ns, node, indent ):
@@ -232,6 +256,7 @@ def printIfDeprecated( ns, node, indent ):
         print( '\n%s.. index:: deprecated\n' % indent)
         fmt = '\n%s**DEPRECATED**: %s\n'
         print( fmt % (indent, deprecated ) )
+        # TODO: lexicon
 
 
 def printFullTree(ns, parent, name, indent):
@@ -262,6 +287,23 @@ def printFullTree(ns, parent, name, indent):
                 indent, name, dims, optional_text, fmtTyp(node), fmtUnits(node)
                 ))
 
+        # parent = node.getparent()
+        lexicon.append(
+            dict(
+                parent=parent.tag.split("}")[-1],
+                category="field", 
+                name=name, 
+                index_name=index_name, 
+                # kind=kind, 
+                optional=optional_text,
+                type=node.get("type", "NX_CHAR"),
+                units=node.get("units", ""),
+                base=relativeBase(node),
+                sourceline=node.sourceline,
+                deprecated=node.get("deprecated", False)
+            )
+        )
+
         printIfDeprecated( ns, node, indent+INDENTATION_UNIT )
         printDoc(indent+INDENTATION_UNIT, ns, node)
 
@@ -283,6 +325,22 @@ def printFullTree(ns, parent, name, indent):
                 name = typ.lstrip('NX').upper()
             typ = ':ref:`%s`' % typ
         print( '%s**%s**: %s%s\n' % (indent, name, optional_text, typ ) )
+
+        lexicon.append(
+            dict(
+                parent=parent.tag.split("}")[-1],
+                category="group", 
+                name=name, 
+                # index_name=index_name, 
+                # kind=kind, 
+                optional=optional_text,
+                type=node.get("type"),
+                # units=node.get("units", ""),
+                base=relativeBase(node),
+                sourceline=node.sourceline,
+                deprecated=node.get("deprecated", False)
+            )
+        )
 
         printIfDeprecated(ns, node, indent+INDENTATION_UNIT)
         printDoc(indent+INDENTATION_UNIT, ns, node)
@@ -443,6 +501,10 @@ def main():
         exit()
 
     print_rst_from_nxdl(nxdl_file)
+    # print()
+    # import json
+    # print(json.dumps(lexicon, indent=2))
+    # print(f"{len(lexicon)} lexicon entries")
 
     # if the NXDL has a subdirectory,
     # copy that subdirectory (quietly) to the pwd, such as:
