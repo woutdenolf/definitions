@@ -501,10 +501,9 @@ def main():
         exit()
 
     print_rst_from_nxdl(nxdl_file)
-    # print()
     # import json
-    # print(json.dumps(lexicon, indent=2))
-    # print(f"{len(lexicon)} lexicon entries")
+    # with open("lexicon.json", "w") as lex:
+    #     lex.write(json.dumps(lexicon, indent=2))
 
     # if the NXDL has a subdirectory,
     # copy that subdirectory (quietly) to the pwd, such as:
