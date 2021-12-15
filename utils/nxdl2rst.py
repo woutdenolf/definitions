@@ -182,10 +182,10 @@ def get_required_or_optional_text(node, use_application_defaults):
         optional = node.get('optional', optional_default) in (True, 'true', '1', 1)
         recommended = node.get('recommended', None) in (True, 'true', '1', 1)
         minOccurs = get_minOccurs(node, use_application_defaults)
-        if minOccurs in ('0', 0) or optional:
-            optional_text = '(optional) '
-        elif recommended:
+        if recommended:
             optional_text = '(recommended) '
+        elif minOccurs in ('0', 0) or optional:
+            optional_text = '(optional) '
         elif minOccurs in ('1', 1):
             optional_text = '(required) '
         else:
@@ -209,8 +209,10 @@ def analyzeDimensions( ns, parent ):
     if len(node_list) != 1:
         return ''
     node = node_list[0]
-    # rank = node.get('rank') # ignore this
+    rank = node.get('rank', '')
     node_list = node.xpath('nx:dim', namespaces=ns)
+    if not node_list and rank:
+        return '[...] (%s,)' % rank
     dims = []
     for subnode in node_list:
         value = subnode.get('value')
