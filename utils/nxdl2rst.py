@@ -209,10 +209,8 @@ def analyzeDimensions( ns, parent ):
     if len(node_list) != 1:
         return ''
     node = node_list[0]
-    rank = node.get('rank', '')
+    # rank = node.get('rank')  # ignore this
     node_list = node.xpath('nx:dim', namespaces=ns)
-    if not node_list and rank:
-        return '[...] (%s,)' % rank
     dims = []
     for subnode in node_list:
         value = subnode.get('value')
