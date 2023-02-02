@@ -21,7 +21,9 @@
 #
 # For further information, see http://www.nexusformat.org
 -->
-<definition name="NXstress" extends="NXobject" type="group" category="application" xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
+<definition name="NXstress" extends="NXobject" type="group" category="application"
+    xmlns="http://definition.nexusformat.org/nxdl/3.1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
     <symbols>
         <symbol name="nX">
             <doc>Number of diffractogram channels.</doc>
