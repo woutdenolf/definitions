@@ -1,0 +1,954 @@
+
+
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>NXstress &#8212; nexus v2022.06 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinxdoc.css" />
+    <link rel="stylesheet" href="../../_static/blockquote.css" type="text/css" />
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="copyright" title="Copyright" href="../../copyright.html" />
+    <link rel="next" title="NXxpcs" href="NXxpcs.html" />
+    <link rel="prev" title="NXstage_lab" href="NXstage_lab.html" /> 
+    <link rel="stylesheet" href="../../_static/blockquote.css" type="text/css" />
+
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="NXxpcs.html" title="NXxpcs"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="NXstage_lab.html" title="NXstage_lab"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">nexus v2022.06 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../ref_doc.html" ><span class="section-number">3. </span>NeXus: Reference Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../index.html" ><span class="section-number">3.3. </span>NeXus Class Definitions</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="index.html" accesskey="U"><span class="section-number">3.3.3.3. </span>Contributed Definitions</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">NXstress</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="nxstress">
+<span id="index-0"></span><span id="id1"></span><h1>NXstress<a class="headerlink" href="#nxstress" title="Permalink to this heading">¶</a></h1>
+<p><strong>Status</strong>:</p>
+<blockquote>
+<div><p>application definition, extends <a class="reference internal" href="../base_classes/NXobject.html#nxobject"><span class="std std-ref">NXobject</span></a></p>
+</div></blockquote>
+<p><strong>Description</strong>:</p>
+<blockquote>
+<div><p>Application definition for stress and strain analysis of crystalline material defined by the <a class="reference external" href="https://easi-stress.eu">EASI-STRESS consortium</a>.</p>
+<p>When a crystal is loaded (applied or residual stress) its crystallographic parameters change.</p>
+<p>Stress and strain analysis calculates deformation (strain) and the associated force (stress)
+from diffraction data.</p>
+<p>This application definition essentially standardizes the result of diffraction pattern analysis
+from different types of diffraction experiments for the purpose of stress and strain analysis.
+The analysis is typically some form of diffraction peak indexing and fitting.
+The experiments are for example</p>
+<ul class="simple">
+<li><p>energy-dispersive X-ray powder diffraction</p></li>
+<li><p>angular-dispersive X-ray powder diffraction</p></li>
+<li><p>angular-dispersive neutron powder diffraction</p></li>
+<li><p>time-of-flight (TOF) neutron powder diffraction.</p></li>
+</ul>
+<p>Sample and detector positions can be defined with <a class="reference internal" href="../base_classes/NXtransformations.html#nxtransformations"><span class="std std-ref">NXtransformations</span></a>. If you don’t specify the direction of gravity
+and the direction of the beam then the standard NeXus Coordinate System is used.</p>
+</div></blockquote>
+<p><strong>Symbols</strong>:</p>
+<blockquote>
+<div><p><strong>nX</strong>: Number of diffractogram channels.</p>
+<p><strong>nD</strong>: Number of diffractograms. For example the number of energy-dispersive detectors or the number of azimuthal sections in an area detector.</p>
+<p><strong>nPeaks</strong>: Number of reflections.</p>
+<p><strong>xUnit</strong>: Diffractogram X units.</p>
+<p><strong>yUnit</strong>: Diffractogram Y units.</p>
+<p><strong>cUnit</strong>: Converted diffractogram X units (could be the same as <em>xUnit</em>).</p>
+</div></blockquote>
+<dl class="simple">
+<dt><strong>Groups cited</strong>:</dt><dd><p><a class="reference internal" href="../base_classes/NXcollection.html#nxcollection"><span class="std std-ref">NXcollection</span></a>, <a class="reference internal" href="../base_classes/NXdata.html#nxdata"><span class="std std-ref">NXdata</span></a>, <a class="reference internal" href="../base_classes/NXdetector.html#nxdetector"><span class="std std-ref">NXdetector</span></a>, <a class="reference internal" href="../base_classes/NXentry.html#nxentry"><span class="std std-ref">NXentry</span></a>, <a class="reference internal" href="../base_classes/NXinstrument.html#nxinstrument"><span class="std std-ref">NXinstrument</span></a>, <a class="reference internal" href="../base_classes/NXnote.html#nxnote"><span class="std std-ref">NXnote</span></a>, <a class="reference internal" href="../base_classes/NXprocess.html#nxprocess"><span class="std std-ref">NXprocess</span></a>, <a class="reference internal" href="../base_classes/NXsample.html#nxsample"><span class="std std-ref">NXsample</span></a>, <a class="reference internal" href="../base_classes/NXsource.html#nxsource"><span class="std std-ref">NXsource</span></a>, <a class="reference internal" href="../base_classes/NXtransformations.html#nxtransformations"><span class="std std-ref">NXtransformations</span></a>, <a class="reference internal" href="../base_classes/NXuser.html#nxuser"><span class="std std-ref">NXuser</span></a></p>
+</dd>
+</dl>
+<p id="index-1"><strong>Structure</strong>:</p>
+<blockquote>
+<div><p id="nxstress-shared-information-group"><strong>Shared_Information</strong>: (required) <a class="reference internal" href="../base_classes/NXcollection.html#nxcollection"><span class="std std-ref">NXcollection</span></a></p>
+<blockquote>
+<div><p>In this group parameters should be listed that are the same for all measurements (acquistions)
+included in the same file. This information is then displayed through a link in all the individual
+acquistions within the same measurement file.</p>
+<p>For example, if during an acquisition all instrumental parameters but one stay the same and only the sample table moves in one direction (e.g. Xtranslation), then all the static instrumental parameters
+will be saved just once in the <em>Shared_Information</em> group and their vales linked to every <em>instrument group</em> under each acquistion. The value for the variable that changes, Xtranslation in this example,
+will only be saved at every <em>instrument group</em> under each acquistion but not in the <em>Shared_Information</em> group. It is not always necessary to link each field. In case all the fields with an entire group
+are the same, the entire group can be linked.</p>
+</div></blockquote>
+<p id="nxstress-acquisition-xxxx-group"><strong>acquisition_XXXX</strong>: (required) <a class="reference internal" href="../base_classes/NXentry.html#nxentry"><span class="std std-ref">NXentry</span></a></p>
+<blockquote>
+<div><p>An acquistion can be any form of data acquisition (e.g. a point, multiple points, line scans, a mesh, … all data points from one sample). XXXX represents a consecutive numbering schema.</p>
+<span class="target" id="nxstress-acquisition-xxxx-definition-field"></span><p id="index-2"><strong>definition</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><p>Official NeXus NXDL schema to which this file conforms</p>
+<p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">NXstress</span></code></p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-title-field"></span><p id="index-3"><strong>title</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><p>Extended title for the entry.</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-experiment-identifier-field"></span><p id="index-4"><strong>experiment_identifier</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><p>Unique identifier for the experiment as defined
+by the facility (e.g. DOI, proposal id, …).</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-experiment-description-field"></span><p id="index-5"><strong>experiment_description</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><p>Brief summary of the experiment, including key objectives.
+At least one of the following information should be provided:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>energy-dispersive X-ray powder diffraction</p></li>
+<li><p>angular-dispersive X-ray powder diffraction</p></li>
+<li><p>angular-dispersive neutron powder diffraction</p></li>
+<li><p>time-of-flight (TOF) neutron powder diffraction.</p></li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-experiment-date-field"></span><p id="index-6"><strong>experiment_date</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-date-time"><span class="std std-ref">NX_DATE_TIME</span></a></p>
+<blockquote>
+<div><p>Date(s) when the raw data was/were collected.</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-collection-identifier-field"></span><p id="index-7"><strong>collection_identifier</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><p>User or Data Acquisition defined identifier from which
+the content of this application definition is derived.</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-collection-description-field"></span><p id="index-8"><strong>collection_description</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><p>Brief summary of the collection, including grouping criteria.</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-diffraction-type-field"></span><p id="index-9"><strong>diffraction_type</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><p>This variable describes the type of data plotted in the diffractogram and describes the type of calculation used in the EASI-STRESS software. Any of these values are valid:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>two-theta</p></li>
+<li><p>energy</p></li>
+<li><p>d-spacing</p></li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-measurement-direction-field"></span><p id="index-10"><strong>measurement_direction</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><p>Describes the specific measurement direction covered by the data in this file. Any of these values are valid:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>radial</p></li>
+<li><p>longitudinal</p></li>
+<li><p>normal</p></li>
+<li><p>tangential</p></li>
+<li><p>multiple</p></li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+<p id="nxstress-acquisition-xxxx-experiment-responsible-group"><strong>experiment_responsible</strong>: (required) <a class="reference internal" href="../base_classes/NXuser.html#nxuser"><span class="std std-ref">NXuser</span></a></p>
+<blockquote>
+<div><p>Information about the person who performed the experiment.</p>
+<span class="target" id="nxstress-acquisition-xxxx-experiment-responsible-name-field"></span><p id="index-11"><strong>name</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<span class="target" id="nxstress-acquisition-xxxx-experiment-responsible-role-field"></span><p id="index-12"><strong>role</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><p>Role of user responsible for this entry. Suggested roes are, for example, “local contact”, “beamline_scientist”, “post_doc”,…</p>
+</div></blockquote>
+</div></blockquote>
+<p id="nxstress-acquisition-xxxx-instrument-group"><strong>instrument</strong>: (required) <a class="reference internal" href="../base_classes/NXinstrument.html#nxinstrument"><span class="std std-ref">NXinstrument</span></a></p>
+<blockquote>
+<div><span class="target" id="nxstress-acquisition-xxxx-instrument-diffractometer-field"></span><p id="index-13"><strong>diffractometer</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><p>Name of the diffractometer, instrument, or beamline used for the experiment.</p>
+<span class="target" id="nxstress-acquisition-xxxx-instrument-diffractometer-short-name-attribute"></span><p id="index-14"><strong>&#64;short_name</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><p>Short name for the instrument, perhaps the acronym.</p>
+</div></blockquote>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-instrument-calibration-date-field"></span><p id="index-15"><strong>calibration_date</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-date-time"><span class="std std-ref">NX_DATE_TIME</span></a></p>
+<blockquote>
+<div><p>Date of last calibration (geometry and / or efficiency) measurements.</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-instrument-calibration-data-file-field"></span><p id="index-16"><strong>calibration_data_file</strong>: (optional) NXnote</p>
+<blockquote>
+<div><p>File name containing data from the last calibration.</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-instrument-diffraction-angle-calibration-data-file-field"></span><p id="index-17"><strong>diffraction_angle_calibration_data_file</strong>: (optional) NXnote</p>
+<blockquote>
+<div><p>File name containing data from the last calibration of the diffraction angle.</p>
+</div></blockquote>
+<p id="nxstress-acquisition-xxxx-instrument-source-group"><strong>source</strong>: (required) <a class="reference internal" href="../base_classes/NXsource.html#nxsource"><span class="std std-ref">NXsource</span></a></p>
+<blockquote>
+<div><span class="target" id="nxstress-acquisition-xxxx-instrument-source-type-field"></span><p id="index-18"><strong>type</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><p>Type of radiation source (pick one from the enumerated list and spell exactly)</p>
+<p>Any of these values:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Spallation</span> <span class="pre">Neutron</span> <span class="pre">Source</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Pulsed</span> <span class="pre">Reactor</span> <span class="pre">Neutron</span> <span class="pre">Source</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Reactor</span> <span class="pre">Neutron</span> <span class="pre">Source</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Synchrotron</span> <span class="pre">X-ray</span> <span class="pre">Source</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Rotating</span> <span class="pre">Anode</span> <span class="pre">X-ray</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Fixed</span> <span class="pre">Tube</span> <span class="pre">X-ray</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Metal</span> <span class="pre">Jet</span> <span class="pre">X-ray</span></code></p></li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-instrument-source-probe-field"></span><p id="index-19"><strong>probe</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><p>Type of radiation probe (pick one from the enumerated list and spell exactly)</p>
+<p>Any of these values: <code class="docutils literal notranslate"><span class="pre">neutron</span></code> | <code class="docutils literal notranslate"><span class="pre">X-ray</span></code></p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-instrument-source-energy-field"></span><p id="index-20"><strong>energy</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-energy"><span class="std std-ref">NX_ENERGY</span></a>}</p>
+<blockquote>
+<div><p>In case of a monochromatic radiation, the energy used during the experiment.
+For X-ray tubes, this would be the excitation voltage.</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-instrument-source-wavelength-field"></span><p id="index-21"><strong>wavelength</strong>: (optional) NXdata</p>
+<blockquote>
+<div><p>In case of monochromatic radiation, the wavelength used during the experiment.</p>
+</div></blockquote>
+</div></blockquote>
+<p id="nxstress-acquisition-xxxx-instrument-detector-group"><strong>detector</strong>: (optional) <a class="reference internal" href="../base_classes/NXdetector.html#nxdetector"><span class="std std-ref">NXdetector</span></a></p>
+<blockquote>
+<div><p>Zero or more of these groups describe the detectors used in the experiment. Additional fields describing the specifics of the detector can be added as needed.</p>
+<span class="target" id="nxstress-acquisition-xxxx-instrument-detector-description-field"></span><p id="index-22"><strong>description</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><p>name/manufacturer/model/etc. information</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-instrument-detector-type-field"></span><p id="index-23"><strong>type</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><p>Description of type such as He3 gas cylinder, He3 PSD, scintillator,
+fission chamber, proportion counter, ion chamber, ccd, pixel, image plate,
+CMOS, …</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-instrument-detector-distance-field"></span><p id="index-24"><strong>distance</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-length"><span class="std std-ref">NX_LENGTH</span></a>}</p>
+<blockquote>
+<div><p>This is the distance to the previous component in the
+instrument; most often the sample. The usage depends on the
+nature of the detector: Most often it is the distance of the
+detector assembly. But there are irregular detectors. In this
+case the distance must be specified for each detector pixel.</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-instrument-detector-efficiency-field"></span><p id="index-25"><strong>efficiency</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> (Rank: 2, Dimensions: [i, j]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-dimensionless"><span class="std std-ref">NX_DIMENSIONLESS</span></a>}</p>
+<blockquote>
+<div><p>efficiency of the detector</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-instrument-detector-wavelength-field"></span><p id="index-26"><strong>wavelength</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> (Rank: 2, Dimensions: [i, j]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-wavelength"><span class="std std-ref">NX_WAVELENGTH</span></a>}</p>
+<blockquote>
+<div><p>This field can be two things:</p>
+<ol class="arabic simple">
+<li><p>For a pixel detector it provides the nominal wavelength
+for which the detector has been calibrated.</p></li>
+<li><p>For other detectors this field has to be seen together with
+the efficiency field above.
+For some detectors, the efficiency is wavelength dependent.
+Thus this field provides the wavelength axis for the efficiency field.
+In this use case, the efficiency and wavelength arrays must
+have the same dimensionality.</p></li>
+</ol>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-instrument-detector-dead-time-field"></span><p id="index-27"><strong>dead_time</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> (Rank: 3, Dimensions: [nP, i, j]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-time"><span class="std std-ref">NX_TIME</span></a>}</p>
+<blockquote>
+<div><p>Detector dead time</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-instrument-detector-count-time-field"></span><p id="index-28"><strong>count_time</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [nP]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-time"><span class="std std-ref">NX_TIME</span></a>}</p>
+<blockquote>
+<div><p>Elapsed actual counting time</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-instrument-detector-depends-on-field"></span><p id="index-29"><strong>depends_on</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><p>The axis on which the detector position depends may be stored
+anywhere, but is normally stored in the NXtransformations
+group within the NXdetector group.</p>
+</div></blockquote>
+<p id="nxstress-acquisition-xxxx-instrument-detector-transformations-group"><strong>TRANSFORMATIONS</strong>: (optional) <a class="reference internal" href="../base_classes/NXtransformations.html#nxtransformations"><span class="std std-ref">NXtransformations</span></a></p>
+<blockquote>
+<div><p>This is the recommended location for detector goniometer
+and other related axes.</p>
+</div></blockquote>
+</div></blockquote>
+<p id="nxstress-acquisition-xxxx-instrument-beam-intensity-profile-group"><strong>beam_intensity_profile</strong>: (required) <a class="reference internal" href="../base_classes/NXcollection.html#nxcollection"><span class="std std-ref">NXcollection</span></a></p>
+<blockquote>
+<div><p>Defines the beam size volume used for probing the sample. This corresponds to the instrumental gauge volume.</p>
+<span class="target" id="nxstress-acquisition-xxxx-instrument-beam-intensity-profile-beam-evaluation-field"></span><p id="index-30"><strong>beam_evaluation</strong>: (optional) NXnote</p>
+<blockquote>
+<div><p>If the beam size was measured, the filename of the measurement can be specified here.</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-instrument-beam-intensity-profile-primary-vertical-type-field"></span><p id="index-31"><strong>primary_vertical_type</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><p>Defines the device used to shape the beam. This could be, for example, a radial collimator or a slit.</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-instrument-beam-intensity-profile-primary-vertical-full-width-field"></span><p id="index-32"><strong>primary_vertical_full_width</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a></p>
+<blockquote>
+<div><p>Defines the bottom of the primary beam size intensity profile in the vertical direction.</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-instrument-beam-intensity-profile-primary-vertical-width-field"></span><p id="index-33"><strong>primary_vertical_width</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a></p>
+<blockquote>
+<div><p>Defines the top of the primary beam size intensity profile in the vertical direction.</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-instrument-beam-intensity-profile-primary-vertical-distance-field"></span><p id="index-34"><strong>primary_vertical_distance</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a></p>
+<blockquote>
+<div><p>Defines the distance between the center of the gauge volume and the beam shaping device.</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-instrument-beam-intensity-profile-primary-horizontal-type-field"></span><p id="index-35"><strong>primary_horizontal_type</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><p>Defines the device used to shape the beam. This could be, for example, a radial collimator or a slit.</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-instrument-beam-intensity-profile-primary-horizontal-full-width-field"></span><p id="index-36"><strong>primary_horizontal_full_width</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a></p>
+<blockquote>
+<div><p>Defines the bottom of the primary beam size intensity profile in the horizontal direction.</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-instrument-beam-intensity-profile-primary-horizontal-width-field"></span><p id="index-37"><strong>primary_horizontal_width</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a></p>
+<blockquote>
+<div><p>Defines the top of the primary beam size intensity profile in the horizontal direction.</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-instrument-beam-intensity-profile-primary-horizontal-distance-field"></span><p id="index-38"><strong>primary_horizontal_distance</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a></p>
+<blockquote>
+<div><p>Defines the distance between the center of the gauge volume and the beam shaping device.</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-instrument-beam-intensity-profile-secondary-horizonatal-type-field"></span><p id="index-39"><strong>secondary_horizonatal_type</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><p>Defines the device used to shape the beam. This could be, for example, a radial collimator or a slit.</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-instrument-beam-intensity-profile-secondary-horizontal-full-width-field"></span><p id="index-40"><strong>secondary_horizontal_full_width</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a></p>
+<blockquote>
+<div><p>Defines the bottom of the primary beam size intensity profile in the horizontal direction.</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-instrument-beam-intensity-profile-secondary-horizontal-width-field"></span><p id="index-41"><strong>secondary_horizontal_width</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a></p>
+<blockquote>
+<div><p>Defines the top of the primary beam size intensity profile in the horizontal direction.</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-instrument-beam-intensity-profile-secondary-horizontal-distance-field"></span><p id="index-42"><strong>secondary_horizontal_distance</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a></p>
+<blockquote>
+<div><p>Defines the distance between the center of the gauge volume and the beam shaping device.</p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+<p id="nxstress-acquisition-xxxx-sample-description-group"><strong>sample_description</strong>: (required) <a class="reference internal" href="../base_classes/NXsample.html#nxsample"><span class="std std-ref">NXsample</span></a></p>
+<blockquote>
+<div><p>This is the recommended location for describing parameters associated with the sample.</p>
+<span class="target" id="nxstress-acquisition-xxxx-sample-description-chemical-formula-field"></span><p id="index-43"><strong>chemical_formula</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><p>The chemical formula specified using CIF conventions.
+Abbreviated version of CIF standard:</p>
+<ul class="simple">
+<li><p>Only recognized element symbols may be used.</p></li>
+<li><p>Each element symbol is followed by a ‘count’ number. A count of ‘1’ may be omitted.</p></li>
+<li><p>A space or parenthesis must separate each cluster of (element symbol + count).</p></li>
+<li><dl class="simple">
+<dt>Where a group of elements is enclosed in parentheses, the multiplier for the</dt><dd><p>group must follow the closing parentheses. That is, all element and group
+multipliers are assumed to be printed as subscripted numbers.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Unless the elements are ordered in a manner that corresponds to their chemical</dt><dd><p>structure, the order of the elements within any group or moiety depends on
+whether or not carbon is present.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>If carbon is present, the order should be:</dt><dd><p>C, then H, then the other elements in alphabetical order of their symbol.
+If carbon is not present, the elements are listed purely in alphabetic
+order of their symbol.</p>
+</dd>
+</dl>
+</li>
+<li><p>This is the <em>Hill</em> system used by Chemical Abstracts.</p></li>
+</ul>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-sample-description-temperature-field"></span><p id="index-44"><strong>temperature</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> (Rank: anyRank, Dimensions: [n_Temp]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-temperature"><span class="std std-ref">NX_TEMPERATURE</span></a>}</p>
+<blockquote>
+<div><p>Sample temperature. This could be a scanned variable</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-sample-description-depends-on-field"></span><p id="index-45"><strong>depends_on</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><p>The axis on which the sample position depends may be stored
+anywhere, but is normally stored in the NXtransformations
+group within the NXsample group.</p>
+</div></blockquote>
+<p id="nxstress-acquisition-xxxx-sample-description-transformations-group"><strong>TRANSFORMATIONS</strong>: (optional) <a class="reference internal" href="../base_classes/NXtransformations.html#nxtransformations"><span class="std std-ref">NXtransformations</span></a></p>
+<blockquote>
+<div><p>This is the recommended location for sample goniometer
+and other related axes.</p>
+</div></blockquote>
+</div></blockquote>
+<p id="nxstress-acquisition-xxxx-fit-log-group"><strong>fit_log</strong>: (required) <a class="reference internal" href="../base_classes/NXprocess.html#nxprocess"><span class="std std-ref">NXprocess</span></a></p>
+<blockquote>
+<div><p>Zero or more groups to describe the data processing steps
+to obtain the content of this application definition.</p>
+<span class="target" id="nxstress-acquisition-xxxx-fit-log-raw-data-file-field"></span><p id="index-46"><strong>raw_data_file</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><p>The file raw data file name(s) used during the data reduction process.</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-fit-log-data-reduction-date-field"></span><p id="index-47"><strong>data_reduction_date</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-date-time"><span class="std std-ref">NX_DATE_TIME</span></a></p>
+<blockquote>
+<div><p>Date when the raw data was reduced and the data in the NXstress file format generated.</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-fit-log-data-reduction-software-field"></span><p id="index-48"><strong>data_reduction_software</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><p>Software package used to perform data reduction including the version number or release date.</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-fit-log-integration-type-field"></span><p id="index-49"><strong>integration_type</strong>: (optional) NXnote</p>
+<blockquote>
+<div><p>Describes how the data was integrated.</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-fit-log-bins-field"></span><p id="index-50"><strong>bins</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><p>Describes the type of binning used during data reduction.</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-fit-log-fit-type-field"></span><p id="index-51"><strong>fit_type</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><p>Describes how the fitting of the peaks was done. For example, single peak fit, multiple peak fit, Pawley refinement, Rietveld refinement, …</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-fit-log-fit-range-field"></span><p id="index-52"><strong>fit_range</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><p>Describes the data range used for peak fitting.</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-fit-log-goodness-of-fit-field"></span><p id="index-53"><strong>goodness_of_fit</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><p>Type and value describing the goodness of fit. For example, Rw 0.23.</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-fit-log-normalization-field"></span><p id="index-54"><strong>normalization</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><p>Describes whether the data was normalized and if so , how. Examples of valid entries are:
+None, time, primary monitor, detector, …</p>
+</div></blockquote>
+<p id="nxstress-acquisition-xxxx-fit-log-data-reduction-responsible-group"><strong>data_reduction_responsible</strong>: (required) <a class="reference internal" href="../base_classes/NXuser.html#nxuser"><span class="std std-ref">NXuser</span></a></p>
+<blockquote>
+<div><p>Information about the person who performed the data reduction.</p>
+<span class="target" id="nxstress-acquisition-xxxx-fit-log-data-reduction-responsible-name-field"></span><p id="index-55"><strong>name</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<span class="target" id="nxstress-acquisition-xxxx-fit-log-data-reduction-responsible-role-field"></span><p id="index-56"><strong>role</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><p>Role of user responsible for this entry. Suggested roes are, for example, “local contact”, “beamline_scientist”, “post_doc”,…</p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+<p id="nxstress-acquisition-xxxx-notes-group"><strong>notes</strong>: (optional) <a class="reference internal" href="../base_classes/NXnote.html#nxnote"><span class="std std-ref">NXnote</span></a></p>
+<blockquote>
+<div><p>User description of the data acquisitions.
+A description of data analysis goes in the
+<em>fit_log</em> group.</p>
+</div></blockquote>
+<p id="nxstress-acquisition-xxxx-peaks-group"><strong>peaks</strong>: (required) <a class="reference internal" href="../base_classes/NXdata.html#nxdata"><span class="std std-ref">NXdata</span></a></p>
+<blockquote>
+<div><p>This group contains all diffraction peak parameters that could be needed for stress-strain calculations.
+These parameters are derived from <a class="reference internal" href="#nxstress-acquisition-xxxx-peak-parameters-group"><span class="std std-ref">peak_parameters</span></a> and additional metadata.</p>
+<span class="target" id="nxstress-acquisition-xxxx-peaks-h-field"></span><p id="index-57"><strong>h</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> (Rank: 1, Dimensions: [nPeaks]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><p>First Miller index.</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-peaks-k-field"></span><p id="index-58"><strong>k</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> (Rank: 1, Dimensions: [nPeaks]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><p>Second Miller index.</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-peaks-l-field"></span><p id="index-59"><strong>l</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> (Rank: 1, Dimensions: [nPeaks]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><p>Third Miller index.</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-peaks-lattice-field"></span><p id="index-60"><strong>lattice</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> (Rank: 1, Dimensions: [nPeaks])</p>
+<blockquote>
+<div><p>Crystal lattice systems (<em>cubic</em>, <em>hexagonal</em>, …)</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-peaks-space-group-field"></span><p id="index-61"><strong>space_group</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> (Rank: 1, Dimensions: [nPeaks])</p>
+<blockquote>
+<div><p>Crystallographic space group (<em>Fm3m</em>, <em>Im3m</em>, …)</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-peaks-phase-name-field"></span><p id="index-62"><strong>phase_name</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> (Rank: 1, Dimensions: [nPeaks])</p>
+<blockquote>
+<div><p>Name of the crystallographic phase (hematite, goethite, a-Al2O3, …).</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-peaks-qx-field"></span><p id="index-63"><strong>qx</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [nPeaks]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-dimensionless"><span class="std std-ref">NX_DIMENSIONLESS</span></a>}</p>
+<blockquote>
+<div><p>First component of the <em>normalized</em> scattering vector <em>Q</em> in the sample reference frame.
+The sample reference frame is defined by the <a class="reference internal" href="#nxstress-acquisition-xxxx-sample-description-transformations-group"><span class="std std-ref">sample transformations</span></a>.</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-peaks-qy-field"></span><p id="index-64"><strong>qy</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [nPeaks]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-dimensionless"><span class="std std-ref">NX_DIMENSIONLESS</span></a>}</p>
+<blockquote>
+<div><p>Second component of the <em>normalized</em> scattering vector <em>Q</em> in the sample reference frame.
+The sample reference frame is defined by the <a class="reference internal" href="#nxstress-acquisition-xxxx-sample-description-transformations-group"><span class="std std-ref">sample transformations</span></a>.</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-peaks-qz-field"></span><p id="index-65"><strong>qz</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [nPeaks]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-dimensionless"><span class="std std-ref">NX_DIMENSIONLESS</span></a>}</p>
+<blockquote>
+<div><p>Third component of the <em>normalized</em> scattering vector <em>Q</em> in the sample reference frame.
+The sample reference frame is defined by the <a class="reference internal" href="#nxstress-acquisition-xxxx-sample-description-transformations-group"><span class="std std-ref">sample transformations</span></a>.</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-peaks-center-field"></span><p id="index-66"><strong>center</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [nPeaks]) {units=cUnit}</p>
+<blockquote>
+<div><p>Diffraction peak position.</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-peaks-center-errors-field"></span><p id="index-67"><strong>center_errors</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [nPeaks]) {units=cUnit}</p>
+<blockquote>
+<div><p>Uncentrainties of <a class="reference internal" href="#nxstress-acquisition-xxxx-peaks-center-field"><span class="std std-ref">center</span></a>.</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-peaks-center-type-field"></span><p id="index-68"><strong>center_type</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><p>The space in which <a class="reference internal" href="#nxstress-acquisition-xxxx-peaks-center-field"><span class="std std-ref">center</span></a> is defined.
+Note that <em>cUnit</em> must correspond. For example if <em>center_type=”two-theta”</em> then <em>cUnit</em>
+must have an angle unit (<em>degrees</em>, <em>rad</em>, …).</p>
+<p>Any of these values:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">two-theta</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">energy</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">momentum-transfer</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">d-spacing</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">channel</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">time-of-flight</span></code></p></li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-peaks-sx-field"></span><p id="index-69"><strong>sx</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [nPeaks]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-length"><span class="std std-ref">NX_LENGTH</span></a>}</p>
+<blockquote>
+<div><p>First component of the sample position in the sample reference frame.
+The sample reference frame is defined by the <a class="reference internal" href="#nxstress-acquisition-xxxx-sample-description-transformations-group"><span class="std std-ref">sample transformations</span></a>.</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-peaks-sy-field"></span><p id="index-70"><strong>sy</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [nPeaks]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-length"><span class="std std-ref">NX_LENGTH</span></a>}</p>
+<blockquote>
+<div><p>First component of the sample position in the sample reference frame.
+The sample reference frame is defined by the <a class="reference internal" href="#nxstress-acquisition-xxxx-sample-description-transformations-group"><span class="std std-ref">sample transformations</span></a>.</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-peaks-sz-field"></span><p id="index-71"><strong>sz</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [nPeaks]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-length"><span class="std std-ref">NX_LENGTH</span></a>}</p>
+<blockquote>
+<div><p>First component of the sample position in the sample reference frame.
+The sample reference frame is defined by the <a class="reference internal" href="#nxstress-acquisition-xxxx-sample-description-transformations-group"><span class="std std-ref">sample transformations</span></a>.</p>
+</div></blockquote>
+</div></blockquote>
+<p id="nxstress-acquisition-xxxx-peak-parameters-group"><strong>peak_parameters</strong>: (required) <a class="reference internal" href="../base_classes/NXdata.html#nxdata"><span class="std std-ref">NXdata</span></a></p>
+<blockquote>
+<div><p>This group contains all diffraction peak fit parameters.
+This information is not required for stress-strain calculations.
+Note that as in any <em>NXdata</em> group, each field can have uncertainties
+associated to them (e.g. <em>center_errors</em> would be the uncertainties
+on the peak center).</p>
+<span class="target" id="nxstress-acquisition-xxxx-peak-parameters-title-field"></span><p id="index-72"><strong>title</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><p>Diffraction peak profile.</p>
+<p>Any of these values:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">gaussian</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lorentzian</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">voigt</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pseudo-voigt</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">split</span> <span class="pre">pseudo-voigt</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pearson</span> <span class="pre">VII</span></code></p></li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-peak-parameters-area-field"></span><p id="index-73"><strong>area</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [nPeaks]) {units=yUnit}</p>
+<blockquote>
+<div><p>Diffraction peak area (not including the background).</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-peak-parameters-height-field"></span><p id="index-74"><strong>height</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [nPeaks]) {units=yUnit}</p>
+<blockquote>
+<div><p>Diffraction peak height (not including the background).</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-peak-parameters-fwhm-field"></span><p id="index-75"><strong>fwhm</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [nPeaks]) {units=xUnit}</p>
+<blockquote>
+<div><p>Diffraction peak full width at half maximum.</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-peak-parameters-fwhm-left-field"></span><p id="index-76"><strong>fwhm_left</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [nPeaks]) {units=xUnit}</p>
+<blockquote>
+<div><p>Left-side FWHM for split profiles.</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-peak-parameters-fwhm-right-field"></span><p id="index-77"><strong>fwhm_right</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [nPeaks]) {units=xUnit}</p>
+<blockquote>
+<div><p>Right-side FWHM for split profiles.</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-peak-parameters-form-factor-field"></span><p id="index-78"><strong>form_factor</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [nPeaks]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-dimensionless"><span class="std std-ref">NX_DIMENSIONLESS</span></a>}</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Voigt or Pseudo-Voigt: Lorentzian fraction</p></li>
+<li><p>Pearson VII: decay parameter</p></li>
+<li><p>Other profiles: not applicable</p></li>
+</ul>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-peak-parameters-form-errors-field"></span><p id="index-79"><strong>form_errors</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [nPeaks]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-dimensionless"><span class="std std-ref">NX_DIMENSIONLESS</span></a>}</p>
+<blockquote>
+<div><p>Error value(s) asscociated with the form_factor.</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-peak-parameters-azimuth-field"></span><p id="index-80"><strong>azimuth</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [nPeaks]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-angle"><span class="std std-ref">NX_ANGLE</span></a>}</p>
+<blockquote>
+<div><p>Angle that define the position of the integrated sector in the diffraction cone
+for angular-dispersive diffraction or the position of the detector for energy-dispersive
+diffraction.</p>
+</div></blockquote>
+</div></blockquote>
+<p id="nxstress-acquisition-xxxx-background-parameters-group"><strong>background_parameters</strong>: (required) <a class="reference internal" href="../base_classes/NXdata.html#nxdata"><span class="std std-ref">NXdata</span></a></p>
+<blockquote>
+<div><p>This group contains all background fit parameters.
+This information is not required for stress-strain caluclations.</p>
+<span class="target" id="nxstress-acquisition-xxxx-background-parameters-title-field"></span><p id="index-81"><strong>title</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><p>Diffraction background profile. Required when background parameters fields are present.
+For example: <code class="docutils literal notranslate"><span class="pre">manual</span></code>,``linear``, <code class="docutils literal notranslate"><span class="pre">5-degree</span> <span class="pre">polynomial</span></code>, or <code class="docutils literal notranslate"><span class="pre">shape</span> <span class="pre">function</span> <span class="pre">plus</span> <span class="pre">polinomial</span></code></p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-background-parameters-a-field"></span><p id="index-82"><strong>A</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [nPeaks]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-dimensionless"><span class="std std-ref">NX_DIMENSIONLESS</span></a>}</p>
+<blockquote>
+<div><p>Background parameter(s). For example a second-degree polynomial will have fields <code class="docutils literal notranslate"><span class="pre">A0</span></code>, <code class="docutils literal notranslate"><span class="pre">A1</span></code> and <code class="docutils literal notranslate"><span class="pre">A2</span></code>.</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-background-parameters-as-field"></span><p id="index-83"><strong>as</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [nPeaks]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-dimensionless"><span class="std std-ref">NX_DIMENSIONLESS</span></a>}</p>
+<blockquote>
+<div><p>Background parameter <em>constant</em> for SHAPE function.</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-background-parameters-as-error-field"></span><p id="index-84"><strong>as_error</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [nPeaks]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-dimensionless"><span class="std std-ref">NX_DIMENSIONLESS</span></a>}</p>
+<blockquote>
+<div><p>Error associated with background parameter <em>constant</em> for SHAPE function.</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-background-parameters-b-field"></span><p id="index-85"><strong>b</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [nPeaks]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-dimensionless"><span class="std std-ref">NX_DIMENSIONLESS</span></a>}</p>
+<blockquote>
+<div><p>Background parameter <em>amplitude</em> for SHAPE function.</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-background-parameters-b-error-field"></span><p id="index-86"><strong>b_error</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [nPeaks]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-dimensionless"><span class="std std-ref">NX_DIMENSIONLESS</span></a>}</p>
+<blockquote>
+<div><p>Error associated with background parameter <em>amplitude</em> for SHAPE function.</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-background-parameters-o-field"></span><p id="index-87"><strong>o</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [nPeaks]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-dimensionless"><span class="std std-ref">NX_DIMENSIONLESS</span></a>}</p>
+<blockquote>
+<div><p>Background parameter <em>offset</em> for SHAPE function.</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-background-parameters-o-error-field"></span><p id="index-88"><strong>o_error</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [nPeaks]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-dimensionless"><span class="std std-ref">NX_DIMENSIONLESS</span></a>}</p>
+<blockquote>
+<div><p>Error associated with background parameter <em>offset</em> for SHAPE function.</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-background-parameters-background-area-field"></span><p id="index-89"><strong>background_area</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [nPeaks]) {units=yUnit}</p>
+<blockquote>
+<div><p>The background area integrated over a confidence interval around the center (<em>0.95</em> by default).</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-background-parameters-background-area-interval-field"></span><p id="index-90"><strong>background_area_interval</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-dimensionless"><span class="std std-ref">NX_DIMENSIONLESS</span></a></p>
+<blockquote>
+<div><p>Confidence interval from which the background counts are integrated.
+For example <em>0.95</em> means that the background is integrated over the range in
+which the integrated peak area is 95% of the total peak area.</p>
+</div></blockquote>
+</div></blockquote>
+<p id="nxstress-acquisition-xxxx-diffractogram-group"><strong>diffractogram</strong>: (required) <a class="reference internal" href="../base_classes/NXdata.html#nxdata"><span class="std std-ref">NXdata</span></a></p>
+<blockquote>
+<div><p>Diffractogram with fit results in <a class="reference internal" href="#nxstress-acquisition-xxxx-peak-parameters-group"><span class="std std-ref">peak_parameters</span></a>
+and <a class="reference internal" href="#nxstress-acquisition-xxxx-background-parameters-group"><span class="std std-ref">background_parameters</span></a>.
+This information is not required for stress-strain caluclations.</p>
+<span class="target" id="nxstress-acquisition-xxxx-diffractogram-axes-attribute"></span><p id="index-91"><strong>&#64;axes</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><p>List of the one to two axes field name(s) to be used by default. The axes are further described in the fields <em>DAXIS</em> and <em>XAXIS</em>.</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-diffractogram-signal-attribute"></span><p id="index-92"><strong>&#64;signal</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><p>Default field name to be plotted.</p>
+<p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">diffractogram</span></code></p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-diffractogram-auxiliary-signals-attribute"></span><p id="index-93"><strong>&#64;auxiliary_signals</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><p>List of additional field names to be plotted. This could be e.g. <em>fit</em>, <em>background</em>, <em>residuals</em>, …</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-diffractogram-daxis-field"></span><p id="index-94"><strong>DAXIS</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> (Rank: 1, Dimensions: [nD])</p>
+<blockquote>
+<div><p>One or more fields that contain the values for the <strong>nD</strong> dimension.
+For example the azimuthal positions of different energy-dispersive detectors
+or the average azimuth of different azimuthal sections on an area detector.</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-diffractogram-xaxis-field"></span><p id="index-95"><strong>XAXIS</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [nX]) {units=xUnit}</p>
+<blockquote>
+<div><p>One or more fields that contain the values for the <strong>nX</strong> dimension.
+This could be depending on the source, for example, MCA channels, scattering angle <span class="math notranslate nohighlight">\(2\theta\)</span> in degrees,
+scattering vector length q in <span class="math notranslate nohighlight">\(\mathrm{nm}^{-1}\)</span>, …</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-diffractogram-diffractogram-field"></span><p id="index-96"><strong>diffractogram</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 2, Dimensions: [nD, nX]) {units=yUnit}</p>
+<blockquote>
+<div><p>Diffractogram counts (default signal)</p>
+<span class="target" id="nxstress-acquisition-xxxx-diffractogram-diffractogram-interpretation-attribute"></span><p id="index-97"><strong>&#64;interpretation</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">spectrum</span></code></p>
+</div></blockquote>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-diffractogram-diffractogram-error-field"></span><p id="index-98"><strong>diffractogram_error</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 2, Dimensions: [nD, nX]) {units=yUnit}</p>
+<blockquote>
+<div><p>Diffractogram counts error (default signal)</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-diffractogram-fit-field"></span><p id="index-99"><strong>fit</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 2, Dimensions: [nD, nX])</p>
+<blockquote>
+<div><p>Diffractogram fit counts (auxiliary signal).</p>
+<span class="target" id="nxstress-acquisition-xxxx-diffractogram-fit-interpretation-attribute"></span><p id="index-100"><strong>&#64;interpretation</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">spectrum</span></code></p>
+</div></blockquote>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-diffractogram-fit-error-field"></span><p id="index-101"><strong>fit_error</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 2, Dimensions: [nD, nX])</p>
+<blockquote>
+<div><p>Diffractogram fit counts error (auxiliary signal).</p>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-diffractogram-background-field"></span><p id="index-102"><strong>background</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 2, Dimensions: [nD, nX])</p>
+<blockquote>
+<div><p>Diffraction background was manually determined. Diffractogram background counts (auxiliary signal).</p>
+<span class="target" id="nxstress-acquisition-xxxx-diffractogram-background-interpretation-attribute"></span><p id="index-103"><strong>&#64;interpretation</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">spectrum</span></code></p>
+</div></blockquote>
+</div></blockquote>
+<span class="target" id="nxstress-acquisition-xxxx-diffractogram-residuals-field"></span><p id="index-104"><strong>residuals</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 2, Dimensions: [nD, nX])</p>
+<blockquote>
+<div><p>Difference between diffractogram and fit (auxiliary signal).</p>
+<span class="target" id="nxstress-acquisition-xxxx-diffractogram-residuals-interpretation-attribute"></span><p id="index-105"><strong>&#64;interpretation</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">spectrum</span></code></p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+<section id="hypertext-anchors">
+<h2>Hypertext Anchors<a class="headerlink" href="#hypertext-anchors" title="Permalink to this heading">¶</a></h2>
+<p>List of hypertext anchors for all groups, fields,
+attributes, and links defined in this class.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-group"><span class="std std-ref">/NXstress/acquisition_XXXX-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-background-parameters-group"><span class="std std-ref">/NXstress/acquisition_XXXX/background_parameters-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-background-parameters-a-field"><span class="std std-ref">/NXstress/acquisition_XXXX/background_parameters/A-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-background-parameters-as-field"><span class="std std-ref">/NXstress/acquisition_XXXX/background_parameters/as-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-background-parameters-as-error-field"><span class="std std-ref">/NXstress/acquisition_XXXX/background_parameters/as_error-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-background-parameters-b-field"><span class="std std-ref">/NXstress/acquisition_XXXX/background_parameters/b-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-background-parameters-b-error-field"><span class="std std-ref">/NXstress/acquisition_XXXX/background_parameters/b_error-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-background-parameters-background-area-field"><span class="std std-ref">/NXstress/acquisition_XXXX/background_parameters/background_area-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-background-parameters-background-area-interval-field"><span class="std std-ref">/NXstress/acquisition_XXXX/background_parameters/background_area_interval-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-background-parameters-o-field"><span class="std std-ref">/NXstress/acquisition_XXXX/background_parameters/o-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-background-parameters-o-error-field"><span class="std std-ref">/NXstress/acquisition_XXXX/background_parameters/o_error-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-background-parameters-title-field"><span class="std std-ref">/NXstress/acquisition_XXXX/background_parameters/title-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-collection-description-field"><span class="std std-ref">/NXstress/acquisition_XXXX/collection_description-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-collection-identifier-field"><span class="std std-ref">/NXstress/acquisition_XXXX/collection_identifier-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-definition-field"><span class="std std-ref">/NXstress/acquisition_XXXX/definition-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-diffraction-type-field"><span class="std std-ref">/NXstress/acquisition_XXXX/diffraction_type-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-diffractogram-group"><span class="std std-ref">/NXstress/acquisition_XXXX/diffractogram-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-diffractogram-background-field"><span class="std std-ref">/NXstress/acquisition_XXXX/diffractogram/background-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-diffractogram-background-interpretation-attribute"><span class="std std-ref">/NXstress/acquisition_XXXX/diffractogram/background&#64;interpretation-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-diffractogram-daxis-field"><span class="std std-ref">/NXstress/acquisition_XXXX/diffractogram/DAXIS-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-diffractogram-diffractogram-field"><span class="std std-ref">/NXstress/acquisition_XXXX/diffractogram/diffractogram-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-diffractogram-diffractogram-interpretation-attribute"><span class="std std-ref">/NXstress/acquisition_XXXX/diffractogram/diffractogram&#64;interpretation-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-diffractogram-diffractogram-error-field"><span class="std std-ref">/NXstress/acquisition_XXXX/diffractogram/diffractogram_error-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-diffractogram-fit-field"><span class="std std-ref">/NXstress/acquisition_XXXX/diffractogram/fit-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-diffractogram-fit-interpretation-attribute"><span class="std std-ref">/NXstress/acquisition_XXXX/diffractogram/fit&#64;interpretation-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-diffractogram-fit-error-field"><span class="std std-ref">/NXstress/acquisition_XXXX/diffractogram/fit_error-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-diffractogram-residuals-field"><span class="std std-ref">/NXstress/acquisition_XXXX/diffractogram/residuals-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-diffractogram-residuals-interpretation-attribute"><span class="std std-ref">/NXstress/acquisition_XXXX/diffractogram/residuals&#64;interpretation-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-diffractogram-xaxis-field"><span class="std std-ref">/NXstress/acquisition_XXXX/diffractogram/XAXIS-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-diffractogram-auxiliary-signals-attribute"><span class="std std-ref">/NXstress/acquisition_XXXX/diffractogram&#64;auxiliary_signals-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-diffractogram-axes-attribute"><span class="std std-ref">/NXstress/acquisition_XXXX/diffractogram&#64;axes-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-diffractogram-signal-attribute"><span class="std std-ref">/NXstress/acquisition_XXXX/diffractogram&#64;signal-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-experiment-date-field"><span class="std std-ref">/NXstress/acquisition_XXXX/experiment_date-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-experiment-description-field"><span class="std std-ref">/NXstress/acquisition_XXXX/experiment_description-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-experiment-identifier-field"><span class="std std-ref">/NXstress/acquisition_XXXX/experiment_identifier-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-experiment-responsible-group"><span class="std std-ref">/NXstress/acquisition_XXXX/experiment_responsible-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-experiment-responsible-name-field"><span class="std std-ref">/NXstress/acquisition_XXXX/experiment_responsible/name-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-experiment-responsible-role-field"><span class="std std-ref">/NXstress/acquisition_XXXX/experiment_responsible/role-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-fit-log-group"><span class="std std-ref">/NXstress/acquisition_XXXX/fit_log-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-fit-log-bins-field"><span class="std std-ref">/NXstress/acquisition_XXXX/fit_log/bins-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-fit-log-data-reduction-date-field"><span class="std std-ref">/NXstress/acquisition_XXXX/fit_log/data_reduction_date-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-fit-log-data-reduction-responsible-group"><span class="std std-ref">/NXstress/acquisition_XXXX/fit_log/data_reduction_responsible-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-fit-log-data-reduction-responsible-name-field"><span class="std std-ref">/NXstress/acquisition_XXXX/fit_log/data_reduction_responsible/name-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-fit-log-data-reduction-responsible-role-field"><span class="std std-ref">/NXstress/acquisition_XXXX/fit_log/data_reduction_responsible/role-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-fit-log-data-reduction-software-field"><span class="std std-ref">/NXstress/acquisition_XXXX/fit_log/data_reduction_software-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-fit-log-fit-range-field"><span class="std std-ref">/NXstress/acquisition_XXXX/fit_log/fit_range-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-fit-log-fit-type-field"><span class="std std-ref">/NXstress/acquisition_XXXX/fit_log/fit_type-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-fit-log-goodness-of-fit-field"><span class="std std-ref">/NXstress/acquisition_XXXX/fit_log/goodness_of_fit-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-fit-log-integration-type-field"><span class="std std-ref">/NXstress/acquisition_XXXX/fit_log/integration_type-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-fit-log-normalization-field"><span class="std std-ref">/NXstress/acquisition_XXXX/fit_log/normalization-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-fit-log-raw-data-file-field"><span class="std std-ref">/NXstress/acquisition_XXXX/fit_log/raw_data_file-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-instrument-group"><span class="std std-ref">/NXstress/acquisition_XXXX/instrument-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-instrument-beam-intensity-profile-group"><span class="std std-ref">/NXstress/acquisition_XXXX/instrument/beam_intensity_profile-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-instrument-beam-intensity-profile-beam-evaluation-field"><span class="std std-ref">/NXstress/acquisition_XXXX/instrument/beam_intensity_profile/beam_evaluation-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-instrument-beam-intensity-profile-primary-horizontal-distance-field"><span class="std std-ref">/NXstress/acquisition_XXXX/instrument/beam_intensity_profile/primary_horizontal_distance-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-instrument-beam-intensity-profile-primary-horizontal-full-width-field"><span class="std std-ref">/NXstress/acquisition_XXXX/instrument/beam_intensity_profile/primary_horizontal_full_width-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-instrument-beam-intensity-profile-primary-horizontal-type-field"><span class="std std-ref">/NXstress/acquisition_XXXX/instrument/beam_intensity_profile/primary_horizontal_type-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-instrument-beam-intensity-profile-primary-horizontal-width-field"><span class="std std-ref">/NXstress/acquisition_XXXX/instrument/beam_intensity_profile/primary_horizontal_width-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-instrument-beam-intensity-profile-primary-vertical-distance-field"><span class="std std-ref">/NXstress/acquisition_XXXX/instrument/beam_intensity_profile/primary_vertical_distance-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-instrument-beam-intensity-profile-primary-vertical-full-width-field"><span class="std std-ref">/NXstress/acquisition_XXXX/instrument/beam_intensity_profile/primary_vertical_full_width-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-instrument-beam-intensity-profile-primary-vertical-type-field"><span class="std std-ref">/NXstress/acquisition_XXXX/instrument/beam_intensity_profile/primary_vertical_type-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-instrument-beam-intensity-profile-primary-vertical-width-field"><span class="std std-ref">/NXstress/acquisition_XXXX/instrument/beam_intensity_profile/primary_vertical_width-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-instrument-beam-intensity-profile-secondary-horizonatal-type-field"><span class="std std-ref">/NXstress/acquisition_XXXX/instrument/beam_intensity_profile/secondary_horizonatal_type-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-instrument-beam-intensity-profile-secondary-horizontal-distance-field"><span class="std std-ref">/NXstress/acquisition_XXXX/instrument/beam_intensity_profile/secondary_horizontal_distance-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-instrument-beam-intensity-profile-secondary-horizontal-full-width-field"><span class="std std-ref">/NXstress/acquisition_XXXX/instrument/beam_intensity_profile/secondary_horizontal_full_width-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-instrument-beam-intensity-profile-secondary-horizontal-width-field"><span class="std std-ref">/NXstress/acquisition_XXXX/instrument/beam_intensity_profile/secondary_horizontal_width-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-instrument-calibration-data-file-field"><span class="std std-ref">/NXstress/acquisition_XXXX/instrument/calibration_data_file-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-instrument-calibration-date-field"><span class="std std-ref">/NXstress/acquisition_XXXX/instrument/calibration_date-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-instrument-detector-group"><span class="std std-ref">/NXstress/acquisition_XXXX/instrument/detector-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-instrument-detector-count-time-field"><span class="std std-ref">/NXstress/acquisition_XXXX/instrument/detector/count_time-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-instrument-detector-dead-time-field"><span class="std std-ref">/NXstress/acquisition_XXXX/instrument/detector/dead_time-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-instrument-detector-depends-on-field"><span class="std std-ref">/NXstress/acquisition_XXXX/instrument/detector/depends_on-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-instrument-detector-description-field"><span class="std std-ref">/NXstress/acquisition_XXXX/instrument/detector/description-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-instrument-detector-distance-field"><span class="std std-ref">/NXstress/acquisition_XXXX/instrument/detector/distance-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-instrument-detector-efficiency-field"><span class="std std-ref">/NXstress/acquisition_XXXX/instrument/detector/efficiency-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-instrument-detector-transformations-group"><span class="std std-ref">/NXstress/acquisition_XXXX/instrument/detector/TRANSFORMATIONS-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-instrument-detector-type-field"><span class="std std-ref">/NXstress/acquisition_XXXX/instrument/detector/type-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-instrument-detector-wavelength-field"><span class="std std-ref">/NXstress/acquisition_XXXX/instrument/detector/wavelength-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-instrument-diffraction-angle-calibration-data-file-field"><span class="std std-ref">/NXstress/acquisition_XXXX/instrument/diffraction_angle_calibration_data_file-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-instrument-diffractometer-field"><span class="std std-ref">/NXstress/acquisition_XXXX/instrument/diffractometer-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-instrument-diffractometer-short-name-attribute"><span class="std std-ref">/NXstress/acquisition_XXXX/instrument/diffractometer&#64;short_name-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-instrument-source-group"><span class="std std-ref">/NXstress/acquisition_XXXX/instrument/source-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-instrument-source-energy-field"><span class="std std-ref">/NXstress/acquisition_XXXX/instrument/source/energy-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-instrument-source-probe-field"><span class="std std-ref">/NXstress/acquisition_XXXX/instrument/source/probe-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-instrument-source-type-field"><span class="std std-ref">/NXstress/acquisition_XXXX/instrument/source/type-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-instrument-source-wavelength-field"><span class="std std-ref">/NXstress/acquisition_XXXX/instrument/source/wavelength-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-measurement-direction-field"><span class="std std-ref">/NXstress/acquisition_XXXX/measurement_direction-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-notes-group"><span class="std std-ref">/NXstress/acquisition_XXXX/notes-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-peak-parameters-group"><span class="std std-ref">/NXstress/acquisition_XXXX/peak_parameters-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-peak-parameters-area-field"><span class="std std-ref">/NXstress/acquisition_XXXX/peak_parameters/area-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-peak-parameters-azimuth-field"><span class="std std-ref">/NXstress/acquisition_XXXX/peak_parameters/azimuth-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-peak-parameters-form-errors-field"><span class="std std-ref">/NXstress/acquisition_XXXX/peak_parameters/form_errors-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-peak-parameters-form-factor-field"><span class="std std-ref">/NXstress/acquisition_XXXX/peak_parameters/form_factor-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-peak-parameters-fwhm-field"><span class="std std-ref">/NXstress/acquisition_XXXX/peak_parameters/fwhm-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-peak-parameters-fwhm-left-field"><span class="std std-ref">/NXstress/acquisition_XXXX/peak_parameters/fwhm_left-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-peak-parameters-fwhm-right-field"><span class="std std-ref">/NXstress/acquisition_XXXX/peak_parameters/fwhm_right-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-peak-parameters-height-field"><span class="std std-ref">/NXstress/acquisition_XXXX/peak_parameters/height-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-peak-parameters-title-field"><span class="std std-ref">/NXstress/acquisition_XXXX/peak_parameters/title-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-peaks-group"><span class="std std-ref">/NXstress/acquisition_XXXX/peaks-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-peaks-center-field"><span class="std std-ref">/NXstress/acquisition_XXXX/peaks/center-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-peaks-center-errors-field"><span class="std std-ref">/NXstress/acquisition_XXXX/peaks/center_errors-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-peaks-center-type-field"><span class="std std-ref">/NXstress/acquisition_XXXX/peaks/center_type-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-peaks-h-field"><span class="std std-ref">/NXstress/acquisition_XXXX/peaks/h-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-peaks-k-field"><span class="std std-ref">/NXstress/acquisition_XXXX/peaks/k-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-peaks-l-field"><span class="std std-ref">/NXstress/acquisition_XXXX/peaks/l-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-peaks-lattice-field"><span class="std std-ref">/NXstress/acquisition_XXXX/peaks/lattice-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-peaks-phase-name-field"><span class="std std-ref">/NXstress/acquisition_XXXX/peaks/phase_name-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-peaks-qx-field"><span class="std std-ref">/NXstress/acquisition_XXXX/peaks/qx-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-peaks-qy-field"><span class="std std-ref">/NXstress/acquisition_XXXX/peaks/qy-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-peaks-qz-field"><span class="std std-ref">/NXstress/acquisition_XXXX/peaks/qz-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-peaks-space-group-field"><span class="std std-ref">/NXstress/acquisition_XXXX/peaks/space_group-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-peaks-sx-field"><span class="std std-ref">/NXstress/acquisition_XXXX/peaks/sx-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-peaks-sy-field"><span class="std std-ref">/NXstress/acquisition_XXXX/peaks/sy-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-peaks-sz-field"><span class="std std-ref">/NXstress/acquisition_XXXX/peaks/sz-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-sample-description-group"><span class="std std-ref">/NXstress/acquisition_XXXX/sample_description-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-sample-description-chemical-formula-field"><span class="std std-ref">/NXstress/acquisition_XXXX/sample_description/chemical_formula-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-sample-description-depends-on-field"><span class="std std-ref">/NXstress/acquisition_XXXX/sample_description/depends_on-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-sample-description-temperature-field"><span class="std std-ref">/NXstress/acquisition_XXXX/sample_description/temperature-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-sample-description-transformations-group"><span class="std std-ref">/NXstress/acquisition_XXXX/sample_description/TRANSFORMATIONS-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-acquisition-xxxx-title-field"><span class="std std-ref">/NXstress/acquisition_XXXX/title-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstress-shared-information-group"><span class="std std-ref">/NXstress/Shared_Information-group</span></a></p></li>
+</ul>
+<dl class="simple">
+<dt><strong>NXDL Source</strong>:</dt><dd><p><a class="reference external" href="https://github.com/nexusformat/definitions/blob/main/contributed_definitions/NXstress.nxdl.xml">https://github.com/nexusformat/definitions/blob/main/contributed_definitions/NXstress.nxdl.xml</a></p>
+</dd>
+</dl>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">NXstress</a><ul>
+<li><a class="reference internal" href="#hypertext-anchors">Hypertext Anchors</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="NXstage_lab.html"
+                          title="previous chapter">NXstage_lab</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="NXxpcs.html"
+                          title="next chapter">NXxpcs</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/classes/contributed_definitions/NXstress.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+<div id="google_search" style="display: none">
+	<hr />
+	<h3>Google search</h3>
+	<form method="get" action="https://www.google.com/search">
+		<table border="0" align="center" cellpadding="0">
+			<tr>
+				<td>
+					<input type="text"   name="q" value="" />
+				</td>
+			</tr>
+			<tr>
+				<td align="center" style="font-size:75%">
+					<input type="radio"  name="sitesearch" value="" />global
+					<input type="radio"  name="sitesearch"
+						value="manual.nexusformat.org" 
+						checked />NeXus manual
+					<input type="submit" value="Go" />
+					<br />
+				</td>
+			</tr>
+		</table>
+	</form>                                
+</div>
+<script type="text/javascript">$('#google_search').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="NXxpcs.html" title="NXxpcs"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="NXstage_lab.html" title="NXstage_lab"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">nexus v2022.06 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../ref_doc.html" ><span class="section-number">3. </span>NeXus: Reference Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../index.html" ><span class="section-number">3.3. </span>NeXus Class Definitions</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="index.html" ><span class="section-number">3.3.3.3. </span>Contributed Definitions</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">NXstress</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; <a href="../../copyright.html">Copyright</a> 1996-2023, NIAC, https://www.nexusformat.org.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
+    </div>
+  </body>
+</html>
