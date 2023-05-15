@@ -80,7 +80,7 @@
 
     <group type="NXentry">
         <doc>
-            The name of the *NXentry group(s)* can be freely chosen by the facility. The *NXentry group* can contain any form of data acquisition (e.g. a measurement point, multiple measurement points, a line scans, a mesh, all data points from one sample …).
+            The name of the *NXentry group(s)* can be freely chosen by the facility. The *NXentry group* can contain any form of data acquisition (e.g. a measurement point, multiple measurement points, a line scan, a mesh, all data points from one sample …).
         </doc>
         <field name="definition" type="NX_CHAR">
             <doc> Official NeXus NXDL schema to which this file conforms </doc>
@@ -690,8 +690,13 @@
             </doc>
             <field name="title" type="NX_CHAR" optional="false">
                 <doc>
-                    Diffraction background profile. Required when background parameters fields are present.
-                    For example: ``manual``, ``linear``, ``5-degree polynomial``, or ``shape function plus polinomial``.
+                    Diffraction background profile. Required when background parameter fields are present.
+                    Some example values with equations are shown below: 
+                    
+                        - ``manual`` : No equations nor variables needed to describe this background.
+                        - ``linear`` : \ :math:`\small background= A0 + A1 \cdot x`
+                        - ``5-degree polynomial`` : \ :math:`\small background= A0 + A1 \cdot x + A2 \cdot \mathrm{x}^{2} + A3 \cdot \mathrm{x}^{3} + A4 \cdot \mathrm{x}^{4} + A5 \cdot \mathrm{x}^{5}`
+                        - ``shape function plus polynomial`` : A shape function is not a mathematical function, it contains a manual background obtained from a fit and a polynomial part. This allows to adapt and modify the fit for subsequent measurements in the same measurement campaign. The function describing it is the following: \ :math:`\small background= as + b \cdot SHAPE(x-o)` Where SHAPE is the name of the variable used to describe the background value at the position x. x can be e.g. the scattering angle \ :math:`2\theta` in degrees. 
                 </doc>
             </field>
             <field name="A" nameType="any" type="NX_NUMBER" units="NX_DIMENSIONLESS" minOccurs="0" maxOccurs="unbounded">
@@ -706,7 +711,7 @@
                     <dim index="1" value="nPeaks" />
                 </dimensions>
             </field>
-            <field name="as_error" nameType="any" type="NX_NUMBER" units="NX_DIMENSIONLESS" minOccurs="0" maxOccurs="unbounded">
+            <field name="as_errors" nameType="any" type="NX_NUMBER" units="NX_DIMENSIONLESS" minOccurs="0" maxOccurs="unbounded">
                 <doc>Error associated with background parameter *constant* for SHAPE function.</doc>
                 <dimensions rank="1">
                     <dim index="1" value="nPeaks" />
@@ -718,7 +723,7 @@
                     <dim index="1" value="nPeaks" />
                 </dimensions>
             </field>
-            <field name="b_error" nameType="any" type="NX_NUMBER" units="NX_DIMENSIONLESS" minOccurs="0" maxOccurs="unbounded">
+            <field name="b_errors" nameType="any" type="NX_NUMBER" units="NX_DIMENSIONLESS" minOccurs="0" maxOccurs="unbounded">
                 <doc>Error associated with background parameter *amplitude* for SHAPE function.</doc>
                 <dimensions rank="1">
                     <dim index="1" value="nPeaks" />
@@ -730,7 +735,7 @@
                     <dim index="1" value="nPeaks" />
                 </dimensions>
             </field>
-            <field name="o_error" nameType="any" type="NX_NUMBER" units="NX_DIMENSIONLESS" minOccurs="0" maxOccurs="unbounded">
+            <field name="o_errors" nameType="any" type="NX_NUMBER" units="NX_DIMENSIONLESS" minOccurs="0" maxOccurs="unbounded">
                 <doc>Error associated with background parameter *offset* for SHAPE function.</doc>
                 <dimensions rank="1">
                     <dim index="1" value="nPeaks" />
@@ -807,7 +812,7 @@
                 </attribute>
             </field>
 
-            <field name="diffractogram_error" type="NX_NUMBER" units="yUnit">
+            <field name="diffractogram_errors" type="NX_NUMBER" units="yUnit">
                 <doc>Diffractogram counts error (default signal)</doc>
                 <dimensions rank="2">
                     <dim index="1" value="nD" />
@@ -833,7 +838,7 @@
                 </attribute>
             </field>
 
-            <field name="fit_error" type="NX_NUMBER">
+            <field name="fit_errors" type="NX_NUMBER">
                 <doc>Diffractogram fit counts error (auxiliary signal).</doc>
                 <dimensions rank="2">
                     <dim index="1" value="nD" />
