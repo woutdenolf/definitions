@@ -128,11 +128,20 @@
                 Brief summary of the collection, including grouping criteria. The information provided in this field can highlight, for example, the measurement setup or information about experimental conditions.
             </doc>       
         </field>
-        <field name="diffraction_type" type="NX_CHAR" optional="false">
-            <doc>   This variable describes the type of data plotted in the diffractogram and describes the type of calculation used in the EASI-STRESS software. Any of these values are valid:
-                     * ``two-theta``
-                     * ``energy``
-                     * ``d-spacing``
+        <field name="processing_type" type="NX_CHAR" optional="false">
+            <doc>   This variable describes what set of equations will be used to calculate strain from the data plotted in the diffractogram. Any of these values are valid:
+                     * ``two-theta``: 
+                        \ :math:`\varepsilon = \large \frac{sin(\mathrm{\theta}_{0})}{sin(\mathrm{\theta})}-1`
+                     * ``energy``:
+                        \ :math:`\varepsilon = \large \frac{\mathrm{E}_{0}}{\mathrm{E}}-1`
+                     * ``d-spacing``:
+                        \ :math:`\varepsilon = \large \frac{\mathrm{d}}{\mathrm{d}_{0}}-1`
+                     * ``Time-of-Flight``:
+                        \ :math:`\varepsilon = \large \frac{\mathrm{TOF}}{\mathrm{TOF}_{0}}-1`   
+                     * ``sin2psi``:
+                        A description of the \ :math:`\mathrm{\sin}^{2}\psi` method can be found in the the literature. Two examples are: 
+                            * Fitzpatrick, M. E.; Fry, A. T.; Holdway, P.; Kandil, F.; Shackleton, J.; Suominen, L. *Determination of residual stresses by X-ray diffraction*; National Physical Laboratory, Teddington, 2005.
+                            * EN 15305:2009 standard: Non-destructive testing - Test Method for Residual Stress analysis by X-ray Diffraction.
             </doc>
         </field>         
         <field name="measurement_direction" type="NX_CHAR" optional="true">
