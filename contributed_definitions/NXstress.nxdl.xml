@@ -139,7 +139,7 @@
                      * ``Time-of-Flight``:
                         \ :math:`\varepsilon = \large \frac{\mathrm{TOF}}{\mathrm{TOF}_{0}}-1`   
                      * ``sin2psi``:
-                        A description of the \ :math:`\mathrm{\sin}^{2}\psi` method can be found in the the literature. Two examples are: 
+                        A description of the \ :math:`\mathrm{\sin}^{2}\psi` method can be found in the literature. Two examples are: 
                             * Fitzpatrick, M. E.; Fry, A. T.; Holdway, P.; Kandil, F.; Shackleton, J.; Suominen, L. *Determination of residual stresses by X-ray diffraction*; National Physical Laboratory, Teddington, 2005.
                             * EN 15305:2009 standard: Non-destructive testing - Test Method for Residual Stress analysis by X-ray Diffraction.
             </doc>
