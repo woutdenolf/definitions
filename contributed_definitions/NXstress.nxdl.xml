@@ -843,7 +843,7 @@
                 </dimensions>
             </field>
             <field name="phase_name" type="NX_CHAR" optional="false">
-                <doc>Name of the crystallographic phase (hematite, goethite, a-Al\ :sub:`2`\ O\ :sub:`3`\ , ...).</doc>
+                <doc>Name of the crystallographic phase (hematite, goethite, \ :math:`\alpha'-Al\ :sub:`2`\ O\ :sub:`3`\ , ...).</doc>
                 <dimensions rank="1">
                     <dim index="1" value="nPeaks" />
                 </dimensions>
