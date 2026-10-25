@@ -1,0 +1,78 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/COLLECTION"},
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"node": "group", "ref": "NXobject/LOG"},
+    {"node": "group", "ref": "NXobject/NOTE"},
+    {"node": "group", "ref": "NXobject/PARAMETERS"},
+    {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+    {"node": "dataset", "ref": "NXobject/identifierNAME"},
+    {"declared_by": "NXchemical_composition", "docs": ["NXchemical_composition/normalization"], "enum": {"open": false, "values": [{"value": "atom_percent"}, {"value": "weight_percent"}]}, "id": "normalization", "name": {"exact": "normalization"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXchemical_composition", "docs": ["NXchemical_composition/total"], "id": "total", "name": {"exact": "total"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["n"], "symbols": {"n": "NXchemical_composition"}}, "type": "NX_NUMBER", "units": {"category": "NX_UNITLESS"}, "via": ["T1", "T4", "T7", "T9"]},
+    {"class": "NXatom", "declared_by": "NXchemical_composition", "docs": ["NXchemical_composition/ELEMENT"], "id": "ELEMENT", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 1}, "provisional": ["Q1", "Q3"], "recommended": false, "specialisation": "NXchemical_composition/ELEMENT", "via": ["T1", "T3", "T6"]}
+  ],
+  "class": "NXchemical_composition",
+  "extends": "NXobject",
+  "lossy": [],
+  "provisional": [],
+  "require": [],
+  "source": "base_classes/NXchemical_composition.nxdl.xml",
+  "status": "base",
+  "symbols": ["n"],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"},
+  "via": []
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {
+  "NXchemical_composition/ELEMENT": {
+   "attributes": [
+     {"ref": "NXobject@default"}
+   ],
+   "children": [
+     {"node": "group", "ref": "NXobject/COLLECTION"},
+     {"node": "group", "ref": "NXobject/DATA"},
+     {"node": "group", "ref": "NXobject/LOG"},
+     {"node": "group", "ref": "NXobject/NOTE"},
+     {"node": "group", "ref": "NXobject/PARAMETERS"},
+     {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+     {"declared_by": "NXchemical_composition", "docs": ["NXobject/FIELDNAME_errors", "NXchemical_composition/ELEMENT/composition_errors"], "id": "composition_errors", "name": {"exact": "composition_errors"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q3", "Q4"], "recommended": true, "refines": "FIELDNAME_errors", "type": "NX_FLOAT", "units": {"category": "NX_DIMENSIONLESS"}, "via": ["T1", "T3", "T6", "T7", "T18"]},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+     {"node": "dataset", "ref": "NXobject/identifierNAME"},
+     {"node": "dataset", "ref": "NXatom/identifier_chemical"},
+     {"node": "dataset", "ref": "NXatom/name"},
+     {"node": "dataset", "ref": "NXatom/id"},
+     {"node": "dataset", "ref": "NXatom/charge"},
+     {"node": "dataset", "ref": "NXatom/charge_state"},
+     {"node": "dataset", "ref": "NXatom/volume"},
+     {"node": "dataset", "ref": "NXatom/indices"},
+     {"node": "dataset", "ref": "NXatom/type"},
+     {"node": "dataset", "ref": "NXatom/position"},
+     {"node": "dataset", "ref": "NXatom/occupancy"},
+     {"node": "dataset", "ref": "NXatom/nuclide_hash"},
+     {"node": "dataset", "ref": "NXatom/nuclide_list"},
+     {"node": "dataset", "ref": "NXatom/mass_to_charge_range"},
+     {"declared_by": "NXchemical_composition", "docs": ["NXchemical_composition/ELEMENT/amount"], "id": "amount", "name": {"exact": "amount"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["n"], "symbols": {"n": "NXchemical_composition"}}, "type": "NX_NUMBER", "units": {"category": "NX_UNITLESS"}, "via": ["T1", "T4", "T7", "T9"]},
+     {"declared_by": "NXchemical_composition", "docs": ["NXchemical_composition/ELEMENT/composition"], "id": "composition", "name": {"exact": "composition"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_FLOAT", "units": {"category": "NX_DIMENSIONLESS"}, "via": ["T1", "T4", "T7"]}
+   ],
+   "class": "NXatom",
+   "declared_by": "NXchemical_composition",
+   "id": "NXchemical_composition/ELEMENT",
+   "require": [],
+   "symbols": [],
+   "undeclared": {"attribute": "report", "dataset": "report", "group": "report"}
+  }
+ }
+}

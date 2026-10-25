@@ -1,0 +1,4 @@
+description: >
+  A role filled by a child of the wrong kind (§7.4): `@signal` names a group,
+  the role DATA is a dataset: REF.
+capabilities: []

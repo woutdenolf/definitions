@@ -1,0 +1,4 @@
+description: >
+  Dispatch members (§8.3): `NXcase_outer/ENTRY/SUBENTRY` restricts `definition`
+  to `NXcase_inner`; `NXcase_inner` declares an NXsubentry dispatch member.
+covers: [dispatch]

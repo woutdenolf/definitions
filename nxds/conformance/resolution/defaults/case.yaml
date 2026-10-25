@@ -1,0 +1,5 @@
+description: >
+  Defaults of the source form: `defaults.min` applies to written members, `max`
+  follows the name kind (fixed 1, free unbounded), shapes take `defaults.binding`,
+  a recommended member keeps `min: 0`.
+covers: [defaults, occurs, recommended, shape.binding, specialisation, role]

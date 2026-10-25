@@ -1,0 +1,33 @@
+nxds: '0.1'
+class: NXcs_memory
+category: base
+extends: NXcomponent
+doc: Base class for reporting the description of the memory system of a computer.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  CIRCUIT:
+    node: group
+    name: {any: true}
+    class: NXcircuit
+    doc: Typically, computers have multiple instances of memory.
+    children:
+      type:
+        node: dataset
+        type: NX_CHAR
+        enum:
+          values:
+          - {value: ddr4}
+          - {value: ddr5}
+          open: true
+        doc: Qualifier for the type of random access memory.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      max_physical_capacity:
+        node: dataset
+        type: NX_POSINT
+        units: {category: NX_ANY}
+        doc: Total amount of data which the medium can hold.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]

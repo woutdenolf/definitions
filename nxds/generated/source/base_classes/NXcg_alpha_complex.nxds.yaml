@@ -1,0 +1,89 @@
+nxds: '0.1'
+class: NXcg_alpha_complex
+category: base
+extends: NXcg_primitive
+doc: |-
+  Computational geometry of alpha complexes (alpha shapes or alpha wrappings) about primitives.
+
+  For details see:
+
+  * https://dx.doi.org/10.1109/TIT.1983.1056714 for 2D,
+  * https://dx.doi.org/10.1145/174462.156635 for 3D,
+  * https://dl.acm.org/doi/10.5555/871114 for weighted, and
+  * https://doc.cgal.org/latest/Alpha_shapes_3 for 3D implementation of alpha shapes, and
+  * https://doc.cgal.org/latest/Manual/packages.html#PkgAlphaWrap3 for 3D alpha wrappings
+
+  in CGAL, the Computational Geometry Algorithms Library respectively.
+  As a starting point, we follow the conventions of the CGAL library.
+
+  In general, an alpha complex is a not necessarily connected or not necessarily pure complex,
+  i.e. singular faces may exist. The number of cells, faces, and edges depends on how a specific
+  alpha complex is filtered for lower-dimensional simplices. The fields is_regularized and
+  regularization can be used to provide details about regularization procedures.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  type:
+    node: dataset
+    enum: [convex_hull, alpha_shape, alpha_wrapping]
+    doc: |-
+      Type of alpha complex following the terminology used by CGAL for now.
+
+      Alpha_shape means meshes created using one of the alpha_shape algorithm.
+      Alpha_wrapping means meshes created using the alpha_wrapping algorithm.
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  regularization:
+    node: dataset
+    doc: Human-readable description about regularization procedures.
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  is_regularized:
+    node: dataset
+    type: NX_BOOLEAN
+    doc: Was the alpha complex regularized, i.e. have singular faces been removed, or not.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  alpha:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_ANY}
+    doc: |-
+      The alpha parameter, i.e. the squared radius of the alpha-sphere
+      that is used when computing the alpha complex.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  offset:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_LENGTH}
+    doc: The offset distance parameter used when computing alpha_wrappings.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  CG_POINT:
+    node: group
+    name: {any: true}
+    class: NXcg_point
+    doc: Point cloud serving as input for the computation of the alpha complex.
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  TRIANGLE_SOUP:
+    node: group
+    name: {any: true}
+    class: NXcg_triangle
+    doc: Triangle soup serving as input for the computation of the alpha complex.
+    via: [T1, T3, T4, T7]
+    provisional: [Q1, Q3]
+  ALPHA_COMPLEX:
+    node: group
+    name: {any: true}
+    class: NXcg_triangle
+    doc: Triangle mesh representing the output of the computation, i.e. the alpha complex.
+    via: [T1, T3, T4, T7]
+    provisional: [Q1, Q3]
+  TETRAHEDRALIZATION:
+    node: group
+    name: {any: true}
+    class: NXcg_tetrahedron
+    doc: Tetrahedra representing an interior volume of the alpha complex (if such exists).
+    via: [T1, T3, T4, T7]
+    provisional: [Q1, Q3]

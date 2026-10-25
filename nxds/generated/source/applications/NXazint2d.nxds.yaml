@@ -1,0 +1,371 @@
+nxds: '0.1'
+class: NXazint2d
+category: application
+describes: NXroot
+doc: |-
+  Application definition for data from two-dimensional area detectors that has been integrated azimuthally,
+  with a certain radial binning in units of q or 2theta and with a binning around the azimuthal angle eta.
+
+  An example application that creates these files is documented here: https://maxiv-science.github.io/azint_writer/
+defaults: {min: 1, binding: true, type: NX_CHAR}
+symbols:
+  nImg: {doc: Number of integrated images}
+  nRad: {doc: Number of radial bins}
+  nRadEdge: {doc: Number of radial bin edges (nRad+1)}
+  nEta: {doc: Number of azimuthal bins}
+  nEtaEdge: {doc: Number of azimuthal bin edges (nEta+1)}
+children:
+  ENTRY:
+    node: group
+    name: {any: true}
+    class: NXentry
+    doc: |-
+      .. index:: NXazint2d (applications)
+
+      The ``NXsubentry`` or Multi-Method Data convention described here:
+      https://manual.nexusformat.org/rules.html#table-nxsubentry
+      should be used when different method (e.g. ``NXcanSAS`` or ``NXmonopd``), ``NXazint1d``
+      or other ``NXazint2d`` data, integrated with different options, should
+      be stored under the same ``NXentry``.
+
+      In case of a single ``NXazint2d`` data processing the standard convention with
+      the application definition directly under ``NXentry`` should be used.
+    attributes:
+      default:
+        occurs: {min: 0}
+        doc: |-
+          .. index:: plotting
+
+          Declares which :ref:`NXdata` group
+          contains the data to be shown by default.
+          It is needed to resolve ambiguity when more than one :ref:`NXdata` group exists.
+          The value is the name of the default :ref:`NXdata` group.
+        via: [T0, T1, T6]
+        provisional: [Q1]
+    children:
+      definition:
+        node: dataset
+        enum: [NXazint2d]
+        doc: 'Official NeXus NXDL schema to which this file conforms. '
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      solid_angle_applied:
+        node: dataset
+        type: NX_BOOLEAN
+        doc: is solid angle correction applied or not.
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      polarization_applied:
+        node: dataset
+        type: NX_BOOLEAN
+        doc: is polarization correction applied or not.
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      normalization_applied:
+        node: dataset
+        type: NX_BOOLEAN
+        doc: |-
+          is a normalization correction applied or not.
+
+          It indicates that integrated intensities and their errors were already divided by the appropriate normalization factors accounting
+          for the effective number or weighted contribution of detector pixels to each integration bin.
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      monitor_applied:
+        node: dataset
+        occurs: {min: 0}
+        type: NX_BOOLEAN
+        doc: |-
+          is a monitor correction applied or not.
+
+          The monitor correction accounts for external factors that are independent of the azimuthal integration process.
+          Most commonly, this involves normalizing for fluctuations in the incident beam intensity or, where applicable, variations in exposure time.
+        via: [T1, T6, T7]
+        provisional: [Q1]
+      INSTRUMENT:
+        node: group
+        name: {any: true}
+        class: NXinstrument
+        children:
+          name:
+            node: dataset
+            type: NX_CHAR
+            doc: Name of instrument (beamline) where data was collected.
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          MONOCHROMATOR:
+            node: group
+            name: {any: true}
+            class: NXmonochromator
+            children:
+              wavelength:
+                node: dataset
+                type: NX_FLOAT
+                units: {fixed: angstrom}
+                doc: Wavelength in angstrom.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              energy:
+                node: dataset
+                type: NX_FLOAT
+                units: {fixed: keV}
+                doc: Energy in keV.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T2, T5, T7]
+            provisional: [Q1, Q2, Q11]
+          SOURCE:
+            node: group
+            name: {any: true}
+            class: NXsource
+            children:
+              name:
+                node: dataset
+                type: NX_CHAR
+                doc: Name of laboratory where data was collected.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              type:
+                node: dataset
+                type: NX_CHAR
+                doc: Type of laboratory where data was collected.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              probe:
+                node: dataset
+                type: NX_CHAR
+                doc: Type of probe.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T2, T5, T7]
+            provisional: [Q1, Q2, Q11]
+        via: [T1, T2, T5, T7]
+        provisional: [Q1, Q2, Q11]
+      reduction:
+        node: group
+        class: NXprocess
+        children:
+          program:
+            node: dataset
+            type: NX_CHAR
+            doc: Name of the program that made this file.
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          version:
+            node: dataset
+            type: NX_CHAR
+            doc: Version of the progam that made this file.
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          date:
+            node: dataset
+            type: NX_DATE_TIME
+            doc: Date the file was created.
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          reference:
+            node: dataset
+            type: NX_CHAR
+            doc: Citation or other references for the algorithm used in the processing.
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          note:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_CHAR
+            doc: Notes required to help interpret the data, e.g. on coordinate systems.
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          input:
+            node: group
+            class: NXparameters
+            doc: |-
+              Parameters should exactly match those required by the algorithm used in the processing.
+              For example, `azint` requires `error_model`, `mask`, `n_splitting`, `poni`, etc.
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      MONITOR:
+        node: group
+        name: {any: true}
+        class: NXmonitor
+        occurs: {min: 0}
+        doc: Monitor data for example `I_zero`.
+        children:
+          data:
+            node: dataset
+            type: NX_NUMBER
+            shape: [nImg]
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+        via: [T1, T2, T6, T7]
+        provisional: [Q1, Q11]
+      DATA:
+        node: group
+        name: {any: true}
+        class: NXdata
+        doc: Azimuthally integrated data with radial binning in q or 2theta and with azimuthal
+          binning.
+        attributes:
+          axes:
+            type: NX_CHAR
+            shape: [null]
+            enum: ['[''.'', ''azimuthal_axis'', ''radial_axis'']']
+            via: [T1, T5, T9]
+            provisional: [Q2]
+          interpretation:
+            type: NX_CHAR
+            enum: [image]
+            via: [T1, T5]
+            provisional: [Q2]
+          signal:
+            type: NX_CHAR
+            enum: [I]
+            via: [T1, T5]
+            provisional: [Q2]
+        children:
+          I:
+            node: dataset
+            type: NX_NUMBER
+            shape: [nImg, nEta, nRad]
+            attributes:
+              long_name:
+                type: NX_CHAR
+                enum: [intensity]
+                via: [T1, T5]
+                provisional: [Q2]
+              units:
+                type: NX_CHAR
+                enum: [arbitrary units]
+                via: [T1, T5]
+                provisional: [Q2]
+            via: [T1, T3b, T5, T7, T9]
+            provisional: [Q1, Q2]
+          I_errors:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_NUMBER
+            shape: [nImg, nEta, nRad]
+            attributes:
+              long_name:
+                occurs: {min: 0}
+                type: NX_CHAR
+                enum: [estimated intensity error]
+                via: [T1, T6]
+                provisional: [Q1]
+              units:
+                occurs: {min: 0}
+                type: NX_CHAR
+                enum: [arbitrary units]
+                via: [T1, T6]
+                provisional: [Q1]
+            via: [T1, T3b, T6, T7, T9]
+            provisional: [Q1]
+          radial_axis:
+            node: dataset
+            type: NX_NUMBER
+            shape: [nRad]
+            attributes:
+              long_name:
+                type: NX_CHAR
+                enum: [q, 2theta]
+                via: [T1, T5]
+                provisional: [Q2]
+              units:
+                type: NX_CHAR
+                enum: [NX_PER_LENGHT, NX_WAVENUMBER, NX_ANGLE]
+                via: [T1, T5]
+                provisional: [Q2]
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+          radial_axis_edges:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_NUMBER
+            shape: [nRadEdge]
+            attributes:
+              long_name:
+                type: NX_CHAR
+                enum: [q bin edges, 2theta bin edges]
+                via: [T1, T5]
+                provisional: [Q2]
+              units:
+                type: NX_CHAR
+                enum: [NX_PER_LENGTH, NX_WAVENUMBER, NX_ANGLE]
+                via: [T1, T5]
+                provisional: [Q2]
+            via: [T1, T6, T7, T9]
+            provisional: [Q1]
+          norm:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_NUMBER
+            shape: [nEta, nRad]
+            doc: |-
+              Values of the normalization correction.
+
+              The normalization correction accounts for the effective number or weighted contribution of detector pixels to each integration bin.
+
+              Note: An important aspect of the normalization strategy is how polarization and solid angle corrections are incorporated, which can vary
+              depending on the specific application, software, and its configuration options (see, for example, PyFAI documentation).
+              Additionally, the normalization strategy may include a relative or absolute calibration factor. Two common normalization approaches are:
+              "Relative normalization" to the PONI (Point Of Normal Incidence) pixel, and "Absolute calibration", which yields the number of photons
+              scattered by the sample in a given direction per unit solid angle. The type of the normalization strategy is not indicated on this level.
+              It must be concluded from the software used or its parameters.
+
+              The monitor correction is not included in the normalization correction and it is specified separately.
+            attributes:
+              long_name:
+                type: NX_CHAR
+                enum: [effective number of pixels contributing to the corresponding bin]
+                via: [T1, T5]
+                provisional: [Q2]
+              units:
+                type: NX_CHAR
+                enum: [arbitrary units]
+                via: [T1, T5]
+                provisional: [Q2]
+            via: [T1, T6, T7, T9]
+            provisional: [Q1]
+          azimuthal_axis:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_NUMBER
+            shape: [nEta]
+            attributes:
+              long_name:
+                type: NX_CHAR
+                enum: [azimuthal bin center]
+                via: [T1, T5]
+                provisional: [Q2]
+              units:
+                type: NX_CHAR
+                enum: [NX_ANGLE]
+                via: [T1, T5]
+                provisional: [Q2]
+            via: [T1, T6, T7, T9]
+            provisional: [Q1]
+          azimuthal_axis_edges:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_NUMBER
+            shape: [nEtaEdge]
+            attributes:
+              long_name:
+                type: NX_CHAR
+                enum: [azimuthal bin edges]
+                via: [T1, T5]
+                provisional: [Q2]
+              units:
+                type: NX_CHAR
+                enum: [NX_ANGLE]
+                via: [T1, T5]
+                provisional: [Q2]
+            via: [T1, T6, T7, T9]
+            provisional: [Q1]
+        via: [T1, T2, T5, T7]
+        provisional: [Q1, Q2, Q11]
+    via: [T1, T2, T5, T7]
+    provisional: [Q1, Q2, Q11]
+via: [T8]

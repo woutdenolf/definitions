@@ -1,0 +1,324 @@
+nxds: '0.1'
+class: NXtas
+category: application
+describes: NXroot
+doc: |-
+  This is an application definition for a triple axis spectrometer.
+
+  It is for the trademark scan of the TAS, the Q-E scan.
+  For your alignment scans use the rules in :ref:`NXscan`.
+defaults: {min: 1, binding: true, type: NX_CHAR}
+symbols:
+  nP: {doc: Number of points}
+children:
+  ENTRY:
+    node: group
+    name: {any: true}
+    class: NXentry
+    children:
+      title:
+        node: dataset
+        type: NX_CHAR
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      start_time:
+        node: dataset
+        type: NX_DATE_TIME
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      definition:
+        node: dataset
+        enum: [NXtas]
+        doc: 'Official NeXus NXDL schema to which this file conforms '
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      INSTRUMENT:
+        node: group
+        name: {any: true}
+        class: NXinstrument
+        children:
+          SOURCE:
+            node: group
+            name: {any: true}
+            class: NXsource
+            children:
+              name:
+                node: dataset
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+              probe:
+                node: dataset
+                enum: [neutron, x-ray]
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T2, T5, T7]
+            provisional: [Q1, Q2, Q11]
+          monochromator:
+            node: group
+            class: NXcrystal
+            children:
+              ei:
+                node: dataset
+                type: NX_FLOAT
+                shape: [nP]
+                units: {category: NX_ENERGY}
+                attributes:
+                  axis:
+                    occurs: {min: 0}
+                    type: NX_POSINT
+                    enum: ['1']
+                    via: [T19]
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              rotation_angle:
+                node: dataset
+                type: NX_FLOAT
+                shape: [nP]
+                units: {category: NX_ANGLE}
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          analyser:
+            node: group
+            class: NXcrystal
+            children:
+              ef:
+                node: dataset
+                type: NX_FLOAT
+                shape: [nP]
+                units: {category: NX_ENERGY}
+                attributes:
+                  axis:
+                    occurs: {min: 0}
+                    type: NX_POSINT
+                    enum: ['1']
+                    via: [T19]
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              rotation_angle:
+                node: dataset
+                type: NX_FLOAT
+                shape: [nP]
+                units: {category: NX_ANGLE}
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              polar_angle:
+                node: dataset
+                type: NX_FLOAT
+                shape: [nP]
+                units: {category: NX_ANGLE}
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          DETECTOR:
+            node: group
+            name: {any: true}
+            class: NXdetector
+            children:
+              data:
+                node: dataset
+                type: NX_INT
+                shape: [nP]
+                attributes:
+                  signal:
+                    occurs: {min: 0}
+                    type: NX_POSINT
+                    enum: ['1']
+                    via: [T19]
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              polar_angle:
+                node: dataset
+                type: NX_FLOAT
+                shape: [nP]
+                units: {category: NX_ANGLE}
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+            via: [T1, T2, T5, T7]
+            provisional: [Q1, Q2, Q11]
+        via: [T1, T2, T5, T7]
+        provisional: [Q1, Q2, Q11]
+      SAMPLE:
+        node: group
+        name: {any: true}
+        class: NXsample
+        children:
+          name:
+            node: dataset
+            doc: Descriptive name of sample
+            via: [T0, T1, T5, T7]
+            provisional: [Q1, Q2]
+          qh:
+            node: dataset
+            type: NX_FLOAT
+            shape: [nP]
+            units: {category: NX_DIMENSIONLESS}
+            attributes:
+              axis:
+                occurs: {min: 0}
+                type: NX_POSINT
+                enum: ['1']
+                via: [T19]
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+          qk:
+            node: dataset
+            type: NX_FLOAT
+            shape: [nP]
+            units: {category: NX_DIMENSIONLESS}
+            attributes:
+              axis:
+                occurs: {min: 0}
+                type: NX_POSINT
+                enum: ['1']
+                via: [T19]
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+          ql:
+            node: dataset
+            type: NX_FLOAT
+            shape: [nP]
+            units: {category: NX_DIMENSIONLESS}
+            attributes:
+              axis:
+                occurs: {min: 0}
+                type: NX_POSINT
+                enum: ['1']
+                via: [T19]
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+          en:
+            node: dataset
+            type: NX_FLOAT
+            shape: [nP]
+            units: {category: NX_ENERGY}
+            attributes:
+              axis:
+                occurs: {min: 0}
+                type: NX_POSINT
+                enum: ['1']
+                via: [T19]
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+          rotation_angle:
+            node: dataset
+            type: NX_FLOAT
+            shape: [nP]
+            units: {category: NX_ANGLE}
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+          polar_angle:
+            node: dataset
+            type: NX_FLOAT
+            shape: [nP]
+            units: {category: NX_ANGLE}
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+          sgu:
+            node: dataset
+            type: NX_FLOAT
+            shape: [nP]
+            units: {category: NX_ANGLE}
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+          sgl:
+            node: dataset
+            type: NX_FLOAT
+            shape: [nP]
+            units: {category: NX_ANGLE}
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+          unit_cell:
+            node: dataset
+            type: NX_FLOAT
+            shape: [6]
+            units: {category: NX_LENGTH}
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+          orientation_matrix:
+            node: dataset
+            type: NX_FLOAT
+            shape: [9]
+            units: {category: NX_DIMENSIONLESS}
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+        via: [T1, T2, T5, T7]
+        provisional: [Q1, Q2, Q11]
+      MONITOR:
+        node: group
+        name: {any: true}
+        class: NXmonitor
+        children:
+          mode:
+            node: dataset
+            enum: [monitor, timer]
+            doc: |-
+              Count to a preset value based on either clock time (timer)
+              or received monitor counts (monitor).
+            via: [T0, T1, T5, T7]
+            provisional: [Q1, Q2]
+          preset:
+            node: dataset
+            type: NX_FLOAT
+            doc: preset value for time or monitor
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          data:
+            node: dataset
+            type: NX_FLOAT
+            shape: [nP]
+            units: {category: NX_ANY}
+            doc: Total integral monitor counts
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+        via: [T1, T2, T5, T7]
+        provisional: [Q1, Q2, Q11]
+      DATA:
+        node: group
+        name: {any: true}
+        class: NXdata
+        doc: One of the ei,ef,qh,qk,ql,en should get a primary=1 attribute to denote the main
+          scan axis
+        children:
+          ei:
+            node: link
+            target: ENTRY/INSTRUMENT/monochromator/ei
+            via: [T1, T5, T10]
+            provisional: [Q2, Q8]
+          ef:
+            node: link
+            target: ENTRY/INSTRUMENT/analyser/ef
+            via: [T1, T5, T10]
+            provisional: [Q2, Q8]
+          en:
+            node: link
+            target: ENTRY/SAMPLE/en
+            via: [T1, T5, T10]
+            provisional: [Q2, Q8]
+          qh:
+            node: link
+            target: ENTRY/SAMPLE/qh
+            via: [T1, T5, T10]
+            provisional: [Q2, Q8]
+          qk:
+            node: link
+            target: ENTRY/SAMPLE/qk
+            via: [T1, T5, T10]
+            provisional: [Q2, Q8]
+          ql:
+            node: link
+            target: ENTRY/SAMPLE/ql
+            via: [T1, T5, T10]
+            provisional: [Q2, Q8]
+          data:
+            node: link
+            target: ENTRY/INSTRUMENT/DETECTOR/data
+            via: [T1, T5, T10]
+            provisional: [Q2, Q8]
+        via: [T1, T2, T5, T7]
+        provisional: [Q1, Q2, Q11]
+    via: [T1, T2, T5, T7]
+    provisional: [Q1, Q2, Q11]
+via: [T8]

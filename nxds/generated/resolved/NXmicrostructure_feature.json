@@ -1,0 +1,35 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/COLLECTION"},
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"node": "group", "ref": "NXobject/LOG"},
+    {"node": "group", "ref": "NXobject/NOTE"},
+    {"node": "group", "ref": "NXobject/PARAMETERS"},
+    {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+    {"node": "dataset", "ref": "NXobject/identifierNAME"},
+    {"class": "NXchemical_composition", "declared_by": "NXmicrostructure_feature", "docs": ["NXmicrostructure_feature/chemical_composition"], "id": "chemical_composition", "name": {"exact": "chemical_composition"}, "node": "group", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "via": ["T1", "T4", "T7"]}
+  ],
+  "class": "NXmicrostructure_feature",
+  "extends": "NXobject",
+  "lossy": [],
+  "provisional": [],
+  "require": [],
+  "source": "contributed_definitions/NXmicrostructure_feature.nxdl.xml",
+  "status": "contributed",
+  "symbols": [],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"},
+  "via": []
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {}
+}

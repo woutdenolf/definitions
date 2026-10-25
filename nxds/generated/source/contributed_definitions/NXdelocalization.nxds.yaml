@@ -1,0 +1,89 @@
+nxds: '0.1'
+class: NXdelocalization
+category: base
+extends: NXobject
+doc: |-
+  Base class of the configuration and results of a delocalization algorithm.
+
+  Delocalization is used to distribute point-like objects on a grid to obtain
+  e.g. smoother count, composition, or concentration values of scalar fields
+  and compute gradients of these fields.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+symbols:
+  n_p: {doc: Number of points/objects.}
+  n_m: {doc: Number of mark data per point/object.}
+  n_atoms: {doc: Number of atoms in the whitelist.}
+  n_nuclides: {doc: Number of isotopes in the whitelist.}
+children:
+  grid:
+    node: group
+    class: NXcg_grid
+    doc: Details about the grid on which the delocalization is applied.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  weighting_model:
+    node: group
+    class: NXmatch_filter
+    doc: |-
+      The weighting model specifies how mark data are mapped to a weight per
+      point/object.
+    children:
+      weighting_method:
+        node: dataset
+        type: NX_CHAR
+        enum: [default, element, isotope]
+        doc: |-
+          As an example from the research field of atom probe points/objects are (molecular) ions.
+          Different methods are used for weighting ions:
+
+          * default, points get all the same weight 1., which for atom probe is equivalent
+             to (molecular) iontype-based delocalization.
+          * element, points get as much weight as they have atoms representing a nuclide
+            with a proton number that is matching to a respective entry in whitelist.
+            In atom probe jargon, this means atomic_decomposition.
+          * isotope, points get as much weight as they have atoms representing a nuclides
+            from a respective entry in whitelist.
+            In atom probe jargon, this means isotope_decomposition.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      method:
+        node: dataset
+        type: NX_CHAR
+        enum: [whitelist]
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      match:
+        node: dataset
+        type: NX_UINT
+        shape: [n_nuclides]
+        units: {category: NX_UNITLESS}
+        doc: |-
+          A list of nuclides based on which to evaluate the weight. Nuclides need to exist in the nuclide table.
+          Values are nuclide (isotope) hash values using the hashing rule defined in :ref:`NXatom`.
+        via: [T1, T4, T7, T9]
+        provisional: [Q1]
+      mark:
+        node: dataset
+        type: NX_NUMBER
+        shape: [n_p, n_m]
+        units: {category: NX_UNITLESS}
+        doc: |-
+          Attribute data for each member of the point cloud. For APM these are the
+          iontypes generated via ranging. The number of mark data per point is 1
+          in the case for atom probe.
+        via: [T1, T4, T7, T9]
+        provisional: [Q1]
+      weight:
+        node: dataset
+        type: NX_NUMBER
+        shape: [n_p]
+        units: {category: NX_UNITLESS}
+        doc: |-
+          Weighting factor with which the integrated intensity per grid cell is
+          multiplied specifically for each point/object. For APM the weight are
+          positive integer values, specifically the multiplicity of the ion,
+          according to the details of the weighting_method.
+        via: [T1, T4, T7, T9]
+        provisional: [Q1]
+    via: [T1, T4, T7]
+    provisional: [Q1]

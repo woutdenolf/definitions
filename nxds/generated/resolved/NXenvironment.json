@@ -1,0 +1,45 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/COLLECTION"},
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"node": "group", "ref": "NXobject/LOG"},
+    {"class": "NXnote", "declared_by": "NXobject", "docs": ["NXenvironment/NOTE"], "id": "NOTE", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q11"], "recommended": false, "refined_by": ["NXenvironment"], "via": ["T1", "T2", "T4", "T6", "T7"]},
+    {"node": "group", "ref": "NXobject/PARAMETERS"},
+    {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+    {"node": "dataset", "ref": "NXobject/identifierNAME"},
+    {"declared_by": "NXenvironment", "docs": ["NXenvironment/name"], "id": "name", "name": {"exact": "name"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4", "T7"]},
+    {"declared_by": "NXenvironment", "docs": ["NXenvironment/short_name"], "id": "short_name", "name": {"exact": "short_name"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4", "T7"]},
+    {"declared_by": "NXenvironment", "docs": ["NXenvironment/type"], "id": "type", "name": {"exact": "type"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4", "T7"]},
+    {"declared_by": "NXenvironment", "docs": ["NXenvironment/description"], "id": "description", "name": {"exact": "description"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4", "T7"]},
+    {"declared_by": "NXenvironment", "docs": ["NXenvironment/program"], "id": "program", "name": {"exact": "program"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4", "T7"]},
+    {"class": "NXgeometry", "declared_by": "NXenvironment", "docs": ["NXenvironment/position"], "id": "position", "name": {"exact": "position"}, "node": "group", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXenvironment", "docs": ["NXenvironment/value"], "id": "value", "name": {"exact": "value"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_FLOAT", "units": {"category": "NX_ANY"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXenvironment", "docs": ["NXenvironment/depends_on"], "id": "depends_on", "name": {"exact": "depends_on"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4", "T7"]},
+    {"class": "NXtransformations", "declared_by": "NXenvironment", "docs": ["NXenvironment/TRANSFORMATIONS"], "id": "TRANSFORMATIONS", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q11"], "recommended": false, "via": ["T1", "T2", "T6", "T7"]},
+    {"class": "NXactuator", "declared_by": "NXenvironment", "docs": ["NXenvironment/ACTUATOR"], "id": "ACTUATOR", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q11"], "recommended": false, "via": ["T1", "T2", "T4", "T7"]},
+    {"class": "NXsensor", "declared_by": "NXenvironment", "docs": ["NXenvironment/SENSOR"], "id": "SENSOR", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q11"], "recommended": false, "via": ["T1", "T2", "T4", "T7"]}
+  ],
+  "class": "NXenvironment",
+  "extends": "NXobject",
+  "lossy": [],
+  "provisional": [],
+  "require": [],
+  "source": "base_classes/NXenvironment.nxdl.xml",
+  "status": "base",
+  "symbols": [],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"},
+  "via": []
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {}
+}

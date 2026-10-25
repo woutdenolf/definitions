@@ -1,0 +1,331 @@
+nxds: '0.1'
+class: NXcorrector_cs
+category: base
+extends: NXcomponent
+doc: |-
+  Base class for a corrector reducing (spherical) aberrations of an electron optical setup.
+
+  Different technology partners use different conventions and
+  models for quantifying the aberration coefficients.
+
+  Aberration correction components are especially important for (scanning)
+  transmission electron microscopy. Composed of multiple lenses and multipole stigmators,
+  their technical details are specific for the technology partner as well as
+  the microscope and instrument. Most technical details are proprietary knowledge.
+
+  If one component corrects for multiple types of aberrations (like it is the case
+  reported here `CEOS <https://www.ceos-gmbh.de/en/research/electrostat>`_) follow this
+  design when using corrector and monochromator in an application definition:
+
+  * Use :ref:`NXcorrector_cs` for spherical aberration
+  * Use :ref:`NXmonochromator` for energy filtering or chromatic aberration
+  * Use the group corrector_ax in :ref:`NXem` for axial astigmatism aberration
+
+  Although this base class currently provides concepts that are foremost used in
+  the field of electron microscopy using this base class is not restricted to this
+  research field. NXcorrector_cs can also serve as a container to detail, in
+  combination with :ref:`NXaberration`, about measured aberrations in classical optics.
+  In optics, though, the difference is that the design of the :ref:NXoptical_lens`
+  itself (e.g., using aspheric lenses or combinations of lenses) enables to
+  reduce spherical aberrations.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+symbols:
+  n_img: {doc: 'Number of images taken, at least one.'}
+children:
+  applied:
+    node: dataset
+    type: NX_BOOLEAN
+    doc: Was the corrector used?
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  tableauID:
+    node: group
+    name: {template: 'tableau{ID}'}
+    class: NXprocess
+    doc: |-
+      Specific information about the alignment procedure. This is a process during which
+      the corrector is configured to enable calibrated usage of the instrument.
+
+      This :ref:`NXprocess` group should also be used when one describes in a computer
+      simulation the specific details about the modeled or assumed aberrations.
+    children:
+      description:
+        node: dataset
+        type: NX_CHAR
+        doc: |-
+          Discouraged free-text field to add further details about the alignment
+          procedure.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      tilt_angle:
+        node: dataset
+        type: NX_NUMBER
+        shape: [n_img]
+        units: {category: NX_ANGLE}
+        doc: |-
+          The outer tilt angle of the beam in tableau acquisition.
+
+          TODO: The relevant axes which span the tilt_angle need a
+          cleaner description. Suggestions from the community are
+          welcome here for guiding an improvement of this base class.
+        via: [T1, T4, T7, T9]
+        provisional: [Q1]
+      exposure_time:
+        node: dataset
+        type: NX_NUMBER
+        shape: [n_img]
+        units: {category: NX_TIME}
+        doc: The exposure time of single tilt images.
+        via: [T1, T4, T7, T9]
+        provisional: [Q1]
+      magnification:
+        node: dataset
+        type: NX_NUMBER
+        shape: [n_img]
+        units: {category: NX_DIMENSIONLESS}
+        doc: |-
+          The factor of enlargement of the apparent size,
+          not the physical size, of an object.
+        via: [T1, T4, T7, T9]
+        provisional: [Q1]
+      imageID:
+        node: group
+        name: {template: 'image{ID}'}
+        class: NXimage
+        doc: Image(s) taken during the alignment procedure
+        via: [T1, T3, T4, T7]
+        provisional: [Q1, Q3]
+      model:
+        node: dataset
+        type: NX_CHAR
+        enum: [ceos, nion]
+        doc: |-
+          Convention used for storing measured or estimated aberrations (for each or the final image)
+          via fields c_1, a_1, c_1_0, c_1_2_a, and so on and so forth.
+
+          See `S. J. Pennycock and P. D. Nellist <https://doi.org/10.1007/978-1-4419-7200-2>`_ (page 44ff, and page 118ff)
+          for different definitions available and further details. Table 7-2 of Ibid. publication (page 305ff) documents how
+          to convert from the Nion to the CEOS definitions. Conversion tables are also summarized by `Y. Liao <https://www.globalsino.com/EM/page3740.html>`_.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      c_1:
+        node: group
+        class: NXaberration
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      a_1:
+        node: group
+        class: NXaberration
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      b_2:
+        node: group
+        class: NXaberration
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      a_2:
+        node: group
+        class: NXaberration
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      c_3:
+        node: group
+        class: NXaberration
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      s_3:
+        node: group
+        class: NXaberration
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      a_3:
+        node: group
+        class: NXaberration
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      b_4:
+        node: group
+        class: NXaberration
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      d_4:
+        node: group
+        class: NXaberration
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      a_4:
+        node: group
+        class: NXaberration
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      c_5:
+        node: group
+        class: NXaberration
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      s_5:
+        node: group
+        class: NXaberration
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      r_5:
+        node: group
+        class: NXaberration
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      a_6:
+        node: group
+        class: NXaberration
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      c_1_0:
+        node: group
+        class: NXaberration
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      c_1_2_a:
+        node: group
+        class: NXaberration
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      c_1_2_b:
+        node: group
+        class: NXaberration
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      c_2_1_a:
+        node: group
+        class: NXaberration
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      c_2_1_b:
+        node: group
+        class: NXaberration
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      c_2_3_a:
+        node: group
+        class: NXaberration
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      c_2_3_b:
+        node: group
+        class: NXaberration
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      c_3_0:
+        node: group
+        class: NXaberration
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      c_3_2_a:
+        node: group
+        class: NXaberration
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      c_3_2_b:
+        node: group
+        class: NXaberration
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      c_3_4_a:
+        node: group
+        class: NXaberration
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      c_3_4_b:
+        node: group
+        class: NXaberration
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      c_4_1_a:
+        node: group
+        class: NXaberration
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      c_4_1_b:
+        node: group
+        class: NXaberration
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      c_4_3_a:
+        node: group
+        class: NXaberration
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      c_4_3_b:
+        node: group
+        class: NXaberration
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      c_4_5_a:
+        node: group
+        class: NXaberration
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      c_4_5_b:
+        node: group
+        class: NXaberration
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      c_5_0:
+        node: group
+        class: NXaberration
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      c_5_2_a:
+        node: group
+        class: NXaberration
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      c_5_2_b:
+        node: group
+        class: NXaberration
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      c_5_4_a:
+        node: group
+        class: NXaberration
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      c_5_4_b:
+        node: group
+        class: NXaberration
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      c_5_6_a:
+        node: group
+        class: NXaberration
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      c_5_6_b:
+        node: group
+        class: NXaberration
+        via: [T1, T4, T7]
+        provisional: [Q1]
+    via: [T1, T3, T4, T7]
+    provisional: [Q1, Q3]
+  ELECTROMAGNETIC_LENS:
+    node: group
+    name: {any: true}
+    class: NXelectromagnetic_lens
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  OPTICAL_LENS:
+    node: group
+    name: {any: true}
+    class: NXoptical_lens
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  APERTURE:
+    node: group
+    name: {any: true}
+    class: NXaperture
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  DEFLECTOR:
+    node: group
+    name: {any: true}
+    class: NXdeflector
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]

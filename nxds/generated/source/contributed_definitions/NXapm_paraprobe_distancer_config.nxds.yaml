@@ -1,0 +1,163 @@
+nxds: '0.1'
+class: NXapm_paraprobe_distancer_config
+category: application
+extends: NXapm_paraprobe_tool_config
+describes: NXroot
+doc: |-
+  Application definition for a configuration file of the paraprobe-distancer tool.
+
+  The tool paraprobe-distancer tool evaluates exactly the shortest Euclidean distance for each
+  member of a set of points against a set of triangles.
+
+  Triangles can represent for instance the facets of a triangulated surface mesh like those returned by
+  paraprobe-surfacer or any other set of triangles. Triangles do not have to be connected.
+
+  Currently, paraprobe-distancer does not check if the respectively specified triangle sets are consistent,
+  what their topology is, or whether or not these triangles are consistently oriented.
+defaults: {min: 1, binding: true, type: NX_CHAR}
+children:
+  ENTRY:
+    node: group
+    name: {any: true}
+    class: NXentry
+    occurs: {min: 1, max: 1}
+    children:
+      definition:
+        node: dataset
+        type: NX_CHAR
+        enum: [NXapm_paraprobe_distancer_config]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      point_to_triangleID:
+        node: group
+        name: {template: 'point_to_triangle{ID}'}
+        class: NXapm_paraprobe_tool_parameters
+        occurs: {min: 1, max: 1}
+        children:
+          method:
+            node: dataset
+            type: NX_CHAR
+            enum: [default, skin]
+            doc: |-
+              Specifies for which point the tool will compute distances.
+
+              The value *default* configures that distances are computed for all points.
+              The value *skin* configures that distances are computed only for those
+              points which are not farther away located to a triangle than
+              threshold_distance.
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          threshold_distance:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_FLOAT
+            units: {category: NX_LENGTH}
+            doc: |-
+              Maximum distance for which distances are
+              computed when *method* is *skin*.
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          number_of_triangle_sets:
+            node: dataset
+            type: NX_UINT
+            units: {category: NX_UNITLESS}
+            doc: |-
+              How many triangle sets to consider.
+              Multiple triangle sets can be defined which are
+              composed into one joint triangle set for the analysis.
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          triangle_setID:
+            node: group
+            name: {template: 'triangle_set{ID}'}
+            class: NXnote
+            occurs: {min: 1, max: unbounded}
+            doc: |-
+              Each triangle_set that is referred to here should be a face_list_data_structure,
+              i.e. an array of (n_vertices, 3) of NX_FLOAT for vertex coordinates, an (n_facets, 3)
+              array of NX_UINT incident vertices of each facet. Vertex indices are assumed to
+              start at zero and must not exceed n_vertices - 1, i.e. the index_offset is 0.
+              Facet normal have to be provided as an array of (n_facets, 3) of NX_FLOAT.
+            children:
+              algorithm:
+                node: dataset
+                type: NX_CHAR
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              checksum:
+                node: dataset
+                type: NX_CHAR
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              file_name:
+                node: dataset
+                type: NX_CHAR
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              vertices:
+                node: dataset
+                type: NX_CHAR
+                doc: |-
+                  Absolute path in the (HDF5) file that points to the array
+                  of vertex positions for the triangles in that triangle_set.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              indices:
+                node: dataset
+                type: NX_CHAR
+                doc: |-
+                  Absolute path in the (HDF5) file that points to the array
+                  of vertex indices for the triangles in that triangle_set.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              vertex_normals:
+                node: dataset
+                occurs: {min: 0}
+                type: NX_CHAR
+                doc: |-
+                  Absolute path in the (HDF5) file that points to the array
+                  of vertex normal vectors for the triangles in that triangle_set.
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              face_normals:
+                node: dataset
+                occurs: {min: 0}
+                type: NX_CHAR
+                doc: |-
+                  Absolute path in the (HDF5) file that points to the array
+                  of facet normal vectors for the triangles in that triangle_set.
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              indices_patch:
+                node: dataset
+                occurs: {min: 0}
+                type: NX_CHAR
+                doc: |-
+                  Absolute path in the (HDF5) file that points to the array
+                  of identifier for the triangles in that triangle_set.
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              patch_filter:
+                node: group
+                class: NXmatch_filter
+                occurs: {min: 0}
+                children:
+                  method:
+                    node: dataset
+                    type: NX_CHAR
+                    via: [T1, T5, T7]
+                    provisional: [Q1, Q2]
+                  match:
+                    node: dataset
+                    type: NX_NUMBER
+                    via: [T1, T5, T7]
+                    provisional: [Q1, Q2]
+                via: [T1, T6, T7]
+                provisional: [Q1]
+            via: [T1, T3, T6]
+            provisional: [Q1, Q3]
+        via: [T1, T3, T6]
+        provisional: [Q1, Q3]
+    via: [T1, T2, T6]
+    provisional: [Q1, Q11]
+via: [T8]

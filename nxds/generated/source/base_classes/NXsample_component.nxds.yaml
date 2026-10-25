@@ -1,0 +1,155 @@
+nxds: '0.1'
+class: NXsample_component
+category: base
+extends: NXcomponent
+doc: One group like this per component can be recorded for a sample consisting of multiple
+  components.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+symbols:
+  n_Temp: {doc: number of temperatures}
+  n_eField:
+    doc: number of values in applied electric field
+  n_mField:
+    doc: number of values in applied magnetic field
+  n_pField:
+    doc: number of values in applied pressure field
+  n_sField:
+    doc: number of values in applied stress field
+children:
+  name:
+    node: dataset
+    doc: Descriptive name of sample component
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  chemical_formula:
+    node: dataset
+    doc: |-
+      The chemical formula specified using CIF conventions.
+      Abbreviated version of CIF standard:
+
+      * Only recognized element symbols may be used.
+      * Each element symbol is followed by a 'count' number. A count of '1' may be omitted.
+      * A space or parenthesis must separate each cluster of (element symbol + count).
+      * Where a group of elements is enclosed in parentheses, the multiplier for the
+        group must follow the closing parentheses. That is, all element and group
+        multipliers are assumed to be printed as subscripted numbers.
+      * Unless the elements are ordered in a manner that corresponds to their chemical
+        structure, the order of the elements within any group or moiety depends on
+        whether or not carbon is present.
+      * If carbon is present, the order should be:
+
+        - C, then H, then the other elements in alphabetical order of their symbol.
+        - If carbon is not present, the elements are listed purely in alphabetic order of their symbol.
+
+      * This is the *Hill* system used by Chemical Abstracts.
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  unit_cell_abc:
+    node: dataset
+    type: NX_FLOAT
+    shape: [3]
+    units: {category: NX_LENGTH}
+    doc: Crystallography unit cell parameters a, b, and c
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  unit_cell_alphabetagamma:
+    node: dataset
+    type: NX_FLOAT
+    shape: [3]
+    units: {category: NX_ANGLE}
+    doc: Crystallography unit cell parameters alpha, beta, and gamma
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  unit_cell_volume:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_VOLUME}
+    doc: Volume of the unit cell
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  sample_orientation:
+    node: dataset
+    type: NX_FLOAT
+    shape: [3]
+    units: {category: NX_ANGLE}
+    doc: This will follow the Busing and Levy convention from Acta.Crysta v22, p457 (1967)
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  orientation_matrix:
+    node: dataset
+    type: NX_FLOAT
+    shape: [3, 3]
+    doc: |-
+      Orientation matrix of single crystal sample component.
+      This will follow the Busing and Levy convention from Acta.Crysta v22, p457 (1967)
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  mass:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_MASS}
+    doc: Mass of sample component
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  density:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_MASS_DENSITY}
+    doc: Density of sample component
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  relative_molecular_mass:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_MASS}
+    doc: Relative Molecular Mass of sample component
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  description:
+    node: dataset
+    doc: Description of the sample component
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  volume_fraction:
+    node: dataset
+    type: NX_FLOAT
+    doc: Volume fraction of component
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  scattering_length_density:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_SCATTERING_LENGTH_DENSITY}
+    doc: Scattering length density of component
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  unit_cell_class:
+    node: dataset
+    enum: [triclinic, monoclinic, orthorhombic, tetragonal, rhombohedral, hexagonal, cubic]
+    doc: In case it is all we know and we want to record/document it
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  space_group:
+    node: dataset
+    doc: Crystallographic space group
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  point_group:
+    node: dataset
+    doc: Crystallographic point group, deprecated if space_group present
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  transmission:
+    node: group
+    class: NXdata
+    doc: As a function of Wavelength
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  history:
+    node: group
+    class: NXhistory
+    doc: |-
+      A set of physical processes that occurred to the sample component prior/during
+      experiment.
+    via: [T1, T4, T7]
+    provisional: [Q1]

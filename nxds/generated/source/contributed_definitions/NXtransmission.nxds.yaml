@@ -1,0 +1,405 @@
+nxds: '0.1'
+class: NXtransmission
+category: application
+describes: NXroot
+doc: Application definition for transmission experiments
+defaults: {min: 1, binding: true, type: NX_CHAR}
+symbols:
+  N_wavelengths: {doc: Number of wavelength points}
+  N_scans: {doc: Number of scans}
+children:
+  ENTRY:
+    node: group
+    name: {any: true}
+    class: NXentry
+    children:
+      definition:
+        node: dataset
+        enum: [NXtransmission]
+        attributes:
+          version:
+            doc: |-
+              Version number to identify which definition of this application definition was
+              used for this entry/data.
+            via: [T0, T1, T5]
+            provisional: [Q2]
+          URL:
+            doc: |-
+              URL where to find further material (documentation, examples) relevant to the
+              application definition.
+            via: [T0, T1, T5]
+            provisional: [Q2]
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      start_time:
+        node: dataset
+        type: NX_DATE_TIME
+        doc: Start time of the experiment.
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      experiment_identifier:
+        node: dataset
+        doc: |-
+          Unique identifier of the experiment, such as a (globally persistent)
+          unique identifier.
+
+          * The identifier is usually defined by the facility or principle
+            investigator.
+          * The identifier enables to link experiments to e.g. proposals.
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      experiment_description:
+        node: dataset
+        occurs: {min: 0}
+        type: NX_CHAR
+        doc: |-
+          An optional free-text description of the experiment. However, details of the
+          experiment should be defined in the specific fields of this application
+          definition rather than in this experiment description.
+        via: [T1, T6, T7]
+        provisional: [Q1]
+      acquisition_program:
+        node: group
+        class: NXfabrication
+        occurs: {min: 0}
+        attributes:
+          url:
+            occurs: {min: 0}
+            recommended: true
+            type: NX_CHAR
+            doc: Website of the software
+            via: [T1, T6]
+            provisional: [Q1]
+        children:
+          model:
+            node: dataset
+            type: NX_CHAR
+            doc: |-
+              Commercial or otherwise defined given name to the program that was
+              used to generate the result file(s) with measured data and metadata.
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          identifier:
+            node: dataset
+            doc: |-
+              Version number of the program that was used to generate the result
+              file(s) with measured data and metadata.
+            via: [T0, T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T6, T7]
+        provisional: [Q1]
+      USER:
+        node: group
+        name: {any: true}
+        class: NXuser
+        doc: |-
+          Contact information of at least the user of the instrument or the investigator
+          who performed this experiment. Adding multiple users if relevant is recommended.
+        children:
+          name:
+            node: dataset
+            doc: Name of the user.
+            via: [T0, T1, T5, T7]
+            provisional: [Q1, Q2]
+          affiliation:
+            node: dataset
+            occurs: {min: 0}
+            recommended: true
+            doc: |-
+              Name of the affiliation of the user at the point in time when the experiment was
+              performed.
+            via: [T0, T1, T6, T7]
+            provisional: [Q1]
+        via: [T1, T2, T5, T7]
+        provisional: [Q1, Q2, Q11]
+      instrument:
+        node: group
+        class: NXinstrument
+        children:
+          manufacturer:
+            node: group
+            class: NXfabrication
+            occurs: {min: 0}
+            recommended: true
+            doc: Manufacturer of the instrument.
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          common_beam_mask:
+            node: group
+            class: NXslit
+            doc: Common beam mask to shape the incident beam
+            children:
+              y_gap:
+                node: dataset
+                type: NX_NUMBER
+                units: {category: NX_UNITLESS}
+                doc: The height of the common beam in percentage of the beam
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          common_beam_depolarizer:
+            node: dataset
+            type: NX_BOOLEAN
+            doc: If true, the incident beam is depolarized.
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          polarizer:
+            node: dataset
+            type: NX_NUMBER
+            units: {category: NX_ANGLE}
+            doc: Polarizer value inside the beam path
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          ref_attenuator:
+            node: group
+            class: NXattenuator
+            doc: Attenuator in the reference beam
+            children:
+              attenuator_transmission:
+                node: dataset
+                type: NX_FLOAT
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          sample_attenuator:
+            node: group
+            class: NXattenuator
+            doc: Attenuator in the sample beam
+            children:
+              attenuator_transmission:
+                node: dataset
+                type: NX_FLOAT
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          spectrometer:
+            node: group
+            class: NXmonochromator
+            children:
+              wavelength:
+                node: dataset
+                type: NX_NUMBER
+                shape: [N_wavelengths]
+                units: {category: NX_LENGTH}
+                doc: |-
+                  Wavelength value(s) used for the measurement.
+                  An array of 1 or more elements. Length defines N_wavelenghts
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              spectral_resolution:
+                node: group
+                class: NXresolution
+                occurs: {min: 0}
+                doc: |-
+                  Overall spectral resolution of this spectrometer.
+                  If several gratings are employed the spectral resolution
+                  should rather be specified for each grating inside the
+                  NXgrating group of this spectrometer.
+                children:
+                  resolution:
+                    node: dataset
+                    type: NX_NUMBER
+                    units: {category: NX_WAVENUMBER}
+                    via: [T1, T5, T7]
+                    provisional: [Q1, Q2]
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              GRATING:
+                node: group
+                name: {any: true}
+                class: NXgrating
+                occurs: {min: 0}
+                doc: |-
+                  Diffraction grating, as could be used in a monochromator.
+                  If two or more gratings were used, define the angular
+                  dispersion and the wavelength range (min/max wavelength)
+                  for each grating and make sure that the wavelength ranges
+                  do not overlap. The dispersion should be defined for the
+                  entire wavelength range of the experiment.
+                children:
+                  angular_dispersion:
+                    node: dataset
+                    occurs: {min: 0}
+                    type: NX_NUMBER
+                    units: {category: NX_DIMENSIONLESS}
+                    doc: Dispersion of the grating in nm/mm used.
+                    via: [T1, T6, T7]
+                    provisional: [Q1]
+                  blaze_wavelength:
+                    node: dataset
+                    occurs: {min: 0}
+                    type: NX_NUMBER
+                    units: {category: NX_LENGTH}
+                    doc: The blaze wavelength of the grating used.
+                    via: [T1, T6, T7]
+                    provisional: [Q1]
+                  spectral_resolution:
+                    node: group
+                    class: NXresolution
+                    occurs: {min: 0}
+                    doc: |-
+                      Overall spectral resolution of the instrument
+                      when this grating is used.
+                    children:
+                      resolution:
+                        node: dataset
+                        type: NX_NUMBER
+                        units: {category: NX_WAVENUMBER}
+                        via: [T1, T5, T7]
+                        provisional: [Q1, Q2]
+                    via: [T1, T6, T7]
+                    provisional: [Q1]
+                  wavelength_range:
+                    node: dataset
+                    type: NX_NUMBER
+                    shape: [2]
+                    units: {category: NX_LENGTH}
+                    doc: Wavelength range in which this grating was used
+                    via: [T1, T5, T7, T9]
+                    provisional: [Q1, Q2]
+                via: [T1, T2, T6, T7]
+                provisional: [Q1, Q11]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          DETECTOR:
+            node: group
+            name: {any: true}
+            class: NXdetector
+            children:
+              wavelength_range:
+                node: dataset
+                type: NX_NUMBER
+                shape: [2]
+                units: {category: NX_LENGTH}
+                doc: Wavelength range in which this detector was used
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              type:
+                node: dataset
+                type: NX_CHAR
+                enum: [PMT, PbS, InGaAs]
+                doc: Detector type
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              response_time:
+                node: dataset
+                occurs: {min: 0}
+                type: NX_NUMBER
+                units: {category: NX_TIME}
+                doc: Response time of the detector
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              gain:
+                node: dataset
+                occurs: {min: 0}
+                type: NX_NUMBER
+                doc: Detector gain
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              slit:
+                node: group
+                class: NXslit
+                doc: Slit setting used for measurement with this detector
+                children:
+                  type:
+                    node: dataset
+                    type: NX_CHAR
+                    enum: [fixed, servo]
+                    via: [T1, T5, T7]
+                    provisional: [Q1, Q2]
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T2, T5, T7]
+            provisional: [Q1, Q2, Q11]
+          time_points:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_NUMBER
+            shape: [N_scans]
+            units: {category: NX_TIME}
+            doc: An array of relative scan start time points.
+            via: [T1, T6, T7, T9]
+            provisional: [Q1]
+          measured_data:
+            node: dataset
+            type: NX_NUMBER
+            shape: [N_scans, N_wavelengths]
+            doc: |-
+              Resulting data from the measurement.
+              The length of the 2nd dimension is
+              the number of time points.
+              If it has length one the time_points
+              may be empty.
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+          SOURCE:
+            node: group
+            name: {any: true}
+            class: NXsource
+            doc: The lamp used for illumination
+            children:
+              type:
+                node: dataset
+                type: NX_CHAR
+                enum:
+                  values:
+                  - {value: halogen}
+                  - {value: D2}
+                  open: true
+                doc: The type of lamp, e.g. halogen, D2 etc.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              spectrum:
+                node: dataset
+                occurs: {min: 0}
+                type: NX_NUMBER
+                shape: [N_wavelengths]
+                doc: The spectrum of the lamp used
+                via: [T1, T6, T7, T9]
+                provisional: [Q1]
+              wavelength_range:
+                node: dataset
+                type: NX_NUMBER
+                shape: [2]
+                units: {category: NX_LENGTH}
+                doc: Wavelength range in which the lamp was used
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+            via: [T1, T2, T5, T7]
+            provisional: [Q1, Q2, Q11]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      SAMPLE:
+        node: group
+        name: {any: true}
+        class: NXsample
+        doc: Properties of the sample measured
+        children:
+          name:
+            node: dataset
+            type: NX_CHAR
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T2, T5, T7]
+        provisional: [Q1, Q2, Q11]
+      data:
+        node: group
+        class: NXdata
+        doc: |-
+          A default view of the data emitted intensity vs. wavelength.
+          From measured_data plot intensity and wavelength.
+        attributes:
+          axes:
+            doc: |-
+              We recommend to use wavelength as a default attribute, but it can be
+              replaced by any suitable parameter along the X-axis.
+            via: [T0, T1, T5]
+            provisional: [Q2]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+    via: [T1, T2, T5, T7]
+    provisional: [Q1, Q2, Q11]
+via: [T8]

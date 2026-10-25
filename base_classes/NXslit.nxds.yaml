@@ -1,0 +1,50 @@
+# NeXus - Neutron and X-ray Common Data Format
+#
+# Copyright (C) 2014-2026 NeXus International Advisory Committee (NIAC)
+#
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 3 of the License, or (at your option) any later version.
+#
+# For further information, see http://www.nexusformat.org
+#
+# Phase 2 of NXDS: this class is written in NXDS (it was NXslit.nxdl.xml).
+nxds: "0.1"
+class: NXslit
+category: base
+extends: NXcomponent
+doc: |
+  A simple slit.
+
+  For more complex geometries, :ref:`NXaperture` should be used.
+defaults: {min: 0, binding: false}   # everything optional; shapes illustrative
+children:
+  depends_on:
+    node: dataset
+    type: NX_CHAR
+    doc: |
+      If desired the location of the slit can also be described relative to
+      an NXbeam, which will allow a simple description of a non-centred slit.
+
+      The reference plane of the slit is orthogonal to the z axis and includes the
+      surface that is the entry surface of the slit. The reference point of the slit
+      is the centre of the slit opening in the x and y axis on the reference plane.
+      The reference point on the z axis is the reference plane.
+
+      .. image:: slit/slit.png
+              :width: 40%
+  x_gap:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_LENGTH}
+    doc: |
+      Size of the gap opening in the first dimension of the local
+      coordinate system.
+  y_gap:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_LENGTH}
+    doc: |
+      Size of the gap opening in the second dimension of the local
+      coordinate system.

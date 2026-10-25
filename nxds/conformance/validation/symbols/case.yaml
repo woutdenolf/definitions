@@ -1,0 +1,7 @@
+description: >
+  Symbols (§9.3): in `/entry1`, `x` and `y` bind `n` to different lengths: one
+  SHAPE per symbol and entry, at the entry, member `<declaring class>#n`; the
+  expression `2*n` is not evaluated once `n` conflicts. `/entry2` is the same
+  in an entry marked stopped (`@status="aborted"`, §11, Q10): SHAPE W, whatever
+  the storage. In `/entry3` (stopped) the expression fails: a conflict of `n`.
+capabilities: []

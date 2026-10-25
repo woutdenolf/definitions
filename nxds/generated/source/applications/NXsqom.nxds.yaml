@@ -1,0 +1,188 @@
+nxds: '0.1'
+class: NXsqom
+category: application
+describes: NXroot
+doc: |-
+  This is the application definition for S(Q,OM) processed data.
+
+  As this kind of data is in
+  general not on a rectangular grid after data reduction, it is stored as Q,E positions plus their
+  intensity, table like. It is the task of a possible visualisation program to regrid this data in
+  a sensible way.
+defaults: {min: 1, binding: true, type: NX_CHAR}
+symbols:
+  nP: {doc: Number of points}
+children:
+  ENTRY:
+    node: group
+    name: {any: true}
+    class: NXentry
+    children:
+      title:
+        node: dataset
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      definition:
+        node: dataset
+        enum: [NXsqom]
+        doc: 'Official NeXus NXDL schema to which this file conforms '
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      instrument:
+        node: group
+        class: NXinstrument
+        children:
+          SOURCE:
+            node: group
+            name: {any: true}
+            class: NXsource
+            children:
+              type:
+                node: dataset
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+              name:
+                node: dataset
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+              probe:
+                node: dataset
+                enum: [neutron, x-ray, electron]
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T2, T5, T7]
+            provisional: [Q1, Q2, Q11]
+          name:
+            node: dataset
+            type: NX_CHAR
+            doc: 'Name of the instrument from which this data was reduced. '
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      SAMPLE:
+        node: group
+        name: {any: true}
+        class: NXsample
+        children:
+          name:
+            node: dataset
+            doc: Descriptive name of sample
+            via: [T0, T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T2, T5, T7]
+        provisional: [Q1, Q2, Q11]
+      reduction:
+        node: group
+        class: NXprocess
+        children:
+          program:
+            node: dataset
+            type: NX_CHAR
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          version:
+            node: dataset
+            type: NX_CHAR
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          input:
+            node: group
+            class: NXparameters
+            doc: Input parameters for the reduction program used
+            children:
+              filenames:
+                node: dataset
+                type: NX_CHAR
+                doc: Raw data files used to generate this I(Q)
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          output:
+            node: group
+            class: NXparameters
+            doc: Eventual output parameters from the data reduction program used
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      DATA:
+        node: group
+        name: {any: true}
+        class: NXdata
+        children:
+          data:
+            node: dataset
+            type: NX_INT
+            shape: [nP]
+            doc: 'This is the intensity for each point in QE '
+            attributes:
+              signal:
+                occurs: {min: 0}
+                type: NX_POSINT
+                enum: ['1']
+                via: [T19]
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+          qx:
+            node: dataset
+            type: NX_NUMBER
+            shape: [nP]
+            units: {category: NX_WAVENUMBER}
+            doc: Positions for the first dimension of Q
+            attributes:
+              axis:
+                occurs: {min: 0}
+                type: NX_POSINT
+                enum: ['1']
+                via: [T19]
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+          qy:
+            node: dataset
+            type: NX_NUMBER
+            shape: [nP]
+            units: {category: NX_WAVENUMBER}
+            doc: Positions for the the second dimension of Q
+            attributes:
+              axis:
+                occurs: {min: 0}
+                type: NX_POSINT
+                enum: ['1']
+                via: [T19]
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+          qz:
+            node: dataset
+            type: NX_NUMBER
+            shape: [nP]
+            units: {category: NX_WAVENUMBER}
+            doc: Positions for the the third dimension of Q
+            attributes:
+              axis:
+                occurs: {min: 0}
+                type: NX_POSINT
+                enum: ['1']
+                via: [T19]
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+          en:
+            node: dataset
+            type: NX_FLOAT
+            shape: [nP]
+            units: {category: NX_ENERGY}
+            doc: Values for the energy transfer for each point
+            attributes:
+              axis:
+                occurs: {min: 0}
+                type: NX_POSINT
+                enum: ['1']
+                via: [T19]
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+        via: [T1, T2, T5, T7]
+        provisional: [Q1, Q2, Q11]
+    via: [T1, T2, T5, T7]
+    provisional: [Q1, Q2, Q11]
+via: [T8]

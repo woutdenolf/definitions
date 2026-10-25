@@ -1,0 +1,289 @@
+nxds: '0.1'
+class: NXapm_paraprobe_surfacer_results
+category: application
+extends: NXapm_paraprobe_tool_results
+describes: NXroot
+doc: Application definition for a results file of the paraprobe-surfacer tool.
+defaults: {min: 1, binding: true, type: NX_CHAR}
+symbols:
+  n_ions:
+    doc: The total number of ions in the reconstruction.
+  n_v_tri:
+    doc: The number of vertices of the alpha complex.
+  n_f_tri:
+    doc: The number of faces of the alpha complex.
+  n_f_tri_xdmf:
+    doc: The total number of XDMF values to represent all faces of triangles via XDMF.
+  n_f_tet_xdmf:
+    doc: The total number of XDMF values to represent all faces of tetrahedra via XDMF.
+children:
+  ENTRY:
+    node: group
+    name: {any: true}
+    class: NXentry
+    occurs: {min: 1, max: 1}
+    children:
+      definition:
+        node: dataset
+        type: NX_CHAR
+        enum: [NXapm_paraprobe_surfacer_results]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      point_set_wrappingID:
+        node: group
+        name: {template: 'point_set_wrapping{ID}'}
+        class: NXapm_paraprobe_tool_process
+        occurs: {min: 1, max: unbounded}
+        doc: |-
+          Paraprobe-surfacer can be used to load a ROI that is the entire or a
+          sub-set of the ion point cloud. In the point_cloud_wrapping process
+          the tool computes a triangulated surface mesh which encloses the
+          ROI/point cloud. This mesh can be seen as a model for the edge of
+          the dataset.
+
+          Different algorithms can be used with paraprobe-surfacer to create
+          this mesh such as convex hulls, alpha-shapes as their generalization,
+          or alpha wrappings.
+
+          Ideally, the resulting mesh should be a watertight polyhedron.
+          This polyhedron is not necessarily convex. For some algorithms there
+          is no guarantee that the resulting mesh yields a watertight mesh.
+        children:
+          alpha_complexID:
+            node: group
+            name: {template: 'alpha_complex{ID}'}
+            class: NXcg_alpha_complex
+            occurs: {min: 0, max: unbounded}
+            children:
+              window:
+                node: group
+                class: NXcs_filter_boolean_mask
+                doc: |-
+                  A bitmask which identifies exactly all those ions whose positions
+                  were considered when defining the filtered point set from which
+                  that alpha_complex instance was computed.
+
+                  This window can be different to the window of the *point_set_wrapping*
+                  parent group because irrelevant ions might have been filtered out in addition
+                  to the window defined in *point_set_wrapping* to reduce e.g. computational
+                  costs of the alpha complex computation.
+                children:
+                  number_of_ions:
+                    node: dataset
+                    type: NX_UINT
+                    units: {category: NX_UNITLESS}
+                    doc: Number of ions covered by the mask.
+                    via: [T1, T5, T7]
+                    provisional: [Q1, Q2]
+                  bitdepth:
+                    node: dataset
+                    type: NX_UINT
+                    units: {category: NX_UNITLESS}
+                    doc: Number of bits assumed matching on a default datatype.
+                    via: [T1, T5, T7]
+                    provisional: [Q1, Q2]
+                  mask:
+                    node: dataset
+                    type: NX_UINT
+                    shape: [n_ions]
+                    units: {category: NX_UNITLESS}
+                    doc: |-
+                      The bitfield of the mask. See :ref:`NXcs_filter_boolean_mask` for
+                      how this bitfield is to be interpreted.
+                    via: [T1, T5, T7, T9]
+                    provisional: [Q1, Q2]
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              dimensionality:
+                node: dataset
+                type: NX_POSINT
+                enum: ['2', '3']
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              type:
+                node: dataset
+                type: NX_CHAR
+                enum: [convex_hull, alpha_shape, alpha_wrapping, other, undefined]
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              mode:
+                node: dataset
+                type: NX_CHAR
+                enum: [general, regularized]
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              alpha:
+                node: dataset
+                type: NX_NUMBER
+                units: {category: NX_ANY}
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              offset:
+                node: dataset
+                occurs: {min: 0}
+                type: NX_NUMBER
+                units: {category: NX_LENGTH}
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              triangle_set:
+                node: group
+                class: NXcg_triangle
+                occurs: {min: 0}
+                doc: |-
+                  The set of triangles in the coordinate system paraprobe
+                  which discretizes the exterior surface of the alpha complex.
+                children:
+                  index_offset:
+                    node: dataset
+                    type: NX_INT
+                    via: [T1, T5, T7]
+                    provisional: [Q1, Q2]
+                  triangles:
+                    node: group
+                    class: NXcg_face_list_data_structure
+                    children:
+                      dimensionality:
+                        node: dataset
+                        type: NX_POSINT
+                        via: [T1, T5, T7]
+                        provisional: [Q1, Q2]
+                      number_of_vertices:
+                        node: dataset
+                        type: NX_UINT
+                        via: [T1, T5, T7]
+                        provisional: [Q1, Q2]
+                      number_of_faces:
+                        node: dataset
+                        type: NX_UINT
+                        via: [T1, T5, T7]
+                        provisional: [Q1, Q2]
+                      indices_offset_vertex:
+                        node: dataset
+                        type: NX_INT
+                        via: [T1, T5, T7]
+                        provisional: [Q1, Q2]
+                      indices_offset_face:
+                        node: dataset
+                        type: NX_INT
+                        via: [T1, T5, T7]
+                        provisional: [Q1, Q2]
+                      vertices:
+                        node: dataset
+                        type: NX_FLOAT
+                        shape: [n_v_tri, 3]
+                        units: {category: NX_LENGTH}
+                        via: [T1, T5, T7, T9]
+                        provisional: [Q1, Q2]
+                      faces:
+                        node: dataset
+                        type: NX_UINT
+                        shape: [n_f_tri, 3]
+                        via: [T1, T5, T7, T9]
+                        provisional: [Q1, Q2]
+                      xdmf_topology:
+                        node: dataset
+                        type: NX_UINT
+                        shape: [n_f_tri_xdmf]
+                        units: {category: NX_UNITLESS}
+                        doc: |-
+                          A list of as many tuples of XDMF topology key, XDMF number
+                          of vertices and a triple of vertex indices specifying each
+                          triangle. The total number of entries is n_f_tri * (1+1+3).
+                        via: [T1, T5, T7, T9]
+                        provisional: [Q1, Q2]
+                      is_watertight:
+                        node: dataset
+                        occurs: {min: 0}
+                        type: NX_BOOLEAN
+                        doc: Do the triangles define a triangulated surface mesh that is watertight?
+                        via: [T1, T6, T7]
+                        provisional: [Q1]
+                      volume:
+                        node: dataset
+                        occurs: {min: 0}
+                        type: NX_FLOAT
+                        units: {category: NX_VOLUME}
+                        doc: |-
+                          The volume which the triangulated surface mesh
+                          encloses if that mesh is watertight.
+                        via: [T1, T6, T7]
+                        provisional: [Q1]
+                    via: [T1, T5, T7]
+                    provisional: [Q1, Q2]
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              interior_tetrahedra:
+                node: group
+                class: NXcg_tetrahedron
+                occurs: {min: 0}
+                doc: |-
+                  The set of tetrahedra which represent the interior volume
+                  of the complex if that is a closed two-manifold.
+                children:
+                  index_offset:
+                    node: dataset
+                    type: NX_INT
+                    via: [T1, T5, T7]
+                    provisional: [Q1, Q2]
+                  volume:
+                    node: dataset
+                    occurs: {min: 0}
+                    type: NX_FLOAT
+                    units: {category: NX_VOLUME}
+                    doc: The accumulated volume of all interior tetrahedra.
+                    via: [T1, T6, T7]
+                    provisional: [Q1]
+                  tetrahedra:
+                    node: group
+                    class: NXcg_face_list_data_structure
+                    occurs: {min: 0}
+                    children:
+                      number_of_vertices:
+                        node: dataset
+                        type: NX_UINT
+                        via: [T1, T5, T7]
+                        provisional: [Q1, Q2]
+                      number_of_faces:
+                        node: dataset
+                        type: NX_UINT
+                        via: [T1, T5, T7]
+                        provisional: [Q1, Q2]
+                      indices_offset_vertex:
+                        node: dataset
+                        type: NX_INT
+                        via: [T1, T5, T7]
+                        provisional: [Q1, Q2]
+                      indices_offset_face:
+                        node: dataset
+                        type: NX_INT
+                        via: [T1, T5, T7]
+                        provisional: [Q1, Q2]
+                      vertices:
+                        node: dataset
+                        type: NX_FLOAT
+                        shape: [n_v_tet, 3]
+                        units: {category: NX_LENGTH}
+                        via: [T1, T5, T7, T9]
+                        provisional: [Q1, Q2]
+                      xdmf_topology:
+                        node: dataset
+                        type: NX_UINT
+                        shape: [n_f_tet_xdmf]
+                        units: {category: NX_UNITLESS}
+                        doc: |-
+                          A list of as many tuples of XDMF topology key, XDMF number
+                          of vertices and a triple of vertex indices specifying each
+                          triangle. The total number of entries is n_f_tet * (1+1+4).
+                        via: [T1, T5, T7, T9]
+                        provisional: [Q1, Q2]
+                    via: [T1, T6, T7]
+                    provisional: [Q1]
+                via: [T1, T6, T7]
+                provisional: [Q1]
+            via: [T1, T3, T6]
+            provisional: [Q1, Q3]
+        via: [T1, T3, T6]
+        provisional: [Q1, Q3]
+    via: [T1, T2, T6]
+    provisional: [Q1, Q11]
+via: [T8]

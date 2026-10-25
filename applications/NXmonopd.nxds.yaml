@@ -1,0 +1,129 @@
+# NeXus - Neutron and X-ray Common Data Format
+#
+# Copyright (C) 2008-2026 NeXus International Advisory Committee (NIAC)
+#
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 3 of the License, or (at your option) any later version.
+#
+# For further information, see http://www.nexusformat.org
+#
+# Phase 2 of NXDS: this class is written in NXDS (it was NXmonopd.nxdl.xml).
+# Members without a type refine a member of a base class and keep its type.
+nxds: "0.1"
+class: NXmonopd
+category: application
+describes: NXroot
+doc: |
+  Monochromatic Neutron and X-Ray Powder diffractometer
+
+  Instrument
+  definition for a powder diffractometer at a monochromatic neutron
+  or X-ray beam. This is both suited for a powder diffractometer
+  with a single detector or a powder diffractometer with a position
+  sensitive detector.
+defaults: {min: 1, binding: true}   # required unless stated otherwise; shapes binding
+symbols:
+  i: {doc: i is the number of wavelengths}
+  nDet: {doc: Number of detectors}
+children:
+  ENTRY:
+    node: group
+    class: NXentry
+    name: {any: true}
+    children:
+      title: {node: dataset}
+      start_time: {node: dataset, type: NX_DATE_TIME}
+      definition:
+        node: dataset
+        doc: Official NeXus NXDL schema to which this file conforms
+        enum: [NXmonopd]
+      INSTRUMENT:
+        node: group
+        class: NXinstrument
+        name: {any: true}
+        children:
+          SOURCE:
+            node: group
+            class: NXsource
+            name: {any: true}
+            children:
+              type: {node: dataset}
+              name: {node: dataset}
+              probe: {node: dataset, enum: [neutron, x-ray, electron]}
+          CRYSTAL:
+            node: group
+            class: NXcrystal
+            name: {any: true}
+            children:
+              wavelength:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_WAVELENGTH}
+                shape: [i]
+                doc: Optimum diffracted wavelength
+          DETECTOR:
+            node: group
+            class: NXdetector
+            name: {any: true}
+            children:
+              polar_angle:
+                node: dataset
+                type: NX_FLOAT
+                shape: [nDet]
+                attributes:
+                  axis: {type: NX_POSINT, occurs: {min: 0}, enum: [1]}
+              data:
+                node: dataset
+                type: NX_INT
+                shape: [nDet]
+                doc: |
+                  detector signal (usually counts) are already
+                  corrected for detector efficiency
+                attributes:
+                  signal: {type: NX_POSINT, occurs: {min: 0}, enum: [1]}
+      SAMPLE:
+        node: group
+        class: NXsample
+        name: {any: true}
+        children:
+          name: {node: dataset, doc: Descriptive name of sample}
+          rotation_angle:
+            node: dataset
+            type: NX_FLOAT
+            units: {category: NX_ANGLE}
+            doc: |
+              Optional rotation angle for the case when the powder diagram
+              has been obtained through an omega-2theta scan like from a
+              traditional single detector powder diffractometer
+      MONITOR:
+        node: group
+        class: NXmonitor
+        name: {any: true}
+        children:
+          mode:
+            node: dataset
+            enum: [monitor, timer]
+            doc: |
+              Count to a preset value based on either clock time (timer)
+              or received monitor counts (monitor).
+          preset: {node: dataset, type: NX_FLOAT, doc: preset value for time or monitor}
+          integral:
+            node: dataset
+            type: NX_FLOAT
+            units: {category: NX_ANY}
+            doc: Total integral monitor counts
+      DATA:
+        node: group
+        class: NXdata
+        name: {any: true}
+        children:
+          polar_angle:
+            node: link
+            target: ENTRY/INSTRUMENT/DETECTOR/polar_angle
+            doc: Link to polar angle in /NXentry/NXinstrument/NXdetector
+          data:
+            node: link
+            target: ENTRY/INSTRUMENT/DETECTOR/data
+            doc: Link to data in /NXentry/NXinstrument/NXdetector

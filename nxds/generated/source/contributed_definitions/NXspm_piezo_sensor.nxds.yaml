@@ -1,0 +1,61 @@
+nxds: '0.1'
+class: NXspm_piezo_sensor
+category: base
+extends: NXsensor
+doc: This piezo sensor group refers to the height (or Z) piezo sensor.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  x:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_LENGTH}
+    doc: The x position (e.g., target or averaged target value) of the piezo.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  y:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_LENGTH}
+    doc: The y position (e.g., target or averaged target value) of the piezo.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  z:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_LENGTH}
+    doc: The z position (e.g., target or averaged target value) of the piezo.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  AXISoffset_value:
+    node: dataset
+    name: {template: '{AXIS}offset_value'}
+    type: NX_NUMBER
+    units: {category: NX_LENGTH}
+    doc: |-
+      The offset value for the piezo axis (X, Y, or Z) that will be added
+      to the measured value.
+    via: [T1, T3, T4, T7]
+    provisional: [Q1, Q3]
+  piezo_configuration:
+    node: group
+    class: NXspm_piezo_config
+    doc: |-
+      The piezo configuration information like piezoelectric calibration and material
+      properties.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  SPM_POSITIONER:
+    node: group
+    name: {any: true}
+    class: NXspm_positioner
+    doc: |-
+      The positioner information like the position of the tip, the position of the
+      sample, PID controller etc.
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  piezo_material:
+    node: group
+    class: NXspm_piezoelectric_material
+    doc: The material description and properties of the piezoelectric scanner materials.
+    via: [T1, T4, T7]
+    provisional: [Q1]

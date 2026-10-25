@@ -1,0 +1,225 @@
+nxds: '0.1'
+class: NXapm_paraprobe_tool_results
+category: application
+describes: NXroot
+doc: |-
+  Application definition for storing processing results of a tool from the paraprobe-toolbox.
+
+  The paraprobe-toolbox is a collection of open-source tools for performing
+  efficient analyses of point cloud data where each point can represent atoms or
+  (molecular) ions. A key application of the toolbox has been for research in the
+  field of Atom Probe Tomography (APT) and related Field Ion Microscopy (FIM):
+
+  * `paraprobe-toolbox <https://www.gitlab.com/paraprobe/paraprobe-toolbox>`_
+  * `M. Kühbach et al. <https://paraprobe-toolbox.readthedocs.io/en/main/>`_
+
+  The toolbox does not replace but complements existent software tools in this
+  research field. Given its capabilities of handling points as objects with
+  properties and enabling analyses of the spatial arrangement of and inter-
+  sections between geometric primitives, the software can equally be used
+  for analyzing data in Materials Science and Materials Engineering.
+defaults: {min: 1, binding: true, type: NX_CHAR}
+children:
+  ENTRY:
+    node: group
+    name: {any: true}
+    class: NXentry
+    occurs: {min: 1, max: 1}
+    children:
+      definition:
+        node: dataset
+        type: NX_CHAR
+        attributes:
+          version:
+            type: NX_CHAR
+            via: [T1, T5]
+            provisional: [Q2]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      TASKPROCESSED:
+        node: group
+        name: {any: true}
+        class: NXapm_paraprobe_tool_process
+        occurs: {min: 1, max: unbounded}
+        doc: A specific processing result
+        children:
+          window:
+            node: group
+            class: NXcs_filter_boolean_mask
+            children:
+              number_of_ions:
+                node: dataset
+                type: NX_UINT
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              bitdepth:
+                node: dataset
+                type: NX_UINT
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              mask:
+                node: dataset
+                type: NX_UINT
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T3, T6]
+        provisional: [Q1, Q3]
+      common:
+        node: group
+        class: NXapm_paraprobe_tool_common
+        children:
+          status:
+            node: dataset
+            type: NX_CHAR
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          identifier_analysis:
+            node: dataset
+            type: NX_UINT
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          config:
+            node: group
+            class: NXnote
+            children:
+              file_name:
+                node: dataset
+                type: NX_CHAR
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              checksum:
+                node: dataset
+                type: NX_CHAR
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              algorithm:
+                node: dataset
+                type: NX_CHAR
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          programID:
+            node: group
+            name: {template: 'program{ID}'}
+            class: NXprogram
+            occurs: {min: 1, max: unbounded}
+            children:
+              program:
+                node: dataset
+                type: NX_CHAR
+                attributes:
+                  version:
+                    type: NX_CHAR
+                    via: [T1, T5]
+                    provisional: [Q2]
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T3, T6]
+            provisional: [Q1, Q3]
+          profiling:
+            node: group
+            class: NXcs_profiling
+            occurs: {min: 0}
+            recommended: true
+            children:
+              start_time:
+                node: dataset
+                type: NX_DATE_TIME
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              end_time:
+                node: dataset
+                type: NX_DATE_TIME
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              total_elapsed_time:
+                node: dataset
+                type: NX_FLOAT
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              max_processes:
+                node: dataset
+                type: NX_UINT
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              max_threads:
+                node: dataset
+                type: NX_UINT
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              max_gpus:
+                node: dataset
+                type: NX_UINT
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          userID:
+            node: group
+            name: {template: 'user{ID}'}
+            class: NXuser
+            occurs: {min: 0, max: unbounded}
+            doc: If used, metadata of at least the person who performed this analysis.
+            children:
+              name:
+                node: dataset
+                type: NX_CHAR
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T3, T6]
+            provisional: [Q1, Q3]
+          paraprobe_reference_frame:
+            node: group
+            class: NXcoordinate_system
+            children:
+              type:
+                node: dataset
+                type: NX_CHAR
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              x:
+                node: dataset
+                type: NX_NUMBER
+                shape: [3]
+                units: {category: NX_LENGTH}
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              x_alias:
+                node: dataset
+                type: NX_CHAR
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              y:
+                node: dataset
+                type: NX_NUMBER
+                shape: [3]
+                units: {category: NX_LENGTH}
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              y_alias:
+                node: dataset
+                type: NX_CHAR
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              z:
+                node: dataset
+                type: NX_NUMBER
+                shape: [3]
+                units: {category: NX_LENGTH}
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              z_alias:
+                node: dataset
+                type: NX_CHAR
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+    via: [T1, T2, T6]
+    provisional: [Q1, Q11]
+via: [T8]

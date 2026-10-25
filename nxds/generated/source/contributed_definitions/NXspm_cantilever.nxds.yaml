@@ -1,0 +1,33 @@
+nxds: '0.1'
+class: NXspm_cantilever
+category: base
+extends: NXobject
+doc: A base class to describe the cantilever used in Atomic Force Microscopy (AFM).
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  cantilever_oscillator:
+    node: group
+    class: NXspm_cantilever_oscillator
+    doc: The oscillator of the cantilever.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  cantilever_config:
+    node: group
+    class: NXspm_cantilever_config
+    doc: |-
+      The configuration parameters of the cantilever used in scanning probe
+      microscopy.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  phase_positioner:
+    node: group
+    class: NXpositioner
+    doc: The phase positioner of the cantilever.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  amplitude_positioner:
+    node: group
+    class: NXpositioner
+    doc: The amplitude positioner of the cantilever.
+    via: [T1, T4, T7]
+    provisional: [Q1]

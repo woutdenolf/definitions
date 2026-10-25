@@ -1,0 +1,42 @@
+nxds: '0.1'
+class: NXcg_roi
+category: base
+extends: NXobject
+doc: |-
+  Base class for a region-of-interest (ROI) bound by geometric primitives.
+
+  So-called region-of-interest(s) (ROIs) are typically used to describe a
+  region in space (and time) where an observation is made or for which
+  a computer simulation is performed with given boundary conditions.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  CG_ELLIPSOID:
+    node: group
+    name: {any: true}
+    class: NXcg_ellipsoid
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  CG_CYLINDER:
+    node: group
+    name: {any: true}
+    class: NXcg_cylinder
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  CG_PARALLELOGRAM:
+    node: group
+    name: {any: true}
+    class: NXcg_parallelogram
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  CG_HEXAHEDRON:
+    node: group
+    name: {any: true}
+    class: NXcg_hexahedron
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  CG_POLYHEDRON:
+    node: group
+    name: {any: true}
+    class: NXcg_polyhedron
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]

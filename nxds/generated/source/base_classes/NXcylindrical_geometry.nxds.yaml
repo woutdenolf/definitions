@@ -1,0 +1,51 @@
+nxds: '0.1'
+class: NXcylindrical_geometry
+category: base
+extends: NXobject
+doc: |-
+  Geometry description for cylindrical shapes.
+  This class can be used in place of ``NXoff_geometry`` when an exact
+  representation for cylinders is preferred.
+  For example, for Helium-tube, neutron detectors.
+  It can be used to describe the shape of any component, including detectors.
+  In the case of detectors it can be used to define the shape of a single pixel, or,
+  if the pixel shapes are non-uniform, to describe the shape of the whole detector.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+symbols:
+  i:
+    doc: number of vertices required to define all cylinders in the shape
+  j: {doc: number of cylinders in the shape}
+  k: {doc: number cylinders which are detectors}
+children:
+  vertices:
+    node: dataset
+    type: NX_NUMBER
+    shape: [i, 3]
+    units: {category: NX_LENGTH}
+    doc: |-
+      List of x,y,z coordinates for vertices.
+      The origin of the coordinates is the position of the parent component, for
+      example the NXdetector which the geometry describes.
+      If the shape describes a single pixel for a detector with uniform pixel shape
+      then the origin is the position of each pixel as described by the
+      ``x/y/z_pixel_offset`` datasets in ``NXdetector``.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  cylinders:
+    node: dataset
+    type: NX_INT
+    shape: [j, 3]
+    doc: |-
+      List of indices of vertices in the ``vertices`` dataset to form each cylinder.
+      Each cylinder is described by three vertices A, B, C.
+      First vertex A lies on the cylinder axis and circular face, second point B
+      on edge of the same face as A, and third point C at the other face and on axis.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  detector_number:
+    node: dataset
+    type: NX_INT
+    shape: [k]
+    doc: Maps cylinders in ``cylinder``, by index, with a detector id.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]

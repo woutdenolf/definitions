@@ -1,0 +1,2 @@
+{"code": "RECOMMENDED", "severity": "W", "path": "/entry", "member": "NXdemo_phase1/ENTRY/title", "bundle": "v2026.01-r1"}
+{"code": "MISSING", "severity": "E", "path": "/entry/data", "member": "NXdemo_phase1/ENTRY/DATA@signal", "bundle": "v2026.01-r1", "message": "0 of at least 1"}

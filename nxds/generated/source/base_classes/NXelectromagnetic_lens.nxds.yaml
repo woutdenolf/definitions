@@ -1,0 +1,100 @@
+nxds: '0.1'
+class: NXelectromagnetic_lens
+category: base
+extends: NXcomponent
+doc: |-
+  Base class for an electro-magnetic lens or a compound lens.
+
+  For :ref:`NXtransformations` the origin of the coordinate system is placed
+  in the center of the lens its pole piece, pinhole, or another point of reference.
+  The origin should be specified in the :ref:`NXtransformations`.
+
+  For details of electro-magnetic lenses in the literature see e.g.
+
+  * `L. Reimer: Scanning Electron Microscopy <https://doi.org/10.1007/978-3-540-38967-5>`_
+  * `P. Hawkes: Magnetic Electron Lenses <https://link.springer.com/book/10.1007/978-3-642-81516-4>`_
+  * `Y. Liao: Practical Electron Microscopy and Database <https://www.globalsino.com/EM/>`_
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  name:
+    node: dataset
+    type: NX_CHAR
+    doc: Name of the lens.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  description:
+    node: dataset
+    type: NX_CHAR
+    doc: |-
+      Ideally, use instances of ``identifierNAME`` to point to a resource
+      that provides further details.
+
+      If such a resource does not exist or should not be used, use this free text,
+      although it is not recommended.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  power_setting:
+    node: dataset
+    type: NX_CHAR_OR_NUMBER
+    units: {category: NX_ANY}
+    doc: |-
+      Descriptor for the lens excitation when the exact technical details
+      are unknown or not directly controllable as the control software of
+      the microscope does not enable or was not configured to display these
+      values for users.
+
+      Although this value does not document the exact physical voltage or
+      excitation, it can still give useful context to reproduce the lens
+      setting, provided a properly working instrument and software sets the lens
+      into a similar state to the technical level possible when no more
+      information is available physically or accessible legally.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  mode:
+    node: dataset
+    type: NX_CHAR
+    doc: |-
+      Descriptor for the operation mode of the lens when other details are not
+      directly controllable as the control software of the microscope
+      does not enable or is not configured to display these values.
+
+      Like value, the mode can only be interpreted for a specific microscope
+      but can still be useful to guide users as to how to repeat the measurement.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  voltage:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_VOLTAGE}
+    doc: |-
+      Excitation voltage of the lens.
+
+      For dipoles it is a single number.
+      For higher order multipoles, it is an array.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  current:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_CURRENT}
+    doc: |-
+      Excitation current of the lens.
+
+      For dipoles it is a single number.
+      For higher-order multipoles, it is an array.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  type:
+    node: dataset
+    type: NX_CHAR
+    enum: [single, double, quadrupole, hexapole, octupole, dodecapole]
+    doc: Qualitative type of lens with respect to the number of pole pieces.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  number_of_poles:
+    node: dataset
+    type: NX_UINT
+    units: {category: NX_UNITLESS}
+    doc: Qualitative description of the lens based on the number of pole pieces.
+    via: [T1, T4, T7]
+    provisional: [Q1]

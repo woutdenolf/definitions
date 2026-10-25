@@ -1,0 +1,2 @@
+{"code": "CLASS", "severity": "E", "path": "/entry2/shape", "member": "NXcase_choice/ENTRY/shape_CASE_BOX"}
+{"code": "TYPE", "severity": "E", "path": "/entry1/shape/radius", "member": "NXcase_cylinder/radius"}

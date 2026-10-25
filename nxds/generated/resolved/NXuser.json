@@ -1,0 +1,43 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/COLLECTION"},
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"node": "group", "ref": "NXobject/LOG"},
+    {"node": "group", "ref": "NXobject/NOTE"},
+    {"node": "group", "ref": "NXobject/PARAMETERS"},
+    {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+    {"node": "dataset", "ref": "NXobject/identifierNAME"},
+    {"declared_by": "NXuser", "docs": ["NXuser/name"], "id": "name", "name": {"exact": "name"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4", "T7"]},
+    {"declared_by": "NXuser", "docs": ["NXuser/role"], "id": "role", "name": {"exact": "role"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4", "T7"]},
+    {"declared_by": "NXuser", "docs": ["NXuser/affiliation"], "id": "affiliation", "name": {"exact": "affiliation"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4", "T7"]},
+    {"declared_by": "NXuser", "docs": ["NXuser/address"], "id": "address", "name": {"exact": "address"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4", "T7"]},
+    {"declared_by": "NXuser", "docs": ["NXuser/telephone_number"], "id": "telephone_number", "name": {"exact": "telephone_number"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4", "T7"]},
+    {"declared_by": "NXuser", "docs": ["NXuser/fax_number"], "id": "fax_number", "name": {"exact": "fax_number"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4", "T7"]},
+    {"declared_by": "NXuser", "docs": ["NXuser/email"], "id": "email", "name": {"exact": "email"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4", "T7"]},
+    {"declared_by": "NXuser", "docs": ["NXuser/facility_user_id"], "id": "facility_user_id", "name": {"exact": "facility_user_id"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4", "T7"]},
+    {"declared_by": "NXuser", "docs": ["NXuser/ORCID"], "id": "ORCID", "name": {"exact": "ORCID"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T3b", "T4", "T7"]}
+  ],
+  "class": "NXuser",
+  "extends": "NXobject",
+  "lossy": [],
+  "provisional": [],
+  "require": [],
+  "source": "base_classes/NXuser.nxdl.xml",
+  "status": "base",
+  "symbols": [],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"},
+  "via": []
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {}
+}

@@ -1,0 +1,454 @@
+nxds: '0.1'
+class: NXsample
+category: base
+extends: NXcomponent
+doc: |-
+  Any information on the sample.
+
+  This could include scanned variables that
+  are associated with one of the data dimensions, e.g. the magnetic field, or
+  logged data, e.g. monitored temperature vs elapsed time.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+symbols:
+  n_comp: {doc: number of compositions}
+  n_Temp: {doc: number of temperatures}
+  n_eField:
+    doc: number of values in applied electric field
+  n_mField:
+    doc: number of values in applied magnetic field
+  n_pField:
+    doc: number of values in applied pressure field
+  n_sField:
+    doc: number of values in applied stress field
+children:
+  name:
+    node: dataset
+    doc: Descriptive name of sample
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  chemical_formula:
+    node: dataset
+    doc: |-
+      The chemical formula specified using CIF conventions.
+      Abbreviated version of CIF standard:
+
+      * Only recognized element symbols may be used.
+      * Each element symbol is followed by a 'count' number. A count of '1' may be omitted.
+      * A space or parenthesis must separate each cluster of (element symbol + count).
+      * Where a group of elements is enclosed in parentheses, the multiplier for the
+        group must follow the closing parentheses. That is, all element and group
+        multipliers are assumed to be printed as subscripted numbers.
+      * Unless the elements are ordered in a manner that corresponds to their chemical
+        structure, the order of the elements within any group or moiety depends on
+        whether or not carbon is present.
+      * If carbon is present, the order should be:
+
+        - C, then H, then the other elements in alphabetical order of their symbol.
+        - If carbon is not present, the elements are listed purely in alphabetic order of their symbol.
+
+      * This is the *Hill* system used by Chemical Abstracts.
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  temperature:
+    node: dataset
+    type: NX_FLOAT
+    shape:
+      rank: anyRank
+      dims: [n_Temp]
+    units: {category: NX_TEMPERATURE}
+    doc: Sample temperature. This could be a scanned variable
+    via: [T1, T4, T7, T9, T9d]
+    provisional: [Q1]
+  electric_field:
+    node: dataset
+    type: NX_FLOAT
+    shape: [n_eField]
+    units: {category: NX_VOLTAGE}
+    doc: Applied electric field
+    attributes:
+      direction:
+        enum: [x, y, z]
+        via: [T0, T1, T4]
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  magnetic_field:
+    node: dataset
+    type: NX_FLOAT
+    shape: [n_mField]
+    units: {category: NX_ANY}
+    doc: Applied magnetic field
+    attributes:
+      direction:
+        enum: [x, y, z]
+        via: [T0, T1, T4]
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  stress_field:
+    node: dataset
+    type: NX_FLOAT
+    shape: [n_sField]
+    units: {category: NX_ANY}
+    doc: Applied external stress field
+    attributes:
+      direction:
+        enum: [x, y, z]
+        via: [T0, T1, T4]
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  pressure:
+    node: dataset
+    type: NX_FLOAT
+    shape: [n_pField]
+    units: {category: NX_PRESSURE}
+    doc: Applied pressure
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  changer_position:
+    node: dataset
+    type: NX_INT
+    units: {category: NX_UNITLESS}
+    doc: Sample changer position
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  unit_cell_abc:
+    node: dataset
+    type: NX_FLOAT
+    shape: [3]
+    units: {category: NX_LENGTH}
+    doc: Crystallography unit cell parameters a, b, and c
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  unit_cell_alphabetagamma:
+    node: dataset
+    type: NX_FLOAT
+    shape: [3]
+    units: {category: NX_ANGLE}
+    doc: Crystallography unit cell parameters alpha, beta, and gamma
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  unit_cell:
+    node: dataset
+    type: NX_FLOAT
+    shape: [n_comp, 6]
+    units: {category: NX_LENGTH}
+    doc: Unit cell parameters (lengths and angles)
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  unit_cell_volume:
+    node: dataset
+    type: NX_FLOAT
+    shape: [n_comp]
+    units: {category: NX_VOLUME}
+    doc: Volume of the unit cell
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  sample_orientation:
+    node: dataset
+    type: NX_FLOAT
+    shape: [3]
+    units: {category: NX_ANGLE}
+    doc: |-
+      This will follow the Busing-Levy convention:
+      W. R. Busing and H. A. Levy (1967). Acta Cryst. 22, 457-464
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  orientation_matrix:
+    node: dataset
+    type: NX_FLOAT
+    shape: [n_comp, 3, 3]
+    doc: |-
+      Orientation matrix of single crystal sample using Busing-Levy convention:
+      W. R. Busing and H. A. Levy (1967). Acta Cryst. 22, 457-464
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  ub_matrix:
+    node: dataset
+    type: NX_FLOAT
+    shape: [n_comp, 3, 3]
+    doc: |-
+      UB matrix of single crystal sample using Busing-Levy convention:
+      W. R. Busing and H. A. Levy (1967). Acta Cryst. 22, 457-464. This is
+      the multiplication of the orientation_matrix, given above,
+      with the :math:`B` matrix which
+      can be derived from the lattice constants.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  mass:
+    node: dataset
+    type: NX_FLOAT
+    shape: [n_comp]
+    units: {category: NX_MASS}
+    doc: Mass of sample
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  density:
+    node: dataset
+    type: NX_FLOAT
+    shape: [n_comp]
+    units: {category: NX_MASS_DENSITY}
+    doc: Density of sample
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  relative_molecular_mass:
+    node: dataset
+    type: NX_FLOAT
+    shape: [n_comp]
+    units: {category: NX_MASS}
+    doc: Relative Molecular Mass of sample
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  type:
+    node: dataset
+    enum: [sample, sample+can, can, sample+buffer, buffer, calibration sample, normalisation
+        sample, simulated data, none, sample environment]
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  situation:
+    node: dataset
+    enum: [air, vacuum, inert atmosphere, oxidising atmosphere, reducing atmosphere, sealed
+        can, other]
+    doc: |-
+      The atmosphere will be one of the components, which is where
+      its details will be stored; the relevant components will be
+      indicated by the entry in the sample_component member.
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  description:
+    node: dataset
+    doc: Description of the sample
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  preparation_date:
+    node: dataset
+    type: NX_DATE_TIME
+    doc: Date of preparation of the sample
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  geometry:
+    node: group
+    class: NXgeometry
+    deprecated: Use the field `depends_on` and :ref:`NXtransformations` to position the sample
+      and NXoff_geometry to describe its shape instead
+    doc: The position and orientation of the center of mass of the sample
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  BEAM:
+    node: group
+    name: {any: true}
+    class: NXbeam
+    doc: Details of beam incident on sample - used to calculate sample/beam interaction point
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  SAMPLE_COMPONENT:
+    node: group
+    name: {any: true}
+    class: NXsample_component
+    doc: |-
+      One group per sample component
+      This is the preferred way of recording per component information over the n_comp arrays
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  component:
+    node: dataset
+    shape: [n_comp]
+    doc: Details of the component of the sample and/or can
+    via: [T0, T1, T4, T7, T9]
+    provisional: [Q1]
+  sample_component:
+    node: dataset
+    shape: [n_comp]
+    enum: [sample, can, atmosphere, kit]
+    doc: Type of component
+    via: [T0, T1, T4, T7, T9]
+    provisional: [Q1]
+  concentration:
+    node: dataset
+    type: NX_FLOAT
+    shape: [n_comp]
+    units: {category: NX_MASS_DENSITY}
+    doc: Concentration of each component
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  volume_fraction:
+    node: dataset
+    type: NX_FLOAT
+    shape: [n_comp]
+    doc: Volume fraction of each component
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  scattering_length_density:
+    node: dataset
+    type: NX_FLOAT
+    shape: [n_comp]
+    units: {category: NX_SCATTERING_LENGTH_DENSITY}
+    doc: Scattering length density of each component
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  unit_cell_class:
+    node: dataset
+    enum: [triclinic, monoclinic, orthorhombic, tetragonal, rhombohedral, hexagonal, cubic]
+    doc: In case it is all we know and we want to record/document it
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  space_group:
+    node: dataset
+    shape: [n_comp]
+    doc: Crystallographic space group
+    via: [T0, T1, T4, T7, T9]
+    provisional: [Q1]
+  point_group:
+    node: dataset
+    shape: [n_comp]
+    doc: Crystallographic point group, deprecated if space_group present
+    via: [T0, T1, T4, T7, T9]
+    provisional: [Q1]
+  path_length:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    doc: |-
+      Path length through sample/can for simple case when
+      it does not vary with scattering direction
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  path_length_window:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    doc: |-
+      Thickness of a beam entry/exit window on the can (mm)
+      - assumed same for entry and exit
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  thickness:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    doc: sample thickness
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  transmission:
+    node: group
+    class: NXdata
+    doc: As a function of Wavelength
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  temperature_log:
+    node: group
+    class: NXlog
+    deprecated: 'use ``temperature``, see: https://github.com/nexusformat/definitions/issues/816'
+    doc: temperature_log.value is a link to e.g. temperature_env.sensor1.value_log.value
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  temperature_env:
+    node: group
+    class: NXenvironment
+    doc: Additional sample temperature environment information
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  magnetic_field[group]:
+    id: magnetic_field
+    node: group
+    class: NXlog
+    doc: magnetic_field.value is a link to e.g. magnetic_field_env.sensor1.value
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  magnetic_field_log:
+    node: group
+    class: NXlog
+    deprecated: 'use ``magnetic_field``, see: https://github.com/nexusformat/definitions/issues/816'
+    doc: magnetic_field_log.value is a link to e.g. magnetic_field_env.sensor1.value_log.value
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  magnetic_field_env:
+    node: group
+    class: NXenvironment
+    doc: Additional sample magnetic environment information
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  external_DAC:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_ANY}
+    doc: value sent to user's sample setup
+    via: [T1, T3b, T4, T7]
+    provisional: [Q1]
+  external_ADC:
+    node: group
+    class: NXlog
+    doc: logged value (or logic state) read from user's setup
+    via: [T1, T3b, T4, T7]
+    provisional: [Q1]
+  short_title:
+    node: dataset
+    doc: 20 character fixed length sample description for legends
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  rotation_angle:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_ANGLE}
+    doc: |-
+      Optional rotation angle for the case when the powder diagram has
+      been obtained through an omega-2theta scan like from a traditional
+      single detector powder diffractometer.
+      Note, it is recommended to use NXtransformations instead.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  x_translation:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    doc: |-
+      Translation of the sample along the X-direction of the laboratory coordinate system
+      Note, it is recommended to use NXtransformations instead.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  distance:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    doc: |-
+      Translation of the sample along the Z-direction of the laboratory coordinate system.
+      Note, it is recommended to use NXtransformations instead.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  POSITIONER:
+    node: group
+    name: {any: true}
+    class: NXpositioner
+    doc: Any positioner (motor, PZT, ...) used to locate the sample
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  OFF_GEOMETRY:
+    node: group
+    name: {any: true}
+    class: NXoff_geometry
+    occurs: {min: 0}
+    doc: This group describes the shape of the sample
+    via: [T1, T2, T6, T7]
+    provisional: [Q1, Q11]
+  physical_form:
+    node: dataset
+    doc: |-
+      Physical form of the sample material.
+      Examples include single crystal, foil, pellet, powder, thin film, disc, foam, gas, liquid, amorphous.
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  ENVIRONMENT:
+    node: group
+    name: {any: true}
+    class: NXenvironment
+    doc: |-
+      Any environmental or external stimuli/measurements.
+      These can include, among others:
+      applied pressure, surrounding gas phase and gas pressure,
+      external electric/magnetic/mechanical fields, temperature, ...
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  history:
+    node: group
+    class: NXhistory
+    doc: A set of physical processes that occurred to the sample prior/during experiment.
+    via: [T1, T4, T7]
+    provisional: [Q1]

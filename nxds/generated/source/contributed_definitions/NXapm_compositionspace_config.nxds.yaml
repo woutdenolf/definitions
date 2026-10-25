@@ -1,0 +1,284 @@
+nxds: '0.1'
+class: NXapm_compositionspace_config
+category: application
+describes: NXroot
+doc: |-
+  Application definition for a configuration of the CompositionSpace tool used in atom probe.
+
+  * `A. Saxena et al. <https://www.github.com/eisenforschung/CompositionSpace.git>`_
+
+  This is an application definition for the common NFDI-MatWerk/FAIRmat infrastructure
+  use case IUC09 that explores how to improve the organization and results storage of the
+  CompositionSpace tool by using the NeXus data model and semantics.
+defaults: {min: 1, binding: true, type: NX_CHAR}
+children:
+  ENTRY:
+    node: group
+    name: {any: true}
+    class: NXentry
+    occurs: {min: 1, max: 1}
+    children:
+      definition:
+        node: dataset
+        type: NX_CHAR
+        enum: [NXapm_compositionspace_config]
+        attributes:
+          version:
+            occurs: {min: 0}
+            type: NX_CHAR
+            via: [T1, T6]
+            provisional: [Q1]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      identifier_analysis:
+        node: dataset
+        occurs: {min: 0}
+        recommended: true
+        type: NX_UINT
+        via: [T1, T6, T7]
+        provisional: [Q1]
+      reconstruction:
+        node: group
+        class: NXnote
+        doc: |-
+          Specification of the tomographic reconstruction used for this analysis.
+
+          Reconstructions in the field of atom probe tomography are communicated via
+          a file which stores the reconstructed position and mass-to-charge-state-ratio
+          value for each ion.
+
+          Container file formats like HDF5, such as NeXus/HDF5 files using :ref:`NXapm`,
+          can store multiple reconstructions. In this case, the position and mass_to_charge
+          concepts point to specific instances in the file referred to by file_name for the
+          analysis with CompositionSpace.
+        children:
+          file_name:
+            node: dataset
+            type: NX_CHAR
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          checksum:
+            node: dataset
+            occurs: {min: 0}
+            recommended: true
+            type: NX_CHAR
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          algorithm:
+            node: dataset
+            occurs: {min: 0}
+            recommended: true
+            type: NX_CHAR
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          position:
+            node: dataset
+            type: NX_CHAR
+            doc: |-
+              Name of the node which resolves the reconstructed
+              ion position values to use for this analysis.
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          mass_to_charge:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_CHAR
+            doc: |-
+              Name of the node which resolves the mass-to-charge-state-ratio
+              values for each reconstructed ion to use for this analysis.
+            via: [T1, T6, T7]
+            provisional: [Q1]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      ranging:
+        node: group
+        class: NXnote
+        doc: |-
+          Specification of the ranging definitions used for this analysis.
+
+          Ranging definitions in the field of atom probe tomography are communicated via
+          a file which stores the mass-to-charge-state-ratio interval and the number of elements
+          of which each (molecular) ion is composed. These values are stored for each ion.
+
+          Container file formats like HDF5, such as NeXus/HDF5 files using :ref:`NXapm`,
+          can store multiple ranging definitions.
+
+          Indices of ions start from 1. The value 0 is reserved for the null model of unranged positions
+          whose iontype is referred to as the unknown_type. The value 0 is also reserved for voxels
+          that lie outside the dataset.
+        children:
+          file_name:
+            node: dataset
+            type: NX_CHAR
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          checksum:
+            node: dataset
+            occurs: {min: 0}
+            recommended: true
+            type: NX_CHAR
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          algorithm:
+            node: dataset
+            occurs: {min: 0}
+            recommended: true
+            type: NX_CHAR
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          ranging_definitions:
+            node: dataset
+            type: NX_CHAR
+            doc: |-
+              Name of that (parent) node whose child stores the ranging definitions that
+              are applied in this analysis with CompositionSpace.
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      voxelization:
+        node: group
+        class: NXprocess
+        doc: |-
+          Step during which the point cloud is discretized to compute element-specific composition fields.
+          Iontypes are atomically decomposed to correctly account for the multiplicity of each element that
+          was ranged for each ion.
+        children:
+          edge_length:
+            node: dataset
+            type: NX_NUMBER
+            units: {category: NX_LENGTH}
+            doc: |-
+              Edge length of cubic voxels building the 3D grid that is used for discretizing
+              the point cloud.
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          autophase:
+            node: group
+            class: NXprocess
+            doc: |-
+              Optional step during which the subsequent segmentation step is prepared with the aim to eventually
+              reduce the dimensionality of the chemical space in which the machine learning model works.
+
+              In this step a supervised reduction of the dimensionality of the chemical space is quantified using
+              the (Gini) feature importance of each element to suggest which columns of the composition matrix
+              should be taken for the subsequent segmentation step.
+            children:
+              use:
+                node: dataset
+                type: NX_BOOLEAN
+                doc: Was the automated phase assignment used?
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              initial_guess:
+                node: dataset
+                type: NX_POSINT
+                units: {category: NX_UNITLESS}
+                doc: |-
+                  Estimated guess for which a Gaussian mixture model is evaluated to preprocess a result that
+                  is subsequently post-processed with a random_forest_classifier to lower the number of
+                  dimensions in the chemical space to the subset of trunc_species many elements with the
+                  highest feature importance.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              trunc_species:
+                node: dataset
+                type: NX_POSINT
+                units: {category: NX_UNITLESS}
+                doc: The number of elements to use for reducing the dimensionality.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              random_forest_classifier:
+                node: group
+                class: NXprocess
+                occurs: {min: 0}
+                doc: Configuration for the random forest classification model.
+                via: [T1, T6, T7]
+                provisional: [Q1]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      segmentation:
+        node: group
+        class: NXprocess
+        doc: |-
+          Step during which the voxel set is segmented into voxel sets
+          with different chemical composition.
+        children:
+          pca:
+            node: group
+            class: NXprocess
+            occurs: {min: 0}
+            doc: |-
+              A principal component analysis of the chemical space to guide a decision into how many sets of voxels
+              with different chemical composition the machine learning algorithm suggests to split the voxel set.
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          ic_opt:
+            node: group
+            class: NXprocess
+            doc: |-
+              The decision is guided through the evaluation of the information criterion
+              minimization.
+            children:
+              n_max_ic_cluster:
+                node: dataset
+                type: NX_POSINT
+                units: {category: NX_UNITLESS}
+                doc: |-
+                  The maximum number of chemical classes to probe with the Gaussian mixture model
+                  with which the voxel set is segmented into a mixture of voxels with that many different
+                  chemical compositions.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              gaussian_mixture:
+                node: group
+                class: NXprocess
+                occurs: {min: 0}
+                doc: |-
+                  Configuration for the Gaussian mixture model that is used in the segmentation
+                  step.
+                via: [T1, T6, T7]
+                provisional: [Q1]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      clustering:
+        node: group
+        class: NXprocess
+        doc: |-
+          Step during which the chemically segmented voxel sets are analyzed for their
+          spatial organization.
+        children:
+          dbscan:
+            node: group
+            class: NXparameters
+            doc: Configuration for the DBScan algorithm that is used in the clustering step.
+            children:
+              eps:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_LENGTH}
+                doc: |-
+                  The maximum distance between voxel pairs in a neighborhood to be considered
+                  connected.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              min_samples:
+                node: dataset
+                type: NX_UINT
+                units: {category: NX_UNITLESS}
+                doc: |-
+                  The number of voxels in a neighborhood for a voxel to be considered as a core
+                  point.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+    via: [T1, T2, T6]
+    provisional: [Q1, Q11]
+via: [T8]

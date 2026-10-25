@@ -1,0 +1,101 @@
+nxds: '0.1'
+class: NXapm_paraprobe_tessellator_config
+category: application
+extends: NXapm_paraprobe_tool_config
+describes: NXroot
+doc: |-
+  Application definition for a configuration file of the paraprobe-tessellator tool.
+
+  The tool paraprobe-tessellator computes a tessellation of the reconstructed positions.
+defaults: {min: 1, binding: true, type: NX_CHAR}
+children:
+  ENTRY:
+    node: group
+    name: {any: true}
+    class: NXentry
+    occurs: {min: 1, max: 1}
+    children:
+      definition:
+        node: dataset
+        type: NX_CHAR
+        enum: [NXapm_paraprobe_tessellator_config]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      tessellateID:
+        node: group
+        name: {template: 'tessellate{ID}'}
+        class: NXapm_paraprobe_tool_parameters
+        occurs: {min: 1, max: 1}
+        children:
+          surface_distance:
+            node: group
+            class: NXnote
+            occurs: {min: 0}
+            children:
+              file_name:
+                node: dataset
+                type: NX_CHAR
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              checksum:
+                node: dataset
+                type: NX_CHAR
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              algorithm:
+                node: dataset
+                type: NX_CHAR
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              distance:
+                node: dataset
+                type: NX_CHAR
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          method:
+            node: dataset
+            type: NX_CHAR
+            enum: [default]
+            doc: |-
+              The method used to compute the tessellation.
+              The value *default* configures the computation of the Voronoi tessellation.
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          has_cell_volume:
+            node: dataset
+            type: NX_BOOLEAN
+            doc: Specifies if the tool should report the volume of each cell.
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          has_cell_neighbors:
+            node: dataset
+            type: NX_BOOLEAN
+            doc: Specifies if the tool should report the first-order neighbors of each cell.
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          has_cell_geometry:
+            node: dataset
+            type: NX_BOOLEAN
+            doc: Specifies if the tool should report the facets and vertices of each cell.
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          has_cell_edge_detection:
+            node: dataset
+            type: NX_BOOLEAN
+            doc: |-
+              Specifies if the tool should report for each cell if it makes contact with
+              the tight axis-aligned bounding box about the point cloud.
+              This can be used to identify if the shape of the cell is likely affected
+              by the edge of the dataset or if cells are deeply enough embedded
+              into the point cloud so that the shape of their cells are not affected
+              anymore by the boundary. This is valuable information to judge
+              about the significance of finite size effects.
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T3, T6]
+        provisional: [Q1, Q3]
+    via: [T1, T2, T6]
+    provisional: [Q1, Q11]
+via: [T8]

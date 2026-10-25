@@ -1,0 +1,42 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/COLLECTION"},
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"node": "group", "ref": "NXobject/LOG"},
+    {"node": "group", "ref": "NXobject/NOTE"},
+    {"node": "group", "ref": "NXobject/PARAMETERS"},
+    {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"declared_by": "NXdetector_channel", "docs": ["NXobject/FIELDNAME_errors", "NXdetector_channel/flatfield_errors"], "id": "flatfield_errors", "name": {"exact": "flatfield_errors"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q3", "Q4", "Q5"], "recommended": false, "refines": "FIELDNAME_errors", "shape": {"binding": false, "dims": ["i", "j"], "symbols": {"i": "NXdetector_channel", "j": "NXdetector_channel"}}, "type": "NX_FLOAT", "via": ["T1", "T3", "T4", "T6", "T7", "T9", "T18"]},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+    {"declared_by": "NXdetector_channel", "docs": ["NXobject/FIELDNAME_mask", "NXdetector_channel/pixel_mask"], "id": "pixel_mask", "name": {"exact": "pixel_mask"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q3", "Q4", "Q5"], "recommended": false, "refines": "FIELDNAME_mask", "shape": {"binding": false, "dims": [null, "i", "j", {"optional": true, "value": "k"}], "rank": "dataRank", "symbols": {"dataRank": "NXdetector_channel", "i": "NXdetector_channel", "j": "NXdetector_channel", "k": "NXdetector_channel"}}, "type": "NX_INT", "via": ["T1", "T3", "T4", "T6", "T7", "T9", "T9c", "T9d", "T18"]},
+    {"node": "dataset", "ref": "NXobject/identifierNAME"},
+    {"declared_by": "NXdetector_channel", "docs": ["NXdetector_channel/threshold_energy"], "id": "threshold_energy", "name": {"exact": "threshold_energy"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_FLOAT", "units": {"category": "NX_ENERGY"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXdetector_channel", "docs": ["NXdetector_channel/flatfield_applied"], "id": "flatfield_applied", "name": {"exact": "flatfield_applied"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_BOOLEAN", "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXdetector_channel", "docs": ["NXdetector_channel/flatfield"], "id": "flatfield", "name": {"exact": "flatfield"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["i", "j", {"optional": true, "value": "k"}], "rank": "dataRank", "symbols": {"dataRank": "NXdetector_channel", "i": "NXdetector_channel", "j": "NXdetector_channel", "k": "NXdetector_channel"}}, "type": "NX_NUMBER", "via": ["T1", "T4", "T7", "T9", "T9c", "T9d"]},
+    {"declared_by": "NXdetector_channel", "docs": ["NXdetector_channel/pixel_mask_applied"], "id": "pixel_mask_applied", "name": {"exact": "pixel_mask_applied"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_BOOLEAN", "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXdetector_channel", "docs": ["NXdetector_channel/saturation_value"], "id": "saturation_value", "name": {"exact": "saturation_value"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXdetector_channel", "docs": ["NXdetector_channel/underload_value"], "id": "underload_value", "name": {"exact": "underload_value"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "via": ["T1", "T4", "T7"]}
+  ],
+  "class": "NXdetector_channel",
+  "extends": "NXobject",
+  "lossy": [],
+  "provisional": [],
+  "require": [],
+  "source": "base_classes/NXdetector_channel.nxdl.xml",
+  "status": "base",
+  "symbols": ["dataRank", "i", "j", "k", "nP"],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"},
+  "via": []
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {}
+}

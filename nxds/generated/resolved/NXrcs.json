@@ -1,0 +1,73 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/COLLECTION"},
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"node": "group", "ref": "NXobject/LOG"},
+    {"node": "group", "ref": "NXobject/NOTE"},
+    {"node": "group", "ref": "NXobject/PARAMETERS"},
+    {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+    {"node": "dataset", "ref": "NXobject/identifierNAME"},
+    {"declared_by": "NXrcs", "docs": ["NXrcs/name"], "id": "name", "name": {"exact": "name"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4", "T7"]},
+    {"class": "NXfabrication", "declared_by": "NXrcs", "docs": ["NXrcs/fabrication"], "id": "fabrication", "name": {"exact": "fabrication"}, "node": "group", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "specialisation": "NXrcs/fabrication", "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXrcs", "docs": ["NXrcs/description"], "id": "description", "name": {"exact": "description"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXrcs", "docs": ["NXrcs/type"], "id": "type", "name": {"exact": "type"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXrcs", "docs": ["NXrcs/frequency"], "id": "frequency", "name": {"exact": "frequency"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_FREQUENCY"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXrcs", "docs": ["NXrcs/measurement_time"], "id": "measurement_time", "name": {"exact": "measurement_time"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_TIME"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXrcs", "docs": ["NXrcs/acquisition_time"], "id": "acquisition_time", "name": {"exact": "acquisition_time"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_TIME"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXrcs", "docs": ["NXrcs/animation_time"], "id": "animation_time", "name": {"exact": "animation_time"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_TIME"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXrcs", "docs": ["NXrcs/indication_time"], "id": "indication_time", "name": {"exact": "indication_time"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_TIME"}, "via": ["T1", "T4", "T7"]}
+  ],
+  "class": "NXrcs",
+  "extends": "NXobject",
+  "lossy": [],
+  "provisional": [],
+  "require": [],
+  "source": "contributed_definitions/NXrcs.nxdl.xml",
+  "status": "contributed",
+  "symbols": [],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"},
+  "via": []
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {
+  "NXrcs/fabrication": {
+   "attributes": [
+     {"ref": "NXobject@default"}
+   ],
+   "children": [
+     {"node": "group", "ref": "NXobject/COLLECTION"},
+     {"node": "group", "ref": "NXobject/DATA"},
+     {"node": "group", "ref": "NXobject/LOG"},
+     {"node": "group", "ref": "NXobject/NOTE"},
+     {"node": "group", "ref": "NXobject/PARAMETERS"},
+     {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+     {"node": "dataset", "ref": "NXobject/identifierNAME"},
+     {"node": "dataset", "ref": "NXfabrication/vendor"},
+     {"attributes": [{"declared_by": "NXfabrication", "docs": ["NXfabrication/model@version"], "id": "version", "name": {"exact": "version"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4"]}], "declared_by": "NXfabrication", "docs": ["NXfabrication/model"], "id": "model", "name": {"exact": "model"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "refined_by": ["NXrcs"], "type": "NX_CHAR_OR_NUMBER", "via": ["T1", "T4", "T7"]},
+     {"node": "dataset", "ref": "NXfabrication/serial_number"},
+     {"node": "dataset", "ref": "NXfabrication/construction_date"},
+     {"node": "dataset", "ref": "NXfabrication/capability"}
+   ],
+   "class": "NXfabrication",
+   "declared_by": "NXrcs",
+   "id": "NXrcs/fabrication",
+   "require": [],
+   "symbols": [],
+   "undeclared": {"attribute": "report", "dataset": "report", "group": "report"}
+  }
+ }
+}

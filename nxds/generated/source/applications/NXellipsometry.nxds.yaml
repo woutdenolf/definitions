@@ -1,0 +1,434 @@
+nxds: '0.1'
+class: NXellipsometry
+category: application
+extends: NXoptical_spectroscopy
+describes: NXroot
+doc: |-
+  This is the application definition describing ellipsometry experiments.
+
+  Such experiments may be as simple as identifying how a reflected
+  beam of light with a single wavelength changes its polarization state,
+  to a variable angle spectroscopic ellipsometry experiment.
+
+  The application definition specializes :ref:`NXoptical_spectroscopy` by
+  extending the terms and setting specific requirements.
+
+  Information on ellipsometry is provided, e.g. in:
+
+  * H. Fujiwara, Spectroscopic ellipsometry: principles and applications,
+    John Wiley & Sons, 2007.
+  * R. M. A. Azzam and N. M. Bashara, Ellipsometry and Polarized Light,
+    North-Holland Publishing Company, 1977.
+  * H. G. Tompkins and E. A. Irene, Handbook of Ellipsometry,
+    William Andrew, 2005.
+
+  Open access sources:
+
+  * https://www.angstromadvanced.com/resource.asp
+  * https://pypolar.readthedocs.io/en/latest/
+
+  Review articles:
+
+  * T. E. Jenkins, "Multiple-angle-of-incidence ellipsometry",
+    J. Phys. D: Appl. Phys. 32, R45 (1999),
+    https://doi.org/10.1088/0022-3727/32/9/201
+  * D. E. Aspnes, "Spectroscopic ellipsometry - Past, present, and future",
+    Thin Solid Films 571, 334-344 (2014),
+    https://doi.org/10.1016/j.tsf.2014.03.056
+  * R. M. A. Azzam, "Mueller-matrix ellipsometry: a review",
+    Proc. SPIE 3121, Polarization: Measurement, Analysis, and Remote Sensing,
+    (3 October 1997),
+    https://doi.org/10.1117/12.283870
+  * E. A. Irene, "Applications of spectroscopic ellipsometry to microelectronics",
+    Thin Solid Films 233, 96-111 (1993),
+    https://doi.org/10.1016/0040-6090(93)90069-2
+  * S. Zollner et al., "Spectroscopic ellipsometry from 10 to 700 K",
+    Adv. Opt. Techn., (2022),
+    https://doi.org/10.1515/aot-2022-0016
+defaults: {min: 1, binding: true, type: NX_CHAR}
+symbols:
+  N_spectrum:
+    doc: |-
+      Length of the spectrum array (e.g. wavelength or energy) of the measured
+      data.
+  N_measurements:
+    doc: |-
+      Number of measurements (1st dimension of measured_data array). This is
+      equal to the number of parameters scanned. For example, if the experiment
+      was performed at three different temperatures and two different pressures
+      N_measurements = 2*3 = 6.
+  N_detection_angles:
+    doc: |-
+      Number of detection angles of the beam reflected or scattered off the
+      sample.
+  N_incident_angles:
+    doc: Number of angles of incidence of the incident beam.
+children:
+  ENTRY:
+    node: group
+    name: {any: true}
+    class: NXentry
+    children:
+      definition:
+        node: dataset
+        enum: [NXellipsometry]
+        doc: An application definition for ellipsometry.
+        attributes:
+          version:
+            doc: |-
+              Version number to identify which definition of this application
+              definition was used for this entry/data.
+            via: [T0, T1, T5]
+            provisional: [Q2]
+          URL:
+            doc: |-
+              URL where to find further material (documentation, examples) relevant
+              to the application definition.
+            via: [T0, T1, T3b, T5]
+            provisional: [Q2]
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      title:
+        node: dataset
+        occurs: {min: 0}
+        recommended: true
+        via: [T0, T1, T6, T7]
+        provisional: [Q1]
+      experiment_type:
+        node: dataset
+        enum: [ellipsometry]
+        doc: |-
+          Specify the type of the optical experiment.
+
+          You may specify fundamental characteristics or properties in the experimental sub-type.
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      ellipsometry_experiment_type:
+        node: dataset
+        enum:
+          values:
+          - {value: in situ spectroscopic ellipsometry}
+          - {value: THz spectroscopic ellipsometry}
+          - {value: infrared spectroscopic ellipsometry}
+          - {value: ultraviolet spectroscopic ellipsometry}
+          - {value: uv-vis spectroscopic ellipsometry}
+          - {value: NIR-Vis-UV spectroscopic ellipsometry}
+          open: true
+        doc: Specify the type of ellipsometry.
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      INSTRUMENT:
+        node: group
+        name: {any: true}
+        class: NXinstrument
+        doc: Properties of the ellipsometry equipment.
+        children:
+          ellipsometer_type:
+            node: dataset
+            enum:
+              values:
+              - {value: rotating analyzer}
+              - value: rotating analyzer with analyzer compensator
+              - value: rotating analyzer with polarizer compensator
+              - {value: rotating polarizer}
+              - {value: rotating compensator on polarizer side}
+              - {value: rotating compensator on analyzer side}
+              - {value: modulator on polarizer side}
+              - {value: modulator on analyzer side}
+              - {value: dual compensator}
+              - {value: phase modulation}
+              - {value: imaging ellipsometry}
+              - {value: null ellipsometry}
+              open: true
+            doc: What type of ellipsometry was used? See Fujiwara Table 4.2.
+            via: [T0, T1, T5, T7]
+            provisional: [Q1, Q2]
+          focusing_probes:
+            node: group
+            class: NXoptical_lens
+            occurs: {min: 0}
+            doc: |-
+              If focusing probes (lenses) were used, please state if the data
+              were corrected for the window effects.
+            children:
+              type:
+                node: dataset
+                enum:
+                  values:
+                  - {value: objective}
+                  - {value: lens}
+                  - {value: glass fiber}
+                  - {value: none}
+                  open: true
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+              device_information:
+                node: group
+                class: NXfabrication
+                occurs: {min: 0}
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              data_correction:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                type: NX_BOOLEAN
+                doc: |-
+                  Were the recorded data corrected by the window effects of the
+                  focusing probes (lenses)?
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              angular_spread:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                type: NX_NUMBER
+                units: {category: NX_ANGLE}
+                doc: Specify the angular spread caused by the focusing probes.
+                via: [T1, T6, T7]
+                provisional: [Q1]
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          rotating_element:
+            node: group
+            class: NXwaveplate
+            doc: |-
+              Properties of the rotating element defined in
+              'instrument/rotating_element_type'.
+            children:
+              rotating_element_type:
+                node: dataset
+                enum: [polarizer (source side), analyzer (detector side), compensator (source
+                    side), compensator (detector side)]
+                doc: Define which element rotates, e.g. polarizer or analyzer.
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+              revolutions:
+                node: dataset
+                occurs: {min: 0}
+                type: NX_NUMBER
+                units: {category: NX_COUNT}
+                doc: |-
+                  Define how many revolutions of the rotating element were averaged
+                  for each measurement. If the number of revolutions was fixed to a
+                  certain value use the field 'fixed_revolutions' instead.
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              fixed_revolutions:
+                node: dataset
+                occurs: {min: 0}
+                type: NX_NUMBER
+                units: {category: NX_COUNT}
+                doc: |-
+                  Define how many revolutions of the rotating element were taken
+                  into account for each measurement (if number of revolutions was
+                  fixed to a certain value, i.e. not averaged).
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              max_revolutions:
+                node: dataset
+                occurs: {min: 0}
+                type: NX_NUMBER
+                units: {category: NX_COUNT}
+                doc: |-
+                  Specify the maximum value of revolutions of the rotating element
+                  for each measurement.
+                via: [T1, T6, T7]
+                provisional: [Q1]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T2, T5, T7]
+        provisional: [Q1, Q2, Q11]
+      SAMPLE:
+        node: group
+        name: {any: true}
+        class: NXsample
+        children:
+          backside_roughness:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_BOOLEAN
+            doc: |-
+              Was the backside of the sample roughened? Relevant for infrared
+              ellipsometry.
+            via: [T1, T6, T7]
+            provisional: [Q1]
+        via: [T1, T2, T5, T7]
+        provisional: [Q1, Q2, Q11]
+      data_collection:
+        node: group
+        class: NXdata
+        occurs: {min: 0}
+        doc: |-
+          Measured data, data errors, and varied parameters. This may be used to describe
+          indirectly derived data or data transformed between different descriptions,
+          such as:
+          Raw Data --> Psi
+          Delta Psi, Delta --> N,C,S
+          Mueller matrix --> N,C,S
+          Mueller matrix --> Psi, Delta
+          etc.
+
+          Other types of data, such as temperature or sample location, may be saved
+          in a generic (NXdata) concept from :ref:`NXoptical_spectroscopy`, or better
+          directly in the location of the sample positioner or temperature sensor.
+        children:
+          data_identifier:
+            node: dataset
+            occurs: {min: 0}
+            recommended: true
+            type: NX_NUMBER
+            doc: |-
+              An identifier to correlate data to the experimental conditions,
+              if several were used in this measurement; typically an index of 0-N.
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          data_type:
+            node: dataset
+            occurs: {min: 0}
+            recommended: true
+            enum: [intensity, reflectivity, transmittance, Psi/Delta, tan(Psi)/cos(Delta),
+              Mueller matrix, Jones matrix, N/C/S, raw data]
+            doc: |-
+              Select which type of data was recorded, for example intensity,
+              reflectivity, transmittance, Psi and Delta etc.
+              It is possible to have multiple selections. The enumeration list
+              depends on the type of experiment and may differ for different
+              application definitions.
+            via: [T0, T1, T6, T7]
+            provisional: [Q1]
+          NAME_spectrum:
+            node: dataset
+            name: {template: '{NAME}_spectrum'}
+            occurs: {min: 0}
+            type: NX_FLOAT
+            shape: [N_spectrum]
+            units: {category: NX_ANY}
+            doc: |-
+              Spectral values (e.g. wavelength or energy) used for the measurement.
+              An array of 1 or more elements. Length defines N_spectrum. Replace
+              'NAME' by the physical quantity that is used, e.g. wavelength.
+            attributes:
+              units:
+                occurs: {min: 0}
+                doc: |-
+                  If applicable, change 'unit: NX_ANY' to the appropriate NXDL unit.
+                  If the unit of the measured data is not covered by NXDL units state
+                  here which unit was used.
+                via: [T0, T1, T6]
+                provisional: [Q1]
+            via: [T1, T3, T6, T7, T9]
+            provisional: [Q1, Q3]
+          measured_data:
+            node: dataset
+            type: NX_FLOAT
+            shape: [N_measurements, N_observables, N_spectrum]
+            units: {category: NX_ANY}
+            doc: |-
+              Resulting data from the measurement, described by 'data_type'.
+
+              The first dimension is defined by the number of measurements taken,
+              (N_measurements). The instructions on how to order the values
+              contained in the parameter vectors given in the doc string of
+              INSTRUMENT/sample_stage/environment_conditions/PARAMETER/values,
+              define the N_measurements parameter sets. For example, if the
+              experiment was performed at three different temperatures
+              (T1, T2, T3), two different pressures (p1, p2) and two different
+              angles of incidence (a1, a2), the first measurement was taken at the
+              parameters {a1,p1,T1}, the second measurement at {a1,p1,T2} etc.
+            attributes:
+              units:
+                occurs: {min: 0}
+                doc: |-
+                  If applicable, change 'unit: NX_ANY' to the appropriate NXDL unit.
+                  If the unit of the measured data is not covered by NXDL units state
+                  here which unit was used.
+                via: [T0, T1, T6]
+                provisional: [Q1]
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+          measured_data_errors:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_FLOAT
+            shape: [N_measurements, N_observables, N_spectrum]
+            units: {category: NX_ANY}
+            doc: |-
+              Specified uncertainties (errors) of the data described by 'data_type'
+              and provided in 'measured_data'.
+            attributes:
+              units:
+                occurs: {min: 0}
+                doc: |-
+                  If applicable, change 'unit: NX_ANY' to the appropriate NXDL unit.
+                  If the unit of the measured data is not covered by NXDL units state
+                  here which unit was used.
+                via: [T0, T1, T6]
+                provisional: [Q1]
+            via: [T1, T6, T7, T9]
+            provisional: [Q1]
+          varied_parameter_link:
+            node: dataset
+            occurs: {min: 0}
+            shape: [N_sensors]
+            doc: |-
+              List of links to the values of the sensors. Add a link for each
+              varied parameter (i.e. for each sensor).
+            via: [T0, T1, T6, T7, T9]
+            provisional: [Q1]
+          reference_data_link:
+            node: dataset
+            occurs: {min: 0}
+            doc: |-
+              :ref:`External link <Design-Links>` to the data field in the NeXus
+              file which describes the reference data if a reference measurement was performed.
+              Ideally, the reference measurement was performed using the same conditions as
+              the actual measurement and should be as close in time to the actual measurement
+              as possible.
+
+              Ideally, the link uses the relative path with respect to the actual
+              NeXus file.
+            via: [T0, T1, T6, T7]
+            provisional: [Q1]
+          data_software:
+            node: group
+            class: NXprogram
+            occurs: {min: 0}
+            attributes:
+              URL:
+                occurs: {min: 0}
+                doc: Website of the software.
+                via: [T0, T1, T3b, T6]
+                provisional: [Q1]
+            children:
+              program:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                doc: |-
+                  Commercial or otherwise defined given name of the program that was
+                  used to generate the result file(s) with measured data and/or
+                  metadata (in most cases, this is the same as INSTRUMENT/software).
+                  If home written, one can provide the actual steps in the NOTE
+                  subfield here.
+                via: [T0, T1, T6, T7]
+                provisional: [Q1]
+              version:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                doc: |-
+                  Either version with build number, commit hash, or description of a
+                  (online) repository where the source code of the program and build
+                  instructions can be found so that the program can be configured in
+                  such a way that result files can be created ideally in a
+                  deterministic manner.
+                via: [T0, T1, T6, T7]
+                provisional: [Q1]
+            via: [T1, T6, T7]
+            provisional: [Q1]
+        via: [T1, T6, T7]
+        provisional: [Q1]
+    via: [T1, T2, T5, T7]
+    provisional: [Q1, Q2, Q11]
+via: [T8]

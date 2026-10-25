@@ -1,0 +1,174 @@
+nxds: '0.1'
+class: NXcg_hexahedron
+category: base
+extends: NXcg_primitive
+doc: |-
+  Computational geometry description of a set of hexahedra in Euclidean space.
+
+  This class can also be used to describe cuboids or cubes, axis-aligned or not.
+  The class represents different access and description levels to offer both
+  applied scientists and computational geometry experts an approach whereby
+  different specific views can be implemented using the same base class:
+
+  * In the simplest case experimentalists may use this base class to describe
+    the dimensions or size of a specimen. In this case the alignment with axes
+    is not relevant as eventually only the volume of the specimen is of interest.
+  * In many cases, take for example an experiment where a specimen was cut out
+    from a specifically deformed piece of material, the orientation of the
+    specimen's edges with the experiment coordinate system is of high relevance.
+    Examples include knowledge about the specimen edge, whether it is
+    parallel to the rolling, the transverse, or the normal direction.
+  * While the above-mentioned use cases are sufficient to pinpoint the sample
+    within a known laboratory/experiment coordinate system, these descriptions
+    are not detailed enough to specify e.g. a CAD model of the specimen.
+  * Therefore, groups and fields for an additional, computational-geometry-
+    based view of hexahedra is offered to serve additional computational
+    tasks: storage-oriented simple views or detailed topological/graph-based
+    descriptions.
+
+  Hexahedra are important geometrical primitives, which are among the most
+  frequently used elements in finite element meshing/modeling.
+
+  As a specialization of the :ref:`NXcg_primitive` base class hexahedra
+  are assumed non-degenerated, closed, and built of polygons that are
+  not self-intersecting.
+
+  The term hexahedra will be used throughout this base class but includes
+  the special cases cuboid, cube, box, axis-aligned bounding box (AABB),
+  and optimal bounding box (OBB).
+
+  An axis-aligned bounding box is a common data object in computational science
+  and simulation codes to represent a cuboid whose edges are aligned with the
+  base vectors of a coordinate system. As a part of binary trees, these data
+  objects are important for making time- as well as space-efficient queries
+  of geometric primitives in techniques like kd-trees.
+
+  An optimal bounding box is a common data object which provides the best
+  tightly fitting box about an arbitrary object. In general, such boxes are
+  rotated. Exact and substantially faster in practice approximate algorithms
+  exist to compute optimal or near optimal bounding boxes for sets of points.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+symbols:
+  c:
+    doc: The cardinality of the set, i.e. the number of hexahedra.
+children:
+  shape:
+    node: dataset
+    type: NX_NUMBER
+    shape: [c, 3]
+    units: {category: NX_LENGTH}
+    doc: Qualifier for the shape of each hexahedron.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  length:
+    node: dataset
+    type: NX_NUMBER
+    shape: [c]
+    units: {category: NX_LENGTH}
+    doc: |-
+      Qualifier that is useful in cases when one edge is longer than all other
+      edges of the hexahedra. Often the term length is associated with the
+      assumption that one edge is parallel to an axis of the coordinate system.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  width:
+    node: dataset
+    type: NX_NUMBER
+    shape: [c]
+    units: {category: NX_LENGTH}
+    doc: |-
+      Qualifier often used to describe the extent of an object in the horizontal
+      direction assuming a specific coordinate system.
+
+      For the sake of explicitness quantities like length, width, and height
+      should not be reported without specifying also the assumed reference frame.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  height:
+    node: dataset
+    type: NX_NUMBER
+    shape: [c]
+    units: {category: NX_LENGTH}
+    doc: |-
+      Qualifier often used to describe the extent of an object in the vertical
+      direction assuming a specific coordinate system.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  volume:
+    node: dataset
+    type: NX_NUMBER
+    shape: [c]
+    units: {category: NX_VOLUME}
+    doc: Volume of each hexahedron.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  area:
+    node: dataset
+    type: NX_NUMBER
+    shape: [c]
+    units: {category: NX_AREA}
+    doc: Total (surface) area (of all six faces) of each hexahedron.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  face_area:
+    node: dataset
+    type: NX_NUMBER
+    shape: [c, 6]
+    units: {category: NX_AREA}
+    doc: Area of each of the six faces of each hexahedron.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  is_box:
+    node: dataset
+    type: NX_BOOLEAN
+    shape: [c]
+    doc: |-
+      Specifies if the hexahedra represent cuboids or cubes eventually rotated
+      ones but at least not too exotic six-faced polyhedra.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  is_axis_aligned:
+    node: dataset
+    type: NX_BOOLEAN
+    shape: [c]
+    doc: |-
+      Only to be used if is_box is present. In this case, this field describes
+      whether hexahedra are boxes whose primary edges are parallel to the
+      axes of the coordinate system.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  vertex_normal:
+    node: group
+    class: NXcg_unit_normal
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  edge_normal:
+    node: group
+    class: NXcg_unit_normal
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  face_normal:
+    node: group
+    class: NXcg_unit_normal
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  hexahedra:
+    node: group
+    class: NXcg_face_list_data_structure
+    doc: Combined storage of all primitives of all hexahedra.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  hexahedronID:
+    node: group
+    name: {template: 'hexahedron{ID}'}
+    class: NXcg_face_list_data_structure
+    doc: Individual storage of each hexahedron.
+    via: [T1, T3, T4, T7]
+    provisional: [Q1, Q3]
+  hexahedron_half_edgeID:
+    node: group
+    name: {template: 'hexahedron_half_edge{ID}'}
+    class: NXcg_half_edge_data_structure
+    doc: Individual storage of each hexahedron as a graph.
+    via: [T1, T3, T4, T7]
+    provisional: [Q1, Q3]

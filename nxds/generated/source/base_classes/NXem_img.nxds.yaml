@@ -1,0 +1,44 @@
+nxds: '0.1'
+class: NXem_img
+category: base
+extends: NXprocess
+doc: |-
+  Base class for method-specific generic imaging with electron microscopes.
+
+  In the majority of cases simple d-dimensional regular scan patterns are used
+  to probe regions-of-interest (ROIs). Examples can be single point aka spot
+  measurements, line profiles, or (rectangular) surface mappings.
+  The latter pattern is the most frequently used.
+
+  For now the base class provides for scans for which the settings,
+  binning, and energy resolution is the same for each scan point.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  IMAGE:
+    node: group
+    name: {any: true}
+    class: NXimage
+    children:
+      imaging_mode:
+        node: dataset
+        type: NX_CHAR
+        enum:
+          values:
+          - {value: secondary_electron}
+          - {value: backscattered_electron}
+          - {value: annular_dark_field}
+          - {value: cathodoluminescence}
+          open: true
+        doc: Which imaging mode was used?
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      half_angle_interval:
+        node: dataset
+        type: NX_NUMBER
+        shape: [2]
+        units: {category: NX_ANGLE}
+        doc: Annulus inner (first value) and outer (second value) half angle.
+        via: [T1, T4, T7, T9]
+        provisional: [Q1]
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]

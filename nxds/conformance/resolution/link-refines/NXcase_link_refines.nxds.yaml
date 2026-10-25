@@ -1,0 +1,38 @@
+nxds: "0.1"
+class: NXcase_link_refines
+category: application
+describes: NXroot
+doc: >
+  A link target through a refining member (§4.6), and a link member refining an
+  inherited dataset member (§5.1).
+defaults: {min: 1, binding: true}
+children:
+  ENTRY:
+    node: group
+    class: NXentry
+    name: {any: true}
+    children:
+      definition: {node: dataset, enum: [NXcase_link_refines]}
+      INSTRUMENT:
+        node: group
+        class: NXinstrument
+        name: {any: true}
+        children:
+          monochromator:
+            node: group
+            class: NXmonochromator
+            refines: MONOCHROMATOR
+            children:
+              wavelength: {node: dataset, type: NX_FLOAT}
+      SAMPLE:
+        node: group
+        class: NXcase_sample
+        name: {any: true}
+        children:
+          temperature: {node: link, target: ENTRY/INSTRUMENT/MONOCHROMATOR/energy}
+      DATA:
+        node: group
+        class: NXdata
+        name: {any: true}
+        children:
+          wavelength: {node: link, target: ENTRY/INSTRUMENT/MONOCHROMATOR/wavelength}

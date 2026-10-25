@@ -1,0 +1,77 @@
+nxds: '0.1'
+class: NXspindispersion
+category: base
+extends: NXcomponent
+doc: Class to describe spin filters in photoemission experiments.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  type:
+    node: dataset
+    type: NX_CHAR
+    doc: Type of spin detector, VLEED, SPLEED, Mott, etc.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  figure_of_merit:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_DIMENSIONLESS}
+    doc: Figure of merit of the spin detector
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  shermann_function:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_DIMENSIONLESS}
+    doc: Effective Shermann function, calibrated spin selectivity factor
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  scattering_energy:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_ENERGY}
+    doc: Energy of the spin-selective scattering
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  scattering_angle:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_ANGLE}
+    doc: Angle of the spin-selective scattering
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  scattering_target:
+    node: dataset
+    type: NX_CHAR
+    doc: Name of the target
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  scattering_target_history:
+    node: group
+    class: NXhistory
+    doc: |-
+      A set of activities that occurred to the ``scattering_target`` prior to/during the.
+      experiment. For example, this group can be used to describe the preparation of the
+      ``scattering_target``.
+    children:
+      preparation:
+        node: group
+        class: NXactivity
+        doc: Preparation procedure of the spin target
+        via: [T1, T4, T7]
+        provisional: [Q1]
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  DEFLECTOR:
+    node: group
+    name: {any: true}
+    class: NXdeflector
+    doc: Deflectors in the spin dispersive section
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  ELECTROMAGNETIC_LENS:
+    node: group
+    name: {any: true}
+    class: NXelectromagnetic_lens
+    doc: Individual lenses in the spin dispersive section
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]

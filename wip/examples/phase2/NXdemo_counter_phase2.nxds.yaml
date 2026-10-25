@@ -1,0 +1,24 @@
+# Written by an author in NXDS (phase 2).
+nxds: "0.1"
+class: NXdemo_counter_phase2
+category: base
+extends: NXobject
+doc: "Demo: a counter with several channels."
+defaults: {min: 0, binding: false}   # a base class: everything optional, shapes illustrative
+children:
+  mode:                               # fixed name: {exact: mode} is the default
+    node: dataset
+    type: NX_CHAR
+    enum: [timer, monitor]
+    doc: Counting mode.
+  CHANNEL_counts:                     # partial name: a template
+    node: dataset
+    name: {template: "{CHANNEL}_counts"}
+    type: NX_INT
+    units: {category: NX_COUNT}
+    doc: Counts of one channel, for example ``i0_counts``.
+  SENSOR:                             # free name
+    node: group
+    class: NXsensor
+    name: {any: true}
+    doc: Any sensor read out with the counter.

@@ -1,0 +1,124 @@
+nxds: '0.1'
+class: NXiv_temp
+category: application
+extends: NXsensor_scan
+describes: NXroot
+doc: |-
+  Application definition for temperature-dependent IV curve measurements.
+
+  In this application definition, times should be specified always together
+  with an UTC offset.
+
+  This is the application definition describing temperature dependent IV curve
+  measurements. For this a temperature is set. After reaching the temperature,
+  a voltage sweep is performed. For each voltage a current is measured.
+  Then, the next desired temperature is set and an IV measurement is performed.
+defaults: {min: 1, binding: true, type: NX_CHAR}
+symbols:
+  n_different_temperatures:
+    doc: Number of different temperature setpoints used in the experiment.
+  n_different_voltages:
+    doc: Number of different voltage setpoints used in the experiment.
+children:
+  ENTRY:
+    node: group
+    name: {any: true}
+    class: NXentry
+    children:
+      definition:
+        node: dataset
+        enum: [NXiv_temp]
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      SAMPLE:
+        node: group
+        name: {any: true}
+        class: NXsample
+        occurs: {min: 0}
+        recommended: true
+        children:
+          name:
+            node: dataset
+            doc: Descriptive name or ideally (globally) unique persistent identifier.
+            via: [T0, T1, T5, T7]
+            provisional: [Q1, Q2]
+          atom_types:
+            node: dataset
+            doc: |-
+              List of comma-separated elements from the periodic table
+              that are contained in the sample.
+              If the sample substance has multiple components, all
+              elements from each component must be included in `atom_types`.
+
+              The purpose of the field is to offer materials database systems an
+              opportunity to parse the relevant elements without having to interpret
+              these from the sample history or from other data sources.
+            via: [T0, T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T2, T6, T7]
+        provisional: [Q1, Q11]
+      INSTRUMENT:
+        node: group
+        name: {any: true}
+        class: NXinstrument
+        children:
+          ENVIRONMENT:
+            node: group
+            name: {any: true}
+            class: NXenvironment
+            doc: |-
+              Describes an environment setup for a temperature-dependent IV measurement experiment.
+
+              The temperature and voltage must be present as independently scanned controllers and
+              the current sensor must also be present with its readings.
+            children:
+              voltage_controller:
+                node: group
+                class: NXsensor
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              temperature_controller:
+                node: group
+                class: NXsensor
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              current_sensor:
+                node: group
+                class: NXsensor
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T2, T5, T7]
+            provisional: [Q1, Q2, Q11]
+        via: [T1, T2, T5, T7]
+        provisional: [Q1, Q2, Q11]
+      DATA:
+        node: group
+        name: {any: true}
+        class: NXdata
+        doc: |-
+          This NXdata should contain separate fields for the current values at different temperature setpoints, for example current_at_100C.
+          There should also be two more fields called temperature and voltage containing the setpoint values.
+          There should also be a field with an array of rank equal to the number of different temperature setpoints and each child's dimension
+          equal to the number of voltage setpoints.
+        children:
+          temperature:
+            node: dataset
+            type: NX_NUMBER
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          voltage:
+            node: dataset
+            type: NX_NUMBER
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          current:
+            node: dataset
+            type: NX_NUMBER
+            shape: [n_different_temperatures, n_different_voltages]
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+        via: [T1, T2, T5, T7]
+        provisional: [Q1, Q2, Q11]
+    via: [T1, T2, T5, T7]
+    provisional: [Q1, Q2, Q11]
+via: [T8]

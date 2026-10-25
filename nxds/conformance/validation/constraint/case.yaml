@@ -1,0 +1,3 @@
+description: at_least_one_of over mu and fluo (CONSTRAINT); expect names the definition.
+expect: NXcase_require
+capabilities: []

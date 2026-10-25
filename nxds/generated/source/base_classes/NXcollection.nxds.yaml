@@ -1,0 +1,29 @@
+nxds: '0.1'
+class: NXcollection
+category: base
+extends: NXobject
+doc: |-
+  An unvalidated set of terms, such as the description of a beam line.
+
+  Use :ref:`NXcollection` to gather together any set of terms.
+  The original suggestion is to use this as a container
+  class for the description of a beamline.
+
+  For NeXus validation, :ref:`NXcollection` will always generate
+  a warning since it is always an optional group.
+  Anything (groups, fields, or attributes) placed in
+  an :ref:`NXcollection` group will not be validated.
+
+  .. admonition:: NXcollection content is not validated.
+
+     :ref:`NXcollection` is and will always be for unvalidated content.
+
+     Any and all content within a :ref:`NXcollection` group specified by
+     an application definition cannot be validated.
+
+     It is suggested to use a :ref:`NXparameters` group for similar
+     content which should be validated.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+undeclared: {group: ignore, dataset: ignore, attribute: ignore}
+via: [T12]
+provisional: [Q6]

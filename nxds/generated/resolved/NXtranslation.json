@@ -1,0 +1,36 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/COLLECTION"},
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"node": "group", "ref": "NXobject/LOG"},
+    {"node": "group", "ref": "NXobject/NOTE"},
+    {"node": "group", "ref": "NXobject/PARAMETERS"},
+    {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+    {"node": "dataset", "ref": "NXobject/identifierNAME"},
+    {"class": "NXgeometry", "declared_by": "NXtranslation", "docs": ["NXtranslation/geometry"], "id": "geometry", "name": {"exact": "geometry"}, "node": "group", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXtranslation", "docs": ["NXtranslation/distances"], "id": "distances", "name": {"exact": "distances"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["numobj", 3], "symbols": {"numobj": "NXtranslation"}}, "type": "NX_FLOAT", "units": {"category": "NX_LENGTH"}, "via": ["T1", "T4", "T7", "T9"]}
+  ],
+  "class": "NXtranslation",
+  "extends": "NXobject",
+  "lossy": [],
+  "provisional": [],
+  "require": [],
+  "source": "base_classes/NXtranslation.nxdl.xml",
+  "status": "base",
+  "symbols": [],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"},
+  "via": []
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {}
+}

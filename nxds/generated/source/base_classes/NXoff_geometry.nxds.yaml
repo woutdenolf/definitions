@@ -1,0 +1,65 @@
+nxds: '0.1'
+class: NXoff_geometry
+category: base
+extends: NXobject
+doc: |-
+  Geometry (shape) description.
+  The format closely matches the Object File Format (OFF) which can be output
+  by most CAD software.
+  It can be used to describe the shape of any component, including detectors.
+  In the case of detectors it can be used to define the shape of a single pixel, or,
+  if the pixel shapes are non-uniform, to describe the shape of the whole detector.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+symbols:
+  i: {doc: number of vertices in the shape}
+  k: {doc: number of faces in the shape}
+  l:
+    doc: |-
+      number faces which are detecting surfaces or form the boundary of
+      detecting volumes
+children:
+  vertices:
+    node: dataset
+    type: NX_NUMBER
+    shape: [i, 3]
+    units: {category: NX_LENGTH}
+    doc: |-
+      List of x,y,z coordinates for vertices.
+      The origin of the coordinates is the position of the parent component, for
+      example the NXdetector which the geometry describes.
+      If the shape describes a single pixel for a detector with uniform pixel
+      shape then the origin is the position of each pixel as described by the
+      ``x/y/z_pixel_offset`` datasets in ``NXdetector``.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  winding_order:
+    node: dataset
+    type: NX_INT
+    shape: [j]
+    doc: |-
+      List of indices of vertices in the ``vertices`` dataset to form each face,
+      right-hand rule for face normal.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  faces:
+    node: dataset
+    type: NX_INT
+    shape: [k]
+    doc: The start index in ``winding_order`` for each face.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  detector_faces:
+    node: dataset
+    type: NX_INT
+    shape: [l, 2]
+    doc: |-
+      List of pairs of index in the "faces" dataset and detector id. Face IDs in
+      the first column, and corresponding detector IDs in the second column.
+      This dataset should only be used only if the ``NXoff_geometry`` group is
+      describing a detector.
+      Note, the face indices must be in ascending order but need not be
+      consecutive as not every face in faces need be a detecting surface or
+      boundary of detecting volume.
+      Can use multiple entries with the same detector id to define detector volumes.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]

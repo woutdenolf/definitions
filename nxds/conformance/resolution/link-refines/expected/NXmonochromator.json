@@ -1,0 +1,23 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"declared_by": "NXmonochromator", "id": "energy", "name": {"exact": "energy"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "recommended": false, "type": "NX_FLOAT", "units": {"category": "NX_ENERGY"}}
+  ],
+  "class": "NXmonochromator",
+  "extends": "NXobject",
+  "lossy": [],
+  "require": [],
+  "status": "local",
+  "symbols": [],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"}
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {}
+}

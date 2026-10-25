@@ -1,0 +1,37 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/COLLECTION"},
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"node": "group", "ref": "NXobject/LOG"},
+    {"node": "group", "ref": "NXobject/NOTE"},
+    {"node": "group", "ref": "NXobject/PARAMETERS"},
+    {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+    {"node": "dataset", "ref": "NXobject/identifierNAME"},
+    {"declared_by": "NXcylindrical_geometry", "docs": ["NXcylindrical_geometry/vertices"], "id": "vertices", "name": {"exact": "vertices"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["i", 3], "symbols": {"i": "NXcylindrical_geometry"}}, "type": "NX_NUMBER", "units": {"category": "NX_LENGTH"}, "via": ["T1", "T4", "T7", "T9"]},
+    {"declared_by": "NXcylindrical_geometry", "docs": ["NXcylindrical_geometry/cylinders"], "id": "cylinders", "name": {"exact": "cylinders"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["j", 3], "symbols": {"j": "NXcylindrical_geometry"}}, "type": "NX_INT", "via": ["T1", "T4", "T7", "T9"]},
+    {"declared_by": "NXcylindrical_geometry", "docs": ["NXcylindrical_geometry/detector_number"], "id": "detector_number", "name": {"exact": "detector_number"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["k"], "symbols": {"k": "NXcylindrical_geometry"}}, "type": "NX_INT", "via": ["T1", "T4", "T7", "T9"]}
+  ],
+  "class": "NXcylindrical_geometry",
+  "extends": "NXobject",
+  "lossy": [],
+  "provisional": [],
+  "require": [],
+  "source": "base_classes/NXcylindrical_geometry.nxdl.xml",
+  "status": "base",
+  "symbols": ["i", "j", "k"],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"},
+  "via": []
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {}
+}

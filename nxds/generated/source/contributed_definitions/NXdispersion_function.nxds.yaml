@@ -1,0 +1,132 @@
+nxds: '0.1'
+class: NXdispersion_function
+category: base
+extends: NXobject
+doc: This describes a dispersion function for a material or layer
+defaults: {min: 0, binding: false, type: NX_CHAR}
+symbols:
+  n_repetitions:
+    doc: The number of repetitions for the repeated parameters
+children:
+  model_name:
+    node: dataset
+    type: NX_CHAR
+    doc: The name of this dispersion model.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  formula:
+    node: dataset
+    type: NX_CHAR
+    doc: |-
+      This should be a python parsable function.
+      Here we should provide which keywords are available
+      and a BNF of valid grammar.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  convention:
+    node: dataset
+    type: NX_CHAR
+    enum: [n + ik, n - ik]
+    doc: The sign convention being used (n + or - ik)
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  energy_identifier:
+    node: dataset
+    type: NX_CHAR
+    doc: |-
+      The identifier used to represent energy
+      in the formula. It is recommended to use `E`.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  energy_min:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_ENERGY}
+    doc: The minimum energy value at which this formula is valid.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  energy_max:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_ENERGY}
+    doc: The maximum energy value at which this formula is valid.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  energy_unit:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_ENERGY}
+    doc: |-
+      The energy unit used in the formula.
+      The field value is a scaling factor for the units attribute.
+      It is recommended to set the field value to 1 and carry all the unit
+      scaling information in the units attribute.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  wavelength_identifier:
+    node: dataset
+    type: NX_CHAR
+    doc: |-
+      The identifier used to represent wavelength
+      in the formula. It is recommended to use `lambda`.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  wavelength_unit:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_LENGTH}
+    doc: |-
+      The wavelength unit used in the formula.
+      The field value is a scaling factor for the units attribute.
+      It is recommended to set the field value to 1 and carry all the unit
+      scaling information in the units attribute.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  wavelength_min:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_LENGTH}
+    doc: The minimum wavelength value at which this formula is valid.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  wavelength_max:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_LENGTH}
+    doc: The maximum wavelength value at which this formula is valid.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  representation:
+    node: dataset
+    type: NX_CHAR
+    enum: [n, eps]
+    doc: |-
+      Which representation does the formula evaluate to.
+      This may either be n for refractive index or eps for dielectric function.
+      The appropriate token is then to be used inside the formula.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  DISPERSION_SINGLE_PARAMETER:
+    node: group
+    name: {any: true}
+    class: NXdispersion_single_parameter
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  DISPERSION_REPEATED_PARAMETER:
+    node: group
+    name: {any: true}
+    class: NXdispersion_repeated_parameter
+    children:
+      parameter_units:
+        node: dataset
+        shape: [n_repetitions]
+        via: [T0, T1, T4, T7, T9]
+        provisional: [Q1]
+      values:
+        node: dataset
+        type: NX_NUMBER
+        shape: [n_repetitions]
+        via: [T1, T4, T7, T9]
+        provisional: [Q1]
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]

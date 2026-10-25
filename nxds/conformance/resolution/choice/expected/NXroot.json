@@ -1,0 +1,24 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"},
+    {"declared_by": "NXroot", "id": "NeXus_release", "name": {"exact": "NeXus_release"}, "occurs": {"max": 1, "min": 0}, "recommended": false, "type": "NX_CHAR"}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"class": "NXentry", "declared_by": "NXroot", "id": "ENTRY", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 1}, "recommended": false}
+  ],
+  "class": "NXroot",
+  "extends": "NXobject",
+  "lossy": [],
+  "require": [],
+  "status": "local",
+  "symbols": [],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"}
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {}
+}

@@ -1,0 +1,36 @@
+nxds: '0.1'
+class: NXregistration
+category: base
+extends: NXprocess
+doc: Describes image registration procedures.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  applied:
+    node: dataset
+    type: NX_BOOLEAN
+    doc: Has the registration been applied?
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  depends_on:
+    node: dataset
+    type: NX_CHAR
+    doc: |-
+      Specifies the position by pointing to the last transformation in the
+      transformation chain in the NXtransformations group.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  TRANSFORMATIONS:
+    node: group
+    name: {any: true}
+    class: NXtransformations
+    doc: |-
+      To describe the operations of image registration (combinations of rigid
+      translations and rotations)
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  description:
+    node: dataset
+    type: NX_CHAR
+    doc: Description of the procedures employed.
+    via: [T1, T4, T7]
+    provisional: [Q1]

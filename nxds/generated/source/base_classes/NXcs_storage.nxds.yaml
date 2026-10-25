@@ -1,0 +1,42 @@
+nxds: '0.1'
+class: NXcs_storage
+category: base
+extends: NXcomponent
+doc: Base class for reporting the description of the I/O of a computer.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  CIRCUIT:
+    node: group
+    name: {any: true}
+    class: NXcircuit
+    children:
+      type:
+        node: dataset
+        type: NX_CHAR
+        enum: [solid_state_disk, hard_disk, optical, tape]
+        doc: Qualifier for the type of storage medium used.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      max_physical_capacity:
+        node: dataset
+        type: NX_POSINT
+        units: {category: NX_ANY}
+        doc: Total amount of data which the medium can hold.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      max_read_rate:
+        node: dataset
+        type: NX_NUMBER
+        units: {category: NX_ANY}
+        doc: Maximum read rate of the storage medium.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      max_write_rate:
+        node: dataset
+        type: NX_NUMBER
+        units: {category: NX_ANY}
+        doc: Maximum write rate of the storage medium.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]

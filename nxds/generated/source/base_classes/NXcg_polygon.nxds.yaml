@@ -1,0 +1,98 @@
+nxds: '0.1'
+class: NXcg_polygon
+category: base
+extends: NXcg_primitive
+doc: |-
+  Computational geometry description of a set of polygons in Euclidean space.
+
+  Polygons are specialized polylines:
+
+  * A polygon is a geometric primitive that is bounded by a closed polyline
+  * All vertices of this polyline lay in the d-1 dimensional plane.
+    whereas vertices of a polyline do not necessarily lay on a plane.
+  * A polygon has at least three vertices.
+
+  Each polygon is built from a sequence of vertices (points with identifiers).
+  The members of a set of polygons may have a different number of vertices.
+  Sometimes a collection/set of polygons is referred to as a soup of polygons.
+
+  As three-dimensional objects, a set of polygons can be used to define the
+  hull of what is effectively a polyhedron; however users are advised to use
+  the specific :ref:`NXcg_polyhedron` base class if they wish to describe closed
+  polyhedra. Even more general complexes can be thought of. An example are the
+  so-called piecewise-linear complexes used in the TetGen library.
+
+  As these complexes can have holes though, polyhedra without holes are one
+  subclass of such complexes, users should rather design their own base class
+  e.g. NXcg_polytope to describe such even more complex primitives instead
+  of abusing this base class for such purposes.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+symbols:
+  d:
+    doc: The dimensionality, which has to be either 2 or 3.
+  c:
+    doc: The cardinality of the set, i.e. the number of polygons.
+  n_total:
+    doc: The total number of vertices when visiting every polygon.
+children:
+  number_of_total_vertices:
+    node: dataset
+    type: NX_UINT
+    units: {category: NX_UNITLESS}
+    doc: The total number of vertices in the set.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  polygons:
+    node: group
+    class: NXcg_face_list_data_structure
+    doc: Combined storage of all primitives of all polygons.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  polygonID:
+    node: group
+    name: {template: 'polygon{ID}'}
+    class: NXcg_face_list_data_structure
+    doc: Individual storage of the mesh of each polygon.
+    via: [T1, T3, T4, T7]
+    provisional: [Q1, Q3]
+  polygon_half_edgeID:
+    node: group
+    name: {template: 'polygon_half_edge{ID}'}
+    class: NXcg_half_edge_data_structure
+    doc: Individual storage of each polygon as a graph.
+    via: [T1, T3, T4, T7]
+    provisional: [Q1, Q3]
+  edge_length:
+    node: dataset
+    type: NX_NUMBER
+    shape: [c]
+    units: {category: NX_LENGTH}
+    doc: For each polygon its accumulated length along its edges.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  interior_angle:
+    node: dataset
+    type: NX_NUMBER
+    shape: [n_total]
+    units: {category: NX_ANGLE}
+    doc: |-
+      Interior angles for each polygon. There are as many values per polygon
+      as there are number_of_vertices.
+      The angle is the angle at the specific vertex, i.e. between the adjoining
+      edges of the vertex according to the sequence in the polygons array.
+      Usually, the winding_order field is required to interpret the value.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  shape:
+    node: dataset
+    type: NX_INT
+    shape: [c]
+    units: {category: NX_UNITLESS}
+    doc: |-
+      Curvature type:
+
+      * 0 - unspecified,
+      * 1 - convex,
+      * 2 - concave
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]

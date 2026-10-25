@@ -1,0 +1,173 @@
+nxds: '0.1'
+class: NXlauetof
+category: application
+describes: NXroot
+doc: This is the application definition for a TOF laue diffractometer
+defaults: {min: 1, binding: true, type: NX_CHAR}
+symbols:
+  nXPixels: {doc: Number of X pixels}
+  nYPixels: {doc: Number of Y pixels}
+  nTOF: {doc: Time of flight}
+children:
+  ENTRY:
+    node: group
+    name: {any: true}
+    class: NXentry
+    children:
+      definition:
+        node: dataset
+        enum: [NXlauetof]
+        doc: 'Official NeXus NXDL schema to which this file conforms '
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      instrument:
+        node: group
+        class: NXinstrument
+        children:
+          detector:
+            node: group
+            class: NXdetector
+            doc: |-
+              This assumes a planar 2D detector. All angles and distances refer to the center of the
+              detector.
+            children:
+              polar_angle:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_ANGLE}
+                doc: The polar_angle (two theta) where the detector is placed.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              azimuthal_angle:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_ANGLE}
+                doc: The azimuthal angle where the detector is placed.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              data:
+                node: dataset
+                type: NX_INT
+                shape: [nXPixels, nYPixels, nTOF]
+                attributes:
+                  signal:
+                    type: NX_POSINT
+                    enum: ['1']
+                    via: [T1, T5]
+                    provisional: [Q2]
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              x_pixel_size:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_LENGTH}
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              y_pixel_size:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_LENGTH}
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              distance:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_LENGTH}
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              time_of_flight:
+                node: dataset
+                type: NX_FLOAT
+                shape: [nTOF]
+                units: {category: NX_TIME_OF_FLIGHT}
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      sample:
+        node: group
+        class: NXsample
+        children:
+          name:
+            node: dataset
+            doc: Descriptive name of sample
+            via: [T0, T1, T5, T7]
+            provisional: [Q1, Q2]
+          orientation_matrix:
+            node: dataset
+            type: NX_FLOAT
+            shape: [3, 3]
+            doc: |-
+              The orientation matrix according to Busing and
+              Levy conventions. This is not strictly necessary as
+              the UB can always be derived from the data.  But
+              let us bow to common usage which includes the
+              UB nearly always.
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+          unit_cell:
+            node: dataset
+            type: NX_FLOAT
+            shape: [6]
+            doc: |-
+              The unit cell, a, b, c, alpha, beta, gamma.
+              Again, not strictly necessary, but normally written.
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      control:
+        node: group
+        class: NXmonitor
+        children:
+          mode:
+            node: dataset
+            enum: [monitor, timer]
+            doc: |-
+              Count to a preset value based on either clock time (timer) or received monitor counts
+              (monitor).
+            via: [T0, T1, T5, T7]
+            provisional: [Q1, Q2]
+          preset:
+            node: dataset
+            type: NX_FLOAT
+            doc: preset value for time or monitor
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          data:
+            node: dataset
+            type: NX_INT
+            shape: [nTOF]
+            doc: use these attributes  ``primary=1 signal=1``
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+          time_of_flight:
+            node: dataset
+            type: NX_FLOAT
+            shape: [nTOF]
+            units: {category: NX_TIME_OF_FLIGHT}
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      name:
+        node: group
+        class: NXdata
+        children:
+          data:
+            node: link
+            target: ENTRY/INSTRUMENT/DETECTOR/data
+            via: [T1, T5, T10]
+            provisional: [Q2, Q8]
+          time_of_flight:
+            node: link
+            target: ENTRY/INSTRUMENT/DETECTOR/time_of_flight
+            via: [T1, T5, T10]
+            provisional: [Q2, Q8]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+    via: [T1, T2, T5, T7]
+    provisional: [Q1, Q2, Q11]
+via: [T8]

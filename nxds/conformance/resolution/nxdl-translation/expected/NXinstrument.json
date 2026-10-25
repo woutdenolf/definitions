@@ -1,0 +1,23 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"class": "NXmonochromator", "declared_by": "NXinstrument", "id": "MONOCHROMATOR", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 0}, "recommended": false}
+  ],
+  "class": "NXinstrument",
+  "extends": "NXobject",
+  "lossy": [],
+  "require": [],
+  "status": "local",
+  "symbols": [],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"}
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {}
+}

@@ -1,0 +1,5 @@
+description: >
+  A link member refines an inherited dataset member (§5.1): in `/entry1` the
+  sample's `temperature` is a dataset, which the link member does not accept
+  (MISSING); in `/entry2` it is a link to the energy (nothing).
+capabilities: []

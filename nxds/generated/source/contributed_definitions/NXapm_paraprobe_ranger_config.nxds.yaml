@@ -1,0 +1,41 @@
+nxds: '0.1'
+class: NXapm_paraprobe_ranger_config
+category: application
+extends: NXapm_paraprobe_tool_config
+describes: NXroot
+doc: |-
+  Application definition for a configuration file of the paraprobe-ranger tool.
+
+  The tool paraprobe-ranger evaluates how mass-to-charge-state-ratio
+  values map on (molecular) ion types.
+defaults: {min: 1, binding: true, type: NX_CHAR}
+symbols:
+  n_nuclides:
+    doc: |-
+      The number of isotopes to consider as building blocks for searching molecular
+      ions.
+  n_composition:
+    doc: The number of compositions to consider for molecular ion search tasks.
+children:
+  ENTRY:
+    node: group
+    name: {any: true}
+    class: NXentry
+    occurs: {min: 1, max: 1}
+    children:
+      definition:
+        node: dataset
+        type: NX_CHAR
+        enum: [NXapm_paraprobe_ranger_config]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      rangeID:
+        node: group
+        name: {template: 'range{ID}'}
+        class: NXapm_paraprobe_tool_parameters
+        occurs: {min: 1, max: unbounded}
+        via: [T1, T3, T6]
+        provisional: [Q1, Q3]
+    via: [T1, T2, T6]
+    provisional: [Q1, Q11]
+via: [T8]

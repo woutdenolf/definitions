@@ -1,0 +1,249 @@
+nxds: '0.1'
+class: NXobject
+category: base
+doc: |-
+  This is the base object of NeXus. The groups and fields contained
+  within this file are allowed to be present in any derived base class.
+
+  If nameType="partial", the placeholders (e.g., FIELDNAME or GROUPNAME)
+  can be replaced by the name of any object (field or group,
+  respectively) that exists within the same group.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+attributes:
+  default:
+    names_child: group
+    doc: |-
+      .. index:: plotting
+
+      Declares which child group contains a path leading
+      to a :ref:`NXdata` group or a group using a base class
+      extending :ref:`NXdata`.
+
+      It is recommended (as of NIAC2014) to use this attribute
+      to help define the path to the default dataset to be plotted.
+      See https://www.nexusformat.org/2014_How_to_find_default_data.html
+      for a summary of the discussion.
+    via: [T0, T1, T4, T13]
+children:
+  COLLECTION:
+    node: group
+    name: {any: true}
+    class: NXcollection
+    occurs: {min: 0}
+    via: [T1, T2, T6, T7]
+    provisional: [Q1, Q11]
+  DATA:
+    node: group
+    name: {any: true}
+    class: NXdata
+    occurs: {min: 0}
+    via: [T1, T2, T6, T7]
+    provisional: [Q1, Q11]
+  LOG:
+    node: group
+    name: {any: true}
+    class: NXlog
+    occurs: {min: 0}
+    via: [T1, T2, T6, T7]
+    provisional: [Q1, Q11]
+  NOTE:
+    node: group
+    name: {any: true}
+    class: NXnote
+    occurs: {min: 0}
+    via: [T1, T2, T6, T7]
+    provisional: [Q1, Q11]
+  PARAMETERS:
+    node: group
+    name: {any: true}
+    class: NXparameters
+    occurs: {min: 0}
+    via: [T1, T2, T6, T7]
+    provisional: [Q1, Q11]
+  GROUPNAME_log:
+    node: group
+    name: {template: '{GROUPNAME}_log'}
+    class: NXlog
+    occurs: {min: 0}
+    doc: NXlog group containing logged values of GROUPNAME.
+    via: [T1, T3, T6, T7]
+    provisional: [Q1, Q3]
+  FIELDNAME_set:
+    node: dataset
+    name: {template: '{FIELDNAME}_set'}
+    occurs: {min: 0}
+    type: NX_NUMBER
+    doc: 'Target values of FIELDNAME. '
+    via: [T1, T3, T6, T7]
+    provisional: [Q1, Q3]
+  FIELDNAME_errors:
+    node: dataset
+    name: {template: '{FIELDNAME}_errors'}
+    occurs: {min: 0}
+    type: NX_NUMBER
+    doc: Uncertainties of FIELDNAME values.
+    via: [T1, T3, T6, T7]
+    provisional: [Q1, Q3]
+  FIELDNAME_weights:
+    node: dataset
+    name: {template: '{FIELDNAME}_weights'}
+    occurs: {min: 0}
+    type: NX_NUMBER
+    doc: Weights of FIELDNAME values.
+    via: [T1, T3, T6, T7]
+    provisional: [Q1, Q3]
+  FIELDNAME_mask:
+    node: dataset
+    name: {template: '{FIELDNAME}_mask'}
+    occurs: {min: 0}
+    type: NX_BOOLEAN
+    doc: Boolean mask of FIELDNAME values. The value is masked if set to 1.
+    via: [T1, T3, T6, T7]
+    provisional: [Q1, Q3]
+  identifierNAME:
+    node: dataset
+    name: {template: 'identifier{NAME}'}
+    type: NX_CHAR
+    doc: |-
+      An identifier for a (persistent) resource.
+
+      An identifier, provided by some authority, that has been assigned to an
+      object described by this ``NXobject``. To be useful, the identifier
+      must not be reassigned to a different real-world object. It is typical for
+      there to be some mechanism to resolve an identifier, obtaining metadata
+      about the object. Identifiers for which some guarantees exist regarding
+      this resolution process are called persistent identifiers.
+      Persistent identifiers are also known as PIDs.
+    attributes:
+      type:
+        type: NX_CHAR
+        enum:
+          values:
+          - value: ARK
+            doc: |-
+              Archival Resource Key.
+
+              An ARK is a Uniform Resource Identifier (URI) designed to support long-term access to a variety of information objects.
+
+              Syntax: https://NMA/ark:/NAAN/Name[Qualifier]. Brackets indicate optional elements.
+              Example: https://example.org/ark:/12345/abcde
+          - value: DOI
+            doc: |-
+              Digital Object Identifier.
+
+              A DOI is a unique alphanumeric string used to identify digital content. It consists of a prefix and a suffix, separated by a slash.
+
+              Syntax: 10.XXXX/XXXXXX
+              Example: 10.1107/S1600576714027575
+          - value: Hdl
+            doc: |-
+              A handle is a unique identifier that consists of a prefix indicating the naming authority and a suffix representing the local name
+              of a resource.
+
+              A handle is a unique identifier used to facilitate the identification and management of digital objects. It is composed of a prefix that
+              indicates the naming authority and a suffix that specifies the resource's local name.
+
+              This refers specifically to an ID in the Handle system operated by the Corporation for National Research Initiatives (CNRI).
+
+              Syntax: prefix/identifier
+              Example: 123456789/abc123
+          - value: IGSN
+            doc: |-
+              International Generic Sample Number.
+
+              The IGSN is a unique identifier assigned to a specific sample or specimen in the context of scientific research.
+
+              Since 2021, IGSNs are issued by DataCite, meaning that there are now DataCite-issued DOIs for all IGSNs,
+              including those historical IGSNs issued beforehand. Therefore, the syntax is the same as for DOIs.
+
+              Syntax: 10.XXXX/XXXXXX
+              Example: 10.1107/S1600576714027575
+          - value: ISNI
+            doc: |-
+              ISNI is an ISO standard to uniquely identify individuals and organizations involved in creative work, including pseudonyms
+              and other public personas.
+
+              An ISNI-ID is made up of 16 digits, the last character being a check character. The check character may be either a decimal digit
+              or the character “X”.
+
+              A URL can be generated from the ISNI ID by combining it with the prefix https://isni.org/isni/, resulting in
+              https://isni.org/isni/{ISNI-ID}.
+
+              Syntax: 16 base-10 digits stored without any spaces.
+              Example: 0000000121032683
+          - value: ISSN
+            doc: |-
+              International Standard Serial Number
+
+              An ISSN is an 8-digit unique identifier used to distinguish a serial publication, whether in print or electronic form.
+              The last character (a digit or 'X') serves as a check character, making the ISSN uniquely defined by its first seven digits.
+
+              Syntax: NNNN-NNNC, where N a decimal digit character (i.e., in the set {0,1,2,...,9}), and C is in {0,1,2,...,9,X}
+              Example: 1234-5678 or 1234-567X
+          - value: ISSN-L
+            doc: |-
+              Linking ISSN
+
+              The linking ISSN, or ISSN-L, is a specific ISSN that groups the different media of the same serial publication.
+
+              Syntax: NNNN-NNNC, where N a decimal digit character (i.e., in the set {0,1,2,...,9}), and C is in {0,1,2,...,9,X}
+              Example: 1234-5678 or 1234-567X
+          - value: ORCID
+            doc: |-
+              Open Researcher and Contributor identifier.
+
+              ORCID provides a free and persistent identifier that uniquely distinguishes authors and contributors in scientific research.
+
+              Syntax: https://orcid.org/XXXX-XXXX-XXXX-XXXX
+              Example: https://orcid.org/0000-0002-1825-0097
+          - value: PURL
+            doc: |-
+              Persistent Uniform Resource Locator.
+
+              A Persistent Uniform Resource Locator (PURL) is a type of URL designed to provide a stable, long-term reference to a web
+              resource by using a resolver to redirect users to the resource's current location, even if it moves over time.
+
+              A PURL has three parts: (1) a protocol, (2) a resolver address, and (3) a name.
+
+              Syntax: https://purl.org/foo/bar
+              Example: https://purl.org/dc/elements/1.1/title
+          - value: ROR
+            doc: |-
+              Research Organization Registry
+
+              A ROR ID is a globally unique identifier for research organizations, enabling unambiguous linking of institutions across systems.
+
+              Syntax: https://ror.org/{ROR-ID}
+              Example: https://ror.org/052gg0110
+          - value: URL
+            doc: |-
+              Uniform Resource Locator
+
+              Also known as web address, a URL is the address used to access a resource on the internet,
+              specifying its location and the protocol to retrieve it.
+
+              Syntax: scheme://domain:port/path?query_string#fragment_id
+              Example: https://www.example.com/about
+          - value: URN
+            doc: |-
+              Uniform Resource Name
+
+              A URN is a unique, persistent identifier for a resource regardless of where it is stored.
+
+              It is recommended that identifiers with more specific type attribute (such as DOI or ISSN) values should not be stored as a URN,
+              even when this is valid. As an example, the URN doi:10.1107/S1600576714027575 is a valid URN-based representation for the DOI
+              10.1107/S1600576714027575, but it is recommended to use type="DOI" in this case.
+
+              Syntax: urn:<namespace>:<namespace-specific-string>. The leading urn: sequence is case-insensitive.
+              Example: urn:isbn:0000000000000
+          open: true
+        doc: |-
+          The type of identifier used.
+
+          It is recommended to use the most specific type when describing the identifier.
+
+          For example, all IGSNs (see below) are DOIs and all DOIs are Handles; however, an IGSN should have type IGSN (and not DOI or Hdl).
+          Similarly, an ARK, Purl, ORCID and ROR identifiers should have their corresponding types and should not use the more generic URL identifier.
+        via: [T1, T4]
+    via: [T1, T3, T4, T7]
+    provisional: [Q1, Q3]

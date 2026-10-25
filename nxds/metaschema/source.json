@@ -1,0 +1,220 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "source.json",
+ "title": "NXDS class file (source form)",
+ "description": "A class as written by an author, or translated from NXDL (spec §3, §4). Written by hand; the implementation is tested against it.",
+ "type": "object",
+ "additionalProperties": false,
+ "required": ["class", "category", "defaults"],
+ "properties": {
+  "nxds": {"type": "string", "description": "language version, for example 0.1"},
+  "class": {"type": "string", "description": "the class name; equals the file name without .nxds.yaml"},
+  "category": {"enum": ["base", "application"], "description": "documentation only"},
+  "extends": {"type": "string"},
+  "describes": {"type": "string", "description": "a class with describes is an application definition"},
+  "deprecated": {"type": "string"},
+  "doc": {"type": "string"},
+  "defaults": {"$ref": "#/$defs/defaults"},
+  "symbols": {"type": "object", "additionalProperties": {"$ref": "#/$defs/symbol"}},
+  "attributes": {"type": "object", "additionalProperties": {"$ref": "#/$defs/attribute"}},
+  "children": {"type": "object", "additionalProperties": {"$ref": "#/$defs/child"}},
+  "require": {"$ref": "#/$defs/require"},
+  "undeclared": {"$ref": "#/$defs/undeclared"},
+  "via": {"type": "array", "items": {"type": "string"}, "description": "translation rows used (NXDL sources)"},
+  "provisional": {"type": "array", "items": {"type": "string"}}
+ },
+ "$defs": {
+  "defaults": {
+   "type": "object",
+   "additionalProperties": false,
+   "required": ["min", "binding"],
+   "properties": {
+    "min": {"type": "integer", "minimum": 0},
+    "binding": {"type": "boolean"},
+    "type": {"type": "string"}
+   }
+  },
+  "symbol": {
+   "type": "object",
+   "additionalProperties": false,
+   "properties": {"doc": {"type": "string"}}
+  },
+  "name": {
+   "oneOf": [
+    {"type": "object", "additionalProperties": false, "required": ["exact"], "properties": {"exact": {"type": "string"}}},
+    {"type": "object", "additionalProperties": false, "required": ["template"], "properties": {"template": {"type": "string"}}},
+    {"type": "object", "additionalProperties": false, "required": ["any"], "properties": {"any": {"const": true}}},
+    {"type": "object", "additionalProperties": false, "required": ["ref"], "properties": {"ref": {"type": "string", "pattern": "^@"}}}
+   ]
+  },
+  "max": {"oneOf": [{"type": "integer", "minimum": 0}, {"const": "unbounded"}]},
+  "occurs": {
+   "type": "object",
+   "additionalProperties": false,
+   "properties": {"min": {"type": "integer", "minimum": 0}, "max": {"$ref": "#/$defs/max"}}
+  },
+  "scalar": {"type": ["string", "integer", "number", "boolean"]},
+  "enum_value": {
+   "oneOf": [
+    {"$ref": "#/$defs/scalar"},
+    {"type": "array", "items": {"$ref": "#/$defs/scalar"}},
+    {
+     "type": "object",
+     "additionalProperties": false,
+     "required": ["value"],
+     "properties": {
+      "value": {"oneOf": [{"$ref": "#/$defs/scalar"}, {"type": "array", "items": {"$ref": "#/$defs/scalar"}}]},
+      "doc": {"type": "string"},
+      "deprecated": {"type": "string"}
+     }
+    }
+   ]
+  },
+  "enum": {
+   "description": "a scalar value applies to each element, a list value to the whole array (§4.5)",
+   "oneOf": [
+    {"type": "array", "items": {"$ref": "#/$defs/enum_value"}},
+    {
+     "type": "object",
+     "additionalProperties": false,
+     "required": ["values"],
+     "properties": {"values": {"type": "array", "items": {"$ref": "#/$defs/enum_value"}}, "open": {"type": "boolean"}}
+    }
+   ]
+  },
+  "expr": {
+   "type": "object",
+   "additionalProperties": false,
+   "required": ["expr"],
+   "properties": {"expr": {"type": "string", "description": "symbols and integers with +, - and *"}}
+  },
+  "dim_value": {"oneOf": [{"type": "integer", "minimum": 0}, {"type": "string"}, {"type": "null"}, {"$ref": "#/$defs/expr"}]},
+  "dim": {
+   "oneOf": [
+    {"$ref": "#/$defs/dim_value"},
+    {
+     "type": "object",
+     "additionalProperties": false,
+     "required": ["optional"],
+     "properties": {"optional": {"const": true}, "value": {"$ref": "#/$defs/dim_value"}}
+    }
+   ]
+  },
+  "shape": {
+   "oneOf": [
+    {"type": "array", "items": {"$ref": "#/$defs/dim"}},
+    {
+     "type": "object",
+     "additionalProperties": false,
+     "properties": {
+      "rank": {"oneOf": [{"type": "integer", "minimum": 0}, {"type": "string"}, {"$ref": "#/$defs/expr"}]},
+      "dims": {"type": "array", "items": {"$ref": "#/$defs/dim"}},
+      "binding": {"type": "boolean"}
+     }
+    }
+   ]
+  },
+  "units": {
+   "oneOf": [
+    {"type": "object", "additionalProperties": false, "required": ["category"], "properties": {"category": {"type": "string"}}},
+    {"type": "object", "additionalProperties": false, "required": ["fixed"], "properties": {"fixed": {"type": "string"}}}
+   ]
+  },
+  "length": {
+   "oneOf": [
+    {"type": "integer", "minimum": 0},
+    {"type": "string"},
+    {"type": "object", "additionalProperties": false, "required": ["rank_of"], "properties": {"rank_of": {"type": "string"}}}
+   ]
+  },
+  "labels": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+  "constraint": {
+   "oneOf": [
+    {"type": "object", "additionalProperties": false, "required": ["at_least_one_of"], "properties": {"at_least_one_of": {"$ref": "#/$defs/labels"}}},
+    {"type": "object", "additionalProperties": false, "required": ["exactly_one_of"], "properties": {"exactly_one_of": {"$ref": "#/$defs/labels"}}},
+    {"type": "object", "additionalProperties": false, "required": ["at_most_one_of"], "properties": {"at_most_one_of": {"$ref": "#/$defs/labels"}}},
+    {"type": "object", "additionalProperties": false, "required": ["all_or_none"], "properties": {"all_or_none": {"$ref": "#/$defs/labels"}}}
+   ]
+  },
+  "require": {
+   "description": "a list of constraints, or a map {kind: labels} (shorthand)",
+   "oneOf": [
+    {"type": "array", "items": {"$ref": "#/$defs/constraint"}},
+    {
+     "type": "object",
+     "additionalProperties": false,
+     "properties": {
+      "at_least_one_of": {"$ref": "#/$defs/labels"},
+      "exactly_one_of": {"$ref": "#/$defs/labels"},
+      "at_most_one_of": {"$ref": "#/$defs/labels"},
+      "all_or_none": {"$ref": "#/$defs/labels"}
+     }
+    }
+   ]
+  },
+  "policy": {"enum": ["report", "ignore", "error"]},
+  "undeclared": {
+   "oneOf": [
+    {"$ref": "#/$defs/policy"},
+    {
+     "type": "object",
+     "additionalProperties": false,
+     "properties": {"group": {"$ref": "#/$defs/policy"}, "dataset": {"$ref": "#/$defs/policy"}, "attribute": {"$ref": "#/$defs/policy"}}
+    }
+   ]
+  },
+  "attribute": {
+   "type": "object",
+   "additionalProperties": false,
+   "properties": {
+    "name": {"$ref": "#/$defs/name"},
+    "occurs": {"$ref": "#/$defs/occurs"},
+    "recommended": {"type": "boolean"},
+    "type": {"type": "string"},
+    "shape": {"$ref": "#/$defs/shape"},
+    "units": {"$ref": "#/$defs/units"},
+    "enum": {"$ref": "#/$defs/enum"},
+    "length": {"$ref": "#/$defs/length"},
+    "rank": {"oneOf": [{"type": "integer", "minimum": 0}, {"type": "string"}]},
+    "names_child": {"enum": ["group", "dataset"]},
+    "refines": {"type": "string"},
+    "deprecated": {"type": "string"},
+    "doc": {"type": "string"},
+    "show": {"type": "array", "items": {"type": "string"}},
+    "via": {"type": "array", "items": {"type": "string"}},
+    "provisional": {"type": "array", "items": {"type": "string"}}
+   }
+  },
+  "child": {
+   "type": "object",
+   "additionalProperties": false,
+   "required": ["node"],
+   "properties": {
+    "id": {"type": "string", "description": "the label, when the key carries a kind suffix (DATA[group])"},
+    "node": {"enum": ["group", "dataset", "link"]},
+    "name": {"$ref": "#/$defs/name"},
+    "class": {"type": "string"},
+    "occurs": {"$ref": "#/$defs/occurs"},
+    "recommended": {"type": "boolean"},
+    "type": {"type": "string"},
+    "shape": {"$ref": "#/$defs/shape"},
+    "units": {"$ref": "#/$defs/units"},
+    "enum": {"$ref": "#/$defs/enum"},
+    "length": {"$ref": "#/$defs/length"},
+    "rank": {"oneOf": [{"type": "integer", "minimum": 0}, {"type": "string"}]},
+    "names_child": {"enum": ["group", "dataset"]},
+    "refines": {"type": "string"},
+    "target": {"type": "string", "description": "a label path (§4.6)"},
+    "deprecated": {"type": "string"},
+    "doc": {"type": "string"},
+    "show": {"type": "array", "items": {"type": "string"}},
+    "undeclared": {"$ref": "#/$defs/undeclared"},
+    "require": {"$ref": "#/$defs/require"},
+    "attributes": {"type": "object", "additionalProperties": {"$ref": "#/$defs/attribute"}},
+    "children": {"type": "object", "additionalProperties": {"$ref": "#/$defs/child"}},
+    "via": {"type": "array", "items": {"type": "string"}},
+    "provisional": {"type": "array", "items": {"type": "string"}}
+   }
+  }
+ }
+}

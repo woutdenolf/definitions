@@ -1,0 +1,6 @@
+description: >
+  `refines` (§5.2): `i0_counts` refines `CHANNEL_counts` and is placed right
+  after it, inheriting type, units and the narrowed maximum; its minimum is
+  the file's `defaults.min` (§3.1). `i1_counts`, without `refines`, is a new
+  optional member with the default type. `CHANNEL_counts` is refined in place.
+covers: [refines, defaults, occurs]

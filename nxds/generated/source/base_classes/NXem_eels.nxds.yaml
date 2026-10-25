@@ -1,0 +1,49 @@
+nxds: '0.1'
+class: NXem_eels
+category: base
+extends: NXprocess
+doc: Base class method-specific for Electron Energy Loss Spectroscopy (EELS).
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  zlp_correction:
+    node: group
+    class: NXprocess
+    doc: Details about computational steps how the zero-loss peak was threaded.
+    children:
+      PROGRAM:
+        node: group
+        name: {any: true}
+        class: NXprogram
+        doc: The program with which the zero-loss peak correction was performed.
+        via: [T1, T2, T4, T7]
+        provisional: [Q1, Q11]
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  indexing:
+    node: group
+    class: NXprocess
+    doc: Details about computational steps how peaks were indexed as elements.
+    children:
+      PROGRAM:
+        node: group
+        name: {any: true}
+        class: NXprogram
+        doc: The program with which the indexing was performed.
+        via: [T1, T2, T4, T7]
+        provisional: [Q1, Q11]
+      PEAK:
+        node: group
+        name: {any: true}
+        class: NXpeak
+        doc: Name and location of each peak in the spectrum considered to be of relevance.
+        via: [T1, T2, T4, T7]
+        provisional: [Q1, Q11]
+      SPECTRUM:
+        node: group
+        name: {any: true}
+        class: NXspectrum
+        doc: NXspectrum specialized for EELS.
+        via: [T1, T2, T4, T7]
+        provisional: [Q1, Q11]
+    via: [T1, T4, T7]
+    provisional: [Q1]

@@ -1,0 +1,19 @@
+nxds: '0.1'
+class: NXmicrostructure_feature
+category: base
+extends: NXobject
+doc: |-
+  Base class for documenting structuring features of a microstructure.
+
+  Instances of the class enable sub-grouping of microstructural features
+  as the abstract base class NXobject should not be used for this purpose.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  chemical_composition:
+    node: group
+    class: NXchemical_composition
+    doc: |-
+      The chemical composition of this microstructural feature
+      or set of such features.
+    via: [T1, T4, T7]
+    provisional: [Q1]

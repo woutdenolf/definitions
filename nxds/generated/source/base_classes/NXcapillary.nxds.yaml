@@ -1,0 +1,69 @@
+nxds: '0.1'
+class: NXcapillary
+category: base
+extends: NXcomponent
+doc: |-
+  A capillary lens to focus the X-ray beam.
+
+  Based on information provided by Gerd Wellenreuther (DESY).
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  type:
+    node: dataset
+    type: NX_CHAR
+    enum: [single_bounce, polycapillary, conical_capillary]
+    doc: Type of the capillary
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  manufacturer:
+    node: dataset
+    type: NX_CHAR
+    doc: |-
+      The manufacturer of the capillary. This is actually important as
+      it may have an impact on performance.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  maximum_incident_angle:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_ANGLE}
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  accepting_aperture:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_ANGLE}
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  gain:
+    node: group
+    class: NXdata
+    doc: The gain of the capillary as a function of energy
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  transmission:
+    node: group
+    class: NXdata
+    doc: The transmission of the capillary as a function of energy
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  working_distance:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  focal_size:
+    node: dataset
+    type: NX_FLOAT
+    doc: The focal size in FWHM
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  depends_on:
+    node: dataset
+    type: NX_CHAR
+    doc: |-
+      .. todo::
+      Add a definition for the reference point of a capillary lens.
+    via: [T1, T4, T7]
+    provisional: [Q1]

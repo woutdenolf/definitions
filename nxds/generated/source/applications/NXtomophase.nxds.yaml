@@ -1,0 +1,242 @@
+nxds: '0.1'
+class: NXtomophase
+category: application
+describes: NXroot
+doc: |-
+  This is the application definition for x-ray or neutron tomography raw data with phase contrast variation at each point.
+
+  In tomography first
+  some dark field images are measured, some bright field images and, of course the sample. In order
+  to properly sort the order of the images taken, a sequence number is stored with each image.
+defaults: {min: 1, binding: true, type: NX_CHAR}
+symbols:
+  nBrightFrames: {doc: Number of bright frames}
+  nDarkFrames: {doc: Number of dark frames}
+  nSampleFrames: {doc: Number of image (sample) frames}
+  nPhase: {doc: Number of phase settings}
+  xSize: {doc: Number of pixels in X direction}
+  ySize: {doc: Number of pixels in Y direction}
+children:
+  ENTRY:
+    node: group
+    name: {any: true}
+    class: NXentry
+    children:
+      title:
+        node: dataset
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      start_time:
+        node: dataset
+        type: NX_DATE_TIME
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      end_time:
+        node: dataset
+        type: NX_DATE_TIME
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      definition:
+        node: dataset
+        enum: [NXtomophase]
+        doc: 'Official NeXus NXDL schema to which this file conforms '
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      instrument:
+        node: group
+        class: NXinstrument
+        children:
+          SOURCE:
+            node: group
+            name: {any: true}
+            class: NXsource
+            children:
+              type:
+                node: dataset
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+              name:
+                node: dataset
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+              probe:
+                node: dataset
+                enum: [neutron, x-ray, electron]
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T2, T5, T7]
+            provisional: [Q1, Q2, Q11]
+          bright_field:
+            node: group
+            class: NXdetector
+            children:
+              data:
+                node: dataset
+                type: NX_INT
+                shape: [nBrightFrames, xSize, ySize]
+                attributes:
+                  signal:
+                    occurs: {min: 0}
+                    type: NX_POSINT
+                    enum: ['1']
+                    via: [T19]
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              sequence_number:
+                node: dataset
+                type: NX_INT
+                shape: [nBrightFrames]
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          dark_field:
+            node: group
+            class: NXdetector
+            children:
+              data:
+                node: dataset
+                type: NX_INT
+                shape: [nDarkFrames, xSize, ySize]
+                attributes:
+                  signal:
+                    occurs: {min: 0}
+                    type: NX_POSINT
+                    enum: ['1']
+                    via: [T19]
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              sequence_number:
+                node: dataset
+                type: NX_INT
+                shape: [nDarkFrames]
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          sample:
+            node: group
+            class: NXdetector
+            children:
+              data:
+                node: dataset
+                type: NX_INT
+                shape: [nSampleFrames, nPhase, xSize, ySize]
+                attributes:
+                  signal:
+                    occurs: {min: 0}
+                    type: NX_POSINT
+                    enum: ['1']
+                    via: [T19]
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              sequence_number:
+                node: dataset
+                type: NX_INT
+                shape: [nSampleFrames, nPhase]
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              x_pixel_size:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_LENGTH}
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              y_pixel_size:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_LENGTH}
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              distance:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_LENGTH}
+                doc: Distance between detector and sample
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      sample:
+        node: group
+        class: NXsample
+        children:
+          name:
+            node: dataset
+            doc: Descriptive name of sample
+            via: [T0, T1, T5, T7]
+            provisional: [Q1, Q2]
+          rotation_angle:
+            node: dataset
+            type: NX_FLOAT
+            shape: [nSampleFrames]
+            units: {category: NX_ANGLE}
+            attributes:
+              axis:
+                occurs: {min: 0}
+                type: NX_POSINT
+                enum: ['1']
+                via: [T19]
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+          x_translation:
+            node: dataset
+            type: NX_FLOAT
+            shape: [nSampleFrames]
+            units: {category: NX_LENGTH}
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+          y_translation:
+            node: dataset
+            type: NX_FLOAT
+            shape: [nSampleFrames]
+            units: {category: NX_LENGTH}
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+          z_translation:
+            node: dataset
+            type: NX_FLOAT
+            shape: [nSampleFrames]
+            units: {category: NX_LENGTH}
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      control:
+        node: group
+        class: NXmonitor
+        children:
+          integral:
+            node: dataset
+            type: NX_FLOAT
+            shape:
+            - {expr: nDarkFrames+nBrightFrames+nSampleFrame}
+            units: {category: NX_ANY}
+            doc: |-
+              Total integral monitor counts for each measured frame. Allows a correction for
+              fluctuations in the beam between frames.
+            via: [T1, T5, T7, T9, T9b]
+            provisional: [Q1, Q2]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      data:
+        node: group
+        class: NXdata
+        children:
+          data:
+            node: link
+            target: ENTRY/INSTRUMENT/sample/data
+            via: [T1, T5, T10]
+            provisional: [Q2, Q8]
+          rotation_angle:
+            node: link
+            target: ENTRY/SAMPLE/rotation_angle
+            via: [T1, T5, T10]
+            provisional: [Q2, Q8]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+    via: [T1, T2, T5, T7]
+    provisional: [Q1, Q2, Q11]
+via: [T8]

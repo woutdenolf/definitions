@@ -1,0 +1,25 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"},
+    {"declared_by": "NXcase_lidded_crate", "enum": {"open": false, "values": [{"value": "red"}, {"value": "green"}]}, "id": "colour", "name": {"exact": "colour"}, "occurs": {"max": 1, "min": 0}, "recommended": false, "type": "NX_CHAR"}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"node": "dataset", "ref": "NXcase_crate/size"},
+    {"declared_by": "NXcase_lidded_crate", "id": "lid", "name": {"exact": "lid"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "recommended": false, "type": "NX_FLOAT"}
+  ],
+  "class": "NXcase_lidded_crate",
+  "extends": "NXcase_crate",
+  "lossy": [],
+  "require": [],
+  "status": "local",
+  "symbols": [],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"}
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {}
+}

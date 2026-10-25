@@ -1,0 +1,77 @@
+nxds: '0.1'
+class: NXchemical_composition
+category: base
+extends: NXobject
+doc: Chemical composition of a sample or a set of things.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+symbols:
+  n: {doc: The number of samples or things.}
+children:
+  normalization:
+    node: dataset
+    type: NX_CHAR
+    enum: [atom_percent, weight_percent]
+    doc: |-
+      Reporting compositions as atom and weight percent yields both
+      dimensionless quantities but their conceptual interpretation differs.
+      A normalization based on atom_percent counts relative to the
+      total number of atoms which are of a particular type.
+      By contrast, weight_percent normalization factorizes in the
+      respective mass of the elements. Software libraries that work with
+      units, like pint in Python, are challenged by these differences as
+      at.-% and wt.-% are both fractional quantities.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  total:
+    node: dataset
+    type: NX_NUMBER
+    shape: [n]
+    units: {category: NX_UNITLESS}
+    doc: |-
+      Total formula mass or number of atoms, depending on the
+      normalization stated in the normalization field.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  ELEMENT:
+    node: group
+    name: {any: true}
+    class: NXatom
+    occurs: {min: 1, max: unbounded}
+    doc: |-
+      If this group is used to report the composition of elements from the periodic table,
+      the group should use the chemical symbol of that element. For other case the
+      group name is unconstrained.
+    children:
+      amount:
+        node: dataset
+        type: NX_NUMBER
+        shape: [n]
+        units: {category: NX_UNITLESS}
+        doc: |-
+          Count or weight which, when divided by total yields the composition
+          of this element, isotope, molecule, or ion.
+        via: [T1, T4, T7, T9]
+        provisional: [Q1]
+      composition:
+        node: dataset
+        type: NX_FLOAT
+        units: {category: NX_DIMENSIONLESS}
+        doc: |-
+          Composition value for the element/ion referred to under name.
+          Composition is reported either normalized for atomic or weight
+          percent. The field normalization should be used to communicate
+          this explicitly. Composition should be reported consistently
+          for all instances ELEMENT.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      composition_errors:
+        node: dataset
+        occurs: {min: 0}
+        recommended: true
+        type: NX_FLOAT
+        units: {category: NX_DIMENSIONLESS}
+        doc: Magnitude of the standard deviation of the composition.
+        via: [T1, T6, T7]
+        provisional: [Q1]
+    via: [T1, T3, T6]
+    provisional: [Q1, Q3]

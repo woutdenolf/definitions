@@ -1,0 +1,331 @@
+nxds: '0.1'
+class: NXelectronanalyzer
+category: base
+extends: NXcomponent
+doc: |-
+  Basic class for describing an electron analyzer.
+
+  This concept is related to term `12.59`_ of the ISO 18115-1:2023 standard.
+
+  .. _12.59: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:12.59
+defaults: {min: 0, binding: false, type: NX_CHAR}
+symbols:
+  nfa:
+    doc: |-
+      Number of fast axes (axes acquired simultaneously, without scanning a
+      physical quantity)
+  nsa:
+    doc: Number of slow axes (axes acquired while scanning a physical quantity)
+  n_transmission_function:
+    doc: Number of data points in the transmission function.
+children:
+  description:
+    node: dataset
+    type: NX_CHAR
+    doc: Free text description of the type of the detector
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  name:
+    node: dataset
+    type: NX_CHAR
+    doc: Name or model of the equipment
+    attributes:
+      short_name:
+        type: NX_CHAR
+        doc: Acronym or other shorthand name
+        via: [T1, T4]
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  work_function:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_ENERGY}
+    doc: |-
+      Work function of the electron analyzer.
+
+      The work function of a uniform surface of a conductor is the minimum energy required to remove
+      an electron from the interior of the solid to a vacuum level immediately outside the solid surface.
+
+      The kinetic energy :math:E_K of a photoelectron emitted from an energy level with binding energy
+      :math:`E_B` below the Fermi level is given by :math:`E_K = h\nu - E_B - W = h\nu - E_B - e \phi_{\mathrm{sample}}`.
+
+      Here, :math:`W = e \phi_{\mathrm{sample}}` is the work function of the sample surface, which is directly proportional
+      to the potential difference :math:`\phi_{\mathrm{sample}}` between the electrochemical potential of electrons in
+      the bulk and the electrostatic potential of an electron in the vacuum just outside the surface.
+
+      In PES measurements, the sample and the spectrometer (with work function :math:`W_{\mathrm{spectr.}} = e \phi_{\mathrm{spectr.}}`)
+      are electrically connected and therefore their Fermi levels are aligned. Due to the difference in local
+      vacuum level between the sample and spectrometer, there however exists an electric potential difference (contact potential)
+      :math:`\Delta\phi = \phi_{\mathrm{sample}} - \phi_{\mathrm{spectr.}}`.  The measured kinetic energy of a
+      photoelectron in PES is therefore given by :math:`E_K^{\mathrm{meas.}} = E_K + e\Delta\phi = h\nu - E_B - e\phi_{\mathrm{spectr.}}`.
+
+      Hence, the measured kinetic energy :math:`E_K^{\mathrm{meas.}}` of a photoelectron is independent
+      of the sample work function. Nonetheless, the work function :math:`\phi_{\mathrm{spectr.}}` needs to be known to
+      accurately determine the binding energy scale.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  voltage_range:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_VOLTAGE}
+    doc: |-
+      Voltage range of the power supply. This influences the noise of the supply
+      and thereby the energy resolution.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  energy_resolution:
+    node: group
+    class: NXresolution
+    doc: |-
+      Energy resolution of the analyzer with the current setting. May be linked from an
+      NXcalibration.
+    children:
+      physical_quantity:
+        node: dataset
+        enum: [energy]
+        via: [T0, T1, T4, T7]
+        provisional: [Q1]
+      resolution:
+        node: dataset
+        type: NX_FLOAT
+        units: {category: NX_ENERGY}
+        doc: |-
+          Minimum distinguishable energy separation in the energy spectra.
+
+          This concept is related to term `10.24`_ of the ISO 18115-1:2023 standard.
+
+          .. _10.24: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:10.24
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      resolution_errors:
+        node: dataset
+        type: NX_FLOAT
+        units: {category: NX_ENERGY}
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      relative_resolution:
+        node: dataset
+        type: NX_FLOAT
+        doc: |-
+          Ratio of the energy resolution of the electron analyzer at a specified energy
+          value to that energy value.
+
+          This concept is related to term `10.7`_ of the ISO 18115-1:2023 standard.
+
+          .. _10.7: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:10.7
+        via: [T1, T4, T7]
+        provisional: [Q1]
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  momentum_resolution:
+    node: group
+    class: NXresolution
+    doc: Momentum resolution of the electron analyzer (FWHM)
+    children:
+      physical_quantity:
+        node: dataset
+        enum: [momentum]
+        via: [T0, T1, T4, T7]
+        provisional: [Q1]
+      resolution:
+        node: dataset
+        type: NX_FLOAT
+        units: {category: NX_WAVENUMBER}
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      resolution_errors:
+        node: dataset
+        type: NX_FLOAT
+        units: {category: NX_WAVENUMBER}
+        via: [T1, T4, T7]
+        provisional: [Q1]
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  angular_resolution:
+    node: group
+    class: NXresolution
+    doc: Angular resolution of the electron analyzer (FWHM)
+    children:
+      physical_quantity:
+        node: dataset
+        enum: [angle]
+        via: [T0, T1, T4, T7]
+        provisional: [Q1]
+      resolution:
+        node: dataset
+        type: NX_FLOAT
+        units: {category: NX_ANGLE}
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      resolution_errors:
+        node: dataset
+        type: NX_FLOAT
+        units: {category: NX_ANGLE}
+        via: [T1, T4, T7]
+        provisional: [Q1]
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  spatial_resolution:
+    node: group
+    class: NXresolution
+    doc: |-
+      Spatial resolution of the electron analyzer (Airy disk radius)
+
+      This concept is related to term `10.14`_ of the ISO 18115-1:2023 standard.
+
+      .. _10.14: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:10.15
+    children:
+      physical_quantity:
+        node: dataset
+        enum: [length]
+        via: [T0, T1, T4, T7]
+        provisional: [Q1]
+      resolution:
+        node: dataset
+        type: NX_FLOAT
+        units: {category: NX_LENGTH}
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      resolution_errors:
+        node: dataset
+        type: NX_FLOAT
+        units: {category: NX_LENGTH}
+        via: [T1, T4, T7]
+        provisional: [Q1]
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  fast_axes:
+    node: dataset
+    type: NX_CHAR
+    shape: [nfa]
+    doc: |-
+      List of the axes that are acquired simultaneously by the detector.
+      These refer only to the experimental variables recorded by the electron analyzer.
+      Other variables such as temperature, manipulator angles etc. can be labeled as fast or slow in the data.
+
+      The fast axes should be listed in order of decreasing speed if they describe the same physical quantity
+      or different components of the same quantity (e.g., ['kx', 'ky'] or ['detector_x', 'detector_y']).
+      However, axes representing different physical quantities (e.g., ['energy', 'kx']) do not need to be ordered
+      by speed.
+
+      .. csv-table:: Examples
+        :header: "Mode", "fast_axes", "slow_axes"
+
+        "Hemispherical in ARPES mode",  "['energy', 'kx']",""
+        "Hemispherical with channeltron, sweeping energy mode", "", [\"energy\"]
+        "Tof", "['energy', 'kx', 'ky']",""
+        "Momentum microscope, spin-resolved", "['energy', 'kx', 'ky']", "['spin up-down', 'spin left-right']"
+
+      Axes may be less abstract than this, i.e. ['detector_x', 'detector_y'].
+      If energy_scan_mode=sweep, fast_axes: ['energy', 'kx']; slow_axes: ['energy'] is allowed.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  slow_axes:
+    node: dataset
+    type: NX_CHAR
+    shape: [nsa]
+    doc: |-
+      List of the axes that are acquired by scanning a physical parameter, listed in
+      order of decreasing speed. See fast_axes for examples.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  transmission_function:
+    node: group
+    class: NXdata
+    doc: |-
+      Transmission function of the electron analyzer.
+
+      The transmission function (TF) specifies the detection efficiency per solid angle for electrons of
+      different kinetic energy passing through the electron analyzer. It depends on the spectrometer
+      geometry as well as operation settings such as lens mode and pass energy.
+      The transmission function is usually given as relative intensity vs. kinetic energy.
+
+      The TF is used for calibration of the intensity scale in quantitative XPS. Without proper
+      transmission correction, a comparison of results measured from the same sample using different
+      operating modes for an instrument would show significant variations in signal intensity for the same
+      kinetic energies.
+
+      This concept is related to term `7.15`_ of the ISO 18115-1:2023 standard.
+
+      .. _7.15: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:7.15
+    attributes:
+      signal:
+        enum: [relative_intensity]
+        via: [T0, T1, T4]
+      axes:
+        enum: ['[''kinetic_energy'']']
+        via: [T0, T1, T4]
+    children:
+      kinetic_energy:
+        node: dataset
+        type: NX_FLOAT
+        shape: [n_transmission_function]
+        units: {category: NX_ENERGY}
+        doc: Kinetic energy values
+        via: [T1, T4, T7, T9]
+        provisional: [Q1]
+      relative_intensity:
+        node: dataset
+        type: NX_FLOAT
+        shape: [n_transmission_function]
+        units: {category: NX_UNITLESS}
+        doc: Relative transmission efficiency for the given kinetic energies
+        via: [T1, T4, T7, T9]
+        provisional: [Q1]
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  COLLECTIONCOLUMN:
+    node: group
+    name: {any: true}
+    class: NXcollectioncolumn
+    doc: Describes the electron collection (spatial and momentum imaging) column
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  ENERGYDISPERSION:
+    node: group
+    name: {any: true}
+    class: NXenergydispersion
+    doc: Describes the energy dispersion section
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  SPINDISPERSION:
+    node: group
+    name: {any: true}
+    class: NXspindispersion
+    doc: Describes the spin dispersion section
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  DETECTOR:
+    node: group
+    name: {any: true}
+    class: NXdetector
+    doc: Describes the electron detector
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  DEFLECTOR:
+    node: group
+    name: {any: true}
+    class: NXdeflector
+    doc: Deflectors outside the main optics ensembles described by the subclasses
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  ELECTROMAGNETIC_LENS:
+    node: group
+    name: {any: true}
+    class: NXelectromagnetic_lens
+    doc: Individual lenses outside the main optics ensembles described by the subclasses
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  FABRICATION:
+    node: group
+    name: {any: true}
+    class: NXfabrication
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  RESOLUTION:
+    node: group
+    name: {any: true}
+    class: NXresolution
+    doc: Any other resolution not explicitly named in this base class.
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]

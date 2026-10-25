@@ -1,0 +1,281 @@
+nxds: '0.1'
+class: NXafm
+category: application
+extends: NXspm
+describes: NXroot
+doc: An application definition to describe atomic force microscopy (AFM).
+defaults: {min: 1, binding: true, type: NX_CHAR}
+children:
+  ENTRY:
+    node: group
+    name: {any: true}
+    class: NXentry
+    children:
+      definition:
+        node: dataset
+        enum: [NXafm]
+        doc: Name of the definition that is used for the application.
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      experiment_technique:
+        node: dataset
+        enum: [AFM]
+        doc: The AFM technique.
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      scan_mode:
+        node: dataset
+        enum:
+          values:
+          - {value: contact mode}
+          - {value: tapping mode}
+          - {value: non-contact mode}
+          - {value: peak force tapping mode}
+          open: true
+        doc: |-
+          The mode of the scan.
+
+          contact mode: Cantilever attempts to move on the sample surface in very close contact with the sample.
+           The cantilever deflection is usually employed to control the cantilever position using a PID feedback loop.
+          non-contact mode: Cantilever attempts to oscillate above the sample surface. Cantilever attempts to stay in the
+           interaction (atomic force) zone therefore cantilever oscillator amplitude and frequency are deformed.
+           The cantilever frequency or oscillation amplitude is usually employed to control the cantilever position using a PID feedback loop.
+          tapping mode: Resembles to the non-contact mode, but at every point of scan the cantilever tip comes closer
+           to the sample surface ("taps it").
+           The cantilever oscillation amplitude is usually employed to control the cantilever position using a PID feedback loop.
+          peak force tapping mode: Like the tapping mode, but at each point of the scan force-distance curve is recorded.
+           The maximum force is usually employed to control the cantilever position using a PID feedback loop.
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      INSTRUMENT:
+        node: group
+        name: {any: true}
+        class: NXinstrument
+        children:
+          photo_detector:
+            node: group
+            class: NXdetector
+            occurs: {min: 0}
+            doc: Information about the quadrant photodiode deflection detector or interferometer.
+            children:
+              SENSOR:
+                node: group
+                name: {any: true}
+                class: NXsensor
+                occurs: {min: 0}
+                doc: The sensor information for the photodiode or interferometer.
+                via: [T1, T2, T6, T7]
+                provisional: [Q1, Q11]
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          SPM_CANTILEVER:
+            node: group
+            name: {any: true}
+            class: NXspm_cantilever
+            occurs: {min: 0}
+            recommended: true
+            doc: The cantilever information.
+            children:
+              cantilever_oscillator:
+                node: group
+                class: NXspm_cantilever_oscillator
+                occurs: {min: 0}
+                recommended: true
+                doc: |-
+                  When a cantilever is oscillated close to its resonance, this describes the oscillator properties.
+
+                  A cantilever can be used in direct contact mode to detect interaction forces or oscillated close to its
+                  resonance frequency. Changes in the oscillation amplitude, phase (between oscillated tail and moving tip)
+                  or resonance frequency are very sensitive to changes in the interaction potential field, giving rise of
+                  various measurement modes, such as non-contact or intermittent-contact (tapping) modes.
+                children:
+                  reference_amplitude:
+                    node: dataset
+                    occurs: {min: 0}
+                    recommended: true
+                    type: NX_NUMBER
+                    units: {category: NX_LENGTH}
+                    via: [T1, T6, T7]
+                    provisional: [Q1]
+                  reference_frequency:
+                    node: dataset
+                    occurs: {min: 0}
+                    recommended: true
+                    type: NX_NUMBER
+                    units: {category: NX_FREQUENCY}
+                    via: [T1, T6, T7]
+                    provisional: [Q1]
+                  reference_phase:
+                    node: dataset
+                    occurs: {min: 0}
+                    recommended: true
+                    type: NX_NUMBER
+                    units: {category: NX_ANGLE}
+                    via: [T1, T6, T7]
+                    provisional: [Q1]
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              phase_positioner:
+                node: group
+                class: NXpositioner
+                occurs: {min: 0}
+                recommended: true
+                doc: The phase positioner of the cantilever.
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              amplitude_positioner:
+                node: group
+                class: NXpositioner
+                occurs: {min: 0}
+                recommended: true
+                doc: The amplitude positioner of the cantilever.
+                via: [T1, T6, T7]
+                provisional: [Q1]
+            via: [T1, T2, T6, T7]
+            provisional: [Q1, Q11]
+          phase_lock_loop:
+            node: group
+            class: NXphase_lock_loop
+            occurs: {min: 0}
+            recommended: true
+            doc: Phase locked loop for cantilever lock-in device.
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          SCAN_ENVIRONMENT:
+            node: group
+            name: {any: true}
+            class: NXenvironment
+            doc: The environment information.
+            children:
+              XYpiezo_sensor:
+                node: group
+                name: {template: '{XY}piezo_sensor'}
+                class: NXspm_piezo_sensor
+                occurs: {min: 0}
+                doc: |-
+                  This should be a link to the concept
+                  entry/instrument/xy_piezo_sensor.
+                via: [T1, T3, T6, T7]
+                provisional: [Q1, Q3]
+              head_temperature_sensor:
+                node: group
+                class: NXsensor
+                occurs: {min: 0}
+                doc: |-
+                  This should be a link to the concept
+                  entry/instrument/head_temperature_sensor.
+                via: [T1, T6, T7]
+                provisional: [Q1]
+            via: [T1, T3, T5, T7]
+            provisional: [Q1, Q2, Q3]
+          head_temperature_sensor:
+            node: group
+            class: NXsensor
+            occurs: {min: 0}
+            doc: The temperature of the scan environment or head of the cantilever.
+            via: [T1, T6, T7]
+            provisional: [Q1]
+        via: [T1, T2, T5, T7]
+        provisional: [Q1, Q2, Q11]
+      reproducibility_indicators:
+        node: group
+        class: NXcollection
+        occurs: {min: 0}
+        doc: |-
+          The group of indicators (links to the existing fields in different groups) that measure
+          the reproducibility of the experiment.
+        children:
+          head_temperature:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_NUMBER
+            doc: |-
+              This should be a link to
+              /entry/instrument/scan_environment/head_temperature
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          cryo_bottom_temperature:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_NUMBER
+            doc: |-
+              This should be a link to
+              /entry/instrument/scan_environment/cryo_bottom_temperature
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          cryo_shield_temperature:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_NUMBER
+            doc: |-
+              This should be a link to
+              /entry/instrument/scan_environment/cryo_shield_temperature
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          cantilever_oscillator:
+            node: group
+            class: NXspm_cantilever_oscillator
+            occurs: {min: 0}
+            doc: |-
+              This should be a link to
+              /entry/instrument/cantilever_spm/cantilever_oscillator
+            via: [T1, T6, T7]
+            provisional: [Q1]
+        via: [T1, T6, T7]
+        provisional: [Q1]
+      resolution_indicators:
+        node: group
+        class: NXcollection
+        occurs: {min: 0}
+        doc: The group of indicators (links to the existing fields in different groups) that
+        children:
+          head_temperature:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_NUMBER
+            doc: |-
+              This should be a link to
+              /entry/instrument/scan_environment/head_temperature
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          cryo_bottom_temperature:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_NUMBER
+            doc: |-
+              This should be a link to
+              /entry/instrument/scan_environment/cryo_bottom_temperature
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          cryo_shield_temperature:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_NUMBER
+            doc: |-
+              This should be a link to
+              /entry/instrument/scan_environment/cryo_shield_temperature
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          cantilever_config:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_NUMBER
+            doc: |-
+              This should be a link to
+              /entry/instrument/cantilever_spm/cantilever_config
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          amplitude_excitation:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_NUMBER
+            doc: |-
+              This should be a link to
+              /entry/instrument/phase_lock_loop/amplitude_excitation
+            via: [T1, T6, T7]
+            provisional: [Q1]
+        via: [T1, T6, T7]
+        provisional: [Q1]
+    via: [T1, T2, T5, T7]
+    provisional: [Q1, Q2, Q11]
+via: [T8]

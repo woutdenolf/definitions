@@ -1,0 +1,198 @@
+nxds: '0.1'
+class: NXem_eds
+category: base
+extends: NXprocess
+doc: |-
+  Base class method-specific for energy-dispersive X-ray spectroscopy (EDS/EDXS).
+
+  `IUPAC instead of Siegbahn notation <https://doi.org/10.1002/xrs.1300200308>`_ should be used.
+
+  X-ray spectroscopy is a surface-sensitive technique. Therefore, three-dimensional elemental
+  characterization requires typically a sequence of characterization and preparation of the
+  surface to expose new surface layer that can be characterized in the next acquisition.
+  In effect, the resulting three-dimensional elemental information mappings are truly the
+  result of a correlation and post-processing of several measurements which is the field
+  of correlative tomographic usage of electron microscopy.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+symbols:
+  n_photon_energy: {doc: Number of X-ray photon energy (bins)}
+  n_elements: {doc: Number of identified elements}
+  n_peaks: {doc: Number of peaks detected}
+  n_iupac_line_names: {doc: Number of IUPAC line names}
+children:
+  indexing:
+    node: group
+    class: NXprocess
+    doc: Details about computational steps how peaks were indexed as elements.
+    children:
+      PROGRAM:
+        node: group
+        name: {any: true}
+        class: NXprogram
+        doc: The program with which the indexing was performed.
+        via: [T1, T2, T4, T7]
+        provisional: [Q1, Q11]
+      summary:
+        node: group
+        class: NXdata
+        doc: Accumulated intensity over all pixels of the region-of-interest.
+        children:
+          intensity:
+            node: dataset
+            type: NX_NUMBER
+            shape: [n_photon_energy]
+            units: {category: NX_UNITLESS}
+            doc: Accumulated counts
+            attributes:
+              long_name:
+                type: NX_CHAR
+                doc: Counts
+                via: [T1, T4]
+            via: [T1, T4, T7, T9]
+            provisional: [Q1]
+          axis_energy:
+            node: dataset
+            type: NX_NUMBER
+            shape: [n_photon_energy]
+            units: {category: NX_ENERGY}
+            doc: Energy axis
+            attributes:
+              long_name:
+                type: NX_CHAR
+                doc: Energy
+                via: [T1, T4]
+            via: [T1, T4, T7, T9]
+            provisional: [Q1]
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      atom_types:
+        node: dataset
+        type: NX_CHAR
+        doc: |-
+          Comma-separated list of symbols for elements from the periodic table that have
+          been confirmed present by the here reported EDS analysis.
+
+          This field can be used when creating instances of :ref:`NXpeak` is not desired.
+          However, a collection of instances of NXpeak with individual NXatom
+          can be used to add isotopic information and other relevant context.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      PEAK:
+        node: group
+        name: {any: true}
+        class: NXpeak
+        doc: Details about individual indexed peaks.
+        children:
+          ATOM:
+            node: group
+            name: {any: true}
+            class: NXatom
+            children:
+              energy_range:
+                node: dataset
+                type: NX_NUMBER
+                shape: [2]
+                units: {category: NX_ENERGY}
+                doc: |-
+                  Associated lower :math:`[e_{min}, e_{max}]` bounds of the
+                  energy which is assumed associated with this peak.
+                via: [T1, T4, T7, T9]
+                provisional: [Q1]
+              energy:
+                node: dataset
+                type: NX_NUMBER
+                units: {category: NX_ENERGY}
+                doc: Theoretical energy of the line according to IUPAC.
+                via: [T1, T4, T7]
+                provisional: [Q1]
+              iupac_line_name:
+                node: dataset
+                type: NX_CHAR
+                shape: [n_iupac_line_names]
+                doc: |-
+                  IUPAC notation identifier of the line which the peak represents.
+
+                  This can be a list of IUPAC notations for (the seldom) case that
+                  multiple lines are grouped with the same peak.
+                via: [T1, T4, T7, T9]
+                provisional: [Q1]
+            via: [T1, T2, T4, T7]
+            provisional: [Q1, Q11]
+        via: [T1, T2, T4, T7]
+        provisional: [Q1, Q11]
+      ELEMENT_SPECIFIC_MAP:
+        node: group
+        name: {any: true}
+        class: NXimage
+        doc: |-
+          Individual element-specific EDS/EDX/EDXS/SXES mapping
+
+          A composition map is an image whose intensities for each pixel are the
+          accumulated X-ray quanta *under the curve(s)* of a set of peaks.
+
+          These element-specific EDS maps are instances of :ref:`NXimage`
+          that should be named by the element from the atom_types field.
+
+          When signal contributions from several peaks were decomposed
+          users should ideally use a respective number of NXpeak instances
+          to give further context about the individual signal contributions
+          are summarized and shown together, e.g. the combined signal
+          under the curve of carbon and oxygen.
+
+          In this case specify the processing details use peak and weight.
+        children:
+          description:
+            node: dataset
+            type: NX_CHAR
+            doc: Discouraged free-text field to add additional information.
+            via: [T1, T4, T7]
+            provisional: [Q1]
+          iupac_line_candidates:
+            node: dataset
+            type: NX_CHAR
+            doc: |-
+              Comma-separated list of chemical_symbol-IUPAC X-ray (emission) line name that
+              documents which elements and their specific lines are theoretically located within
+              the energy_range of the spectrum from which the EDS (element) map was computed.
+            via: [T1, T4, T7]
+            provisional: [Q1]
+          energy_range:
+            node: dataset
+            type: NX_NUMBER
+            shape: [2]
+            units: {category: NX_ENERGY}
+            doc: |-
+              Associated :math:`[e_{min}, e_{max}]` bounds of the energy
+              range for which spectrum counts were accumulated.
+            via: [T1, T4, T7, T9]
+            provisional: [Q1]
+          PROCESS:
+            node: group
+            name: {any: true}
+            class: NXprocess
+            children:
+              peak:
+                node: dataset
+                type: NX_CHAR
+                shape: [n_peaks]
+                doc: |-
+                  A list of :ref:`NXpeak` instance names whose X-ray quanta were
+                  accumulated for each pixel to obtain an element-specific
+                  EDS map.
+                via: [T1, T4, T7, T9]
+                provisional: [Q1]
+              weight:
+                node: dataset
+                type: NX_NUMBER
+                units: {category: NX_UNITLESS}
+                doc: |-
+                  A list of weights by how much the intensity of each peak
+                  contributes to the intensity of the EDS map.
+                via: [T1, T4, T7]
+                provisional: [Q1]
+            via: [T1, T2, T4, T7]
+            provisional: [Q1, Q11]
+        via: [T1, T3, T4, T7]
+        provisional: [Q1, Q3]
+    via: [T1, T4, T7]
+    provisional: [Q1]

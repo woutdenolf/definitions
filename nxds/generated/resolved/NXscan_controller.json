@@ -1,0 +1,49 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/COLLECTION"},
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"node": "group", "ref": "NXobject/LOG"},
+    {"node": "group", "ref": "NXobject/NOTE"},
+    {"node": "group", "ref": "NXobject/PARAMETERS"},
+    {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+    {"node": "dataset", "ref": "NXobject/identifierNAME"},
+    {"node": "dataset", "ref": "NXcomponent/applied"},
+    {"node": "dataset", "ref": "NXcomponent/name"},
+    {"node": "dataset", "ref": "NXcomponent/description"},
+    {"node": "dataset", "ref": "NXcomponent/inputs"},
+    {"node": "dataset", "ref": "NXcomponent/outputs"},
+    {"node": "group", "ref": "NXcomponent/FABRICATION"},
+    {"node": "group", "ref": "NXcomponent/PROGRAM"},
+    {"node": "group", "ref": "NXcomponent/ENVIRONMENT"},
+    {"node": "dataset", "ref": "NXcomponent/depends_on"},
+    {"node": "group", "ref": "NXcomponent/TRANSFORMATIONS"},
+    {"declared_by": "NXscan_controller", "docs": ["NXscan_controller/scan_schema"], "id": "scan_schema", "name": {"exact": "scan_schema"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXscan_controller", "docs": ["NXscan_controller/dwell_time"], "id": "dwell_time", "name": {"exact": "dwell_time"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_TIME"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXscan_controller", "docs": ["NXscan_controller/flyback_time"], "id": "flyback_time", "name": {"exact": "flyback_time"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_TIME"}, "via": ["T1", "T4", "T7"]},
+    {"class": "NXdeflector", "declared_by": "NXscan_controller", "docs": ["NXscan_controller/DEFLECTOR"], "id": "DEFLECTOR", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q11"], "recommended": false, "via": ["T1", "T2", "T4", "T7"]},
+    {"class": "NXcircuit", "declared_by": "NXscan_controller", "id": "CIRCUIT", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q11"], "recommended": false, "via": ["T1", "T2", "T4", "T7"]}
+  ],
+  "class": "NXscan_controller",
+  "extends": "NXcomponent",
+  "lossy": [],
+  "provisional": [],
+  "require": [],
+  "source": "base_classes/NXscan_controller.nxdl.xml",
+  "status": "base",
+  "symbols": [],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"},
+  "via": []
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {}
+}

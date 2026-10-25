@@ -1,0 +1,250 @@
+nxds: '0.1'
+class: NXlockin
+category: base
+extends: NXobject
+doc: |-
+  A base class definition for a lock-in amplifier.
+
+  The lock-in amplifier information: the device is being used to extract a (potentially)
+  very weak input signal buried in the noisy background, where the input signal has
+  the same frequency (or its harmonic) as carrier signal or reference signal, using heterodyne
+  detection.
+
+  This method extracts the amplitude and phase shift between input signal and reference signal.
+
+  In single phase lock-in amplifiers used in high signal-to-noise ratio applications, only
+  the amplitude is measured and phase difference is set to zero.
+
+  In two phase lock-in amplifiers used in low signal-to-noise ratio applications, both the
+  amplitude and phase difference are measured.
+
+  Fields with partial names like low_passN, high_passN, etc., can be repeated for each channel
+  of the lockin amplifier. It is envisioned that these fields are named low_pass_0, low_pass_1,
+  and so on.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  hardware:
+    node: group
+    class: NXfabrication
+    doc: Hardware manufacturers and type (product number) of lock-in amplifier.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  bias_divider:
+    node: dataset
+    doc: |-
+      Bias divider for lock-in channel.
+      math: `Bias divider $= \frac{V_{\mathrm{ref}}}{V_{\mathrm{ref}} + V_{\mathrm{input}}}$`
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  modulation_status:
+    node: dataset
+    type: NX_BOOLEAN
+    doc: Switch the lock-in modulation on or off.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  modulation_signal:
+    node: dataset
+    type: NX_CHAR
+    enum:
+      values:
+      - {value: voltage}
+      - {value: current}
+      - {value: bias}
+      open: true
+    doc: |-
+      Type of the modulation or reference signal, voltage | current | bias.
+      The name of the current or voltage signal can be also specified
+      according to their purpose (e.g., `bias` voltage).
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  modulation_frequency:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_FREQUENCY}
+    doc: |-
+      The frequency of the sine modulation that is used to modulate the signal in
+      lock-in.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  reference_amplitude:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_ANY}
+    doc: |-
+      Amplitude of the reference signal for the lock-in amplifier.
+      Unit could be NX_VOLTAGE or NX_CURRENT depending on the type of the reference signal.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  reference_frequency:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_FREQUENCY}
+    doc: Frequency of the reference signal for the lock-in amplifier.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  reference_phase:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_ANGLE}
+    doc: Phase of the reference signal set in the lock-in amplifier.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  phase_difference:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_ANGLE}
+    doc: |-
+      Phase difference between the input signal and the reference signal.
+      This is used in two phase lock-in amplifiers.
+      In single phase lock-in amplifiers, this value is set to zero.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  demodulated_signal:
+    node: dataset
+    type: NX_CHAR
+    enum:
+      values:
+      - {value: current}
+      - {value: voltage}
+      - {value: bias}
+      open: true
+    doc: |-
+      Type of the demodulated signal,  current | voltage | bias.
+      The name of the current or voltage signal can be also specified
+      according to their purpose (e.g., `bias` voltage).
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  demodulated_frequency:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_FREQUENCY}
+    doc: The frequency of the demodulated signal.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  frequency_modulation_bandwidth:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_FREQUENCY}
+    doc: The bandwidth of the modulating signal.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  phase_modulation_bandwidth:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_FREQUENCY}
+    doc: The bandwidth of the modulating signal over which modulated signal spreads.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  amplitude_modulation_bandwidth:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_FREQUENCY}
+    doc: The bandwidth of the modulating signal over which modulated signal spreads.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  demodulated_amplitude:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_ANY}
+    doc: |-
+      The amplitude of the demodulated signal.
+      Unit could be NX_VOLTAGE or NX_CURRENT depending on the type of the demodulated signal.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  demodulated_phase:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_ANGLE}
+    doc: The phase of the demodulated signal.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  demodulator_channels:
+    node: dataset
+    type: NX_CHAR
+    doc: Comma separated list of the demodulator channels.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  low_passN:
+    node: dataset
+    name: {template: 'low_pass{N}'}
+    type: NX_NUMBER
+    units: {category: NX_FREQUENCY}
+    doc: |-
+      Frequency of the low-pass filter or cut-off frequency. Only signals below
+      this frequency are passed through the filter.
+      N is envisioned to represent the channel number e.g., low_pass1.
+    via: [T1, T3, T4, T7]
+    provisional: [Q1, Q3]
+  high_passN:
+    node: dataset
+    name: {template: 'high_pass{N}'}
+    type: NX_NUMBER
+    units: {category: NX_FREQUENCY}
+    doc: |-
+      Frequency of the high-pass filter or cut-off frequency. Only signals above
+      this frequency are passed through the filter.
+      N is envisioned to represent the channel number e.g., high_pass1.
+    via: [T1, T3, T4, T7]
+    provisional: [Q1, Q3]
+  lp_filter_orderN:
+    node: dataset
+    name: {template: 'lp_filter_order{N}'}
+    type: NX_NUMBER
+    doc: |-
+      Order of the low-pass filter applied on the input or demodulated signals (X, Y).
+      Reducing the bandwidth or increasing the order reduces noise on the demodulated signals,
+      but increases settling and measurement times.
+      N is envisioned to represent the channel number e.g., lp_filter_order1.
+    via: [T1, T3, T4, T7]
+    provisional: [Q1, Q3]
+  hp_filter_orderN:
+    node: dataset
+    name: {template: 'hp_filter_order{N}'}
+    type: NX_NUMBER
+    doc: |-
+      Order of the high-pass filter applied on the input or demodulated
+      signal. This is used mainly to suppress a DC component of the input
+      signal noise.
+      N is envisioned to represent the channel number e.g., hp_filter_order1.
+    via: [T1, T3, T4, T7]
+    provisional: [Q1, Q3]
+  ref_offset_phaseN:
+    node: dataset
+    name: {template: 'ref_offset_phase{N}'}
+    type: NX_NUMBER
+    units: {category: NX_ANGLE}
+    doc: |-
+      An extra phase offset added to the reference signal in modulation step.
+      N is envisioned to represent the channel number e.g., hp_filter_order1.
+    via: [T1, T3, T4, T7]
+    provisional: [Q1, Q3]
+  harmonic_orderN:
+    node: dataset
+    name: {template: 'harmonic_order{N}'}
+    type: NX_NUMBER
+    doc: |-
+      The reference signal can be a higher harmonic of the modulation signal.
+      Here the order of the harmonic is stored.
+      N is envisioned to represent the channel number e.g., harmonic_order1.
+    via: [T1, T3, T4, T7]
+    provisional: [Q1, Q3]
+  sensitivity_factor:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_DIMENSIONLESS}
+    doc: Ratio of output signal amplitude to input signal amplitude (V/V).
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  dc_offset_valueN:
+    node: dataset
+    name: {template: 'dc_offset_value{N}'}
+    type: NX_NUMBER
+    units: {category: NX_ANY}
+    doc: |-
+      The DC offset of the demodulated signal.
+      This is used to remove the DC component from the demodulated signal.
+
+      The same DC offset might be applied to the input signal in the modulation process.
+      N is envisioned to represent the channel number e.g., dc_offset_value1.
+    via: [T1, T3, T4, T7]
+    provisional: [Q1, Q3]

@@ -1,0 +1,70 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/COLLECTION"},
+    {"node": "group", "ref": "NXprocess/DATA"},
+    {"node": "group", "ref": "NXobject/LOG"},
+    {"node": "group", "ref": "NXprocess/NOTE"},
+    {"node": "group", "ref": "NXprocess/PARAMETERS"},
+    {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+    {"node": "dataset", "ref": "NXobject/identifierNAME"},
+    {"node": "dataset", "ref": "NXprocess/program"},
+    {"node": "dataset", "ref": "NXprocess/sequence_index"},
+    {"node": "dataset", "ref": "NXprocess/version"},
+    {"node": "dataset", "ref": "NXprocess/date"},
+    {"declared_by": "NXapm_paraprobe_tool_process", "docs": ["NXapm_paraprobe_tool_process/description"], "id": "description", "name": {"exact": "description"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4", "T7"]},
+    {"class": "NXcs_filter_boolean_mask", "declared_by": "NXapm_paraprobe_tool_process", "docs": ["NXapm_paraprobe_tool_process/window"], "id": "window", "name": {"exact": "window"}, "node": "group", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "specialisation": "NXapm_paraprobe_tool_process/window", "via": ["T1", "T4", "T7"]}
+  ],
+  "class": "NXapm_paraprobe_tool_process",
+  "extends": "NXprocess",
+  "lossy": [],
+  "provisional": [],
+  "require": [],
+  "source": "contributed_definitions/NXapm_paraprobe_tool_process.nxdl.xml",
+  "status": "contributed",
+  "symbols": ["n_mask"],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"},
+  "via": []
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {
+  "NXapm_paraprobe_tool_process/window": {
+   "attributes": [
+     {"ref": "NXobject@default"}
+   ],
+   "children": [
+     {"node": "group", "ref": "NXobject/COLLECTION"},
+     {"node": "group", "ref": "NXobject/DATA"},
+     {"node": "group", "ref": "NXobject/LOG"},
+     {"node": "group", "ref": "NXobject/NOTE"},
+     {"node": "group", "ref": "NXobject/PARAMETERS"},
+     {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+     {"node": "dataset", "ref": "NXobject/identifierNAME"},
+     {"node": "dataset", "ref": "NXcs_filter_boolean_mask/depends_on"},
+     {"node": "dataset", "ref": "NXcs_filter_boolean_mask/number_of_objects"},
+     {"declared_by": "NXcs_filter_boolean_mask", "docs": ["NXcs_filter_boolean_mask/bitdepth", "NXapm_paraprobe_tool_process/window/bitdepth"], "id": "bitdepth", "name": {"exact": "bitdepth"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "refined_by": ["NXapm_paraprobe_tool_process"], "type": "NX_UINT", "units": {"category": "NX_UNITLESS"}, "via": ["T1", "T4", "T7"]},
+     {"declared_by": "NXcs_filter_boolean_mask", "docs": ["NXcs_filter_boolean_mask/mask", "NXapm_paraprobe_tool_process/window/mask"], "id": "mask", "name": {"exact": "mask"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "refined_by": ["NXapm_paraprobe_tool_process"], "shape": {"binding": false, "dims": ["n_mask"], "symbols": {"n_mask": "NXapm_paraprobe_tool_process"}}, "type": "NX_UINT", "units": {"category": "NX_UNITLESS"}, "via": ["T1", "T4", "T7", "T9"]},
+     {"declared_by": "NXapm_paraprobe_tool_process", "docs": ["NXapm_paraprobe_tool_process/window/number_of_ions"], "id": "number_of_ions", "name": {"exact": "number_of_ions"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_UINT", "units": {"category": "NX_UNITLESS"}, "via": ["T1", "T4", "T7"]}
+   ],
+   "class": "NXcs_filter_boolean_mask",
+   "declared_by": "NXapm_paraprobe_tool_process",
+   "id": "NXapm_paraprobe_tool_process/window",
+   "require": [],
+   "symbols": [],
+   "undeclared": {"attribute": "report", "dataset": "report", "group": "report"}
+  }
+ }
+}

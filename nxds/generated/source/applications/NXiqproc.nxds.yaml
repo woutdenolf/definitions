@@ -1,0 +1,179 @@
+nxds: '0.1'
+class: NXiqproc
+category: application
+describes: NXroot
+doc: Application definition for any :math:`I(Q)` data.
+defaults: {min: 1, binding: true, type: NX_CHAR}
+symbols:
+  nVars:
+    doc: The number of values taken by the varied variable
+  nQX:
+    doc: Number of values for the first dimension of Q
+  nQY:
+    doc: Number of values for the second dimension of Q
+children:
+  ENTRY:
+    node: group
+    name: {any: true}
+    class: NXentry
+    children:
+      title:
+        node: dataset
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      definition:
+        node: dataset
+        enum: [NXiqproc]
+        doc: 'Official NeXus NXDL schema to which this file conforms '
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      instrument:
+        node: group
+        class: NXinstrument
+        children:
+          SOURCE:
+            node: group
+            name: {any: true}
+            class: NXsource
+            children:
+              type:
+                node: dataset
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+              name:
+                node: dataset
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+              probe:
+                node: dataset
+                enum: [neutron, x-ray, electron]
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T2, T5, T7]
+            provisional: [Q1, Q2, Q11]
+          name:
+            node: dataset
+            type: NX_CHAR
+            doc: 'Name of the instrument from which this data was reduced. '
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      SAMPLE:
+        node: group
+        name: {any: true}
+        class: NXsample
+        children:
+          name:
+            node: dataset
+            doc: Descriptive name of sample
+            via: [T0, T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T2, T5, T7]
+        provisional: [Q1, Q2, Q11]
+      reduction:
+        node: group
+        class: NXprocess
+        children:
+          program:
+            node: dataset
+            type: NX_CHAR
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          version:
+            node: dataset
+            type: NX_CHAR
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          input:
+            node: group
+            class: NXparameters
+            doc: Input parameters for the reduction program used
+            children:
+              filenames:
+                node: dataset
+                type: NX_CHAR
+                doc: Raw data files used to generate this I(Q)
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          output:
+            node: group
+            class: NXparameters
+            doc: Eventual output parameters from the data reduction program used
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      DATA:
+        node: group
+        name: {any: true}
+        class: NXdata
+        children:
+          data:
+            node: dataset
+            type: NX_INT
+            shape: [nVars, nQX, nQY]
+            doc: |-
+              This is I(Q). The client has to analyse the dimensions
+              of I(Q). Often, multiple I(Q) for various environment
+              conditions are measured; that would be the first
+              dimension. Q can be multidimensional, this accounts for
+              the further dimensions in the data
+            attributes:
+              signal:
+                occurs: {min: 0}
+                type: NX_POSINT
+                enum: ['1']
+                via: [T19]
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+          variable:
+            node: dataset
+            type: NX_NUMBER
+            shape: [nVars]
+            attributes:
+              varied_variable:
+                doc: The real name of the varied variable in the first dim of data, temperature,
+                  P, MF etc...
+                via: [T0, T1, T5]
+                provisional: [Q2]
+              axis:
+                occurs: {min: 0}
+                type: NX_POSINT
+                enum: ['1']
+                via: [T19]
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+          qx:
+            node: dataset
+            type: NX_NUMBER
+            shape: [nQX]
+            doc: Values for the first dimension of Q
+            attributes:
+              axis:
+                occurs: {min: 0}
+                type: NX_POSINT
+                enum: ['2']
+                via: [T19]
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+          qy:
+            node: dataset
+            type: NX_NUMBER
+            shape: [nQY]
+            doc: Values for the second dimension of Q
+            attributes:
+              axis:
+                occurs: {min: 0}
+                type: NX_POSINT
+                enum: ['3']
+                via: [T19]
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+        via: [T1, T2, T5, T7]
+        provisional: [Q1, Q2, Q11]
+    via: [T1, T2, T5, T7]
+    provisional: [Q1, Q2, Q11]
+via: [T8]

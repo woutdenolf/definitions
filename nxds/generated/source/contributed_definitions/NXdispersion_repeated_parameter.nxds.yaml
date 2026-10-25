@@ -1,0 +1,41 @@
+nxds: '0.1'
+class: NXdispersion_repeated_parameter
+category: base
+extends: NXobject
+doc: A repeated parameter for a dispersion function
+defaults: {min: 0, binding: false, type: NX_CHAR}
+symbols:
+  n_repetitions: {doc: The number of parameter repetitions}
+children:
+  name:
+    node: dataset
+    type: NX_CHAR
+    doc: The name of the parameter
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  description:
+    node: dataset
+    type: NX_CHAR
+    doc: A description of what this parameter represents
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  parameter_units:
+    node: dataset
+    type: NX_CHAR
+    shape: [n_repetitions]
+    doc: |-
+      A unit array associating a unit with each parameter.
+      The first element should be equal to values/@unit.
+      The values should be SI interpretable standard units
+      with common prefixes (e.g. mikro, nano etc.) or their
+      short-hand notation (e.g. nm, mm, kHz etc.).
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  values:
+    node: dataset
+    type: NX_NUMBER
+    shape: [n_repetitions]
+    units: {category: NX_ANY}
+    doc: The value of the parameter
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]

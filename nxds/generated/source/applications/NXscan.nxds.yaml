@@ -1,0 +1,139 @@
+nxds: '0.1'
+class: NXscan
+category: application
+describes: NXroot
+doc: |-
+  Application definition for a generic scan instrument.
+
+  This definition is more an
+  example then a stringent definition as the content of a given NeXus scan file needs to
+  differ for different types of scans. This example definition shows a scan like done
+  on a rotation camera: the sample is rotated and a detector image, the rotation angle
+  and a monitor value is stored at each step in the scan. In the following, the symbol
+  ``NP`` is used to represent the number of scan points. These are the rules for
+  storing scan data in NeXus files which are implemented in this example:
+
+  * Each value varied throughout a scan is stored as an array of
+    length ``NP`` at its respective location within the NeXus hierarchy.
+  * For area detectors, ``NP`` is the first dimension,
+    example for a detector of 256x256:  ``data[NP,256,256]``
+  * The NXdata group contains links to all variables varied in the scan and the data.
+    This to give an equivalent to the more familiar classical tabular representation of scans.
+
+  These rules exist for a reason: HDF allows the first dimension of a data set to be
+  unlimited. This means the data can be appended too. Thus a NeXus file built according
+  to the rules given above can be used in the following way:
+
+  * At the start of a scan, write all the static information.
+  * At each scan point, append new data from varied variables
+    and the detector to the file.
+defaults: {min: 1, binding: true, type: NX_CHAR}
+symbols:
+  nP: {doc: Number of points}
+  xDim: {doc: xDim description}
+  yDim: {doc: yDim description}
+children:
+  ENTRY:
+    node: group
+    name: {any: true}
+    class: NXentry
+    children:
+      title:
+        node: dataset
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      start_time:
+        node: dataset
+        type: NX_DATE_TIME
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      end_time:
+        node: dataset
+        type: NX_DATE_TIME
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      definition:
+        node: dataset
+        type: NX_CHAR
+        enum: [NXscan]
+        doc: 'Official NeXus NXDL schema to which this file conforms '
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      INSTRUMENT:
+        node: group
+        name: {any: true}
+        class: NXinstrument
+        children:
+          DETECTOR:
+            node: group
+            name: {any: true}
+            class: NXdetector
+            children:
+              data:
+                node: dataset
+                type: NX_INT
+                shape: [nP, xDim, yDim]
+                attributes:
+                  signal:
+                    occurs: {min: 0}
+                    type: NX_POSINT
+                    enum: ['1']
+                    via: [T19]
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+            via: [T1, T2, T5, T7]
+            provisional: [Q1, Q2, Q11]
+        via: [T1, T2, T5, T7]
+        provisional: [Q1, Q2, Q11]
+      SAMPLE:
+        node: group
+        name: {any: true}
+        class: NXsample
+        children:
+          rotation_angle:
+            node: dataset
+            type: NX_FLOAT
+            shape: [nP]
+            attributes:
+              axis:
+                occurs: {min: 0}
+                type: NX_POSINT
+                enum: ['1']
+                via: [T19]
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+        via: [T1, T2, T5, T7]
+        provisional: [Q1, Q2, Q11]
+      MONITOR:
+        node: group
+        name: {any: true}
+        class: NXmonitor
+        children:
+          data:
+            node: dataset
+            type: NX_INT
+            shape: [nP]
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+        via: [T1, T2, T5, T7]
+        provisional: [Q1, Q2, Q11]
+      DATA:
+        node: group
+        name: {any: true}
+        class: NXdata
+        children:
+          data:
+            node: link
+            target: ENTRY/INSTRUMENT/DETECTOR/data
+            via: [T1, T5, T10]
+            provisional: [Q2, Q8]
+          rotation_angle:
+            node: link
+            target: ENTRY/SAMPLE/rotation_angle
+            via: [T1, T5, T10]
+            provisional: [Q2, Q8]
+        via: [T1, T2, T5, T7]
+        provisional: [Q1, Q2, Q11]
+    via: [T1, T2, T5, T7]
+    provisional: [Q1, Q2, Q11]
+via: [T8]

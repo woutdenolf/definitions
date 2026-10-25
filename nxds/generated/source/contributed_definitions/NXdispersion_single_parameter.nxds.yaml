@@ -1,0 +1,26 @@
+nxds: '0.1'
+class: NXdispersion_single_parameter
+category: base
+extends: NXobject
+doc: A single parameter for a dispersion function
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  name:
+    node: dataset
+    type: NX_CHAR
+    doc: The name of the parameter
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  description:
+    node: dataset
+    type: NX_CHAR
+    doc: A description of what this parameter represents
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  value:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_ANY}
+    doc: The value of the parameter
+    via: [T1, T4, T7]
+    provisional: [Q1]

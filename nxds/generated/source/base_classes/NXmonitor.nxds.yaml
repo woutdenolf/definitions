@@ -1,0 +1,154 @@
+nxds: '0.1'
+class: NXmonitor
+category: base
+extends: NXcomponent
+doc: |-
+  A monitor of incident beam data.
+
+  It is similar to the :ref:`NXdata` groups containing
+  monitor data and its associated axis coordinates, e.g. time_of_flight or
+  wavelength in pulsed neutron instruments. However, it may also include
+  integrals, or scalar monitor counts, which are often used in both in both
+  pulsed and steady-state instrumentation.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  mode:
+    node: dataset
+    enum: [monitor, timer]
+    doc: |-
+      Count to a preset value based on either clock time (timer)
+      or received monitor counts (monitor).
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  start_time:
+    node: dataset
+    type: NX_DATE_TIME
+    doc: Starting time of measurement
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  end_time:
+    node: dataset
+    type: NX_DATE_TIME
+    doc: Ending time of measurement
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  preset:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_ANY}
+    doc: preset value for time or monitor
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  distance:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    deprecated: Use transformations/distance instead
+    doc: Distance of monitor from sample
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  range:
+    node: dataset
+    type: NX_FLOAT
+    shape: [2]
+    units: {category: NX_ANY}
+    doc: Range (X-axis, Time-of-flight, etc.) over which the integral was calculated
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  nominal:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_ANY}
+    doc: Nominal reading to be used for normalisation purposes.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  integral:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_ANY}
+    doc: Total integral monitor counts
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  integral_log:
+    node: group
+    class: NXlog
+    doc: Time variation of monitor counts
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  type:
+    node: dataset
+    enum: [Fission Chamber, Scintillator]
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  time_of_flight:
+    node: dataset
+    type: NX_FLOAT
+    shape: [null]
+    units: {category: NX_TIME_OF_FLIGHT}
+    doc: Time-of-flight
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  efficiency:
+    node: dataset
+    type: NX_NUMBER
+    shape: [null]
+    units: {category: NX_DIMENSIONLESS}
+    doc: Monitor efficiency
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  data:
+    node: dataset
+    type: NX_NUMBER
+    shape: {rank: dataRank}
+    units: {category: NX_ANY}
+    doc: Monitor data
+    via: [T1, T4, T7, T9, T9d]
+    provisional: [Q1]
+  sampled_fraction:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_DIMENSIONLESS}
+    doc: Proportion of incident beam sampled by the monitor (0<x<1)
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  GEOMETRY:
+    node: group
+    name: {any: true}
+    class: NXgeometry
+    deprecated: Use the field `depends_on` and :ref:`NXtransformations` to position the monitor
+      and NXoff_geometry to describe its shape instead
+    doc: Geometry of the monitor
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  count_time:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_TIME}
+    doc: |-
+      Elapsed actual counting time, can be an array of size ``np``
+      when scanning. This is not the difference of the calendar time
+      but the time the instrument was really counting, without
+      pauses or times lost due beam unavailability
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  OFF_GEOMETRY:
+    node: group
+    name: {any: true}
+    class: NXoff_geometry
+    occurs: {min: 0}
+    doc: This group describes the shape of the beam line component
+    via: [T1, T2, T6, T7]
+    provisional: [Q1, Q11]
+  depends_on:
+    node: dataset
+    type: NX_CHAR
+    doc: |-
+      The reference plane of the monitor contains the surface of the detector that faces the source
+      and is the entry point of the beam. The reference point of the monitor in the x and y axis is
+      its centre on this surface. The reference plane is orthogonal to the the z axis and the
+      reference point on this z axis is where they intersect.
+
+      .. image:: monitor/monitor.png
+        :width: 40%
+    via: [T1, T4, T7]
+    provisional: [Q1]

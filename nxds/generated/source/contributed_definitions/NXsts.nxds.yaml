@@ -1,0 +1,287 @@
+nxds: '0.1'
+class: NXsts
+category: application
+extends: NXspm
+describes: NXroot
+doc: |-
+  An application definition to describe Scanning Tunneling Spectroscopy (STS).
+
+  NXsts is an extension of NXspm.
+defaults: {min: 1, binding: true, type: NX_CHAR}
+children:
+  ENTRY:
+    node: group
+    name: {any: true}
+    class: NXentry
+    children:
+      definition:
+        node: dataset
+        enum: [NXsts]
+        doc: Name of the definition that is used for the application.
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      experiment_technique:
+        node: dataset
+        enum: [STS]
+        doc: The specific to STM experiment.
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      scan_mode:
+        node: dataset
+        enum:
+          values:
+          - {value: constant height}
+          - {value: constant current}
+          - {value: constant spacing}
+          open: true
+        doc: The mode between the tip and sample of the tunneling spectroscopy experiment.
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      INSTRUMENT:
+        node: group
+        name: {any: true}
+        class: NXinstrument
+        children:
+          lockin_amplifier:
+            node: group
+            class: NXlockin
+            occurs: {min: 0}
+            recommended: true
+            doc: The lock-in amplifier information.
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          current_sensorTAG:
+            node: group
+            name: {template: 'current_sensor{TAG}'}
+            class: NXsensor
+            occurs: {min: 0}
+            recommended: true
+            doc: Information for current sensor.
+            via: [T1, T3, T6, T7]
+            provisional: [Q1, Q3]
+          SCAN_ENVIRONMENT:
+            node: group
+            name: {any: true}
+            class: NXenvironment
+            occurs: {min: 0}
+            children:
+              SPM_SCAN_CONTROL:
+                node: group
+                name: {any: true}
+                class: NXspm_scan_control
+                occurs: {min: 0}
+                recommended: true
+                via: [T1, T2, T6, T7]
+                provisional: [Q1, Q11]
+            via: [T1, T3, T6, T7]
+            provisional: [Q1, Q3]
+          bias_spectroscopy_environment:
+            node: group
+            class: NXenvironment
+            doc: To explain bias (sweep measurement) voltage applied to the sample.
+            children:
+              SPM_BIAS_SPECTROSCOPY:
+                node: group
+                name: {any: true}
+                class: NXspm_bias_spectroscopy
+                doc: |-
+                  Setup and scan data for continuous measurement of bias-voltage on the subject of experiment
+                  vs tunneling current from probe.
+                children:
+                  SPM_POSITIONER:
+                    node: group
+                    name: {any: true}
+                    class: NXspm_positioner
+                    occurs: {min: 0}
+                    recommended: true
+                    children:
+                      z_controller:
+                        node: group
+                        class: NXpid_controller
+                        occurs: {min: 0}
+                        recommended: true
+                        via: [T1, T6, T7]
+                        provisional: [Q1]
+                    via: [T1, T2, T6, T7]
+                    provisional: [Q1, Q11]
+                via: [T1, T2, T5, T7]
+                provisional: [Q1, Q2, Q11]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T2, T5, T7]
+        provisional: [Q1, Q2, Q11]
+      reproducibility_indicators:
+        node: group
+        class: NXcollection
+        occurs: {min: 0}
+        doc: |-
+          The group's concepts hold the link to the related concepts that define the
+          reproducibility of the STM experiment.
+        children:
+          current:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_NUMBER
+            doc: |-
+              The tunneling current between tip and sample after application of bias voltage.
+              This should be a link to
+              /ENTRY[*]/INSTRUMENT[*]/current_sensorTAG/current
+
+              Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
+              square bracket would be the `exact` name of the NXentry group.
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          current_offset:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_NUMBER
+            doc: |-
+              The offset in tunneling current between tip and sample after application of bias voltage.
+              This should be a link to
+              /ENTRY[*]/INSTRUMENT[*]/current_sensorTAG[current_sensor*]/current_offset
+
+              Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
+              square bracket would be the `exact` name of the NXentry group.
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          current_gain:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_NUMBER
+            doc: |-
+              Proportional relationship between the probe output voltage and the actual
+              tunneling current when measuring the tunneling current.
+              This should be a link to
+              /ENTRY[*]/INSTRUMENT[*]/current_sensorTAG[current_sensor*]/amplifier/current_gain
+
+              Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
+              square bracket would be the `exact` name of the NXentry group.
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          BIAS_SWEEP:
+            node: group
+            name: {any: true}
+            class: NXspm_scan_control
+            occurs: {min: 0}
+            doc: |-
+              Bias sweep measurement in bias spectroscopy.
+              This should be a link to
+              /ENTRY[*]/INSTRUMENT[*]/bias_spectroscopy_environment/BIAS_SPECTROSCOPY[bias_spectroscopy]/bias_sweep
+
+              Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
+              square bracket would be the `exact` name of the NXentry group.
+            via: [T1, T3, T6, T7]
+            provisional: [Q1, Q3]
+          modulation_signal_type:
+            node: dataset
+            occurs: {min: 0}
+            doc: |-
+              This is the signal on which the modulation voltage or current will be added.
+              This should be a link to
+              /ENTRY[*]/INSTRUMENT[*]/lockin_amplifier/modulation_signal_type
+
+              Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
+              square bracket would be the `exact` name of the NXentry group.
+            via: [T0, T1, T6, T7]
+            provisional: [Q1]
+          reference_frequency:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_NUMBER
+            doc: |-
+              The frequency of the sine modulation that is used as carrier signal of input signal in lock-in.
+              This should be a link to
+              /ENTRY[*]/INSTRUMENT[*]/lockin_amplifier/reference_frequency
+
+              Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
+              square bracket would be the `exact` name of the NXentry group.
+            via: [T1, T6, T7]
+            provisional: [Q1]
+        via: [T1, T6, T7]
+        provisional: [Q1]
+      resolution_indicators:
+        node: group
+        class: NXcollection
+        occurs: {min: 0}
+        doc: |-
+          The group's concepts hold the link to the related concepts that define the
+          resolution of the STM experiment.
+        children:
+          head_temperature:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_NUMBER
+            doc: |-
+              This should be a link to
+              /entry/instrument/scan_environment/head_temperature
+
+              Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
+              square bracket would be the `exact` name of the NXentry group.
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          cryo_bottom_temperature:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_NUMBER
+            doc: |-
+              This should be a link to
+              /entry/instrument/scan_environment/cryo_bottom_temperature
+
+              Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
+              square bracket would be the `exact` name of the NXentry group.
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          cryo_shield_temperature:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_NUMBER
+            doc: |-
+              This should be a link to
+              /entry/instrument/scan_environment/cryo_shield_temperature
+
+              Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
+              square bracket would be the `exact` name of the NXentry group.
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          BIAS_SWEEP:
+            node: group
+            name: {any: true}
+            class: NXspm_scan_control
+            occurs: {min: 0}
+            doc: |-
+              This should be a link to
+              /ENTRY[*]/INSTRUMENT[*]/bias_spectroscopy_environment/SPM_BIAS_SPECTROSCOPY[bias_spectroscopy]/bias_sweep
+
+              Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
+              square bracket would be the `exact` name of the NXentry group.
+            via: [T1, T3, T6, T7]
+            provisional: [Q1, Q3]
+          modulation_signal_type:
+            node: dataset
+            occurs: {min: 0}
+            doc: |-
+              This is the signal on which the modulation voltage or current will be added.
+              This should be a link to
+              /ENTRY[*]/INSTRUMENT[*]/lockin_amplifier/modulation_signal_type
+
+              Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
+              square bracket would be the `exact` name of the NXentry group.
+            via: [T0, T1, T6, T7]
+            provisional: [Q1]
+          modulation_frequency:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_NUMBER
+            doc: |-
+              The frequency of the sine modulation that is used to modulate the signal in lock-in.
+              This should be a link to
+              /ENTRY[*]/INSTRUMENT[*]/lockin_amplifier/modulation_frequency
+
+              Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
+            via: [T1, T6, T7]
+            provisional: [Q1]
+        via: [T1, T6, T7]
+        provisional: [Q1]
+    via: [T1, T2, T5, T7]
+    provisional: [Q1, Q2, Q11]
+via: [T8]

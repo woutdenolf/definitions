@@ -1,0 +1,80 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/COLLECTION"},
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"node": "group", "ref": "NXobject/LOG"},
+    {"node": "group", "ref": "NXobject/NOTE"},
+    {"node": "group", "ref": "NXobject/PARAMETERS"},
+    {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+    {"node": "dataset", "ref": "NXobject/identifierNAME"},
+    {"node": "dataset", "ref": "NXcomponent/applied"},
+    {"node": "dataset", "ref": "NXcomponent/name"},
+    {"node": "dataset", "ref": "NXcomponent/description"},
+    {"node": "dataset", "ref": "NXcomponent/inputs"},
+    {"node": "dataset", "ref": "NXcomponent/outputs"},
+    {"node": "group", "ref": "NXcomponent/FABRICATION"},
+    {"node": "group", "ref": "NXcomponent/PROGRAM"},
+    {"node": "group", "ref": "NXcomponent/ENVIRONMENT"},
+    {"node": "dataset", "ref": "NXcomponent/depends_on"},
+    {"node": "group", "ref": "NXcomponent/TRANSFORMATIONS"},
+    {"declared_by": "NXspindispersion", "docs": ["NXspindispersion/type"], "id": "type", "name": {"exact": "type"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXspindispersion", "docs": ["NXspindispersion/figure_of_merit"], "id": "figure_of_merit", "name": {"exact": "figure_of_merit"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_FLOAT", "units": {"category": "NX_DIMENSIONLESS"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXspindispersion", "docs": ["NXspindispersion/shermann_function"], "id": "shermann_function", "name": {"exact": "shermann_function"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_FLOAT", "units": {"category": "NX_DIMENSIONLESS"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXspindispersion", "docs": ["NXspindispersion/scattering_energy"], "id": "scattering_energy", "name": {"exact": "scattering_energy"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_FLOAT", "units": {"category": "NX_ENERGY"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXspindispersion", "docs": ["NXspindispersion/scattering_angle"], "id": "scattering_angle", "name": {"exact": "scattering_angle"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_FLOAT", "units": {"category": "NX_ANGLE"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXspindispersion", "docs": ["NXspindispersion/scattering_target"], "id": "scattering_target", "name": {"exact": "scattering_target"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4", "T7"]},
+    {"class": "NXhistory", "declared_by": "NXspindispersion", "docs": ["NXspindispersion/scattering_target_history"], "id": "scattering_target_history", "name": {"exact": "scattering_target_history"}, "node": "group", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "specialisation": "NXspindispersion/scattering_target_history", "via": ["T1", "T4", "T7"]},
+    {"class": "NXdeflector", "declared_by": "NXspindispersion", "docs": ["NXspindispersion/DEFLECTOR"], "id": "DEFLECTOR", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q11"], "recommended": false, "via": ["T1", "T2", "T4", "T7"]},
+    {"class": "NXelectromagnetic_lens", "declared_by": "NXspindispersion", "docs": ["NXspindispersion/ELECTROMAGNETIC_LENS"], "id": "ELECTROMAGNETIC_LENS", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q11"], "recommended": false, "via": ["T1", "T2", "T4", "T7"]}
+  ],
+  "class": "NXspindispersion",
+  "extends": "NXcomponent",
+  "lossy": [],
+  "provisional": [],
+  "require": [],
+  "source": "base_classes/NXspindispersion.nxdl.xml",
+  "status": "base",
+  "symbols": [],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"},
+  "via": []
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {
+  "NXspindispersion/scattering_target_history": {
+   "attributes": [
+     {"ref": "NXobject@default"}
+   ],
+   "children": [
+     {"node": "group", "ref": "NXobject/COLLECTION"},
+     {"node": "group", "ref": "NXobject/DATA"},
+     {"node": "group", "ref": "NXobject/LOG"},
+     {"node": "group", "ref": "NXhistory/NOTE"},
+     {"node": "group", "ref": "NXobject/PARAMETERS"},
+     {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+     {"node": "dataset", "ref": "NXhistory/identifierNAME"},
+     {"node": "group", "ref": "NXhistory/ACTIVITY"},
+     {"class": "NXactivity", "declared_by": "NXspindispersion", "docs": ["NXhistory/ACTIVITY", "NXspindispersion/scattering_target_history/preparation"], "id": "preparation", "name": {"exact": "preparation"}, "node": "group", "occurs": {"max": 1, "min": 1}, "provisional": ["Q1", "Q4", "Q11"], "recommended": false, "refines": "ACTIVITY", "via": ["T1", "T2", "T4", "T6", "T7", "T18"]}
+   ],
+   "class": "NXhistory",
+   "declared_by": "NXspindispersion",
+   "id": "NXspindispersion/scattering_target_history",
+   "require": [],
+   "symbols": [],
+   "undeclared": {"attribute": "report", "dataset": "report", "group": "report"}
+  }
+ }
+}

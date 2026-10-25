@@ -1,0 +1,4 @@
+description: >
+  Numeric enumeration values typed after resolution (§5.2.7): `mode` = 4 is
+  not 3 or 5 (ENUM); in `/entry2`, `mode` = 5 stored as int8 is allowed.
+capabilities: []

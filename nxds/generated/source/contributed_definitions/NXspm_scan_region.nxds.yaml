@@ -1,0 +1,70 @@
+nxds: '0.1'
+class: NXspm_scan_region
+category: base
+extends: NXobject
+doc: |-
+  The scan region is the area of phase space or sub-phase space where the scan is
+  performed. The region could be N-dimensional and is defined by the minimum and
+  maximum values of the scan axes.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  scan_offset_valueN:
+    node: dataset
+    name: {template: 'scan_offset_value{N}'}
+    type: NX_NUMBER
+    units: {category: NX_ANY}
+    doc: |-
+      The offset of center of the scan region from the origin along the specific scan axis.
+
+      'N' denotes the name of the specific scan axis. (Offset, start and end positions are related)
+    via: [T1, T3, T4, T7]
+    provisional: [Q1, Q3]
+  scan_rangeN:
+    node: dataset
+    name: {template: 'scan_range{N}'}
+    type: NX_NUMBER
+    units: {category: NX_ANY}
+    doc: |-
+      The range of the scan is the difference start and end values of the scan region
+      along the dimension 'N'.
+    via: [T1, T3, T4, T7]
+    provisional: [Q1, Q3]
+  scan_angleN:
+    node: dataset
+    name: {template: 'scan_angle{N}'}
+    type: NX_NUMBER
+    units: {category: NX_ANGLE}
+    doc: |-
+      The orientation of the scan region or subspace. Usually, the scan_offset and scan_range are enough
+      to define the scan region. This field defines how the spatial space is oriented with respect to
+      the frame of reference.
+
+      Rename the field describing the angle with an axis of the spatial space (e.g. scan_angle_x).
+    via: [T1, T3, T4, T7]
+    provisional: [Q1, Q3]
+  scan_startN:
+    node: dataset
+    name: {template: 'scan_start{N}'}
+    type: NX_NUMBER
+    units: {category: NX_ANY}
+    doc: |-
+      The start of the scan is the starting point of the scan region (phase space or sub-phase space)
+      for each independent scan axis.
+
+      For N-dimensional, it is a list of N numbers.
+    via: [T1, T3, T4, T7]
+    provisional: [Q1, Q3]
+  scan_endN:
+    node: dataset
+    name: {template: 'scan_end{N}'}
+    type: NX_NUMBER
+    units: {category: NX_ANY}
+    doc: |-
+      The end of the scan is the ending point of the scan region (phase space or sub-phase space)
+      for each independent scan axis.
+
+      Note: The scan_offset and scan_range are equivalent to the scan_start and scan_end.
+
+      For N-dimensional, it is a list of N numbers.
+    via: [T1, T3, T4, T7]
+    provisional: [Q1, Q3]

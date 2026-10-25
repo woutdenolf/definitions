@@ -1,0 +1,65 @@
+nxds: '0.1'
+class: NXspatial_filter
+category: base
+extends: NXparameters
+doc: |-
+  Base class for a spatial filter for objects within a region-of-interest (ROI).
+
+  Objects can be points, objects composed from other geometric primitives,
+  or objects.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+symbols:
+  n_hexahedra: {doc: Number of hexahedra.}
+  n_cylinders: {doc: Number of cylinders.}
+  n_ellipsoids: {doc: Number of ellipsoids.}
+  n_polyhedra: {doc: Number of polyhedra.}
+children:
+  windowing_method:
+    node: dataset
+    type: NX_CHAR
+    enum: [entire_dataset, union_of_primitives, bitmask]
+    doc: |-
+      Qualitative statement which describes the logical operations
+      that define which objects will be included and which excluded:
+
+      * entire_dataset, no filter is applied, all objects are included.
+      * union_of_primitives, a filter with (possibly non-axis-aligned) geometric
+        primitives. Objects in or on the surface of the primitives are included.
+        All other objects are excluded.
+      * bitmask, a boolean array whose bits encode with 1 which objects
+        are included. Bits set to zero encode which objects are excluded.
+
+      Users of python can use the bitfield operations of the numpy package to work with bitfields.
+      Multiple instances of NXcg base classes are used to compose a union_of_primitives.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  CG_HEXAHEDRON:
+    node: group
+    name: {any: true}
+    class: NXcg_hexahedron
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  CG_CYLINDER:
+    node: group
+    name: {any: true}
+    class: NXcg_cylinder
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  CG_ELLIPSOID:
+    node: group
+    name: {any: true}
+    class: NXcg_ellipsoid
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  CG_POLYHEDRON:
+    node: group
+    name: {any: true}
+    class: NXcg_polyhedron
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  CS_FILTER_BOOLEAN_MASK:
+    node: group
+    name: {any: true}
+    class: NXcs_filter_boolean_mask
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]

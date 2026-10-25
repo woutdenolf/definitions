@@ -1,0 +1,879 @@
+nxds: '0.1'
+class: NXsnshisto
+category: application
+describes: NXroot
+doc: This is a definition for histogram data from Spallation Neutron Source (SNS) at ORNL.
+defaults: {min: 1, binding: true, type: NX_CHAR}
+children:
+  ENTRY:
+    node: group
+    name: {any: true}
+    class: NXentry
+    occurs: {min: 1}
+    children:
+      DASlogs:
+        node: group
+        class: NXcollection
+        doc: Details of all logs, both from cvinfo file and from HistoTool (frequency and
+          proton_charge).
+        children:
+          LOG:
+            node: group
+            name: {any: true}
+            class: NXlog
+            occurs: {min: 1}
+            children:
+              average_value:
+                node: dataset
+                type: NX_FLOAT
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              average_value_error:
+                node: dataset
+                occurs: {min: 0}
+                type: NX_FLOAT
+                deprecated: see https://github.com/nexusformat/definitions/issues/821
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              average_value_errors:
+                node: dataset
+                type: NX_FLOAT
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              description:
+                node: dataset
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+              duration:
+                node: dataset
+                type: NX_FLOAT
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              maximum_value:
+                node: dataset
+                type: NX_FLOAT
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              minimum_value:
+                node: dataset
+                type: NX_FLOAT
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              time:
+                node: dataset
+                type: NX_FLOAT
+                shape: [nvalue]
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              value:
+                node: dataset
+                type: NX_FLOAT
+                shape: [nvalue]
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+            via: [T1, T2, T6, T7]
+            provisional: [Q1, Q11]
+          POSITIONER:
+            node: group
+            name: {any: true}
+            class: NXpositioner
+            occurs: {min: 0}
+            doc: Motor logs from cvinfo file.
+            children:
+              average_value:
+                node: dataset
+                type: NX_FLOAT
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              average_value_error:
+                node: dataset
+                occurs: {min: 0}
+                type: NX_FLOAT
+                deprecated: see https://github.com/nexusformat/definitions/issues/821
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              average_value_errors:
+                node: dataset
+                type: NX_FLOAT
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              description:
+                node: dataset
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+              duration:
+                node: dataset
+                type: NX_FLOAT
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              maximum_value:
+                node: dataset
+                type: NX_FLOAT
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              minimum_value:
+                node: dataset
+                type: NX_FLOAT
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              time:
+                node: dataset
+                type: NX_FLOAT
+                shape: [numvalue]
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              value:
+                node: dataset
+                type: NX_FLOAT
+                shape: [numvalue]
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+            via: [T1, T2, T6, T7]
+            provisional: [Q1, Q11]
+        via: [T1, T3b, T5, T7]
+        provisional: [Q1, Q2]
+      SNSHistoTool:
+        node: group
+        class: NXnote
+        children:
+          SNSbanking_file_name:
+            node: dataset
+            via: [T0, T1, T3b, T5, T7]
+            provisional: [Q1, Q2]
+          SNSmapping_file_name:
+            node: dataset
+            via: [T0, T1, T3b, T5, T7]
+            provisional: [Q1, Q2]
+          author:
+            node: dataset
+            via: [T0, T1, T5, T7]
+            provisional: [Q1, Q2]
+          command1:
+            node: dataset
+            doc: Command string for event2histo_nxl.
+            via: [T0, T1, T5, T7]
+            provisional: [Q1, Q2]
+          date:
+            node: dataset
+            via: [T0, T1, T5, T7]
+            provisional: [Q1, Q2]
+          description:
+            node: dataset
+            via: [T0, T1, T5, T7]
+            provisional: [Q1, Q2]
+          version:
+            node: dataset
+            via: [T0, T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T3b, T5, T7]
+        provisional: [Q1, Q2]
+      DATA:
+        node: group
+        name: {any: true}
+        class: NXdata
+        occurs: {min: 1}
+        children:
+          data:
+            node: link
+            target: ENTRY/INSTRUMENT/DETECTOR/data
+            via: [T1, T5, T10]
+            provisional: [Q2, Q8]
+          data_x_time_of_flight:
+            node: link
+            target: ENTRY/INSTRUMENT/DETECTOR/data_x_time_of_flight
+            via: [T1, T5, T10]
+            provisional: [Q2, Q8]
+          data_x_y:
+            node: link
+            target: ENTRY/INSTRUMENT/DETECTOR/data_x_y
+            via: [T1, T5, T10]
+            provisional: [Q2, Q8]
+          data_y_time_of_flight:
+            node: link
+            target: ENTRY/INSTRUMENT/DETECTOR/data_y_time_of_flight
+            via: [T1, T5, T10]
+            provisional: [Q2, Q8]
+          pixel_id:
+            node: link
+            target: ENTRY/INSTRUMENT/DETECTOR/pixel_id
+            via: [T1, T5, T10]
+            provisional: [Q2, Q8]
+          time_of_flight:
+            node: link
+            target: ENTRY/INSTRUMENT/DETECTOR/time_of_flight
+            via: [T1, T5, T10]
+            provisional: [Q2, Q8]
+          total_counts:
+            node: link
+            target: ENTRY/INSTRUMENT/DETECTOR/total_counts
+            via: [T1, T5, T10]
+            provisional: [Q2, Q8]
+          x_pixel_offset:
+            node: link
+            target: ENTRY/INSTRUMENT/DETECTOR/x_pixel_offset
+            via: [T1, T5, T10]
+            provisional: [Q2, Q8]
+          y_pixel_offset:
+            node: link
+            target: ENTRY/INSTRUMENT/DETECTOR/y_pixel_offset
+            via: [T1, T5, T10]
+            provisional: [Q2, Q8]
+        via: [T1, T2, T6, T7]
+        provisional: [Q1, Q11]
+      collection_identifier:
+        node: dataset
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      collection_title:
+        node: dataset
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      definition:
+        node: dataset
+        enum: [NXsnshisto]
+        doc: Official NXDL schema after this file goes to applications.
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      duration:
+        node: dataset
+        type: NX_FLOAT
+        units: {category: NX_TIME}
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      end_time:
+        node: dataset
+        type: NX_DATE_TIME
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      entry_identifier:
+        node: dataset
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      experiment_identifier:
+        node: dataset
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      instrument:
+        node: group
+        class: NXinstrument
+        children:
+          SNS:
+            node: group
+            class: NXsource
+            children:
+              frequency:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_FREQUENCY}
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              name:
+                node: dataset
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+              probe:
+                node: dataset
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+              type:
+                node: dataset
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T3b, T5, T7]
+            provisional: [Q1, Q2]
+          SNSdetector_calibration_id:
+            node: dataset
+            doc: Detector calibration id from DAS.
+            via: [T0, T1, T3b, T5, T7]
+            provisional: [Q1, Q2]
+          SNSgeometry_file_name:
+            node: dataset
+            via: [T0, T1, T3b, T5, T7]
+            provisional: [Q1, Q2]
+          SNStranslation_service:
+            node: dataset
+            via: [T0, T1, T3b, T5, T7]
+            provisional: [Q1, Q2]
+          DETECTOR:
+            node: group
+            name: {any: true}
+            class: NXdetector
+            occurs: {min: 1}
+            children:
+              azimuthal_angle:
+                node: dataset
+                type: NX_FLOAT
+                shape: [numx, numy]
+                units: {category: NX_ANGLE}
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              data:
+                node: dataset
+                type: NX_UINT
+                shape: [numx, numy, numtof]
+                attributes:
+                  signal:
+                    occurs: {min: 0}
+                    type: NX_POSINT
+                    enum: ['1']
+                    via: [T19]
+                  axes:
+                    occurs: {min: 0}
+                    type: NX_CHAR
+                    enum: ['x_pixel_offset,y_pixel_offset,time_of_flight']
+                    via: [T19]
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              data_x_time_of_flight:
+                node: dataset
+                type: NX_UINT
+                shape: [numx, numtof]
+                attributes:
+                  signal:
+                    occurs: {min: 0}
+                    type: NX_POSINT
+                    enum: ['3']
+                    via: [T19]
+                  axes:
+                    occurs: {min: 0}
+                    type: NX_CHAR
+                    enum: ['x_pixel_offset,time_of_flight']
+                    via: [T19]
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              data_x_y:
+                node: dataset
+                type: NX_UINT
+                shape: [numx, numy]
+                attributes:
+                  signal:
+                    occurs: {min: 0}
+                    type: NX_POSINT
+                    enum: ['2']
+                    via: [T19]
+                  axes:
+                    occurs: {min: 0}
+                    type: NX_CHAR
+                    enum: ['x_pixel_offset,y_pixel_offset']
+                    via: [T19]
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              data_y_time_of_flight:
+                node: dataset
+                type: NX_UINT
+                shape: [numy, numtof]
+                attributes:
+                  signal:
+                    occurs: {min: 0}
+                    type: NX_POSINT
+                    enum: ['4']
+                    via: [T19]
+                  axes:
+                    occurs: {min: 0}
+                    type: NX_CHAR
+                    enum: ['y_pixel_offset,time_of_flight']
+                    via: [T19]
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              distance:
+                node: dataset
+                type: NX_FLOAT
+                shape: [numx, numy]
+                units: {category: NX_LENGTH}
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              origin:
+                node: group
+                class: NXgeometry
+                children:
+                  orientation:
+                    node: group
+                    class: NXorientation
+                    children:
+                      value:
+                        node: dataset
+                        type: NX_FLOAT
+                        shape: [6]
+                        doc: Six out of nine rotation parameters.
+                        via: [T1, T5, T7, T9]
+                        provisional: [Q1, Q2]
+                    via: [T1, T5, T7]
+                    provisional: [Q1, Q2]
+                  shape:
+                    node: group
+                    class: NXshape
+                    children:
+                      description:
+                        node: dataset
+                        via: [T0, T1, T5, T7]
+                        provisional: [Q1, Q2]
+                      shape:
+                        node: dataset
+                        via: [T0, T1, T5, T7]
+                        provisional: [Q1, Q2]
+                      size:
+                        node: dataset
+                        type: NX_FLOAT
+                        shape: [3]
+                        units: {category: NX_LENGTH}
+                        via: [T1, T5, T7, T9]
+                        provisional: [Q1, Q2]
+                    via: [T1, T5, T7]
+                    provisional: [Q1, Q2]
+                  translation:
+                    node: group
+                    class: NXtranslation
+                    children:
+                      distance:
+                        node: dataset
+                        type: NX_FLOAT
+                        shape: [3]
+                        units: {category: NX_LENGTH}
+                        via: [T1, T5, T7, T9]
+                        provisional: [Q1, Q2]
+                    via: [T1, T5, T7]
+                    provisional: [Q1, Q2]
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              pixel_id:
+                node: dataset
+                type: NX_UINT
+                shape: [numx, numy]
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              polar_angle:
+                node: dataset
+                type: NX_FLOAT
+                shape: [numx, numy]
+                units: {category: NX_ANGLE}
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              time_of_flight:
+                node: dataset
+                type: NX_FLOAT
+                shape:
+                - {expr: numtof+1}
+                units: {category: NX_TIME_OF_FLIGHT}
+                attributes:
+                  axis:
+                    occurs: {min: 0}
+                    type: NX_POSINT
+                    enum: ['3']
+                    via: [T19]
+                  primary:
+                    occurs: {min: 0}
+                    type: NX_POSINT
+                    enum: ['1']
+                    via: [T19]
+                via: [T1, T5, T7, T9, T9b]
+                provisional: [Q1, Q2]
+              total_counts:
+                node: dataset
+                type: NX_UINT
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              x_pixel_offset:
+                node: dataset
+                type: NX_FLOAT
+                shape: [numx]
+                units: {category: NX_LENGTH}
+                attributes:
+                  axis:
+                    occurs: {min: 0}
+                    type: NX_POSINT
+                    enum: ['1']
+                    via: [T19]
+                  primary:
+                    occurs: {min: 0}
+                    type: NX_POSINT
+                    enum: ['1']
+                    via: [T19]
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              y_pixel_offset:
+                node: dataset
+                type: NX_FLOAT
+                shape: [numy]
+                units: {category: NX_LENGTH}
+                attributes:
+                  axis:
+                    occurs: {min: 0}
+                    type: NX_POSINT
+                    enum: ['2']
+                    via: [T19]
+                  primary:
+                    occurs: {min: 0}
+                    type: NX_POSINT
+                    enum: ['1']
+                    via: [T19]
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+            via: [T1, T2, T6, T7]
+            provisional: [Q1, Q11]
+          beamline:
+            node: dataset
+            via: [T0, T1, T5, T7]
+            provisional: [Q1, Q2]
+          DISK_CHOPPER:
+            node: group
+            name: {any: true}
+            class: NXdisk_chopper
+            occurs: {min: 0}
+            doc: |-
+              Original specification called for NXchopper,
+              which is not a valid NeXus base class.
+              Select either NXdisk_chopper or NXfermi_chopper, as appropriate.
+            children:
+              distance:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_LENGTH}
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T2, T6, T7]
+            provisional: [Q1, Q11]
+          FERMI_CHOPPER:
+            node: group
+            name: {any: true}
+            class: NXfermi_chopper
+            occurs: {min: 0}
+            doc: |-
+              Original specification called for NXchopper,
+              which is not a valid NeXus base class.
+              Select either NXdisk_chopper or NXfermi_chopper, as appropriate.
+            children:
+              distance:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_LENGTH}
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T2, T6, T7]
+            provisional: [Q1, Q11]
+          moderator:
+            node: group
+            class: NXmoderator
+            children:
+              coupling_material:
+                node: dataset
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+              distance:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_LENGTH}
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              temperature:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_TEMPERATURE}
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              type:
+                node: dataset
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          name:
+            node: dataset
+            via: [T0, T1, T5, T7]
+            provisional: [Q1, Q2]
+          APERTURE:
+            node: group
+            name: {any: true}
+            class: NXaperture
+            occurs: {min: 0}
+            children:
+              origin:
+                node: group
+                class: NXgeometry
+                children:
+                  orientation:
+                    node: group
+                    class: NXorientation
+                    children:
+                      value:
+                        node: dataset
+                        type: NX_FLOAT
+                        shape: [6]
+                        doc: Six out of nine rotation parameters.
+                        via: [T1, T5, T7, T9]
+                        provisional: [Q1, Q2]
+                    via: [T1, T5, T7]
+                    provisional: [Q1, Q2]
+                  shape:
+                    node: group
+                    class: NXshape
+                    children:
+                      description:
+                        node: dataset
+                        via: [T0, T1, T5, T7]
+                        provisional: [Q1, Q2]
+                      shape:
+                        node: dataset
+                        via: [T0, T1, T5, T7]
+                        provisional: [Q1, Q2]
+                      size:
+                        node: dataset
+                        type: NX_FLOAT
+                        shape: [3]
+                        units: {category: NX_LENGTH}
+                        via: [T1, T5, T7, T9]
+                        provisional: [Q1, Q2]
+                    via: [T1, T5, T7]
+                    provisional: [Q1, Q2]
+                  translation:
+                    node: group
+                    class: NXtranslation
+                    children:
+                      distance:
+                        node: dataset
+                        type: NX_FLOAT
+                        shape: [3]
+                        units: {category: NX_LENGTH}
+                        via: [T1, T5, T7, T9]
+                        provisional: [Q1, Q2]
+                    via: [T1, T5, T7]
+                    provisional: [Q1, Q2]
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              x_pixel_offset:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_LENGTH}
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T2, T6, T7]
+            provisional: [Q1, Q11]
+          ATTENUATOR:
+            node: group
+            name: {any: true}
+            class: NXattenuator
+            occurs: {min: 0}
+            children:
+              distance:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_LENGTH}
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T2, T6, T7]
+            provisional: [Q1, Q11]
+          POLARIZER:
+            node: group
+            name: {any: true}
+            class: NXpolarizer
+            occurs: {min: 0}
+            via: [T1, T2, T6, T7]
+            provisional: [Q1, Q11]
+          CRYSTAL:
+            node: group
+            name: {any: true}
+            class: NXcrystal
+            occurs: {min: 0}
+            children:
+              origin:
+                node: group
+                class: NXgeometry
+                children:
+                  description:
+                    node: dataset
+                    via: [T0, T1, T5, T7]
+                    provisional: [Q1, Q2]
+                  orientation:
+                    node: group
+                    class: NXorientation
+                    children:
+                      value:
+                        node: dataset
+                        type: NX_FLOAT
+                        shape: [6]
+                        doc: Six out of nine rotation parameters.
+                        via: [T1, T5, T7, T9]
+                        provisional: [Q1, Q2]
+                    via: [T1, T5, T7]
+                    provisional: [Q1, Q2]
+                  shape:
+                    node: group
+                    class: NXshape
+                    children:
+                      description:
+                        node: dataset
+                        via: [T0, T1, T5, T7]
+                        provisional: [Q1, Q2]
+                      shape:
+                        node: dataset
+                        via: [T0, T1, T5, T7]
+                        provisional: [Q1, Q2]
+                      size:
+                        node: dataset
+                        type: NX_FLOAT
+                        units: {category: NX_LENGTH}
+                        via: [T1, T5, T7]
+                        provisional: [Q1, Q2]
+                    via: [T1, T5, T7]
+                    provisional: [Q1, Q2]
+                  translation:
+                    node: group
+                    class: NXtranslation
+                    children:
+                      distance:
+                        node: dataset
+                        type: NX_FLOAT
+                        shape: [3]
+                        units: {category: NX_LENGTH}
+                        via: [T1, T5, T7, T9]
+                        provisional: [Q1, Q2]
+                    via: [T1, T5, T7]
+                    provisional: [Q1, Q2]
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              type:
+                node: dataset
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+              wavelength:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_WAVELENGTH}
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T2, T6, T7]
+            provisional: [Q1, Q11]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      MONITOR:
+        node: group
+        name: {any: true}
+        class: NXmonitor
+        occurs: {min: 0}
+        children:
+          data:
+            node: dataset
+            type: NX_UINT
+            shape: [numtimechannels]
+            attributes:
+              signal:
+                occurs: {min: 0}
+                type: NX_POSINT
+                enum: ['1']
+                via: [T19]
+              axes:
+                occurs: {min: 0}
+                type: NX_CHAR
+                enum: [time_of_flight]
+                via: [T19]
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+          distance:
+            node: dataset
+            type: NX_FLOAT
+            units: {category: NX_LENGTH}
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          mode:
+            node: dataset
+            via: [T0, T1, T5, T7]
+            provisional: [Q1, Q2]
+          time_of_flight:
+            node: dataset
+            type: NX_FLOAT
+            shape:
+            - {expr: numtimechannels+1}
+            units: {category: NX_TIME}
+            via: [T1, T5, T7, T9, T9b]
+            provisional: [Q1, Q2]
+        via: [T1, T2, T6, T7]
+        provisional: [Q1, Q11]
+      notes:
+        node: dataset
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      proton_charge:
+        node: dataset
+        type: NX_FLOAT
+        units: {category: NX_CHARGE}
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      raw_frames:
+        node: dataset
+        type: NX_INT
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      run_number:
+        node: dataset
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      sample:
+        node: group
+        class: NXsample
+        children:
+          changer_position:
+            node: dataset
+            via: [T0, T1, T5, T7]
+            provisional: [Q1, Q2]
+          holder:
+            node: dataset
+            via: [T0, T1, T5, T7]
+            provisional: [Q1, Q2]
+          identifier:
+            node: dataset
+            via: [T0, T1, T5, T7]
+            provisional: [Q1, Q2]
+          name:
+            node: dataset
+            doc: Descriptive name of sample
+            via: [T0, T1, T5, T7]
+            provisional: [Q1, Q2]
+          nature:
+            node: dataset
+            via: [T0, T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      start_time:
+        node: dataset
+        type: NX_DATE_TIME
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      title:
+        node: dataset
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      total_counts:
+        node: dataset
+        type: NX_UINT
+        units: {category: NX_UNITLESS}
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      total_uncounted_counts:
+        node: dataset
+        type: NX_UINT
+        units: {category: NX_UNITLESS}
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      USER:
+        node: group
+        name: {any: true}
+        class: NXuser
+        occurs: {min: 1}
+        children:
+          facility_user_id:
+            node: dataset
+            via: [T0, T1, T5, T7]
+            provisional: [Q1, Q2]
+          name:
+            node: dataset
+            via: [T0, T1, T5, T7]
+            provisional: [Q1, Q2]
+          role:
+            node: dataset
+            via: [T0, T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T2, T6, T7]
+        provisional: [Q1, Q11]
+    via: [T1, T2, T6, T7]
+    provisional: [Q1, Q11]
+via: [T8]

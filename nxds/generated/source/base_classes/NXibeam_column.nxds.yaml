@@ -1,0 +1,192 @@
+nxds: '0.1'
+class: NXibeam_column
+category: base
+extends: NXcomponent
+doc: |-
+  Base class for a set of components equipping an instrument with FIB capabilities.
+
+  Focused-ion-beam (FIB) capabilities turn especially scanning electron microscopes
+  into specimen preparation labs. FIB is a material preparation technique whereby
+  portions of the sample are illuminated with a focused ion beam with controlled
+  intensity. The beam is controlled such that it is intense, focused, and equipped
+  with sufficient ion having sufficient momentum to remove material in a controlled
+  manner.
+
+  The fact that an electron microscope with FIB capabilities achieves these functionalities
+  via a second component (aka the ion gun) that has its own relevant control circuits,
+  focusing lenses, and other components, warrants the definition of an own base class
+  to group these components and distinguish them from the lenses and components for creating
+  and shaping the electron beam.
+
+  For more details about the relevant physics and application examples
+  consult the literature, for example:
+
+  * `L. A. Giannuzzi et al. <https://doi.org/10.1007/b101190>`_
+  * `E. I. Preiß et al. <https://link.springer.com/content/pdf/10.1557/s43578-020-00045-w.pdf>`_
+  * `J. F. Ziegler et al. <https://www.sciencedirect.com/science/article/pii/S0168583X10001862>`_
+  * `J. Lili <https://www.osti.gov/servlets/purl/924801>`_
+  * `N. Yao <https://doi.org/10.1017/CBO9780511600302>`_
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  operation_mode:
+    node: dataset
+    type: NX_CHAR
+    doc: |-
+      Tech-partner, microscope-, and control-software-specific name of the
+      specific operation mode how the ibeam_column and its components are
+      controlled to achieve specific illumination conditions.
+
+      In many cases the users of an instrument do not or can not be expected to know
+      all intricate spatiotemporal dynamics of their hardware. Instead, they rely on
+      assumptions that the instrument, its control software, and components work as
+      expected to focus on their research questions.
+
+      For these cases, having a place for documenting the operation_mode is useful
+      in as much as at least some constraints on how the illumination conditions were
+      is documented.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  ion_source:
+    node: group
+    class: NXsource
+    doc: The source which creates the ion beam.
+    children:
+      name:
+        node: dataset
+        type: NX_CHAR
+        doc: Given name/alias for the ion gun.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      emitter_type:
+        node: dataset
+        type: NX_CHAR
+        enum: [liquid_metal, plasma, gas_field, other]
+        doc: |-
+          Emitter type used to create the ion beam.
+
+          If the emitter type is other, give further
+          details in the description field.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      description:
+        node: dataset
+        type: NX_CHAR
+        doc: |-
+          Ideally, a (globally) unique persistent identifier, link,
+          or text to a resource which gives further details.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      probe:
+        node: group
+        class: NXatom
+        doc: |-
+          Which elements, ions, or molecular ions form the beam.
+          Examples are gallium, helium, neon, argon, krypton,
+          or xenon, O2+.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      flux:
+        node: dataset
+        type: NX_NUMBER
+        units: {category: NX_ANY}
+        doc: Average/nominal flux
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      brightness:
+        node: dataset
+        type: NX_NUMBER
+        units: {category: NX_ANY}
+        doc: Average/nominal brightness
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      current:
+        node: dataset
+        type: NX_NUMBER
+        units: {category: NX_CURRENT}
+        doc: Charge current
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      voltage:
+        node: dataset
+        type: NX_NUMBER
+        units: {category: NX_VOLTAGE}
+        doc: |-
+          Ion acceleration voltage upon source exit and
+          entering the vacuum flight path.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      ion_energy_profile:
+        node: dataset
+        type: NX_NUMBER
+        units: {category: NX_ENERGY}
+        doc: To be defined more specifically. Community suggestions are welcome.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  ELECTROMAGNETIC_LENS:
+    node: group
+    name: {any: true}
+    class: NXelectromagnetic_lens
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  APERTURE:
+    node: group
+    name: {any: true}
+    class: NXaperture
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  DEFLECTOR:
+    node: group
+    name: {any: true}
+    class: NXdeflector
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  blankerID:
+    node: group
+    name: {template: 'blanker{ID}'}
+    class: NXdeflector
+    doc: A component for blanking the ion beam or generating pulsed ion beams.
+    via: [T1, T3, T4, T7]
+    provisional: [Q1, Q3]
+  MONOCHROMATOR:
+    node: group
+    name: {any: true}
+    class: NXmonochromator
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  SENSOR:
+    node: group
+    name: {any: true}
+    class: NXsensor
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  ACTUATOR:
+    node: group
+    name: {any: true}
+    class: NXactuator
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  BEAM:
+    node: group
+    name: {any: true}
+    class: NXbeam
+    doc: |-
+      Individual characterization results for the position, shape,
+      and characteristics of the ion beam.
+
+      :ref:`NXtransformations` should be used to specify the location or position
+      at which details about the ion beam are probed.
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  COMPONENT:
+    node: group
+    name: {any: true}
+    class: NXcomponent
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  scan_controller:
+    node: group
+    class: NXscan_controller
+    via: [T1, T4, T7]
+    provisional: [Q1]

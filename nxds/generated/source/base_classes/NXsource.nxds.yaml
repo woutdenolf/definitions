@@ -1,0 +1,357 @@
+nxds: '0.1'
+class: NXsource
+category: base
+extends: NXcomponent
+doc: |-
+  Radiation source emitting a beam.
+
+  Examples include particle sources (electrons, neutrons, protons) or sources for electromagnetic radiation (photons).
+  This base class can also be used to describe neutron or x-ray storage ring/facilities.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  distance:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    doc: |-
+      Effective distance from sample
+      Distance as seen by radiation from sample. This number should be negative
+      to signify that it is upstream of the sample.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  name:
+    node: dataset
+    doc: Name of source
+    attributes:
+      short_name:
+        doc: short name for source, perhaps the acronym
+        via: [T0, T1, T4]
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  type:
+    node: dataset
+    enum:
+      values:
+      - {value: Spallation Neutron Source}
+      - {value: Pulsed Reactor Neutron Source}
+      - {value: Reactor Neutron Source}
+      - {value: Synchrotron X-ray Source}
+      - {value: Pulsed Muon Source}
+      - {value: Rotating Anode X-ray}
+      - {value: Fixed Tube X-ray}
+      - {value: UV Laser}
+      - {value: Free-Electron Laser}
+      - {value: Optical Laser}
+      - {value: Ion Source}
+      - {value: UV Plasma Source}
+      - {value: Metal Jet X-ray}
+      - {value: Laser}
+      - {value: Dye Laser}
+      - {value: Broadband Tunable Light Source}
+      - {value: Halogen Lamp}
+      - {value: LED}
+      - {value: Mercury Cadmium Telluride Lamp}
+      - {value: Deuterium Lamp}
+      - {value: Xenon Lamp}
+      - {value: Globar}
+      open: true
+    doc: type of radiation source (pick one from the enumerated list and spell exactly)
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  probe:
+    node: dataset
+    enum: [neutron, photon, x-ray, muon, electron, ultraviolet, visible light, positron, proton]
+    doc: type of radiation probe (pick one from the enumerated list and spell exactly)
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  power:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_POWER}
+    doc: Source power
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  emittance_x:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_EMITTANCE}
+    doc: Source emittance (nm-rad) in X (horizontal) direction.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  emittance_y:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_EMITTANCE}
+    doc: Source emittance (nm-rad) in Y (horizontal) direction.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  sigma_x:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    doc: particle beam size in x
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  sigma_y:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    doc: particle beam size in y
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  flux:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_FLUX}
+    doc: 'Source intensity/area (example: s-1 cm-2)'
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  energy:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_ENERGY}
+    doc: |-
+      Source energy. Typically, this would be the energy of
+      the emitted beam. For storage rings, this would be
+      the particle beam energy.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  current:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_CURRENT}
+    doc: Accelerator, X-ray tube, or storage ring current
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  voltage:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_VOLTAGE}
+    doc: Accelerator voltage
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  frequency:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_FREQUENCY}
+    doc: Frequency of pulsed source
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  period:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_PERIOD}
+    doc: Period of pulsed source
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  target_material:
+    node: dataset
+    enum: [Ta, W, depleted_U, enriched_U, Hg, Pb, C]
+    doc: Pulsed source target material
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  notes:
+    node: group
+    class: NXnote
+    doc: |-
+      any source/facility related messages/events that
+      occurred during the experiment
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  bunch_pattern:
+    node: group
+    class: NXdata
+    doc: |-
+      For storage rings, description of the bunch pattern.
+      This is useful to describe irregular bunch patterns.
+    children:
+      title:
+        node: dataset
+        doc: name of the bunch pattern
+        via: [T0, T1, T4, T7]
+        provisional: [Q1]
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  number_of_bunches:
+    node: dataset
+    type: NX_INT
+    doc: For storage rings, the number of bunches in use.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  bunch_length:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_TIME}
+    doc: For storage rings, temporal length of the bunch
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  bunch_distance:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_TIME}
+    doc: For storage rings, time between bunches
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  pulse_width:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_TIME}
+    doc: temporal width of source pulse
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  pulse_shape:
+    node: group
+    class: NXdata
+    doc: source pulse shape
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  mode:
+    node: dataset
+    enum:
+      values:
+      - {value: Single Bunch, doc: for storage rings}
+      - {value: Multi Bunch, doc: for storage rings}
+      open: true
+    doc: source operating mode
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  top_up:
+    node: dataset
+    type: NX_BOOLEAN
+    doc: Is the synchrotron operating in top_up mode?
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  last_fill:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_CURRENT}
+    doc: For storage rings, the current at the end of the most recent injection.
+    attributes:
+      time:
+        type: NX_DATE_TIME
+        doc: date and time of the most recent injection.
+        via: [T1, T4]
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  wavelength:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_WAVELENGTH}
+    doc: The wavelength of the radiation emitted by the source.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  pulse_energy:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_ENERGY}
+    doc: For pulsed sources, the energy of a single pulse.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  peak_power:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_POWER}
+    doc: |-
+      For pulsed sources, the pulse energy divided
+      by the pulse duration
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  anode_material:
+    node: dataset
+    doc: Material of the anode (for X-ray tubes).
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  filament_current:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_CURRENT}
+    doc: Filament current (for X-ray tubes).
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  emission_current:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_CURRENT}
+    doc: Emission current of the generated beam.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  gas_pressure:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_PRESSURE}
+    doc: Gas pressure inside ionization source.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  previous_source:
+    node: dataset
+    type: NX_CHAR
+    doc: |-
+      Single instance or list of instances of NXsource pointing to the sources from which a beam originated to reach this source.
+      This can be used, for example, for secondary sources to describe which other source(s) they are derived from.
+
+      An example is the white light source in transient absorption spectroscopy, which is a supercontinuum crystal that is pumped by a
+      another laser.
+
+      In case of a primary source, this field should not be filled.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  geometry:
+    node: group
+    class: NXgeometry
+    deprecated: Use the field `depends_on` and :ref:`NXtransformations` to position the source
+      and NXoff_geometry to describe its shape instead
+    doc: '"Engineering" location of source.'
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  APERTURE:
+    node: group
+    name: {any: true}
+    class: NXaperture
+    doc: The size and position of an aperture inside the source.
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  ELECTROMAGNETIC_LENS:
+    node: group
+    name: {any: true}
+    class: NXelectromagnetic_lens
+    doc: Individual electromagnetic lenses inside the source.
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  DEFLECTOR:
+    node: group
+    name: {any: true}
+    class: NXdeflector
+    doc: Deflectors inside the source.
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  FABRICATION:
+    node: group
+    name: {any: true}
+    class: NXfabrication
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  OFF_GEOMETRY:
+    node: group
+    name: {any: true}
+    class: NXoff_geometry
+    occurs: {min: 0}
+    doc: This group describes the shape of the beam line component
+    via: [T1, T2, T6, T7]
+    provisional: [Q1, Q11]
+  distribution:
+    node: group
+    class: NXdata
+    doc: The wavelength or energy distribution of the source
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  depends_on:
+    node: dataset
+    type: NX_CHAR
+    doc: |-
+      The reference point of the source plane is its center in the x and y axis. The source is considered infinitely thin in the
+      z axis.
+
+      .. image:: source/source.png
+        :width: 40%
+    via: [T1, T4, T7]
+    provisional: [Q1]

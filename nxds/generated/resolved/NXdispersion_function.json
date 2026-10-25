@@ -1,0 +1,77 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/COLLECTION"},
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"node": "group", "ref": "NXobject/LOG"},
+    {"node": "group", "ref": "NXobject/NOTE"},
+    {"node": "group", "ref": "NXobject/PARAMETERS"},
+    {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+    {"node": "dataset", "ref": "NXobject/identifierNAME"},
+    {"declared_by": "NXdispersion_function", "docs": ["NXdispersion_function/model_name"], "id": "model_name", "name": {"exact": "model_name"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXdispersion_function", "docs": ["NXdispersion_function/formula"], "id": "formula", "name": {"exact": "formula"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXdispersion_function", "docs": ["NXdispersion_function/convention"], "enum": {"open": false, "values": [{"value": "n + ik"}, {"value": "n - ik"}]}, "id": "convention", "name": {"exact": "convention"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXdispersion_function", "docs": ["NXdispersion_function/energy_identifier"], "id": "energy_identifier", "name": {"exact": "energy_identifier"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXdispersion_function", "docs": ["NXdispersion_function/energy_min"], "id": "energy_min", "name": {"exact": "energy_min"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_ENERGY"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXdispersion_function", "docs": ["NXdispersion_function/energy_max"], "id": "energy_max", "name": {"exact": "energy_max"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_ENERGY"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXdispersion_function", "docs": ["NXdispersion_function/energy_unit"], "id": "energy_unit", "name": {"exact": "energy_unit"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_ENERGY"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXdispersion_function", "docs": ["NXdispersion_function/wavelength_identifier"], "id": "wavelength_identifier", "name": {"exact": "wavelength_identifier"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXdispersion_function", "docs": ["NXdispersion_function/wavelength_unit"], "id": "wavelength_unit", "name": {"exact": "wavelength_unit"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_LENGTH"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXdispersion_function", "docs": ["NXdispersion_function/wavelength_min"], "id": "wavelength_min", "name": {"exact": "wavelength_min"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_LENGTH"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXdispersion_function", "docs": ["NXdispersion_function/wavelength_max"], "id": "wavelength_max", "name": {"exact": "wavelength_max"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_LENGTH"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXdispersion_function", "docs": ["NXdispersion_function/representation"], "enum": {"open": false, "values": [{"value": "n"}, {"value": "eps"}]}, "id": "representation", "name": {"exact": "representation"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4", "T7"]},
+    {"class": "NXdispersion_single_parameter", "declared_by": "NXdispersion_function", "id": "DISPERSION_SINGLE_PARAMETER", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q11"], "recommended": false, "via": ["T1", "T2", "T4", "T7"]},
+    {"class": "NXdispersion_repeated_parameter", "declared_by": "NXdispersion_function", "id": "DISPERSION_REPEATED_PARAMETER", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q11"], "recommended": false, "specialisation": "NXdispersion_function/DISPERSION_REPEATED_PARAMETER", "via": ["T1", "T2", "T4", "T7"]}
+  ],
+  "class": "NXdispersion_function",
+  "extends": "NXobject",
+  "lossy": [],
+  "provisional": [],
+  "require": [],
+  "source": "contributed_definitions/NXdispersion_function.nxdl.xml",
+  "status": "contributed",
+  "symbols": ["n_repetitions"],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"},
+  "via": []
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {
+  "NXdispersion_function/DISPERSION_REPEATED_PARAMETER": {
+   "attributes": [
+     {"ref": "NXobject@default"}
+   ],
+   "children": [
+     {"node": "group", "ref": "NXobject/COLLECTION"},
+     {"node": "group", "ref": "NXobject/DATA"},
+     {"node": "group", "ref": "NXobject/LOG"},
+     {"node": "group", "ref": "NXobject/NOTE"},
+     {"node": "group", "ref": "NXobject/PARAMETERS"},
+     {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+     {"node": "dataset", "ref": "NXobject/identifierNAME"},
+     {"node": "dataset", "ref": "NXdispersion_repeated_parameter/name"},
+     {"node": "dataset", "ref": "NXdispersion_repeated_parameter/description"},
+     {"declared_by": "NXdispersion_repeated_parameter", "docs": ["NXdispersion_repeated_parameter/parameter_units"], "id": "parameter_units", "name": {"exact": "parameter_units"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "refined_by": ["NXdispersion_function"], "shape": {"binding": false, "dims": ["n_repetitions"], "symbols": {"n_repetitions": "NXdispersion_function"}}, "type": "NX_CHAR", "via": ["T0", "T1", "T4", "T7", "T9"]},
+     {"declared_by": "NXdispersion_repeated_parameter", "docs": ["NXdispersion_repeated_parameter/values"], "id": "values", "name": {"exact": "values"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "refined_by": ["NXdispersion_function"], "shape": {"binding": false, "dims": ["n_repetitions"], "symbols": {"n_repetitions": "NXdispersion_function"}}, "type": "NX_NUMBER", "units": {"category": "NX_ANY"}, "via": ["T1", "T4", "T7", "T9"]}
+   ],
+   "class": "NXdispersion_repeated_parameter",
+   "declared_by": "NXdispersion_function",
+   "id": "NXdispersion_function/DISPERSION_REPEATED_PARAMETER",
+   "require": [],
+   "symbols": [],
+   "undeclared": {"attribute": "report", "dataset": "report", "group": "report"}
+  }
+ }
+}

@@ -1,0 +1,134 @@
+nxds: '0.1'
+class: NXamplifier
+category: base
+extends: NXcomponent
+doc: Base classed definition for amplifier devices.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  classification:
+    node: dataset
+    enum:
+      values:
+      - value: low-pass
+        doc: |-
+          A low-pass filter is a filter that passes signals
+          with a frequency lower than a certain cutoff frequency and
+          attenuates signals with frequencies higher than the cutoff frequency.
+      - value: high-pass
+        doc: |-
+          A high-pass filter is a filter that passes signals
+          with a frequency higher than a certain cutoff frequency and
+          attenuates signals with frequencies lower than the cutoff frequency.
+      - value: band-pass
+        doc: |-
+          A band-pass filter is a filter that passes signals
+          within a certain frequency range and attenuates signals outside that range.
+      - value: band-stop
+        doc: |-
+          A band-stop filter is a filter (opposite to the band-pass) that attenuates signals
+          within a certain frequency range and passes signals outside that range.
+      - value: broadband
+        doc: |-
+          A broadband filter is a filter that passes signals
+          over a wide range of frequencies with minimal attenuation.
+      open: true
+    doc: Type of the amplifier base on the response on frequency.
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  hardware:
+    node: group
+    class: NXfabrication
+    doc: (IC, device) (NXmanufacturer?)
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  num_of_channels:
+    node: dataset
+    type: NX_NUMBER
+    doc: The number of preamplifier channels are assigned.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  active_channels:
+    node: dataset
+    type: NX_NUMBER
+    doc: |-
+      The number of preamplifier channels are ready to be used. (array for active
+      channels)
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  openloop_amplification:
+    node: dataset
+    type: NX_NUMBER
+    doc: |-
+      The output signal does not go through a feedback loop to adjust the
+      amplification of the amplifier. (array for active channels)
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  signal_over_noise:
+    node: dataset
+    type: NX_NUMBER
+    doc: |-
+      The ratio of the amplitude of the target signal to the amplitude of the noise in
+      the output signal of the amplifier. S/N=V_signal/V_noise. (array for active
+      channels)
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  crosstalk_factor:
+    node: dataset
+    type: NX_NUMBER
+    units: {fixed: db}
+    doc: |-
+      The unwanted coupling between different channels (if active >1).
+      In ideal amplifier, channels are independent of each other, But due to different resources
+      sharing (e.g., same power supply, electromagnetic interference), there may have some
+      unwanted coupling between different channels, which is called crosstalk.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  crosstalk_compensation:
+    node: dataset
+    type: NX_BOOLEAN
+    doc: |-
+      If measures are taken for reducing interferences between different signalling
+      pathways.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  bandwidth:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_FREQUENCY}
+    doc: |-
+      The spectrum of frequency it can amplify, from its lowest to highest frequency
+      limits. If it is difference of the frequencies, please also provide :ref:
+      `center_frequency </NXamplifier/center_frequency-field>`.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  center_frequency:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_FREQUENCY}
+    doc: The frequency in the middle of the bandwidth.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  lower_cutoff_frequency:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_FREQUENCY}
+    doc: |-
+      The lower frequency point of the bandwidth where gain drops significantly (e.g.,
+      -3dB point).
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  upper_cutoff_frequency:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_FREQUENCY}
+    doc: |-
+      The upper frequency point of the bandwidth where gain drops significantly (e.g.,
+      -3dB point).
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  gain:
+    node: dataset
+    type: NX_NUMBER
+    doc: The ratio of the output signal to the input signal of the amplifier.
+    via: [T1, T4, T7]
+    provisional: [Q1]

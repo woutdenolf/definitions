@@ -1,0 +1,1475 @@
+nxds: '0.1'
+class: NXstress
+category: application
+describes: NXroot
+doc: |-
+  Application definition for stress and strain analysis of crystalline material defined by the `EASI-STRESS consortium <https://easi-stress.eu>`_.
+
+  When a crystal is loaded (applied or residual stress) its crystallographic parameters change.
+
+  Stress and strain analysis calculates deformation (strain) and the associated force (stress)
+  from diffraction data.
+
+  This application definition essentially standardizes the result of diffraction pattern analysis
+  from different types of diffraction experiments for the purpose of stress and strain analysis.
+  The analysis is typically some form of diffraction peak indexing and fitting.
+  The experiments are for example
+
+  - energy-dispersive X-ray powder diffraction
+  - angular-dispersive X-ray powder diffraction
+  - angular-dispersive neutron powder diffraction
+  - time-of-flight (TOF) neutron powder diffraction.
+
+  In addition, the application definition guarantees that the information about instrumental setups, measurement conditions, and data analysis workflows are described.
+  This ensures not only the reproducability and tracability of the measured data, but also the metadata. Since not all participating beamlines or instruments can provide an input to all the NeXus fields listed in this application definition, not all of them are "required".
+
+  However, when possible and technically feasible, the instrument using the NXstress application definition is expected to provide the type of information outlined below.
+
+  Sample and detector positions can be defined with :ref:`NXtransformations`. If you don't specify the direction of gravity
+  and the direction of the beam then the standard NeXus Coordinate System is used.
+
+  It is highly recommended that when certain parameters or values are the same for all the measurements (acquistions) in the same
+  file, they are stored only in one location and then linked in the other instances. For example, if during an acquisition all
+
+  instrumental parameters but one stay the same and only the sample table moves in one direction (e.g. Xtranslation), then all the
+  static instrumental parameters should be saved just once (e.g. in just one NXentry or in a *Shared_Information group*) and their
+  values linked to every *instrument group* under all the other acquisitions. The value for the variable that changes, Xtranslation
+  in this example, is suggested to be saved only at every instrument group under each acquistion but not in the *Shared_Information group*.
+
+  It is not always necessary to link each field. In case all the fields with an entire group are the same, the entire group can be linked.
+defaults: {min: 1, binding: true, type: NX_CHAR}
+symbols:
+  n_X: {doc: Number of diffractogram channels.}
+  n_D:
+    doc: Number of diffractograms. For example the number of energy-dispersive detectors or
+      the number of azimuthal sections in an area detector.
+  n_Peaks: {doc: Number of reflections.}
+  x_Unit: {doc: Diffractogram X units.}
+  y_Unit: {doc: Diffractogram Y units.}
+  c_Unit:
+    doc: Converted diffractogram X units (could be the same as *x_Unit*).
+  n_Temp: {doc: number of temperatures}
+  n_sField:
+    doc: number of values in applied stress field
+  nP:
+    doc: number of scan points (only present in scanning measurements)
+  i:
+    doc: number of detector pixels in the first (slowest) direction
+  j:
+    doc: number of detector pixels in the second (faster) direction
+children:
+  ENTRY:
+    node: group
+    name: {any: true}
+    class: NXentry
+    doc: The name of the *NXentry group(s)* can be freely chosen by the facility. The *NXentry
+      group* can contain any form of data acquisition (e.g. a measurement point, multiple
+      measurement points, a line scan, a mesh, all data points from one sample …).
+    children:
+      definition:
+        node: dataset
+        type: NX_CHAR
+        enum: [NXstress]
+        doc: 'Official NeXus NXDL schema to which this file conforms '
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      title:
+        node: dataset
+        occurs: {min: 0, max: 1}
+        doc: Extended title for the entry.
+        via: [T0, T1, T6]
+        provisional: [Q1]
+      experiment_identifier:
+        node: dataset
+        occurs: {min: 0, max: 1}
+        doc: Unique identifier for the experiment as defined by the facility (e.g. DOI, proposal
+          id, ...). At ILL, this could be, for example, ``exp_1-02-286``, ``exp_INDU-229``,
+          or ``exp_INTER-569``.
+        via: [T0, T1, T6]
+        provisional: [Q1]
+      experiment_description:
+        node: dataset
+        occurs: {min: 0, max: 1}
+        doc: |-
+          Brief summary of the experiment, including key objectives. At least one of the following information should be provided:
+          * ``energy-dispersive X-ray powder diffraction``
+          * ``angular-dispersive X-ray powder diffraction``
+          * ``angular-dispersive neutron powder diffraction``
+          * ``time-of-flight (TOF) neutron powder diffraction``
+        via: [T0, T1, T6]
+        provisional: [Q1]
+      start_time:
+        node: dataset
+        occurs: {min: 1, max: 1}
+        type: NX_DATE_TIME
+        doc: The starting time(s) of measurement(s) which can be provided in form of a list
+          if multiple measurements are included in the same NXentry.
+        via: [T1, T6]
+        provisional: [Q1]
+      end_time:
+        node: dataset
+        occurs: {min: 1, max: 1}
+        type: NX_DATE_TIME
+        doc: The end time(s) of measurement(s) which can be provided in form of a list if
+          multiple measurements are included in the same NXentry.
+        via: [T1, T6]
+        provisional: [Q1]
+      collection_identifier:
+        node: dataset
+        occurs: {min: 0, max: 1}
+        doc: |-
+          User or Data Acquisition defined identifier from which
+          the content of this application definition is derived. This can be freely chosen by the user or the instrument scientist and could be, for example, ``05_DA_650_AX_B3P5``, ``SENB-14``, ``Quartz``,....
+        via: [T0, T1, T6]
+        provisional: [Q1]
+      collection_description:
+        node: dataset
+        occurs: {min: 0, max: 1}
+        doc: Brief summary of the collection, including grouping criteria. The information
+          provided in this field can highlight, for example, the measurement setup or information
+          about experimental conditions.
+        via: [T0, T1, T6]
+        provisional: [Q1]
+      processing_type:
+        node: dataset
+        occurs: {min: 1, max: 1}
+        type: NX_CHAR
+        enum:
+          values:
+          - value: two-theta
+            doc: :math:`\varepsilon = \large \frac{sin(\mathrm{\theta}_{0})}{sin(\mathrm{\theta})}-1`
+          - value: energy
+            doc: :math:`\varepsilon = \large \frac{\mathrm{E}_{0}}{\mathrm{E}}-1`
+          - value: d-spacing
+            doc: :math:`\varepsilon = \large \frac{\mathrm{d}}{\mathrm{d}_{0}}-1`
+          - value: time-of-flight
+            doc: :math:`\varepsilon = \large \frac{\mathrm{TOF}}{\mathrm{TOF}_{0}}-1`
+          - value: sin2psi
+            doc: |-
+              A description of the :math:`\mathrm{\sin}^{2}\psi` method can be found in the literature. Two examples are
+              `Fitzpatrick et al. 2005 <http://eprintspublications.npl.co.uk/id/eprint/2391>`_
+              and
+              `DIN ISO 15305:2009-01 <https://www.en-standard.eu/din-en-15305-non-destructive-testing-test-method-for-residual-stress-analysis-by-x-ray-diffraction/>`_.
+        doc: |-
+          Describes the way strain :math:`\varepsilon` can be calculated from the :ref:`center </NXstress/ENTRY/peaks/center-field>`
+          peak parameter.
+        via: [T1, T6]
+        provisional: [Q1]
+      measurement_direction:
+        node: dataset
+        occurs: {min: 0, max: 1}
+        type: NX_CHAR
+        enum: [radial, longitudinal, normal, tangential, multiple]
+        doc: Describes the specific measurement direction covered by the data in this file.
+        via: [T1, T6]
+        provisional: [Q1]
+      experiment_responsible:
+        node: group
+        class: NXuser
+        occurs: {min: 0, max: 1}
+        doc: Information about the person who performed the experiment.
+        children:
+          name:
+            node: dataset
+            occurs: {min: 0, max: 1}
+            type: NX_CHAR
+            via: [T1, T6]
+            provisional: [Q1]
+          role:
+            node: dataset
+            occurs: {min: 0, max: 1}
+            type: NX_CHAR
+            doc: Role of user responsible for this entry. Suggested roes are, for example,
+              ``local contact``, ``beamline_scientist``, ``post_doc``,…
+            via: [T1, T6]
+            provisional: [Q1]
+        via: [T1, T6]
+        provisional: [Q1]
+      instrument:
+        node: group
+        class: NXinstrument
+        occurs: {min: 1, max: 1}
+        children:
+          name:
+            node: dataset
+            occurs: {min: 1, max: 1}
+            type: NX_CHAR
+            doc: Name of the diffractometer, instrument, or beamline used for the experiment.
+              This could be, for example, *Strain Analyser for Large and Small scale engineering
+              Applications*.
+            attributes:
+              short_name:
+                occurs: {min: 0}
+                doc: Short name for the instrument, perhaps the acronym, which would be for
+                  the the example above ``SALSA``.
+                via: [T0, T1, T6]
+                provisional: [Q1]
+            via: [T1, T6]
+            provisional: [Q1]
+          CALIBRATION:
+            node: group
+            name: {any: true}
+            class: NXnote
+            occurs: {min: 0, max: 1}
+            doc: This group contains information about the geometry and/or efficiency measurement(s).
+            children:
+              calibration_type:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_CHAR
+                doc: Describe the type of calibration.
+                via: [T1, T6]
+                provisional: [Q1]
+              file_name:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_CHAR
+                doc: File name(s) and/or path(s) (within file(s)) containing data from the
+                  last calibration(s). This can be an array.
+                via: [T1, T6]
+                provisional: [Q1]
+              data:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_BINARY
+                doc: Calibration file content.
+                via: [T1, T6]
+                provisional: [Q1]
+              type:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_CHAR
+                doc: Mime content type of calibration *data* field e.g. text/plain, application/json,...
+                via: [T1, T6]
+                provisional: [Q1]
+              author:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_CHAR
+                doc: Author or creator of the calibration.
+                via: [T1, T6]
+                provisional: [Q1]
+              date:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_DATE_TIME
+                doc: Date calibration was created/added
+                via: [T1, T6]
+                provisional: [Q1]
+            via: [T1, T3, T6]
+            provisional: [Q1, Q3]
+          SOURCE:
+            node: group
+            name: {any: true}
+            class: NXsource
+            occurs: {min: 1, max: 1}
+            children:
+              type:
+                node: dataset
+                occurs: {min: 1, max: 1}
+                type: NX_CHAR
+                enum: [Spallation Neutron Source, Pulsed Reactor Neutron Source, Reactor Neutron
+                    Source, Synchrotron X-ray Source, Rotating Anode X-ray, Fixed Tube X-ray,
+                  Metal Jet X-ray]
+                doc: Type of radiation source
+                via: [T1, T6]
+                provisional: [Q1]
+              probe:
+                node: dataset
+                occurs: {min: 1, max: 1}
+                type: NX_CHAR
+                enum: [neutron, X-ray]
+                doc: Type of radiation probe
+                via: [T1, T6]
+                provisional: [Q1]
+            via: [T1, T3, T6]
+            provisional: [Q1, Q3]
+          DETECTOR:
+            node: group
+            name: {any: true}
+            class: NXdetector
+            occurs: {min: 1, max: unbounded}
+            doc: Zero or more of these groups describe the detectors used in the experiment.
+            children:
+              description:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_CHAR
+                doc: name/manufacturer/model/etc. information
+                via: [T1, T6]
+                provisional: [Q1]
+              type:
+                node: dataset
+                type: NX_CHAR
+                doc: Description of type such as \ :sup:`3`\ He gas cylinder, \ :sup:`3`\
+                  He PSD, scintillator, fission chamber, proportion counter, ion chamber,
+                  CCD, pixel, image plate, CMOS, …
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              distance:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_NUMBER
+                shape: [nP, i, j]
+                units: {category: NX_LENGTH}
+                doc: |-
+                  This is the distance to the previous component in the
+                  instrument; most often the sample. The usage depends on the
+                  nature of the detector: Most often it is the distance of the
+                  detector assembly. But there are irregular detectors. In this
+                  case the distance must be specified for each detector pixel.
+
+                  Note, it is recommended to use NXtransformations instead.
+                via: [T1, T6, T9]
+                provisional: [Q1]
+              efficiency:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_FLOAT
+                shape: [i, j]
+                units: {category: NX_DIMENSIONLESS}
+                doc: efficiency of the detector
+                via: [T1, T6, T9]
+                provisional: [Q1]
+              wavelength:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_FLOAT
+                shape: [i, j]
+                units: {category: NX_WAVELENGTH}
+                doc: |-
+                  This field can be two things:
+
+                  1. For a pixel detector it provides the nominal wavelength
+                  for which the detector has been calibrated.
+
+                  2. For other detectors this field has to be seen together with
+                  the efficiency field above.
+                  For some detectors, the efficiency is wavelength dependent.
+                  Thus this field provides the wavelength axis for the efficiency field.
+                  In this use case, the efficiency and wavelength arrays must
+                  have the same dimensionality.
+                via: [T1, T6, T9]
+                provisional: [Q1]
+              dead_time:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_FLOAT
+                shape: [nP, i, j]
+                units: {category: NX_TIME}
+                doc: Detector dead time
+                via: [T1, T6, T9]
+                provisional: [Q1]
+              count_time:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_NUMBER
+                shape: [nP]
+                units: {category: NX_TIME}
+                doc: Elapsed actual counting time
+                via: [T1, T6, T9]
+                provisional: [Q1]
+              depends_on:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_CHAR
+                doc: |-
+                  The axis on which the detector position depends may be stored
+                  anywhere, but is normally stored in the *NXtransformations
+                  group* within the *NXdetector group*.
+                via: [T1, T6]
+                provisional: [Q1]
+              TRANSFORMATIONS:
+                node: group
+                name: {any: true}
+                class: NXtransformations
+                occurs: {min: 0, max: 1}
+                doc: |-
+                  This is the recommended location for detector goniometer
+                  and other related axes.
+                via: [T1, T2, T6]
+                provisional: [Q1, Q11]
+            via: [T1, T3, T6]
+            provisional: [Q1, Q3]
+          beam_intensity_profile:
+            node: group
+            class: NXbeam
+            occurs: {min: 1, max: 1}
+            doc: |-
+              Defines the dimensions of the beam profile used for probing the sample which corresponds to or can be used to determine the instrumental gauge volume.
+              A description of the subsequent fields can be found in the folowing figure. The term "primary" in the subsequent fields refers to the beam path between the sample and the source. The term "secondary" refers to the beam path between the sample and the detector(s).
+
+              .. figure:: stress/Beam_profile_sketch3.jpg
+               :width: 70%
+               :alt: Examples for the beam intensity profile.
+
+               Some examples for the beam intensity profile. The 1D description of the beam profile on the right can equally be applied for the horizontal and vertical direction for the primary and the secondary side.
+            children:
+              beam_evaluation:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_CHAR
+                doc: 'If the beam profile was measured, the filename(s) of the measurement
+                  can be specified here. '
+                via: [T1, T6]
+                provisional: [Q1]
+              primary_vertical_type:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_CHAR
+                doc: Defines the last device right in front of the sample used to shape the
+                  beam. This could be, for example, a :ref:`(radial) collimator <NXcollimator>`
+                  or a :ref:`slit <NXslit>`.
+                via: [T1, T6]
+                provisional: [Q1]
+              primary_vertical_source_width:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_NUMBER
+                doc: Defines the primary beam size intensity profile on the side closer to
+                  the source in the vertical direction.
+                via: [T1, T6]
+                provisional: [Q1]
+              primary_vertical_sample_width:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_NUMBER
+                doc: Defines the primary beam size intensity profile on the side closer to
+                  the sample in the vertical direction.
+                via: [T1, T6]
+                provisional: [Q1]
+              primary_vertical_distance:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_NUMBER
+                doc: Defines the distance between the center of the gauge volume and the beam
+                  shaping device.
+                via: [T1, T6]
+                provisional: [Q1]
+              primary_vertical_evaluation:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_CHAR
+                doc: 'Describes how the beam intensity profile in the primary vertical direction
+                  was determined. Examples of valid entries are: ``measured``, ``theoretical``,
+                  ``estimated``, ...  '
+                via: [T1, T6]
+                provisional: [Q1]
+              primary_horizontal_type:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_CHAR
+                doc: Defines the last device right in front of the sample used to shape the
+                  beam. This could be, for example, a :ref:`(radial) collimator <NXcollimator>`
+                  or a :ref:`slit <NXslit>`.
+                via: [T1, T6]
+                provisional: [Q1]
+              primary_horizontal_source_width:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_NUMBER
+                doc: Defines the primary beam size intensity profile on the side closer to
+                  the source in the horizontal direction.
+                via: [T1, T6]
+                provisional: [Q1]
+              primary_horizontal_sample_width:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_NUMBER
+                doc: Defines the primary beam size intensity profile on the side closer to
+                  the sample in the horizontal direction.
+                via: [T1, T6]
+                provisional: [Q1]
+              primary_horizontal_distance:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_NUMBER
+                doc: Defines the distance between the center of the gauge volume and the beam
+                  shaping device.
+                via: [T1, T6]
+                provisional: [Q1]
+              primary_horizontal_evaluation:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_CHAR
+                doc: 'Describes how the beam intensity profile in the primary horizontal direction
+                  was determined. Examples of valid entries are: ``measured``, ``theoretical``,
+                  ``estimated``, ...  '
+                via: [T1, T6]
+                provisional: [Q1]
+              secondary_horizontal_type:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_CHAR
+                doc: Defines the last device right in front of the sample used to shape the
+                  beam. This could be, for example, a :ref:`(radial) collimator <NXcollimator>`
+                  or a :ref:`slit <NXslit>`.
+                via: [T1, T6]
+                provisional: [Q1]
+              secondary_horizontal_detector_width:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_NUMBER
+                doc: Defines the secondary beam size intensity profile on the side closer
+                  to the detector in the horizontal direction.
+                via: [T1, T6]
+                provisional: [Q1]
+              secondary_horizontal_sample_width:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_NUMBER
+                doc: Defines the secondary beam size intensity profile on the side closer
+                  to the sample in the horizontal direction.
+                via: [T1, T6]
+                provisional: [Q1]
+              secondary_horizontal_distance:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_NUMBER
+                doc: Defines the distance between the center of the gauge volume and the beam
+                  shaping device.
+                via: [T1, T6]
+                provisional: [Q1]
+              secondary_horizontal_evaluation:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_CHAR
+                doc: 'Describes how the beam intensity profile in the secondary horizontal
+                  direction was determined. Examples of valid entries are: ``measured``, ``theoretical``,
+                  ``estimated``, ...  '
+                via: [T1, T6]
+                provisional: [Q1]
+              incident_energy:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_FLOAT
+                units: {category: NX_ENERGY}
+                doc: Incident energy mostly useful for monochromatic beams.
+                via: [T1, T6]
+                provisional: [Q1]
+              incident_wavelength:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_FLOAT
+                units: {category: NX_WAVELENGTH}
+                doc: Incident wavelength mostly useful for monochromatic beams.
+                via: [T1, T6]
+                provisional: [Q1]
+            via: [T1, T6]
+            provisional: [Q1]
+        via: [T1, T6]
+        provisional: [Q1]
+      SAMPLE_DESCRIPTION:
+        node: group
+        name: {any: true}
+        class: NXsample
+        occurs: {min: 1, max: 1}
+        doc: This is the recommended location for describing parameters associated with the
+          sample.
+        children:
+          name:
+            node: dataset
+            occurs: {min: 1, max: 1}
+            type: NX_CHAR
+            doc: Descriptive name of sample
+            via: [T1, T6]
+            provisional: [Q1]
+          chemical_formula:
+            node: dataset
+            occurs: {min: 0, max: 1}
+            doc: |-
+              The chemical formula specified using CIF conventions.
+              Abbreviated version of CIF standard:
+
+              * Only recognized element symbols may be used.
+              * Each element symbol is followed by a 'count' number. A count of '1' may be omitted.
+              * A space or parenthesis must separate each cluster of (element symbol + count).
+              * Where a group of elements is enclosed in parentheses, the multiplier for the
+                group must follow the closing parentheses. That is, all element and group
+                multipliers are assumed to be printed as subscripted numbers.
+              * Unless the elements are ordered in a manner that corresponds to their chemical
+                structure, the order of the elements within any group or moiety depends on
+                whether or not carbon is present.
+              * If carbon is present, the order should be:
+
+                - C, then H, then the other elements in alphabetical order of their symbol.
+                - If carbon is not present, the elements are listed purely in alphabetic order of their symbol.
+
+              * This is the *Hill* system used by Chemical Abstracts.
+            via: [T0, T1, T6]
+            provisional: [Q1]
+          temperature:
+            node: dataset
+            occurs: {min: 0, max: 1}
+            type: NX_FLOAT
+            shape:
+              rank: anyRank
+              dims: [n_Temp]
+            units: {category: NX_TEMPERATURE}
+            doc: Sample temperature. This could be a scanned variable
+            via: [T1, T6, T9, T9d]
+            provisional: [Q1]
+          stress_field:
+            node: dataset
+            occurs: {min: 0, max: 1}
+            type: NX_FLOAT
+            shape: [n_sField]
+            units: {category: NX_ANY}
+            doc: Applied external stress field
+            attributes:
+              direction:
+                enum: [x, y, z]
+                via: [T0, T1, T5]
+                provisional: [Q2]
+            via: [T1, T6, T9]
+            provisional: [Q1]
+          gauge_volume:
+            node: group
+            class: NXparameters
+            occurs: {min: 0, max: 1}
+            doc: |-
+              The gauge volume can be described with the following parameters:
+              .. figure:: stress/gauge_volume.png
+               :width: 70%
+               :alt: Gauge volume parameters and coordinate system.
+
+               Gauge volume parameters and coordinate system.
+            children:
+              a:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_FLOAT
+                units: {category: NX_LENGTH}
+                doc: Length of the first diagonal.
+                via: [T1, T6]
+                provisional: [Q1]
+              b:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_FLOAT
+                units: {category: NX_LENGTH}
+                doc: Length of the second diagonal normal to :ref:`x </NXstress/ENTRY/sample_description/gauge_volume/a-field>`.
+                via: [T1, T6]
+                provisional: [Q1]
+              c:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_FLOAT
+                units: {category: NX_LENGTH}
+                doc: Height of the gauge volume.
+                via: [T1, T6]
+                provisional: [Q1]
+              depends_on:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_CHAR
+                doc: |-
+                  In the local coordinate system, the beam is aligned along the X-axis,
+                  and the Z-axis is oriented in the opposite direction of gravity. The origin
+                  is the center to the gauge volume.
+                via: [T1, T6]
+                provisional: [Q1]
+              TRANSFORMATIONS:
+                node: group
+                name: {any: true}
+                class: NXtransformations
+                occurs: {min: 0, max: 1}
+                doc: |-
+                  The last field typically depends on the first
+                  field of the :ref:`sample transformations </NXstress/ENTRY/SAMPLE_DESCRIPTION/TRANSFORMATIONS-group>`.
+                via: [T1, T2, T6]
+                provisional: [Q1, Q11]
+            via: [T1, T6]
+            provisional: [Q1]
+          depends_on:
+            node: dataset
+            occurs: {min: 0, max: 1}
+            type: NX_CHAR
+            doc: |-
+              The axis on which the sample position depends may be stored
+              anywhere, but is normally stored in the NXtransformations
+              group within the NXsample group.
+            via: [T1, T6]
+            provisional: [Q1]
+          TRANSFORMATIONS:
+            node: group
+            name: {any: true}
+            class: NXtransformations
+            occurs: {min: 0, max: 1}
+            doc: |-
+              This is the recommended location for sample goniometer
+              and other related axes.
+            via: [T1, T2, T6]
+            provisional: [Q1, Q11]
+        via: [T1, T3, T6]
+        provisional: [Q1, Q3]
+      FIT:
+        node: group
+        name: {any: true}
+        class: NXprocess
+        occurs: {min: 1, max: unbounded}
+        doc: |-
+          Zero or more groups to describe the data processing steps
+          to obtain the content of this application definition.
+        children:
+          raw_data_file:
+            node: dataset
+            occurs: {min: 1, max: 1}
+            type: NX_CHAR
+            doc: The raw data file name(s) used during the data reduction process. This can
+              be a list.
+            via: [T1, T6]
+            provisional: [Q1]
+          date:
+            node: dataset
+            occurs: {min: 1, max: 1}
+            type: NX_DATE_TIME
+            doc: Date when the raw data was reduced and the data in the *NXstress* file format
+              generated.
+            via: [T1, T6]
+            provisional: [Q1]
+          program:
+            node: dataset
+            occurs: {min: 1, max: 1}
+            type: NX_CHAR
+            doc: Software package used to perform data reduction including the version number
+              or release date.
+            via: [T1, T6]
+            provisional: [Q1]
+          integration_type:
+            node: dataset
+            occurs: {min: 0, max: 1}
+            type: NX_CHAR
+            doc: Describes how the data was integrated.
+            via: [T1, T6]
+            provisional: [Q1]
+          bins:
+            node: dataset
+            occurs: {min: 0, max: 1}
+            type: NX_CHAR
+            doc: Describes the type of binning used during data reduction.
+            via: [T1, T6]
+            provisional: [Q1]
+          fit_type:
+            node: dataset
+            occurs: {min: 0, max: 1}
+            type: NX_CHAR
+            doc: Describes how the fitting of the peaks was done. For example, single peak
+              fit, multiple peak fit, Pawley refinement, Rietveld refinement, …
+            via: [T1, T6]
+            provisional: [Q1]
+          fit_range:
+            node: dataset
+            occurs: {min: 0, max: 1}
+            type: NX_CHAR
+            doc: Describes the data range used for peak fitting.
+            via: [T1, T6]
+            provisional: [Q1]
+          goodness_of_fit:
+            node: dataset
+            occurs: {min: 0, max: 1}
+            type: NX_CHAR
+            doc: Type and value describing the goodness of fit. For example, Rw 0.23.
+            via: [T1, T6]
+            provisional: [Q1]
+          normalization:
+            node: dataset
+            occurs: {min: 0, max: 1}
+            type: NX_CHAR
+            doc: 'Describes whether the data was normalized and if so , how. Examples of valid
+              entries are: ``None``, ``time``, ``primary monitor``, ``detector``, …'
+            via: [T1, T6]
+            provisional: [Q1]
+          data_reduction_responsible:
+            node: group
+            class: NXuser
+            occurs: {min: 0, max: 1}
+            doc: Information about the person who performed the data reduction.
+            children:
+              name:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_CHAR
+                via: [T1, T6]
+                provisional: [Q1]
+              role:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_CHAR
+                doc: Role of user responsible for this entry. Suggested roles are, for example,
+                  ``local contact``, ``beamline_scientist``, ``post_doc``,…
+                via: [T1, T6]
+                provisional: [Q1]
+            via: [T1, T6]
+            provisional: [Q1]
+          DESCRIPTION:
+            node: group
+            name: {any: true}
+            class: NXnote
+            doc: |-
+              The note will contain information about how the data was processed
+              or anything about the data provenance.
+              The contents of the note can be anything that the processing code
+              can understand, or a simple text.
+
+              The name will be numbered to allow for ordering of steps.
+            via: [T1, T3, T5, T7]
+            provisional: [Q1, Q2, Q3]
+          peak_parameters:
+            node: group
+            class: NXparameters
+            occurs: {min: 1, max: 1}
+            doc: |-
+              This group contains all diffraction peak fit parameters.
+              This information is not required for stress and strain calculations.
+            children:
+              title:
+                node: dataset
+                occurs: {min: 1, max: 1}
+                type: NX_CHAR
+                enum: [gaussian, lorentzian, voigt, pseudo-voigt, split pseudo-voigt, pearson
+                    VII]
+                doc: Diffraction peak profile.
+                via: [T1, T6]
+                provisional: [Q1]
+              area:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_NUMBER
+                shape: [n_Peaks]
+                units: {category: NX_ANY}
+                doc: Diffraction peak area (not including the background) in *y_Unit* units.
+                attributes:
+                  units:
+                    type: NX_CHAR
+                    doc: Specify the *y_Unit* units
+                    via: [T1, T5]
+                    provisional: [Q2]
+                via: [T1, T6, T9]
+                provisional: [Q1]
+              area_errors:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_NUMBER
+                shape: [n_Peaks]
+                units: {category: NX_DIMENSIONLESS}
+                doc: Error value(s) asscociated with :ref:`area </NXstress/ENTRY/fit/peak_parameters/area-field>`
+                via: [T1, T6, T9]
+                provisional: [Q1]
+              center:
+                node: dataset
+                occurs: {min: 1, max: 1}
+                type: NX_NUMBER
+                shape: [n_Peaks]
+                units: {category: NX_ANY}
+                doc: Diffraction peak position in *x_Unit* units.
+                attributes:
+                  units:
+                    type: NX_CHAR
+                    doc: Specify the *x_Unit* units
+                    via: [T1, T5]
+                    provisional: [Q2]
+                via: [T1, T6, T9]
+                provisional: [Q1]
+              center_errors:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_NUMBER
+                shape: [n_Peaks]
+                units: {category: NX_DIMENSIONLESS}
+                doc: Error value(s) asscociated with :ref:`center </NXstress/ENTRY/fit/peak_parameters/center-field>`
+                via: [T1, T6, T9]
+                provisional: [Q1]
+              height:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_NUMBER
+                shape: [n_Peaks]
+                units: {category: NX_ANY}
+                doc: Diffraction peak height (not including the background) in *y_Unit* units.
+                attributes:
+                  units:
+                    type: NX_CHAR
+                    doc: Specify the *y_Unit* units
+                    via: [T1, T5]
+                    provisional: [Q2]
+                via: [T1, T6, T9]
+                provisional: [Q1]
+              height_errors:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_NUMBER
+                shape: [n_Peaks]
+                units: {category: NX_DIMENSIONLESS}
+                doc: Error value(s) asscociated with :ref:`height </NXstress/ENTRY/fit/peak_parameters/height-field>`
+                via: [T1, T6, T9]
+                provisional: [Q1]
+              fwhm:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_NUMBER
+                shape: [n_Peaks]
+                units: {category: NX_ANY}
+                doc: Diffraction peak full width at half maximum in *x_Unit* units.
+                attributes:
+                  units:
+                    type: NX_CHAR
+                    doc: Specify the *x_Unit* units
+                    via: [T1, T5]
+                    provisional: [Q2]
+                via: [T1, T6, T9]
+                provisional: [Q1]
+              fwhm_errors:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_NUMBER
+                shape: [n_Peaks]
+                units: {category: NX_DIMENSIONLESS}
+                doc: Error value(s) asscociated with :ref:`fwhm </NXstress/ENTRY/fit/peak_parameters/fwhm-field>`
+                via: [T1, T6, T9]
+                provisional: [Q1]
+              fwhm_left:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_NUMBER
+                shape: [n_Peaks]
+                units: {category: NX_ANY}
+                doc: Left-side FWHM for split profiles in *x_Unit* units.
+                attributes:
+                  units:
+                    type: NX_CHAR
+                    doc: Specify the *x_Unit* units
+                    via: [T1, T5]
+                    provisional: [Q2]
+                via: [T1, T6, T9]
+                provisional: [Q1]
+              fwhm_left_errors:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_NUMBER
+                shape: [n_Peaks]
+                units: {category: NX_DIMENSIONLESS}
+                doc: Error value(s) asscociated with :ref:`fwhm_left </NXstress/ENTRY/fit/peak_parameters/fwhm_left-field>`
+                via: [T1, T6, T9]
+                provisional: [Q1]
+              fwhm_right:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_NUMBER
+                shape: [n_Peaks]
+                units: {category: NX_ANY}
+                doc: Right-side FWHM for split profiles in *x_Unit* units.
+                attributes:
+                  units:
+                    type: NX_CHAR
+                    doc: Specify the *x_Unit* units
+                    via: [T1, T5]
+                    provisional: [Q2]
+                via: [T1, T6, T9]
+                provisional: [Q1]
+              fwhm_right_errors:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_NUMBER
+                shape: [n_Peaks]
+                units: {category: NX_DIMENSIONLESS}
+                doc: Error value(s) asscociated with :ref:`fwhm_right </NXstress/ENTRY/fit/peak_parameters/fwhm_right-field>`
+                via: [T1, T6, T9]
+                provisional: [Q1]
+              form_factor:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_NUMBER
+                shape: [n_Peaks]
+                units: {category: NX_DIMENSIONLESS}
+                doc: |-
+                  - Voigt or Pseudo-Voigt: Lorentzian fraction
+                  - Pearson VII: decay parameter
+                  - Other profiles: not applicable
+                via: [T1, T6, T9]
+                provisional: [Q1]
+              form_factor_errors:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_NUMBER
+                shape: [n_Peaks]
+                units: {category: NX_DIMENSIONLESS}
+                doc: Error value(s) asscociated with :ref:`form_factor </NXstress/ENTRY/fit/peak_parameters/form_factor-field>`
+                via: [T1, T6, T9]
+                provisional: [Q1]
+              azimuth:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_NUMBER
+                shape: [n_Peaks]
+                units: {category: NX_ANGLE}
+                doc: |-
+                  Angle that defines the position of the integrated sector in the diffraction cone
+                  for angular-dispersive diffraction or the position of the detector for energy-dispersive
+                  diffraction.
+                via: [T1, T6, T9]
+                provisional: [Q1]
+            via: [T1, T6]
+            provisional: [Q1]
+          background_parameters:
+            node: group
+            class: NXparameters
+            occurs: {min: 1, max: 1}
+            doc: |-
+              This group contains all background fit parameters.
+              This information is not required for stress and strain calculations.
+            children:
+              title:
+                node: dataset
+                occurs: {min: 1, max: 1}
+                type: NX_CHAR
+                doc: |-
+                  Diffraction background profile. Required when background parameter fields are present.
+                  Some example values with equations are shown below:
+
+                      - ``manual`` : No equations nor variables needed to describe this background.
+                      - ``linear`` : \ :math:`\small background= A0 + A1 \cdot x`
+                      - ``5-degree polynomial`` : \ :math:`\small background= A0 + A1 \cdot x + A2 \cdot \mathrm{x}^{2} + A3 \cdot \mathrm{x}^{3} + A4 \cdot \mathrm{x}^{4} + A5 \cdot \mathrm{x}^{5}`
+                      - ``shape function plus polynomial`` : A shape function is not a mathematical function, it contains a manual background obtained from a fit and a polynomial part. This allows to adapt and modify the fit for subsequent measurements in the same measurement campaign. The function describing it is the following: \ :math:`\small background= as + b \cdot SHAPE(x-o)` Where SHAPE is the name of the variable used to describe the background value at the position x. x can be e.g. the scattering angle \ :math:`2\theta` in degrees.
+                via: [T1, T6]
+                provisional: [Q1]
+              A:
+                node: dataset
+                occurs: {min: 0, max: unbounded}
+                type: NX_NUMBER
+                shape: [n_Peaks]
+                units: {category: NX_DIMENSIONLESS}
+                doc: Background parameter(s). For example a second-degree polynomial will
+                  have fields ``A0``, ``A1`` and ``A2``.
+                via: [T1, T3b, T6, T9]
+                provisional: [Q1]
+              as:
+                node: dataset
+                occurs: {min: 0, max: unbounded}
+                type: NX_NUMBER
+                shape: [n_Peaks]
+                units: {category: NX_DIMENSIONLESS}
+                doc: Background parameter *constant* for SHAPE function.
+                via: [T1, T6, T9]
+                provisional: [Q1]
+              as_errors:
+                node: dataset
+                occurs: {min: 0, max: unbounded}
+                type: NX_NUMBER
+                shape: [n_Peaks]
+                units: {category: NX_DIMENSIONLESS}
+                doc: Error associated with background parameter *constant* for SHAPE function.
+                via: [T1, T6, T9]
+                provisional: [Q1]
+              b:
+                node: dataset
+                occurs: {min: 0, max: unbounded}
+                type: NX_NUMBER
+                shape: [n_Peaks]
+                units: {category: NX_DIMENSIONLESS}
+                doc: Background parameter *amplitude* for SHAPE function.
+                via: [T1, T6, T9]
+                provisional: [Q1]
+              b_errors:
+                node: dataset
+                occurs: {min: 0, max: unbounded}
+                type: NX_NUMBER
+                shape: [n_Peaks]
+                units: {category: NX_DIMENSIONLESS}
+                doc: Error associated with background parameter *amplitude* for SHAPE function.
+                via: [T1, T6, T9]
+                provisional: [Q1]
+              o:
+                node: dataset
+                occurs: {min: 0, max: unbounded}
+                type: NX_NUMBER
+                shape: [n_Peaks]
+                units: {category: NX_DIMENSIONLESS}
+                doc: Background parameter *offset* for SHAPE function.
+                via: [T1, T6, T9]
+                provisional: [Q1]
+              o_errors:
+                node: dataset
+                occurs: {min: 0, max: unbounded}
+                type: NX_NUMBER
+                shape: [n_Peaks]
+                units: {category: NX_DIMENSIONLESS}
+                doc: Error associated with background parameter *offset* for SHAPE function.
+                via: [T1, T6, T9]
+                provisional: [Q1]
+              background_area:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_NUMBER
+                shape: [n_Peaks]
+                units: {category: NX_ANY}
+                doc: The background area in *y_Unit* units, integrated over a confidence interval
+                  around the center (*0.95* by default).
+                attributes:
+                  units:
+                    type: NX_CHAR
+                    doc: Specify the *y_Unit* units
+                    via: [T1, T5]
+                    provisional: [Q2]
+                via: [T1, T6, T9]
+                provisional: [Q1]
+              background_area_interval:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_NUMBER
+                units: {category: NX_DIMENSIONLESS}
+                doc: |-
+                  Confidence interval from which the background counts are integrated.
+                  For example *0.95* means that the background is integrated over the range in
+                  which the integrated peak area is 95% of the total peak area.
+                via: [T1, T6]
+                provisional: [Q1]
+            via: [T1, T6]
+            provisional: [Q1]
+          DIFFRACTOGRAM:
+            node: group
+            name: {any: true}
+            class: NXdata
+            occurs: {min: 1, max: unbounded}
+            doc: |-
+              Diffractogram with fit results in :ref:`peak_parameters </NXstress/ENTRY/fit/peak_parameters-group>`
+              and :ref:`background_parameters </NXstress/ENTRY/fit/background_parameters-group>`.
+              This information is not required for stress and strain calculations.
+            attributes:
+              axes:
+                doc: List of the one to two axes field name(s) to be used by default. The
+                  axes are further described in the fields DAXIS and XAXIS.
+                via: [T0, T1, T5]
+                provisional: [Q2]
+              signal:
+                enum: [diffractogram]
+                doc: Default field name to be plotted.
+                via: [T0, T1, T5]
+                provisional: [Q2]
+              auxiliary_signals:
+                doc: List of additional field names to be plotted. This could be e.g. fit,
+                  background, residuals, …
+                via: [T0, T1, T5]
+                provisional: [Q2]
+            children:
+              DAXIS:
+                node: dataset
+                name: {any: true}
+                occurs: {min: 0, max: unbounded}
+                shape: [n_D]
+                doc: |-
+                  One or more fields that contain the values for the **n_D** dimension.
+                  For example the azimuthal positions of different energy-dispersive detectors
+                  or the average azimuth of different azimuthal sections on an area detector.
+                via: [T0, T1, T3, T6, T9]
+                provisional: [Q1, Q3]
+              XAXIS:
+                node: dataset
+                name: {any: true}
+                occurs: {min: 1, max: unbounded}
+                type: NX_NUMBER
+                shape: [n_X]
+                units: {category: NX_ANY}
+                doc: |-
+                  One or more fields that contain the values for the **n_X** dimension in *x_Unit* units.
+                  For example: MCA channels, scattering angle \ :math:`2\theta` in degrees,
+                  scattering vector length q in \ :math:`\mathrm{nm}^{-1}`, ...
+                attributes:
+                  units:
+                    type: NX_CHAR
+                    doc: Specify the *x_Unit* units
+                    via: [T1, T5]
+                    provisional: [Q2]
+                via: [T1, T3, T6, T9]
+                provisional: [Q1, Q3]
+              diffractogram:
+                node: dataset
+                type: NX_NUMBER
+                shape: [n_D, n_X]
+                units: {category: NX_ANY}
+                doc: Diffractogram counts in *y_Unit* units (default signal)
+                attributes:
+                  interpretation:
+                    type: NX_CHAR
+                    enum: [spectrum]
+                    via: [T1, T5]
+                    provisional: [Q2]
+                  units:
+                    type: NX_CHAR
+                    doc: Specify the *y_Unit* units
+                    via: [T1, T5]
+                    provisional: [Q2]
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              diffractogram_errors:
+                node: dataset
+                type: NX_NUMBER
+                shape: [n_D, n_X]
+                units: {category: NX_ANY}
+                doc: Diffractogram counts error in *y_Unit* units (default signal)
+                attributes:
+                  interpretation:
+                    type: NX_CHAR
+                    enum: [spectrum]
+                    via: [T1, T5]
+                    provisional: [Q2]
+                  units:
+                    type: NX_CHAR
+                    doc: Specify the *y_Unit* units
+                    via: [T1, T5]
+                    provisional: [Q2]
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              fit:
+                node: dataset
+                type: NX_NUMBER
+                shape: [n_D, n_X]
+                doc: Diffractogram fit counts (auxiliary signal).
+                attributes:
+                  interpretation:
+                    type: NX_CHAR
+                    enum: [spectrum]
+                    via: [T1, T5]
+                    provisional: [Q2]
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              fit_errors:
+                node: dataset
+                type: NX_NUMBER
+                shape: [n_D, n_X]
+                doc: Diffractogram fit counts error (auxiliary signal).
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              background:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_NUMBER
+                shape: [n_D, n_X]
+                doc: In case the diffraction background was manually determined. Diffractogram
+                  background counts (auxiliary signal).
+                attributes:
+                  interpretation:
+                    type: NX_CHAR
+                    enum: [spectrum]
+                    via: [T1, T5]
+                    provisional: [Q2]
+                via: [T1, T6, T9]
+                provisional: [Q1]
+              residuals:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_NUMBER
+                shape: [n_D, n_X]
+                doc: Difference between diffractogram and fit (auxiliary signal).
+                attributes:
+                  interpretation:
+                    type: NX_CHAR
+                    enum: [spectrum]
+                    via: [T1, T5]
+                    provisional: [Q2]
+                via: [T1, T6, T9]
+                provisional: [Q1]
+            via: [T1, T3, T6]
+            provisional: [Q1, Q3]
+        via: [T1, T3, T6]
+        provisional: [Q1, Q3]
+      NOTES:
+        node: group
+        name: {any: true}
+        class: NXnote
+        occurs: {min: 0, max: 1}
+        doc: |-
+          User description of the data acquisitions.
+          A description of data analysis goes in the
+          :ref:`fit descriptions </NXstress/ENTRY/FIT/DESCRIPTION-group>`.
+        via: [T1, T3, T6]
+        provisional: [Q1, Q3]
+      peaks:
+        node: group
+        class: NXreflections
+        occurs: {min: 1, max: 1}
+        doc: |-
+          This group contains all diffraction peak parameters that could be needed for stress and strain calculations.
+          These parameters are derived from :ref:`peak_parameters </NXstress/ENTRY/fit/peak_parameters-group>` and additional metadata.
+        children:
+          h:
+            node: dataset
+            type: NX_INT
+            shape: [n_Peaks]
+            units: {category: NX_UNITLESS}
+            doc: First Miller index.
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+          k:
+            node: dataset
+            type: NX_INT
+            shape: [n_Peaks]
+            units: {category: NX_UNITLESS}
+            doc: Second Miller index.
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+          l:
+            node: dataset
+            type: NX_INT
+            shape: [n_Peaks]
+            units: {category: NX_UNITLESS}
+            doc: Third Miller index.
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+          lattice:
+            node: dataset
+            occurs: {min: 0, max: 1}
+            type: NX_CHAR
+            shape: [n_Peaks]
+            doc: Crystal lattice systems (*cubic*, *hexagonal*, ...)
+            via: [T1, T6, T9]
+            provisional: [Q1]
+          space_group:
+            node: dataset
+            occurs: {min: 0, max: 1}
+            type: NX_CHAR
+            shape: [n_Peaks]
+            doc: Crystallographic space group :math:`(Fm\bar{3}m, Im\bar{3}m, ...)`
+            via: [T1, T6, T9]
+            provisional: [Q1]
+          phase_name:
+            node: dataset
+            occurs: {min: 1, max: 1}
+            type: NX_CHAR
+            shape: [n_Peaks]
+            doc: Name of the crystallographic phase (hematite, goethite, \ :math:`\alpha`-Al\
+              :sub:`2`\ O\ :sub:`3`\ , ...).
+            via: [T1, T6, T9]
+            provisional: [Q1]
+          qx:
+            node: dataset
+            type: NX_NUMBER
+            shape: [n_Peaks]
+            units: {category: NX_DIMENSIONLESS}
+            doc: |-
+              First component of the *normalized* scattering vector *Q* in the sample reference frame.
+              The sample reference frame is defined by the :ref:`sample transformations </NXstress/ENTRY/sample_description/TRANSFORMATIONS-group>`.
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+          qy:
+            node: dataset
+            type: NX_NUMBER
+            shape: [n_Peaks]
+            units: {category: NX_DIMENSIONLESS}
+            doc: |-
+              Second component of the *normalized* scattering vector *Q* in the sample reference frame.
+              The sample reference frame is defined by the :ref:`sample transformations </NXstress/ENTRY/sample_description/TRANSFORMATIONS-group>`.
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+          qz:
+            node: dataset
+            type: NX_NUMBER
+            shape: [n_Peaks]
+            units: {category: NX_DIMENSIONLESS}
+            doc: |-
+              Third component of the *normalized* scattering vector *Q* in the sample reference frame.
+              The sample reference frame is defined by the :ref:`sample transformations </NXstress/ENTRY/sample_description/TRANSFORMATIONS-group>`.
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+          center:
+            node: dataset
+            occurs: {min: 1, max: 1}
+            type: NX_NUMBER
+            shape: [n_Peaks]
+            units: {category: NX_ANY}
+            doc: Diffraction peak position in *c_Unit* units.
+            attributes:
+              units:
+                type: NX_CHAR
+                enum:
+                  values:
+                  - {value: degrees, doc: two-theta}
+                  - {value: keV, doc: energy}
+                  - {value: 1/angstrom, doc: momentum-transfer}
+                  - {value: angstrom, doc: d-spacing}
+                  - {value: microseconds, doc: time-of-flight}
+                  - {value: '''''', doc: channel (dimensionless)}
+                doc: Specify the *c_Unit* units (see :ref:`center_type </NXstress/ENTRY/peaks/center_type-field>`)
+                via: [T1, T5]
+                provisional: [Q2]
+            via: [T1, T6, T9]
+            provisional: [Q1]
+          center_errors:
+            node: dataset
+            occurs: {min: 1, max: 1}
+            type: NX_NUMBER
+            shape: [n_Peaks]
+            units: {category: NX_ANY}
+            doc: Uncentrainties on :ref:`center </NXstress/ENTRY/peaks/center-field>` in *c_Unit*
+              units.
+            attributes:
+              units:
+                type: NX_CHAR
+                enum:
+                  values:
+                  - {value: degrees, doc: two-theta}
+                  - {value: keV, doc: energy}
+                  - {value: 1/angstrom, doc: momentum-transfer}
+                  - {value: angstrom, doc: d-spacing}
+                  - {value: microseconds, doc: time-of-flight}
+                  - {value: '''''', doc: channel (dimensionless)}
+                doc: Specify the *c_Unit* units (see :ref:`center_type </NXstress/ENTRY/peaks/center_type-field>`)
+                via: [T1, T5]
+                provisional: [Q2]
+            via: [T1, T6, T9]
+            provisional: [Q1]
+          center_type:
+            node: dataset
+            occurs: {min: 1, max: 1}
+            type: NX_CHAR
+            enum: [two-theta, energy, momentum-transfer, d-spacing, channel, time-of-flight]
+            doc: |-
+              The space in which :ref:`center </NXstress/ENTRY/peaks/center-field>` is defined.
+              It defines the *c_Unit* as follows
+
+                  - if *center_type="two-theta"* then *c_Unit* must have the angle unit *degrees*
+                  - if *center_type="energy"* then *c_Unit* must have the unit *keV*
+                  - if *center_type="momentum-transfer"* then *c_Unit* must have the unit \ :math:`Å^{-1}`
+                  - if *center_type="d-spacing"* then *c_Unit* must have the unit \ :math:`Å`
+                  - if *center_type="channel"* then *c_Unit* must be *dimensioness*
+                  - if *center_type="time-of-flight"* then *c_Unit* must have the unit \ :math:`\mu\mathrm{s}`
+            via: [T1, T6]
+            provisional: [Q1]
+          sx:
+            node: dataset
+            occurs: {min: 1, max: 1}
+            type: NX_NUMBER
+            shape: [n_Peaks]
+            units: {category: NX_LENGTH}
+            doc: |-
+              First component of the sample position in the sample reference frame.
+              The sample reference frame is defined by the :ref:`sample transformations </NXstress/ENTRY/sample_description/TRANSFORMATIONS-group>`.
+            via: [T1, T6, T9]
+            provisional: [Q1]
+          sy:
+            node: dataset
+            occurs: {min: 1, max: 1}
+            type: NX_NUMBER
+            shape: [n_Peaks]
+            units: {category: NX_LENGTH}
+            doc: |-
+              First component of the sample position in the sample reference frame.
+              The sample reference frame is defined by the :ref:`sample transformations </NXstress/ENTRY/sample_description/TRANSFORMATIONS-group>`.
+            via: [T1, T6, T9]
+            provisional: [Q1]
+          sz:
+            node: dataset
+            occurs: {min: 1, max: 1}
+            type: NX_NUMBER
+            shape: [n_Peaks]
+            units: {category: NX_LENGTH}
+            doc: |-
+              First component of the sample position in the sample reference frame.
+              The sample reference frame is defined by the :ref:`sample transformations </NXstress/ENTRY/sample_description/TRANSFORMATIONS-group>`.
+            via: [T1, T6, T9]
+            provisional: [Q1]
+        via: [T1, T6]
+        provisional: [Q1]
+    via: [T1, T2, T5, T7]
+    provisional: [Q1, Q2, Q11]
+via: [T8]

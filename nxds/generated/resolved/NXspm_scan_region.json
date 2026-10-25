@@ -1,0 +1,39 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/COLLECTION"},
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"node": "group", "ref": "NXobject/LOG"},
+    {"node": "group", "ref": "NXobject/NOTE"},
+    {"node": "group", "ref": "NXobject/PARAMETERS"},
+    {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+    {"node": "dataset", "ref": "NXobject/identifierNAME"},
+    {"declared_by": "NXspm_scan_region", "docs": ["NXspm_scan_region/scan_offset_valueN"], "id": "scan_offset_valueN", "name": {"template": "scan_offset_value{N}"}, "node": "dataset", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q3"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_ANY"}, "via": ["T1", "T3", "T4", "T7"]},
+    {"declared_by": "NXspm_scan_region", "docs": ["NXspm_scan_region/scan_rangeN"], "id": "scan_rangeN", "name": {"template": "scan_range{N}"}, "node": "dataset", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q3"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_ANY"}, "via": ["T1", "T3", "T4", "T7"]},
+    {"declared_by": "NXspm_scan_region", "docs": ["NXspm_scan_region/scan_angleN"], "id": "scan_angleN", "name": {"template": "scan_angle{N}"}, "node": "dataset", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q3"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_ANGLE"}, "via": ["T1", "T3", "T4", "T7"]},
+    {"declared_by": "NXspm_scan_region", "docs": ["NXspm_scan_region/scan_startN"], "id": "scan_startN", "name": {"template": "scan_start{N}"}, "node": "dataset", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q3"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_ANY"}, "via": ["T1", "T3", "T4", "T7"]},
+    {"declared_by": "NXspm_scan_region", "docs": ["NXspm_scan_region/scan_endN"], "id": "scan_endN", "name": {"template": "scan_end{N}"}, "node": "dataset", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q3"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_ANY"}, "via": ["T1", "T3", "T4", "T7"]}
+  ],
+  "class": "NXspm_scan_region",
+  "extends": "NXobject",
+  "lossy": [],
+  "provisional": [],
+  "require": [],
+  "source": "contributed_definitions/NXspm_scan_region.nxdl.xml",
+  "status": "contributed",
+  "symbols": [],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"},
+  "via": []
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {}
+}

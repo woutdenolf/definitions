@@ -1,0 +1,2 @@
+{"code": "ENUM", "severity": "E", "path": "/entry/crate@colour", "member": "NXcase_lidded_crate@colour"}
+{"code": "TYPE", "severity": "E", "path": "/entry/crate/lid", "member": "NXcase_lidded_crate/lid"}

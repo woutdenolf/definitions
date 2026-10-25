@@ -1,0 +1,212 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/COLLECTION"},
+    {"node": "group", "ref": "NXprocess/DATA"},
+    {"class": "NXdata", "declared_by": "NXmicrostructure_odf", "docs": ["NXprocess/DATA", "NXmicrostructure_odf/phi_two_plot"], "id": "phi_two_plot", "name": {"exact": "phi_two_plot"}, "node": "group", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q4", "Q11"], "recommended": false, "refines": "DATA", "specialisation": "NXmicrostructure_odf/phi_two_plot", "via": ["T1", "T2", "T4", "T6", "T7", "T18"]},
+    {"node": "group", "ref": "NXobject/LOG"},
+    {"node": "group", "ref": "NXprocess/NOTE"},
+    {"node": "group", "ref": "NXprocess/PARAMETERS"},
+    {"class": "NXparameters", "declared_by": "NXmicrostructure_odf", "docs": ["NXprocess/PARAMETERS", "NXmicrostructure_odf/configuration"], "id": "configuration", "name": {"exact": "configuration"}, "node": "group", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q4", "Q11"], "recommended": false, "refines": "PARAMETERS", "specialisation": "NXmicrostructure_odf/configuration", "via": ["T1", "T2", "T4", "T6", "T7", "T18"]},
+    {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+    {"node": "dataset", "ref": "NXobject/identifierNAME"},
+    {"node": "dataset", "ref": "NXprocess/program"},
+    {"node": "dataset", "ref": "NXprocess/sequence_index"},
+    {"node": "dataset", "ref": "NXprocess/version"},
+    {"node": "dataset", "ref": "NXprocess/date"},
+    {"class": "NXprocess", "declared_by": "NXmicrostructure_odf", "docs": ["NXmicrostructure_odf/characteristics"], "id": "characteristics", "name": {"exact": "characteristics"}, "node": "group", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "specialisation": "NXmicrostructure_odf/characteristics", "via": ["T1", "T4", "T7"]},
+    {"class": "NXprocess", "declared_by": "NXmicrostructure_odf", "docs": ["NXmicrostructure_odf/kth_extrema"], "id": "kth_extrema", "name": {"exact": "kth_extrema"}, "node": "group", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "specialisation": "NXmicrostructure_odf/kth_extrema", "via": ["T1", "T4", "T7"]},
+    {"class": "NXprocess", "declared_by": "NXmicrostructure_odf", "docs": ["NXmicrostructure_odf/sampling"], "id": "sampling", "name": {"exact": "sampling"}, "node": "group", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "specialisation": "NXmicrostructure_odf/sampling", "via": ["T1", "T4", "T7"]}
+  ],
+  "class": "NXmicrostructure_odf",
+  "extends": "NXprocess",
+  "lossy": [],
+  "provisional": [],
+  "require": [],
+  "source": "contributed_definitions/NXmicrostructure_odf.nxdl.xml",
+  "status": "contributed",
+  "symbols": ["k", "n_capital_phi", "n_pos", "n_varphi_one", "n_varphi_two"],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"},
+  "via": []
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {
+  "NXmicrostructure_odf/characteristics": {
+   "attributes": [
+     {"ref": "NXobject@default"}
+   ],
+   "children": [
+     {"node": "group", "ref": "NXobject/COLLECTION"},
+     {"node": "group", "ref": "NXprocess/DATA"},
+     {"node": "group", "ref": "NXobject/LOG"},
+     {"node": "group", "ref": "NXprocess/NOTE"},
+     {"node": "group", "ref": "NXprocess/PARAMETERS"},
+     {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+     {"node": "dataset", "ref": "NXobject/identifierNAME"},
+     {"node": "dataset", "ref": "NXprocess/program"},
+     {"node": "dataset", "ref": "NXprocess/sequence_index"},
+     {"node": "dataset", "ref": "NXprocess/version"},
+     {"node": "dataset", "ref": "NXprocess/date"},
+     {"declared_by": "NXmicrostructure_odf", "docs": ["NXmicrostructure_odf/characteristics/texture_index"], "id": "texture_index", "name": {"exact": "texture_index"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_FLOAT", "units": {"category": "NX_DIMENSIONLESS"}, "via": ["T1", "T4", "T7"]}
+   ],
+   "class": "NXprocess",
+   "declared_by": "NXmicrostructure_odf",
+   "id": "NXmicrostructure_odf/characteristics",
+   "require": [],
+   "symbols": [],
+   "undeclared": {"attribute": "report", "dataset": "report", "group": "report"}
+  },
+  "NXmicrostructure_odf/configuration": {
+   "attributes": [
+     {"ref": "NXobject@default"},
+     {"ref": "NXparameters@model"}
+   ],
+   "children": [
+     {"node": "group", "ref": "NXobject/COLLECTION"},
+     {"node": "group", "ref": "NXobject/DATA"},
+     {"node": "group", "ref": "NXobject/LOG"},
+     {"node": "group", "ref": "NXobject/NOTE"},
+     {"node": "group", "ref": "NXobject/PARAMETERS"},
+     {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+     {"node": "dataset", "ref": "NXobject/identifierNAME"},
+     {"node": "dataset", "ref": "NXparameters/PARAMETER"},
+     {"attributes": [{"declared_by": "NXparameters", "id": "units", "name": {"exact": "units"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4"]}, {"declared_by": "NXparameters", "docs": ["NXparameters/PARAMETER@error"], "id": "error", "name": {"exact": "error"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "via": ["T1", "T4"]}, {"declared_by": "NXparameters", "docs": ["NXparameters/PARAMETER@description"], "id": "description", "name": {"exact": "description"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4"]}, {"declared_by": "NXparameters", "docs": ["NXparameters/PARAMETER@expression"], "id": "expression", "name": {"exact": "expression"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4"]}, {"declared_by": "NXparameters", "docs": ["NXparameters/PARAMETER@initial"], "id": "initial", "name": {"exact": "initial"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "via": ["T1", "T4"]}, {"declared_by": "NXparameters", "docs": ["NXparameters/PARAMETER@max"], "id": "max", "name": {"exact": "max"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "via": ["T1", "T4"]}, {"declared_by": "NXparameters", "docs": ["NXparameters/PARAMETER@min"], "id": "min", "name": {"exact": "min"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "via": ["T1", "T4"]}, {"declared_by": "NXparameters", "docs": ["NXparameters/PARAMETER@vary"], "id": "vary", "name": {"exact": "vary"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_BOOLEAN", "via": ["T1", "T4"]}], "declared_by": "NXmicrostructure_odf", "docs": ["NXparameters/PARAMETER", "NXmicrostructure_odf/configuration/crystal_symmetry_point_group"], "id": "crystal_symmetry_point_group", "name": {"exact": "crystal_symmetry_point_group"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q3", "Q4"], "recommended": false, "refines": "PARAMETER", "type": "NX_CHAR", "via": ["T1", "T3", "T4", "T7", "T18"]},
+     {"attributes": [{"declared_by": "NXparameters", "id": "units", "name": {"exact": "units"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4"]}, {"declared_by": "NXparameters", "docs": ["NXparameters/PARAMETER@error"], "id": "error", "name": {"exact": "error"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "via": ["T1", "T4"]}, {"declared_by": "NXparameters", "docs": ["NXparameters/PARAMETER@description"], "id": "description", "name": {"exact": "description"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4"]}, {"declared_by": "NXparameters", "docs": ["NXparameters/PARAMETER@expression"], "id": "expression", "name": {"exact": "expression"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4"]}, {"declared_by": "NXparameters", "docs": ["NXparameters/PARAMETER@initial"], "id": "initial", "name": {"exact": "initial"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "via": ["T1", "T4"]}, {"declared_by": "NXparameters", "docs": ["NXparameters/PARAMETER@max"], "id": "max", "name": {"exact": "max"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "via": ["T1", "T4"]}, {"declared_by": "NXparameters", "docs": ["NXparameters/PARAMETER@min"], "id": "min", "name": {"exact": "min"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "via": ["T1", "T4"]}, {"declared_by": "NXparameters", "docs": ["NXparameters/PARAMETER@vary"], "id": "vary", "name": {"exact": "vary"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_BOOLEAN", "via": ["T1", "T4"]}], "declared_by": "NXmicrostructure_odf", "docs": ["NXparameters/PARAMETER", "NXmicrostructure_odf/configuration/specimen_symmetry_point_group"], "id": "specimen_symmetry_point_group", "name": {"exact": "specimen_symmetry_point_group"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q3", "Q4"], "recommended": false, "refines": "PARAMETER", "type": "NX_CHAR", "via": ["T1", "T3", "T4", "T7", "T18"]},
+     {"attributes": [{"declared_by": "NXparameters", "id": "units", "name": {"exact": "units"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4"]}, {"declared_by": "NXparameters", "docs": ["NXparameters/PARAMETER@error"], "id": "error", "name": {"exact": "error"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "via": ["T1", "T4"]}, {"declared_by": "NXparameters", "docs": ["NXparameters/PARAMETER@description"], "id": "description", "name": {"exact": "description"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4"]}, {"declared_by": "NXparameters", "docs": ["NXparameters/PARAMETER@expression"], "id": "expression", "name": {"exact": "expression"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4"]}, {"declared_by": "NXparameters", "docs": ["NXparameters/PARAMETER@initial"], "id": "initial", "name": {"exact": "initial"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "via": ["T1", "T4"]}, {"declared_by": "NXparameters", "docs": ["NXparameters/PARAMETER@max"], "id": "max", "name": {"exact": "max"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "via": ["T1", "T4"]}, {"declared_by": "NXparameters", "docs": ["NXparameters/PARAMETER@min"], "id": "min", "name": {"exact": "min"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "via": ["T1", "T4"]}, {"declared_by": "NXparameters", "docs": ["NXparameters/PARAMETER@vary"], "id": "vary", "name": {"exact": "vary"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_BOOLEAN", "via": ["T1", "T4"]}], "declared_by": "NXmicrostructure_odf", "docs": ["NXparameters/PARAMETER", "NXmicrostructure_odf/configuration/kernel_halfwidth"], "id": "kernel_halfwidth", "name": {"exact": "kernel_halfwidth"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q3", "Q4"], "recommended": false, "refines": "PARAMETER", "type": "NX_NUMBER", "units": {"category": "NX_ANGLE"}, "via": ["T1", "T3", "T4", "T7", "T18"]},
+     {"attributes": [{"declared_by": "NXparameters", "id": "units", "name": {"exact": "units"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4"]}, {"declared_by": "NXparameters", "docs": ["NXparameters/PARAMETER@error"], "id": "error", "name": {"exact": "error"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "via": ["T1", "T4"]}, {"declared_by": "NXparameters", "docs": ["NXparameters/PARAMETER@description"], "id": "description", "name": {"exact": "description"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4"]}, {"declared_by": "NXparameters", "docs": ["NXparameters/PARAMETER@expression"], "id": "expression", "name": {"exact": "expression"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4"]}, {"declared_by": "NXparameters", "docs": ["NXparameters/PARAMETER@initial"], "id": "initial", "name": {"exact": "initial"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "via": ["T1", "T4"]}, {"declared_by": "NXparameters", "docs": ["NXparameters/PARAMETER@max"], "id": "max", "name": {"exact": "max"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "via": ["T1", "T4"]}, {"declared_by": "NXparameters", "docs": ["NXparameters/PARAMETER@min"], "id": "min", "name": {"exact": "min"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "via": ["T1", "T4"]}, {"declared_by": "NXparameters", "docs": ["NXparameters/PARAMETER@vary"], "id": "vary", "name": {"exact": "vary"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_BOOLEAN", "via": ["T1", "T4"]}], "declared_by": "NXmicrostructure_odf", "docs": ["NXparameters/PARAMETER", "NXmicrostructure_odf/configuration/kernel_name"], "id": "kernel_name", "name": {"exact": "kernel_name"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q3", "Q4"], "recommended": false, "refines": "PARAMETER", "type": "NX_CHAR", "via": ["T1", "T3", "T4", "T7", "T18"]},
+     {"attributes": [{"declared_by": "NXparameters", "id": "units", "name": {"exact": "units"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4"]}, {"declared_by": "NXparameters", "docs": ["NXparameters/PARAMETER@error"], "id": "error", "name": {"exact": "error"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "via": ["T1", "T4"]}, {"declared_by": "NXparameters", "docs": ["NXparameters/PARAMETER@description"], "id": "description", "name": {"exact": "description"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4"]}, {"declared_by": "NXparameters", "docs": ["NXparameters/PARAMETER@expression"], "id": "expression", "name": {"exact": "expression"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4"]}, {"declared_by": "NXparameters", "docs": ["NXparameters/PARAMETER@initial"], "id": "initial", "name": {"exact": "initial"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "via": ["T1", "T4"]}, {"declared_by": "NXparameters", "docs": ["NXparameters/PARAMETER@max"], "id": "max", "name": {"exact": "max"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "via": ["T1", "T4"]}, {"declared_by": "NXparameters", "docs": ["NXparameters/PARAMETER@min"], "id": "min", "name": {"exact": "min"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "via": ["T1", "T4"]}, {"declared_by": "NXparameters", "docs": ["NXparameters/PARAMETER@vary"], "id": "vary", "name": {"exact": "vary"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_BOOLEAN", "via": ["T1", "T4"]}], "declared_by": "NXmicrostructure_odf", "docs": ["NXparameters/PARAMETER", "NXmicrostructure_odf/configuration/resolution"], "id": "resolution", "name": {"exact": "resolution"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q3", "Q4"], "recommended": false, "refines": "PARAMETER", "type": "NX_NUMBER", "units": {"category": "NX_ANGLE"}, "via": ["T1", "T3", "T4", "T7", "T18"]}
+   ],
+   "class": "NXparameters",
+   "declared_by": "NXmicrostructure_odf",
+   "id": "NXmicrostructure_odf/configuration",
+   "require": [],
+   "symbols": [],
+   "undeclared": {"attribute": "report", "dataset": "report", "group": "report"}
+  },
+  "NXmicrostructure_odf/kth_extrema": {
+   "attributes": [
+     {"ref": "NXobject@default"}
+   ],
+   "children": [
+     {"node": "group", "ref": "NXobject/COLLECTION"},
+     {"node": "group", "ref": "NXprocess/DATA"},
+     {"node": "group", "ref": "NXobject/LOG"},
+     {"node": "group", "ref": "NXprocess/NOTE"},
+     {"node": "group", "ref": "NXprocess/PARAMETERS"},
+     {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+     {"node": "dataset", "ref": "NXobject/identifierNAME"},
+     {"node": "dataset", "ref": "NXprocess/program"},
+     {"node": "dataset", "ref": "NXprocess/sequence_index"},
+     {"node": "dataset", "ref": "NXprocess/version"},
+     {"node": "dataset", "ref": "NXprocess/date"},
+     {"declared_by": "NXmicrostructure_odf", "docs": ["NXmicrostructure_odf/kth_extrema/extrema"], "enum": {"open": false, "values": [{"value": "minima"}, {"value": "maxima"}]}, "id": "extrema", "name": {"exact": "extrema"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4", "T7"]},
+     {"declared_by": "NXmicrostructure_odf", "docs": ["NXmicrostructure_odf/kth_extrema/kth"], "id": "kth", "name": {"exact": "kth"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_UINT", "units": {"category": "NX_UNITLESS"}, "via": ["T1", "T4", "T7"]},
+     {"declared_by": "NXmicrostructure_odf", "docs": ["NXmicrostructure_odf/kth_extrema/theta"], "id": "theta", "name": {"exact": "theta"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_ANGLE"}, "via": ["T1", "T4", "T7"]},
+     {"declared_by": "NXmicrostructure_odf", "docs": ["NXmicrostructure_odf/kth_extrema/location"], "id": "location", "name": {"exact": "location"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["k", 3], "symbols": {"k": "NXmicrostructure_odf"}}, "type": "NX_NUMBER", "units": {"category": "NX_ANGLE"}, "via": ["T1", "T4", "T7", "T9"]},
+     {"declared_by": "NXmicrostructure_odf", "docs": ["NXmicrostructure_odf/kth_extrema/volume_fraction"], "id": "volume_fraction", "name": {"exact": "volume_fraction"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["k"], "symbols": {"k": "NXmicrostructure_odf"}}, "type": "NX_NUMBER", "units": {"category": "NX_ANY"}, "via": ["T1", "T4", "T7", "T9"]}
+   ],
+   "class": "NXprocess",
+   "declared_by": "NXmicrostructure_odf",
+   "id": "NXmicrostructure_odf/kth_extrema",
+   "require": [],
+   "symbols": [],
+   "undeclared": {"attribute": "report", "dataset": "report", "group": "report"}
+  },
+  "NXmicrostructure_odf/phi_two_plot": {
+   "attributes": [
+     {"ref": "NXobject@default"},
+     {"ref": "NXdata@signal"},
+     {"ref": "NXdata@auxiliary_signals"},
+     {"ref": "NXdata@default_slice"},
+     {"ref": "NXdata@AXISNAME_indices"},
+     {"ref": "NXdata@axes"}
+   ],
+   "children": [
+     {"node": "group", "ref": "NXobject/COLLECTION"},
+     {"node": "group", "ref": "NXobject/DATA"},
+     {"node": "group", "ref": "NXobject/LOG"},
+     {"node": "group", "ref": "NXobject/NOTE"},
+     {"node": "group", "ref": "NXobject/PARAMETERS"},
+     {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+     {"node": "dataset", "ref": "NXdata/FIELDNAME_errors"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+     {"node": "dataset", "ref": "NXobject/identifierNAME"},
+     {"node": "dataset", "ref": "NXdata/AXISNAME"},
+     {"node": "dataset", "ref": "NXdata/DATA"},
+     {"node": "dataset", "ref": "NXdata/errors"},
+     {"node": "dataset", "ref": "NXdata/FIELDNAME_scaling_factor"},
+     {"node": "dataset", "ref": "NXdata/FIELDNAME_offset"},
+     {"node": "dataset", "ref": "NXdata/scaling_factor"},
+     {"node": "dataset", "ref": "NXdata/offset"},
+     {"node": "dataset", "ref": "NXdata/title"},
+     {"node": "dataset", "ref": "NXdata/x"},
+     {"node": "dataset", "ref": "NXdata/y"},
+     {"node": "dataset", "ref": "NXdata/z"},
+     {"declared_by": "NXmicrostructure_odf", "docs": ["NXmicrostructure_odf/phi_two_plot/intensity"], "id": "intensity", "name": {"exact": "intensity"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["n_varphi_two", "n_capital_phi", "n_varphi_one"], "symbols": {"n_capital_phi": "NXmicrostructure_odf", "n_varphi_one": "NXmicrostructure_odf", "n_varphi_two": "NXmicrostructure_odf"}}, "type": "NX_NUMBER", "units": {"category": "NX_DIMENSIONLESS"}, "via": ["T1", "T4", "T7", "T9"]},
+     {"declared_by": "NXmicrostructure_odf", "docs": ["NXmicrostructure_odf/phi_two_plot/varphi_one"], "id": "varphi_one", "name": {"exact": "varphi_one"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["n_varphi_one"], "symbols": {"n_varphi_one": "NXmicrostructure_odf"}}, "type": "NX_NUMBER", "units": {"category": "NX_ANGLE"}, "via": ["T1", "T4", "T7", "T9"]},
+     {"declared_by": "NXmicrostructure_odf", "docs": ["NXmicrostructure_odf/phi_two_plot/capital_phi"], "id": "capital_phi", "name": {"exact": "capital_phi"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["n_capital_phi"], "symbols": {"n_capital_phi": "NXmicrostructure_odf"}}, "type": "NX_NUMBER", "units": {"category": "NX_ANGLE"}, "via": ["T1", "T4", "T7", "T9"]},
+     {"declared_by": "NXmicrostructure_odf", "docs": ["NXmicrostructure_odf/phi_two_plot/varphi_two"], "id": "varphi_two", "name": {"exact": "varphi_two"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["n_varphi_two"], "symbols": {"n_varphi_two": "NXmicrostructure_odf"}}, "type": "NX_NUMBER", "units": {"category": "NX_ANGLE"}, "via": ["T1", "T4", "T7", "T9"]}
+   ],
+   "class": "NXdata",
+   "declared_by": "NXmicrostructure_odf",
+   "id": "NXmicrostructure_odf/phi_two_plot",
+   "require": [],
+   "symbols": [],
+   "undeclared": {"attribute": "ignore", "dataset": "ignore", "group": "report"}
+  },
+  "NXmicrostructure_odf/sampling": {
+   "attributes": [
+     {"ref": "NXobject@default"}
+   ],
+   "children": [
+     {"node": "group", "ref": "NXobject/COLLECTION"},
+     {"node": "group", "ref": "NXprocess/DATA"},
+     {"node": "group", "ref": "NXobject/LOG"},
+     {"node": "group", "ref": "NXprocess/NOTE"},
+     {"node": "group", "ref": "NXprocess/PARAMETERS"},
+     {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+     {"node": "dataset", "ref": "NXobject/identifierNAME"},
+     {"node": "dataset", "ref": "NXprocess/program"},
+     {"node": "dataset", "ref": "NXprocess/sequence_index"},
+     {"node": "dataset", "ref": "NXprocess/version"},
+     {"node": "dataset", "ref": "NXprocess/date"},
+     {"declared_by": "NXmicrostructure_odf", "docs": ["NXmicrostructure_odf/sampling/resolution"], "id": "resolution", "name": {"exact": "resolution"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_ANGLE"}, "via": ["T1", "T4", "T7"]},
+     {"declared_by": "NXmicrostructure_odf", "docs": ["NXmicrostructure_odf/sampling/euler"], "id": "euler", "name": {"exact": "euler"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["n_pos", 3], "symbols": {"n_pos": "NXmicrostructure_odf"}}, "type": "NX_NUMBER", "units": {"category": "NX_ANGLE"}, "via": ["T1", "T4", "T7", "T9"]},
+     {"declared_by": "NXmicrostructure_odf", "docs": ["NXmicrostructure_odf/sampling/weight"], "id": "weight", "name": {"exact": "weight"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["n_pos"], "symbols": {"n_pos": "NXmicrostructure_odf"}}, "type": "NX_NUMBER", "units": {"category": "NX_DIMENSIONLESS"}, "via": ["T1", "T4", "T7", "T9"]}
+   ],
+   "class": "NXprocess",
+   "declared_by": "NXmicrostructure_odf",
+   "id": "NXmicrostructure_odf/sampling",
+   "require": [],
+   "symbols": [],
+   "undeclared": {"attribute": "report", "dataset": "report", "group": "report"}
+  }
+ }
+}

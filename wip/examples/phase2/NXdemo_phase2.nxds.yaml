@@ -1,0 +1,43 @@
+# Written by an author in NXDS (phase 2).
+nxds: "0.1"
+class: NXdemo_phase2
+category: application
+describes: NXroot
+doc: "Demo: absorption against energy."
+defaults: {min: 1, binding: true}   # required unless stated otherwise; omitting this line is an error
+symbols:
+  nE: {doc: number of energies}
+children:
+  ENTRY:                            # an id; upper case is only a convention for free names
+    node: group
+    class: NXentry
+    name: {any: true}               # free name
+    children:
+      definition: {node: dataset, type: NX_CHAR, enum: [NXdemo_phase2]}
+      title: {node: dataset, type: NX_CHAR, occurs: {min: 0}, recommended: true}
+      INSTRUMENT:
+        node: group
+        class: NXinstrument
+        name: {any: true}
+        children:
+          monochromator:            # fixed name
+            node: group
+            class: NXmonochromator
+            refines: MONOCHROMATOR  # the free-named member of NXinstrument it stands for
+            children:
+              energy: {node: dataset, type: NX_FLOAT, units: {category: NX_ENERGY}, shape: [nE]}
+          counter:
+            node: group
+            class: NXdemo_counter_phase2
+            children:
+              mode: {node: dataset}               # keeps type and enumeration of the base class
+              i0_counts: {node: dataset, refines: CHANNEL_counts, shape: [nE]}   # one of the template's channels
+      DATA:
+        node: group
+        class: NXdata
+        name: {any: true}
+        attributes:
+          signal: {type: NX_CHAR, enum: [mu]}
+        children:
+          mu: {node: dataset, type: NX_FLOAT, shape: [nE]}
+          energy: {node: link, target: ENTRY/INSTRUMENT/monochromator/energy}

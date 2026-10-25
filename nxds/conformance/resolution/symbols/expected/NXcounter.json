@@ -1,0 +1,25 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"declared_by": "NXcounter", "enum": {"open": false, "values": [{"value": "timer"}, {"value": "monitor"}]}, "id": "mode", "name": {"exact": "mode"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "recommended": false, "type": "NX_CHAR"},
+    {"declared_by": "NXcounter", "id": "CHANNEL_counts", "name": {"template": "{CHANNEL}_counts"}, "node": "dataset", "occurs": {"max": "unbounded", "min": 0}, "recommended": false, "type": "NX_INT", "units": {"category": "NX_COUNT"}},
+    {"class": "NXsensor", "declared_by": "NXcounter", "id": "SENSOR", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 0}, "recommended": false}
+  ],
+  "class": "NXcounter",
+  "extends": "NXobject",
+  "lossy": [],
+  "require": [],
+  "status": "local",
+  "symbols": [],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"}
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {}
+}

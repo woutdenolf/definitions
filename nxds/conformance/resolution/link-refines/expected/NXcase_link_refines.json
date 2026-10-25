@@ -1,0 +1,115 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"},
+    {"ref": "NXroot@NeXus_release"}
+  ],
+  "category": "application",
+  "children": [
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"class": "NXentry", "declared_by": "NXroot", "id": "ENTRY", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 1}, "recommended": false, "refined_by": ["NXcase_link_refines"], "specialisation": "NXcase_link_refines/ENTRY"}
+  ],
+  "class": "NXcase_link_refines",
+  "describes": "NXroot",
+  "lossy": [],
+  "require": [],
+  "status": "local",
+  "symbols": [],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"}
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {
+  "NXcase_link_refines/ENTRY": {
+   "attributes": [
+     {"ref": "NXobject@default"}
+   ],
+   "children": [
+     {"class": "NXdata", "declared_by": "NXobject", "id": "DATA", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 1}, "recommended": false, "refined_by": ["NXcase_link_refines"], "specialisation": "NXcase_link_refines/ENTRY/DATA"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+     {"declared_by": "NXentry", "enum": {"open": false, "values": [{"value": "NXcase_link_refines"}]}, "id": "definition", "name": {"exact": "definition"}, "node": "dataset", "occurs": {"max": 1, "min": 1}, "recommended": false, "refined_by": ["NXcase_link_refines"], "type": "NX_CHAR"},
+     {"node": "dataset", "ref": "NXentry/title"},
+     {"node": "dataset", "ref": "NXentry/start_time"},
+     {"class": "NXinstrument", "declared_by": "NXentry", "id": "INSTRUMENT", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 1}, "recommended": false, "refined_by": ["NXcase_link_refines"], "specialisation": "NXcase_link_refines/ENTRY/INSTRUMENT"},
+     {"class": "NXcase_sample", "declared_by": "NXcase_link_refines", "id": "SAMPLE", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 1}, "recommended": false, "specialisation": "NXcase_link_refines/ENTRY/SAMPLE"}
+   ],
+   "class": "NXentry",
+   "declared_by": "NXcase_link_refines",
+   "id": "NXcase_link_refines/ENTRY",
+   "require": [],
+   "symbols": [],
+   "undeclared": {"attribute": "report", "dataset": "report", "group": "report"}
+  },
+  "NXcase_link_refines/ENTRY/DATA": {
+   "attributes": [
+     {"ref": "NXobject@default"},
+     {"ref": "NXdata@signal"},
+     {"ref": "NXdata@axes"}
+   ],
+   "children": [
+     {"node": "group", "ref": "NXobject/DATA"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+     {"node": "dataset", "ref": "NXdata/DATA"},
+     {"node": "dataset", "ref": "NXdata/AXISNAME"},
+     {"declared_by": "NXcase_link_refines", "id": "wavelength", "name": {"exact": "wavelength"}, "node": "link", "occurs": {"max": 1, "min": 1}, "recommended": false, "target": "ENTRY/INSTRUMENT/MONOCHROMATOR/wavelength"}
+   ],
+   "class": "NXdata",
+   "declared_by": "NXcase_link_refines",
+   "id": "NXcase_link_refines/ENTRY/DATA",
+   "require": [],
+   "symbols": [],
+   "undeclared": {"attribute": "report", "dataset": "report", "group": "report"}
+  },
+  "NXcase_link_refines/ENTRY/INSTRUMENT": {
+   "attributes": [
+     {"ref": "NXobject@default"}
+   ],
+   "children": [
+     {"node": "group", "ref": "NXobject/DATA"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+     {"node": "group", "ref": "NXinstrument/MONOCHROMATOR"},
+     {"class": "NXmonochromator", "declared_by": "NXcase_link_refines", "id": "monochromator", "name": {"exact": "monochromator"}, "node": "group", "occurs": {"max": 1, "min": 1}, "recommended": false, "refines": "MONOCHROMATOR", "specialisation": "NXcase_link_refines/ENTRY/INSTRUMENT/monochromator"}
+   ],
+   "class": "NXinstrument",
+   "declared_by": "NXcase_link_refines",
+   "id": "NXcase_link_refines/ENTRY/INSTRUMENT",
+   "require": [],
+   "symbols": [],
+   "undeclared": {"attribute": "report", "dataset": "report", "group": "report"}
+  },
+  "NXcase_link_refines/ENTRY/INSTRUMENT/monochromator": {
+   "attributes": [
+     {"ref": "NXobject@default"}
+   ],
+   "children": [
+     {"node": "group", "ref": "NXobject/DATA"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+     {"node": "dataset", "ref": "NXmonochromator/energy"},
+     {"declared_by": "NXcase_link_refines", "id": "wavelength", "name": {"exact": "wavelength"}, "node": "dataset", "occurs": {"max": 1, "min": 1}, "recommended": false, "type": "NX_FLOAT"}
+   ],
+   "class": "NXmonochromator",
+   "declared_by": "NXcase_link_refines",
+   "id": "NXcase_link_refines/ENTRY/INSTRUMENT/monochromator",
+   "require": [],
+   "symbols": [],
+   "undeclared": {"attribute": "report", "dataset": "report", "group": "report"}
+  },
+  "NXcase_link_refines/ENTRY/SAMPLE": {
+   "attributes": [
+     {"ref": "NXobject@default"}
+   ],
+   "children": [
+     {"node": "group", "ref": "NXobject/DATA"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+     {"declared_by": "NXcase_sample", "id": "temperature", "name": {"exact": "temperature"}, "node": "link", "occurs": {"max": 1, "min": 1}, "recommended": false, "refined_by": ["NXcase_link_refines"], "target": "ENTRY/INSTRUMENT/MONOCHROMATOR/energy", "type": "NX_FLOAT"}
+   ],
+   "class": "NXcase_sample",
+   "declared_by": "NXcase_link_refines",
+   "id": "NXcase_link_refines/ENTRY/SAMPLE",
+   "require": [],
+   "symbols": [],
+   "undeclared": {"attribute": "report", "dataset": "report", "group": "report"}
+  }
+ }
+}

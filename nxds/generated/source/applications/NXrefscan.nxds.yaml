@@ -1,0 +1,178 @@
+nxds: '0.1'
+class: NXrefscan
+category: application
+describes: NXroot
+doc: |-
+  This is an application definition for a monochromatic scanning reflectometer.
+
+  It does not have the information to calculate the resolution
+  since it does not have any apertures.
+defaults: {min: 1, binding: true, type: NX_CHAR}
+symbols:
+  nP: {doc: Number of points}
+children:
+  ENTRY:
+    node: group
+    name: {any: true}
+    class: NXentry
+    children:
+      title:
+        node: dataset
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      start_time:
+        node: dataset
+        type: NX_DATE_TIME
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      end_time:
+        node: dataset
+        type: NX_DATE_TIME
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      definition:
+        node: dataset
+        enum: [NXrefscan]
+        doc: 'Official NeXus NXDL schema to which this file conforms '
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      instrument:
+        node: group
+        class: NXinstrument
+        children:
+          SOURCE:
+            node: group
+            name: {any: true}
+            class: NXsource
+            children:
+              type:
+                node: dataset
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+              name:
+                node: dataset
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+              probe:
+                node: dataset
+                enum: [neutron, x-ray, electron]
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T2, T5, T7]
+            provisional: [Q1, Q2, Q11]
+          monochromator:
+            node: group
+            class: NXmonochromator
+            children:
+              wavelength:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_WAVELENGTH}
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          DETECTOR:
+            node: group
+            name: {any: true}
+            class: NXdetector
+            children:
+              data:
+                node: dataset
+                type: NX_INT
+                shape: [nP]
+                attributes:
+                  signal:
+                    occurs: {min: 0}
+                    type: NX_POSINT
+                    enum: ['1']
+                    via: [T19]
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              polar_angle:
+                node: dataset
+                type: NX_FLOAT
+                shape: [nP]
+                units: {category: NX_ANGLE}
+                attributes:
+                  axis:
+                    occurs: {min: 0}
+                    type: NX_POSINT
+                    enum: ['1']
+                    via: [T19]
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+            via: [T1, T2, T5, T7]
+            provisional: [Q1, Q2, Q11]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      sample:
+        node: group
+        class: NXsample
+        children:
+          name:
+            node: dataset
+            doc: Descriptive name of sample
+            via: [T0, T1, T5, T7]
+            provisional: [Q1, Q2]
+          rotation_angle:
+            node: dataset
+            type: NX_FLOAT
+            shape: [nP]
+            units: {category: NX_ANGLE}
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      control:
+        node: group
+        class: NXmonitor
+        children:
+          mode:
+            node: dataset
+            enum: [monitor, timer]
+            doc: |-
+              Count to a preset value based on either clock time (timer)
+              or received monitor counts (monitor).
+            via: [T0, T1, T5, T7]
+            provisional: [Q1, Q2]
+          preset:
+            node: dataset
+            type: NX_FLOAT
+            doc: preset value for time or monitor
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          data:
+            node: dataset
+            type: NX_FLOAT
+            shape: [nP]
+            units: {category: NX_ANY}
+            doc: Monitor counts for each step
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      data:
+        node: group
+        class: NXdata
+        children:
+          data:
+            node: link
+            target: ENTRY/INSTRUMENT/DETECTOR/data
+            via: [T1, T5, T10]
+            provisional: [Q2, Q8]
+          rotation_angle:
+            node: link
+            target: ENTRY/SAMPLE/rotation_angle
+            via: [T1, T5, T10]
+            provisional: [Q2, Q8]
+          polar_angle:
+            node: link
+            target: ENTRY/INSTRUMENT/DETECTOR/polar_angle
+            via: [T1, T5, T10]
+            provisional: [Q2, Q8]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+    via: [T1, T2, T5, T7]
+    provisional: [Q1, Q2, Q11]
+via: [T8]

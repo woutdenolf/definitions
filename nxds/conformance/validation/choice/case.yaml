@@ -1,0 +1,6 @@
+description: >
+  Choice by class (§7.2): `/entry1/shape` is an NXcase_cylinder and is
+  assigned to the cylinder member (its `radius` is checked there: TYPE);
+  `/entry2/shape` has a class neither member accepts, so it is assigned to the
+  first exact member (CLASS).
+capabilities: []

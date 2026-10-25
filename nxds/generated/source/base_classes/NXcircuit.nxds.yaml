@@ -1,0 +1,173 @@
+nxds: '0.1'
+class: NXcircuit
+category: base
+extends: NXcomponent
+doc: |-
+  Base class for documenting circuit devices.
+
+  Electronic circuits are hardware components that connect several electronic components to achieve
+  specific functionality, e.g. amplifying a voltage or convert a voltage to binary numbers, etc.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  hardware:
+    node: group
+    class: NXfabrication
+    doc: |-
+      Hardware where the circuit is implanted; includes information about the
+      hardware manufacturers and type (e.g. part number)
+      All the elements below may be single numbers of an array of values with length N_channel
+      describing multiple input and output channels.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  components:
+    node: dataset
+    type: NX_CHAR
+    doc: |-
+      List of components used in the circuit, e.g., resistors, capacitors, transistors or any
+      other complex components.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  connections:
+    node: dataset
+    type: NX_CHAR
+    doc: |-
+      Description of how components are interconnected, including connection points
+      and wiring.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  power_source:
+    node: dataset
+    type: NX_CHAR
+    doc: |-
+      Details of the power source for the circuit, including voltage and current
+      ratings.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  signal_type:
+    node: dataset
+    type: NX_CHAR
+    doc: |-
+      Type of signal (input signal) the circuit is designed to handle, e.g., analog,
+      digital, mixed-signal.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  operating_frequency:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_FREQUENCY}
+    doc: |-
+      The operating frequency of the circuit, see also bandwidth, which is possibly
+      but not necessarily centered around this frequency (e.g. running a 100 kHz bandwidth
+      amplifier at low, audio frequencies 1 - 20,000 Hz).
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  bandwidth:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_FREQUENCY}
+    doc: The bandwidth of the frequency response of the circuit.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  input_impedance:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_ANY}
+    doc: Input impedance of the circuit.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  output_impedance:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_ANY}
+    doc: Output impedance of the circuit.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  gain:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_UNITLESS}
+    doc: |-
+      Gain of the circuit, if applicable, usually all instruments have a gain
+      which might be important or not.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  noise_level:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_ANY}
+    doc: |-
+      Root-mean-square (RMS) noise level (in current or voltage)
+      in the circuit in voltage or current.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  temperature_range:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_ANY}
+    doc: Operating temperature range of the circuit.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  calibration:
+    node: group
+    class: NXcalibration
+    doc: Calibration data for the circuit.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  offset:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_ANY}
+    doc: Offset value for current or voltage.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  output_channels:
+    node: dataset
+    type: NX_NUMBER
+    doc: Number of output channels connected to this circuit. Most probably N_channel.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  output_signal:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_ANY}
+    doc: Type of output signal, e.g., voltage, current, digital.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  power_consumption:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_ANY}
+    doc: Power consumption of the circuit per unit time.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  status_indicators:
+    node: dataset
+    type: NX_CHAR
+    doc: Status indicators for the circuit, e.g., LEDs, display readouts.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  protection_features:
+    node: dataset
+    type: NX_CHAR
+    doc: |-
+      Protection features built into the circuit, e.g., overvoltage protection,
+      thermal shutdown.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  acquisition_time:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_TIME}
+    doc: |-
+      Updated rate for several processes using the input signal, e.g., History Graph, the circuit
+      uses for any such process.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  output_slew_rate:
+    node: dataset
+    type: NX_CHAR
+    doc: |-
+      The rate at which the signal changes when ramping from the starting
+      value.
+    via: [T1, T4, T7]
+    provisional: [Q1]

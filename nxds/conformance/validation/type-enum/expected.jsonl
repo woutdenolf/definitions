@@ -1,0 +1,3 @@
+{"code": "ENUM", "severity": "E", "path": "/entry/instrument/counter/mode", "member": "NXcase_name_fit/ENTRY/INSTRUMENT/counter/mode"}
+{"code": "TYPE", "severity": "E", "path": "/entry/instrument/counter/i0_counts", "member": "NXcase_name_fit/ENTRY/INSTRUMENT/counter/i0_counts"}
+{"code": "UNITS", "severity": "W", "path": "/entry/instrument/counter/i1_counts", "member": "NXcase_name_fit/ENTRY/INSTRUMENT/counter/CHANNEL_counts"}

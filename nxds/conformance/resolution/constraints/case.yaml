@@ -1,0 +1,2 @@
+description: A constraint over members (`require: at_least_one_of`).
+covers: [require.at_least_one_of]

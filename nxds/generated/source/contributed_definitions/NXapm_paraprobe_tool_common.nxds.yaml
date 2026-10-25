@@ -1,0 +1,109 @@
+nxds: '0.1'
+class: NXapm_paraprobe_tool_common
+category: base
+extends: NXobject
+doc: |-
+  Base class documenting organizational metadata used by all tools of the
+  paraprobe-toolbox.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  status:
+    node: dataset
+    type: NX_CHAR
+    enum: [success, failure]
+    doc: |-
+      A statement whether the tool executable managed to process the analysis
+      or whether this failed. Status is written to the results file after the
+      end_time beyond which point in time the tool must no longer compute
+      any further analysis results but exit.
+
+      Only when this status message is present and its value is `success`,
+      one should consider the results of the tool. In all other cases it might
+      be that the tool has terminated prematurely or another error occurred.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  identifier_analysis:
+    node: dataset
+    type: NX_UINT
+    units: {category: NX_UNITLESS}
+    doc: |-
+      Internal identifier used by the tool to refer to an analysis.
+      Simulation ID is an alias.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  config:
+    node: group
+    class: NXnote
+    doc: |-
+      The configuration file that was used to parameterize
+      the algorithms that this tool has executed.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  programID:
+    node: group
+    name: {template: 'program{ID}'}
+    class: NXprogram
+    via: [T1, T3, T4, T7]
+    provisional: [Q1, Q3]
+  profiling:
+    node: group
+    class: NXcs_profiling
+    children:
+      start_time:
+        node: dataset
+        type: NX_DATE_TIME
+        doc: |-
+          ISO 8601 formatted time code with local time zone offset to UTC
+          information included when the analysis in this results file was started,
+          i.e. when the respective executable/tool was started as a process.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      end_time:
+        node: dataset
+        type: NX_DATE_TIME
+        doc: |-
+          ISO 8601 formatted time code with local time zone offset to UTC
+          information included when the analysis in this results file were
+          completed and the respective process of the tool exited.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      total_elapsed_time:
+        node: dataset
+        type: NX_FLOAT
+        units: {category: NX_TIME}
+        doc: Wall-clock time.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  userID:
+    node: group
+    name: {template: 'user{ID}'}
+    class: NXuser
+    via: [T1, T3, T4, T7]
+    provisional: [Q1, Q3]
+  NAMED_reference_frameID:
+    node: group
+    name: {template: '{NAMED}_reference_frame{ID}'}
+    class: NXcoordinate_system
+    doc: |-
+      Details about coordinate systems (reference frames) used. In atom probe several coordinate
+      systems have to be distinguished. Names of instances of such :ref:`NXcoordinate_system`
+      should be documented explicitly and doing so by picking from the
+      following controlled set of names:
+
+      * paraprobe_reference_frame
+      * lab_reference_frame
+      * specimen_reference_frame
+      * laser_reference_frame
+      * instrument_reference_frame
+      * detector_reference_frame
+      * reconstruction_reference_frame
+
+      The aim of this convention is to support users with contextualizing which reference frame
+      each instance (coordinate system) is. If needed, instances of :ref:`NXtransformations`
+      are used to detail the explicit affine transformations whereby one can convert
+      representations between different reference frames.
+      Inspect :ref:`NXtransformations` for further details.
+    via: [T1, T3, T4, T7]
+    provisional: [Q1, Q3]

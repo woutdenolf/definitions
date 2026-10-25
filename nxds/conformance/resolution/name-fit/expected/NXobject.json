@@ -1,0 +1,21 @@
+{
+ "definition": {
+  "attributes": [
+    {"declared_by": "NXobject", "id": "default", "name": {"exact": "default"}, "names_child": "group", "occurs": {"max": 1, "min": 0}, "recommended": false, "type": "NX_CHAR"}
+  ],
+  "category": "base",
+  "children": [
+    {"class": "NXdata", "declared_by": "NXobject", "id": "DATA", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 0}, "recommended": false},
+    {"declared_by": "NXobject", "id": "FIELDNAME_errors", "name": {"template": "{FIELDNAME}_errors"}, "node": "dataset", "occurs": {"max": "unbounded", "min": 0}, "recommended": false, "type": "NX_NUMBER"}
+  ],
+  "class": "NXobject",
+  "lossy": [],
+  "require": [],
+  "status": "local",
+  "symbols": [],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"}
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {}
+}

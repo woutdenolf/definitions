@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="NXdemo_counter_phase2" extends="NXobject" type="group" category="base" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
+  <doc>
+    Demo: a counter with several channels.
+  </doc>
+  <field name="mode" type="NX_CHAR">
+    <doc>
+      Counting mode.
+    </doc>
+    <enumeration>
+      <item value="timer"/>
+      <item value="monitor"/>
+    </enumeration>
+  </field>
+  <field name="CHANNEL_counts" nameType="partial" type="NX_INT" units="NX_COUNT">
+    <doc>
+      Counts of one channel, for example ``i0_counts``.
+    </doc>
+  </field>
+  <group type="NXsensor">
+    <doc>
+      Any sensor read out with the counter.
+    </doc>
+  </group>
+</definition>

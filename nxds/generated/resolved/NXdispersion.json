@@ -1,0 +1,37 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/COLLECTION"},
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"node": "group", "ref": "NXobject/LOG"},
+    {"node": "group", "ref": "NXobject/NOTE"},
+    {"node": "group", "ref": "NXobject/PARAMETERS"},
+    {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+    {"node": "dataset", "ref": "NXobject/identifierNAME"},
+    {"declared_by": "NXdispersion", "docs": ["NXdispersion/model_name"], "id": "model_name", "name": {"exact": "model_name"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4", "T7"]},
+    {"class": "NXdispersion_table", "declared_by": "NXdispersion", "id": "DISPERSION_TABLE", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q11"], "recommended": false, "via": ["T1", "T2", "T4", "T7"]},
+    {"class": "NXdispersion_function", "declared_by": "NXdispersion", "id": "DISPERSION_FUNCTION", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q11"], "recommended": false, "via": ["T1", "T2", "T4", "T7"]}
+  ],
+  "class": "NXdispersion",
+  "extends": "NXobject",
+  "lossy": [],
+  "provisional": [],
+  "require": [],
+  "source": "contributed_definitions/NXdispersion.nxdl.xml",
+  "status": "contributed",
+  "symbols": [],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"},
+  "via": []
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {}
+}

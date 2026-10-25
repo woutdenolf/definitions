@@ -1,0 +1,9 @@
+{
+ "nxds": "0.1",
+ "texts": {
+  "NXdemo_phase4": "Demo: absorption against energy.",
+  "NXdemo_phase4#nE": "number of energies",
+  "NXdemo_phase4/ENTRY/DATA/fluo": "fluorescence",
+  "NXdemo_phase4/ENTRY/DATA/mu": "transmission"
+ }
+}

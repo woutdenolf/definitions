@@ -1,0 +1,97 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"},
+    {"ref": "NXroot@NeXus_release"}
+  ],
+  "category": "application",
+  "children": [
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"class": "NXentry", "declared_by": "NXroot", "id": "ENTRY", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 1}, "recommended": false, "refined_by": ["NXcase_nxdl"], "specialisation": "NXcase_nxdl/ENTRY"}
+  ],
+  "class": "NXcase_nxdl",
+  "describes": "NXroot",
+  "lossy": [],
+  "require": [],
+  "status": "local",
+  "symbols": ["n"],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"}
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {
+  "NXcase_nxdl/ENTRY": {
+   "attributes": [
+     {"ref": "NXobject@default"}
+   ],
+   "children": [
+     {"class": "NXdata", "declared_by": "NXobject", "id": "DATA", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 1}, "recommended": false, "refined_by": ["NXcase_nxdl"], "specialisation": "NXcase_nxdl/ENTRY/DATA"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+     {"declared_by": "NXentry", "enum": {"open": false, "values": [{"value": "NXcase_nxdl"}]}, "id": "definition", "name": {"exact": "definition"}, "node": "dataset", "occurs": {"max": 1, "min": 1}, "recommended": false, "refined_by": ["NXcase_nxdl"], "type": "NX_CHAR"},
+     {"declared_by": "NXentry", "id": "title", "name": {"exact": "title"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "recommended": true, "refined_by": ["NXcase_nxdl"], "type": "NX_CHAR"},
+     {"declared_by": "NXentry", "id": "start_time", "name": {"exact": "start_time"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "recommended": false, "refined_by": ["NXcase_nxdl"], "type": "NX_DATE_TIME"},
+     {"class": "NXinstrument", "declared_by": "NXentry", "id": "INSTRUMENT", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 1}, "recommended": false, "refined_by": ["NXcase_nxdl"], "specialisation": "NXcase_nxdl/ENTRY/INSTRUMENT"}
+   ],
+   "class": "NXentry",
+   "declared_by": "NXcase_nxdl",
+   "id": "NXcase_nxdl/ENTRY",
+   "require": [],
+   "symbols": [],
+   "undeclared": {"attribute": "report", "dataset": "report", "group": "report"}
+  },
+  "NXcase_nxdl/ENTRY/DATA": {
+   "attributes": [
+     {"ref": "NXobject@default"},
+     {"declared_by": "NXdata", "id": "signal", "name": {"exact": "signal"}, "occurs": {"max": 1, "min": 1}, "recommended": false, "refined_by": ["NXcase_nxdl"], "type": "NX_CHAR"},
+     {"ref": "NXdata@axes"}
+   ],
+   "children": [
+     {"node": "group", "ref": "NXobject/DATA"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+     {"node": "dataset", "ref": "NXdata/DATA"},
+     {"node": "dataset", "ref": "NXdata/AXISNAME"},
+     {"declared_by": "NXcase_nxdl", "id": "energy", "name": {"exact": "energy"}, "node": "link", "occurs": {"max": 1, "min": 1}, "recommended": false, "target": "ENTRY/INSTRUMENT/monochromator/energy"}
+   ],
+   "class": "NXdata",
+   "declared_by": "NXcase_nxdl",
+   "id": "NXcase_nxdl/ENTRY/DATA",
+   "require": [],
+   "symbols": [],
+   "undeclared": {"attribute": "report", "dataset": "report", "group": "report"}
+  },
+  "NXcase_nxdl/ENTRY/INSTRUMENT": {
+   "attributes": [
+     {"ref": "NXobject@default"}
+   ],
+   "children": [
+     {"node": "group", "ref": "NXobject/DATA"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+     {"node": "group", "ref": "NXinstrument/MONOCHROMATOR"},
+     {"class": "NXmonochromator", "declared_by": "NXcase_nxdl", "id": "monochromator", "name": {"exact": "monochromator"}, "node": "group", "occurs": {"max": 1, "min": 1}, "recommended": false, "refines": "MONOCHROMATOR", "specialisation": "NXcase_nxdl/ENTRY/INSTRUMENT/monochromator"}
+   ],
+   "class": "NXinstrument",
+   "declared_by": "NXcase_nxdl",
+   "id": "NXcase_nxdl/ENTRY/INSTRUMENT",
+   "require": [],
+   "symbols": [],
+   "undeclared": {"attribute": "report", "dataset": "report", "group": "report"}
+  },
+  "NXcase_nxdl/ENTRY/INSTRUMENT/monochromator": {
+   "attributes": [
+     {"ref": "NXobject@default"}
+   ],
+   "children": [
+     {"node": "group", "ref": "NXobject/DATA"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+     {"declared_by": "NXmonochromator", "id": "energy", "name": {"exact": "energy"}, "node": "dataset", "occurs": {"max": 1, "min": 1}, "recommended": false, "refined_by": ["NXcase_nxdl"], "shape": {"binding": true, "dims": ["n"], "symbols": {"n": "NXcase_nxdl"}}, "type": "NX_FLOAT", "units": {"category": "NX_ENERGY"}}
+   ],
+   "class": "NXmonochromator",
+   "declared_by": "NXcase_nxdl",
+   "id": "NXcase_nxdl/ENTRY/INSTRUMENT/monochromator",
+   "require": [],
+   "symbols": [],
+   "undeclared": {"attribute": "report", "dataset": "report", "group": "report"}
+  }
+ }
+}

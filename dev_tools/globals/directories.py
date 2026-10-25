@@ -21,9 +21,9 @@ def set_source_root(root: PathLike) -> None:
 
 def get_nxdl_root() -> Path:
     """Root directory of the XSD and NXDL files
-    (same as the source root by default)"""
+    (NEXUS_DEF_PATH, or the source root by default)"""
     if _NXDL_ROOT is None:
-        set_nxdl_root(get_source_root())
+        set_nxdl_root(os.environ.get("NEXUS_DEF_PATH") or get_source_root())
     return _NXDL_ROOT
 
 

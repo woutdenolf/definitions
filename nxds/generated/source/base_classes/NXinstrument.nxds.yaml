@@ -1,0 +1,215 @@
+nxds: '0.1'
+class: NXinstrument
+category: base
+extends: NXobject
+doc: |-
+  Collection of the components of the instrument or beamline.
+
+  Template of instrument descriptions comprising various beamline components.
+  Each component will also be a NeXus group defined by its distance from the
+  sample. Negative distances represent beamline components that are before the
+  sample while positive distances represent components that are after the sample.
+  This device allows the unique identification of beamline components in a way
+  that is valid for both reactor and pulsed instrumentation.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  name:
+    node: dataset
+    doc: Name of instrument
+    attributes:
+      short_name:
+        doc: short name for instrument, perhaps the acronym
+        via: [T0, T1, T4]
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  ACTUATOR:
+    node: group
+    name: {any: true}
+    class: NXactuator
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  APERTURE:
+    node: group
+    name: {any: true}
+    class: NXaperture
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  ATTENUATOR:
+    node: group
+    name: {any: true}
+    class: NXattenuator
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  BEAM:
+    node: group
+    name: {any: true}
+    class: NXbeam
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  BEAM_STOP:
+    node: group
+    name: {any: true}
+    class: NXbeam_stop
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  BENDING_MAGNET:
+    node: group
+    name: {any: true}
+    class: NXbending_magnet
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  COLLIMATOR:
+    node: group
+    name: {any: true}
+    class: NXcollimator
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  COLLECTION:
+    node: group
+    name: {any: true}
+    class: NXcollection
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  CAPILLARY:
+    node: group
+    name: {any: true}
+    class: NXcapillary
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  CRYSTAL:
+    node: group
+    name: {any: true}
+    class: NXcrystal
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  DETECTOR:
+    node: group
+    name: {any: true}
+    class: NXdetector
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  DETECTOR_GROUP:
+    node: group
+    name: {any: true}
+    class: NXdetector_group
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  DISK_CHOPPER:
+    node: group
+    name: {any: true}
+    class: NXdisk_chopper
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  EVENT_DATA:
+    node: group
+    name: {any: true}
+    class: NXevent_data
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  FABRICATION:
+    node: group
+    name: {any: true}
+    class: NXfabrication
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  FERMI_CHOPPER:
+    node: group
+    name: {any: true}
+    class: NXfermi_chopper
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  FILTER:
+    node: group
+    name: {any: true}
+    class: NXfilter
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  FLIPPER:
+    node: group
+    name: {any: true}
+    class: NXflipper
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  GUIDE:
+    node: group
+    name: {any: true}
+    class: NXguide
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  HISTORY:
+    node: group
+    name: {any: true}
+    class: NXhistory
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  INSERTION_DEVICE:
+    node: group
+    name: {any: true}
+    class: NXinsertion_device
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  MIRROR:
+    node: group
+    name: {any: true}
+    class: NXmirror
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  MODERATOR:
+    node: group
+    name: {any: true}
+    class: NXmoderator
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  MONOCHROMATOR:
+    node: group
+    name: {any: true}
+    class: NXmonochromator
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  POLARIZER:
+    node: group
+    name: {any: true}
+    class: NXpolarizer
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  POSITIONER:
+    node: group
+    name: {any: true}
+    class: NXpositioner
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  SENSOR:
+    node: group
+    name: {any: true}
+    class: NXsensor
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  SOURCE:
+    node: group
+    name: {any: true}
+    class: NXsource
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  DIFFRACTOMETER:
+    node: group
+    class: NXtransformations
+    via: [T1, T3b, T4, T7]
+    provisional: [Q1]
+  VELOCITY_SELECTOR:
+    node: group
+    name: {any: true}
+    class: NXvelocity_selector
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  XRAYLENS:
+    node: group
+    name: {any: true}
+    class: NXxraylens
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  ENVIRONMENT:
+    node: group
+    name: {any: true}
+    class: NXenvironment
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]

@@ -1,0 +1,9 @@
+description: >
+  Objects of a subclass (§8.7): `/entry/crate` is an NXcase_lidded_crate assigned to
+  the NXcase_crate member CRATE. Its children are checked against CRATE's
+  specialisation; `lid`, which that leaves undeclared, is then matched against
+  NXcase_lidded_crate (TYPE, member `NXcase_lidded_crate/lid`), and so is the
+  attribute `@colour` (ENUM, member `NXcase_lidded_crate@colour`). The link
+  `/entry/zdata/size` comes after its target, inside the subclass group: its
+  assignment is found again (no LINK).
+capabilities: []

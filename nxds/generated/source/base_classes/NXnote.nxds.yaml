@@ -1,0 +1,78 @@
+nxds: '0.1'
+class: NXnote
+category: base
+extends: NXobject
+doc: |-
+  Any additional freeform information not covered by the other base classes.
+
+  This class can be used to store additional information in a
+  NeXus file e.g. pictures, movies, audio, additional text logs
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  author:
+    node: dataset
+    doc: Author or creator of note
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  date:
+    node: dataset
+    type: NX_DATE_TIME
+    doc: Date note created/added
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  type:
+    node: dataset
+    doc: Mime content type of note data field e.g. image/jpeg, text/plain, text/html
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  file_name:
+    node: dataset
+    doc: Name of original file name if note was read from an external source
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  identifierNAME:
+    node: dataset
+    name: {template: 'identifier{NAME}'}
+    type: NX_CHAR
+    doc: |-
+      Identifier of the resource if that resource that has been serialized.
+
+      For example, the identifier to a resource in another database.
+    via: [T1, T3, T4, T7]
+    provisional: [Q1, Q3]
+  checksum:
+    node: dataset
+    type: NX_CHAR
+    doc: |-
+      Value of the hash that is obtained when running algorithm
+      on the content of the resource referred to by ``identifierNAME``.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  algorithm:
+    node: dataset
+    type: NX_CHAR
+    doc: |-
+      Name of the algorithm whereby the ``checksum`` was computed.
+
+      Examples: md5, sha256
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  description:
+    node: dataset
+    doc: Title of an image or other details of the note
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  sequence_index:
+    node: dataset
+    type: NX_POSINT
+    doc: |-
+      Sequence index of note, for placing a sequence of
+      multiple **NXnote** groups in an order.  Starts with 1.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  data:
+    node: dataset
+    type: NX_BINARY
+    doc: Binary note data - if text, line terminator is [CR][LF].
+    via: [T1, T4, T7]
+    provisional: [Q1]

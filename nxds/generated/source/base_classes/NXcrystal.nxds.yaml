@@ -1,0 +1,397 @@
+nxds: '0.1'
+class: NXcrystal
+category: base
+extends: NXcomponent
+doc: |-
+  A crystal monochromator or analyzer.
+
+  Permits double bent
+  monochromator comprised of multiple segments with anisotropic
+  Gaussian mosaic.
+
+  If curvatures are set to zero or are absent, array
+  is considered to be flat.
+
+  Scattering vector is perpendicular to surface. Crystal is oriented
+  parallel to beam incident on crystal before rotation, and lies in
+  vertical plane.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+symbols:
+  n_comp:
+    doc: number of different unit cells to be described
+  i: {doc: number of wavelengths}
+children:
+  GEOMETRY:
+    node: group
+    name: {any: true}
+    class: NXgeometry
+    deprecated: Use the field `depends_on` and :ref:`NXtransformations` to position the crystal
+      and NXoff_geometry to describe its shape instead
+    doc: Position of crystal
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  usage:
+    node: dataset
+    type: NX_CHAR
+    enum:
+      values:
+      - {value: Bragg, doc: reflection geometry}
+      - value: Laue
+        doc: |-
+          The chemical formula specified using CIF conventions.
+          Abbreviated version of CIF standard:
+          * Only recognized element symbols may be used.
+          * Each element symbol is followed by a 'count' number. A count of '1' may be omitted.
+          * A space or parenthesis must separate each cluster of (element symbol + count).
+          * Where a group of elements is enclosed in parentheses, the multiplier for the
+            group must follow the closing parentheses. That is, all element and group
+            multipliers are assumed to be printed as subscripted numbers.
+          * Unless the elements are ordered in a manner that corresponds to their chemical
+            structure, the order of the elements within any group or moiety depends on
+            whether or not carbon is present.
+          * If carbon is present, the order should be:
+            C, then H, then the other elements in alphabetical order of their symbol.
+            If carbon is not present, the elements are listed purely in alphabetic
+            order of their symbol.
+          This is the *Hill* system used by Chemical Abstracts.
+          See, for example:
+          http://www.iucr.org/__data/iucr/cif/standard/cifstd15.html or
+          http://www.cas.org/training/stneasytips/subinforformula1.html.
+    doc: How this crystal is used.  Choices are in the list.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  type:
+    node: dataset
+    doc: |-
+      Type or material of monochromating substance.
+      Chemical formula can be specified separately.
+      Use the "reflection" field to indicate the (hkl) orientation.
+      Use the "d_spacing" field to record the lattice plane spacing.
+
+      This field was changed (2010-11-17) from an enumeration to
+      a string since common usage showed a wider variety of use
+      than a simple list.  These are the items in the list at
+      the time of the change: PG (Highly Oriented Pyrolytic Graphite) |
+      Ge | Si | Cu | Fe3Si | CoFe | Cu2MnAl (Heusler) | Multilayer |
+      Diamond.
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  chemical_formula:
+    node: dataset
+    doc: |-
+      The chemical formula specified using CIF conventions.
+      Abbreviated version of CIF standard:
+
+      * Only recognized element symbols may be used.
+      * Each element symbol is followed by a 'count' number. A count of '1' may be omitted.
+      * A space or parenthesis must separate each cluster of (element symbol + count).
+      * Where a group of elements is enclosed in parentheses, the multiplier for the
+        group must follow the closing parentheses. That is, all element and group
+        multipliers are assumed to be printed as subscripted numbers.
+      * Unless the elements are ordered in a manner that corresponds to their chemical
+        structure, the order of the elements within any group or moiety depends on
+        whether or not carbon is present.
+      * If carbon is present, the order should be:
+        C, then H, then the other elements in alphabetical order of their symbol.
+        If carbon is not present, the elements are listed purely in alphabetic
+        order of their symbol.
+      * This is the *Hill* system used by Chemical Abstracts.
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  order_no:
+    node: dataset
+    type: NX_INT
+    doc: |-
+      A number which describes if this is the first, second,..
+      :math:`n^{th}` crystal in a multi crystal monochromator
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  cut_angle:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_ANGLE}
+    doc: Cut angle of reflecting Bragg plane and plane of crystal surface
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  space_group:
+    node: dataset
+    doc: Space group of crystal structure
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  unit_cell:
+    node: dataset
+    type: NX_FLOAT
+    shape: [n_comp, 6]
+    units: {category: NX_LENGTH}
+    doc: Unit cell parameters (lengths and angles)
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  unit_cell_a:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    doc: 'Unit cell lattice parameter: length of side a'
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  unit_cell_b:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    doc: 'Unit cell lattice parameter: length of side b'
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  unit_cell_c:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    doc: 'Unit cell lattice parameter: length of side c'
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  unit_cell_alpha:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_ANGLE}
+    doc: 'Unit cell lattice parameter: angle alpha'
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  unit_cell_beta:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_ANGLE}
+    doc: 'Unit cell lattice parameter: angle beta'
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  unit_cell_gamma:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_ANGLE}
+    doc: 'Unit cell lattice parameter: angle gamma'
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  unit_cell_volume:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_VOLUME}
+    doc: Volume of the unit cell
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  orientation_matrix:
+    node: dataset
+    type: NX_FLOAT
+    shape: [3, 3]
+    doc: |-
+      Orientation matrix of single crystal sample using Busing-Levy convention:
+      W. R. Busing and H. A. Levy (1967). Acta Cryst. 22, 457-464
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  wavelength:
+    node: dataset
+    type: NX_FLOAT
+    shape: [i]
+    units: {category: NX_WAVELENGTH}
+    doc: Optimum diffracted wavelength
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  d_spacing:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    doc: spacing between crystal planes of the reflection
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  scattering_vector:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_WAVENUMBER}
+    doc: Scattering vector, Q, of nominal reflection
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  reflection:
+    node: dataset
+    type: NX_INT
+    shape: [3]
+    units: {category: NX_UNITLESS}
+    doc: Miller indices (hkl) values of nominal reflection
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  thickness:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    doc: Thickness of the crystal.  (Required for Laue orientations - see "usage" field)
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  density:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_MASS_DENSITY}
+    doc: mass density of the crystal
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  segment_width:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    doc: Horizontal width of individual segment
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  segment_height:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    doc: Vertical height of individual segment
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  segment_thickness:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    doc: Thickness of individual segment
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  segment_gap:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    doc: Typical gap between adjacent segments
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  segment_columns:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    doc: number of segment columns in horizontal direction
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  segment_rows:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    doc: number of segment rows in vertical direction
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  mosaic_horizontal:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_ANGLE}
+    doc: horizontal mosaic Full Width Half Maximum
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  mosaic_vertical:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_ANGLE}
+    doc: vertical mosaic Full Width Half Maximum
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  curvature_horizontal:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_ANGLE}
+    doc: Horizontal curvature of focusing crystal
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  curvature_vertical:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_ANGLE}
+    doc: Vertical curvature of focusing crystal
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  is_cylindrical:
+    node: dataset
+    type: NX_BOOLEAN
+    doc: Is this crystal bent cylindrically?
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  cylindrical_orientation_angle:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_ANGLE}
+    doc: 'If cylindrical: cylinder orientation angle'
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  polar_angle:
+    node: dataset
+    type: NX_FLOAT
+    shape: [i]
+    units: {category: NX_ANGLE}
+    doc: |-
+      Polar (scattering) angle at which crystal assembly is positioned.
+      Note: some instrument geometries call this term 2theta.
+      Note: it is recommended to use NXtransformations instead.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  azimuthal_angle:
+    node: dataset
+    type: NX_FLOAT
+    shape: [i]
+    units: {category: NX_ANGLE}
+    doc: |-
+      Azimuthal angle at which crystal assembly is positioned.
+      Note: it is recommended to use NXtransformations instead.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  bragg_angle:
+    node: dataset
+    type: NX_FLOAT
+    shape: [i]
+    units: {category: NX_ANGLE}
+    doc: Bragg angle of nominal reflection
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  temperature:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_TEMPERATURE}
+    doc: average/nominal crystal temperature
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  temperature_coefficient:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_ANY}
+    doc: how lattice parameter changes with temperature
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  temperature_log:
+    node: group
+    class: NXlog
+    doc: log file of crystal temperature
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  reflectivity:
+    node: group
+    class: NXdata
+    doc: crystal reflectivity versus wavelength
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  transmission:
+    node: group
+    class: NXdata
+    doc: crystal transmission versus wavelength
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  shape:
+    node: group
+    class: NXshape
+    deprecated: Use NXoff_geometry instead to describe the shape of the monochromator
+    doc: A NXshape group describing the shape of the crystal arrangement
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  OFF_GEOMETRY:
+    node: group
+    name: {any: true}
+    class: NXoff_geometry
+    occurs: {min: 0}
+    doc: This group describes the shape of the beam line component
+    via: [T1, T2, T6, T7]
+    provisional: [Q1, Q11]
+  depends_on:
+    node: dataset
+    type: NX_CHAR
+    doc: |-
+      .. todo::
+      Add a definition for the reference point of a crystal.
+    via: [T1, T4, T7]
+    provisional: [Q1]

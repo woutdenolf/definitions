@@ -1,0 +1,150 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"},
+    {"ref": "NXparameters@model"}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/COLLECTION"},
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"node": "group", "ref": "NXobject/LOG"},
+    {"node": "group", "ref": "NXobject/NOTE"},
+    {"class": "NXnote", "declared_by": "NXapm_paraprobe_tool_parameters", "docs": ["NXapm_paraprobe_tool_parameters/reconstruction"], "id": "reconstruction", "name": {"exact": "reconstruction"}, "node": "group", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q4", "Q11"], "recommended": false, "refines": "NOTE", "specialisation": "NXapm_paraprobe_tool_parameters/reconstruction", "via": ["T1", "T2", "T4", "T6", "T7", "T18"]},
+    {"class": "NXnote", "declared_by": "NXapm_paraprobe_tool_parameters", "docs": ["NXapm_paraprobe_tool_parameters/ranging"], "id": "ranging", "name": {"exact": "ranging"}, "node": "group", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q4", "Q11"], "recommended": false, "refines": "NOTE", "specialisation": "NXapm_paraprobe_tool_parameters/ranging", "via": ["T1", "T2", "T4", "T6", "T7", "T18"]},
+    {"class": "NXnote", "declared_by": "NXapm_paraprobe_tool_parameters", "docs": ["NXapm_paraprobe_tool_parameters/surface"], "id": "surface", "name": {"exact": "surface"}, "node": "group", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q4", "Q11"], "recommended": false, "refines": "NOTE", "via": ["T1", "T2", "T4", "T6", "T7", "T18"]},
+    {"class": "NXnote", "declared_by": "NXapm_paraprobe_tool_parameters", "docs": ["NXapm_paraprobe_tool_parameters/surface_distance"], "id": "surface_distance", "name": {"exact": "surface_distance"}, "node": "group", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q4", "Q11"], "recommended": false, "refines": "NOTE", "specialisation": "NXapm_paraprobe_tool_parameters/surface_distance", "via": ["T1", "T2", "T4", "T6", "T7", "T18"]},
+    {"node": "group", "ref": "NXobject/PARAMETERS"},
+    {"class": "NXspatial_filter", "declared_by": "NXapm_paraprobe_tool_parameters", "id": "spatial_filter", "name": {"exact": "spatial_filter"}, "node": "group", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q4", "Q11"], "recommended": false, "refines": "PARAMETERS", "via": ["T1", "T2", "T4", "T6", "T7", "T18"]},
+    {"class": "NXsubsampling_filter", "declared_by": "NXapm_paraprobe_tool_parameters", "id": "evaporation_id_filter", "name": {"exact": "evaporation_id_filter"}, "node": "group", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q4", "Q11"], "recommended": false, "refines": "PARAMETERS", "via": ["T1", "T2", "T4", "T6", "T7", "T18"]},
+    {"class": "NXmatch_filter", "declared_by": "NXapm_paraprobe_tool_parameters", "id": "iontype_filter", "name": {"exact": "iontype_filter"}, "node": "group", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q4", "Q11"], "recommended": false, "refines": "PARAMETERS", "via": ["T1", "T2", "T4", "T6", "T7", "T18"]},
+    {"class": "NXmatch_filter", "declared_by": "NXapm_paraprobe_tool_parameters", "id": "hit_multiplicity_filter", "name": {"exact": "hit_multiplicity_filter"}, "node": "group", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q4", "Q11"], "recommended": false, "refines": "PARAMETERS", "via": ["T1", "T2", "T4", "T6", "T7", "T18"]},
+    {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+    {"node": "dataset", "ref": "NXobject/identifierNAME"},
+    {"attributes": [{"declared_by": "NXobject", "docs": ["NXobject/identifierNAME@type"], "enum": {"open": true, "values": [{"value": "ARK"}, {"value": "DOI"}, {"value": "Hdl"}, {"value": "IGSN"}, {"value": "ISNI"}, {"value": "ISSN"}, {"value": "ISSN-L"}, {"value": "ORCID"}, {"value": "PURL"}, {"value": "ROR"}, {"value": "URL"}, {"value": "URN"}]}, "id": "type", "name": {"exact": "type"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4"]}], "declared_by": "NXapm_paraprobe_tool_parameters", "docs": ["NXobject/identifierNAME", "NXapm_paraprobe_tool_parameters/identifier_analysis"], "id": "identifier_analysis", "name": {"exact": "identifier_analysis"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q3", "Q4"], "recommended": false, "refines": "identifierNAME", "type": "NX_UINT", "units": {"category": "NX_UNITLESS"}, "via": ["T1", "T3", "T4", "T7", "T18"]},
+    {"node": "dataset", "ref": "NXparameters/PARAMETER"},
+    {"attributes": [{"declared_by": "NXparameters", "id": "units", "name": {"exact": "units"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4"]}, {"declared_by": "NXparameters", "docs": ["NXparameters/PARAMETER@error"], "id": "error", "name": {"exact": "error"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "via": ["T1", "T4"]}, {"declared_by": "NXparameters", "docs": ["NXparameters/PARAMETER@description"], "id": "description", "name": {"exact": "description"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4"]}, {"declared_by": "NXparameters", "docs": ["NXparameters/PARAMETER@expression"], "id": "expression", "name": {"exact": "expression"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4"]}, {"declared_by": "NXparameters", "docs": ["NXparameters/PARAMETER@initial"], "id": "initial", "name": {"exact": "initial"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "via": ["T1", "T4"]}, {"declared_by": "NXparameters", "docs": ["NXparameters/PARAMETER@max"], "id": "max", "name": {"exact": "max"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "via": ["T1", "T4"]}, {"declared_by": "NXparameters", "docs": ["NXparameters/PARAMETER@min"], "id": "min", "name": {"exact": "min"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "via": ["T1", "T4"]}, {"declared_by": "NXparameters", "docs": ["NXparameters/PARAMETER@vary"], "id": "vary", "name": {"exact": "vary"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_BOOLEAN", "via": ["T1", "T4"]}], "declared_by": "NXapm_paraprobe_tool_parameters", "docs": ["NXparameters/PARAMETER", "NXapm_paraprobe_tool_parameters/description"], "id": "description", "name": {"exact": "description"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q3", "Q4"], "recommended": false, "refines": "PARAMETER", "type": "NX_CHAR", "via": ["T1", "T3", "T4", "T7", "T18"]}
+  ],
+  "class": "NXapm_paraprobe_tool_parameters",
+  "extends": "NXparameters",
+  "lossy": [],
+  "provisional": [],
+  "require": [],
+  "source": "contributed_definitions/NXapm_paraprobe_tool_parameters.nxdl.xml",
+  "status": "contributed",
+  "symbols": [],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"},
+  "via": []
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {
+  "NXapm_paraprobe_tool_parameters/ranging": {
+   "attributes": [
+     {"ref": "NXobject@default"}
+   ],
+   "children": [
+     {"node": "group", "ref": "NXobject/COLLECTION"},
+     {"node": "group", "ref": "NXobject/DATA"},
+     {"node": "group", "ref": "NXobject/LOG"},
+     {"node": "group", "ref": "NXobject/NOTE"},
+     {"node": "group", "ref": "NXobject/PARAMETERS"},
+     {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+     {"node": "dataset", "ref": "NXnote/identifierNAME"},
+     {"node": "dataset", "ref": "NXnote/author"},
+     {"node": "dataset", "ref": "NXnote/date"},
+     {"node": "dataset", "ref": "NXnote/type"},
+     {"node": "dataset", "ref": "NXnote/file_name"},
+     {"node": "dataset", "ref": "NXnote/checksum"},
+     {"node": "dataset", "ref": "NXnote/algorithm"},
+     {"node": "dataset", "ref": "NXnote/description"},
+     {"node": "dataset", "ref": "NXnote/sequence_index"},
+     {"node": "dataset", "ref": "NXnote/data"},
+     {"declared_by": "NXapm_paraprobe_tool_parameters", "docs": ["NXapm_paraprobe_tool_parameters/ranging/ranging_definitions"], "id": "ranging_definitions", "name": {"exact": "ranging_definitions"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4", "T7"]}
+   ],
+   "class": "NXnote",
+   "declared_by": "NXapm_paraprobe_tool_parameters",
+   "id": "NXapm_paraprobe_tool_parameters/ranging",
+   "require": [],
+   "symbols": [],
+   "undeclared": {"attribute": "report", "dataset": "report", "group": "report"}
+  },
+  "NXapm_paraprobe_tool_parameters/reconstruction": {
+   "attributes": [
+     {"ref": "NXobject@default"}
+   ],
+   "children": [
+     {"node": "group", "ref": "NXobject/COLLECTION"},
+     {"node": "group", "ref": "NXobject/DATA"},
+     {"node": "group", "ref": "NXobject/LOG"},
+     {"node": "group", "ref": "NXobject/NOTE"},
+     {"node": "group", "ref": "NXobject/PARAMETERS"},
+     {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+     {"node": "dataset", "ref": "NXnote/identifierNAME"},
+     {"node": "dataset", "ref": "NXnote/author"},
+     {"node": "dataset", "ref": "NXnote/date"},
+     {"node": "dataset", "ref": "NXnote/type"},
+     {"node": "dataset", "ref": "NXnote/file_name"},
+     {"node": "dataset", "ref": "NXnote/checksum"},
+     {"node": "dataset", "ref": "NXnote/algorithm"},
+     {"node": "dataset", "ref": "NXnote/description"},
+     {"node": "dataset", "ref": "NXnote/sequence_index"},
+     {"node": "dataset", "ref": "NXnote/data"},
+     {"declared_by": "NXapm_paraprobe_tool_parameters", "docs": ["NXapm_paraprobe_tool_parameters/reconstruction/position"], "id": "position", "name": {"exact": "position"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4", "T7"]},
+     {"declared_by": "NXapm_paraprobe_tool_parameters", "docs": ["NXapm_paraprobe_tool_parameters/reconstruction/mass_to_charge"], "id": "mass_to_charge", "name": {"exact": "mass_to_charge"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4", "T7"]}
+   ],
+   "class": "NXnote",
+   "declared_by": "NXapm_paraprobe_tool_parameters",
+   "id": "NXapm_paraprobe_tool_parameters/reconstruction",
+   "require": [],
+   "symbols": [],
+   "undeclared": {"attribute": "report", "dataset": "report", "group": "report"}
+  },
+  "NXapm_paraprobe_tool_parameters/surface_distance": {
+   "attributes": [
+     {"ref": "NXobject@default"}
+   ],
+   "children": [
+     {"node": "group", "ref": "NXobject/COLLECTION"},
+     {"node": "group", "ref": "NXobject/DATA"},
+     {"node": "group", "ref": "NXobject/LOG"},
+     {"node": "group", "ref": "NXobject/NOTE"},
+     {"node": "group", "ref": "NXobject/PARAMETERS"},
+     {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+     {"node": "dataset", "ref": "NXnote/identifierNAME"},
+     {"node": "dataset", "ref": "NXnote/author"},
+     {"node": "dataset", "ref": "NXnote/date"},
+     {"node": "dataset", "ref": "NXnote/type"},
+     {"node": "dataset", "ref": "NXnote/file_name"},
+     {"node": "dataset", "ref": "NXnote/checksum"},
+     {"node": "dataset", "ref": "NXnote/algorithm"},
+     {"node": "dataset", "ref": "NXnote/description"},
+     {"node": "dataset", "ref": "NXnote/sequence_index"},
+     {"node": "dataset", "ref": "NXnote/data"},
+     {"declared_by": "NXapm_paraprobe_tool_parameters", "docs": ["NXapm_paraprobe_tool_parameters/surface_distance/distance"], "id": "distance", "name": {"exact": "distance"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4", "T7"]}
+   ],
+   "class": "NXnote",
+   "declared_by": "NXapm_paraprobe_tool_parameters",
+   "id": "NXapm_paraprobe_tool_parameters/surface_distance",
+   "require": [],
+   "symbols": [],
+   "undeclared": {"attribute": "report", "dataset": "report", "group": "report"}
+  }
+ }
+}

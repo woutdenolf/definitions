@@ -1,0 +1,113 @@
+nxds: '0.1'
+class: NXxrd
+category: application
+extends: NXmonopd
+describes: NXroot
+doc: NXxrd on top of NXmonopd
+defaults: {min: 1, binding: true, type: NX_CHAR}
+children:
+  ENTRY:
+    node: group
+    name: {any: true}
+    class: NXentry
+    children:
+      definition:
+        node: dataset
+        enum: [NXxrd]
+        doc: Official NeXus NXDL schema to which this file conforms
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      INSTRUMENT:
+        node: group
+        name: {any: true}
+        class: NXinstrument
+        occurs: {min: 0}
+        children:
+          BEAM:
+            node: group
+            name: {any: true}
+            class: NXbeam
+            children:
+              incident_energy:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_ENERGY}
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T2, T5, T7]
+            provisional: [Q1, Q2, Q11]
+          DETECTOR:
+            node: group
+            name: {any: true}
+            class: NXdetector
+            children:
+              raw_data:
+                node: group
+                class: NXdata
+                occurs: {min: 0}
+                doc: |-
+                  raw detector signal (usually counts) as collected
+                  it can be a multi-dimensional dataset depending on
+                  the detector type (faster axes) and
+                  the scanning method (slower axes)
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              polar_angle:
+                node: dataset
+                type: NX_FLOAT
+                shape: [nDet]
+                units: {category: NX_ANGLE}
+                doc: The 2-theta range of the diffractogram
+                attributes:
+                  units:
+                    enum: [deg]
+                    via: [T0, T1, T5]
+                    provisional: [Q2]
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+            via: [T1, T2, T5, T7]
+            provisional: [Q1, Q2, Q11]
+        via: [T1, T2, T6, T7]
+        provisional: [Q1, Q11]
+      DATA:
+        node: group
+        name: {any: true}
+        class: NXdata
+        children:
+          polar_angle:
+            node: dataset
+            type: NX_FLOAT
+            shape: [nDet]
+            doc: |-
+              link (suggested target:/NXentry/NXinstrument/NXdetector/polar_angle)
+              Link to polar ale in /NXentry/NXinstrument/NXdetector
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+          data:
+            node: dataset
+            type: NX_NUMBER
+            shape: [nDet]
+            doc: |-
+              link (suggested target:/NXentry/NXinstrument/NXdetector/data)
+              Link to data in /Nxentry/Nxinstrument/Nxdetector
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+        via: [T1, T2, T5, T7]
+        provisional: [Q1, Q2, Q11]
+      PROCESS:
+        node: group
+        name: {any: true}
+        class: NXprocess
+        occurs: {min: 0}
+        doc: |-
+          Description of a processing or analysis step, such as the
+          baseline extraction or azimuth integration.
+          Add additional fields as needed to describe value(s) of
+          any variable, parameter, or term related to
+          the NXprocess step. Be sure to include units attributes
+          for all numerical fields.
+        via: [T1, T2, T6, T7]
+        provisional: [Q1, Q11]
+    via: [T1, T2, T5, T7]
+    provisional: [Q1, Q2, Q11]
+via: [T8]

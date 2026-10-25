@@ -1,0 +1,47 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/COLLECTION"},
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"node": "group", "ref": "NXobject/LOG"},
+    {"node": "group", "ref": "NXobject/NOTE"},
+    {"node": "group", "ref": "NXobject/PARAMETERS"},
+    {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+    {"node": "dataset", "ref": "NXobject/identifierNAME"},
+    {"node": "dataset", "ref": "NXcomponent/applied"},
+    {"node": "dataset", "ref": "NXcomponent/name"},
+    {"node": "dataset", "ref": "NXcomponent/description"},
+    {"node": "dataset", "ref": "NXcomponent/inputs"},
+    {"node": "dataset", "ref": "NXcomponent/outputs"},
+    {"node": "group", "ref": "NXcomponent/FABRICATION"},
+    {"node": "group", "ref": "NXcomponent/PROGRAM"},
+    {"node": "group", "ref": "NXcomponent/ENVIRONMENT"},
+    {"node": "dataset", "ref": "NXcomponent/depends_on"},
+    {"node": "group", "ref": "NXcomponent/TRANSFORMATIONS"},
+    {"declared_by": "NXpump", "docs": ["NXpump/design"], "enum": {"open": true, "values": [{"value": "membrane"}, {"value": "rotary_vane"}, {"value": "roots"}, {"value": "turbo_molecular"}, {"value": "ion"}, {"value": "cryo"}, {"value": "diffusion"}, {"value": "scroll"}]}, "id": "design", "name": {"exact": "design"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXpump", "docs": ["NXpump/base_pressure"], "id": "base_pressure", "name": {"exact": "base_pressure"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_FLOAT", "units": {"category": "NX_PRESSURE"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXpump", "docs": ["NXpump/medium"], "enum": {"open": false, "values": [{"value": "vacuum"}, {"value": "liquid"}, {"value": "gas"}, {"value": "slurry"}, {"value": "powder"}]}, "id": "medium", "name": {"exact": "medium"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4", "T7"]}
+  ],
+  "class": "NXpump",
+  "extends": "NXcomponent",
+  "lossy": [],
+  "provisional": [],
+  "require": [],
+  "source": "base_classes/NXpump.nxdl.xml",
+  "status": "base",
+  "symbols": [],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"},
+  "via": []
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {}
+}

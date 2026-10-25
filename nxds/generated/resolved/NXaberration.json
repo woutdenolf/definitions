@@ -1,0 +1,41 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/COLLECTION"},
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"node": "group", "ref": "NXobject/LOG"},
+    {"node": "group", "ref": "NXobject/NOTE"},
+    {"node": "group", "ref": "NXobject/PARAMETERS"},
+    {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"declared_by": "NXaberration", "docs": ["NXobject/FIELDNAME_errors", "NXaberration/magnitude_errors"], "id": "magnitude_errors", "name": {"exact": "magnitude_errors"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q3", "Q4"], "recommended": false, "refines": "FIELDNAME_errors", "type": "NX_NUMBER", "units": {"category": "NX_ANY"}, "via": ["T1", "T3", "T4", "T6", "T7", "T18"]},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+    {"node": "dataset", "ref": "NXobject/identifierNAME"},
+    {"declared_by": "NXaberration", "docs": ["NXaberration/magnitude"], "id": "magnitude", "name": {"exact": "magnitude"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_ANY"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXaberration", "docs": ["NXaberration/magnitude_errors_model"], "id": "magnitude_errors_model", "name": {"exact": "magnitude_errors_model"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXaberration", "docs": ["NXaberration/delta_time"], "id": "delta_time", "name": {"exact": "delta_time"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_TIME"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXaberration", "docs": ["NXaberration/angle"], "id": "angle", "name": {"exact": "angle"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_ANGLE"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXaberration", "docs": ["NXaberration/name"], "id": "name", "name": {"exact": "name"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXaberration", "docs": ["NXaberration/alias"], "id": "alias", "name": {"exact": "alias"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4", "T7"]}
+  ],
+  "class": "NXaberration",
+  "extends": "NXobject",
+  "lossy": [],
+  "provisional": [],
+  "require": [],
+  "source": "base_classes/NXaberration.nxdl.xml",
+  "status": "base",
+  "symbols": [],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"},
+  "via": []
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {}
+}

@@ -1,0 +1,29 @@
+nxds: '0.1'
+class: NXpinhole
+category: base
+extends: NXcomponent
+doc: |-
+  A simple pinhole.
+
+  For more complex geometries, :ref:`NXaperture` should be used.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  depends_on:
+    node: dataset
+    type: NX_CHAR
+    doc: |-
+      The reference direction of the pinhole is parallel with the z axis. The reference
+      point of the pinhole is its center in the x and y axis. The reference point on the z axis is the
+      plane which overlaps the side of the opening of the pin hole pointing towards the source (minus on the z axis).
+
+      .. image:: pinhole/pinhole.png
+              :width: 40%
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  diameter:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_LENGTH}
+    doc: Size of the circular hole defining the transmitted beam size.
+    via: [T1, T4, T7]
+    provisional: [Q1]

@@ -1,0 +1,26 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"declared_by": "NXentry", "id": "definition", "name": {"exact": "definition"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "recommended": false, "type": "NX_CHAR"},
+    {"declared_by": "NXentry", "id": "title", "name": {"exact": "title"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "recommended": false, "type": "NX_CHAR"},
+    {"declared_by": "NXentry", "id": "start_time", "name": {"exact": "start_time"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "recommended": false, "type": "NX_DATE_TIME"},
+    {"class": "NXinstrument", "declared_by": "NXentry", "id": "INSTRUMENT", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 0}, "recommended": false}
+  ],
+  "class": "NXentry",
+  "extends": "NXobject",
+  "lossy": [],
+  "require": [],
+  "status": "local",
+  "symbols": [],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"}
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {}
+}

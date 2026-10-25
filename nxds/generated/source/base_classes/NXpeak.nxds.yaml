@@ -1,0 +1,61 @@
+nxds: '0.1'
+class: NXpeak
+category: base
+extends: NXobject
+doc: |-
+  Base class for describing a peak, its functional form, and support values
+  i.e., the discretization points at which the function has been evaluated.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+symbols:
+  dimRank:
+    doc: |-
+      Rank of the dependent and independent data arrays
+      (for multivariate scalar-valued fit).
+children:
+  label:
+    node: dataset
+    type: NX_CHAR
+    doc: |-
+      Human-readable label which specifies which concept/entity
+      the peak represents/identifies.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  data:
+    node: group
+    class: NXdata
+    children:
+      position:
+        node: dataset
+        type: NX_NUMBER
+        shape: {rank: dimRank}
+        units: {category: NX_ANY}
+        doc: |-
+          Position values along one or more data dimensions (to hold the
+          values for the independent variable).
+        via: [T1, T4, T7, T9, T9d]
+        provisional: [Q1]
+      intensity:
+        node: dataset
+        type: NX_NUMBER
+        shape: {rank: dimRank}
+        units: {category: NX_ANY}
+        doc: This array holds the intensity/count values of the fitted peak at each position.
+        via: [T1, T4, T7, T9, T9d]
+        provisional: [Q1]
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  function:
+    node: group
+    class: NXfit_function
+    doc: |-
+      The functional form of the peak. This could be a Gaussian, Lorentzian, Voigt,
+      etc.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  total_area:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_ANY}
+    doc: Total area under the curve.
+    via: [T1, T4, T7]
+    provisional: [Q1]

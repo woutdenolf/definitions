@@ -1,0 +1,2 @@
+{"code": "MISSING", "severity": "E", "path": "/entry/data", "member": "NXcase_nxdl/ENTRY/DATA@signal"}
+{"code": "RECOMMENDED", "severity": "W", "path": "/entry", "member": "NXcase_nxdl/ENTRY/title"}

@@ -1,0 +1,66 @@
+nxds: '0.1'
+class: NXuser
+category: base
+extends: NXobject
+doc: |-
+  Contact information for a user.
+
+  The format allows more
+  than one user with the same affiliation and contact information,
+  but a second :ref:`NXuser` group should be used if they have different
+  affiliations, etc.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  name:
+    node: dataset
+    doc: Name of user responsible for this entry
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  role:
+    node: dataset
+    doc: |-
+      Role of user responsible for this entry.
+      Suggested roles are "local_contact",
+      "principal_investigator", and "proposer"
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  affiliation:
+    node: dataset
+    doc: Affiliation of user
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  address:
+    node: dataset
+    doc: Address of user
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  telephone_number:
+    node: dataset
+    doc: Telephone number of user
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  fax_number:
+    node: dataset
+    doc: Fax number of user
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  email:
+    node: dataset
+    doc: Email of user
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  facility_user_id:
+    node: dataset
+    doc: |-
+      facility based unique identifier for this person
+      e.g. their identification code on the facility
+      address/contact database
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  ORCID:
+    node: dataset
+    doc: |-
+      an author code, Open Researcher and Contributor ID,
+      defined by https://orcid.org and expressed as a URI
+    via: [T0, T1, T3b, T4, T7]
+    provisional: [Q1]

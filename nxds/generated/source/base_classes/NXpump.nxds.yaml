@@ -1,0 +1,45 @@
+nxds: '0.1'
+class: NXpump
+category: base
+extends: NXcomponent
+doc: Device to reduce an atmosphere to a controlled pressure.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  design:
+    node: dataset
+    type: NX_CHAR
+    enum:
+      values:
+      - {value: membrane}
+      - {value: rotary_vane}
+      - {value: roots}
+      - {value: turbo_molecular}
+      - {value: ion}
+      - {value: cryo}
+      - {value: diffusion}
+      - {value: scroll}
+      open: true
+    doc: Principle type of the pump.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  base_pressure:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_PRESSURE}
+    doc: |-
+      The minimum pressure achievable in a chamber after
+      it has been pumped down for an extended period.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  medium:
+    node: dataset
+    type: NX_CHAR
+    enum: [vacuum, liquid, gas, slurry, powder]
+    doc: |-
+      The material being moved by the pump.
+
+      Pumps intending to create a vacuum should state "vacuum" as the medium,
+      while pumps having the primary purpose of creating a flow or pressure
+      of gas should state "gas" as the medium.
+    via: [T1, T4, T7]
+    provisional: [Q1]

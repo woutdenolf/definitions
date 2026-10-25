@@ -1,0 +1,1 @@
+{"code": "CONSTRAINT", "severity": "E", "path": "/entry/data", "member": "NXcase_require/ENTRY/DATA:at_least_one_of[mu,fluo]"}

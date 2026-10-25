@@ -1,0 +1,111 @@
+nxds: '0.1'
+class: NXxraylens
+category: base
+extends: NXcomponent
+doc: |-
+  An X-ray lens, typically at a synchrotron X-ray beam line.
+
+  Based on information provided by Gerd Wellenreuther (DESY).
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  lens_geometry:
+    node: dataset
+    type: NX_CHAR
+    enum: [paraboloid, spherical, elliptical, hyperbolical]
+    doc: Geometry of the lens
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  symmetric:
+    node: dataset
+    type: NX_BOOLEAN
+    doc: 'Is the device symmetric? '
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  cylindrical:
+    node: dataset
+    type: NX_BOOLEAN
+    doc: 'Is the device cylindrical? '
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  cylinder_orientation:
+    node: group
+    class: NXnote
+    doc: Orientation of the cylinder axis.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  focus_type:
+    node: dataset
+    type: NX_CHAR
+    enum: [line, point]
+    doc: The type of focus of the lens
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  lens_thickness:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    doc: Thickness of the lens
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  lens_length:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    doc: Length of the lens
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  curvature:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    doc: Radius of the curvature as measured in the middle of the lens
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  aperture:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    doc: Diameter of the lens.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  number_of_lenses:
+    node: dataset
+    type: NX_INT
+    doc: Number of lenses that make up the compound lens.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  lens_material:
+    node: dataset
+    type: NX_CHAR
+    doc: Material used to make the lens.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  gas:
+    node: dataset
+    type: NX_CHAR
+    doc: Gas used to fill the lens
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  gas_pressure:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_PRESSURE}
+    doc: Gas pressure in the lens
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  OFF_GEOMETRY:
+    node: group
+    name: {any: true}
+    class: NXoff_geometry
+    occurs: {min: 0}
+    doc: This group describes the shape of the beam line component
+    via: [T1, T2, T6, T7]
+    provisional: [Q1, Q11]
+  depends_on:
+    node: dataset
+    type: NX_CHAR
+    doc: |-
+      .. todo::
+      Add a definition for the reference point of a x-ray lens.
+    via: [T1, T4, T7]
+    provisional: [Q1]

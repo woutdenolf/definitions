@@ -1,0 +1,7 @@
+nxds: "0.1"
+class: NXcase_crate
+category: base
+extends: NXobject
+defaults: {min: 0, binding: false}
+children:
+  size: {node: dataset, type: NX_FLOAT}

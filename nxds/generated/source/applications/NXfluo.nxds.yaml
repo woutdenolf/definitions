@@ -1,0 +1,153 @@
+nxds: '0.1'
+class: NXfluo
+category: application
+describes: NXroot
+doc: This is an application definition for raw data from an X-ray fluorescence experiment
+defaults: {min: 1, binding: true, type: NX_CHAR}
+symbols:
+  nE: {doc: Number of energies}
+children:
+  ENTRY:
+    node: group
+    name: {any: true}
+    class: NXentry
+    children:
+      title:
+        node: dataset
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      start_time:
+        node: dataset
+        type: NX_DATE_TIME
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      definition:
+        node: dataset
+        enum: [NXfluo]
+        doc: Official NeXus NXDL schema to which this file conforms.
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      INSTRUMENT:
+        node: group
+        name: {any: true}
+        class: NXinstrument
+        children:
+          SOURCE:
+            node: group
+            name: {any: true}
+            class: NXsource
+            children:
+              type:
+                node: dataset
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+              name:
+                node: dataset
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+              probe:
+                node: dataset
+                enum: [x-ray]
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T2, T5, T7]
+            provisional: [Q1, Q2, Q11]
+          monochromator:
+            node: group
+            class: NXmonochromator
+            children:
+              wavelength:
+                node: dataset
+                type: NX_FLOAT
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          fluorescence:
+            node: group
+            class: NXdetector
+            children:
+              data:
+                node: dataset
+                type: NX_INT
+                shape: [nE]
+                attributes:
+                  signal:
+                    occurs: {min: 0}
+                    type: NX_POSINT
+                    enum: ['1']
+                    via: [T19]
+                  axes:
+                    occurs: {min: 0}
+                    type: NX_CHAR
+                    enum: [energy]
+                    via: [T19]
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              energy:
+                node: dataset
+                type: NX_FLOAT
+                shape: [nE]
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T2, T5, T7]
+        provisional: [Q1, Q2, Q11]
+      SAMPLE:
+        node: group
+        name: {any: true}
+        class: NXsample
+        children:
+          name:
+            node: dataset
+            doc: Descriptive name of sample
+            via: [T0, T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T2, T5, T7]
+        provisional: [Q1, Q2, Q11]
+      MONITOR:
+        node: group
+        name: {any: true}
+        class: NXmonitor
+        children:
+          mode:
+            node: dataset
+            enum: [monitor, timer]
+            doc: |-
+              Count to a preset value based on either clock time (timer)
+              or received monitor counts (monitor).
+            via: [T0, T1, T5, T7]
+            provisional: [Q1, Q2]
+          preset:
+            node: dataset
+            type: NX_FLOAT
+            doc: preset value for time or monitor
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          data:
+            node: dataset
+            type: NX_INT
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T2, T5, T7]
+        provisional: [Q1, Q2, Q11]
+      data:
+        node: group
+        class: NXdata
+        children:
+          energy:
+            node: link
+            target: entry/instrument/fluorescence/energy
+            via: [T1, T5, T10]
+            provisional: [Q2, Q8]
+          data:
+            node: link
+            target: entry/instrument/fluorescence/data
+            via: [T1, T5, T10]
+            provisional: [Q2, Q8]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+    via: [T1, T2, T5, T7]
+    provisional: [Q1, Q2, Q11]
+via: [T8]

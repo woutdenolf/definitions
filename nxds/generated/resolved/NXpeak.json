@@ -1,0 +1,81 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/COLLECTION"},
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"class": "NXdata", "declared_by": "NXpeak", "id": "data", "name": {"exact": "data"}, "node": "group", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q4", "Q11"], "recommended": false, "refines": "DATA", "specialisation": "NXpeak/data", "via": ["T1", "T2", "T4", "T6", "T7", "T18"]},
+    {"node": "group", "ref": "NXobject/LOG"},
+    {"node": "group", "ref": "NXobject/NOTE"},
+    {"node": "group", "ref": "NXobject/PARAMETERS"},
+    {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+    {"node": "dataset", "ref": "NXobject/identifierNAME"},
+    {"declared_by": "NXpeak", "docs": ["NXpeak/label"], "id": "label", "name": {"exact": "label"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4", "T7"]},
+    {"class": "NXfit_function", "declared_by": "NXpeak", "docs": ["NXpeak/function"], "id": "function", "name": {"exact": "function"}, "node": "group", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXpeak", "docs": ["NXpeak/total_area"], "id": "total_area", "name": {"exact": "total_area"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_ANY"}, "via": ["T1", "T4", "T7"]}
+  ],
+  "class": "NXpeak",
+  "extends": "NXobject",
+  "lossy": [],
+  "provisional": [],
+  "require": [],
+  "source": "base_classes/NXpeak.nxdl.xml",
+  "status": "base",
+  "symbols": ["dimRank"],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"},
+  "via": []
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {
+  "NXpeak/data": {
+   "attributes": [
+     {"ref": "NXobject@default"},
+     {"ref": "NXdata@signal"},
+     {"ref": "NXdata@auxiliary_signals"},
+     {"ref": "NXdata@default_slice"},
+     {"ref": "NXdata@AXISNAME_indices"},
+     {"ref": "NXdata@axes"}
+   ],
+   "children": [
+     {"node": "group", "ref": "NXobject/COLLECTION"},
+     {"node": "group", "ref": "NXobject/DATA"},
+     {"node": "group", "ref": "NXobject/LOG"},
+     {"node": "group", "ref": "NXobject/NOTE"},
+     {"node": "group", "ref": "NXobject/PARAMETERS"},
+     {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+     {"node": "dataset", "ref": "NXdata/FIELDNAME_errors"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+     {"node": "dataset", "ref": "NXobject/identifierNAME"},
+     {"node": "dataset", "ref": "NXdata/AXISNAME"},
+     {"node": "dataset", "ref": "NXdata/DATA"},
+     {"node": "dataset", "ref": "NXdata/errors"},
+     {"node": "dataset", "ref": "NXdata/FIELDNAME_scaling_factor"},
+     {"node": "dataset", "ref": "NXdata/FIELDNAME_offset"},
+     {"node": "dataset", "ref": "NXdata/scaling_factor"},
+     {"node": "dataset", "ref": "NXdata/offset"},
+     {"node": "dataset", "ref": "NXdata/title"},
+     {"node": "dataset", "ref": "NXdata/x"},
+     {"node": "dataset", "ref": "NXdata/y"},
+     {"node": "dataset", "ref": "NXdata/z"},
+     {"declared_by": "NXpeak", "docs": ["NXpeak/data/position"], "id": "position", "name": {"exact": "position"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "rank": "dimRank", "symbols": {"dimRank": "NXpeak"}}, "type": "NX_NUMBER", "units": {"category": "NX_ANY"}, "via": ["T1", "T4", "T7", "T9", "T9d"]},
+     {"declared_by": "NXpeak", "docs": ["NXpeak/data/intensity"], "id": "intensity", "name": {"exact": "intensity"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "rank": "dimRank", "symbols": {"dimRank": "NXpeak"}}, "type": "NX_NUMBER", "units": {"category": "NX_ANY"}, "via": ["T1", "T4", "T7", "T9", "T9d"]}
+   ],
+   "class": "NXdata",
+   "declared_by": "NXpeak",
+   "id": "NXpeak/data",
+   "require": [],
+   "symbols": [],
+   "undeclared": {"attribute": "ignore", "dataset": "ignore", "group": "report"}
+  }
+ }
+}

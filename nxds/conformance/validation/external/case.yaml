@@ -1,0 +1,4 @@
+description: >
+  A link into a file that cannot be opened (§9.8): it counts as present
+  (no MISSING), is not dangling (no LINK), and its checks are SKIPPED (I).
+capabilities: []

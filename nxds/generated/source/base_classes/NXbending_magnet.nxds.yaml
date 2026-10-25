@@ -1,0 +1,118 @@
+nxds: '0.1'
+class: NXbending_magnet
+category: base
+extends: NXcomponent
+doc: A bending magnet
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  critical_energy:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_ENERGY}
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  bending_radius:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  magnetic_field:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_CURRENT}
+    doc: strength of magnetic field of dipole magnets
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  accepted_photon_beam_divergence:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    doc: An array of four numbers giving X+, X-, Y+ and Y- half divergence
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  source_distance_x:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    doc: |-
+      Distance of source point from particle beam waist in X (horizontal) direction.
+      Note, it is recommended to use NXtransformations instead to place component.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  source_distance_y:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    doc: |-
+      Distance of source point from particle beam waist in Y (vertical) direction.
+      Note, it is recommended to use NXtransformations instead to place component.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  divergence_x_plus:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_ANGLE}
+    doc: |-
+      Accepted photon beam divergence in X+ (horizontal outboard) direction.
+      Note that divergence_x_plus+divergence_x_minus is the total horizontal beam divergence.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  divergence_x_minus:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_ANGLE}
+    doc: |-
+      Accepted photon beam divergence in X- (horizontal inboard) direction.
+      Note that divergence_x_plus+divergence_x_minus is the total horizontal beam divergence.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  divergence_y_plus:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_ANGLE}
+    doc: |-
+      Accepted photon beam divergence in Y+ (vertical upward) direction.
+      Note that divergence_y_plus+divergence_y_minus is the total vertical beam divergence.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  divergence_y_minus:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_ANGLE}
+    doc: |-
+      Accepted photon beam divergence in Y- (vertical downward) direction.
+      Note that divergence_y_plus+divergence_y_minus is the total vertical beam divergence.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  spectrum:
+    node: group
+    class: NXdata
+    doc: bending magnet spectrum
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  GEOMETRY:
+    node: group
+    name: {any: true}
+    class: NXgeometry
+    deprecated: Use the field `depends_on` and :ref:`NXtransformations` to position the bending
+      magnet and NXoff_geometry to describe its shape instead
+    doc: '"Engineering" position of bending magnet'
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  OFF_GEOMETRY:
+    node: group
+    name: {any: true}
+    class: NXoff_geometry
+    occurs: {min: 0}
+    doc: This group describes the shape of the beam line component
+    via: [T1, T2, T6, T7]
+    provisional: [Q1, Q11]
+  depends_on:
+    node: dataset
+    type: NX_CHAR
+    doc: |-
+      .. todo::
+      Add a definition for the reference point of a bending magnet.
+    via: [T1, T4, T7]
+    provisional: [Q1]

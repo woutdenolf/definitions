@@ -1,0 +1,134 @@
+nxds: '0.1'
+class: NXapm_paraprobe_spatstat_results
+category: application
+extends: NXapm_paraprobe_tool_results
+describes: NXroot
+doc: |-
+  Application definition for a results file of the paraprobe-spatstat tool.
+
+  The tool paraprobe-spatstat evaluates spatial distribution functions.
+defaults: {min: 1, binding: true, type: NX_CHAR}
+symbols:
+  n_ions:
+    doc: The total number of ions in the reconstruction.
+  n_knn:
+    doc: The total number of bins in the histogram for the k-th nearest neighbor.
+  n_rdf:
+    doc: The total number of bins in the histogram for the radial distribution function.
+children:
+  ENTRY:
+    node: group
+    name: {any: true}
+    class: NXentry
+    occurs: {min: 1, max: 1}
+    children:
+      definition:
+        node: dataset
+        type: NX_CHAR
+        enum: [NXapm_paraprobe_spatstat_results]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      spatial_statisticsID:
+        node: group
+        name: {template: 'spatial_statistics{ID}'}
+        class: NXapm_paraprobe_tool_process
+        occurs: {min: 1, max: unbounded}
+        children:
+          iontypes_randomized:
+            node: dataset
+            type: NX_UINT
+            shape: [n_ions]
+            units: {category: NX_UNITLESS}
+            doc: |-
+              The iontype ID for each ion that was assigned to each ion during
+              the randomization of the ionlabels. Iontype labels are just permuted
+              but the total number of values for each iontype remain the same.
+
+              The order matches the iontypes array from a given ranging results
+              as it is specified in the configuration settings inside the specific
+              config_filename that was used for this paraprobe-spatstat analysis.
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+          knn:
+            node: group
+            class: NXprocess
+            occurs: {min: 0}
+            doc: K-nearest neighbor statistics.
+            children:
+              distance:
+                node: dataset
+                type: NX_FLOAT
+                shape: [n_knn]
+                units: {category: NX_LENGTH}
+                doc: Right boundary of the binning.
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              probability_mass:
+                node: dataset
+                type: NX_FLOAT
+                shape: [n_knn]
+                units: {category: NX_DIMENSIONLESS}
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              cumulated:
+                node: dataset
+                type: NX_FLOAT
+                shape: [n_knn]
+                units: {category: NX_UNITLESS}
+                doc: Cumulated not normalized by total counts.
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              cumulated_normalized:
+                node: dataset
+                type: NX_FLOAT
+                shape: [n_knn]
+                units: {category: NX_DIMENSIONLESS}
+                doc: Cumulated and normalized by total counts.
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          rdf:
+            node: group
+            class: NXprocess
+            occurs: {min: 0}
+            doc: Radial distribution statistics.
+            children:
+              distance:
+                node: dataset
+                type: NX_FLOAT
+                shape: [n_rdf]
+                units: {category: NX_LENGTH}
+                doc: Right boundary of the binning.
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              probability_mass:
+                node: dataset
+                type: NX_FLOAT
+                shape: [n_rdf]
+                units: {category: NX_DIMENSIONLESS}
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              cumulated:
+                node: dataset
+                type: NX_FLOAT
+                shape: [n_rdf]
+                units: {category: NX_UNITLESS}
+                doc: Cumulated not normalized by total counts.
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              cumulated_normalized:
+                node: dataset
+                type: NX_FLOAT
+                shape: [n_rdf]
+                units: {category: NX_DIMENSIONLESS}
+                doc: Cumulated and normalized by total counts.
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+            via: [T1, T6, T7]
+            provisional: [Q1]
+        via: [T1, T3, T6]
+        provisional: [Q1, Q3]
+    via: [T1, T2, T6]
+    provisional: [Q1, Q11]
+via: [T8]

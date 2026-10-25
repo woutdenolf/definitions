@@ -1,0 +1,19 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "finding.json",
+ "title": "NXDS finding",
+ "description": "One finding of a validator, one JSON object per line (spec §10). Written by hand.",
+ "type": "object",
+ "additionalProperties": false,
+ "required": ["code", "severity", "path", "member", "bundle"],
+ "properties": {
+  "code": {"type": "string", "pattern": "^[A-Z][A-Z-]*$"},
+  "severity": {"enum": ["E", "W", "I"]},
+  "path": {"type": "string", "description": "/-separated path in the file; @a for an attribute"},
+  "member": {"type": ["string", "null"], "description": "member reference (§10.2), null where §10.3 says so"},
+  "bundle": {"type": "string", "pattern": "^.+-r[0-9]+$"},
+  "message": {"type": ["string", "null"]},
+  "expected": {"type": ["string", "null"]},
+  "actual": {"type": ["string", "null"]}
+ }
+}

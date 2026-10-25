@@ -1,0 +1,45 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/COLLECTION"},
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"class": "NXdata", "declared_by": "NXresolution", "docs": ["NXresolution/response_function"], "id": "response_function", "name": {"exact": "response_function"}, "node": "group", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q4", "Q11"], "recommended": false, "refines": "DATA", "via": ["T1", "T2", "T4", "T6", "T7", "T18"]},
+    {"node": "group", "ref": "NXobject/LOG"},
+    {"node": "group", "ref": "NXobject/NOTE"},
+    {"class": "NXnote", "declared_by": "NXresolution", "docs": ["NXresolution/note"], "id": "note", "name": {"exact": "note"}, "node": "group", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q4", "Q11"], "recommended": false, "refines": "NOTE", "via": ["T1", "T2", "T4", "T6", "T7", "T18"]},
+    {"node": "group", "ref": "NXobject/PARAMETERS"},
+    {"class": "NXparameters", "declared_by": "NXresolution", "docs": ["NXresolution/formula_symbols"], "id": "formula_symbols", "name": {"exact": "formula_symbols"}, "node": "group", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q4", "Q11"], "recommended": false, "refines": "PARAMETERS", "via": ["T1", "T2", "T4", "T6", "T7", "T18"]},
+    {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"declared_by": "NXresolution", "docs": ["NXobject/FIELDNAME_errors", "NXresolution/resolution_errors"], "id": "resolution_errors", "name": {"exact": "resolution_errors"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q3", "Q4"], "recommended": false, "refines": "FIELDNAME_errors", "type": "NX_FLOAT", "units": {"category": "NX_ANY"}, "via": ["T1", "T3", "T4", "T6", "T7", "T18"]},
+    {"declared_by": "NXresolution", "docs": ["NXobject/FIELDNAME_errors", "NXresolution/relative_resolution_errors"], "id": "relative_resolution_errors", "name": {"exact": "relative_resolution_errors"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q3", "Q4"], "recommended": false, "refines": "FIELDNAME_errors", "type": "NX_FLOAT", "units": {"category": "NX_DIMENSIONLESS"}, "via": ["T1", "T3", "T4", "T6", "T7", "T18"]},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+    {"node": "dataset", "ref": "NXobject/identifierNAME"},
+    {"declared_by": "NXresolution", "docs": ["NXresolution/physical_quantity"], "id": "physical_quantity", "name": {"exact": "physical_quantity"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4", "T7"]},
+    {"declared_by": "NXresolution", "docs": ["NXresolution/type"], "enum": {"open": false, "values": [{"value": "estimated"}, {"value": "derived"}, {"value": "calibrated"}, {"value": "other"}]}, "id": "type", "name": {"exact": "type"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4", "T7"]},
+    {"declared_by": "NXresolution", "docs": ["NXresolution/resolution"], "id": "resolution", "name": {"exact": "resolution"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_FLOAT", "units": {"category": "NX_ANY"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXresolution", "docs": ["NXresolution/relative_resolution"], "id": "relative_resolution", "name": {"exact": "relative_resolution"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_FLOAT", "units": {"category": "NX_ANY"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXresolution", "docs": ["NXresolution/resolution_formula_description"], "id": "resolution_formula_description", "name": {"exact": "resolution_formula_description"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4", "T7"]},
+    {"class": "NXcalibration", "declared_by": "NXresolution", "docs": ["NXresolution/CALIBRATION"], "id": "CALIBRATION", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q11"], "recommended": false, "via": ["T1", "T2", "T4", "T7"]}
+  ],
+  "class": "NXresolution",
+  "extends": "NXobject",
+  "lossy": [],
+  "provisional": [],
+  "require": [],
+  "source": "base_classes/NXresolution.nxdl.xml",
+  "status": "base",
+  "symbols": [],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"},
+  "via": []
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {}
+}

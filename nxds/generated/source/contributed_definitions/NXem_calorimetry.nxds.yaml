@@ -1,0 +1,437 @@
+nxds: '0.1'
+class: NXem_calorimetry
+category: application
+describes: NXroot
+doc: |-
+  Application definition for minimal example in-situ calorimetry.
+
+  TODO:
+
+  * What is the technique about.
+  * General context.
+  * Literature references.
+defaults: {min: 1, binding: true, type: NX_CHAR}
+symbols:
+  n_p: {doc: Number of diffraction pattern.}
+  n_f: {doc: Number of radial integration bins.}
+  n_i: {doc: Number of coordinates along i axis.}
+  n_j: {doc: Number of coordinates along j axis.}
+children:
+  ENTRY:
+    node: group
+    name: {any: true}
+    class: NXentry
+    occurs: {min: 1, max: 1}
+    children:
+      definition:
+        node: dataset
+        type: NX_CHAR
+        enum: [NXem_calorimetry]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      identifier_analysis:
+        node: dataset
+        occurs: {min: 0}
+        type: NX_CHAR
+        via: [T1, T6, T7]
+        provisional: [Q1]
+      profiling:
+        node: group
+        class: NXcs_profiling
+        occurs: {min: 0}
+        doc: Details about performance, profiling, etc.
+        children:
+          start_time:
+            node: dataset
+            occurs: {min: 0}
+            recommended: true
+            type: NX_DATE_TIME
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          end_time:
+            node: dataset
+            occurs: {min: 0}
+            recommended: true
+            type: NX_DATE_TIME
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          total_elapsed_time:
+            node: dataset
+            type: NX_NUMBER
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T6, T7]
+        provisional: [Q1]
+      program1:
+        node: group
+        class: NXprogram
+        occurs: {min: 0}
+        recommended: true
+        doc: Name of the program whereby this config file was created.
+        children:
+          program:
+            node: dataset
+            type: NX_CHAR
+            attributes:
+              version:
+                type: NX_CHAR
+                via: [T1, T5]
+                provisional: [Q2]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T6, T7]
+        provisional: [Q1]
+      environment:
+        node: group
+        class: NXcollection
+        occurs: {min: 0}
+        recommended: true
+        doc: Programs and libraries representing the computational environment
+        children:
+          programID:
+            node: group
+            name: {template: 'program{ID}'}
+            class: NXprogram
+            occurs: {min: 1, max: unbounded}
+            children:
+              program:
+                node: dataset
+                type: NX_CHAR
+                attributes:
+                  version:
+                    type: NX_CHAR
+                    via: [T1, T5]
+                    provisional: [Q2]
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T3, T6]
+            provisional: [Q1, Q3]
+        via: [T1, T6, T7]
+        provisional: [Q1]
+      userID:
+        node: group
+        name: {template: 'user{ID}'}
+        class: NXuser
+        occurs: {min: 0, max: unbounded}
+        via: [T1, T3, T6]
+        provisional: [Q1, Q3]
+      sample:
+        node: group
+        class: NXsample
+        occurs: {min: 0}
+        recommended: true
+        children:
+          is_simulation:
+            node: dataset
+            type: NX_BOOLEAN
+            doc: |-
+              Qualifier whether the sample is a real (in which case is_simulation should be set to false)
+              or a virtual one (in which case is_simulation should be set to true).
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          atom_types:
+            node: dataset
+            type: NX_CHAR
+            doc: |-
+              List of comma-separated elements from the periodic table that are
+              contained in the specimen. If the specimen substance has multiple
+              components, all elements from each component must be included in
+              `atom_types`.
+
+              The purpose of the field is to offer research data management systems an
+              opportunity to parse the relevant elements without having to interpret
+              these from the resources.
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T6, T7]
+        provisional: [Q1]
+      citeID:
+        node: group
+        name: {template: 'cite{ID}'}
+        class: NXcite
+        occurs: {min: 0, max: unbounded}
+        via: [T1, T3, T6]
+        provisional: [Q1, Q3]
+      diffraction_space:
+        node: group
+        class: NXcoordinate_system
+        occurs: {min: 0}
+        via: [T1, T6, T7]
+        provisional: [Q1]
+      diffraction:
+        node: group
+        class: NXnote
+        doc: |-
+          Reference to the resource which stores acquired pattern from the
+          experiment or simulation that are analyzed in this workflow.
+
+          Can refer to the original EMD or MRC files or the parsed NXem
+          in RDM e.g. NOMAD OASIS.
+        children:
+          file_name:
+            node: dataset
+            type: NX_CHAR
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          checksum:
+            node: dataset
+            type: NX_CHAR
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          algorithm:
+            node: dataset
+            type: NX_CHAR
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      actuator:
+        node: group
+        class: NXnote
+        doc: Reference to the resource which stores actuator log file from the experiment.
+        children:
+          file_name:
+            node: dataset
+            type: NX_CHAR
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          checksum:
+            node: dataset
+            type: NX_CHAR
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          algorithm:
+            node: dataset
+            type: NX_CHAR
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      config:
+        node: group
+        class: NXnote
+        doc: Configuration file that was used for parametrizing this analysis workflow.
+        children:
+          file_name:
+            node: dataset
+            type: NX_CHAR
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          checksum:
+            node: dataset
+            type: NX_CHAR
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          algorithm:
+            node: dataset
+            type: NX_CHAR
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      synchronization:
+        node: group
+        class: NXprocess
+        doc: |-
+          Assumptions and computations whereby timestamping data from
+          the detector and actuator (e.g. heating chip) were synchronized.
+        children:
+          sequence_index:
+            node: dataset
+            type: NX_POSINT
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          start_time:
+            node: dataset
+            type: NX_DATE_TIME
+            doc: |-
+              ISO8601 with local time zone reference timestamp that tells
+              with which delta_time can be converted in timestamp.
+              The reference timestamp is defined as the time when the
+              actuator started acting on the sample.
+
+              Time differences to this timestamp when correlated signals such
+              as diffraction pattern matching with a specific state of  the sample
+              (e.g. obtained temperature via the actuator) are reported through
+              delta_time.
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          indices_pattern:
+            node: dataset
+            type: NX_INT
+            shape: [n_p]
+            units: {category: NX_UNITLESS}
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+          delta_time:
+            node: dataset
+            type: NX_FLOAT
+            shape: [n_p]
+            units: {category: NX_TIME}
+            doc: |-
+              Time difference to start_time.
+
+              Collecting diffraction pattern also takes some time.
+              It is assumed that the acquisition time for each pattern is
+              substantial shorter than the time it takes the actuator to
+              cause a change in stimulus (e.g. temperature).
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      pattern_center:
+        node: group
+        class: NXprocess
+        doc: |-
+          Computation of the center for each pattern using e.g. a Circular Hough
+          Transformation.
+        children:
+          sequence_index:
+            node: dataset
+            type: NX_POSINT
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          position:
+            node: dataset
+            type: NX_FLOAT
+            shape: [n_p, 2]
+            units: {category: NX_LENGTH}
+            doc: Computed center for each pattern.
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      distortion_correction:
+        node: group
+        class: NXprocess
+        occurs: {min: 0}
+        doc: |-
+          Elliptical distortion correction as a step when computing the center for
+          patterns.
+        children:
+          sequence_index:
+            node: dataset
+            type: NX_POSINT
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          center:
+            node: dataset
+            type: NX_NUMBER
+            shape: [n_p, 2]
+            units: {category: NX_LENGTH}
+            doc: Computed center for each pattern.
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+        via: [T1, T6, T7]
+        provisional: [Q1]
+      integration:
+        node: group
+        class: NXprocess
+        doc: |-
+          Integrated diffraction pattern intensity as a function of radial distance from the center
+          azimuthally integrated as a function of time.
+        children:
+          sequence_index:
+            node: dataset
+            type: NX_POSINT
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          resultBACKGROUND:
+            node: group
+            name: {template: 'result{BACKGROUND}'}
+            class: NXdata
+            occurs: {min: 0, max: 2}
+            doc: |-
+              The integrated intensities:
+
+              * result_with_background
+              * result_without_background
+            attributes:
+              signal:
+                type: NX_CHAR
+                via: [T1, T5]
+                provisional: [Q2]
+              axes:
+                type: NX_CHAR
+                via: [T1, T5]
+                provisional: [Q2]
+              AXISNAME_indices:
+                name: {template: '{AXISNAME}_indices'}
+                type: NX_UINT
+                via: [T1, T3, T5]
+                provisional: [Q2, Q3]
+            children:
+              title:
+                node: dataset
+                type: NX_CHAR
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              intensity:
+                node: dataset
+                type: NX_FLOAT
+                shape: [n_p, n_f]
+                units: {category: NX_UNITLESS}
+                doc: |-
+                  Integrated intensity as a function of time and the radial distance from the
+                  pattern center.
+                attributes:
+                  long_name:
+                    type: NX_CHAR
+                    via: [T1, T5]
+                    provisional: [Q2]
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              indices_pattern:
+                node: dataset
+                occurs: {min: 0}
+                type: NX_INT
+                shape: [n_p]
+                units: {category: NX_UNITLESS}
+                doc: Identifier for each pattern.
+                attributes:
+                  long_name:
+                    type: NX_CHAR
+                    via: [T1, T5]
+                    provisional: [Q2]
+                via: [T1, T6, T7, T9]
+                provisional: [Q1]
+              s:
+                node: dataset
+                type: NX_FLOAT
+                shape: [n_f]
+                units: {category: NX_ANY}
+                doc: Positions in reciprocal space.
+                attributes:
+                  long_name:
+                    type: NX_CHAR
+                    via: [T1, T5]
+                    provisional: [Q2]
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              time:
+                node: dataset
+                type: NX_FLOAT
+                shape: [n_p]
+                units: {category: NX_TIME}
+                doc: Time since start of the in-situ experiment
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+            via: [T1, T3, T6]
+            provisional: [Q1, Q3]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      background_subtraction:
+        node: group
+        class: NXprocess
+        occurs: {min: 0}
+        children:
+          sequence_index:
+            node: dataset
+            type: NX_POSINT
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T6, T7]
+        provisional: [Q1]
+    via: [T1, T2, T6]
+    provisional: [Q1, Q11]
+via: [T8]

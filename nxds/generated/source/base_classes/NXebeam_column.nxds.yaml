@@ -1,0 +1,306 @@
+nxds: '0.1'
+class: NXebeam_column
+category: base
+extends: NXcomponent
+doc: |-
+  Base class for a set of components providing a controllable electron beam.
+
+  The idea behind defining :ref:`NXebeam_column` as an own base class vs. adding these
+  concepts in :ref:`NXem_instrument` is that the electron beam generating component
+  might be worthwhile to use also in other types of experiments.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  operation_mode:
+    node: dataset
+    type: NX_CHAR
+    doc: |-
+      Tech-partner, microscope-, and control-software-specific name of the
+      specific operation mode how the ebeam_column and its components are
+      controlled to achieve specific illumination conditions.
+
+      In many cases the users of an instrument do not or can not be expected to know
+      all intricate spatiotemporal dynamics of their hardware. Instead, they rely on
+      assumptions that the instrument, its control software, and components work as
+      expected to focus on their research questions.
+
+      For these cases, having a place for documenting the operation_mode is useful
+      in as much as at least some constraints on how the illumination conditions were
+      is documented.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  electron_source:
+    node: group
+    class: NXsource
+    doc: |-
+      A physical part of an electron or ion microscope from which
+      the particles that form the beam are emitted.
+
+      The hardware for an electron source in an electron microscope
+      may contain several components which affect the beam path.
+
+      This concept is related to term `Source`_ of the EMglossary standard.
+
+      .. _Source: https://purls.helmholtz-metadaten.de/emg/EMG_00000045
+    children:
+      voltage:
+        node: dataset
+        type: NX_NUMBER
+        units: {category: NX_VOLTAGE}
+        doc: |-
+          The potential difference between anode and cathode.
+
+          This concept is related to term `Acceleration Voltage`_ of the EMglossary standard.
+
+          .. _Acceleration Voltage: https://purls.helmholtz-metadaten.de/emg/EMG_00000004
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      extraction_voltage:
+        node: dataset
+        type: NX_NUMBER
+        units: {category: NX_VOLTAGE}
+        doc: |-
+          Voltage which is used to create an electric field that draws particles from
+          the source.
+
+          This concept is related to term `Extraction Voltage`_ of the EMglossary standard.
+
+          .. _Extraction Voltage: https://purls.helmholtz-metadaten.de/emg/EMG_00000025
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      emission_current:
+        node: dataset
+        type: NX_NUMBER
+        units: {category: NX_CURRENT}
+        doc: |-
+          Electrical current which is released from the source.
+
+          This concept is related to term `Emission Current`_ of the EMglossary standard.
+
+          .. _Emission Current: https://purls.helmholtz-metadaten.de/emg/EMG_00000025
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      filament_current:
+        node: dataset
+        type: NX_NUMBER
+        units: {category: NX_CURRENT}
+        doc: |-
+          Electrical current which flows through the source.
+
+          This concept is related to term `Filament Current`_ of the EMglossary standard.
+
+          .. _Filament Current: https://purls.helmholtz-metadaten.de/emg/EMG_00000027
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      probe:
+        node: dataset
+        type: NX_CHAR
+        enum: [electron]
+        doc: Type of radiation.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      emitter_type:
+        node: dataset
+        type: NX_CHAR
+        doc: |-
+          Emitter type used to create the beam.
+
+          If the emitter type is other, give further details
+          in the description field.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      emitter_material:
+        node: dataset
+        type: NX_CHAR
+        doc: Material of which the emitter is build, e.g. the filament material.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      lifetime:
+        node: dataset
+        type: NX_NUMBER
+        units: {category: NX_TIME}
+        doc: How long has the source been in operation.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  ELECTROMAGNETIC_LENS:
+    node: group
+    name: {any: true}
+    class: NXelectromagnetic_lens
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  APERTURE:
+    node: group
+    name: {any: true}
+    class: NXaperture
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  DEFLECTOR:
+    node: group
+    name: {any: true}
+    class: NXdeflector
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  blankerID:
+    node: group
+    name: {template: 'blanker{ID}'}
+    class: NXdeflector
+    doc: |-
+      A component for blanking the beam or generating pulsed electron beams.
+      See e.g . `I. G. C. Weppelman et al. <https://doi.org/10.1016/j.ultramic.2017.10.002>`_
+      or `Y. Liao <https://www.globalsino.com/EM/page2464.html>`_ for details.
+    via: [T1, T3, T4, T7]
+    provisional: [Q1, Q3]
+  MONOCHROMATOR:
+    node: group
+    name: {any: true}
+    class: NXmonochromator
+    doc: |-
+      Device to improve energy resolution or chromatic aberration.
+
+      Examples are Wien, $\textalpha$-, or $\Omega$- energy filter or `cc corrector
+      like <https://www.ceos-gmbh.de/en/basics/cc-corrector>`_
+    children:
+      type:
+        node: dataset
+        type: NX_CHAR
+        enum: [wien, alfa, omega, castaing_henry, gatan_imaging, sector_analyzer]
+        doc: Qualitative type of the component.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      FABRICATION:
+        node: group
+        name: {any: true}
+        class: NXfabrication
+        via: [T1, T2, T4, T7]
+        provisional: [Q1, Q11]
+      applied:
+        node: dataset
+        type: NX_BOOLEAN
+        doc: Was the corrector used?
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      dispersion:
+        node: dataset
+        type: NX_NUMBER
+        units: {category: NX_ANY}
+        doc: Energy dispersion in e.g. µm/eV.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      voltage:
+        node: dataset
+        type: NX_NUMBER
+        units: {category: NX_VOLTAGE}
+        doc: Corresponding voltage for that energy dispersion.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  CORRECTOR_CS:
+    node: group
+    name: {any: true}
+    class: NXcorrector_cs
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  corrector_ax:
+    node: group
+    class: NXcomponent
+    doc: |-
+      Component that reshapes an ellipse-shaped electron beam into a circular one.
+
+      * `L. Reimer 1998, Springer, 1998 <https://dx.doi.org/10.1007/978-3-540-3896>`_
+      * `M. Tanaka et al., Electron Microscopy Glossary, 2024 <https://www.jeol.com/words/semterms/20201020.111014.php#gsc.tab=0>`_
+
+      Stigmator is an exact synonym.
+    children:
+      value_x:
+        node: dataset
+        type: NX_NUMBER
+        units: {category: NX_ANY}
+        doc: |-
+          Descriptor for the correction strength along the first direction when exact technical details
+          are unknown or not directly controllable as the control software of the microscope does not
+          enable or was not configured to display these values for users.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      value_y:
+        node: dataset
+        type: NX_NUMBER
+        units: {category: NX_ANY}
+        doc: |-
+          Descriptor for the correction strength along the second direction when exact technical details
+          are unknown or not directly controllable as the control software of the microscope does not
+          enable or was not configured to display these values for users.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  biprismID:
+    node: group
+    name: {template: 'biprism{ID}'}
+    class: NXcomponent
+    doc: Electron biprism as it is used e.g. for electron holography.
+    via: [T1, T3, T4, T7]
+    provisional: [Q1, Q3]
+  phaseplateID:
+    node: group
+    name: {template: 'phaseplate{ID}'}
+    class: NXcomponent
+    doc: |-
+      Device that causes a change in the phase of an electron wave.
+
+      * `M. Malac et al. <https://doi.org/10.1093/jmicro/dfaa070>`_
+      * `R. R. Schröder et al. <https://www.lem.kit.edu/152.php>`_
+    children:
+      type:
+        node: dataset
+        type: NX_CHAR
+        enum:
+          values:
+          - {value: thin_film}
+          - {value: electrostatic}
+          open: true
+        doc: Qualitative type
+        via: [T1, T4, T7]
+        provisional: [Q1]
+    via: [T1, T3, T4, T7]
+    provisional: [Q1, Q3]
+  SENSOR:
+    node: group
+    name: {any: true}
+    class: NXsensor
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  ACTUATOR:
+    node: group
+    name: {any: true}
+    class: NXactuator
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  BEAM:
+    node: group
+    name: {any: true}
+    class: NXbeam
+    doc: |-
+      Individual characterization results for the position, shape,
+      and characteristics of the electron beam at a given location.
+
+      :ref:`NXtransformations` should be used to specify the location
+      or the position at which details about the beam were probed.
+
+      This concept is related to term `Electron Beam`_ of the EMglossary standard.
+
+      .. _Electron Beam: https://purls.helmholtz-metadaten.de/emg/EMG_00000021
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  COMPONENT:
+    node: group
+    name: {any: true}
+    class: NXcomponent
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  scan_controller:
+    node: group
+    class: NXscan_controller
+    via: [T1, T4, T7]
+    provisional: [Q1]

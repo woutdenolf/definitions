@@ -1,0 +1,6 @@
+description: >
+  A subentry that follows another definition (§8.2, §8.4): `/entry/sub` names
+  NXcase_inner, so it counts for NXcase_outer's SUBENTRY but is checked against
+  NXcase_inner (MISSING `value`); the root is checked against the root-level
+  members of both definitions.
+capabilities: []

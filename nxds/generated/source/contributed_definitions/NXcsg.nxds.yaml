@@ -1,0 +1,55 @@
+nxds: '0.1'
+class: NXcsg
+category: base
+extends: NXobject
+doc: |-
+  Constructive Solid Geometry (CSG) base class.
+
+  Offers concepts for combining the definitions of leaf and
+  branching nodes of a CSG tree.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  operation:
+    node: dataset
+    enum: [UNION, INTERSECTION, DIFFERENCE, COMPLEMENT, IS_QUADRIC, IS_MESH]
+    doc: |-
+      One of the standard construction solid geometry set operations,
+      or statement IS_QUADRIC or IS_MESH if the CSG is a pointer to an
+      instance of a geometry class. Takes values:
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  a:
+    node: group
+    class: NXcsg
+    occurs: {min: 0, max: 1}
+    doc: |-
+      The first operand of constructive solid geometry operation.
+      Compulsory if 'operation' is UNION, INTERSECTION,
+      DIFFERENCE or COMPLEMENT.
+    via: [T1, T6]
+    provisional: [Q1]
+  b:
+    node: group
+    class: NXcsg
+    occurs: {min: 0, max: 1}
+    doc: |-
+      The second operand of constructive solid geometry operation.
+      Compulsory if 'operation' is UNION, INTERSECTION or
+      DIFFERENCE.
+    via: [T1, T6]
+    provisional: [Q1]
+  geometry:
+    node: dataset
+    occurs: {min: 0, max: 1}
+    type: NX_CHAR
+    doc: |-
+      Path to a field that is an instance of one of several possible geometry
+      classes: Specifically, :ref:`NXquadric` if 'operation' is IS_QUADRIC,
+      :ref:`NXoff_geometry`, or other primitive based base classes
+      if 'operation' is IS_MESH.
+
+      The instance defines the surface making up the constructive solid
+      geometry component. This field is compulsory if 'operation' is
+      IS_QUADRIC or IS_MESH.
+    via: [T1, T6]
+    provisional: [Q1]

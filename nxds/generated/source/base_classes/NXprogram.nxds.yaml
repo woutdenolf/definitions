@@ -1,0 +1,25 @@
+nxds: '0.1'
+class: NXprogram
+category: base
+extends: NXobject
+doc: Base class to describe a software tool or library.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  program:
+    node: dataset
+    doc: |-
+      Given name of the program. Program can be a commercial one a script,
+      or a library or a library component.
+    attributes:
+      version:
+        doc: Program version plus build number, or commit hash.
+        via: [T0, T1, T4]
+      url:
+        doc: |-
+          Description of an ideally ever persistent resource where the source code
+          of the program or this specific compiled version of the program can be
+          found so that the program yields repeatably exactly the same numerical
+          and categorical results.
+        via: [T0, T1, T4]
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]

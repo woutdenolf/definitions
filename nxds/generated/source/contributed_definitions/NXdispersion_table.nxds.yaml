@@ -1,0 +1,61 @@
+nxds: '0.1'
+class: NXdispersion_table
+category: base
+extends: NXobject
+doc: A dispersion table denoting energy, dielectric function tabulated values.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+symbols:
+  n_points:
+    doc: The number of energy and dielectric function points
+children:
+  model_name:
+    node: dataset
+    type: NX_CHAR
+    doc: The name of this dispersion model.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  convention:
+    node: dataset
+    type: NX_CHAR
+    enum: [n + ik, n - ik]
+    doc: The sign convention being used (n + or - ik)
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  wavelength:
+    node: dataset
+    type: NX_NUMBER
+    shape: [n_points]
+    units: {category: NX_LENGTH}
+    doc: |-
+      The wavelength array of the tabulated dataset.
+      This is essentially a duplicate of the energy field.
+      There should be one or both of them present.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  energy:
+    node: dataset
+    type: NX_NUMBER
+    shape: [n_points]
+    units: {category: NX_ENERGY}
+    doc: |-
+      The energy array of the tabulated dataset.
+      This is essentially a duplicate of the wavelength field.
+      There should be one or both of them present.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  refractive_index:
+    node: dataset
+    type: NX_COMPLEX
+    shape: [n_points]
+    units: {category: NX_DIMENSIONLESS}
+    doc: The refractive index array of the tabulated dataset.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  dielectric_function:
+    node: dataset
+    type: NX_COMPLEX
+    shape: [n_points]
+    units: {category: NX_DIMENSIONLESS}
+    doc: The dielectric function of the tabulated dataset.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]

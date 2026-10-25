@@ -1,0 +1,6 @@
+description: >
+  Enumeration values of an NXDL class typed after resolution (§5.2.7): `mode`
+  inherits NX_INT, so its items are the numbers 3 and 5; `labels` inherits a
+  text type and a one-dimensional shape, so `"a b"` is the list `[a, b]`;
+  `direction` inherits NX_NUMBER and shape [3], so `"[0, 0, 1]"` is `[0, 0, 1]`.
+covers: [enum, T19]

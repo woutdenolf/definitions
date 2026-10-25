@@ -1,0 +1,50 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/COLLECTION"},
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"node": "group", "ref": "NXobject/LOG"},
+    {"node": "group", "ref": "NXobject/NOTE"},
+    {"node": "group", "ref": "NXobject/PARAMETERS"},
+    {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+    {"node": "dataset", "ref": "NXobject/identifierNAME"},
+    {"node": "dataset", "ref": "NXcomponent/applied"},
+    {"declared_by": "NXcomponent", "docs": ["NXcomponent/name", "NXactuator/name"], "id": "name", "name": {"exact": "name"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "refined_by": ["NXactuator"], "type": "NX_CHAR", "via": ["T0", "T1", "T4", "T7"]},
+    {"node": "dataset", "ref": "NXcomponent/description"},
+    {"node": "dataset", "ref": "NXcomponent/inputs"},
+    {"node": "dataset", "ref": "NXcomponent/outputs"},
+    {"node": "group", "ref": "NXcomponent/FABRICATION"},
+    {"node": "group", "ref": "NXcomponent/PROGRAM"},
+    {"class": "NXenvironment", "declared_by": "NXcomponent", "docs": ["NXactuator/ENVIRONMENT"], "id": "ENVIRONMENT", "name": {"any": true}, "node": "group", "occurs": {"max": 0, "min": 0}, "provisional": ["Q1", "Q11"], "recommended": false, "refined_by": ["NXactuator"], "via": ["T1", "T2", "T4", "T7"]},
+    {"node": "dataset", "ref": "NXcomponent/depends_on"},
+    {"node": "group", "ref": "NXcomponent/TRANSFORMATIONS"},
+    {"declared_by": "NXactuator", "docs": ["NXactuator/short_name"], "id": "short_name", "name": {"exact": "short_name"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4", "T7"]},
+    {"declared_by": "NXactuator", "docs": ["NXactuator/actuation_target"], "id": "actuation_target", "name": {"exact": "actuation_target"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4", "T7"]},
+    {"declared_by": "NXactuator", "docs": ["NXactuator/physical_quantity"], "id": "physical_quantity", "name": {"exact": "physical_quantity"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4", "T7"]},
+    {"declared_by": "NXactuator", "docs": ["NXactuator/type"], "id": "type", "name": {"exact": "type"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4", "T7"]},
+    {"declared_by": "NXactuator", "docs": ["NXactuator/outputVALUE"], "id": "outputVALUE", "name": {"template": "output{VALUE}"}, "node": "dataset", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q3"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_ANY"}, "via": ["T1", "T3", "T4", "T7"]},
+    {"class": "NXpid_controller", "declared_by": "NXactuator", "docs": ["NXactuator/PID_CONTROLLER"], "id": "PID_CONTROLLER", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q11"], "recommended": false, "via": ["T1", "T2", "T4", "T7"]}
+  ],
+  "class": "NXactuator",
+  "extends": "NXcomponent",
+  "lossy": [],
+  "provisional": [],
+  "require": [],
+  "source": "base_classes/NXactuator.nxdl.xml",
+  "status": "base",
+  "symbols": [],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"},
+  "via": []
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {}
+}

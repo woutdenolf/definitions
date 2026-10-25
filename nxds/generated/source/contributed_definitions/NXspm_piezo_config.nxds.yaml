@@ -1,0 +1,147 @@
+nxds: '0.1'
+class: NXspm_piezo_config
+category: base
+extends: NXobject
+doc: |-
+  A base class describing piezo actuator settings for scanning probe microscopy.
+
+  Piezoelectric actuators work utilizing the inverse-piezoelectric effect, when a voltage
+  is applied on the material and it deforms proportional to the applied voltage.
+  Description below shows calibration coefficients and other configuration parameters of
+  open loop piezo actuators (that is actuators without capacitive sensor feedback systems).
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  piezo_material:
+    node: group
+    class: NXspm_piezoelectric_material
+    doc: The material description and properties of the piezoelectric scanner materials.
+    children:
+      curvature_radiusN:
+        node: dataset
+        name: {template: 'curvature_radius{N}'}
+        type: NX_NUMBER
+        units: {category: NX_LENGTH}
+        doc: |-
+          The N (substring) denotes X or Y. There are 2 parameters in X and Y directions. It can be set
+          approximately to the length of the piezo tube along X and Y axis.
+        via: [T1, T3, T4, T7]
+        provisional: [Q1, Q3]
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  calibration:
+    node: group
+    class: NXcalibration
+    children:
+      calibration_type:
+        node: dataset
+        type: NX_CHAR
+        enum: [active, passive]
+        doc: |-
+          The name of the calibration type, sometimes it is called
+          `active calibration`.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      calibration_name:
+        node: dataset
+        doc: A specific name of the calibration (e.g. active type with name 'LHe').
+        via: [T0, T1, T4, T7]
+        provisional: [Q1]
+      calibration_date:
+        node: dataset
+        type: NX_DATE_TIME
+        doc: The date of the calibration.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      calibratedAXIS:
+        node: dataset
+        name: {template: 'calibrated{AXIS}'}
+        type: NX_NUMBER
+        doc: |-
+          The AXIS (substring) denotes X, Y or Z, e.g., calibrated_x. There are three directions X, Y, and Z for calibration,
+          along with three available parameters each: Calibration (m/V), Range (m), and HV gain. Only
+          two of these parameters are required to define the calibration. Consequently, when any
+          value is changed, one of the other values will be automatically updated.
+        via: [T1, T3, T4, T7]
+        provisional: [Q1, Q3]
+      hv_gainN:
+        node: dataset
+        name: {template: 'hv_gain{N}'}
+        type: NX_NUMBER
+        doc: |-
+          The N (substring) denotes X or Y or Z, e.g., hv_gain_x. In some systems, there is an HV gain readout feature. For
+          these systems, the HV gain should be automatically adjusted whenever the gain is
+          changed at the high voltage amplifier.
+        via: [T1, T3, T4, T7]
+        provisional: [Q1, Q3]
+      rangeN:
+        node: dataset
+        name: {template: 'range{N}'}
+        type: NX_NUMBER
+        units: {category: NX_LENGTH}
+        doc: |-
+          The N (substring) denotes X or Y or Z, e.g., range_x. There are 3 parameters in X, Y and Z directions. The range
+          is the maximum distance the piezo can move.
+        via: [T1, T3, T4, T7]
+        provisional: [Q1, Q3]
+      calibration_parameters:
+        node: group
+        class: NXparameters
+        occurs: {min: 0}
+        children:
+          coefficientN:
+            node: dataset
+            name: {template: 'coefficient{N}'}
+            type: NX_NUMBER
+            units: {category: NX_ANY}
+            doc: |-
+              The calibration coefficient is the ratio of the actual distance moved by the piezo due to
+              the voltage or external force applied to the piezo. It is also called first-order correction.
+              The N (substring) denotes X and Y directions (e.g., coefficient_x).
+            via: [T1, T3, T4, T7]
+            provisional: [Q1, Q3]
+          second_order_correctionN:
+            node: dataset
+            name: {template: 'second_order_correction{N}'}
+            type: NX_NUMBER
+            units: {category: NX_ANY}
+            doc: |-
+              The N (substring) denotes X and Y directions (e.g., second_order_correction_x). If you know them, you can enter the 2nd order piezo
+              characteristics to compensate the error for that axis.
+              The following equation shows the
+              interpretation of the 2nd order correction parameters, For the X-piezo: :math:`U_x = \frac{1}{c_x} \cdot X + c_{xx} \cdot X^2`
+              with units: :math:`[V] = \frac{[V]}{[m]} \cdot [m] + \frac{[V]}{[m^2]} \cdot [m^2]`
+              where cx is the calibration of the piezo X and cxx is the 2nd order correction. The unit for
+              the second-order correction is (:math:`\frac{V}{m^2}`).
+            via: [T1, T3, T4, T7]
+            provisional: [Q1, Q3]
+        via: [T1, T6, T7]
+        provisional: [Q1]
+      tiltN:
+        node: dataset
+        name: {template: 'tilt{N}'}
+        type: NX_NUMBER
+        units: {category: NX_ANGLE}
+        doc: |-
+          The N (substring) denotes X and Y directions (e.g., tilt_x), and for both directions tilt needs to be adjusted according
+          to the actual surface.
+        via: [T1, T3, T4, T7]
+        provisional: [Q1, Q3]
+      drift_correction_status:
+        node: dataset
+        type: NX_BOOLEAN
+        doc: The drift correction status (true / false) in calibration step of piezo.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      driftN:
+        node: dataset
+        name: {template: 'drift{N}'}
+        type: NX_NUMBER
+        units: {category: NX_ANY}
+        doc: |-
+          The N (substring) denotes X, Y and Z directions (e.g., drift_x). Define the
+          drift speed [m/s] for all three axes. When the compensation is on, the piezo will start to
+          move at that speed.
+        via: [T1, T3, T4, T7]
+        provisional: [Q1, Q3]
+    via: [T1, T4, T7]
+    provisional: [Q1]

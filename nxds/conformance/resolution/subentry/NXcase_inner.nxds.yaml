@@ -1,0 +1,14 @@
+nxds: "0.1"
+class: NXcase_inner
+category: application
+describes: NXroot
+doc: A definition followed by subentries.
+defaults: {min: 1, binding: true}
+children:
+  SUBENTRY:
+    node: group
+    class: NXsubentry
+    name: {any: true}
+    children:
+      definition: {node: dataset, enum: [NXcase_inner]}
+      value: {node: dataset}

@@ -1,0 +1,45 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/COLLECTION"},
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"node": "group", "ref": "NXobject/LOG"},
+    {"node": "group", "ref": "NXobject/NOTE"},
+    {"class": "NXnote", "declared_by": "NXsubstance", "docs": ["NXsubstance/cas_image"], "id": "cas_image", "name": {"exact": "cas_image"}, "node": "group", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q4", "Q11"], "recommended": false, "refines": "NOTE", "via": ["T1", "T2", "T4", "T6", "T7", "T18"]},
+    {"node": "group", "ref": "NXobject/PARAMETERS"},
+    {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+    {"node": "dataset", "ref": "NXobject/identifierNAME"},
+    {"attributes": [{"declared_by": "NXobject", "docs": ["NXobject/identifierNAME@type"], "enum": {"open": false, "values": [{"value": "URL"}]}, "id": "type", "name": {"exact": "type"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "refined_by": ["NXsubstance"], "type": "NX_CHAR", "via": ["T0", "T1", "T4"]}, {"declared_by": "NXsubstance", "docs": ["NXsubstance/identifier_cas@cas_number"], "id": "cas_number", "name": {"exact": "cas_number"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4"]}, {"declared_by": "NXsubstance", "docs": ["NXsubstance/identifier_cas@cas_name"], "id": "cas_name", "name": {"exact": "cas_name"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4"]}], "declared_by": "NXsubstance", "docs": ["NXobject/identifierNAME", "NXsubstance/identifier_cas"], "id": "identifier_cas", "name": {"exact": "identifier_cas"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q3", "Q4"], "recommended": false, "refines": "identifierNAME", "type": "NX_CHAR", "via": ["T0", "T1", "T3", "T4", "T7", "T18"]},
+    {"attributes": [{"declared_by": "NXobject", "docs": ["NXobject/identifierNAME@type"], "enum": {"open": true, "values": [{"value": "ARK"}, {"value": "DOI"}, {"value": "Hdl"}, {"value": "IGSN"}, {"value": "ISNI"}, {"value": "ISSN"}, {"value": "ISSN-L"}, {"value": "ORCID"}, {"value": "PURL"}, {"value": "ROR"}, {"value": "URL"}, {"value": "URN"}]}, "id": "type", "name": {"exact": "type"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4"]}], "declared_by": "NXsubstance", "docs": ["NXobject/identifierNAME", "NXsubstance/identifier_inchi_str"], "id": "identifier_inchi_str", "name": {"exact": "identifier_inchi_str"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q3", "Q4"], "recommended": false, "refines": "identifierNAME", "type": "NX_CHAR", "via": ["T0", "T1", "T3", "T4", "T7", "T18"]},
+    {"attributes": [{"declared_by": "NXobject", "docs": ["NXobject/identifierNAME@type"], "enum": {"open": true, "values": [{"value": "ARK"}, {"value": "DOI"}, {"value": "Hdl"}, {"value": "IGSN"}, {"value": "ISNI"}, {"value": "ISSN"}, {"value": "ISSN-L"}, {"value": "ORCID"}, {"value": "PURL"}, {"value": "ROR"}, {"value": "URL"}, {"value": "URN"}]}, "id": "type", "name": {"exact": "type"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4"]}], "declared_by": "NXsubstance", "docs": ["NXobject/identifierNAME", "NXsubstance/identifier_inchi_key"], "id": "identifier_inchi_key", "name": {"exact": "identifier_inchi_key"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q3", "Q4"], "recommended": false, "refines": "identifierNAME", "type": "NX_CHAR", "via": ["T0", "T1", "T3", "T4", "T7", "T18"]},
+    {"attributes": [{"declared_by": "NXobject", "docs": ["NXobject/identifierNAME@type"], "enum": {"open": true, "values": [{"value": "ARK"}, {"value": "DOI"}, {"value": "Hdl"}, {"value": "IGSN"}, {"value": "ISNI"}, {"value": "ISSN"}, {"value": "ISSN-L"}, {"value": "ORCID"}, {"value": "PURL"}, {"value": "ROR"}, {"value": "URL"}, {"value": "URN"}]}, "id": "type", "name": {"exact": "type"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4"]}], "declared_by": "NXsubstance", "docs": ["NXobject/identifierNAME", "NXsubstance/identifier_iupac_name"], "id": "identifier_iupac_name", "name": {"exact": "identifier_iupac_name"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q3", "Q4"], "recommended": false, "refines": "identifierNAME", "type": "NX_CHAR", "via": ["T0", "T1", "T3", "T4", "T7", "T18"]},
+    {"attributes": [{"declared_by": "NXobject", "docs": ["NXobject/identifierNAME@type"], "enum": {"open": true, "values": [{"value": "ARK"}, {"value": "DOI"}, {"value": "Hdl"}, {"value": "IGSN"}, {"value": "ISNI"}, {"value": "ISSN"}, {"value": "ISSN-L"}, {"value": "ORCID"}, {"value": "PURL"}, {"value": "ROR"}, {"value": "URL"}, {"value": "URN"}]}, "id": "type", "name": {"exact": "type"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4"]}], "declared_by": "NXsubstance", "docs": ["NXobject/identifierNAME", "NXsubstance/identifier_smiles"], "id": "identifier_smiles", "name": {"exact": "identifier_smiles"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q3", "Q4"], "recommended": false, "refines": "identifierNAME", "type": "NX_CHAR", "via": ["T0", "T1", "T3", "T4", "T7", "T18"]},
+    {"attributes": [{"declared_by": "NXobject", "docs": ["NXobject/identifierNAME@type"], "enum": {"open": true, "values": [{"value": "ARK"}, {"value": "DOI"}, {"value": "Hdl"}, {"value": "IGSN"}, {"value": "ISNI"}, {"value": "ISSN"}, {"value": "ISSN-L"}, {"value": "ORCID"}, {"value": "PURL"}, {"value": "ROR"}, {"value": "URL"}, {"value": "URN"}]}, "id": "type", "name": {"exact": "type"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4"]}], "declared_by": "NXsubstance", "docs": ["NXobject/identifierNAME", "NXsubstance/identifier_canonical_smiles"], "id": "identifier_canonical_smiles", "name": {"exact": "identifier_canonical_smiles"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q3", "Q4"], "recommended": false, "refines": "identifierNAME", "type": "NX_CHAR", "via": ["T0", "T1", "T3", "T4", "T7", "T18"]},
+    {"attributes": [{"declared_by": "NXobject", "docs": ["NXobject/identifierNAME@type"], "enum": {"open": true, "values": [{"value": "ARK"}, {"value": "DOI"}, {"value": "Hdl"}, {"value": "IGSN"}, {"value": "ISNI"}, {"value": "ISSN"}, {"value": "ISSN-L"}, {"value": "ORCID"}, {"value": "PURL"}, {"value": "ROR"}, {"value": "URL"}, {"value": "URN"}]}, "id": "type", "name": {"exact": "type"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4"]}, {"declared_by": "NXsubstance", "docs": ["NXsubstance/identifier_pub_chem@pub_chem_link"], "id": "pub_chem_link", "name": {"exact": "pub_chem_link"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4"]}], "declared_by": "NXsubstance", "docs": ["NXobject/identifierNAME", "NXsubstance/identifier_pub_chem"], "id": "identifier_pub_chem", "name": {"exact": "identifier_pub_chem"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q3", "Q4"], "recommended": false, "refines": "identifierNAME", "type": "NX_CHAR", "via": ["T0", "T1", "T3", "T4", "T7", "T18"]},
+    {"declared_by": "NXsubstance", "docs": ["NXsubstance/name"], "id": "name", "name": {"exact": "name"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4", "T7"]},
+    {"declared_by": "NXsubstance", "docs": ["NXsubstance/molecular_mass"], "id": "molecular_mass", "name": {"exact": "molecular_mass"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_FLOAT", "units": {"category": "NX_MOLECULAR_WEIGHT"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXsubstance", "docs": ["NXsubstance/molecular_formula_hill"], "id": "molecular_formula_hill", "name": {"exact": "molecular_formula_hill"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4", "T7"]}
+  ],
+  "class": "NXsubstance",
+  "extends": "NXobject",
+  "lossy": [],
+  "provisional": [],
+  "require": [],
+  "source": "contributed_definitions/NXsubstance.nxdl.xml",
+  "status": "contributed",
+  "symbols": [],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"},
+  "via": []
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {}
+}

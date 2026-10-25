@@ -1,0 +1,66 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"},
+    {"ref": "NXroot@NeXus_release"}
+  ],
+  "category": "application",
+  "children": [
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"class": "NXentry", "declared_by": "NXroot", "id": "ENTRY", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 1}, "provisional": ["Q1", "Q2", "Q11"], "recommended": false, "refined_by": ["NXcase_enum_nxdl"], "specialisation": "NXcase_enum_nxdl/ENTRY", "via": ["T1", "T2", "T5", "T7"]}
+  ],
+  "class": "NXcase_enum_nxdl",
+  "describes": "NXroot",
+  "lossy": [],
+  "provisional": [],
+  "require": [],
+  "source": "enum-typing/NXcase_enum_nxdl.nxdl.xml",
+  "status": "local",
+  "symbols": [],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"},
+  "via": ["T8"]
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {
+  "NXcase_enum_nxdl/ENTRY": {
+   "attributes": [
+     {"ref": "NXobject@default"}
+   ],
+   "children": [
+     {"node": "group", "ref": "NXobject/DATA"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+     {"declared_by": "NXentry", "enum": {"open": false, "values": [{"value": "NXcase_enum_nxdl"}]}, "id": "definition", "name": {"exact": "definition"}, "node": "dataset", "occurs": {"max": 1, "min": 1}, "provisional": ["Q1", "Q2"], "recommended": false, "refined_by": ["NXcase_enum_nxdl"], "type": "NX_CHAR", "via": ["T0", "T1", "T5", "T7"]},
+     {"node": "dataset", "ref": "NXentry/title"},
+     {"node": "dataset", "ref": "NXentry/start_time"},
+     {"node": "group", "ref": "NXentry/INSTRUMENT"},
+     {"class": "NXcase_probe", "declared_by": "NXcase_enum_nxdl", "id": "probe", "name": {"exact": "probe"}, "node": "group", "occurs": {"max": 1, "min": 1}, "provisional": ["Q1", "Q2"], "recommended": false, "specialisation": "NXcase_enum_nxdl/ENTRY/probe", "via": ["T1", "T5", "T7"]}
+   ],
+   "class": "NXentry",
+   "declared_by": "NXcase_enum_nxdl",
+   "id": "NXcase_enum_nxdl/ENTRY",
+   "require": [],
+   "symbols": [],
+   "undeclared": {"attribute": "report", "dataset": "report", "group": "report"}
+  },
+  "NXcase_enum_nxdl/ENTRY/probe": {
+   "attributes": [
+     {"ref": "NXobject@default"}
+   ],
+   "children": [
+     {"node": "group", "ref": "NXobject/DATA"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+     {"declared_by": "NXcase_probe", "enum": {"open": false, "values": [{"value": 3}, {"value": 5}]}, "id": "mode", "name": {"exact": "mode"}, "node": "dataset", "occurs": {"max": 1, "min": 1}, "provisional": ["Q1", "Q2"], "recommended": false, "refined_by": ["NXcase_enum_nxdl"], "type": "NX_INT", "via": ["T0", "T1", "T5", "T7"]},
+     {"declared_by": "NXcase_probe", "enum": {"open": false, "values": [{"value": ["a", "b"]}]}, "id": "labels", "name": {"exact": "labels"}, "node": "dataset", "occurs": {"max": 1, "min": 1}, "provisional": ["Q1", "Q2", "Q5"], "recommended": false, "refined_by": ["NXcase_enum_nxdl"], "shape": {"binding": false, "dims": [2]}, "type": "NX_CHAR", "via": ["T0", "T1", "T5", "T7"]},
+     {"declared_by": "NXcase_probe", "enum": {"open": false, "values": [{"value": [0, 0, 1]}]}, "id": "direction", "name": {"exact": "direction"}, "node": "dataset", "occurs": {"max": 1, "min": 1}, "provisional": ["Q1", "Q2", "Q5"], "recommended": false, "refined_by": ["NXcase_enum_nxdl"], "shape": {"binding": false, "dims": [3]}, "type": "NX_NUMBER", "via": ["T0", "T1", "T5", "T7"]}
+   ],
+   "class": "NXcase_probe",
+   "declared_by": "NXcase_enum_nxdl",
+   "id": "NXcase_enum_nxdl/ENTRY/probe",
+   "require": [],
+   "symbols": [],
+   "undeclared": {"attribute": "report", "dataset": "report", "group": "report"}
+  }
+ }
+}

@@ -1,0 +1,38 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/COLLECTION"},
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"node": "group", "ref": "NXobject/LOG"},
+    {"node": "group", "ref": "NXobject/NOTE"},
+    {"node": "group", "ref": "NXobject/PARAMETERS"},
+    {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+    {"node": "dataset", "ref": "NXobject/identifierNAME"},
+    {"declared_by": "NXdetector_group", "docs": ["NXdetector_group/group_names"], "id": "group_names", "name": {"exact": "group_names"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXdetector_group", "docs": ["NXdetector_group/group_index"], "id": "group_index", "name": {"exact": "group_index"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["i"], "symbols": {"i": "NXdetector_group"}}, "type": "NX_INT", "via": ["T1", "T4", "T7", "T9"]},
+    {"declared_by": "NXdetector_group", "docs": ["NXdetector_group/group_parent"], "id": "group_parent", "name": {"exact": "group_parent"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": [null]}, "type": "NX_INT", "via": ["T1", "T4", "T7", "T9"]},
+    {"declared_by": "NXdetector_group", "docs": ["NXdetector_group/group_type"], "id": "group_type", "name": {"exact": "group_type"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": [null]}, "type": "NX_INT", "via": ["T1", "T4", "T7", "T9"]}
+  ],
+  "class": "NXdetector_group",
+  "extends": "NXobject",
+  "lossy": [],
+  "provisional": [],
+  "require": [],
+  "source": "base_classes/NXdetector_group.nxdl.xml",
+  "status": "base",
+  "symbols": [],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"},
+  "via": []
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {}
+}

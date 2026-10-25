@@ -1,0 +1,123 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/COLLECTION"},
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"node": "group", "ref": "NXobject/LOG"},
+    {"class": "NXlog", "declared_by": "NXelectrostatic_kicker", "docs": ["NXelectrostatic_kicker/read_current"], "id": "read_current", "name": {"exact": "read_current"}, "node": "group", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q4", "Q11"], "recommended": false, "refines": "LOG", "specialisation": "NXelectrostatic_kicker/read_current", "via": ["T1", "T2", "T6", "T7", "T18"]},
+    {"class": "NXlog", "declared_by": "NXelectrostatic_kicker", "docs": ["NXelectrostatic_kicker/read_voltage"], "id": "read_voltage", "name": {"exact": "read_voltage"}, "node": "group", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q4", "Q11"], "recommended": false, "refines": "LOG", "specialisation": "NXelectrostatic_kicker/read_voltage", "via": ["T1", "T2", "T6", "T7", "T18"]},
+    {"node": "group", "ref": "NXobject/NOTE"},
+    {"node": "group", "ref": "NXobject/PARAMETERS"},
+    {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+    {"node": "dataset", "ref": "NXobject/identifierNAME"},
+    {"node": "dataset", "ref": "NXcomponent/applied"},
+    {"node": "dataset", "ref": "NXcomponent/name"},
+    {"declared_by": "NXcomponent", "docs": ["NXcomponent/description", "NXelectrostatic_kicker/description"], "id": "description", "name": {"exact": "description"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "refined_by": ["NXelectrostatic_kicker"], "type": "NX_CHAR", "via": ["T1", "T4", "T7"]},
+    {"node": "dataset", "ref": "NXcomponent/inputs"},
+    {"node": "dataset", "ref": "NXcomponent/outputs"},
+    {"node": "group", "ref": "NXcomponent/FABRICATION"},
+    {"node": "group", "ref": "NXcomponent/PROGRAM"},
+    {"node": "group", "ref": "NXcomponent/ENVIRONMENT"},
+    {"node": "dataset", "ref": "NXcomponent/depends_on"},
+    {"node": "group", "ref": "NXcomponent/TRANSFORMATIONS"},
+    {"declared_by": "NXelectrostatic_kicker", "docs": ["NXelectrostatic_kicker/beamline_distance"], "id": "beamline_distance", "name": {"exact": "beamline_distance"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_FLOAT", "units": {"category": "NX_LENGTH"}, "via": ["T1", "T6"]},
+    {"attributes": [{"declared_by": "NXelectrostatic_kicker", "id": "description", "name": {"exact": "description"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4"]}], "declared_by": "NXelectrostatic_kicker", "docs": ["NXelectrostatic_kicker/timing"], "id": "timing", "name": {"exact": "timing"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_FLOAT", "units": {"category": "NX_TIME"}, "via": ["T1", "T6"]},
+    {"declared_by": "NXelectrostatic_kicker", "docs": ["NXelectrostatic_kicker/set_current"], "id": "set_current", "name": {"exact": "set_current"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_FLOAT", "units": {"category": "NX_CURRENT"}, "via": ["T1", "T6"]},
+    {"declared_by": "NXelectrostatic_kicker", "docs": ["NXelectrostatic_kicker/set_voltage"], "id": "set_voltage", "name": {"exact": "set_voltage"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_FLOAT", "units": {"category": "NX_VOLTAGE"}, "via": ["T1", "T6"]}
+  ],
+  "class": "NXelectrostatic_kicker",
+  "extends": "NXcomponent",
+  "lossy": [],
+  "provisional": [],
+  "require": [],
+  "source": "contributed_definitions/NXelectrostatic_kicker.nxdl.xml",
+  "status": "contributed",
+  "symbols": [],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"},
+  "via": []
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {
+  "NXelectrostatic_kicker/read_current": {
+   "attributes": [
+     {"ref": "NXobject@default"}
+   ],
+   "children": [
+     {"node": "group", "ref": "NXobject/COLLECTION"},
+     {"node": "group", "ref": "NXobject/DATA"},
+     {"node": "group", "ref": "NXobject/LOG"},
+     {"node": "group", "ref": "NXobject/NOTE"},
+     {"node": "group", "ref": "NXobject/PARAMETERS"},
+     {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+     {"node": "dataset", "ref": "NXlog/average_value_errors"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+     {"node": "dataset", "ref": "NXobject/identifierNAME"},
+     {"node": "dataset", "ref": "NXlog/time"},
+     {"declared_by": "NXlog", "docs": ["NXlog/value"], "id": "value", "name": {"exact": "value"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "refined_by": ["NXelectrostatic_kicker"], "type": "NX_NUMBER", "units": {"category": "NX_CURRENT"}, "via": ["T0", "T1", "T4", "T7"]},
+     {"node": "dataset", "ref": "NXlog/raw_value"},
+     {"node": "dataset", "ref": "NXlog/description"},
+     {"node": "dataset", "ref": "NXlog/average_value"},
+     {"node": "dataset", "ref": "NXlog/average_value_error"},
+     {"node": "dataset", "ref": "NXlog/minimum_value"},
+     {"node": "dataset", "ref": "NXlog/maximum_value"},
+     {"node": "dataset", "ref": "NXlog/duration"},
+     {"node": "dataset", "ref": "NXlog/cue_timestamp_zero"},
+     {"node": "dataset", "ref": "NXlog/cue_index"}
+   ],
+   "class": "NXlog",
+   "declared_by": "NXelectrostatic_kicker",
+   "id": "NXelectrostatic_kicker/read_current",
+   "require": [],
+   "symbols": [],
+   "undeclared": {"attribute": "report", "dataset": "report", "group": "report"}
+  },
+  "NXelectrostatic_kicker/read_voltage": {
+   "attributes": [
+     {"ref": "NXobject@default"}
+   ],
+   "children": [
+     {"node": "group", "ref": "NXobject/COLLECTION"},
+     {"node": "group", "ref": "NXobject/DATA"},
+     {"node": "group", "ref": "NXobject/LOG"},
+     {"node": "group", "ref": "NXobject/NOTE"},
+     {"node": "group", "ref": "NXobject/PARAMETERS"},
+     {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+     {"node": "dataset", "ref": "NXlog/average_value_errors"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+     {"node": "dataset", "ref": "NXobject/identifierNAME"},
+     {"node": "dataset", "ref": "NXlog/time"},
+     {"declared_by": "NXlog", "docs": ["NXlog/value"], "id": "value", "name": {"exact": "value"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "refined_by": ["NXelectrostatic_kicker"], "type": "NX_NUMBER", "units": {"category": "NX_VOLTAGE"}, "via": ["T0", "T1", "T4", "T7"]},
+     {"node": "dataset", "ref": "NXlog/raw_value"},
+     {"node": "dataset", "ref": "NXlog/description"},
+     {"node": "dataset", "ref": "NXlog/average_value"},
+     {"node": "dataset", "ref": "NXlog/average_value_error"},
+     {"node": "dataset", "ref": "NXlog/minimum_value"},
+     {"node": "dataset", "ref": "NXlog/maximum_value"},
+     {"node": "dataset", "ref": "NXlog/duration"},
+     {"node": "dataset", "ref": "NXlog/cue_timestamp_zero"},
+     {"node": "dataset", "ref": "NXlog/cue_index"}
+   ],
+   "class": "NXlog",
+   "declared_by": "NXelectrostatic_kicker",
+   "id": "NXelectrostatic_kicker/read_voltage",
+   "require": [],
+   "symbols": [],
+   "undeclared": {"attribute": "report", "dataset": "report", "group": "report"}
+  }
+ }
+}

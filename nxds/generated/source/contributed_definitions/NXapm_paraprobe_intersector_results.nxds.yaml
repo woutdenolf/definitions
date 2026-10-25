@@ -1,0 +1,198 @@
+nxds: '0.1'
+class: NXapm_paraprobe_intersector_results
+category: application
+extends: NXapm_paraprobe_tool_results
+describes: NXroot
+doc: Application definition for results files of the paraprobe-intersector tool.
+defaults: {min: 1, binding: true, type: NX_CHAR}
+symbols:
+  n_c2n:
+    doc: The total number of links pointing from current to next.
+  n_n2c:
+    doc: The total number of links pointing from next to current.
+  n_features_curr:
+    doc: The total number of members in the current_set.
+  n_features_next:
+    doc: The total number of members in the next_set.
+  n_cluster:
+    doc: The total number of cluster found for coprecipitation analysis.
+  n_total:
+    doc: The number of rows in the table/matrix for coprecipitation statistics.
+children:
+  ENTRY:
+    node: group
+    name: {any: true}
+    class: NXentry
+    occurs: {min: 1, max: 1}
+    children:
+      definition:
+        node: dataset
+        type: NX_CHAR
+        enum: [NXapm_paraprobe_intersector_results]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      v_v_spatial_correlationID:
+        node: group
+        name: {template: 'v_v_spatial_correlation{ID}'}
+        class: NXapm_paraprobe_tool_process
+        occurs: {min: 0, max: 1}
+        doc: The results of an overlap/intersection analysis.
+        children:
+          current_to_next_link:
+            node: dataset
+            type: NX_UINT
+            shape: [n_c2n, 2]
+            units: {category: NX_UNITLESS}
+            doc: |-
+              A matrix of indices_feature that specifies which named features
+              from the current_set have directed link(s) pointing to which named
+              feature(s) from the next_set.
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+          current_to_next_link_type:
+            node: dataset
+            type: NX_UINT
+            shape: [n_c2n]
+            units: {category: NX_UNITLESS}
+            doc: |-
+              For each link/pair in current_to_next a characterization whether the
+              link is due to volumetric overlap (0x00 == 0), proximity (0x01 == 1),
+              or something else unknown (0xFF == 255).
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+          next_to_current_link:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_UINT
+            shape: [n_n2c, 2]
+            units: {category: NX_UNITLESS}
+            doc: |-
+              A matrix of indices_feature which specifies which named feature(s)
+              from the next_set have directed link(s) pointing to which named
+              feature(s) from the current_set. Only if the mapping whereby the
+              links are defined is symmetric it holds that next_to_current maps
+              the links for current_to_next in just the opposite direction.
+            via: [T1, T6, T7, T9]
+            provisional: [Q1]
+          next_to_current_link_type:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_UINT
+            shape: [n_n2c]
+            units: {category: NX_UNITLESS}
+            doc: |-
+              For each link/pair in next_to_current a characterization whether the
+              link is due to a volumetric overlap (0x00 == 0), proximity (0x01 == 1),
+              or something else unknown (0xFF == 255).
+            via: [T1, T6, T7, T9]
+            provisional: [Q1]
+          intersection_volume:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_FLOAT
+            shape: [n_c2n]
+            units: {category: NX_VOLUME}
+            doc: |-
+              For each pair of links in current_to_next the volume of the
+              intersection, i.e. how much volume do the two features share.
+              If features do not intersect the volume is zero.
+            via: [T1, T6, T7, T9]
+            provisional: [Q1]
+          coprecipitation_analysis:
+            node: group
+            class: NXprocess
+            occurs: {min: 0}
+            doc: |-
+              During coprecipitation analysis the current and next set are analyzed
+              for links in a special way. Three set comparisons are made. Members
+              of the set in each comparison are analyzed for overlap and proximity:
+
+              The first comparison is the current_set against the current_set.
+              The second comparison is the next_set against the next_set.
+              The third comparison is the current_set against the next_set.
+
+              Once the (forward) links for these comparisons are ready, pair relations
+              are analyzed with respect to which objects with indices_feature
+              cluster in identifier space. Thereby, a logical connection (link) is
+              established between the features in the current_set and the next_set.
+              Recall that these two sets typically represent different features
+              within an observed system for otherwise the same parameterization.
+
+              Examples include two sets of e.g. precipitates with differing
+              chemical composition that were characterized in the same material
+              volume representing a snapshot of an e.g. microstructure at the same
+              point in time. Researchers may have performed two analyses, one to
+              characterize precipitates A and another one for precipitates B.
+
+              Coprecipitation analysis now logically connects these independent
+              characterization results to establish spatial correlations of e.g.
+              the precipitates' spatial arrangement.
+            children:
+              current_set_feature_to_cluster:
+                node: dataset
+                type: NX_UINT
+                shape: [n_features_curr, 2]
+                units: {category: NX_UNITLESS}
+                doc: |-
+                  Matrix of indices_feature and cluster_id pairs which
+                  encodes the cluster to which each indices_feature was assigned.
+                  Here for features of the current_set.
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              next_set_feature_to_cluster:
+                node: dataset
+                type: NX_UINT
+                shape: [n_features_next, 2]
+                units: {category: NX_UNITLESS}
+                doc: |-
+                  Matrix of indices_feature and cluster_id pairs which
+                  encodes the cluster to which each indices_feature was assigned.
+                  Here for features of the next_set.
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              cluster_id:
+                node: dataset
+                type: NX_UINT
+                shape: [n_cluster]
+                units: {category: NX_UNITLESS}
+                doc: The identifier (names) of the cluster.
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              cluster_composition:
+                node: dataset
+                type: NX_UINT
+                shape: [n_cluster, 3]
+                units: {category: NX_UNITLESS}
+                doc: |-
+                  Pivot table as a matrix.
+                  The first column encodes how many members from the current_set
+                  are in each cluster, one row per cluster.
+
+                  The second column encodes how many members from the next_set
+                  are in each cluster, in the same row per cluster respectively.
+
+                  The third column encodes the total number of members in the cluster.
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              cluster_statistics:
+                node: dataset
+                type: NX_UINT
+                shape: [n_total, 2]
+                units: {category: NX_UNITLESS}
+                doc: |-
+                  Pivot table as a matrix.
+
+                  The first column encodes the different types of
+                  clusters based on their number of members in the sub-graph.
+
+                  The second column encodes how many clusters with
+                  as many members exist.
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+            via: [T1, T6, T7]
+            provisional: [Q1]
+        via: [T1, T3, T6]
+        provisional: [Q1, Q3]
+    via: [T1, T2, T6]
+    provisional: [Q1, Q11]
+via: [T8]

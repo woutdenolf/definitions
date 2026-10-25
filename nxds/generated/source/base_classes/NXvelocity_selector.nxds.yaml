@@ -1,0 +1,112 @@
+nxds: '0.1'
+class: NXvelocity_selector
+category: base
+extends: NXcomponent
+doc: A neutron velocity selector
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  type:
+    node: dataset
+    doc: velocity selector type
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  rotation_speed:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_FREQUENCY}
+    doc: velocity selector rotation speed
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  radius:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    doc: radius at beam centre
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  spwidth:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    doc: spoke width at beam centre
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  length:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    doc: rotor length
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  num:
+    node: dataset
+    type: NX_INT
+    units: {category: NX_UNITLESS}
+    doc: number of spokes/lamella
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  twist:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_ANGLE}
+    doc: twist angle along axis
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  table:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_ANGLE}
+    doc: offset vertical angle
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  height:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    doc: input beam height
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  width:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    doc: input beam width
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  wavelength:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_WAVELENGTH}
+    doc: wavelength
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  wavelength_spread:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_WAVELENGTH}
+    doc: deviation FWHM /Wavelength
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  geometry:
+    node: group
+    class: NXgeometry
+    deprecated: Use the field `depends_on` and :ref:`NXtransformations` to position the velocity
+      selector and NXoff_geometry to describe its shape instead
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  OFF_GEOMETRY:
+    node: group
+    name: {any: true}
+    class: NXoff_geometry
+    occurs: {min: 0}
+    doc: This group describes the shape of the beam line component
+    via: [T1, T2, T6, T7]
+    provisional: [Q1, Q11]
+  depends_on:
+    node: dataset
+    type: NX_CHAR
+    doc: |-
+      .. todo::
+      Add a definition for the reference point of a velocity selector.
+    via: [T1, T4, T7]
+    provisional: [Q1]

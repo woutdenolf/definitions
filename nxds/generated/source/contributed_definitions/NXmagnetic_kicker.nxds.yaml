@@ -1,0 +1,75 @@
+nxds: '0.1'
+class: NXmagnetic_kicker
+category: base
+extends: NXcomponent
+doc: Base class for a magnetic kicker.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  description:
+    node: dataset
+    type: NX_CHAR
+    doc: Extended description of the kicker.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  beamline_distance:
+    node: dataset
+    occurs: {min: 0, max: 1}
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    doc: Define position of beamline element relative to production target
+    via: [T1, T6]
+    provisional: [Q1]
+  timing:
+    node: dataset
+    occurs: {min: 0, max: 1}
+    type: NX_FLOAT
+    units: {category: NX_TIME}
+    doc: Kicker timing as defined by ``description`` attribute
+    attributes:
+      description:
+        type: NX_CHAR
+        via: [T1, T4]
+    via: [T1, T6]
+    provisional: [Q1]
+  set_current:
+    node: dataset
+    occurs: {min: 0, max: 1}
+    type: NX_FLOAT
+    units: {category: NX_CURRENT}
+    doc: Current set on supply.
+    via: [T1, T6]
+    provisional: [Q1]
+  read_current:
+    node: group
+    class: NXlog
+    occurs: {min: 0, max: 1}
+    doc: Current read from supply.
+    children:
+      value:
+        node: dataset
+        units: {category: NX_CURRENT}
+        via: [T0, T1, T4, T7]
+        provisional: [Q1]
+    via: [T1, T6]
+    provisional: [Q1]
+  set_voltage:
+    node: dataset
+    occurs: {min: 0, max: 1}
+    type: NX_FLOAT
+    units: {category: NX_VOLTAGE}
+    doc: Voltage set on supply.
+    via: [T1, T6]
+    provisional: [Q1]
+  read_voltage:
+    node: group
+    class: NXlog
+    occurs: {min: 0, max: 1}
+    doc: Voltage read from supply.
+    children:
+      value:
+        node: dataset
+        units: {category: NX_VOLTAGE}
+        via: [T0, T1, T4, T7]
+        provisional: [Q1]
+    via: [T1, T6]
+    provisional: [Q1]

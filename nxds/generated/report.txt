@@ -1,0 +1,456 @@
+# NXDS build report
+
+errors: 0, warnings: 430, infos: 2
+
+## Counts by code
+info     round-trip-ok                    2
+warning  ambiguous-name-fit               5
+warning  bad-rank                         2
+warning  class-not-subclass               2
+warning  deprecated-dim-ref               6
+warning  enum-not-subset                  11
+warning  enum-value-type                  4
+warning  enum-wildcard                    2
+warning  exact-max                        11
+warning  legacy-attribute                 2
+warning  several-any                      2
+warning  type-not-narrower                104
+warning  undeclared-symbol                175
+warning  units-not-category               12
+warning  unresolved-target                5
+warning  upper-case-exact                 75
+warning  widened-occurs                   12
+
+## Problems
+WARNING [type-not-narrower] applications/NXapm.nxdl.xml:1368: 'evaporation_field': NX_CHAR is not narrower than NX_FLOAT
+WARNING [undeclared-symbol] applications/NXapm.nxdl.xml:1393: symbol 'n_x' is not declared
+WARNING [undeclared-symbol] applications/NXapm.nxdl.xml:1393: symbol 'n_y' is not declared
+WARNING [undeclared-symbol] applications/NXapm.nxdl.xml:1393: symbol 'n_z' is not declared
+WARNING [undeclared-symbol] applications/NXapm.nxdl.xml:1400: symbol 'n_z' is not declared
+WARNING [undeclared-symbol] applications/NXapm.nxdl.xml:1406: symbol 'n_y' is not declared
+WARNING [undeclared-symbol] applications/NXapm.nxdl.xml:1412: symbol 'n_x' is not declared
+WARNING [type-not-narrower] applications/NXarchive.nxdl.xml:60: 'duration': NX_FLOAT is not narrower than NX_INT
+WARNING [enum-not-subset] applications/NXarchive.nxdl.xml:127: 'type': enumeration is not a subset of the inherited one
+WARNING [type-not-narrower] applications/NXarchive.nxdl.xml:141: 'preparation_date': NX_CHAR is not narrower than NX_DATE_TIME
+WARNING [type-not-narrower] applications/NXarpes.nxdl.xml:60: 'energy': NX_NUMBER is not narrower than NX_FLOAT
+WARNING [enum-not-subset] applications/NXarpes.nxdl.xml:67: 'acquisition_mode': enumeration is not a subset of the inherited one
+WARNING [type-not-narrower] applications/NXarpes.nxdl.xml:129: 'temperature': NX_NUMBER is not narrower than NX_FLOAT
+WARNING [units-not-category] applications/NXazint1d.nxdl.xml:121: units='angstrom' is not a category: fixed units
+WARNING [units-not-category] applications/NXazint1d.nxdl.xml:124: units='keV' is not a category: fixed units
+WARNING [upper-case-exact] applications/NXazint1d.nxdl.xml:201: 'I' has upper case but no nameType: exact name (T3b)
+WARNING [upper-case-exact] applications/NXazint1d.nxdl.xml:218: 'I_errors' has upper case but no nameType: exact name (T3b)
+WARNING [units-not-category] applications/NXazint2d.nxdl.xml:127: units='angstrom' is not a category: fixed units
+WARNING [units-not-category] applications/NXazint2d.nxdl.xml:130: units='keV' is not a category: fixed units
+WARNING [upper-case-exact] applications/NXazint2d.nxdl.xml:205: 'I' has upper case but no nameType: exact name (T3b)
+WARNING [upper-case-exact] applications/NXazint2d.nxdl.xml:223: 'I_errors' has upper case but no nameType: exact name (T3b)
+WARNING [several-any] applications/NXcanSAS.nxdl.xml:118: group members DATA, TRANSMISSION_SPECTRUM all accept any name
+WARNING [upper-case-exact] applications/NXcanSAS.nxdl.xml:144: 'canSAS_class' has upper case but no nameType: exact name (T3b)
+WARNING [upper-case-exact] applications/NXcanSAS.nxdl.xml:203: 'canSAS_class' has upper case but no nameType: exact name (T3b)
+WARNING [upper-case-exact] applications/NXcanSAS.nxdl.xml:218: 'I_axes' has upper case but no nameType: exact name (T3b)
+WARNING [upper-case-exact] applications/NXcanSAS.nxdl.xml:234: 'Q_indices' has upper case but no nameType: exact name (T3b)
+WARNING [upper-case-exact] applications/NXcanSAS.nxdl.xml:262: 'Mask_indices' has upper case but no nameType: exact name (T3b)
+WARNING [upper-case-exact] applications/NXcanSAS.nxdl.xml:542: 'Idev' has upper case but no nameType: exact name (T3b)
+WARNING [upper-case-exact] applications/NXcanSAS.nxdl.xml:581: 'Qdev' has upper case but no nameType: exact name (T3b)
+WARNING [upper-case-exact] applications/NXcanSAS.nxdl.xml:617: 'dQw' has upper case but no nameType: exact name (T3b)
+WARNING [upper-case-exact] applications/NXcanSAS.nxdl.xml:652: 'dQl' has upper case but no nameType: exact name (T3b)
+WARNING [upper-case-exact] applications/NXcanSAS.nxdl.xml:687: 'Qmean' has upper case but no nameType: exact name (T3b)
+WARNING [upper-case-exact] applications/NXcanSAS.nxdl.xml:713: 'ShadowFactor' has upper case but no nameType: exact name (T3b)
+WARNING [upper-case-exact] applications/NXcanSAS.nxdl.xml:750: 'canSAS_class' has upper case but no nameType: exact name (T3b)
+WARNING [upper-case-exact] applications/NXcanSAS.nxdl.xml:780: 'canSAS_class' has upper case but no nameType: exact name (T3b)
+WARNING [upper-case-exact] applications/NXcanSAS.nxdl.xml:806: 'canSAS_class' has upper case but no nameType: exact name (T3b)
+WARNING [upper-case-exact] applications/NXcanSAS.nxdl.xml:838: 'canSAS_class' has upper case but no nameType: exact name (T3b)
+WARNING [upper-case-exact] applications/NXcanSAS.nxdl.xml:851: 'SDD' has upper case but no nameType: exact name (T3b)
+WARNING [upper-case-exact] applications/NXcanSAS.nxdl.xml:930: 'canSAS_class' has upper case but no nameType: exact name (T3b)
+WARNING [upper-case-exact] applications/NXcanSAS.nxdl.xml:1018: 'canSAS_class' has upper case but no nameType: exact name (T3b)
+WARNING [type-not-narrower] applications/NXcanSAS.nxdl.xml:1044: 'temperature': NX_NUMBER is not narrower than NX_FLOAT
+WARNING [upper-case-exact] applications/NXcanSAS.nxdl.xml:1078: 'canSAS_class' has upper case but no nameType: exact name (T3b)
+WARNING [upper-case-exact] applications/NXcanSAS.nxdl.xml:1150: 'canSAS_class' has upper case but no nameType: exact name (T3b)
+WARNING [upper-case-exact] applications/NXcanSAS.nxdl.xml:1171: 'canSAS_class' has upper case but no nameType: exact name (T3b)
+WARNING [upper-case-exact] applications/NXcanSAS.nxdl.xml:1201: 'canSAS_class' has upper case but no nameType: exact name (T3b)
+WARNING [upper-case-exact] applications/NXcanSAS.nxdl.xml:1215: 'T_axes' has upper case but no nameType: exact name (T3b)
+WARNING [upper-case-exact] applications/NXcanSAS.nxdl.xml:1248: 'T' has upper case but no nameType: exact name (T3b)
+WARNING [upper-case-exact] applications/NXcanSAS.nxdl.xml:1273: 'Tdev' has upper case but no nameType: exact name (T3b)
+WARNING [upper-case-exact] applications/NXellipsometry.nxdl.xml:109: 'URL' has upper case but no nameType: exact name (T3b)
+WARNING [ambiguous-name-fit] applications/NXellipsometry.nxdl.xml:166: 'focusing_probes' fits COMPONENT, OPTICAL_LENS; refining COMPONENT
+WARNING [ambiguous-name-fit] applications/NXellipsometry.nxdl.xml:192: 'rotating_element' fits COMPONENT, WAVEPLATE; refining COMPONENT
+WARNING [widened-occurs] applications/NXellipsometry.nxdl.xml:238: 'data_collection': min 0 < inherited 1
+WARNING [undeclared-symbol] applications/NXellipsometry.nxdl.xml:296: symbol 'N_observables' is not declared
+WARNING [undeclared-symbol] applications/NXellipsometry.nxdl.xml:323: symbol 'N_observables' is not declared
+WARNING [undeclared-symbol] applications/NXellipsometry.nxdl.xml:341: symbol 'N_sensors' is not declared
+WARNING [upper-case-exact] applications/NXellipsometry.nxdl.xml:381: 'URL' has upper case but no nameType: exact name (T3b)
+WARNING [type-not-narrower] applications/NXem.nxdl.xml:411: 'thickness': NX_NUMBER is not narrower than NX_FLOAT
+WARNING [type-not-narrower] applications/NXem.nxdl.xml:425: 'density': NX_NUMBER is not narrower than NX_FLOAT
+WARNING [type-not-narrower] applications/NXem.nxdl.xml:1739: 'axis_energy': NX_CHAR is not narrower than NX_NUMBER
+WARNING [unresolved-target] applications/NXfluo.nxdl.xml:101: link 'energy': target 'entry/instrument/fluorescence/energy' does not resolve; form dataset
+WARNING [unresolved-target] applications/NXfluo.nxdl.xml:103: link 'data': target 'entry/instrument/fluorescence/data' does not resolve; form dataset
+WARNING [legacy-attribute] applications/NXlauetof.nxdl.xml:66: signal='1' and an attribute 'signal'
+INFO [round-trip-ok] applications/NXmonopd.nxds.yaml: NXDS → NXDL → NXDS gives the same resolved form
+WARNING [enum-not-subset] applications/NXmpes.nxdl.xml:1089: 'situation': enumeration is not a subset of the inherited one
+WARNING [widened-occurs] applications/NXmpes.nxdl.xml:1102: 'sample_preparation': min 0 < inherited 1
+WARNING [widened-occurs] applications/NXmpes_arpes.nxdl.xml:178: 'scheme': min 0 < inherited 1
+WARNING [type-not-narrower] applications/NXmpes_arpes.nxdl.xml:190: 'diameter': NX_NUMBER is not narrower than NX_FLOAT
+WARNING [type-not-narrower] applications/NXmx.nxdl.xml:228: 'temperature': NX_NUMBER is not narrower than NX_FLOAT
+WARNING [type-not-narrower] applications/NXmx.nxdl.xml:257: 'attenuator_transmission': NX_NUMBER is not narrower than NX_FLOAT
+WARNING [type-not-narrower] applications/NXmx.nxdl.xml:579: 'flatfield': NX_NUMBER is not narrower than NX_FLOAT
+WARNING [type-not-narrower] applications/NXmx.nxdl.xml:604: 'flatfield_errors': NX_NUMBER is not narrower than NX_FLOAT
+WARNING [upper-case-exact] applications/NXoptical_spectroscopy.nxdl.xml:75: 'URL' has upper case but no nameType: exact name (T3b)
+WARNING [type-not-narrower] applications/NXoptical_spectroscopy.nxdl.xml:230: 'incident_wavelength': NX_NUMBER is not narrower than NX_FLOAT
+WARNING [type-not-narrower] applications/NXoptical_spectroscopy.nxdl.xml:231: 'incident_wavelength_spread': NX_NUMBER is not narrower than NX_FLOAT
+WARNING [enum-value-type] applications/NXoptical_spectroscopy.nxdl.xml:472: item 'detection beam' is not a NX_NUMBER
+WARNING [enum-value-type] applications/NXoptical_spectroscopy.nxdl.xml:472: item 'incident beam' is not a NX_NUMBER
+WARNING [enum-value-type] applications/NXoptical_spectroscopy.nxdl.xml:472: item 'sample' is not a NX_NUMBER
+WARNING [upper-case-exact] applications/NXoptical_spectroscopy.nxdl.xml:749: 'URL' has upper case but no nameType: exact name (T3b)
+WARNING [type-not-narrower] applications/NXoptical_spectroscopy.nxdl.xml:947: 'thickness': NX_NUMBER is not narrower than NX_FLOAT
+WARNING [upper-case-exact] applications/NXraman.nxdl.xml:113: 'URL' has upper case but no nameType: exact name (T3b)
+WARNING [upper-case-exact] applications/NXspe.nxdl.xml:42: 'NXSPE_info' has upper case but no nameType: exact name (T3b)
+WARNING [type-not-narrower] applications/NXspe.nxdl.xml:66: 'energy': NX_NUMBER is not narrower than NX_FLOAT
+WARNING [type-not-narrower] applications/NXspe.nxdl.xml:70: 'rotation_angle': NX_NUMBER is not narrower than NX_FLOAT
+WARNING [type-not-narrower] applications/NXspe.nxdl.xml:72: 'temperature': NX_NUMBER is not narrower than NX_FLOAT
+WARNING [enum-not-subset] applications/NXstress.nxdl.xml:249: 'probe': enumeration is not a subset of the inherited one
+WARNING [type-not-narrower] applications/NXstress.nxdl.xml:269: 'distance': NX_NUMBER is not narrower than NX_FLOAT
+WARNING [undeclared-symbol] applications/NXstress.nxdl.xml:467: symbol 'anyRank' is not declared
+WARNING [exact-max] applications/NXstress.nxdl.xml:777: 'A': an exact name occurs at most once, max unbounded
+WARNING [upper-case-exact] applications/NXstress.nxdl.xml:777: 'A' has upper case but no nameType: exact name (T3b)
+WARNING [exact-max] applications/NXstress.nxdl.xml:783: 'as': an exact name occurs at most once, max unbounded
+WARNING [exact-max] applications/NXstress.nxdl.xml:789: 'as_errors': an exact name occurs at most once, max unbounded
+WARNING [exact-max] applications/NXstress.nxdl.xml:795: 'b': an exact name occurs at most once, max unbounded
+WARNING [exact-max] applications/NXstress.nxdl.xml:801: 'b_errors': an exact name occurs at most once, max unbounded
+WARNING [exact-max] applications/NXstress.nxdl.xml:807: 'o': an exact name occurs at most once, max unbounded
+WARNING [exact-max] applications/NXstress.nxdl.xml:813: 'o_errors': an exact name occurs at most once, max unbounded
+WARNING [widened-occurs] applications/NXstxm.nxdl.xml:105: 'sample_x': min 0 < inherited 1
+WARNING [widened-occurs] applications/NXstxm.nxdl.xml:113: 'sample_y': min 0 < inherited 1
+WARNING [widened-occurs] applications/NXstxm.nxdl.xml:121: 'sample_z': min 0 < inherited 1
+WARNING [enum-not-subset] applications/NXtofnpd.nxdl.xml:77: 'axis': enumeration is not a subset of the inherited one
+WARNING [type-not-narrower] applications/NXtofraw.nxdl.xml:51: 'duration': NX_FLOAT is not narrower than NX_INT
+WARNING [enum-not-subset] applications/NXtofraw.nxdl.xml:84: 'axis': enumeration is not a subset of the inherited one
+WARNING [type-not-narrower] applications/NXtofsingle.nxdl.xml:57: 'duration': NX_FLOAT is not narrower than NX_INT
+WARNING [enum-not-subset] applications/NXtofsingle.nxdl.xml:83: 'axis': enumeration is not a subset of the inherited one
+WARNING [undeclared-symbol] applications/NXtomophase.nxdl.xml:156: symbol 'nSampleFrame' is not declared
+WARNING [upper-case-exact] applications/NXxasproc.nxdl.xml:54: 'XAS_data_reduction' has upper case but no nameType: exact name (T3b)
+WARNING [exact-max] applications/NXxbase.nxdl.xml:71: 'detector': an exact name occurs at most once, max unbounded
+WARNING [legacy-attribute] applications/NXxbase.nxdl.xml:72: signal='1' and an attribute 'signal'
+WARNING [unresolved-target] applications/NXxnb.nxdl.xml:93: link 'tilt': target 'ENTRY/INSTRUMENT/DETECTOR/tilt' does not resolve; form dataset
+WARNING [enum-value-type] applications/NXxps.nxdl.xml:154: item '[0, 0, -1]' is not a NX_NUMBER
+WARNING [type-not-narrower] applications/NXxps.nxdl.xml:216: 'radius': NX_NUMBER is not narrower than NX_FLOAT
+WARNING [upper-case-exact] base_classes/NXaperture.nxdl.xml:68: 'BLADE_GEOMETRY' has upper case but no nameType: exact name (T3b)
+WARNING [type-not-narrower] base_classes/NXapm_charge_state_analysis.nxdl.xml:100: 'sacrifice_isotopic_uniqueness': NX_BOOLEAN is not narrower than NX_CHAR_OR_NUMBER
+WARNING [units-not-category] base_classes/NXbeam.nxdl.xml:282: units='mJ/cm^2' is not a category: fixed units
+WARNING [undeclared-symbol] base_classes/NXbeam.nxdl.xml:307: symbol 'nx' is not declared
+WARNING [undeclared-symbol] base_classes/NXbeam.nxdl.xml:307: symbol 'ny' is not declared
+WARNING [undeclared-symbol] base_classes/NXbeam.nxdl.xml:319: symbol 'nx' is not declared
+WARNING [undeclared-symbol] base_classes/NXbeam.nxdl.xml:330: symbol 'ny' is not declared
+WARNING [several-any] base_classes/NXcg_alpha_complex.nxdl.xml:26: group members TRIANGLE_SOUP, ALPHA_COMPLEX all accept any name
+WARNING [type-not-narrower] base_classes/NXdetector.nxdl.xml:660: 'pixel_mask': NX_INT is not narrower than NX_BOOLEAN
+WARNING [undeclared-symbol] base_classes/NXdetector.nxdl.xml:713: symbol 'np' is not declared
+WARNING [undeclared-symbol] base_classes/NXdetector.nxdl.xml:747: symbol 'm' is not declared
+WARNING [type-not-narrower] base_classes/NXdetector_channel.nxdl.xml:122: 'pixel_mask': NX_INT is not narrower than NX_BOOLEAN
+WARNING [undeclared-symbol] base_classes/NXdetector_group.nxdl.xml:67: symbol 'i' is not declared
+WARNING [deprecated-dim-ref] base_classes/NXdetector_group.nxdl.xml:84: dim/@ref is deprecated; dimension left open
+WARNING [deprecated-dim-ref] base_classes/NXdetector_group.nxdl.xml:88: dim/@ref is deprecated; dimension left open
+WARNING [type-not-narrower] base_classes/NXebeam_column.nxdl.xml:60: 'voltage': NX_NUMBER is not narrower than NX_FLOAT
+WARNING [type-not-narrower] base_classes/NXebeam_column.nxdl.xml:79: 'emission_current': NX_NUMBER is not narrower than NX_FLOAT
+WARNING [type-not-narrower] base_classes/NXebeam_column.nxdl.xml:88: 'filament_current': NX_NUMBER is not narrower than NX_FLOAT
+WARNING [type-not-narrower] base_classes/NXem_event_data.nxdl.xml:116: 'identifier_event': NX_INT is not narrower than NX_CHAR
+WARNING [units-not-category] base_classes/NXem_optical_system.nxdl.xml:109: units='1/(angstrom^2*s)' is not a category: fixed units
+WARNING [upper-case-exact] base_classes/NXentry.nxdl.xml:94: 'IDF_Version' has upper case but no nameType: exact name (T3b)
+WARNING [upper-case-exact] base_classes/NXentry.nxdl.xml:152: 'URL' has upper case but no nameType: exact name (T3b)
+WARNING [upper-case-exact] base_classes/NXentry.nxdl.xml:162: 'URL' has upper case but no nameType: exact name (T3b)
+WARNING [enum-wildcard] base_classes/NXentry.nxdl.xml:218: item 'image/*' kept as a literal value (#1234)
+WARNING [undeclared-symbol] base_classes/NXevent_data.nxdl.xml:54: symbol 'i' is not declared
+WARNING [undeclared-symbol] base_classes/NXevent_data.nxdl.xml:60: symbol 'i' is not declared
+WARNING [undeclared-symbol] base_classes/NXevent_data.nxdl.xml:69: symbol 'j' is not declared
+WARNING [undeclared-symbol] base_classes/NXevent_data.nxdl.xml:78: symbol 'j' is not declared
+WARNING [undeclared-symbol] base_classes/NXevent_data.nxdl.xml:89: symbol 'i' is not declared
+WARNING [undeclared-symbol] base_classes/NXevent_data.nxdl.xml:89: symbol 'k' is not declared
+WARNING [undeclared-symbol] base_classes/NXfilter.nxdl.xml:120: symbol 'n_comp' is not declared
+WARNING [undeclared-symbol] base_classes/NXfilter.nxdl.xml:124: symbol 'n_comp' is not declared
+WARNING [undeclared-symbol] base_classes/NXfilter.nxdl.xml:150: symbol 'nsurf' is not declared
+WARNING [type-not-narrower] base_classes/NXibeam_column.nxdl.xml:102: 'flux': NX_NUMBER is not narrower than NX_FLOAT
+WARNING [type-not-narrower] base_classes/NXibeam_column.nxdl.xml:114: 'current': NX_NUMBER is not narrower than NX_FLOAT
+WARNING [type-not-narrower] base_classes/NXibeam_column.nxdl.xml:119: 'voltage': NX_NUMBER is not narrower than NX_FLOAT
+WARNING [upper-case-exact] base_classes/NXinstrument.nxdl.xml:73: 'DIFFRACTOMETER' has upper case but no nameType: exact name (T3b)
+WARNING [deprecated-dim-ref] base_classes/NXmonitor.nxdl.xml:82: dim/@ref is deprecated; dimension left open
+WARNING [deprecated-dim-ref] base_classes/NXmonitor.nxdl.xml:87: dim/@ref is deprecated; dimension left open
+WARNING [undeclared-symbol] base_classes/NXmonitor.nxdl.xml:89: symbol 'dataRank' is not declared
+WARNING [units-not-category] base_classes/NXmonochromator.nxdl.xml:63: units='eV/mm' is not a category: fixed units
+WARNING [units-not-category] base_classes/NXmonochromator.nxdl.xml:68: units='nm/mm' is not a category: fixed units
+WARNING [undeclared-symbol] base_classes/NXoff_geometry.nxdl.xml:69: symbol 'j' is not declared
+WARNING [undeclared-symbol] base_classes/NXorientation.nxdl.xml:38: symbol 'numobj' is not declared
+WARNING [undeclared-symbol] base_classes/NXpositioner.nxdl.xml:42: symbol 'n' is not declared
+WARNING [undeclared-symbol] base_classes/NXpositioner.nxdl.xml:46: symbol 'n' is not declared
+WARNING [undeclared-symbol] base_classes/NXpositioner.nxdl.xml:50: symbol 'n' is not declared
+WARNING [undeclared-symbol] base_classes/NXpositioner.nxdl.xml:54: symbol 'n' is not declared
+WARNING [upper-case-exact] base_classes/NXroot.nxdl.xml:52: 'NeXus_version' has upper case but no nameType: exact name (T3b)
+WARNING [upper-case-exact] base_classes/NXroot.nxdl.xml:60: 'NeXus_repository' has upper case but no nameType: exact name (T3b)
+WARNING [upper-case-exact] base_classes/NXroot.nxdl.xml:68: 'NeXus_release' has upper case but no nameType: exact name (T3b)
+WARNING [upper-case-exact] base_classes/NXroot.nxdl.xml:83: 'HDF_version' has upper case but no nameType: exact name (T3b)
+WARNING [upper-case-exact] base_classes/NXroot.nxdl.xml:86: 'HDF5_Version' has upper case but no nameType: exact name (T3b)
+WARNING [upper-case-exact] base_classes/NXroot.nxdl.xml:94: 'XML_version' has upper case but no nameType: exact name (T3b)
+WARNING [undeclared-symbol] base_classes/NXsample.nxdl.xml:73: symbol 'anyRank' is not declared
+WARNING [upper-case-exact] base_classes/NXsample.nxdl.xml:351: 'external_DAC' has upper case but no nameType: exact name (T3b)
+WARNING [upper-case-exact] base_classes/NXsample.nxdl.xml:354: 'external_ADC' has upper case but no nameType: exact name (T3b)
+WARNING [undeclared-symbol] base_classes/NXsensor.nxdl.xml:106: symbol 'n' is not declared
+WARNING [deprecated-dim-ref] base_classes/NXsensor.nxdl.xml:122: dim/@ref is deprecated; dimension left open
+WARNING [deprecated-dim-ref] base_classes/NXsensor.nxdl.xml:131: dim/@ref is deprecated; dimension left open
+WARNING [undeclared-symbol] base_classes/NXshape.nxdl.xml:51: symbol 'nshapepar' is not declared
+WARNING [undeclared-symbol] base_classes/NXshape.nxdl.xml:51: symbol 'numobj' is not declared
+INFO [round-trip-ok] base_classes/NXslit.nxds.yaml: NXDS → NXDL → NXDS gives the same resolved form
+WARNING [upper-case-exact] base_classes/NXsubentry.nxdl.xml:78: 'IDF_Version' has upper case but no nameType: exact name (T3b)
+WARNING [upper-case-exact] base_classes/NXsubentry.nxdl.xml:110: 'URL' has upper case but no nameType: exact name (T3b)
+WARNING [upper-case-exact] base_classes/NXsubentry.nxdl.xml:120: 'URL' has upper case but no nameType: exact name (T3b)
+WARNING [enum-wildcard] base_classes/NXsubentry.nxdl.xml:176: item 'image/*' kept as a literal value (#1234)
+WARNING [undeclared-symbol] base_classes/NXtranslation.nxdl.xml:35: symbol 'numobj' is not declared
+WARNING [upper-case-exact] base_classes/NXuser.nxdl.xml:69: 'ORCID' has upper case but no nameType: exact name (T3b)
+WARNING [class-not-subclass] contributed_definitions/NXafm.nxdl.xml:128: 'head_temperature_sensor': NXsensor is not a subclass of NXspm_temperature_sensor
+WARNING [type-not-narrower] contributed_definitions/NXafm.nxdl.xml:139: 'head_temperature': NX_NUMBER is not narrower than NX_CHAR
+WARNING [type-not-narrower] contributed_definitions/NXafm.nxdl.xml:145: 'cryo_bottom_temperature': NX_NUMBER is not narrower than NX_CHAR
+WARNING [type-not-narrower] contributed_definitions/NXafm.nxdl.xml:151: 'cryo_shield_temperature': NX_NUMBER is not narrower than NX_CHAR
+WARNING [type-not-narrower] contributed_definitions/NXafm.nxdl.xml:168: 'head_temperature': NX_NUMBER is not narrower than NX_CHAR
+WARNING [type-not-narrower] contributed_definitions/NXafm.nxdl.xml:174: 'cryo_bottom_temperature': NX_NUMBER is not narrower than NX_CHAR
+WARNING [type-not-narrower] contributed_definitions/NXafm.nxdl.xml:180: 'cryo_shield_temperature': NX_NUMBER is not narrower than NX_CHAR
+WARNING [type-not-narrower] contributed_definitions/NXafm.nxdl.xml:186: 'cantilever_config': NX_NUMBER is not narrower than NX_CHAR
+WARNING [type-not-narrower] contributed_definitions/NXafm.nxdl.xml:192: 'amplitude_excitation': NX_NUMBER is not narrower than NX_CHAR
+WARNING [units-not-category] contributed_definitions/NXamplifier.nxdl.xml:98: units='db' is not a category: fixed units
+WARNING [type-not-narrower] contributed_definitions/NXapm_compositionspace_config.nxdl.xml:41: 'identifier_analysis': NX_UINT is not narrower than NX_CHAR
+WARNING [type-not-narrower] contributed_definitions/NXapm_compositionspace_results.nxdl.xml:61: 'identifier_analysis': NX_UINT is not narrower than NX_CHAR
+WARNING [exact-max] contributed_definitions/NXapm_compositionspace_results.nxdl.xml:68: 'program1': an exact name occurs at most once, max unbounded
+WARNING [undeclared-symbol] contributed_definitions/NXapm_compositionspace_results.nxdl.xml:234: symbol 'i' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_compositionspace_results.nxdl.xml:247: symbol 'i' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_compositionspace_results.nxdl.xml:283: symbol 'i' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_compositionspace_results.nxdl.xml:291: symbol 'i' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_compositionspace_results.nxdl.xml:338: symbol 'i' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_compositionspace_results.nxdl.xml:346: symbol 'i' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_compositionspace_results.nxdl.xml:354: symbol 'i' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_compositionspace_results.nxdl.xml:396: symbol 'k' is not declared
+WARNING [ambiguous-name-fit] contributed_definitions/NXapm_paraprobe_clusterer_config.nxdl.xml:57: 'cameca_to_nexus' fits PARAMETERS, TASKCONFIG; refining PARAMETERS
+WARNING [type-not-narrower] contributed_definitions/NXapm_paraprobe_clusterer_config.nxdl.xml:86: 'recover_evaporation_id': NX_BOOLEAN is not narrower than NX_CHAR_OR_NUMBER
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_clusterer_config.nxdl.xml:200: symbol 'i' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_clusterer_config.nxdl.xml:208: symbol 'j' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_clusterer_config.nxdl.xml:258: symbol 'i' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_clusterer_config.nxdl.xml:266: symbol 'j' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_clusterer_config.nxdl.xml:274: symbol 'k' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_clusterer_config.nxdl.xml:282: symbol 'm' is not declared
+WARNING [ambiguous-name-fit] contributed_definitions/NXapm_paraprobe_clusterer_results.nxdl.xml:51: 'cameca_to_nexus' fits PROCESS, TASKPROCESSED; refining PROCESS
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_clusterer_results.nxdl.xml:88: symbol 'i' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_clusterer_results.nxdl.xml:100: symbol 'i' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_clusterer_results.nxdl.xml:112: symbol 'k' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_clusterer_results.nxdl.xml:125: symbol 'k' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_clusterer_results.nxdl.xml:134: symbol 'k' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_clusterer_results.nxdl.xml:142: symbol 'k' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_clusterer_results.nxdl.xml:150: symbol 'k' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_clusterer_results.nxdl.xml:164: symbol 'k' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_clusterer_results.nxdl.xml:172: symbol 'k' is not declared
+WARNING [type-not-narrower] contributed_definitions/NXapm_paraprobe_intersector_config.nxdl.xml:78: 'analyze_intersection': NX_BOOLEAN is not narrower than NX_CHAR_OR_NUMBER
+WARNING [type-not-narrower] contributed_definitions/NXapm_paraprobe_intersector_config.nxdl.xml:83: 'analyze_proximity': NX_BOOLEAN is not narrower than NX_CHAR_OR_NUMBER
+WARNING [type-not-narrower] contributed_definitions/NXapm_paraprobe_intersector_config.nxdl.xml:89: 'analyze_coprecipitation': NX_BOOLEAN is not narrower than NX_CHAR_OR_NUMBER
+WARNING [type-not-narrower] contributed_definitions/NXapm_paraprobe_intersector_config.nxdl.xml:104: 'has_current_to_next_links': NX_BOOLEAN is not narrower than NX_CHAR_OR_NUMBER
+WARNING [type-not-narrower] contributed_definitions/NXapm_paraprobe_intersector_config.nxdl.xml:110: 'has_next_to_current_links': NX_BOOLEAN is not narrower than NX_CHAR_OR_NUMBER
+WARNING [enum-not-subset] contributed_definitions/NXapm_paraprobe_nanochem_config.nxdl.xml:132: 'method': enumeration is not a subset of the inherited one
+WARNING [type-not-narrower] contributed_definitions/NXapm_paraprobe_nanochem_config.nxdl.xml:273: 'has_scalar_fields': NX_BOOLEAN is not narrower than NX_CHAR_OR_NUMBER
+WARNING [class-not-subclass] contributed_definitions/NXapm_paraprobe_nanochem_results.nxdl.xml:216: 'bounding_box': NXcg_hexahedron is not a subclass of NXcg_polyhedron
+WARNING [type-not-narrower] contributed_definitions/NXapm_paraprobe_nanochem_results.nxdl.xml:269: 'faces': NX_NUMBER is not narrower than NX_INT
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_nanochem_results.nxdl.xml:381: symbol 'n_xyz' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_nanochem_results.nxdl.xml:389: symbol 'n_xyz' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_nanochem_results.nxdl.xml:399: symbol 'i' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_nanochem_results.nxdl.xml:449: symbol 'n_xyz' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_nanochem_results.nxdl.xml:459: symbol 'n_xyz' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_nanochem_results.nxdl.xml:469: symbol 'i' is not declared
+WARNING [type-not-narrower] contributed_definitions/NXapm_paraprobe_nanochem_results.nxdl.xml:514: 'number_of_vertices': NX_POSINT is not narrower than NX_UINT
+WARNING [type-not-narrower] contributed_definitions/NXapm_paraprobe_nanochem_results.nxdl.xml:515: 'number_of_faces': NX_POSINT is not narrower than NX_UINT
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_nanochem_results.nxdl.xml:518: symbol 'i' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_nanochem_results.nxdl.xml:533: symbol 'j' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_nanochem_results.nxdl.xml:561: symbol 'j' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_nanochem_results.nxdl.xml:570: symbol 'j' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_nanochem_results.nxdl.xml:587: symbol 'k' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_nanochem_results.nxdl.xml:596: symbol 'k' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_nanochem_results.nxdl.xml:609: symbol 'k' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_nanochem_results.nxdl.xml:627: symbol 'k' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_nanochem_results.nxdl.xml:643: symbol 'j' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_nanochem_results.nxdl.xml:648: symbol 'k' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_nanochem_results.nxdl.xml:659: symbol 'j' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_nanochem_results.nxdl.xml:671: symbol 'j' is not declared
+WARNING [exact-max] contributed_definitions/NXapm_paraprobe_nanochem_results.nxdl.xml:753: 'FEATURE': an exact name occurs at most once, max 6
+WARNING [upper-case-exact] contributed_definitions/NXapm_paraprobe_nanochem_results.nxdl.xml:753: 'FEATURE' has upper case but no nameType: exact name (T3b)
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_nanochem_results.nxdl.xml:766: symbol 'i' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_nanochem_results.nxdl.xml:775: symbol 'i' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_nanochem_results.nxdl.xml:787: symbol 'i' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_nanochem_results.nxdl.xml:796: symbol 'i' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_nanochem_results.nxdl.xml:806: symbol 'i' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_nanochem_results.nxdl.xml:822: symbol 'k' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_nanochem_results.nxdl.xml:830: symbol 'k' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_nanochem_results.nxdl.xml:835: symbol 'k' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_nanochem_results.nxdl.xml:862: symbol 'k' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_nanochem_results.nxdl.xml:867: symbol 'k' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_nanochem_results.nxdl.xml:872: symbol 'm' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_nanochem_results.nxdl.xml:884: symbol 'i' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_nanochem_results.nxdl.xml:898: symbol 'i' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_nanochem_results.nxdl.xml:981: symbol 'j' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_nanochem_results.nxdl.xml:986: symbol 'i' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_nanochem_results.nxdl.xml:992: symbol 'i' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_nanochem_results.nxdl.xml:1001: symbol 'i' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_nanochem_results.nxdl.xml:1014: symbol 'j' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_nanochem_results.nxdl.xml:1020: symbol 'j' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_nanochem_results.nxdl.xml:1029: symbol 'j' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_nanochem_results.nxdl.xml:1042: symbol 'k' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_nanochem_results.nxdl.xml:1088: symbol 'i' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_nanochem_results.nxdl.xml:1098: symbol 'i' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_nanochem_results.nxdl.xml:1109: symbol 'j' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_nanochem_results.nxdl.xml:1117: symbol 'j' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_nanochem_results.nxdl.xml:1125: symbol 'j' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_nanochem_results.nxdl.xml:1133: symbol 'j' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_nanochem_results.nxdl.xml:1155: symbol 'k' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_nanochem_results.nxdl.xml:1164: symbol 'k' is not declared
+WARNING [type-not-narrower] contributed_definitions/NXapm_paraprobe_spatstat_config.nxdl.xml:106: 'randomize_iontypes': NX_BOOLEAN is not narrower than NX_CHAR_OR_NUMBER
+WARNING [type-not-narrower] contributed_definitions/NXapm_paraprobe_spatstat_config.nxdl.xml:118: 'seed': NX_NUMBER is not narrower than NX_INT
+WARNING [type-not-narrower] contributed_definitions/NXapm_paraprobe_spatstat_config.nxdl.xml:119: 'warmup': NX_NUMBER is not narrower than NX_UINT
+WARNING [type-not-narrower] contributed_definitions/NXapm_paraprobe_surfacer_config.nxdl.xml:130: 'has_exterior_facets': NX_BOOLEAN is not narrower than NX_CHAR_OR_NUMBER
+WARNING [type-not-narrower] contributed_definitions/NXapm_paraprobe_surfacer_config.nxdl.xml:136: 'has_closure': NX_BOOLEAN is not narrower than NX_CHAR_OR_NUMBER
+WARNING [type-not-narrower] contributed_definitions/NXapm_paraprobe_surfacer_config.nxdl.xml:142: 'has_interior_tetrahedra': NX_BOOLEAN is not narrower than NX_CHAR_OR_NUMBER
+WARNING [enum-not-subset] contributed_definitions/NXapm_paraprobe_surfacer_results.nxdl.xml:121: 'type': enumeration is not a subset of the inherited one
+WARNING [ambiguous-name-fit] contributed_definitions/NXapm_paraprobe_surfacer_results.nxdl.xml:138: 'triangle_set' fits TRIANGLE_SOUP, ALPHA_COMPLEX; refining TRIANGLE_SOUP
+WARNING [undeclared-symbol] contributed_definitions/NXapm_paraprobe_surfacer_results.nxdl.xml:201: symbol 'n_v_tet' is not declared
+WARNING [type-not-narrower] contributed_definitions/NXapm_paraprobe_tessellator_config.nxdl.xml:59: 'has_cell_volume': NX_BOOLEAN is not narrower than NX_CHAR_OR_NUMBER
+WARNING [type-not-narrower] contributed_definitions/NXapm_paraprobe_tessellator_config.nxdl.xml:64: 'has_cell_neighbors': NX_BOOLEAN is not narrower than NX_CHAR_OR_NUMBER
+WARNING [type-not-narrower] contributed_definitions/NXapm_paraprobe_tessellator_config.nxdl.xml:69: 'has_cell_geometry': NX_BOOLEAN is not narrower than NX_CHAR_OR_NUMBER
+WARNING [type-not-narrower] contributed_definitions/NXapm_paraprobe_tessellator_config.nxdl.xml:74: 'has_cell_edge_detection': NX_BOOLEAN is not narrower than NX_CHAR_OR_NUMBER
+WARNING [type-not-narrower] contributed_definitions/NXapm_paraprobe_tool_common.nxdl.xml:45: 'identifier_analysis': NX_UINT is not narrower than NX_CHAR
+WARNING [type-not-narrower] contributed_definitions/NXapm_paraprobe_tool_parameters.nxdl.xml:29: 'identifier_analysis': NX_UINT is not narrower than NX_CHAR
+WARNING [enum-not-subset] contributed_definitions/NXbeam_splitter.nxdl.xml:111: 'shape': enumeration is not a subset of the inherited one
+WARNING [undeclared-symbol] contributed_definitions/NXcontainer.nxdl.xml:114: symbol 'n_comp' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXcontainer.nxdl.xml:122: symbol 'n_comp' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXcontainer.nxdl.xml:131: symbol 'n_comp' is not declared
+WARNING [type-not-narrower] contributed_definitions/NXcxi_ptycho.nxdl.xml:94: 'probe': NX_FLOAT is not narrower than NX_CHAR
+WARNING [type-not-narrower] contributed_definitions/NXcxi_ptycho.nxdl.xml:95: 'type': NX_FLOAT is not narrower than NX_CHAR
+WARNING [bad-rank] contributed_definitions/NXcxi_ptycho.nxdl.xml:145: rank '3 for arbitrary scan, 4 for raster' dropped
+WARNING [bad-rank] contributed_definitions/NXcxi_ptycho.nxdl.xml:179: rank '1 for arbitrary scan, 2 for raster' dropped
+WARNING [unresolved-target] contributed_definitions/NXcxi_ptycho.nxdl.xml:199: link 'x': target 'ENTRY/SAMPLE/TRANSFORMATIONS/x' does not resolve; form dataset
+WARNING [unresolved-target] contributed_definitions/NXcxi_ptycho.nxdl.xml:200: link 'y': target 'ENTRY/SAMPLE/TRANSFORMATIONS/y' does not resolve; form dataset
+WARNING [undeclared-symbol] contributed_definitions/NXmicrostructure.nxdl.xml:509: symbol 'i' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXmicrostructure.nxdl.xml:759: symbol 'i' is not declared
+WARNING [type-not-narrower] contributed_definitions/NXmicrostructure_kanapy_results.nxdl.xml:115: 'z': NX_NUMBER is not narrower than NX_FLOAT
+WARNING [type-not-narrower] contributed_definitions/NXmicrostructure_kanapy_results.nxdl.xml:128: 'y': NX_NUMBER is not narrower than NX_FLOAT
+WARNING [type-not-narrower] contributed_definitions/NXmicrostructure_kanapy_results.nxdl.xml:141: 'x': NX_NUMBER is not narrower than NX_FLOAT
+WARNING [type-not-narrower] contributed_definitions/NXmicrostructure_score_config.nxdl.xml:85: 'identifier_simulation': NX_UINT is not narrower than NX_CHAR
+WARNING [type-not-narrower] contributed_definitions/NXmicrostructure_score_config.nxdl.xml:683: 'defragment': NX_BOOLEAN is not narrower than NX_CHAR_OR_NUMBER
+WARNING [type-not-narrower] contributed_definitions/NXmicrostructure_score_config.nxdl.xml:704: 'apply': NX_BOOLEAN is not narrower than NX_CHAR_OR_NUMBER
+WARNING [type-not-narrower] contributed_definitions/NXmicrostructure_score_results.nxdl.xml:94: 'identifier_simulation': NX_UINT is not narrower than NX_CHAR
+WARNING [undeclared-symbol] contributed_definitions/NXmicrostructure_score_results.nxdl.xml:411: symbol 'n_x' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXmicrostructure_score_results.nxdl.xml:411: symbol 'n_y' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXmicrostructure_score_results.nxdl.xml:411: symbol 'n_z' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXmicrostructure_score_results.nxdl.xml:421: symbol 'n_x' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXmicrostructure_score_results.nxdl.xml:421: symbol 'n_y' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXmicrostructure_score_results.nxdl.xml:421: symbol 'n_z' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXmicrostructure_slip_system.nxdl.xml:57: symbol 'i' is not declared
+WARNING [units-not-category] contributed_definitions/NXoptical_fiber.nxdl.xml:176: units='GB/s' is not a category: fixed units
+WARNING [units-not-category] contributed_definitions/NXoptical_fiber.nxdl.xml:186: units='dB/km' is not a category: fixed units
+WARNING [enum-not-subset] contributed_definitions/NXoptical_polarizer.nxdl.xml:88: 'shape': enumeration is not a subset of the inherited one
+WARNING [undeclared-symbol] contributed_definitions/NXoptical_polarizer.nxdl.xml:108: symbol 'N_objects' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXoptical_polarizer.nxdl.xml:108: symbol 'N_shapepar' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXoptical_polarizer.nxdl.xml:197: symbol 'N_spectrum_coating' is not declared
+WARNING [units-not-category] contributed_definitions/NXphase_lock_loop.nxdl.xml:125: units='V/rad' is not a category: fixed units
+WARNING [type-not-narrower] contributed_definitions/NXrcs.nxdl.xml:41: 'model': NX_CHAR_OR_NUMBER is not narrower than NX_CHAR
+WARNING [type-not-narrower] contributed_definitions/NXsensor_scan.nxdl.xml:198: 'run_control': NX_CHAR is not narrower than NX_BOOLEAN
+WARNING [upper-case-exact] contributed_definitions/NXseparator.nxdl.xml:36: 'set_Bfield_current' has upper case but no nameType: exact name (T3b)
+WARNING [upper-case-exact] contributed_definitions/NXsnsevent.nxdl.xml:13: 'DASlogs' has upper case but no nameType: exact name (T3b)
+WARNING [undeclared-symbol] contributed_definitions/NXsnsevent.nxdl.xml:26: symbol 'nvalue' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXsnsevent.nxdl.xml:31: symbol 'nvalue' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXsnsevent.nxdl.xml:49: symbol 'numvalue' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXsnsevent.nxdl.xml:54: symbol 'numvalue' is not declared
+WARNING [upper-case-exact] contributed_definitions/NXsnsevent.nxdl.xml:61: 'SNSHistoTool' has upper case but no nameType: exact name (T3b)
+WARNING [upper-case-exact] contributed_definitions/NXsnsevent.nxdl.xml:62: 'SNSbanking_file_name' has upper case but no nameType: exact name (T3b)
+WARNING [upper-case-exact] contributed_definitions/NXsnsevent.nxdl.xml:63: 'SNSmapping_file_name' has upper case but no nameType: exact name (T3b)
+WARNING [type-not-narrower] contributed_definitions/NXsnsevent.nxdl.xml:97: 'duration': NX_FLOAT is not narrower than NX_INT
+WARNING [upper-case-exact] contributed_definitions/NXsnsevent.nxdl.xml:102: 'SNS' has upper case but no nameType: exact name (T3b)
+WARNING [upper-case-exact] contributed_definitions/NXsnsevent.nxdl.xml:108: 'SNSdetector_calibration_id' has upper case but no nameType: exact name (T3b)
+WARNING [upper-case-exact] contributed_definitions/NXsnsevent.nxdl.xml:113: 'SNSgeometry_file_name' has upper case but no nameType: exact name (T3b)
+WARNING [upper-case-exact] contributed_definitions/NXsnsevent.nxdl.xml:115: 'SNStranslation_service' has upper case but no nameType: exact name (T3b)
+WARNING [undeclared-symbol] contributed_definitions/NXsnsevent.nxdl.xml:118: symbol 'numx' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXsnsevent.nxdl.xml:118: symbol 'numy' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXsnsevent.nxdl.xml:124: symbol 'numx' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXsnsevent.nxdl.xml:124: symbol 'numy' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXsnsevent.nxdl.xml:132: symbol 'numx' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXsnsevent.nxdl.xml:132: symbol 'numy' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXsnsevent.nxdl.xml:138: symbol 'numpulses' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXsnsevent.nxdl.xml:143: symbol 'numevents' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXsnsevent.nxdl.xml:148: symbol 'numevents' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXsnsevent.nxdl.xml:181: symbol 'numx' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXsnsevent.nxdl.xml:181: symbol 'numy' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXsnsevent.nxdl.xml:187: symbol 'numx' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXsnsevent.nxdl.xml:187: symbol 'numy' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXsnsevent.nxdl.xml:193: symbol 'numpulses' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXsnsevent.nxdl.xml:199: symbol 'numx' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXsnsevent.nxdl.xml:204: symbol 'numy' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXsnsevent.nxdl.xml:291: symbol 'numtimechannels' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXsnsevent.nxdl.xml:299: symbol 'numtimechannels' is not declared
+WARNING [upper-case-exact] contributed_definitions/NXsnshisto.nxdl.xml:13: 'DASlogs' has upper case but no nameType: exact name (T3b)
+WARNING [undeclared-symbol] contributed_definitions/NXsnshisto.nxdl.xml:26: symbol 'nvalue' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXsnshisto.nxdl.xml:31: symbol 'nvalue' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXsnshisto.nxdl.xml:49: symbol 'numvalue' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXsnshisto.nxdl.xml:54: symbol 'numvalue' is not declared
+WARNING [upper-case-exact] contributed_definitions/NXsnshisto.nxdl.xml:61: 'SNSHistoTool' has upper case but no nameType: exact name (T3b)
+WARNING [upper-case-exact] contributed_definitions/NXsnshisto.nxdl.xml:62: 'SNSbanking_file_name' has upper case but no nameType: exact name (T3b)
+WARNING [upper-case-exact] contributed_definitions/NXsnshisto.nxdl.xml:63: 'SNSmapping_file_name' has upper case but no nameType: exact name (T3b)
+WARNING [type-not-narrower] contributed_definitions/NXsnshisto.nxdl.xml:96: 'duration': NX_FLOAT is not narrower than NX_INT
+WARNING [upper-case-exact] contributed_definitions/NXsnshisto.nxdl.xml:101: 'SNS' has upper case but no nameType: exact name (T3b)
+WARNING [upper-case-exact] contributed_definitions/NXsnshisto.nxdl.xml:107: 'SNSdetector_calibration_id' has upper case but no nameType: exact name (T3b)
+WARNING [upper-case-exact] contributed_definitions/NXsnshisto.nxdl.xml:112: 'SNSgeometry_file_name' has upper case but no nameType: exact name (T3b)
+WARNING [upper-case-exact] contributed_definitions/NXsnshisto.nxdl.xml:114: 'SNStranslation_service' has upper case but no nameType: exact name (T3b)
+WARNING [undeclared-symbol] contributed_definitions/NXsnshisto.nxdl.xml:117: symbol 'numx' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXsnshisto.nxdl.xml:117: symbol 'numy' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXsnshisto.nxdl.xml:123: symbol 'numtof' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXsnshisto.nxdl.xml:123: symbol 'numx' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXsnshisto.nxdl.xml:123: symbol 'numy' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXsnshisto.nxdl.xml:130: symbol 'numtof' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXsnshisto.nxdl.xml:130: symbol 'numx' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXsnshisto.nxdl.xml:136: symbol 'numx' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXsnshisto.nxdl.xml:136: symbol 'numy' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXsnshisto.nxdl.xml:142: symbol 'numtof' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXsnshisto.nxdl.xml:142: symbol 'numy' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXsnshisto.nxdl.xml:148: symbol 'numx' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXsnshisto.nxdl.xml:148: symbol 'numy' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXsnshisto.nxdl.xml:182: symbol 'numx' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXsnshisto.nxdl.xml:182: symbol 'numy' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXsnshisto.nxdl.xml:188: symbol 'numx' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXsnshisto.nxdl.xml:188: symbol 'numy' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXsnshisto.nxdl.xml:194: symbol 'numtof' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXsnshisto.nxdl.xml:200: symbol 'numx' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXsnshisto.nxdl.xml:205: symbol 'numy' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXsnshisto.nxdl.xml:305: symbol 'numtimechannels' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXsnshisto.nxdl.xml:312: symbol 'numtimechannels' is not declared
+WARNING [widened-occurs] contributed_definitions/NXspm.nxdl.xml:80: 'PROCESS': min 0 < inherited 1
+WARNING [undeclared-symbol] contributed_definitions/NXspm_scan_pattern.nxdl.xml:138: symbol 'nD' is not declared
+WARNING [undeclared-symbol] contributed_definitions/NXspm_scan_pattern.nxdl.xml:138: symbol 'nTraj' is not declared
+WARNING [type-not-narrower] contributed_definitions/NXstm.nxdl.xml:116: 'current': NX_NUMBER is not narrower than NX_CHAR
+WARNING [type-not-narrower] contributed_definitions/NXstm.nxdl.xml:123: 'current_offset': NX_NUMBER is not narrower than NX_CHAR
+WARNING [upper-case-exact] contributed_definitions/NXstm.nxdl.xml:130: 'BIAS_SWEEP' has upper case but no nameType: exact name (T3b)
+WARNING [type-not-narrower] contributed_definitions/NXstm.nxdl.xml:144: 'reference_frequency': NX_NUMBER is not narrower than NX_CHAR
+WARNING [type-not-narrower] contributed_definitions/NXstm.nxdl.xml:158: 'head_temperature': NX_NUMBER is not narrower than NX_CHAR
+WARNING [type-not-narrower] contributed_definitions/NXstm.nxdl.xml:164: 'cryo_bottom_temperature': NX_NUMBER is not narrower than NX_CHAR
+WARNING [type-not-narrower] contributed_definitions/NXstm.nxdl.xml:170: 'cryo_shield_temperature': NX_NUMBER is not narrower than NX_CHAR
+WARNING [type-not-narrower] contributed_definitions/NXstm.nxdl.xml:189: 'reference_frequency': NX_NUMBER is not narrower than NX_CHAR
+WARNING [widened-occurs] contributed_definitions/NXsts.nxdl.xml:71: 'SCAN_ENVIRONMENT': min 0 < inherited 1
+WARNING [widened-occurs] contributed_definitions/NXsts.nxdl.xml:72: 'SPM_SCAN_CONTROL': min 0 < inherited 1
+WARNING [type-not-narrower] contributed_definitions/NXsts.nxdl.xml:94: 'current': NX_NUMBER is not narrower than NX_CHAR
+WARNING [type-not-narrower] contributed_definitions/NXsts.nxdl.xml:104: 'current_offset': NX_NUMBER is not narrower than NX_CHAR
+WARNING [type-not-narrower] contributed_definitions/NXsts.nxdl.xml:114: 'current_gain': NX_NUMBER is not narrower than NX_CHAR
+WARNING [type-not-narrower] contributed_definitions/NXsts.nxdl.xml:145: 'reference_frequency': NX_NUMBER is not narrower than NX_CHAR
+WARNING [type-not-narrower] contributed_definitions/NXsts.nxdl.xml:161: 'head_temperature': NX_NUMBER is not narrower than NX_CHAR
+WARNING [type-not-narrower] contributed_definitions/NXsts.nxdl.xml:170: 'cryo_bottom_temperature': NX_NUMBER is not narrower than NX_CHAR
+WARNING [type-not-narrower] contributed_definitions/NXsts.nxdl.xml:179: 'cryo_shield_temperature': NX_NUMBER is not narrower than NX_CHAR
+WARNING [type-not-narrower] contributed_definitions/NXsts.nxdl.xml:207: 'modulation_frequency': NX_NUMBER is not narrower than NX_CHAR
+WARNING [type-not-narrower] contributed_definitions/NXtransmission.nxdl.xml:161: 'wavelength': NX_NUMBER is not narrower than NX_FLOAT
+WARNING [type-not-narrower] contributed_definitions/NXtransmission.nxdl.xml:177: 'resolution': NX_NUMBER is not narrower than NX_FLOAT
+WARNING [type-not-narrower] contributed_definitions/NXtransmission.nxdl.xml:203: 'resolution': NX_NUMBER is not narrower than NX_FLOAT
+WARNING [upper-case-exact] contributed_definitions/NXxpcs.nxdl.xml:180: 'G2_unnormalized' has upper case but no nameType: exact name (T3b)
+WARNING [type-not-narrower] contributed_definitions/NXxpcs.nxdl.xml:449: 'distance': NX_NUMBER is not narrower than NX_FLOAT
+WARNING [type-not-narrower] contributed_definitions/NXxpcs.nxdl.xml:455: 'frame_time': NX_NUMBER is not narrower than NX_FLOAT
+WARNING [type-not-narrower] contributed_definitions/NXxpcs.nxdl.xml:460: 'beam_center_x': NX_NUMBER is not narrower than NX_FLOAT
+WARNING [type-not-narrower] contributed_definitions/NXxpcs.nxdl.xml:465: 'beam_center_y': NX_NUMBER is not narrower than NX_FLOAT
+WARNING [type-not-narrower] contributed_definitions/NXxpcs.nxdl.xml:470: 'x_pixel_size': NX_NUMBER is not narrower than NX_FLOAT
+WARNING [type-not-narrower] contributed_definitions/NXxpcs.nxdl.xml:478: 'y_pixel_size': NX_NUMBER is not narrower than NX_FLOAT
+WARNING [type-not-narrower] contributed_definitions/NXxpcs.nxdl.xml:575: 'temperature': NX_NUMBER is not narrower than NX_FLOAT
+WARNING [exact-max] contributed_definitions/NXxpcs.nxdl.xml:585: 'NOTE': an exact name occurs at most once, max unbounded
+WARNING [upper-case-exact] contributed_definitions/NXxpcs.nxdl.xml:585: 'NOTE' has upper case but no nameType: exact name (T3b)
+WARNING [widened-occurs] contributed_definitions/NXxrd.nxdl.xml:40: 'INSTRUMENT': min 0 < inherited 1
+WARNING [widened-occurs] contributed_definitions/NXxrd_pan.nxdl.xml:276: 'q_data': min 0 < inherited 1
+WARNING [widened-occurs] contributed_definitions/NXxrd_pan.nxdl.xml:313: 'SAMPLE': min 0 < inherited 1

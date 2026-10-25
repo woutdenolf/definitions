@@ -1,0 +1,123 @@
+nxds: '0.1'
+class: NXxnb
+category: application
+extends: NXxbase
+describes: NXroot
+doc: |-
+  raw data from a single crystal diffractometer, extends :ref:`NXxbase`
+
+  This is the application definition for raw data from
+  a single crystal diffractometer
+  measuring in normal beam mode. It extends :ref:`NXxbase`,
+  so the full definition is the content of
+  :ref:`NXxbase` plus the data defined here. All angles are
+  logged in order to support arbitrary scans in
+  reciprocal space.
+defaults: {min: 1, binding: true, type: NX_CHAR}
+symbols:
+  nP: {doc: Number of points}
+children:
+  ENTRY:
+    node: group
+    name: {any: true}
+    class: NXentry
+    children:
+      definition:
+        node: dataset
+        enum: [NXxnb]
+        doc: 'Official NeXus NXDL schema to which this file conforms '
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      instrument:
+        node: group
+        class: NXinstrument
+        children:
+          detector:
+            node: group
+            class: NXdetector
+            children:
+              polar_angle:
+                node: dataset
+                type: NX_FLOAT
+                shape: [nP]
+                units: {category: NX_ANGLE}
+                doc: The polar_angle (gamma) of the detector for each scan point.
+                attributes:
+                  axis:
+                    occurs: {min: 0}
+                    type: NX_POSINT
+                    enum: ['1']
+                    via: [T19]
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              tilt_angle:
+                node: dataset
+                type: NX_FLOAT
+                shape: [nP]
+                units: {category: NX_ANGLE}
+                doc: |-
+                  The angle by which the detector has been tilted out of the
+                  scattering plane.
+                attributes:
+                  axis:
+                    occurs: {min: 0}
+                    type: NX_POSINT
+                    enum: ['1']
+                    via: [T19]
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      sample:
+        node: group
+        class: NXsample
+        children:
+          rotation_angle:
+            node: dataset
+            type: NX_FLOAT
+            shape: [nP]
+            units: {category: NX_ANGLE}
+            doc: |-
+              This is an array holding the sample rotation angle at each
+              scan point
+            attributes:
+              axis:
+                occurs: {min: 0}
+                type: NX_POSINT
+                enum: ['1']
+                via: [T19]
+              primary:
+                occurs: {min: 0}
+                type: NX_POSINT
+                enum: ['1']
+                via: [T19]
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      name:
+        node: group
+        class: NXdata
+        children:
+          polar_angle:
+            node: link
+            target: ENTRY/INSTRUMENT/DETECTOR/polar_angle
+            via: [T1, T5, T10]
+            provisional: [Q2, Q8]
+          tilt:
+            node: link
+            target: ENTRY/INSTRUMENT/DETECTOR/tilt
+            via: [T1, T5, T10]
+            provisional: [Q2, Q8]
+          rotation_angle:
+            node: link
+            target: ENTRY/SAMPLE/rotation_angle
+            via: [T1, T5, T10]
+            provisional: [Q2, Q8]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+    via: [T1, T2, T5, T7]
+    provisional: [Q1, Q2, Q11]
+via: [T8]

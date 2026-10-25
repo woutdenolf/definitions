@@ -1,0 +1,169 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/COLLECTION"},
+    {"node": "group", "ref": "NXprocess/DATA"},
+    {"node": "group", "ref": "NXobject/LOG"},
+    {"class": "NXnote", "declared_by": "NXobject", "docs": ["NXprocess/NOTE"], "id": "NOTE", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q11"], "recommended": false, "refined_by": ["NXprocess", "NXapm_ranging"], "via": ["T1", "T2", "T4", "T6", "T7"]},
+    {"node": "group", "ref": "NXprocess/PARAMETERS"},
+    {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+    {"node": "dataset", "ref": "NXobject/identifierNAME"},
+    {"node": "dataset", "ref": "NXprocess/program"},
+    {"node": "dataset", "ref": "NXprocess/sequence_index"},
+    {"node": "dataset", "ref": "NXprocess/version"},
+    {"node": "dataset", "ref": "NXprocess/date"},
+    {"class": "NXprogram", "declared_by": "NXapm_ranging", "id": "PROGRAM", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q11"], "recommended": false, "via": ["T1", "T2", "T4", "T7"]},
+    {"class": "NXprocess", "declared_by": "NXapm_ranging", "docs": ["NXapm_ranging/mass_to_charge_distribution"], "id": "mass_to_charge_distribution", "name": {"exact": "mass_to_charge_distribution"}, "node": "group", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "specialisation": "NXapm_ranging/mass_to_charge_distribution", "via": ["T1", "T4", "T7"]},
+    {"class": "NXprocess", "declared_by": "NXapm_ranging", "docs": ["NXapm_ranging/background_quantification"], "id": "background_quantification", "name": {"exact": "background_quantification"}, "node": "group", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "specialisation": "NXapm_ranging/background_quantification", "via": ["T1", "T4", "T7"]},
+    {"class": "NXprocess", "declared_by": "NXapm_ranging", "docs": ["NXapm_ranging/peak_search_and_deconvolution"], "id": "peak_search_and_deconvolution", "name": {"exact": "peak_search_and_deconvolution"}, "node": "group", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "specialisation": "NXapm_ranging/peak_search_and_deconvolution", "via": ["T1", "T4", "T7"]},
+    {"class": "NXprocess", "declared_by": "NXapm_ranging", "docs": ["NXapm_ranging/peak_identification"], "id": "peak_identification", "name": {"exact": "peak_identification"}, "node": "group", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "specialisation": "NXapm_ranging/peak_identification", "via": ["T1", "T4", "T7"]}
+  ],
+  "class": "NXapm_ranging",
+  "extends": "NXprocess",
+  "lossy": [],
+  "provisional": [],
+  "require": [],
+  "source": "base_classes/NXapm_ranging.nxdl.xml",
+  "status": "base",
+  "symbols": [],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"},
+  "via": []
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {
+  "NXapm_ranging/background_quantification": {
+   "attributes": [
+     {"ref": "NXobject@default"}
+   ],
+   "children": [
+     {"node": "group", "ref": "NXobject/COLLECTION"},
+     {"node": "group", "ref": "NXprocess/DATA"},
+     {"node": "group", "ref": "NXobject/LOG"},
+     {"node": "group", "ref": "NXprocess/NOTE"},
+     {"node": "group", "ref": "NXprocess/PARAMETERS"},
+     {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+     {"node": "dataset", "ref": "NXobject/identifierNAME"},
+     {"node": "dataset", "ref": "NXprocess/program"},
+     {"node": "dataset", "ref": "NXprocess/sequence_index"},
+     {"node": "dataset", "ref": "NXprocess/version"},
+     {"node": "dataset", "ref": "NXprocess/date"},
+     {"class": "NXprogram", "declared_by": "NXapm_ranging", "id": "PROGRAM", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q11"], "recommended": false, "via": ["T1", "T2", "T4", "T7"]},
+     {"declared_by": "NXapm_ranging", "docs": ["NXapm_ranging/background_quantification/description"], "id": "description", "name": {"exact": "description"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4", "T7"]}
+   ],
+   "class": "NXprocess",
+   "declared_by": "NXapm_ranging",
+   "id": "NXapm_ranging/background_quantification",
+   "require": [],
+   "symbols": [],
+   "undeclared": {"attribute": "report", "dataset": "report", "group": "report"}
+  },
+  "NXapm_ranging/mass_to_charge_distribution": {
+   "attributes": [
+     {"ref": "NXobject@default"}
+   ],
+   "children": [
+     {"node": "group", "ref": "NXobject/COLLECTION"},
+     {"node": "group", "ref": "NXprocess/DATA"},
+     {"class": "NXdata", "declared_by": "NXapm_ranging", "docs": ["NXprocess/DATA", "NXapm_ranging/mass_to_charge_distribution/mass_spectrum"], "id": "mass_spectrum", "name": {"exact": "mass_spectrum"}, "node": "group", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q4", "Q11"], "recommended": false, "refines": "DATA", "via": ["T1", "T2", "T4", "T6", "T7", "T18"]},
+     {"node": "group", "ref": "NXobject/LOG"},
+     {"node": "group", "ref": "NXprocess/NOTE"},
+     {"node": "group", "ref": "NXprocess/PARAMETERS"},
+     {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+     {"node": "dataset", "ref": "NXobject/identifierNAME"},
+     {"node": "dataset", "ref": "NXprocess/program"},
+     {"node": "dataset", "ref": "NXprocess/sequence_index"},
+     {"node": "dataset", "ref": "NXprocess/version"},
+     {"node": "dataset", "ref": "NXprocess/date"},
+     {"class": "NXprogram", "declared_by": "NXapm_ranging", "id": "PROGRAM", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q11"], "recommended": false, "via": ["T1", "T2", "T4", "T7"]},
+     {"declared_by": "NXapm_ranging", "docs": ["NXapm_ranging/mass_to_charge_distribution/min_mass_to_charge"], "id": "min_mass_to_charge", "name": {"exact": "min_mass_to_charge"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_FLOAT", "units": {"category": "NX_ANY"}, "via": ["T1", "T4", "T7"]},
+     {"declared_by": "NXapm_ranging", "docs": ["NXapm_ranging/mass_to_charge_distribution/max_mass_to_charge"], "id": "max_mass_to_charge", "name": {"exact": "max_mass_to_charge"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_FLOAT", "units": {"category": "NX_ANY"}, "via": ["T1", "T4", "T7"]},
+     {"declared_by": "NXapm_ranging", "docs": ["NXapm_ranging/mass_to_charge_distribution/n_mass_to_charge"], "id": "n_mass_to_charge", "name": {"exact": "n_mass_to_charge"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_POSINT", "units": {"category": "NX_UNITLESS"}, "via": ["T1", "T4", "T7"]}
+   ],
+   "class": "NXprocess",
+   "declared_by": "NXapm_ranging",
+   "id": "NXapm_ranging/mass_to_charge_distribution",
+   "require": [],
+   "symbols": [],
+   "undeclared": {"attribute": "report", "dataset": "report", "group": "report"}
+  },
+  "NXapm_ranging/peak_identification": {
+   "attributes": [
+     {"ref": "NXobject@default"}
+   ],
+   "children": [
+     {"node": "group", "ref": "NXobject/COLLECTION"},
+     {"node": "group", "ref": "NXprocess/DATA"},
+     {"node": "group", "ref": "NXobject/LOG"},
+     {"node": "group", "ref": "NXprocess/NOTE"},
+     {"node": "group", "ref": "NXprocess/PARAMETERS"},
+     {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+     {"node": "dataset", "ref": "NXobject/identifierNAME"},
+     {"node": "dataset", "ref": "NXprocess/program"},
+     {"node": "dataset", "ref": "NXprocess/sequence_index"},
+     {"node": "dataset", "ref": "NXprocess/version"},
+     {"node": "dataset", "ref": "NXprocess/date"},
+     {"class": "NXprogram", "declared_by": "NXapm_ranging", "id": "PROGRAM", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q11"], "recommended": false, "via": ["T1", "T2", "T4", "T7"]},
+     {"declared_by": "NXapm_ranging", "docs": ["NXapm_ranging/peak_identification/number_of_ion_types"], "id": "number_of_ion_types", "name": {"exact": "number_of_ion_types"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_UINT", "units": {"category": "NX_UNITLESS"}, "via": ["T1", "T4", "T7"]},
+     {"declared_by": "NXapm_ranging", "docs": ["NXapm_ranging/peak_identification/maximum_number_of_atoms_per_molecular_ion"], "id": "maximum_number_of_atoms_per_molecular_ion", "name": {"exact": "maximum_number_of_atoms_per_molecular_ion"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_UINT", "units": {"category": "NX_UNITLESS"}, "via": ["T1", "T4", "T7"]},
+     {"class": "NXatom", "declared_by": "NXapm_ranging", "id": "ATOM", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q11"], "recommended": false, "via": ["T1", "T2", "T4", "T7"]}
+   ],
+   "class": "NXprocess",
+   "declared_by": "NXapm_ranging",
+   "id": "NXapm_ranging/peak_identification",
+   "require": [],
+   "symbols": [],
+   "undeclared": {"attribute": "report", "dataset": "report", "group": "report"}
+  },
+  "NXapm_ranging/peak_search_and_deconvolution": {
+   "attributes": [
+     {"ref": "NXobject@default"}
+   ],
+   "children": [
+     {"node": "group", "ref": "NXobject/COLLECTION"},
+     {"node": "group", "ref": "NXprocess/DATA"},
+     {"node": "group", "ref": "NXobject/LOG"},
+     {"node": "group", "ref": "NXprocess/NOTE"},
+     {"node": "group", "ref": "NXprocess/PARAMETERS"},
+     {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+     {"node": "dataset", "ref": "NXobject/identifierNAME"},
+     {"node": "dataset", "ref": "NXprocess/program"},
+     {"node": "dataset", "ref": "NXprocess/sequence_index"},
+     {"node": "dataset", "ref": "NXprocess/version"},
+     {"node": "dataset", "ref": "NXprocess/date"},
+     {"class": "NXprogram", "declared_by": "NXapm_ranging", "id": "PROGRAM", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q11"], "recommended": false, "via": ["T1", "T2", "T4", "T7"]},
+     {"class": "NXpeak", "declared_by": "NXapm_ranging", "id": "PEAK", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q11"], "recommended": false, "via": ["T1", "T2", "T4", "T7"]}
+   ],
+   "class": "NXprocess",
+   "declared_by": "NXapm_ranging",
+   "id": "NXapm_ranging/peak_search_and_deconvolution",
+   "require": [],
+   "symbols": [],
+   "undeclared": {"attribute": "report", "dataset": "report", "group": "report"}
+  }
+ }
+}

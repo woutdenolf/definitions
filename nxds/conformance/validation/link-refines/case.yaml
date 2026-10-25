@@ -1,0 +1,5 @@
+description: >
+  A link whose target path names `MONOCHROMATOR` reaches the object assigned to
+  `monochromator`, which refines it (§4.6, §9.8): no LINK. `/entry/data/wavelength`
+  points to the energy, not to the wavelength: LINK.
+capabilities: []

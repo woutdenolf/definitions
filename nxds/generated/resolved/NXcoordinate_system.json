@@ -1,0 +1,47 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/COLLECTION"},
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"node": "group", "ref": "NXobject/LOG"},
+    {"node": "group", "ref": "NXobject/NOTE"},
+    {"node": "group", "ref": "NXobject/PARAMETERS"},
+    {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+    {"node": "dataset", "ref": "NXobject/identifierNAME"},
+    {"declared_by": "NXcoordinate_system", "docs": ["NXcoordinate_system/origin"], "id": "origin", "name": {"exact": "origin"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXcoordinate_system", "docs": ["NXcoordinate_system/type"], "enum": {"open": true, "values": [{"value": "undefined"}, {"value": "cartesian"}]}, "id": "type", "name": {"exact": "type"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXcoordinate_system", "docs": ["NXcoordinate_system/x_alias"], "id": "x_alias", "name": {"exact": "x_alias"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXcoordinate_system", "docs": ["NXcoordinate_system/x_direction"], "id": "x_direction", "name": {"exact": "x_direction"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXcoordinate_system", "docs": ["NXcoordinate_system/x"], "id": "x", "name": {"exact": "x"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": [3]}, "type": "NX_NUMBER", "units": {"category": "NX_LENGTH"}, "via": ["T1", "T4", "T7", "T9"]},
+    {"declared_by": "NXcoordinate_system", "docs": ["NXcoordinate_system/y_alias"], "id": "y_alias", "name": {"exact": "y_alias"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXcoordinate_system", "docs": ["NXcoordinate_system/y_direction"], "id": "y_direction", "name": {"exact": "y_direction"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXcoordinate_system", "docs": ["NXcoordinate_system/y"], "id": "y", "name": {"exact": "y"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": [3]}, "type": "NX_NUMBER", "units": {"category": "NX_LENGTH"}, "via": ["T1", "T4", "T7", "T9"]},
+    {"declared_by": "NXcoordinate_system", "docs": ["NXcoordinate_system/z_alias"], "id": "z_alias", "name": {"exact": "z_alias"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXcoordinate_system", "docs": ["NXcoordinate_system/z_direction"], "id": "z_direction", "name": {"exact": "z_direction"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXcoordinate_system", "docs": ["NXcoordinate_system/z"], "id": "z", "name": {"exact": "z"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": [3]}, "type": "NX_NUMBER", "units": {"category": "NX_LENGTH"}, "via": ["T1", "T4", "T7", "T9"]},
+    {"declared_by": "NXcoordinate_system", "docs": ["NXcoordinate_system/depends_on"], "id": "depends_on", "name": {"exact": "depends_on"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4", "T7"]},
+    {"class": "NXtransformations", "declared_by": "NXcoordinate_system", "docs": ["NXcoordinate_system/TRANSFORMATIONS"], "id": "TRANSFORMATIONS", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q11"], "recommended": false, "via": ["T1", "T2", "T4", "T7"]}
+  ],
+  "class": "NXcoordinate_system",
+  "extends": "NXobject",
+  "lossy": [],
+  "provisional": [],
+  "require": [],
+  "source": "base_classes/NXcoordinate_system.nxdl.xml",
+  "status": "base",
+  "symbols": [],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"},
+  "via": []
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {}
+}

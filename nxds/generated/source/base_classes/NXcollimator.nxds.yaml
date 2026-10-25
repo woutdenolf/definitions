@@ -1,0 +1,99 @@
+nxds: '0.1'
+class: NXcollimator
+category: base
+extends: NXcomponent
+doc: A beamline collimator.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  GEOMETRY:
+    node: group
+    name: {any: true}
+    class: NXgeometry
+    deprecated: Use the field `depends_on` and :ref:`NXtransformations` to position the collimator
+      and NXoff_geometry to describe its shape instead
+    doc: position, shape and size
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  type:
+    node: dataset
+    enum: [Soller, radial, oscillating, honeycomb]
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  soller_angle:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_ANGLE}
+    doc: Angular divergence of Soller collimator
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  divergence_x:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_ANGLE}
+    doc: divergence of collimator in local x direction
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  divergence_y:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_ANGLE}
+    doc: divergence of collimator in local y direction
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  frequency:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_FREQUENCY}
+    doc: Frequency of oscillating collimator
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  frequency_log:
+    node: group
+    class: NXlog
+    doc: Log of frequency
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  blade_thickness:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    doc: blade thickness
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  blade_spacing:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    doc: blade spacing
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  absorbing_material:
+    node: dataset
+    doc: name of absorbing material
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  transmitting_material:
+    node: dataset
+    doc: name of transmitting material
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  OFF_GEOMETRY:
+    node: group
+    name: {any: true}
+    class: NXoff_geometry
+    occurs: {min: 0}
+    doc: This group describes the shape of the beam line component
+    via: [T1, T2, T6, T7]
+    provisional: [Q1, Q11]
+  depends_on:
+    node: dataset
+    type: NX_CHAR
+    doc: |-
+      Assuming a collimator with a "flat" entry surface, the reference plane is the plane which contains this surface. The reference
+      point of the collimator in the x and y axis is the centre of the collimator entry surface on that plane. The reference plane is orthogonal
+      to the z axis and the location of this plane is the reference point on the z axis. The collimator faces negative z values.
+
+      .. image:: collimator/collimator.png
+        :width: 40%
+    via: [T1, T4, T7]
+    provisional: [Q1]

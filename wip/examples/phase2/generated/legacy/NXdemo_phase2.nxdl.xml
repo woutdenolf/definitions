@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="NXdemo_phase2" extends="NXobject" type="group" category="application" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
+  <symbols>
+    <symbol name="nE">
+      <doc>
+        number of energies
+      </doc>
+    </symbol>
+  </symbols>
+  <doc>
+    Demo: absorption against energy.
+  </doc>
+  <group type="NXentry">
+    <field name="definition" type="NX_CHAR">
+      <enumeration>
+        <item value="NXdemo_phase2"/>
+      </enumeration>
+    </field>
+    <field name="title" minOccurs="0" recommended="true" type="NX_CHAR"/>
+    <group type="NXinstrument">
+      <group type="NXmonochromator" name="monochromator">
+        <field name="energy" type="NX_FLOAT" units="NX_ENERGY">
+          <dimensions rank="1">
+            <dim index="1" value="nE"/>
+          </dimensions>
+        </field>
+      </group>
+      <group type="NXdemo_counter_phase2" name="counter">
+        <field name="mode"/>
+        <field name="i0_counts">
+          <dimensions rank="1">
+            <dim index="1" value="nE"/>
+          </dimensions>
+        </field>
+      </group>
+    </group>
+    <group type="NXdata">
+      <attribute name="signal" type="NX_CHAR">
+        <enumeration>
+          <item value="mu"/>
+        </enumeration>
+      </attribute>
+      <field name="mu" type="NX_FLOAT">
+        <dimensions rank="1">
+          <dim index="1" value="nE"/>
+        </dimensions>
+      </field>
+      <link name="energy" target="/NXentry/NXinstrument/monochromator:NXmonochromator/energy"/>
+    </group>
+  </group>
+</definition>

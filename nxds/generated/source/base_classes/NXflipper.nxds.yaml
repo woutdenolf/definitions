@@ -1,0 +1,69 @@
+nxds: '0.1'
+class: NXflipper
+category: base
+extends: NXcomponent
+doc: A spin flipper.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  type:
+    node: dataset
+    enum: [coil, current-sheet]
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  flip_turns:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_PER_LENGTH}
+    doc: Linear density of turns (such as number of turns/cm) in flipping field coils
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  comp_turns:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_PER_LENGTH}
+    doc: Linear density of turns (such as number of turns/cm) in compensating field coils
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  guide_turns:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_PER_LENGTH}
+    doc: Linear density of turns (such as number of turns/cm) in guide field coils
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  flip_current:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_CURRENT}
+    doc: Flipping field coil current in "on" state"
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  comp_current:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_CURRENT}
+    doc: Compensating field coil current in "on" state"
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  guide_current:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_CURRENT}
+    doc: Guide field coil current in "on" state
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  thickness:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    doc: thickness along path of neutron travel
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  depends_on:
+    node: dataset
+    type: NX_CHAR
+    doc: |-
+      .. todo::
+      Add a definition for the reference point of a spin flipper.
+    via: [T1, T4, T7]
+    provisional: [Q1]

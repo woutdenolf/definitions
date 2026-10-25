@@ -1,0 +1,52 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/COLLECTION"},
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"node": "group", "ref": "NXobject/LOG"},
+    {"node": "group", "ref": "NXobject/NOTE"},
+    {"node": "group", "ref": "NXobject/PARAMETERS"},
+    {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+    {"node": "dataset", "ref": "NXobject/identifierNAME"},
+    {"node": "dataset", "ref": "NXcomponent/applied"},
+    {"node": "dataset", "ref": "NXcomponent/name"},
+    {"node": "dataset", "ref": "NXcomponent/description"},
+    {"node": "dataset", "ref": "NXcomponent/inputs"},
+    {"node": "dataset", "ref": "NXcomponent/outputs"},
+    {"node": "group", "ref": "NXcomponent/FABRICATION"},
+    {"node": "group", "ref": "NXcomponent/PROGRAM"},
+    {"node": "group", "ref": "NXcomponent/ENVIRONMENT"},
+    {"declared_by": "NXcomponent", "docs": ["NXcomponent/depends_on", "NXattenuator/depends_on"], "id": "depends_on", "name": {"exact": "depends_on"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "refined_by": ["NXattenuator"], "type": "NX_CHAR", "via": ["T1", "T4", "T7"]},
+    {"node": "group", "ref": "NXcomponent/TRANSFORMATIONS"},
+    {"declared_by": "NXattenuator", "docs": ["NXattenuator/distance"], "id": "distance", "name": {"exact": "distance"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_FLOAT", "units": {"category": "NX_LENGTH"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXattenuator", "docs": ["NXattenuator/type"], "id": "type", "name": {"exact": "type"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4", "T7"]},
+    {"declared_by": "NXattenuator", "docs": ["NXattenuator/thickness"], "id": "thickness", "name": {"exact": "thickness"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_FLOAT", "units": {"category": "NX_LENGTH"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXattenuator", "docs": ["NXattenuator/scattering_cross_section"], "id": "scattering_cross_section", "name": {"exact": "scattering_cross_section"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_FLOAT", "units": {"category": "NX_CROSS_SECTION"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXattenuator", "docs": ["NXattenuator/absorption_cross_section"], "id": "absorption_cross_section", "name": {"exact": "absorption_cross_section"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_FLOAT", "units": {"category": "NX_CROSS_SECTION"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXattenuator", "docs": ["NXattenuator/attenuator_transmission"], "id": "attenuator_transmission", "name": {"exact": "attenuator_transmission"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_FLOAT", "units": {"category": "NX_DIMENSIONLESS"}, "via": ["T1", "T4", "T7"]},
+    {"attributes": [{"declared_by": "NXattenuator", "docs": ["NXattenuator/status@time"], "id": "time", "name": {"exact": "time"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_DATE_TIME", "via": ["T1", "T4"]}], "declared_by": "NXattenuator", "docs": ["NXattenuator/status"], "enum": {"open": false, "values": [{"value": "in"}, {"value": "out"}, {"value": "moving"}]}, "id": "status", "name": {"exact": "status"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4", "T7"]},
+    {"class": "NXoff_geometry", "declared_by": "NXattenuator", "docs": ["NXattenuator/shape"], "id": "shape", "name": {"exact": "shape"}, "node": "group", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "via": ["T1", "T4", "T7"]}
+  ],
+  "class": "NXattenuator",
+  "extends": "NXcomponent",
+  "lossy": [],
+  "provisional": [],
+  "require": [],
+  "source": "base_classes/NXattenuator.nxdl.xml",
+  "status": "base",
+  "symbols": [],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"},
+  "via": []
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {}
+}

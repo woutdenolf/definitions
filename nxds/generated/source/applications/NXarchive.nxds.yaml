@@ -1,0 +1,263 @@
+nxds: '0.1'
+class: NXarchive
+category: application
+describes: NXroot
+doc: |-
+  This is a definition for data to be archived by ICAT (http://www.icatproject.org/).
+
+  .. text from the icatproject.org site
+
+          the database (with supporting software) that provides an
+          interface to all ISIS experimental data and will provide
+          a mechanism to link all aspects of ISIS research from
+          proposal through to publication.
+defaults: {min: 1, binding: true, type: NX_CHAR}
+children:
+  ENTRY:
+    node: group
+    name: {any: true}
+    class: NXentry
+    attributes:
+      index:
+        via: [T0, T1, T5]
+        provisional: [Q2]
+    children:
+      title:
+        node: dataset
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      experiment_identifier:
+        node: dataset
+        type: NX_CHAR
+        doc: unique identifier for the experiment
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      experiment_description:
+        node: dataset
+        type: NX_CHAR
+        doc: Brief description of the experiment and its objectives
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      collection_identifier:
+        node: dataset
+        type: NX_CHAR
+        doc: 'ID of user or DAQ define group of data files '
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      collection_description:
+        node: dataset
+        type: NX_CHAR
+        doc: 'Brief summary of the collection, including grouping criteria '
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      entry_identifier:
+        node: dataset
+        type: NX_CHAR
+        doc: unique identifier for this measurement as provided by the facility
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      start_time:
+        node: dataset
+        type: NX_DATE_TIME
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      end_time:
+        node: dataset
+        type: NX_DATE_TIME
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      duration:
+        node: dataset
+        type: NX_FLOAT
+        units: {category: NX_TIME}
+        doc: 'TODO: needs documentation'
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      collection_time:
+        node: dataset
+        type: NX_FLOAT
+        units: {category: NX_TIME}
+        doc: 'TODO: needs documentation'
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      run_cycle:
+        node: dataset
+        type: NX_CHAR
+        doc: 'TODO: needs documentation'
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      revision:
+        node: dataset
+        type: NX_CHAR
+        doc: revision ID of this file, may be after recalibration, reprocessing etc.
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      definition:
+        node: dataset
+        enum: [NXarchive]
+        doc: 'Official NeXus NXDL schema to which this file conforms '
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      program:
+        node: dataset
+        type: NX_CHAR
+        doc: The program and version used for generating this file
+        attributes:
+          version:
+            via: [T0, T1, T5]
+            provisional: [Q2]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      release_date:
+        node: dataset
+        type: NX_CHAR
+        units: {category: NX_TIME}
+        doc: when this file is to be released into PD
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      user:
+        node: group
+        class: NXuser
+        children:
+          name:
+            node: dataset
+            type: NX_CHAR
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          role:
+            node: dataset
+            type: NX_CHAR
+            doc: role of the user
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          facility_user_id:
+            node: dataset
+            type: NX_CHAR
+            doc: ID of the user in the facility bureaucracy database
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      instrument:
+        node: group
+        class: NXinstrument
+        children:
+          SOURCE:
+            node: group
+            name: {any: true}
+            class: NXsource
+            children:
+              type:
+                node: dataset
+                type: NX_CHAR
+                enum: [Spallation Neutron Source, Pulsed Reactor Neutron Source, Reactor Neutron
+                    Source, Synchrotron X-Ray Source, Pulsed Muon Source, Rotating Anode X-Ray,
+                  Fixed Tube X-Ray]
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              name:
+                node: dataset
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+              probe:
+                node: dataset
+                enum: [neutron, x-ray, electron]
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T2, T5, T7]
+            provisional: [Q1, Q2, Q11]
+          name:
+            node: dataset
+            type: NX_CHAR
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          description:
+            node: dataset
+            type: NX_CHAR
+            doc: Brief description of the instrument
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      sample:
+        node: group
+        class: NXsample
+        children:
+          name:
+            node: dataset
+            doc: Descriptive name of sample
+            via: [T0, T1, T5, T7]
+            provisional: [Q1, Q2]
+          sample_id:
+            node: dataset
+            type: NX_CHAR
+            doc: Unique database id of the sample
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          description:
+            node: dataset
+            type: NX_CHAR
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          type:
+            node: dataset
+            type: NX_CHAR
+            enum: [sample, sample+can, calibration sample, normalisation sample, simulated
+                data, none, sample_environment]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          chemical_formula:
+            node: dataset
+            type: NX_CHAR
+            doc: Chemical formula formatted according to CIF conventions
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          preparation_date:
+            node: dataset
+            type: NX_CHAR
+            units: {category: NX_TIME}
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          situation:
+            node: dataset
+            type: NX_CHAR
+            doc: |-
+              Description of the environment the sample is in:
+              air, vacuum, oxidizing atmosphere, dehydrated, etc.
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          temperature:
+            node: dataset
+            type: NX_FLOAT
+            units: {category: NX_TEMPERATURE}
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          magnetic_field:
+            node: dataset
+            type: NX_FLOAT
+            units: {category: NX_CURRENT}
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          electric_field:
+            node: dataset
+            type: NX_FLOAT
+            units: {category: NX_VOLTAGE}
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          stress_field:
+            node: dataset
+            type: NX_FLOAT
+            units: {category: NX_UNITLESS}
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          pressure:
+            node: dataset
+            type: NX_FLOAT
+            units: {category: NX_PRESSURE}
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+    via: [T1, T2, T5, T7]
+    provisional: [Q1, Q2, Q11]
+via: [T8]

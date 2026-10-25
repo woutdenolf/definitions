@@ -1,0 +1,110 @@
+nxds: '0.1'
+class: NXroot
+category: base
+extends: NXobject
+doc: |-
+  The root of a NeXus file.
+
+  In the NeXus standard, only NXentry groups are allowed at the
+  root level of a file, although it is permitted to include
+  additional groups and fields that are not part of the NeXus
+  standard and will not be validated by NeXus tools. NeXus defines
+  a number of root-level attributes that can be used to annotate
+  the NeXus tree.
+
+  Note that NXroot is the only base class that does not inherit
+  from the NXobject class, since the latter permits the inclusion
+  of NeXus objects that are not allowed at the root level.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+attributes:
+  file_time:
+    type: NX_DATE_TIME
+    doc: Date and time file was originally created
+    via: [T1, T4]
+  file_name:
+    doc: File name of original NeXus file
+    via: [T0, T1, T4]
+  file_update_time:
+    type: NX_DATE_TIME
+    doc: Date and time of last file change at close
+    via: [T1, T4]
+  NeXus_version:
+    deprecated: NAPI is frozen.
+    doc: |-
+      Version of NeXus API used in writing the file.
+
+      Note that this is different from the version of the
+      base class or application definition version number.
+    via: [T0, T1, T3b, T4]
+  NeXus_repository:
+    doc: |-
+      A repository containing the application definitions
+      used for creating this file.
+      If the ``NeXus_release`` attribute contains a commit distance and hash,
+      this should refer to this repository.
+    via: [T0, T1, T3b, T4]
+  NeXus_release:
+    doc: |-
+      The version of NeXus definitions used in writing the file. This can either be a date-based
+      NeXus release (e.g., YYYY.MM), see https://github.com/nexusformat/definitions/releases or
+      a version tag that includes additional development information, such as a commit distance and
+      a Git hash. This is typically formatted as  `vYYYY.MM.post1.dev<commit-distance>-g<git-hash>`,
+      where `YYYY.MM` refers to the base version of the NeXus definitions. `post1.dev<commit-distance>`
+      indicates that the definitions are based on a commit after the base version (post1), with
+      `<commit-distance>` being the number of commits since that version. `g<git-hash>` is the
+      abbreviated Git hash that identifies the specific commit of the definitions being used.
+
+      If the version includes both a commit distance and a Git hash, the ``NeXus_repository``
+      attribute must be included, specifying the URL of the repository containing that version.
+    via: [T0, T1, T3b, T4]
+  HDF_version:
+    doc: Version of HDF (version 4) library used in writing the file
+    via: [T0, T1, T3b, T4]
+  HDF5_Version:
+    doc: |-
+      Version of HDF5 library used in writing the file.
+
+      Note this attribute is spelled with uppercase "V",
+      different than other version attributes.
+    via: [T0, T1, T3b, T4]
+  XML_version:
+    doc: Version of XML support library used in writing the XML file
+    via: [T0, T1, T3b, T4]
+  h5py_version:
+    doc: Version of h5py Python package used in writing the file
+    via: [T0, T1, T4]
+  creator:
+    doc: facility or program where file originated
+    via: [T0, T1, T4]
+  creator_version:
+    doc: Version of facility or program used in writing the file
+    via: [T0, T1, T4]
+  default:
+    doc: |-
+      .. index:: find the default plottable data
+      .. index:: plotting
+      .. index:: default attribute value
+
+      Declares which :ref:`NXentry` group contains
+      the data to be shown by default.
+      It is used to resolve ambiguity when
+      more than one :ref:`NXentry` group exists.
+      The value :ref:`names <validItemName>` the default :ref:`NXentry` group.  The
+      value must be the name of a child of the current group. The child must be a
+      NeXus group or a link to a NeXus group.
+
+      It is recommended (as of NIAC2014) to use this attribute
+      to help define the path to the default dataset to be plotted.
+      See https://www.nexusformat.org/2014_How_to_find_default_data.html
+      for a summary of the discussion.
+    via: [T0, T1, T4]
+children:
+  ENTRY:
+    node: group
+    name: {any: true}
+    class: NXentry
+    occurs: {min: 1}
+    doc: entries
+    via: [T1, T2, T6, T7]
+    provisional: [Q1, Q11]
+via: [T8]

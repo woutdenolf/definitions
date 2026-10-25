@@ -1,0 +1,555 @@
+nxds: '0.1'
+class: NXdispersive_material
+category: application
+describes: NXroot
+doc: An application definition for describing a dispersive material.
+defaults: {min: 1, binding: true, type: NX_CHAR}
+children:
+  ENTRY:
+    node: group
+    name: {any: true}
+    class: NXentry
+    children:
+      definition:
+        node: dataset
+        enum: [NXdispersive_material]
+        attributes:
+          version:
+            doc: |-
+              Version number to identify which definition of this application definition was
+              used for this entry/data.
+            via: [T0, T1, T5]
+            provisional: [Q2]
+          URL:
+            doc: |-
+              URL where to find further material (documentation, examples) relevant to the
+              application definition
+            via: [T0, T1, T5]
+            provisional: [Q2]
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      sample:
+        node: group
+        class: NXsample
+        children:
+          chemical_formula:
+            node: dataset
+            type: NX_CHAR
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          atom_types:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_CHAR
+            doc: |-
+              List of comma-separated elements from the periodic table
+              that are contained in the sample.
+              If the sample substance has multiple components, all
+              elements from each component must be included in `atom_types`.
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          colloquial_name:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_CHAR
+            doc: The colloquial name of the material, e.g. graphite or diamond for carbon.
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          material_phase:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_CHAR
+            enum:
+              values:
+              - {value: gas}
+              - {value: liquid}
+              - {value: solid}
+              open: true
+            doc: The phase of the material
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          material_phase_comment:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_CHAR
+            doc: |-
+              Additional information about the phase if the
+              material phase is not from the enumerated list.
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          additional_phase_information:
+            node: dataset
+            occurs: {min: 0}
+            recommended: true
+            type: NX_CHAR
+            doc: |-
+              This field may be used to denote additional phase information,
+              such as crystalline phase of a crystal (e.g. 4H or 6H for SiC) or
+              if a measurement was done on a thin film or bulk material.
+            via: [T1, T6, T7]
+            provisional: [Q1]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      dispersion_type:
+        node: dataset
+        occurs: {min: 0}
+        recommended: true
+        type: NX_CHAR
+        enum: [measured, simulated]
+        doc: Denotes whether the dispersion is calculated or derived from an experiment
+        via: [T1, T6, T7]
+        provisional: [Q1]
+      REFERENCES:
+        node: group
+        name: {any: true}
+        class: NXcite
+        occurs: {min: 0}
+        recommended: true
+        children:
+          text:
+            node: dataset
+            doc: |-
+              A text description of this reference, e.g.
+              `E. Example et al, The mighty example, An example journal 50 (2023), 100`
+            via: [T0, T1, T5, T7]
+            provisional: [Q1, Q2]
+          doi:
+            node: dataset
+            via: [T0, T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T3, T6, T7]
+        provisional: [Q1, Q3]
+      dispersion_x:
+        node: group
+        class: NXdispersion
+        doc: |-
+          The dispersion along the optical axis of the material.
+          This should be the only dispersion available for isotropic materials.
+          For uniaxial materials this denotes the ordinary axis.
+          For biaxial materials this denotes the x axis or epsilon 11 tensor element
+          of the diagonalized permittivity tensor.
+        children:
+          model_name:
+            node: dataset
+            type: NX_CHAR
+            doc: The name of this dispersion model.
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          DISPERSION_TABLE:
+            node: group
+            name: {any: true}
+            class: NXdispersion_table
+            occurs: {min: 0}
+            recommended: true
+            children:
+              model_name:
+                node: dataset
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+              convention:
+                node: dataset
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+              wavelength:
+                node: dataset
+                type: NX_NUMBER
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              dielectric_function:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                type: NX_COMPLEX
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              refractive_index:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                type: NX_COMPLEX
+                via: [T1, T6, T7]
+                provisional: [Q1]
+            via: [T1, T2, T6, T7]
+            provisional: [Q1, Q11]
+          DISPERSION_FUNCTION:
+            node: group
+            name: {any: true}
+            class: NXdispersion_function
+            occurs: {min: 0}
+            recommended: true
+            children:
+              model_name:
+                node: dataset
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+              formula:
+                node: dataset
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+              convention:
+                node: dataset
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+              energy_identifier:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                via: [T0, T1, T6, T7]
+                provisional: [Q1]
+              energy_unit:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                type: NX_NUMBER
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              wavelength_identifier:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                via: [T0, T1, T6, T7]
+                provisional: [Q1]
+              wavelength_unit:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                type: NX_NUMBER
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              representation:
+                node: dataset
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+              DISPERSION_SINGLE_PARAMETER:
+                node: group
+                name: {any: true}
+                class: NXdispersion_single_parameter
+                children:
+                  name:
+                    node: dataset
+                    via: [T0, T1, T5, T7]
+                    provisional: [Q1, Q2]
+                  value:
+                    node: dataset
+                    type: NX_NUMBER
+                    via: [T1, T5, T7]
+                    provisional: [Q1, Q2]
+                via: [T1, T2, T5, T7]
+                provisional: [Q1, Q2, Q11]
+              DISPERSION_REPEATED_PARAMETER:
+                node: group
+                name: {any: true}
+                class: NXdispersion_repeated_parameter
+                children:
+                  name:
+                    node: dataset
+                    via: [T0, T1, T5, T7]
+                    provisional: [Q1, Q2]
+                  values:
+                    node: dataset
+                    type: NX_NUMBER
+                    via: [T1, T5, T7]
+                    provisional: [Q1, Q2]
+                via: [T1, T2, T5, T7]
+                provisional: [Q1, Q2, Q11]
+            via: [T1, T2, T6, T7]
+            provisional: [Q1, Q11]
+          plot:
+            node: group
+            class: NXdata
+            occurs: {min: 0}
+            recommended: true
+            via: [T1, T6, T7]
+            provisional: [Q1]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      dispersion_y:
+        node: group
+        class: NXdispersion
+        occurs: {min: 0}
+        doc: |-
+          This should only be filled for biaxial materials.
+          It denotes the epsilon 22 direction of the diagonalized
+          permittivity tensor.
+        children:
+          model_name:
+            node: dataset
+            type: NX_CHAR
+            doc: The name of this dispersion model.
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          DISPERSION_TABLE:
+            node: group
+            name: {any: true}
+            class: NXdispersion_table
+            occurs: {min: 0}
+            recommended: true
+            children:
+              model_name:
+                node: dataset
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+              convention:
+                node: dataset
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+              wavelength:
+                node: dataset
+                type: NX_NUMBER
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              dielectric_function:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                type: NX_COMPLEX
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              refractive_index:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                type: NX_COMPLEX
+                via: [T1, T6, T7]
+                provisional: [Q1]
+            via: [T1, T2, T6, T7]
+            provisional: [Q1, Q11]
+          DISPERSION_FUNCTION:
+            node: group
+            name: {any: true}
+            class: NXdispersion_function
+            occurs: {min: 0}
+            recommended: true
+            children:
+              model_name:
+                node: dataset
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+              formula:
+                node: dataset
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+              convention:
+                node: dataset
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+              energy_identifier:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                via: [T0, T1, T6, T7]
+                provisional: [Q1]
+              energy_unit:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                type: NX_NUMBER
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              wavelength_identifier:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                via: [T0, T1, T6, T7]
+                provisional: [Q1]
+              wavelength_unit:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                type: NX_NUMBER
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              representation:
+                node: dataset
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+              DISPERSION_SINGLE_PARAMETER:
+                node: group
+                name: {any: true}
+                class: NXdispersion_single_parameter
+                children:
+                  name:
+                    node: dataset
+                    via: [T0, T1, T5, T7]
+                    provisional: [Q1, Q2]
+                  value:
+                    node: dataset
+                    type: NX_NUMBER
+                    via: [T1, T5, T7]
+                    provisional: [Q1, Q2]
+                via: [T1, T2, T5, T7]
+                provisional: [Q1, Q2, Q11]
+              DISPERSION_REPEATED_PARAMETER:
+                node: group
+                name: {any: true}
+                class: NXdispersion_repeated_parameter
+                children:
+                  name:
+                    node: dataset
+                    via: [T0, T1, T5, T7]
+                    provisional: [Q1, Q2]
+                  values:
+                    node: dataset
+                    type: NX_NUMBER
+                    via: [T1, T5, T7]
+                    provisional: [Q1, Q2]
+                via: [T1, T2, T5, T7]
+                provisional: [Q1, Q2, Q11]
+            via: [T1, T2, T6, T7]
+            provisional: [Q1, Q11]
+          plot:
+            node: group
+            class: NXdata
+            occurs: {min: 0}
+            recommended: true
+            via: [T1, T6, T7]
+            provisional: [Q1]
+        via: [T1, T6, T7]
+        provisional: [Q1]
+      dispersion_z:
+        node: group
+        class: NXdispersion
+        occurs: {min: 0}
+        doc: |-
+          This should only be filled for uniaxial or biaxial materials.
+          For uniaxial materials this denotes the extraordinary axis.
+          For biaxial materials this denotes the epsilon 33 tensor element
+          of the diagonalized permittivity tensor.
+        children:
+          model_name:
+            node: dataset
+            type: NX_CHAR
+            doc: The name of this dispersion model.
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          DISPERSION_TABLE:
+            node: group
+            name: {any: true}
+            class: NXdispersion_table
+            occurs: {min: 0}
+            recommended: true
+            children:
+              model_name:
+                node: dataset
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+              convention:
+                node: dataset
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+              wavelength:
+                node: dataset
+                type: NX_NUMBER
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              dielectric_function:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                type: NX_COMPLEX
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              refractive_index:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                type: NX_COMPLEX
+                via: [T1, T6, T7]
+                provisional: [Q1]
+            via: [T1, T2, T6, T7]
+            provisional: [Q1, Q11]
+          DISPERSION_FUNCTION:
+            node: group
+            name: {any: true}
+            class: NXdispersion_function
+            occurs: {min: 0}
+            recommended: true
+            children:
+              model_name:
+                node: dataset
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+              formula:
+                node: dataset
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+              convention:
+                node: dataset
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+              energy_identifier:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                via: [T0, T1, T6, T7]
+                provisional: [Q1]
+              energy_unit:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                type: NX_NUMBER
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              wavelength_identifier:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                via: [T0, T1, T6, T7]
+                provisional: [Q1]
+              wavelength_unit:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                type: NX_NUMBER
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              representation:
+                node: dataset
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+              DISPERSION_SINGLE_PARAMETER:
+                node: group
+                name: {any: true}
+                class: NXdispersion_single_parameter
+                children:
+                  name:
+                    node: dataset
+                    via: [T0, T1, T5, T7]
+                    provisional: [Q1, Q2]
+                  value:
+                    node: dataset
+                    type: NX_NUMBER
+                    via: [T1, T5, T7]
+                    provisional: [Q1, Q2]
+                via: [T1, T2, T5, T7]
+                provisional: [Q1, Q2, Q11]
+              DISPERSION_REPEATED_PARAMETER:
+                node: group
+                name: {any: true}
+                class: NXdispersion_repeated_parameter
+                children:
+                  name:
+                    node: dataset
+                    via: [T0, T1, T5, T7]
+                    provisional: [Q1, Q2]
+                  values:
+                    node: dataset
+                    type: NX_NUMBER
+                    via: [T1, T5, T7]
+                    provisional: [Q1, Q2]
+                via: [T1, T2, T5, T7]
+                provisional: [Q1, Q2, Q11]
+            via: [T1, T2, T6, T7]
+            provisional: [Q1, Q11]
+          plot:
+            node: group
+            class: NXdata
+            occurs: {min: 0}
+            recommended: true
+            via: [T1, T6, T7]
+            provisional: [Q1]
+        via: [T1, T6, T7]
+        provisional: [Q1]
+    via: [T1, T2, T5, T7]
+    provisional: [Q1, Q2, Q11]
+via: [T8]

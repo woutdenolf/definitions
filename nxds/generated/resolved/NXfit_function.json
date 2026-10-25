@@ -1,0 +1,65 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/COLLECTION"},
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"node": "group", "ref": "NXobject/LOG"},
+    {"node": "group", "ref": "NXobject/NOTE"},
+    {"node": "group", "ref": "NXobject/PARAMETERS"},
+    {"class": "NXparameters", "declared_by": "NXfit_function", "id": "fit_parameters", "name": {"exact": "fit_parameters"}, "node": "group", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q4", "Q11"], "recommended": false, "refines": "PARAMETERS", "specialisation": "NXfit_function/fit_parameters", "via": ["T1", "T2", "T4", "T6", "T7", "T18"]},
+    {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+    {"node": "dataset", "ref": "NXobject/identifierNAME"},
+    {"declared_by": "NXfit_function", "docs": ["NXfit_function/function_type"], "id": "function_type", "name": {"exact": "function_type"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4", "T7"]},
+    {"declared_by": "NXfit_function", "docs": ["NXfit_function/description"], "id": "description", "name": {"exact": "description"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4", "T7"]},
+    {"declared_by": "NXfit_function", "docs": ["NXfit_function/formula_description"], "id": "formula_description", "name": {"exact": "formula_description"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4", "T7"]}
+  ],
+  "class": "NXfit_function",
+  "extends": "NXobject",
+  "lossy": [],
+  "provisional": [],
+  "require": [],
+  "source": "base_classes/NXfit_function.nxdl.xml",
+  "status": "base",
+  "symbols": [],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"},
+  "via": []
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {
+  "NXfit_function/fit_parameters": {
+   "attributes": [
+     {"ref": "NXobject@default"},
+     {"ref": "NXparameters@model"}
+   ],
+   "children": [
+     {"node": "group", "ref": "NXobject/COLLECTION"},
+     {"node": "group", "ref": "NXobject/DATA"},
+     {"node": "group", "ref": "NXobject/LOG"},
+     {"node": "group", "ref": "NXobject/NOTE"},
+     {"node": "group", "ref": "NXobject/PARAMETERS"},
+     {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+     {"node": "dataset", "ref": "NXobject/identifierNAME"},
+     {"attributes": [{"declared_by": "NXparameters", "id": "units", "name": {"exact": "units"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4"]}, {"declared_by": "NXparameters", "docs": ["NXparameters/PARAMETER@error"], "id": "error", "name": {"exact": "error"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "via": ["T1", "T4"]}, {"declared_by": "NXparameters", "docs": ["NXparameters/PARAMETER@description", "NXfit_function/fit_parameters/PARAMETER@description"], "id": "description", "name": {"exact": "description"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "refined_by": ["NXfit_function"], "type": "NX_CHAR", "via": ["T0", "T1", "T4"]}, {"declared_by": "NXparameters", "docs": ["NXparameters/PARAMETER@expression"], "id": "expression", "name": {"exact": "expression"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4"]}, {"declared_by": "NXparameters", "docs": ["NXparameters/PARAMETER@initial"], "id": "initial", "name": {"exact": "initial"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "via": ["T1", "T4"]}, {"declared_by": "NXparameters", "docs": ["NXparameters/PARAMETER@max"], "id": "max", "name": {"exact": "max"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "via": ["T1", "T4"]}, {"declared_by": "NXparameters", "docs": ["NXparameters/PARAMETER@min"], "id": "min", "name": {"exact": "min"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "via": ["T1", "T4"]}, {"declared_by": "NXparameters", "docs": ["NXparameters/PARAMETER@vary"], "id": "vary", "name": {"exact": "vary"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_BOOLEAN", "via": ["T1", "T4"]}], "declared_by": "NXparameters", "docs": ["NXparameters/PARAMETER", "NXfit_function/fit_parameters/PARAMETER"], "id": "PARAMETER", "name": {"any": true}, "node": "dataset", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q3"], "recommended": false, "refined_by": ["NXfit_function"], "type": "NX_CHAR_OR_NUMBER", "units": {"category": "NX_ANY"}, "via": ["T1", "T3", "T4", "T7"]}
+   ],
+   "class": "NXparameters",
+   "declared_by": "NXfit_function",
+   "id": "NXfit_function/fit_parameters",
+   "require": [],
+   "symbols": [],
+   "undeclared": {"attribute": "report", "dataset": "report", "group": "report"}
+  }
+ }
+}

@@ -1,0 +1,73 @@
+nxds: '0.1'
+class: NXparameters
+category: base
+extends: NXobject
+doc: |-
+  Container for parameters used in processing or analysing data.
+
+  Typically, this group is stored in a :ref:`NXprocess` group in
+  order to contain parameters that are either inputs to or
+  resulting from the process defined by the parent group. However,
+  this base class can also be added to other groups for use in
+  other contexts.
+
+  Although this base class can be used to store any kind of
+  parameter, one possible use case is to store parameters that are
+  refined by a fitting function or model. A number of attributes
+  have been defined to store metadata associated with such a
+  refinement.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+attributes:
+  model:
+    doc: |-
+      The name of the model used in optimizing the parameter
+      values. Fitting packages such as LMFIT
+      (https://lmfit.github.io/lmfit-py/) provide models, which
+      instantiate functions to be fitted to the data. If this
+      attribute is provided, it is assumed that all the parameters
+      in this group are associated with this model.
+    via: [T0, T1, T4]
+children:
+  PARAMETER:
+    node: dataset
+    name: {any: true}
+    type: NX_CHAR_OR_NUMBER
+    doc: 'A parameter that is used in or results from processing. '
+    attributes:
+      units:
+        via: [T0, T1, T4]
+      error:
+        type: NX_NUMBER
+        doc: |-
+          The standard deviation of the parameter after optimizing
+          its value.
+        via: [T1, T4]
+      description:
+        doc: A description of what this parameter represents.
+        via: [T0, T1, T4]
+      expression:
+        doc: |-
+          A string representing an expression that can be used to
+          relate the parameter to another parameter's value. The
+          format of this string is dependent on the program used
+          to optimize the parameters and is not specified by
+          NeXus.
+        via: [T0, T1, T4]
+      initial:
+        type: NX_NUMBER
+        doc: The initial value of the parameter used in optimization.
+        via: [T1, T4]
+      max:
+        type: NX_NUMBER
+        doc: The upper bound of the parameter used in optimization.
+        via: [T1, T4]
+      min:
+        type: NX_NUMBER
+        doc: The lower bound of the parameter used in optimization.
+        via: [T1, T4]
+      vary:
+        type: NX_BOOLEAN
+        doc: True if the parameter was varied during optimization.
+        via: [T1, T4]
+    via: [T1, T3, T4, T7]
+    provisional: [Q1, Q3]

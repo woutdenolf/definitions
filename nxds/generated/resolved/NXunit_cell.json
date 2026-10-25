@@ -1,0 +1,53 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/COLLECTION"},
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"node": "group", "ref": "NXobject/LOG"},
+    {"node": "group", "ref": "NXobject/NOTE"},
+    {"node": "group", "ref": "NXobject/PARAMETERS"},
+    {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+    {"node": "dataset", "ref": "NXobject/identifierNAME"},
+    {"declared_by": "NXunit_cell", "docs": ["NXunit_cell/reference_frame"], "id": "reference_frame", "name": {"exact": "reference_frame"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXunit_cell", "docs": ["NXunit_cell/dimensionality"], "enum": {"open": false, "values": [{"value": 1}, {"value": 2}, {"value": 3}]}, "id": "dimensionality", "name": {"exact": "dimensionality"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_POSINT", "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXunit_cell", "docs": ["NXunit_cell/a_b_c"], "id": "a_b_c", "name": {"exact": "a_b_c"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["d"], "symbols": {"d": "NXunit_cell"}}, "type": "NX_NUMBER", "units": {"category": "NX_LENGTH"}, "via": ["T1", "T4", "T7", "T9"]},
+    {"declared_by": "NXunit_cell", "docs": ["NXunit_cell/a"], "id": "a", "name": {"exact": "a"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_LENGTH"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXunit_cell", "docs": ["NXunit_cell/b"], "id": "b", "name": {"exact": "b"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_LENGTH"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXunit_cell", "docs": ["NXunit_cell/c"], "id": "c", "name": {"exact": "c"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_LENGTH"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXunit_cell", "docs": ["NXunit_cell/alpha_beta_gamma"], "id": "alpha_beta_gamma", "name": {"exact": "alpha_beta_gamma"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["d"], "symbols": {"d": "NXunit_cell"}}, "type": "NX_NUMBER", "units": {"category": "NX_ANGLE"}, "via": ["T1", "T4", "T7", "T9"]},
+    {"declared_by": "NXunit_cell", "docs": ["NXunit_cell/alpha"], "id": "alpha", "name": {"exact": "alpha"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_ANGLE"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXunit_cell", "docs": ["NXunit_cell/beta"], "id": "beta", "name": {"exact": "beta"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_ANGLE"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXunit_cell", "docs": ["NXunit_cell/gamma"], "id": "gamma", "name": {"exact": "gamma"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_ANGLE"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXunit_cell", "docs": ["NXunit_cell/crystal_system"], "enum": {"open": false, "values": [{"value": "triclinic"}, {"value": "monoclinic"}, {"value": "orthorhombic"}, {"value": "tetragonal"}, {"value": "rhombohedral"}, {"value": "hexagonal"}, {"value": "cubic"}]}, "id": "crystal_system", "name": {"exact": "crystal_system"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXunit_cell", "docs": ["NXunit_cell/laue_group"], "id": "laue_group", "name": {"exact": "laue_group"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXunit_cell", "docs": ["NXunit_cell/point_group"], "id": "point_group", "name": {"exact": "point_group"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXunit_cell", "docs": ["NXunit_cell/space_group"], "id": "space_group", "name": {"exact": "space_group"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXunit_cell", "docs": ["NXunit_cell/is_centrosymmetric"], "id": "is_centrosymmetric", "name": {"exact": "is_centrosymmetric"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_BOOLEAN", "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXunit_cell", "docs": ["NXunit_cell/is_chiral"], "id": "is_chiral", "name": {"exact": "is_chiral"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_BOOLEAN", "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXunit_cell", "docs": ["NXunit_cell/area"], "id": "area", "name": {"exact": "area"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_AREA"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXunit_cell", "docs": ["NXunit_cell/volume"], "id": "volume", "name": {"exact": "volume"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_VOLUME"}, "via": ["T1", "T4", "T7"]},
+    {"class": "NXatom", "declared_by": "NXunit_cell", "id": "ATOM", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q11"], "recommended": false, "via": ["T1", "T2", "T4", "T7"]}
+  ],
+  "class": "NXunit_cell",
+  "extends": "NXobject",
+  "lossy": [],
+  "provisional": [],
+  "require": [],
+  "source": "base_classes/NXunit_cell.nxdl.xml",
+  "status": "base",
+  "symbols": ["d"],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"},
+  "via": []
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {}
+}

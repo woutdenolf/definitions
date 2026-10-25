@@ -1,0 +1,48 @@
+nxds: '0.1'
+class: NXactivity
+category: base
+extends: NXobject
+doc: |-
+  A planned or unplanned action that has a temporal extension and for some time depends on some entity.
+
+  This class is a super class for all other activities.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  start_time:
+    node: dataset
+    type: NX_DATE_TIME
+    doc: Start time of this activity. It is recommended to include local time zone information.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  end_time:
+    node: dataset
+    type: NX_DATE_TIME
+    doc: End time of this activity. It is recommended to include local time zone information.
+    attributes:
+      estimated:
+        type: NX_BOOLEAN
+        doc: |-
+          In some cases, the end time of an activity can only be estimated. In this case,
+          this attribute shall be True.
+        via: [T1, T4]
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  description:
+    node: dataset
+    doc: Short description of the activity.
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  NOTE:
+    node: group
+    name: {any: true}
+    class: NXnote
+    doc: |-
+      This can be any data or other descriptor acquired during the activity
+      (NXnote allows to add pictures, audio, movies). Alternatively, a
+      reference to the location or a unique identifier or other metadata file. In the
+      case these are not available, free-text description.
+
+      Any number of instances of :ref:`NXnote` are allowed for describing extra details of
+      this activity.
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]

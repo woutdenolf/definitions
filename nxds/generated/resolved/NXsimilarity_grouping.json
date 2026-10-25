@@ -1,0 +1,75 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/COLLECTION"},
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"node": "group", "ref": "NXobject/LOG"},
+    {"node": "group", "ref": "NXobject/NOTE"},
+    {"node": "group", "ref": "NXobject/PARAMETERS"},
+    {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+    {"node": "dataset", "ref": "NXobject/identifierNAME"},
+    {"declared_by": "NXsimilarity_grouping", "docs": ["NXsimilarity_grouping/cardinality"], "id": "cardinality", "name": {"exact": "cardinality"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_POSINT", "units": {"category": "NX_UNITLESS"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXsimilarity_grouping", "docs": ["NXsimilarity_grouping/number_of_numeric_labels"], "id": "number_of_numeric_labels", "name": {"exact": "number_of_numeric_labels"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_UINT", "units": {"category": "NX_UNITLESS"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXsimilarity_grouping", "docs": ["NXsimilarity_grouping/number_of_categorical_labels"], "id": "number_of_categorical_labels", "name": {"exact": "number_of_categorical_labels"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_UINT", "units": {"category": "NX_UNITLESS"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXsimilarity_grouping", "docs": ["NXsimilarity_grouping/index_offset"], "id": "index_offset", "name": {"exact": "index_offset"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_INT", "units": {"category": "NX_UNITLESS"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXsimilarity_grouping", "docs": ["NXsimilarity_grouping/numerical_label"], "id": "numerical_label", "name": {"exact": "numerical_label"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["c", "n_lbl_num"], "symbols": {"c": "NXsimilarity_grouping", "n_lbl_num": "NXsimilarity_grouping"}}, "type": "NX_INT", "units": {"category": "NX_UNITLESS"}, "via": ["T1", "T4", "T7", "T9"]},
+    {"declared_by": "NXsimilarity_grouping", "docs": ["NXsimilarity_grouping/categorical_label"], "id": "categorical_label", "name": {"exact": "categorical_label"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["c", "n_lbl_cat"], "symbols": {"c": "NXsimilarity_grouping", "n_lbl_cat": "NXsimilarity_grouping"}}, "type": "NX_CHAR", "via": ["T1", "T4", "T7", "T9"]},
+    {"class": "NXprocess", "declared_by": "NXsimilarity_grouping", "docs": ["NXsimilarity_grouping/statistics"], "id": "statistics", "name": {"exact": "statistics"}, "node": "group", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "specialisation": "NXsimilarity_grouping/statistics", "via": ["T1", "T4", "T7"]}
+  ],
+  "class": "NXsimilarity_grouping",
+  "extends": "NXobject",
+  "lossy": [],
+  "provisional": [],
+  "require": [],
+  "source": "contributed_definitions/NXsimilarity_grouping.nxdl.xml",
+  "status": "contributed",
+  "symbols": ["c", "n_features", "n_lbl_cat", "n_lbl_num"],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"},
+  "via": []
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {
+  "NXsimilarity_grouping/statistics": {
+   "attributes": [
+     {"ref": "NXobject@default"}
+   ],
+   "children": [
+     {"node": "group", "ref": "NXobject/COLLECTION"},
+     {"node": "group", "ref": "NXprocess/DATA"},
+     {"node": "group", "ref": "NXobject/LOG"},
+     {"node": "group", "ref": "NXprocess/NOTE"},
+     {"node": "group", "ref": "NXprocess/PARAMETERS"},
+     {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+     {"node": "dataset", "ref": "NXobject/identifierNAME"},
+     {"node": "dataset", "ref": "NXprocess/program"},
+     {"node": "dataset", "ref": "NXprocess/sequence_index"},
+     {"node": "dataset", "ref": "NXprocess/version"},
+     {"node": "dataset", "ref": "NXprocess/date"},
+     {"declared_by": "NXsimilarity_grouping", "docs": ["NXsimilarity_grouping/statistics/unassigned"], "id": "unassigned", "name": {"exact": "unassigned"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_UINT", "units": {"category": "NX_UNITLESS"}, "via": ["T1", "T4", "T7"]},
+     {"declared_by": "NXsimilarity_grouping", "docs": ["NXsimilarity_grouping/statistics/noise"], "id": "noise", "name": {"exact": "noise"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_UINT", "units": {"category": "NX_UNITLESS"}, "via": ["T1", "T4", "T7"]},
+     {"declared_by": "NXsimilarity_grouping", "docs": ["NXsimilarity_grouping/statistics/total"], "id": "total", "name": {"exact": "total"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_UINT", "units": {"category": "NX_UNITLESS"}, "via": ["T1", "T4", "T7"]},
+     {"declared_by": "NXsimilarity_grouping", "docs": ["NXsimilarity_grouping/statistics/indices_cluster"], "id": "indices_cluster", "name": {"exact": "indices_cluster"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["n_features"], "symbols": {"n_features": "NXsimilarity_grouping"}}, "type": "NX_INT", "units": {"category": "NX_UNITLESS"}, "via": ["T1", "T4", "T7", "T9"]},
+     {"declared_by": "NXsimilarity_grouping", "docs": ["NXsimilarity_grouping/statistics/member_count"], "id": "member_count", "name": {"exact": "member_count"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["n_features", "n_lbl_num"], "symbols": {"n_features": "NXsimilarity_grouping", "n_lbl_num": "NXsimilarity_grouping"}}, "type": "NX_UINT", "units": {"category": "NX_UNITLESS"}, "via": ["T1", "T4", "T7", "T9"]}
+   ],
+   "class": "NXprocess",
+   "declared_by": "NXsimilarity_grouping",
+   "id": "NXsimilarity_grouping/statistics",
+   "require": [],
+   "symbols": [],
+   "undeclared": {"attribute": "report", "dataset": "report", "group": "report"}
+  }
+ }
+}

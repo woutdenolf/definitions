@@ -1,0 +1,77 @@
+nxds: '0.1'
+class: NXcg_polyhedron
+category: base
+extends: NXcg_primitive
+doc: |-
+  Computational geometry description of a set of polyhedra in Euclidean space.
+
+  Polyhedra or so-called cells (especially in the convex of tessellations) are
+  constructed from polygon meshes. Polyhedra may make contact to allow a usage
+  of this base class for a description of tessellations.
+
+  For the description of more complicated manifolds and especially for polyhedra
+  with holes, users are advised to check if their particular needs are described
+  by creating customized instances of an :ref:`NXcg_polygon`.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+symbols:
+  c:
+    doc: The cardinality of the set, i.e. the number of polyhedra.
+  n_e_total:
+    doc: The total number of edges for all polyhedra.
+  n_f_total:
+    doc: The total number of faces for all polyhedra.
+children:
+  number_of_faces:
+    node: dataset
+    type: NX_UINT
+    shape: [c]
+    units: {category: NX_UNITLESS}
+    doc: |-
+      The number of faces for each polyhedron. Faces of adjoining polyhedra
+      are counted for each polyhedron.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  face_area:
+    node: dataset
+    type: NX_NUMBER
+    shape: [n_f_total]
+    units: {category: NX_AREA}
+    doc: Area of each of faces.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  number_of_edges:
+    node: dataset
+    type: NX_UINT
+    doc: |-
+      The number of edges for each polyhedron. Edges of adjoining polyhedra
+      are counted for each polyhedron.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  edge_length:
+    node: dataset
+    type: NX_NUMBER
+    shape: [n_e_total]
+    units: {category: NX_LENGTH}
+    doc: Length of each edge.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  polyhedra:
+    node: group
+    class: NXcg_face_list_data_structure
+    doc: Combined storage of all primitives of all polyhedra.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  polyhedronID:
+    node: group
+    name: {template: 'polyhedron{ID}'}
+    class: NXcg_face_list_data_structure
+    doc: Individual storage of each polyhedron.
+    via: [T1, T3, T4, T7]
+    provisional: [Q1, Q3]
+  polyhedron_half_edgeID:
+    node: group
+    name: {template: 'polyhedron_half_edge{ID}'}
+    class: NXcg_half_edge_data_structure
+    doc: Individual storage of each polygon as a graph.
+    via: [T1, T3, T4, T7]
+    provisional: [Q1, Q3]

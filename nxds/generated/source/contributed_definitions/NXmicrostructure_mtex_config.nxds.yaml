@@ -1,0 +1,349 @@
+nxds: '0.1'
+class: NXmicrostructure_mtex_config
+category: base
+extends: NXparameters
+doc: |-
+  Base class to store the configuration when using the MTex/Matlab software.
+
+  MTex is a Matlab package for texture analysis used in the Materials and Earth Sciences.
+  See `R. Hielscher et al. <https://mtex-toolbox.github.io/publications>`_ and
+  the `MTex source code <https://github.com/mtex-toolbox>`_ for details.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+symbols:
+  n_def_color_map:
+    doc: Number of entries in the default color map
+  n_color_map: {doc: Number of entries in color map}
+children:
+  conventions:
+    node: group
+    class: NXcollection
+    doc: |-
+      MTex reference frame and orientation conventions.
+      Consult the `MTex docs <https://mtex-toolbox.github.io/EBSDReferenceFrame.html>`_ for details.
+    children:
+      x_axis_direction:
+        node: dataset
+        type: NX_CHAR
+        doc: TODO with MTex developers
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      z_axis_direction:
+        node: dataset
+        type: NX_CHAR
+        doc: TODO with MTex developers
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      a_axis_direction:
+        node: dataset
+        type: NX_CHAR
+        doc: TODO with MTex developers
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      b_axis_direction:
+        node: dataset
+        type: NX_CHAR
+        doc: TODO with MTex developers
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      euler_angle:
+        node: dataset
+        type: NX_CHAR
+        enum: [unknown, undefined, bunge]
+        doc: TODO with MTex developers
+        via: [T1, T4, T7]
+        provisional: [Q1]
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  plotting:
+    node: group
+    class: NXcollection
+    doc: Settings relevant for generating plots.
+    children:
+      font_size:
+        node: dataset
+        type: NX_NUMBER
+        units: {category: NX_ANY}
+        doc: TODO with MTex developers
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      inner_plot_spacing:
+        node: dataset
+        type: NX_NUMBER
+        units: {category: NX_ANY}
+        doc: TODO with MTex developers
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      outer_plot_spacing:
+        node: dataset
+        type: NX_NUMBER
+        units: {category: NX_ANY}
+        doc: TODO with MTex developers
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      marker_size:
+        node: dataset
+        type: NX_NUMBER
+        units: {category: NX_ANY}
+        doc: TODO with MTex developers
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      figure_size:
+        node: dataset
+        type: NX_NUMBER
+        doc: TODO with MTex developers
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      show_micron_bar:
+        node: dataset
+        type: NX_BOOLEAN
+        doc: True, if MTex renders a scale bar with figures.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      show_coordinates:
+        node: dataset
+        type: NX_BOOLEAN
+        doc: True, if MTex renders a grid with figures.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      pf_anno_fun_hdl:
+        node: dataset
+        doc: Code for the function handle used for annotating pole figure plots.
+        via: [T0, T1, T4, T7]
+        provisional: [Q1]
+      color_map:
+        node: dataset
+        type: NX_NUMBER
+        shape: [n_color_map, 3]
+        units: {category: NX_UNITLESS}
+        doc: TODO with MTex developers
+        via: [T1, T4, T7, T9]
+        provisional: [Q1]
+      default_color_map:
+        node: dataset
+        type: NX_NUMBER
+        shape: [n_def_color_map, 3]
+        units: {category: NX_UNITLESS}
+        doc: TODO with MTex developers
+        via: [T1, T4, T7, T9]
+        provisional: [Q1]
+      color_palette:
+        node: dataset
+        type: NX_CHAR
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      degree_char:
+        node: dataset
+        type: NX_CHAR
+        doc: TODO with MTex developers
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      arrow_char:
+        node: dataset
+        type: NX_CHAR
+        doc: TODO with MTex developers
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      marker:
+        node: dataset
+        type: NX_CHAR
+        doc: TODO with MTex developers
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      marker_edge_color:
+        node: dataset
+        type: NX_CHAR
+        doc: TODO with MTex developers
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      marker_face_color:
+        node: dataset
+        type: NX_CHAR
+        doc: TODO with MTex developers
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      hit_test:
+        node: dataset
+        type: NX_BOOLEAN
+        doc: TODO with MTex developers
+        via: [T1, T4, T7]
+        provisional: [Q1]
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  miscellaneous:
+    node: group
+    class: NXcollection
+    doc: Miscellaneous other settings of MTex.
+    children:
+      mosek:
+        node: dataset
+        type: NX_BOOLEAN
+        doc: TODO with MTex developers
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      generating_help_mode:
+        node: dataset
+        type: NX_BOOLEAN
+        doc: TODO with MTex developers
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      methods_advise:
+        node: dataset
+        type: NX_BOOLEAN
+        doc: TODO with MTex developers
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      stop_on_symmetry_mismatch:
+        node: dataset
+        type: NX_BOOLEAN
+        doc: TODO with MTex developers
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      inside_poly:
+        node: dataset
+        type: NX_BOOLEAN
+        doc: TODO with MTex developers
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      text_interpreter:
+        node: dataset
+        type: NX_CHAR
+        doc: TODO with MTex developers
+        via: [T1, T4, T7]
+        provisional: [Q1]
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  numerics:
+    node: group
+    class: NXcollection
+    doc: Miscellaneous settings relevant for numerics.
+    children:
+      eps:
+        node: dataset
+        type: NX_NUMBER
+        units: {category: NX_UNITLESS}
+        doc: Return value of the Matlab eps command.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      fft_accuracy:
+        node: dataset
+        type: NX_NUMBER
+        units: {category: NX_ANY}
+        doc: TODO with MTex developers
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      max_stwo_bandwidth:
+        node: dataset
+        type: NX_NUMBER
+        units: {category: NX_ANY}
+        doc: TODO with MTex developers
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      max_sothree_bandwidth:
+        node: dataset
+        type: NX_NUMBER
+        units: {category: NX_ANY}
+        doc: TODO with MTex developers
+        via: [T1, T4, T7]
+        provisional: [Q1]
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  system:
+    node: group
+    class: NXcollection
+    doc: Miscellaneous settings relevant of the system where MTex runs.
+    children:
+      memory:
+        node: dataset
+        type: NX_NUMBER
+        doc: TODO with MTex developers
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      open_gl_bug:
+        node: dataset
+        type: NX_BOOLEAN
+        doc: TODO with MTex developers
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      save_to_file:
+        node: dataset
+        type: NX_BOOLEAN
+        doc: TODO with MTex developers
+        via: [T1, T4, T7]
+        provisional: [Q1]
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  path:
+    node: group
+    class: NXcollection
+    doc: Collection of paths from where MTex reads information and code.
+    children:
+      mtex:
+        node: dataset
+        type: NX_CHAR
+        doc: Absolute path to specific component of MTex source code.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      data:
+        node: dataset
+        type: NX_CHAR
+        doc: Absolute path to specific component of MTex source code.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      cif:
+        node: dataset
+        type: NX_CHAR
+        doc: Absolute path to specific component of MTex source code.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      ebsd:
+        node: dataset
+        type: NX_CHAR
+        doc: Absolute path to specific component of MTex source code.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      pf:
+        node: dataset
+        type: NX_CHAR
+        doc: Absolute path to specific component of MTex source code.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      odf:
+        node: dataset
+        type: NX_CHAR
+        doc: Absolute path to specific component of MTex source code.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      tensor:
+        node: dataset
+        type: NX_CHAR
+        doc: Absolute path to specific component of MTex source code.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      example:
+        node: dataset
+        type: NX_CHAR
+        doc: Absolute path to specific component of MTex source code.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      import_wizard:
+        node: dataset
+        type: NX_CHAR
+        doc: Absolute path to specific component of MTex source code.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      pf_extensions:
+        node: dataset
+        type: NX_CHAR
+        doc: |-
+          List of file type suffixes for which MTex assumes
+          texture/pole figure information.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      ebsd_extensions:
+        node: dataset
+        type: NX_CHAR
+        doc: List of file type suffixes for which MTex assumes EBSD content.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+    via: [T1, T4, T7]
+    provisional: [Q1]

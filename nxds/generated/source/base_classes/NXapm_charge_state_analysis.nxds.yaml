@@ -1,0 +1,136 @@
+nxds: '0.1'
+class: NXapm_charge_state_analysis
+category: base
+extends: NXprocess
+doc: |-
+  Base class to document the parameters, configuration, and results of a processing for recovering
+  the charge state and nuclide composition of an ion from ranging definitions as used in the research
+  field of atom probe microscopy.
+
+  A ranging definition classically reports only the mass-to-charge-state-ratio interval plus the
+  elemental composition, but not necessarily the nuclide that compose the ion.
+
+  As the mass-resolving-power in an atom probe instrument is finite and typically lower
+  than for cutting edge tandem mass spectrometry it is possible that different combinations of nuclides
+  are indistinguishable and thus multiple ions in eventually even different charge states can be valid
+  labels for a given mass-to-charge-state-ratio peak. Enumerating the possible combinations
+  is a programmatic approach that can help with peak identification.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+symbols:
+  n_cand: {doc: The number of ion candidates.}
+  n_ivec_max:
+    doc: Maximum number of allowed atoms per ion.
+  n_variable: {doc: Number of entries}
+children:
+  config:
+    node: group
+    class: NXparameters
+    doc: |-
+      Parameters for the algorithm used to recover which combinations of nuclides
+      have a mass and charge that matches a set of constraints.
+
+      Each parameter in this group is defines one constraint.
+    children:
+      nuclides:
+        node: dataset
+        type: NX_UINT
+        shape: [n_variable]
+        units: {category: NX_UNITLESS}
+        doc: |-
+          Parameter that defines the elements considered in the combinatorial search.
+          The array contains nuclides as many times as their multiplicity and must not be empty.
+          Nuclides are encoded using the hashing rule that is defined in by nuclide_hash of :ref:`NXatom`.
+
+          Constraining the elements or nuclides instead of providing all nuclides
+          reduces the time to perform an exhaustive combinatorial search.
+        via: [T1, T4, T7, T9]
+        provisional: [Q1]
+      mass_to_charge_range:
+        node: dataset
+        type: NX_FLOAT
+        shape: [2]
+        units: {category: NX_ANY}
+        doc: |-
+          Parameter that defines the interval :math:`[{\frac{m}{q}}_{min}, {\frac{m}{q}}_{max}]` within which
+          ions with given mass-to-charge-state-ratio qualify as candidates.
+        via: [T1, T4, T7, T9]
+        provisional: [Q1]
+      min_half_life:
+        node: dataset
+        type: NX_FLOAT
+        units: {category: NX_TIME}
+        doc: |-
+          Parameter that defines the minimum half life for how long each nuclide of each
+          ion needs to be stable such that the ion qualifies as a candidate.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      min_abundance:
+        node: dataset
+        type: NX_FLOAT
+        units: {category: NX_DIMENSIONLESS}
+        doc: |-
+          Parameter that defines the minimum natural abundance of each nuclide of each
+          ion such that the ion qualifies as a candidate.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      sacrifice_isotopic_uniqueness:
+        node: dataset
+        type: NX_BOOLEAN
+        doc: |-
+          If the value is false, it means that non-unique solutions are accepted.
+          These are solutions where multiple candidates have been built from
+          different nuclide instances but the charge_state of all the ions is the same.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  charge_state:
+    node: dataset
+    type: NX_INT
+    shape: [n_cand]
+    units: {category: NX_UNITLESS}
+    doc: |-
+      Signed charge, i.e. integer multiple of the elementary
+      charge of each candidate.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  nuclide_hash:
+    node: dataset
+    type: NX_UINT
+    shape: [n_cand, n_ivec_max]
+    units: {category: NX_UNITLESS}
+    doc: |-
+      Table of nuclide instances of which each candidate is composed.
+      Each row vector is sorted in descending order.
+      Unused entries in the matrix should be set to 0.
+      Use the hashing rule that is defined in nuclide_hash of :ref:`NXatom`.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  mass:
+    node: dataset
+    type: NX_FLOAT
+    shape: [n_cand]
+    units: {category: NX_MASS}
+    doc: |-
+      Accumulated mass of the nuclides in each candidate.
+      Not corrected for quantum effects.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  natural_abundance_product:
+    node: dataset
+    type: NX_FLOAT
+    shape: [n_cand]
+    units: {category: NX_DIMENSIONLESS}
+    doc: The product of the natural abundances of the nuclides for each candidate.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  shortest_half_life:
+    node: dataset
+    type: NX_FLOAT
+    shape: [n_cand]
+    units: {category: NX_TIME}
+    doc: |-
+      For each candidate the half life of the nuclide that has the
+      shortest half life.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]

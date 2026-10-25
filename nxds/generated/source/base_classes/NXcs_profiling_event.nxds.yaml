@@ -1,0 +1,98 @@
+nxds: '0.1'
+class: NXcs_profiling_event
+category: base
+extends: NXobject
+doc: Computer science description of a profiling event.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+symbols:
+  n_processes: {doc: Number of processes.}
+children:
+  start_time:
+    node: dataset
+    type: NX_DATE_TIME
+    doc: |-
+      ISO 8601 time code with local time zone offset to UTC information
+      included when the event tracking started.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  end_time:
+    node: dataset
+    type: NX_DATE_TIME
+    doc: |-
+      ISO 8601 time code with local time zone offset to UTC information
+      included when the event tracking ended.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  description:
+    node: dataset
+    type: NX_CHAR
+    doc: Free-text description what was monitored/executed during the event.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  elapsed_time:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_TIME}
+    doc: |-
+      Wall-clock time how long the event took.
+
+      This may be in principle end_time minus start_time; however usage of
+      eventually more precise timers may warrant to use a finer temporal
+      discretization, and thus demand for a more precise record of the
+      wall-clock time.
+
+      Elapsed time may contain time portions where resources were idling.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  max_processes:
+    node: dataset
+    type: NX_UINT
+    units: {category: NX_UNITLESS}
+    doc: |-
+      The number of nominal processes that the app invoked during the execution of this event.
+
+      The main idea behind this field e.g. for apps which use e.g. MPI
+      (Message Passing Interface) parallelization is to communicate
+      how many processes were used.
+
+      For sequentially running apps number_of_processes and number_of_threads
+      is one. If the app exclusively uses GPU parallelization, number_of_gpus
+      can be larger than one. If no GPU is used, number_of_gpus is zero,
+      even though the hardware may have GPUs installed.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  max_threads:
+    node: dataset
+    type: NX_UINT
+    units: {category: NX_UNITLESS}
+    doc: |-
+      The number of nominal threads that the app invoked at during the execution of this event.
+      Specifically here the maximum number of threads used for the
+      high-level threading library used (e.g. OMP_NUM_THREADS), posix.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  max_gpus:
+    node: dataset
+    type: NX_UINT
+    units: {category: NX_UNITLESS}
+    doc: |-
+      The number of nominal GPUs that the app invoked during the execution of this
+      event.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  max_virtual_memory_snapshot:
+    node: dataset
+    type: NX_NUMBER
+    shape: [n_processes]
+    units: {category: NX_ANY}
+    doc: Maximum amount of virtual memory allocated per process during the event.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  max_resident_memory_snapshot:
+    node: dataset
+    type: NX_NUMBER
+    shape: [n_processes]
+    units: {category: NX_ANY}
+    doc: Maximum amount of resident memory allocated per process during the event.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]

@@ -1,0 +1,124 @@
+nxds: '0.1'
+class: NXxrot
+category: application
+extends: NXxbase
+describes: NXroot
+doc: |-
+  raw data from a rotation camera, extends :ref:`NXxbase`
+
+  This is the application definition for raw data from a rotation camera.
+  It extends :ref:`NXxbase`, so the full definition is the content of :ref:`NXxbase`
+  plus the data defined here.
+defaults: {min: 1, binding: true, type: NX_CHAR}
+symbols:
+  nP: {doc: Number of points}
+children:
+  ENTRY:
+    node: group
+    name: {any: true}
+    class: NXentry
+    children:
+      definition:
+        node: dataset
+        enum: [NXxrot]
+        doc: Official NeXus NXDL schema to which this file conforms.
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      instrument:
+        node: group
+        class: NXinstrument
+        children:
+          detector:
+            node: group
+            class: NXdetector
+            children:
+              polar_angle:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_ANGLE}
+                doc: The polar_angle (two theta) where the detector is placed.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              beam_center_x:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_LENGTH}
+                doc: |-
+                  This is the x position where the direct beam would hit the detector. This is a
+                  length, not a pixel position, and can be outside of the actual detector.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              beam_center_y:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_LENGTH}
+                doc: |-
+                  This is the y position where the direct beam would hit the detector. This is a
+                  length, not a pixel position, and can be outside of the actual detector.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          attenuator:
+            node: group
+            class: NXattenuator
+            children:
+              attenuator_transmission:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_ANY}
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      sample:
+        node: group
+        class: NXsample
+        children:
+          rotation_angle:
+            node: dataset
+            type: NX_FLOAT
+            shape: [nP]
+            units: {category: NX_ANGLE}
+            doc: This is an array holding the sample rotation start angle at each  scan point
+            attributes:
+              axis:
+                occurs: {min: 0}
+                type: NX_POSINT
+                enum: ['1']
+                via: [T19]
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+          rotation_angle_step:
+            node: dataset
+            type: NX_FLOAT
+            shape: [nP]
+            units: {category: NX_ANGLE}
+            doc: This is an array holding the step made for sample rotation angle at each  scan
+              point
+            attributes:
+              axis:
+                occurs: {min: 0}
+                type: NX_POSINT
+                enum: ['1']
+                via: [T19]
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      name:
+        node: group
+        class: NXdata
+        children:
+          rotation_angle:
+            node: link
+            target: ENTRY/SAMPLE/rotation_angle
+            via: [T1, T5, T10]
+            provisional: [Q2, Q8]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+    via: [T1, T2, T5, T7]
+    provisional: [Q1, Q2, Q11]
+via: [T8]

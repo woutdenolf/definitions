@@ -1,0 +1,163 @@
+nxds: '0.1'
+class: NXwaveplate
+category: base
+extends: NXcomponent
+doc: A waveplate or retarder.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+symbols:
+  N_spectrum:
+    doc: |-
+      Size of the wavelength array for which the refractive index of the material
+      and/or coating is given.
+  N_wavelengths:
+    doc: |-
+      Number of discrete wavelengths for which the waveplate is designed. If it
+      operates for a range of wavelengths then N_wavelengths = 2 and the minimum
+      and maximum values of the range should be provided.
+children:
+  type:
+    node: dataset
+    enum:
+      values:
+      - {value: zero-order}
+      - {value: achromatic}
+      - {value: multiple-order}
+      - {value: dual-wavelength}
+      open: true
+    doc: Type of waveplate (e.g. achromatic or zero-order).
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  retardance:
+    node: dataset
+    enum: [full-wave, half-wave, quarter-wave]
+    doc: |-
+      Specify the retardance of the waveplate (e.g. full-wave, half-wave
+      (lambda/2), quarter-wave (lambda/4)).
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  wavelengths:
+    node: dataset
+    occurs: {min: 0}
+    recommended: true
+    type: NX_NUMBER
+    shape: [N_wavelengths]
+    doc: |-
+      Discrete wavelengths for which the waveplate is designed. If the
+      waveplate operates over an entire range of wavelengths, enter the minimum
+      and maximum values of the wavelength range (in this case
+      N_wavelengths = 2). In this case, also use type="achromatic".
+    via: [T1, T6, T7, T9]
+    provisional: [Q1]
+  retardance_distribution:
+    node: group
+    class: NXdata
+    doc: Wavelength resolved retardance of the waveplate.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  diameter:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    doc: Diameter of the waveplate (if the waveplate is circular).
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  clear_aperture:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_UNITLESS}
+    doc: |-
+      Clear aperture of the device (e.g. 90% of diameter for a disc or 90% of
+      length/height for square geometry).
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  substrate:
+    node: group
+    class: NXsample
+    doc: |-
+      Describe the material of the substrate of the waveplate in
+      substrate/substrate_material and provide its index of refraction in
+      substrate/index_of_refraction_substrate, if known.
+    children:
+      substrate_material:
+        node: dataset
+        doc: |-
+          Specify the material of the waveplate. If the device has a
+          coating it should be described in coating/coating_material.
+        via: [T0, T1, T4, T7]
+        provisional: [Q1]
+      substrate_thickness:
+        node: dataset
+        type: NX_NUMBER
+        units: {category: NX_LENGTH}
+        doc: Thickness of the waveplate substrate.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      index_of_refraction_substrate:
+        node: dataset
+        type: NX_NUMBER
+        shape: [2, N_spectrum]
+        units: {category: NX_UNITLESS}
+        doc: |-
+          Complex index of refraction of the waveplate substrate. Specify at
+          given wavelength (or energy, wavenumber etc.) values.
+        via: [T1, T4, T7, T9]
+        provisional: [Q1]
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  coating:
+    node: group
+    class: NXsample
+    doc: |-
+      Is the waveplate coated? If yes, specify the type and material of the
+      coating and the wavelength range for which it is designed. If known, you
+      may also provide its index of refraction.
+    children:
+      coating_type:
+        node: dataset
+        doc: |-
+          Specify the coating type (e.g. dielectric, anti-reflection (AR),
+          multilayer coating etc.).
+        via: [T0, T1, T4, T7]
+        provisional: [Q1]
+      coating_material:
+        node: dataset
+        doc: Specify the coating material.
+        via: [T0, T1, T4, T7]
+        provisional: [Q1]
+      coating_thickness:
+        node: dataset
+        type: NX_NUMBER
+        units: {category: NX_LENGTH}
+        doc: Thickness of the coating.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      wavelength_range_coating:
+        node: dataset
+        occurs: {min: 0}
+        recommended: true
+        type: NX_NUMBER
+        shape: [2]
+        doc: |-
+          Wavelength range for which the coating is designed. Enter the minimum
+          and maximum values of the wavelength range.
+        via: [T1, T6, T7, T9]
+        provisional: [Q1]
+      index_of_refraction_coating:
+        node: dataset
+        type: NX_NUMBER
+        shape: [2, N_spectrum]
+        units: {category: NX_UNITLESS}
+        doc: |-
+          Complex index of refraction of the coating. Specify at given spectral
+          values (wavelength, energy, wavenumber etc.).
+        via: [T1, T4, T7, T9]
+        provisional: [Q1]
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  reflectance:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_UNITLESS}
+    doc: Average reflectance of the waveplate in percentage.
+    via: [T1, T4, T7]
+    provisional: [Q1]

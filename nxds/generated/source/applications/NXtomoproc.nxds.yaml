@@ -1,0 +1,184 @@
+nxds: '0.1'
+class: NXtomoproc
+category: application
+describes: NXroot
+doc: 'This is an application definition for the final result of a tomography experiment: a
+  3D construction of some volume of physical properties.'
+defaults: {min: 1, binding: true, type: NX_CHAR}
+symbols:
+  nX: {doc: Number of voxels in X direction}
+  nY: {doc: Number of voxels in Y direction}
+  nZ: {doc: Number of voxels in Z direction}
+children:
+  ENTRY:
+    node: group
+    name: {any: true}
+    class: NXentry
+    children:
+      title:
+        node: dataset
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      definition:
+        node: dataset
+        enum: [NXtomoproc]
+        doc: 'Official NeXus NXDL schema to which this file conforms '
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      INSTRUMENT:
+        node: group
+        name: {any: true}
+        class: NXinstrument
+        children:
+          SOURCE:
+            node: group
+            name: {any: true}
+            class: NXsource
+            children:
+              type:
+                node: dataset
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+              name:
+                node: dataset
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+              probe:
+                node: dataset
+                enum: [neutron, x-ray, electron]
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T2, T5, T7]
+            provisional: [Q1, Q2, Q11]
+        via: [T1, T2, T5, T7]
+        provisional: [Q1, Q2, Q11]
+      SAMPLE:
+        node: group
+        name: {any: true}
+        class: NXsample
+        children:
+          name:
+            node: dataset
+            doc: Descriptive name of sample
+            via: [T0, T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T2, T5, T7]
+        provisional: [Q1, Q2, Q11]
+      reconstruction:
+        node: group
+        class: NXprocess
+        children:
+          program:
+            node: dataset
+            type: NX_CHAR
+            doc: Name of the program used for reconstruction
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          version:
+            node: dataset
+            type: NX_CHAR
+            doc: Version of the program used
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          date:
+            node: dataset
+            type: NX_DATE_TIME
+            doc: Date and time of reconstruction processing.
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          parameters:
+            node: group
+            class: NXparameters
+            children:
+              raw_file:
+                node: dataset
+                type: NX_CHAR
+                doc: Original raw data file this data was derived from
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      data:
+        node: group
+        class: NXdata
+        children:
+          data:
+            node: dataset
+            type: NX_NUMBER
+            shape: [nX, nY, nZ]
+            doc: |-
+              This is the reconstructed volume. This can be different
+              things. Please indicate in the unit attribute what physical
+              quantity this really is.
+            attributes:
+              transform:
+                via: [T0, T1, T5]
+                provisional: [Q2]
+              offset:
+                via: [T0, T1, T5]
+                provisional: [Q2]
+              scaling:
+                via: [T0, T1, T5]
+                provisional: [Q2]
+              signal:
+                occurs: {min: 0}
+                type: NX_POSINT
+                enum: ['1']
+                via: [T19]
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+          x:
+            node: dataset
+            type: NX_FLOAT
+            shape: [nX]
+            units: {category: NX_ANY}
+            doc: |-
+              This is an array holding the values to use for the x-axis of
+              data. The units must be appropriate for the measurement.
+            attributes:
+              axis:
+                occurs: {min: 0}
+                type: NX_POSINT
+                enum: ['1']
+                via: [T19]
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+          y:
+            node: dataset
+            type: NX_FLOAT
+            shape: [nY]
+            units: {category: NX_ANY}
+            doc: |-
+              This is an array holding the values to use for the y-axis of
+              data. The units must be appropriate for the measurement.
+            attributes:
+              axis:
+                occurs: {min: 0}
+                type: NX_POSINT
+                enum: ['2']
+                via: [T19]
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+          z:
+            node: dataset
+            type: NX_FLOAT
+            shape: [nZ]
+            units: {category: NX_ANY}
+            doc: |-
+              This is an array holding the values to use for the z-axis of
+              data. The units must be appropriate for the measurement.
+            attributes:
+              axis:
+                occurs: {min: 0}
+                type: NX_POSINT
+                enum: ['3']
+                via: [T19]
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+    via: [T1, T2, T5, T7]
+    provisional: [Q1, Q2, Q11]
+via: [T8]

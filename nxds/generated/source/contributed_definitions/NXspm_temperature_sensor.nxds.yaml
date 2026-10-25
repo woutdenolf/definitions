@@ -1,0 +1,90 @@
+nxds: '0.1'
+class: NXspm_temperature_sensor
+category: base
+extends: NXsensor
+doc: |-
+  The :ref:`NXspm_temperature_sensor` class describes a temperature sensor
+  used in scanning probe microscopy (SPM) experiments. It includes fields
+  for the temperature measurement, calibration, and associated data.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  temperature:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_TEMPERATURE}
+    doc: The obtained average temperature of the sensor.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  target_temperature:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_TEMPERATURE}
+    doc: |-
+      The target temperature of the sensor, which is the desired temperature
+      to be maintained during the experiment.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  temp_offset_value:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_TEMPERATURE}
+    doc: |-
+      The offset temperature of the sensor, which will be added to obtained correct the
+      measured temperature.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  TEMPERATUREchannel:
+    node: dataset
+    name: {template: '{TEMPERATURE}channel'}
+    type: NX_CHAR
+    doc: The name of the channel that handles the temperature measurement.
+    via: [T1, T3, T4, T7]
+    provisional: [Q1, Q3]
+  calibration:
+    node: group
+    class: NXcalibration
+    doc: Calibration of the temperature measurement.
+    children:
+      calibration_parameters:
+        node: group
+        class: NXparameters
+        occurs: {min: 0}
+        children:
+          coefficient:
+            node: dataset
+            type: NX_NUMBER
+            units: {category: NX_ANY}
+            doc: The coefficient of the calibration.
+            via: [T1, T4, T7]
+            provisional: [Q1]
+        via: [T1, T6, T7]
+        provisional: [Q1]
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  DATA:
+    node: group
+    name: {any: true}
+    class: NXdata
+    occurs: {min: 0}
+    doc: |-
+      Data related to the temperature measurement, such as time series data
+      or voltage-temperature data.
+    children:
+      DATA:
+        node: dataset
+        name: {any: true}
+        type: NX_NUMBER
+        units: {category: NX_TEMPERATURE}
+        doc: Temperature data collected during the scan.
+        via: [T1, T3, T4, T7]
+        provisional: [Q1, Q3]
+      AXISNAME:
+        node: dataset
+        name: {any: true}
+        type: NX_NUMBER
+        units: {category: NX_ANY}
+        doc: independent axis data like time or position or bias voltage.
+        via: [T1, T3, T4, T7]
+        provisional: [Q1, Q3]
+    via: [T1, T2, T6, T7]
+    provisional: [Q1, Q11]

@@ -1,0 +1,81 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"},
+    {"ref": "NXroot@NeXus_release"}
+  ],
+  "category": "application",
+  "children": [
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"class": "NXentry", "declared_by": "NXroot", "id": "ENTRY", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 1}, "recommended": false, "refined_by": ["NXcase_refines"], "specialisation": "NXcase_refines/ENTRY"}
+  ],
+  "class": "NXcase_refines",
+  "describes": "NXroot",
+  "lossy": [],
+  "require": [],
+  "status": "local",
+  "symbols": [],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"}
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {
+  "NXcase_refines/ENTRY": {
+   "attributes": [
+     {"ref": "NXobject@default"}
+   ],
+   "children": [
+     {"node": "group", "ref": "NXobject/DATA"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+     {"declared_by": "NXentry", "enum": {"open": false, "values": [{"value": "NXcase_refines"}]}, "id": "definition", "name": {"exact": "definition"}, "node": "dataset", "occurs": {"max": 1, "min": 1}, "recommended": false, "refined_by": ["NXcase_refines"], "type": "NX_CHAR"},
+     {"node": "dataset", "ref": "NXentry/title"},
+     {"node": "dataset", "ref": "NXentry/start_time"},
+     {"class": "NXinstrument", "declared_by": "NXentry", "id": "INSTRUMENT", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 1}, "recommended": false, "refined_by": ["NXcase_refines"], "specialisation": "NXcase_refines/ENTRY/INSTRUMENT"}
+   ],
+   "class": "NXentry",
+   "declared_by": "NXcase_refines",
+   "id": "NXcase_refines/ENTRY",
+   "require": [],
+   "symbols": [],
+   "undeclared": {"attribute": "report", "dataset": "report", "group": "report"}
+  },
+  "NXcase_refines/ENTRY/INSTRUMENT": {
+   "attributes": [
+     {"ref": "NXobject@default"}
+   ],
+   "children": [
+     {"node": "group", "ref": "NXobject/DATA"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+     {"node": "group", "ref": "NXinstrument/MONOCHROMATOR"},
+     {"class": "NXcounter", "declared_by": "NXcase_refines", "id": "counter", "name": {"exact": "counter"}, "node": "group", "occurs": {"max": 1, "min": 1}, "recommended": false, "specialisation": "NXcase_refines/ENTRY/INSTRUMENT/counter"}
+   ],
+   "class": "NXinstrument",
+   "declared_by": "NXcase_refines",
+   "id": "NXcase_refines/ENTRY/INSTRUMENT",
+   "require": [],
+   "symbols": [],
+   "undeclared": {"attribute": "report", "dataset": "report", "group": "report"}
+  },
+  "NXcase_refines/ENTRY/INSTRUMENT/counter": {
+   "attributes": [
+     {"ref": "NXobject@default"}
+   ],
+   "children": [
+     {"node": "group", "ref": "NXobject/DATA"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+     {"node": "dataset", "ref": "NXcounter/mode"},
+     {"declared_by": "NXcounter", "id": "CHANNEL_counts", "name": {"template": "{CHANNEL}_counts"}, "node": "dataset", "occurs": {"max": 2, "min": 0}, "recommended": false, "refined_by": ["NXcase_refines"], "type": "NX_INT", "units": {"category": "NX_COUNT"}},
+     {"declared_by": "NXcase_refines", "id": "i0_counts", "name": {"exact": "i0_counts"}, "node": "dataset", "occurs": {"max": 1, "min": 1}, "recommended": false, "refines": "CHANNEL_counts", "type": "NX_INT", "units": {"category": "NX_COUNT"}},
+     {"node": "group", "ref": "NXcounter/SENSOR"},
+     {"declared_by": "NXcase_refines", "id": "i1_counts", "name": {"exact": "i1_counts"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "recommended": false, "type": "NX_CHAR"}
+   ],
+   "class": "NXcounter",
+   "declared_by": "NXcase_refines",
+   "id": "NXcase_refines/ENTRY/INSTRUMENT/counter",
+   "require": [],
+   "symbols": [],
+   "undeclared": {"attribute": "report", "dataset": "report", "group": "report"}
+  }
+ }
+}

@@ -1,0 +1,40 @@
+nxds: '0.1'
+class: NXcg_unit_normal
+category: base
+extends: NXobject
+doc: |-
+  Computational geometry description of a set of (oriented) unit normal vectors.
+
+  Store normal vector information as properties of primitives.
+  Use only only as a child of an instance of :ref:`NXcg_primitive`
+  so that this instance acts as the parent to define a context.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+symbols:
+  d:
+    doc: The dimensionality, which has to be at least 2.
+  c:
+    doc: The cardinality of the set, i.e. the number of unit normals.
+children:
+  normals:
+    node: dataset
+    type: NX_NUMBER
+    shape: [c, d]
+    units: {category: NX_LENGTH}
+    doc: Direction of each normal - a unit normal.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  orientation:
+    node: dataset
+    type: NX_INT
+    shape: [c]
+    units: {category: NX_UNITLESS}
+    doc: |-
+      An indicator which details the orientation of each normal vector
+      in relation to its primitive, assuming the object is viewed
+      from a position outside the object.
+
+      * 0 - undefined
+      * 1 - outer unit normal vector
+      * 2 - inner unit normal vector
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]

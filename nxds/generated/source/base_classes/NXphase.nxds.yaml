@@ -1,0 +1,50 @@
+nxds: '0.1'
+class: NXphase
+category: base
+extends: NXobject
+doc: |-
+  Base class to describe a (thermodynamic) phase as a component of a material.
+
+  Instances of phases can be crystalline.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  phase_id:
+    node: dataset
+    type: NX_INT
+    units: {category: NX_UNITLESS}
+    doc: |-
+      Identifier for each phase.
+
+      The value 0 is reserved for the unknown phase that represents the
+      null-model (no sufficiently significant information available).
+      In other words, the phase_name is n/a aka notIndexed.
+
+      The  phase_id value should match with the integer suffix of the
+      group name which represents that instance in a NeXus/HDF5 file, i.e.
+      if three phases were used e.g. 0, 1, and 2, three instances of
+      :ref:`NXphase` named phase0, phase1, and phase2 should be stored
+      in that HDF5 file.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  name:
+    node: dataset
+    type: NX_CHAR
+    doc: |-
+      Given name as an alias for identifying this phase.
+
+      If the  phase_id is 0 and one would like to use
+      the field name, the value should be n/a or notIndexed.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  UNIT_CELL:
+    node: group
+    name: {any: true}
+    class: NXunit_cell
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  ATOM:
+    node: group
+    name: {any: true}
+    class: NXatom
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]

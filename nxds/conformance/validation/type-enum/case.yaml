@@ -1,0 +1,4 @@
+description: >
+  A member reached by name-fit keeps the inherited type (TYPE); a closed
+  enumeration (ENUM, tier S); units absent on a counts dataset (UNITS).
+capabilities: []

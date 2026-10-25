@@ -1,0 +1,347 @@
+nxds: '0.1'
+class: NXapm_reconstruction
+category: base
+extends: NXprocess
+doc: |-
+  Base class for the configuration and results of a reconstruction algorithm.
+
+  Generating a tomographic reconstruction of the specimen uses selected and
+  calibrated ion hit positions, the evaporation sequence, and voltage curve data.
+  Very often scientists use own software scripts according to published procedures,
+  so-called reconstruction protocols.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+symbols:
+  n:
+    doc: |-
+      Number of ions spatially filtered from results of the hit_finding algorithm
+      from which an instance of a reconstructed volume has been generated.
+      These ions get new identifier assigned in the process - the so-called
+      evaporation_id, which must not be confused with the pulse_id!
+children:
+  PROGRAM:
+    node: group
+    name: {any: true}
+    class: NXprogram
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  NOTE:
+    node: group
+    name: {any: true}
+    class: NXnote
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  config:
+    node: group
+    class: NXparameters
+    doc: |-
+      Parameters that configure a reconstruction algorithm which takes
+      hit data and mass-to-charge-state ratio values to construct a model
+      of the evaporated specimen. This model is called the reconstructed volume.
+      Researchers in the field of atom probe call these algorithms reconstruction
+      protocols.
+
+      Different such protocols exist. Although these are qualitatively similar,
+      each protocol uses and interprets the parameters slightly differently.
+
+      The majority of reconstructions is performed with the proprietary software
+      APSuite / IVAS, the source code for the reconstruction protocols that this
+      software implements in detail is not open but the parameters and their qualitative
+      effect on the reconstructed volume follows the protocols that are discussed in
+      the atom probe literature. This group allows to document these parameters in
+      a standardized manner.
+    children:
+      voltage_filter_initial:
+        node: dataset
+        type: NX_FLOAT
+        units: {category: NX_VOLTAGE}
+        doc: |-
+          Lowest voltage at which an ion that is considered in the reconstructed
+          volume has been extracted from the specimen.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      voltage_filter_final:
+        node: dataset
+        type: NX_FLOAT
+        units: {category: NX_VOLTAGE}
+        doc: |-
+          Highest voltage at which an ion that is considered in the reconstructed
+          volume has been extracted from the specimen.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      protocol_name:
+        node: dataset
+        type: NX_CHAR
+        enum:
+          values:
+          - {value: bas}
+          - {value: geiser}
+          - {value: gault}
+          - {value: cameca}
+          open: true
+        doc: |-
+          Qualitative statement about which reconstruction protocol was used.
+
+          For reconstructions performed with APSuite / IVAS the value "cameca"
+          should be used.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      primary_element:
+        node: dataset
+        type: NX_CHAR
+        doc: |-
+          Assumed primary element based on which the reconstruction is calibrated.
+
+          The value can be extracted from the CAnalysis.CSpatial.fPrimaryElement
+          field of a CamecaRoot ROOT file.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      efficiency:
+        node: dataset
+        type: NX_FLOAT
+        units: {category: NX_DIMENSIONLESS}
+        doc: |-
+          Assumed detection efficiency
+
+          The value can be extracted from the CAnalysis.CSpatial.fEfficiency
+          field of a CamecaRoot ROOT file.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      flight_path:
+        node: dataset
+        type: NX_FLOAT
+        units: {category: NX_LENGTH}
+        doc: |-
+          Nominal flight path
+
+          The value can be extracted from the CAnalysis.CSpatial.fFlightPath
+          field of a CamecaRoot ROOT file.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      evaporation_field:
+        node: dataset
+        type: NX_FLOAT
+        units: {category: NX_ANY}
+        doc: |-
+          Assumed evaporation electric field
+
+          The value can be extracted from the CAnalysis.CSpatial.fEvaporationField
+          field of a CamecaRoot ROOT file.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      image_compression:
+        node: dataset
+        type: NX_FLOAT
+        units: {category: NX_UNITLESS}
+        doc: |-
+          Image compression factor (ICF)
+
+          The value can be extracted from the CAnalysis.CSpatial.fImageCompression
+          field of a CamecaRoot ROOT file.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      kfactor:
+        node: dataset
+        type: NX_FLOAT
+        units: {category: NX_UNITLESS}
+        doc: |-
+          The factor :math:`k` in :math:`R_0 = \frac{V}{kF}` with :math:`R_0` tip_radius_zero
+          :math:`V` the voltage and :math:`F` the evaporation field.
+
+          The value can be extracted from the CAnalysis.CSpatial.fKfactor
+          field of a CamecaRoot ROOT file.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      shank_angle:
+        node: dataset
+        type: NX_FLOAT
+        units: {category: NX_ANGLE}
+        doc: |-
+          Shank angle
+
+          The value can be extracted from the CAnalysis.CSpatial.fShankAngle
+          field of a CamecaRoot ROOT file.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      ion_volume:
+        node: dataset
+        type: NX_FLOAT
+        units: {category: NX_VOLUME}
+        doc: Assumed atomic volume
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      tip_radius:
+        node: dataset
+        type: NX_FLOAT
+        units: {category: NX_LENGTH}
+        doc: |-
+          The value can be extracted from the CAnalysis.CSpatial.fTipRadius
+          field of a CamecaRoot ROOT file.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      tip_radius_zero:
+        node: dataset
+        type: NX_FLOAT
+        units: {category: NX_LENGTH}
+        doc: |-
+          The value can be extracted from the CAnalysis.CSpatial.fTipRadius0
+          field of a CamecaRoot ROOT file.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      voltage_zero:
+        node: dataset
+        type: NX_FLOAT
+        units: {category: NX_VOLTAGE}
+        doc: |-
+          The value can be extracted from the CAnalysis.CSpatial.fVoltage0
+          field of a CamecaRoot ROOT file.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      crystallographic_calibration:
+        node: dataset
+        type: NX_CHAR
+        doc: |-
+          Different strategies for crystallographic calibration of the
+          reconstruction are possible. Therefore, we collect first such
+          feedback before parametrizing this further.
+
+          If no crystallographic calibration was performed, the field
+          should be filled with the n/a, meaning not applied.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      comment:
+        node: dataset
+        type: NX_CHAR
+        doc: |-
+          Possibility of a free text field that allows to report additional details related to
+          the reconstruction protocol. For LEAP systems and reconstructions that are
+          performed with APSuite / IVAS see also `B. Gault et al. <https://doi.org/10.1093/mam/ozae081>_`
+          and `T. Blum et al. <https://doi.org/10.1002/9781119227250.ch18>`_ (page 371).
+          for best practices on the reporting of metadata in atom probe tomography.
+
+          The value can be extracted from the CAnalysis.CResults.fComments
+          field of a CamecaRoot ROOT file.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  reconstructed_positions:
+    node: dataset
+    type: NX_FLOAT
+    shape: [n, 3]
+    units: {category: NX_LENGTH}
+    doc: Three-dimensional positions of the ions in the reconstructed volume.
+    attributes:
+      depends_on:
+        type: NX_CHAR
+        doc: The instance of :ref:`NXcoordinate_system` in which the positions are defined.
+        via: [T1, T4]
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  quality:
+    node: dataset
+    type: NX_CHAR
+    doc: |-
+      Qualitative statement about the reconstruction.
+
+      The value can be extracted from the CAnalysis.CResults.fQuality
+      field of a CamecaRoot ROOT file.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  naive_discretization:
+    node: group
+    class: NXprocess
+    children:
+      PROGRAM:
+        node: group
+        name: {any: true}
+        class: NXprogram
+        via: [T1, T2, T4, T7]
+        provisional: [Q1, Q11]
+      DATA:
+        node: group
+        name: {any: true}
+        class: NXdata
+        doc: |-
+          Visual overview of the reconstructed dataset via a three-dimensional
+          histogram of ion counts. Ion counts are characterized using one nanometer
+          cubic bins without applying any smoothening of reconstructed positions
+          during the histogram computation.
+
+          Such preview is useful to get an impression of the macroscopic shape of the
+          reconstructed volume. Visualizing by ion counts highlights density variations
+          the reconstructed volume that are signatures of features such as poles,
+          interfaces or irregularities of the specimen shape.
+        via: [T1, T2, T4, T7]
+        provisional: [Q1, Q11]
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  volume:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_VOLUME}
+    doc: |-
+      Sum of ion volumes
+
+      The value can be extracted from the CAnalysis.CSpatial.fRecoVolume
+      field of a CamecaRoot ROOT file.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  field_of_view:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    doc: |-
+      The nominal diameter of the specimen ROI which is measured in the
+      experiment. The physical specimen cannot be measured completely
+      because ions may launch but hit in locations other than the detector.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  obb:
+    node: group
+    class: NXcollection
+    doc: Tight, axis-aligned bounding box about the point cloud of the reconstruction.
+    children:
+      xmin:
+        node: dataset
+        type: NX_FLOAT
+        units: {category: NX_LENGTH}
+        doc: Minimum coordinate value along the x-direction
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      xmax:
+        node: dataset
+        type: NX_FLOAT
+        units: {category: NX_LENGTH}
+        doc: Maximum coordinate value along the x-direction
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      ymin:
+        node: dataset
+        type: NX_FLOAT
+        units: {category: NX_LENGTH}
+        doc: Minimum coordinate value along the y-direction
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      ymax:
+        node: dataset
+        type: NX_FLOAT
+        units: {category: NX_LENGTH}
+        doc: Maximum coordinate value along the y-direction
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      zmin:
+        node: dataset
+        type: NX_FLOAT
+        units: {category: NX_LENGTH}
+        doc: Minimum coordinate value along the z-direction
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      zmax:
+        node: dataset
+        type: NX_FLOAT
+        units: {category: NX_LENGTH}
+        doc: Maximum coordinate value along the z-direction
+        via: [T1, T4, T7]
+        provisional: [Q1]
+    via: [T1, T4, T7]
+    provisional: [Q1]

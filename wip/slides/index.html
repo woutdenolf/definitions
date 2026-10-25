@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NXDS for NeXus</title>
+<!--
+  How to edit: every slide is Markdown inside the <textarea> below.
+  A line with only "---" starts a new slide, a line with only "--" a sub-slide (go down).
+  "Note:" starts speaker notes (press S in the browser to see them).
+  Open this file in a browser: F = full screen, ESC = overview.
+  PDF (for a meeting without internet): open index.html?print-pdf in Chrome or Chromium and print to PDF.
+-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reset.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/theme/white.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+<style>
+  :root { --accent: #1f6feb; --muted: #57606a; --good: #1a7f37; --bad: #cf222e; }
+  .reveal { font-size: 32px; }
+  .reveal h1, .reveal h2, .reveal h3 { text-transform: none; color: #0d1117; }
+  .reveal h2 { font-size: 1.45em; }
+  .reveal pre { width: 100%; font-size: 0.62em; box-shadow: none; }
+  .reveal pre code { max-height: 600px; padding: 12px; border: 1px solid #d0d7de; border-radius: 6px; }
+  .reveal table { font-size: 0.7em; }
+  .reveal table th { background: #f6f8fa; }
+  .reveal small, .muted { color: var(--muted); }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; text-align: left; }
+  .two > div { min-width: 0; }
+  .good { color: var(--good); font-weight: bold; }
+  .bad { color: var(--bad); font-weight: bold; }
+  .box { border: 2px solid var(--accent); border-radius: 8px; padding: 10px 16px; display: inline-block; }
+  .tag { display: inline-block; font-size: 0.6em; padding: 2px 8px; border-radius: 10px; background: #ddf4ff; color: #0969da; }
+  .tag.gen { background: #fff8c5; color: #9a6700; }
+</style>
+</head>
+<body>
+<div class="reveal"><div class="slides">
+<section data-markdown data-separator="^\n---\n$" data-separator-vertical="^\n--\n$" data-separator-notes="^Note:">
+<textarea data-template>
+
+# NXDS
+## one place for all NeXus rules
+
+Wout De Nolf (ESRF)
+
+<small>Proposal to the NIAC · working prototype on branch <code>nxds</code> · October 2026</small>
+
+Note: NXDS = NeXus Definition Schema. Everything shown here exists on branch nxds of the definitions repository.
+
+---
+
+## Today the rules are in three places
+
+<div class="two"><div>
+
+1. `nxdl.xsd` — checks the **definition files**, not your data files
+2. `*.nxdl.xml` — the classes
+3. the **manual** — many rules written only as text
+
+</div><div>
+
+**So:**
+
+- every tool turns the text into its own code
+- tools give **different answers** about the same file
+- a change to NXDL often needs a change in every tool
+
+</div></div>
+
+Note: The XSD is a schema for XML files. What a class means for a data file is mostly in the manual.
+
+---
+
+## One name, different answers
+
+Is `x1_indices` a correct name for `AXISNAME_indices`?
+
+| cnxvalidate | nexusformat | punx | pynxtools |
+|---|---|---|---|
+| does not support free names | <span class="bad">no</span> | does not support free names | <span class="good">yes</span> |
+
+<small>From the source code of each tool, October 2026 — not yet confirmed by the maintainers</small>
+
+Note: There are more examples in Appendix A of the proposal: required or not, inheritance, how serious a problem is.
+
+---
+
+## What the community said
+
+- "NXDL is a blocker; … uncomfortable unconventional rules e.g. PARTIAL names" <small>NIAC2026</small>
+- "cnxvalidate does not recognise partial names" <small>NIAC2026</small>
+- "mapping to App defs (pydantic model from NXDL)" <small>NIAC2026</small>
+- "we have not fully defined the expected behavior of validators" <small>Telco 2025-10-20</small>
+- "single source of truth in NeXus is the definition in NXDL. It shall not be the validator which provides the truth" <small>NIAC2026</small>
+
+Note: NXDS keeps the last principle: the definition is the truth, not the validator. In phases 0–2 the definitions stay in NXDL. Changing the language of the definitions is what the later votes decide.
+
+---
+
+## The idea
+
+<div class="box">Write every rule down <b>once</b>, in a form programs can read, in the definitions repository.</div>
+
+```
+  classes (NXDL today, YAML later)              ✍ written by people
+             │   a robot runs "make nxds" on every pull request
+             ▼
+  nxds/generated/   what every class means       ⚙ generated, never edited
+             │
+   ┌─────────┼──────────────┬────────────────┐
+ manual   validators     readers/writers    ontology, other tools
+          (any language)  (any language)
+```
+
+---
+
+## What changes for you
+
+| You are … | Phases 0–2 (this vote) | At the end |
+|---|---|---|
+| scientist with NeXus files | nothing; one command to check a file | the same |
+| facility writing files | nothing required; check files while writing | the same |
+| author of classes | keep writing NXDL; a robot updates generated files; YAML allowed from phase 2 | YAML |
+| tool developer | nothing breaks; one JSON file per release available | read the JSON |
+| NIAC | answer 14 unclear questions, once | features decided once, with tests |
+
+Your existing files are **never** changed.
+
+---
+
+## Five phases — nothing breaks in phases 0–2
+
+| Phase | Authors write | What changes |
+|---|---|---|
+| **0 Translate** | NXDL | NXDL → NXDS on every pull request; more checks |
+| **1 Document** | NXDL | manual pages generated from NXDS |
+| **2 Choose** | NXDL *or* YAML | new classes may be YAML |
+| **3 Grow** | + new features in YAML | `nxdl.xsd` stops changing |
+| **4 Finish** | YAML | XML files removed |
+
+<span class="tag">this vote: phases 0, 1, 2</span> <span class="tag gen">later votes: 3, 4</span>
+
+Note: Phases 0–2 can be undone. Each phase starts only after a checkpoint (conditions) is met.
+
+---
+
+## The running example
+
+A made-up absorption measurement:
+
+- `mu` measured for `nE` energies of a monochromator
+- a counter base class with channels `i0_counts`, `i1_counts`, …
+
+Two classes per phase:
+**NXdemo_…** (application definition) and **NXdemo_counter_…** (base class)
+
+<small>All files: <code>wip/examples/</code> on branch <code>nxds</code></small>
+
+---
+
+## Today: rules you cannot see
+
+```xml
+<group type="NXentry">                    <!-- no name: any name in the file -->
+  <field name="title" recommended="true"/>
+  <group type="NXdata">
+    <attribute name="signal">             <!-- required? XSD: no. Manual: yes -->
+      <enumeration><item value="mu"/></enumeration>
+    </attribute>
+    <field name="mu" type="NX_FLOAT">     <!-- same length as energy? -->
+      <dimensions rank="1"><dim index="1" value="nE"/></dimensions>
+    </field>
+```
+
+Every tool answers these questions in its own way.
+
+---
+
+## Phase 0: translated automatically
+
+<span class="tag">the author writes</span> the same NXDL &nbsp; <span class="tag gen">a robot generates</span>
+
+```yaml
+ENTRY:
+  node: group
+  name: {any: true}        # "no name" written out: any name
+  class: NXentry
+  children:
+    title:
+      node: dataset
+      occurs: {min: 0}     # optional …
+      recommended: true    # … but recommended
+```
+
+All **280 classes** translated in **4 s**, no errors
+
+Note: Each generated value also says which translation rule made it (via) and which unanswered question it depends on (provisional). Authors do not need to read these files.
+
+---
+
+## Phase 1: check a file
+
+```
+python -m nxds_tools validate demo_phase1.h5 --bundle nxds/generated
+```
+
+```
+WARNING /entry: a recommended item is missing (NXdemo_phase1/ENTRY/title)
+ERROR   /entry/data: a required item is missing (NXdemo_phase1/ENTRY/DATA@signal)
+```
+
+<small>The ERROR uses the proposed answer to Q2 (attributes are required) — not yet voted.</small>
+
+The class pages of the manual are generated too: every item, also inherited ones, with *required / recommended / optional*.
+
+--
+
+## Phase 1: while the file is written
+
+After 57 of 200 points (`--partial`):
+
+```
+INFO /entry: not finished yet (NXdemo_phase1/ENTRY#nE) — mu has 57 values, energy 200
+INFO /entry: not finished yet (NXdemo_phase1/ENTRY/title)
+INFO /entry/data: not finished yet (NXdemo_phase1/ENTRY/DATA@signal)
+```
+
+`#nE` = the length called `nE`. A check takes 3–5 ms.
+
+---
+
+## Phase 2: a base class in YAML
+
+```yaml
+class: NXdemo_counter_phase2
+category: base
+extends: NXobject
+defaults: {min: 0, binding: false}   # all optional; shapes are examples
+children:
+  mode:                               # FIXED name
+    node: dataset
+    type: NX_CHAR
+    enum: [timer, monitor]
+  CHANNEL_counts:                     # PARTLY FREE: i0_counts, i1_counts, …
+    node: dataset
+    name: {template: "{CHANNEL}_counts"}
+    type: NX_INT
+  SENSOR:                             # FREE name
+    node: group
+    class: NXsensor
+    name: {any: true}
+```
+
+--
+
+## Phase 2: an application definition in YAML
+
+```yaml
+class: NXdemo_phase2
+category: application
+describes: NXroot                  # describes a whole file
+defaults: {min: 1, binding: true}  # all required; shapes are rules
+symbols: {nE: {doc: number of energies}}
+children:
+  ENTRY:
+    node: group
+    class: NXentry
+    name: {any: true}
+    children:
+      title: {node: dataset, occurs: {min: 0}, recommended: true}
+      DATA:
+        node: group
+        class: NXdata
+        name: {any: true}
+        attributes:
+          signal: {type: NX_CHAR, enum: [mu]}
+        children:
+          mu: {node: dataset, type: NX_FLOAT, shape: [nE]}
+```
+
+<small>shortened — the full file is in <code>wip/examples/phase2/</code></small>
+
+--
+
+## Phase 2: both languages work together
+
+- each class is written **either** in NXDL **or** in YAML (CI checks this)
+- YAML classes are also published as NXDL → tools that read NXDL keep working
+- every YAML class is converted back to NXDL and checked on every pull request → **can be undone**
+- prototype: `NXslit` and `NXmonopd` are YAML; `NXxrd` (NXDL) extends `NXmonopd` (YAML)
+
+---
+
+## Phase 3: something NXDL cannot say
+
+```yaml
+DATA:
+  node: group
+  class: NXdata
+  children:
+    mu:   {node: dataset, type: NX_FLOAT, occurs: {min: 0}}
+    fluo: {node: dataset, type: NX_FLOAT, occurs: {min: 0}}
+  require:
+    at_least_one_of: [mu, fluo]    # asked for in #1045, #1002, #1064
+```
+
+Tools that read NXDL still get an NXDL version, marked: one rule is missing there.
+
+---
+
+## Phase 4: the files at the end
+
+```
+base_classes/*.nxds.yaml      ✍ people
+applications/*.nxds.yaml      ✍ people
+nxds/spec/                    ✍ the specification (voted by the NIAC)
+nxds/conformance/             ✍ tests: input + expected answer
+nxds/generated/               ⚙ robot — used by all tools
+nxds_tools/                   ✍ the tools: build, check, docs, validate
+```
+
+`nxdl.xsd` and `*.nxdl.xml` are removed — they stay in git history, and old releases stay readable.
+
+---
+
+## How to try it
+
+```
+git checkout nxds            # in the definitions repository
+make install                 # installs nxds_tools
+make nxds                    # translate all classes
+python -m nxds_tools validate myfile.h5 --bundle nxds/generated
+```
+
+Write your first class: copy `wip/examples/today/*.nxdl.xml` (NXDL, today) or `wip/examples/phase2/*.nxds.yaml` (YAML, from phase 2), change it, then
+
+```
+python -m nxds_tools check --definitions . --extra my_classes/
+```
+
+---
+
+## Storage formats
+
+NeXus does not depend on HDF5. A **storage profile** is a small table that says how the tree is stored in one file format:
+
+| | HDF5 (today) | Zarr (maybe later) |
+|---|---|---|
+| class of a group | attribute `NX_class` | attribute `NX_class` |
+| units | attribute `units` | attribute `units` |
+| link | HDF5 link | a copy (Zarr has no links) |
+
+A new file format = a new profile. **No class changes.**
+
+---
+
+## Measured on a laptop (7.7 GB)
+
+| Task | One object at a time | Whole file in memory |
+|---|---|---|
+| 8 GB dataset | <span class="good">0.2 s, 130 MB</span> | <span class="bad">out of memory</span> |
+| first value, 100 000 objects | <span class="good">0.3 s</span> | 27 s |
+| help while writing | <span class="good">less than 1 % slower</span> | 2–3× the data in memory |
+
+Pydantic models per class: fine. One model for a whole file: only for small files.
+
+---
+
+## Tests that define the meaning
+
+```
+nxds/conformance/validation/missing-recommended/
+  make_file.py     writes a small HDF5 file
+  expected.jsonl   the messages every correct tool must give
+```
+
+- an answer of the NIAC to a question → a new test
+- any tool, in any language, can show it follows the rules
+
+---
+
+## 14 questions for the NIAC
+
+| | Question | Proposed answer |
+|---|---|---|
+| Q1 | how many, when nothing is written? | 1 for a fixed name, any for a free name |
+| Q2 | attributes required in application definitions? | yes |
+| Q3 | characters in partly free names? | letters, digits, `_`, `.` |
+| Q4 | what may a subclass change? | make more precise |
+| Q5 | are shapes rules? | rules in application definitions, examples in base classes |
+| Q6 | how serious is each problem? | table in the proposal |
+| Q7 | which HDF5 types? | table in the proposal |
+
+<small>Q8 links · Q9 which definition applies where · Q10 marking stopped scans · Q11 same name for dataset and group · Q12 NXdata rules · Q13 reserved prefixes · Q14 do free-named groups of an application definition apply to every such group</small>
+
+---
+
+## Risks — and what we do
+
+| | Risk | What we do |
+|---|---|---|
+| R1 | too few volunteers | working group; second maintainer before phase 1; prototype exists; can be undone |
+| R2 | some files get a different result | files are never changed; shown on public files before each vote |
+| R3 | documentation changes | `make docdiff` compares; every difference is checked |
+| R6 | new software to maintain | tested; the author maintains it; a second maintainer before phase 1 |
+| R11 | authors must run Python | a robot does it (for forks: a patch or a follow-up pull request) |
+| R12 | docs show unvoted rules | marked as not decided; manual stays official |
+
+---
+
+## The motion (summary)
+
+<small>The exact text is §3 of the proposal.</small>
+
+1. **Direction:** NXDS is the intended direction for defining NeXus. The specification (draft: `nxds/spec/nxds.md`) is completed during phases 0–2 and adopted by a separate vote before phase 3. The NIAC may stop at any phase. This item obliges nobody.
+2. **Approve phases 0, 1 and 2** as described in §3 and §8 (branch `nxds` is a demonstration).
+3. **Working group:** ≥ 3 volunteers, including a maintainer of another validator, chaired by someone other than the author. It brings `nxds_tools` in through reviewed pull requests, maintains it, reports in writing on checkpoints, and brings the 14 questions to a vote.
+
+If rejected: nothing changes.
+
+---
+
+## Decision details
+
+| | |
+|---|---|
+| dates (targets) | phase 0: first release 2027 · Q1, Q2, Q5: first half 2027 · phase 1: second half 2027 · other questions: by NIAC2028 · nyaml agreement: first half 2028 · phase 2: around NIAC2028 |
+| checkpoints | written report to the NIAC before each phase; accepted unless a member asks for a vote |
+| stop or undo | a NIAC vote at any member's request — e.g. fewer than three members, no second maintainer, a checkpoint more than a year late; phases 0–2 can be undone technically |
+| remaining work | review of `nxds_tools`, the specification, 14 votes, a second validator, the nyaml agreement — all voluntary |
+| other risks | R4 a new file format confuses (nyaml agreement first) · R5 work stops halfway (every phase is stable) · R7/R15 tools that read only NXDL (NXDL published until a set date) · R13 YAML before the spec (limited to what NXDL can say) · R14 split with nyaml (agreement first; NIAC decides after 12 months) |
+
+---
+
+
+## How this was made
+
+- AI agents (Claude), directed by the author:
+  - research: definitions repository, 1 676 issues and pull requests, wiki, 7 libraries
+  - development: `nxds_tools`, the examples
+  - measurements on large files
+  - review: AI role-plays of different readers — **not** a community review
+- The community review starts now
+
+Proposal: `wip/proposal.md` · Branch: `nxds`
+
+---
+
+# Thank you
+
+Questions?
+
+</textarea>
+</section>
+</div></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/plugin/markdown/markdown.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/plugin/highlight/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/plugin/notes/notes.min.js"></script>
+<script>
+  Reveal.initialize({
+    hash: true, slideNumber: "c/t", width: 1280, height: 800, margin: 0.04,
+    plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+  });
+</script>
+</body>
+</html>

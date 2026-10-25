@@ -36,4 +36,4 @@ jobs:
 
       - name: validate
         run: |
-          python -m dev_tools nxtest
+          make nxtest PYTHON=python

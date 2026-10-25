@@ -1,0 +1,17 @@
+nxds: "0.1"
+class: NXcase_symbols
+category: application
+describes: NXroot
+defaults: {min: 1, binding: true}
+symbols:
+  n: {doc: number of points}
+children:
+  ENTRY:
+    node: group
+    class: NXentry
+    name: {any: true}
+    children:
+      definition: {node: dataset, enum: [NXcase_symbols]}
+      x: {node: dataset, type: NX_FLOAT, shape: [n]}
+      y: {node: dataset, type: NX_FLOAT, shape: [n]}
+      xy: {node: dataset, type: NX_FLOAT, shape: [{expr: 2*n}]}

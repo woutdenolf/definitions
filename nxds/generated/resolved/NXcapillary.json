@@ -1,0 +1,52 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/COLLECTION"},
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"class": "NXdata", "declared_by": "NXcapillary", "docs": ["NXcapillary/gain"], "id": "gain", "name": {"exact": "gain"}, "node": "group", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q4", "Q11"], "recommended": false, "refines": "DATA", "via": ["T1", "T2", "T4", "T6", "T7", "T18"]},
+    {"class": "NXdata", "declared_by": "NXcapillary", "docs": ["NXcapillary/transmission"], "id": "transmission", "name": {"exact": "transmission"}, "node": "group", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q4", "Q11"], "recommended": false, "refines": "DATA", "via": ["T1", "T2", "T4", "T6", "T7", "T18"]},
+    {"node": "group", "ref": "NXobject/LOG"},
+    {"node": "group", "ref": "NXobject/NOTE"},
+    {"node": "group", "ref": "NXobject/PARAMETERS"},
+    {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+    {"node": "dataset", "ref": "NXobject/identifierNAME"},
+    {"node": "dataset", "ref": "NXcomponent/applied"},
+    {"node": "dataset", "ref": "NXcomponent/name"},
+    {"node": "dataset", "ref": "NXcomponent/description"},
+    {"node": "dataset", "ref": "NXcomponent/inputs"},
+    {"node": "dataset", "ref": "NXcomponent/outputs"},
+    {"node": "group", "ref": "NXcomponent/FABRICATION"},
+    {"node": "group", "ref": "NXcomponent/PROGRAM"},
+    {"node": "group", "ref": "NXcomponent/ENVIRONMENT"},
+    {"declared_by": "NXcomponent", "docs": ["NXcomponent/depends_on", "NXcapillary/depends_on"], "id": "depends_on", "name": {"exact": "depends_on"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "refined_by": ["NXcapillary"], "type": "NX_CHAR", "via": ["T1", "T4", "T7"]},
+    {"node": "group", "ref": "NXcomponent/TRANSFORMATIONS"},
+    {"declared_by": "NXcapillary", "docs": ["NXcapillary/type"], "enum": {"open": false, "values": [{"value": "single_bounce"}, {"value": "polycapillary"}, {"value": "conical_capillary"}]}, "id": "type", "name": {"exact": "type"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXcapillary", "docs": ["NXcapillary/manufacturer"], "id": "manufacturer", "name": {"exact": "manufacturer"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXcapillary", "id": "maximum_incident_angle", "name": {"exact": "maximum_incident_angle"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_FLOAT", "units": {"category": "NX_ANGLE"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXcapillary", "id": "accepting_aperture", "name": {"exact": "accepting_aperture"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_FLOAT", "units": {"category": "NX_ANGLE"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXcapillary", "id": "working_distance", "name": {"exact": "working_distance"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_FLOAT", "units": {"category": "NX_LENGTH"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXcapillary", "docs": ["NXcapillary/focal_size"], "id": "focal_size", "name": {"exact": "focal_size"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_FLOAT", "via": ["T1", "T4", "T7"]}
+  ],
+  "class": "NXcapillary",
+  "extends": "NXcomponent",
+  "lossy": [],
+  "provisional": [],
+  "require": [],
+  "source": "base_classes/NXcapillary.nxdl.xml",
+  "status": "base",
+  "symbols": [],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"},
+  "via": []
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {}
+}

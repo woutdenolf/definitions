@@ -1,0 +1,166 @@
+nxds: '0.1'
+class: NXcg_half_edge_data_structure
+category: base
+extends: NXcg_primitive
+doc: |-
+  Computational geometry description of a half-edge data structure.
+
+  Such a data structure can be used to efficiently circulate around faces
+  and iterate over vertices of a planar graph. The data structure is also
+  known as a doubly connected edge list.
+
+  Indices can be used as identifier and thus names for individual instances.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+symbols:
+  d:
+    doc: The dimensionality, which has to be at least 2.
+  n_v: {doc: The number of vertices.}
+  n_f: {doc: The number of faces.}
+  n_he: {doc: The number of half-edges.}
+children:
+  dimensionality:
+    node: dataset
+    type: NX_POSINT
+    units: {category: NX_UNITLESS}
+    doc: Dimensionality of the primitives described.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  number_of_vertices:
+    node: dataset
+    type: NX_UINT
+    shape: [n_f]
+    units: {category: NX_UNITLESS}
+    doc: |-
+      Number of vertices for each face.
+
+      Each entry represents the total number of vertices for that face,
+      irrespectively whether vertices are shared among faces or not.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  number_of_edges:
+    node: dataset
+    type: NX_UINT
+    shape: [n_he]
+    units: {category: NX_UNITLESS}
+    doc: |-
+      Number of edges for each face.
+
+      Each entry represents the total number of edges for that face,
+      irrespectively whether edges are shared across faces or not.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  index_offset_vertex:
+    node: dataset
+    type: NX_INT
+    units: {category: NX_UNITLESS}
+    doc: |-
+      Integer offset whereby the identifier of the first member
+      of the vertices differs from zero.
+
+      Identifier can be defined explicitly or implicitly.
+      Inspect the definition of :ref:`NXcg_primitive` for further details.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  index_offset_edge:
+    node: dataset
+    type: NX_INT
+    units: {category: NX_UNITLESS}
+    doc: |-
+      Integer offset whereby the identifier of the first member
+      of the edges differs from zero.
+
+      Identifier can be defined explicitly or implicitly.
+      Inspect the definition of :ref:`NXcg_primitive` for further details.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  index_offset_face:
+    node: dataset
+    type: NX_INT
+    doc: |-
+      Integer offset whereby the identifier of the first member
+      of the faces differs from zero.
+
+      Identifier can be defined explicitly or implicitly.
+      Inspect the definition of :ref:`NXcg_primitive` for further details.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  position:
+    node: dataset
+    type: NX_NUMBER
+    shape: [n_v, d]
+    units: {category: NX_ANY}
+    doc: The position of the vertices.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  vertex_incident_half_edge:
+    node: dataset
+    type: NX_INT
+    shape: [n_v]
+    units: {category: NX_UNITLESS}
+    doc: Identifier of the incident half-edge.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  face_half_edge:
+    node: dataset
+    type: NX_INT
+    shape: [n_f]
+    units: {category: NX_UNITLESS}
+    doc: Identifier of the (starting)/associated half-edge of the face.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  half_edge_vertex_origin:
+    node: dataset
+    type: NX_INT
+    shape: [n_he]
+    units: {category: NX_UNITLESS}
+    doc: The identifier of the vertex from which this half-edge is outwards pointing.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  half_edge_twin:
+    node: dataset
+    type: NX_INT
+    shape: [n_he]
+    units: {category: NX_UNITLESS}
+    doc: Identifier of the associated oppositely pointing half-edge.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  half_edge_incident_face:
+    node: dataset
+    type: NX_INT
+    shape: [n_he]
+    units: {category: NX_UNITLESS}
+    doc: |-
+      If the half-edge is a boundary half-edge the
+      incident face identifier is NULL, i.e. 0.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  half_edge_next:
+    node: dataset
+    type: NX_INT
+    shape: [n_he]
+    units: {category: NX_UNITLESS}
+    doc: Identifier of the next half-edge.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  half_edge_prev:
+    node: dataset
+    type: NX_INT
+    shape: [n_he]
+    units: {category: NX_UNITLESS}
+    doc: Identifier of the previous half-edge.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  weinberg_vector:
+    node: dataset
+    doc: |-
+      Users are referred to the literature for the background of L. Weinberg's
+      work about topological characterization of planar graphs:
+
+      * `L. Weinberg 1966a, <https://dx.doi.org/10.1109/TCT.1964.1082216>`_
+      * `L. Weinberg, 1966b, <https://dx.doi.org/10.1137/0114062>`_
+      * `E. A. Lazar et al. <https://doi.org/10.1103/PhysRevLett.109.095505>`_
+
+      and how this work can e.g. be applied in space-filling tessellations
+      of microstructural objects like crystals/grains.
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]

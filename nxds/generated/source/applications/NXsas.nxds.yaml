@@ -1,0 +1,320 @@
+nxds: '0.1'
+class: NXsas
+category: application
+describes: NXroot
+doc: |-
+  Raw, monochromatic 2-D SAS data with an area detector.
+
+  This is an application definition for raw data (not processed or reduced data)
+  from a 2-D small angle scattering instrument collected with a monochromatic
+  beam and an area detector. It is meant to be suitable both for neutron SANS
+  and X-ray SAXS data.
+
+  It covers all raw data from any monochromatic SAS techniques that
+  use an area detector: SAS, WSAS, grazing incidence, GISAS
+
+  It covers all raw data from any SAS techniques that use an area detector and
+  a monochromatic beam.
+defaults: {min: 1, binding: true, type: NX_CHAR}
+symbols:
+  nXPixel: {doc: Number of pixels in x direction.}
+  nYPixel: {doc: Number of pixels in y direction.}
+children:
+  ENTRY:
+    node: group
+    name: {any: true}
+    class: NXentry
+    children:
+      title:
+        node: dataset
+        occurs: {min: 0}
+        via: [T0, T1, T6, T7]
+        provisional: [Q1]
+      start_time:
+        node: dataset
+        occurs: {min: 0}
+        type: NX_DATE_TIME
+        via: [T1, T6, T7]
+        provisional: [Q1]
+      end_time:
+        node: dataset
+        occurs: {min: 0}
+        type: NX_DATE_TIME
+        via: [T1, T6, T7]
+        provisional: [Q1]
+      definition:
+        node: dataset
+        enum: [NXsas]
+        doc: Official NeXus NXDL schema to which this file conforms.
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      INSTRUMENT:
+        node: group
+        name: {any: true}
+        class: NXinstrument
+        children:
+          SOURCE:
+            node: group
+            name: {any: true}
+            class: NXsource
+            children:
+              type:
+                node: dataset
+                doc: Type of radiation source.
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+              name:
+                node: dataset
+                occurs: {min: 0}
+                doc: Name of the radiation source.
+                via: [T0, T1, T6, T7]
+                provisional: [Q1]
+              probe:
+                node: dataset
+                enum: [neutron, x-ray]
+                doc: Name of radiation probe, necessary to compute the sample contrast.
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T2, T5, T7]
+            provisional: [Q1, Q2, Q11]
+          MONOCHROMATOR:
+            node: group
+            name: {any: true}
+            class: NXmonochromator
+            children:
+              wavelength:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_WAVELENGTH}
+                doc: The wavelength (:math:`\lambda`) of the radiation.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              wavelength_spread:
+                node: dataset
+                occurs: {min: 0}
+                type: NX_FLOAT
+                doc: |-
+                  delta_lambda/lambda (:math:`\Delta\lambda/\lambda`):
+                  Important for resolution calculations.
+                via: [T1, T6, T7]
+                provisional: [Q1]
+            via: [T1, T2, T5, T7]
+            provisional: [Q1, Q2, Q11]
+          COLLIMATOR:
+            node: group
+            name: {any: true}
+            class: NXcollimator
+            occurs: {min: 0}
+            children:
+              GEOMETRY:
+                node: group
+                name: {any: true}
+                class: NXgeometry
+                children:
+                  SHAPE:
+                    node: group
+                    name: {any: true}
+                    class: NXshape
+                    children:
+                      shape:
+                        node: dataset
+                        type: NX_CHAR
+                        enum: [nxcylinder, nxbox]
+                        via: [T1, T5, T7]
+                        provisional: [Q1, Q2]
+                      size:
+                        node: dataset
+                        type: NX_FLOAT
+                        units: {category: NX_LENGTH}
+                        doc: The collimation length.
+                        via: [T1, T5, T7]
+                        provisional: [Q1, Q2]
+                    via: [T1, T2, T5, T7]
+                    provisional: [Q1, Q2, Q11]
+                via: [T1, T2, T5, T7]
+                provisional: [Q1, Q2, Q11]
+            via: [T1, T2, T6, T7]
+            provisional: [Q1, Q11]
+          DETECTOR:
+            node: group
+            name: {any: true}
+            class: NXdetector
+            children:
+              data:
+                node: dataset
+                type: NX_NUMBER
+                shape: [nXPixel, nYPixel]
+                doc: |-
+                  This is area detector data, number of x-pixel versus
+                  number of y-pixels.
+
+                  Since the beam center is to be determined as a step of data
+                  reduction, it is not necessary to document or assume the position of
+                  the beam center in acquired data.
+
+                  It is necessary to define which are the x and y directions, to coordinate
+                  with the pixel size and compute Q.
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              distance:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_LENGTH}
+                doc: The distance between detector and sample.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              x_pixel_size:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_LENGTH}
+                doc: Physical size of a pixel in x-direction.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              y_pixel_size:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_LENGTH}
+                doc: Physical size of a pixel in y-direction.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              polar_angle:
+                node: dataset
+                occurs: {min: 0}
+                type: NX_FLOAT
+                units: {category: NX_ANGLE}
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              azimuthal_angle:
+                node: dataset
+                occurs: {min: 0}
+                type: NX_FLOAT
+                units: {category: NX_ANGLE}
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              rotation_angle:
+                node: dataset
+                occurs: {min: 0}
+                type: NX_FLOAT
+                units: {category: NX_ANGLE}
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              aequatorial_angle:
+                node: dataset
+                occurs: {min: 0}
+                type: NX_FLOAT
+                units: {category: NX_ANGLE}
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              beam_center_x:
+                node: dataset
+                occurs: {min: 0}
+                type: NX_FLOAT
+                units: {category: NX_LENGTH}
+                doc: |-
+                  This is the x position where the direct beam would hit the detector.
+                  This is a length, not a pixel position, and can be outside of the
+                  actual detector.
+
+                  It is expected that data reduction will determine beam center from
+                  the raw data, thus it is not required here.  The instrument can
+                  provide an initial or nominal value to advise data reduction.
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              beam_center_y:
+                node: dataset
+                occurs: {min: 0}
+                type: NX_FLOAT
+                units: {category: NX_LENGTH}
+                doc: |-
+                  This is the y position where the direct beam would hit the detector.
+                  This is a length, not a pixel position, and can be outside of the
+                  actual detector.
+
+                  It is expected that data reduction will determine beam center from
+                  the raw data, thus it is not required here.  The instrument can
+                  provide an initial or nominal value to advise data reduction.
+                via: [T1, T6, T7]
+                provisional: [Q1]
+            via: [T1, T2, T5, T7]
+            provisional: [Q1, Q2, Q11]
+          name:
+            node: dataset
+            type: NX_CHAR
+            doc: Name of the instrument actually used to perform the experiment.
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T2, T5, T7]
+        provisional: [Q1, Q2, Q11]
+      SAMPLE:
+        node: group
+        name: {any: true}
+        class: NXsample
+        occurs: {min: 0}
+        children:
+          name:
+            node: dataset
+            doc: Descriptive name of sample.
+            via: [T0, T1, T5, T7]
+            provisional: [Q1, Q2]
+          aequatorial_angle:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_FLOAT
+            units: {category: NX_ANGLE}
+            via: [T1, T6, T7]
+            provisional: [Q1]
+        via: [T1, T2, T6, T7]
+        provisional: [Q1, Q11]
+      MONITOR:
+        node: group
+        name: {any: true}
+        class: NXmonitor
+        occurs: {min: 0}
+        children:
+          mode:
+            node: dataset
+            enum: [monitor, timer]
+            doc: |-
+              Count to a preset value based on either clock time
+              (timer) or received monitor counts (monitor).
+            via: [T0, T1, T5, T7]
+            provisional: [Q1, Q2]
+          preset:
+            node: dataset
+            type: NX_FLOAT
+            doc: Preset value for time or monitor.
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          integral:
+            node: dataset
+            type: NX_FLOAT
+            units: {category: NX_ANY}
+            doc: Total integral monitor counts.
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T2, T6, T7]
+        provisional: [Q1, Q11]
+      DATA:
+        node: group
+        name: {any: true}
+        class: NXdata
+        attributes:
+          signal:
+            occurs: {min: 0}
+            enum: [data]
+            doc: |-
+              Name the *plottable* field.  The link here defines this name as
+              ``data``.
+            via: [T0, T1, T6]
+            provisional: [Q1]
+        children:
+          data:
+            node: link
+            target: ENTRY/INSTRUMENT/DETECTOR/data
+            via: [T1, T5, T10]
+            provisional: [Q2, Q8]
+        via: [T1, T2, T5, T7]
+        provisional: [Q1, Q2, Q11]
+    via: [T1, T2, T5, T7]
+    provisional: [Q1, Q2, Q11]
+via: [T8]

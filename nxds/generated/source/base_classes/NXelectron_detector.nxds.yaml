@@ -1,0 +1,40 @@
+nxds: '0.1'
+class: NXelectron_detector
+category: base
+extends: NXdetector
+doc: A subclass of NXdetector for detectors that detect electrons.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  amplifier_type:
+    node: dataset
+    type: NX_CHAR
+    doc: Type of electron amplifier, MCP, channeltron, etc.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  detector_type:
+    node: dataset
+    type: NX_CHAR
+    doc: Description of the electron detector type, DLD, Phosphor+CCD, CMOS.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  detector_voltage:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_VOLTAGE}
+    doc: Voltage applied to the electron detector.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  amplifier_voltage:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_VOLTAGE}
+    doc: Voltage applied to the amplifier.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  amplifier_bias:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_VOLTAGE}
+    doc: The low voltage of the amplifier might not be the ground.
+    via: [T1, T4, T7]
+    provisional: [Q1]

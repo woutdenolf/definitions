@@ -1,0 +1,4 @@
+description: >
+  `choice` (T11): one group member per alternative, all with the exact name
+  `shape` and different classes, and `exactly_one_of` over them.
+covers: [T11, require.exactly_one_of]

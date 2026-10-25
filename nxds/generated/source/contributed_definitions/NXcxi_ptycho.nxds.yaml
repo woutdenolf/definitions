@@ -1,0 +1,426 @@
+nxds: '0.1'
+class: NXcxi_ptycho
+category: application
+describes: NXroot
+doc: |-
+  Application definition for a ptychography experiment, compatible with CXI from version 1.6.
+
+  This is compatible with CXI from version 1.6 if this application definition
+  is put at the top "entry" level. Above this a "cxi_version" field should be defined. The CXI format is name based, rather than class based, and so it is important
+  to pay attention to the naming convention to be CXI compatible. There are duplications due to the format merger. These should be achieved by linking,
+  with hdf5 Virtual Dataset being used to restructure any data that needs to be remapped. To be fully CXI compatible, all units (including energy) must be in SI units.
+
+  An example here is that CXI expects the data to always to have shape (npts_x*npts_y, frame_size_x, frame_size_y). For nexus this is only true for arbitrary scan paths
+  with raster format scans taking shape (npts_x, npts_y, frame_size_x, frame_size_y).
+defaults: {min: 1, binding: true, type: NX_CHAR}
+symbols:
+  npts_x: {doc: The number of points in the x direction}
+  npts_y: {doc: 'Number of points in the y direction. '}
+  frame_size_x: {doc: Number of detector pixels in x}
+  frame_size_y: {doc: Number of detector pixels in y}
+children:
+  entry_1:
+    node: group
+    class: NXentry
+    children:
+      title:
+        node: dataset
+        occurs: {min: 0, max: 1}
+        via: [T0, T1, T6]
+        provisional: [Q1]
+      start_time:
+        node: dataset
+        occurs: {min: 0, max: 1}
+        type: NX_DATE_TIME
+        via: [T1, T6]
+        provisional: [Q1]
+      end_time:
+        node: dataset
+        occurs: {min: 0, max: 1}
+        type: NX_DATE_TIME
+        via: [T1, T6]
+        provisional: [Q1]
+      definition:
+        node: dataset
+        occurs: {min: 1, max: 1}
+        type: NX_CHAR
+        enum: [NXcxi_ptycho]
+        doc: Official NeXus NXDL schema to which this file conforms
+        via: [T1, T6]
+        provisional: [Q1]
+      instrument_1:
+        node: group
+        class: NXinstrument
+        occurs: {min: 1, max: 1}
+        children:
+          source_1:
+            node: group
+            class: NXsource
+            occurs: {min: 1, max: 1}
+            children:
+              name:
+                node: dataset
+                occurs: {min: 1, max: 1}
+                type: NX_CHAR
+                via: [T1, T6]
+                provisional: [Q1]
+              energy:
+                node: dataset
+                occurs: {min: 1, max: 1}
+                type: NX_FLOAT
+                doc: This is the energy of the machine, not the beamline.
+                via: [T1, T6]
+                provisional: [Q1]
+              probe:
+                node: dataset
+                occurs: {min: 1, max: 1}
+                type: NX_FLOAT
+                via: [T1, T6]
+                provisional: [Q1]
+              type:
+                node: dataset
+                occurs: {min: 1, max: 1}
+                type: NX_FLOAT
+                via: [T1, T6]
+                provisional: [Q1]
+            via: [T1, T6]
+            provisional: [Q1]
+          beam_1:
+            node: group
+            class: NXbeam
+            occurs: {min: 1, max: 1}
+            children:
+              energy:
+                node: dataset
+                occurs: {min: 1, max: 1}
+                type: NX_FLOAT
+                attributes:
+                  units:
+                    occurs: {min: 1}
+                    type: NX_CHAR
+                    via: [T1, T6]
+                    provisional: [Q1]
+                via: [T1, T6]
+                provisional: [Q1]
+              extent:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_FLOAT
+                attributes:
+                  units:
+                    occurs: {min: 1}
+                    type: NX_CHAR
+                    via: [T1, T6]
+                    provisional: [Q1]
+                via: [T1, T6]
+                provisional: [Q1]
+              incident_beam_divergence:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_FLOAT
+                attributes:
+                  units:
+                    occurs: {min: 1}
+                    type: NX_CHAR
+                    via: [T1, T6]
+                    provisional: [Q1]
+                via: [T1, T6]
+                provisional: [Q1]
+              incident_beam_energy:
+                node: dataset
+                occurs: {min: 1, max: 1}
+                type: NX_FLOAT
+                attributes:
+                  units:
+                    occurs: {min: 1}
+                    type: NX_CHAR
+                    via: [T1, T6]
+                    provisional: [Q1]
+                via: [T1, T6]
+                provisional: [Q1]
+              incident_energy_spread:
+                node: dataset
+                occurs: {min: 1, max: 1}
+                type: NX_FLOAT
+                attributes:
+                  units:
+                    occurs: {min: 1}
+                    type: NX_CHAR
+                    via: [T1, T6]
+                    provisional: [Q1]
+                via: [T1, T6]
+                provisional: [Q1]
+            via: [T1, T6]
+            provisional: [Q1]
+          detector_1:
+            node: group
+            class: NXdetector
+            occurs: {min: 1, max: 1}
+            attributes:
+              axes:
+                type: NX_CHAR
+                doc: should have value "[, data]"
+                via: [T1, T5]
+                provisional: [Q2]
+              signal:
+                type: NX_CHAR
+                doc: should have value "data"
+                via: [T1, T5]
+                provisional: [Q2]
+            children:
+              transformations:
+                node: group
+                class: NXtransformations
+                children:
+                  vector:
+                    node: dataset
+                    occurs: {min: 1, max: 1}
+                    type: NX_NUMBER
+                    via: [T1, T6]
+                    provisional: [Q1]
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              translation:
+                node: dataset
+                occurs: {min: 1, max: 1}
+                type: NX_FLOAT
+                units: {category: NX_LENGTH}
+                doc: This is an array of shape (npts_x*npts_y, 3) and can be a Virtual Dataset
+                  of x and y
+                attributes:
+                  units:
+                    occurs: {min: 1}
+                    type: NX_CHAR
+                    via: [T1, T6]
+                    provisional: [Q1]
+                  axes:
+                    occurs: {min: 1}
+                    type: NX_CHAR
+                    doc: this should take the value "translation:$slowaxisname:$fastaxisname"
+                    via: [T1, T6]
+                    provisional: [Q1]
+                  interpretation:
+                    occurs: {min: 1}
+                    type: NX_CHAR
+                    doc: This should be "image"
+                    via: [T1, T6]
+                    provisional: [Q1]
+                via: [T1, T6]
+                provisional: [Q1]
+              data:
+                node: dataset
+                occurs: {min: 1, max: 1}
+                type: NX_INT
+                shape: [npts_x, npts_y, frame_size_x, frame_size_y]
+                attributes:
+                  signal:
+                    occurs: {min: 0}
+                    type: NX_POSINT
+                    enum: ['1']
+                    via: [T19]
+                via: [T1, T6, T9]
+                provisional: [Q1]
+              data_1:
+                node: link
+                target: ENTRY/INSTRUMENT/DETECTOR/data
+                doc: |-
+                  This data must always have shape (npts_x*npts_y, frame_size_x, frame_size_y) regardless
+                  of the scan pattern. Use hdf5 virtual dataset to achieve this.
+                via: [T1, T5, T10]
+                provisional: [Q2, Q8]
+              x_pixel_size:
+                node: dataset
+                occurs: {min: 1, max: 1}
+                type: NX_FLOAT
+                units: {category: NX_LENGTH}
+                attributes:
+                  units:
+                    occurs: {min: 1}
+                    type: NX_CHAR
+                    via: [T1, T6]
+                    provisional: [Q1]
+                via: [T1, T6]
+                provisional: [Q1]
+              y_pixel_size:
+                node: dataset
+                occurs: {min: 1, max: 1}
+                type: NX_FLOAT
+                units: {category: NX_LENGTH}
+                attributes:
+                  units:
+                    occurs: {min: 1}
+                    type: NX_CHAR
+                    via: [T1, T6]
+                    provisional: [Q1]
+                via: [T1, T6]
+                provisional: [Q1]
+              distance:
+                node: dataset
+                occurs: {min: 1, max: 1}
+                type: NX_FLOAT
+                units: {category: NX_LENGTH}
+                doc: The distance between the detector and the sample
+                attributes:
+                  units:
+                    occurs: {min: 1}
+                    type: NX_CHAR
+                    via: [T1, T6]
+                    provisional: [Q1]
+                via: [T1, T6]
+                provisional: [Q1]
+              beam_center_x:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_FLOAT
+                units: {category: NX_LENGTH}
+                attributes:
+                  units:
+                    occurs: {min: 1}
+                    type: NX_CHAR
+                    via: [T1, T6]
+                    provisional: [Q1]
+                via: [T1, T6]
+                provisional: [Q1]
+              beam_center_y:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_FLOAT
+                units: {category: NX_LENGTH}
+                attributes:
+                  units:
+                    occurs: {min: 1}
+                    type: NX_CHAR
+                    via: [T1, T6]
+                    provisional: [Q1]
+                via: [T1, T6]
+                provisional: [Q1]
+            via: [T1, T6]
+            provisional: [Q1]
+          MONITOR:
+            node: group
+            name: {any: true}
+            class: NXmonitor
+            occurs: {min: 0, max: 1}
+            children:
+              data:
+                node: dataset
+                type: NX_FLOAT
+                shape: [npts_x, npts_y]
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+            via: [T1, T2, T6]
+            provisional: [Q1, Q11]
+        via: [T1, T6]
+        provisional: [Q1]
+    via: [T1, T5, T7]
+    provisional: [Q1, Q2]
+  DATA:
+    node: group
+    name: {any: true}
+    class: NXdata
+    occurs: {min: 1, max: 1}
+    attributes:
+      axes:
+        occurs: {min: 1}
+        type: NX_CHAR
+        doc: This should be "[x,.]" for arbitrary scanning patterns, and "[x,.,.]" for raster
+        via: [T1, T6]
+        provisional: [Q1]
+      signal:
+        occurs: {min: 1}
+        type: NX_CHAR
+        doc: This should be "data"
+        via: [T1, T6]
+        provisional: [Q1]
+    children:
+      data:
+        node: link
+        target: ENTRY/INSTRUMENT/DETECTOR/data
+        via: [T1, T5, T10]
+        provisional: [Q2, Q8]
+      x:
+        node: link
+        target: ENTRY/SAMPLE/TRANSFORMATIONS/x
+        via: [T1, T5, T10]
+        provisional: [Q2, Q8]
+      y:
+        node: link
+        target: ENTRY/SAMPLE/TRANSFORMATIONS/y
+        via: [T1, T5, T10]
+        provisional: [Q2, Q8]
+      x_indices:
+        node: dataset
+        type: NX_CHAR
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      y_indices:
+        node: dataset
+        type: NX_CHAR
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+    via: [T1, T2, T6]
+    provisional: [Q1, Q11]
+  data_1:
+    node: group
+    class: NXcollection
+    occurs: {min: 1, max: 1}
+    doc: |-
+      To ensure CXI compatibility the data in this group must always have shape that is
+      (npts_x*npts_y, frame_size_x, frame_size_y). For nexus-style raster scans it is proposed that
+      hdf5 virtual dataset is used.
+    children:
+      data:
+        node: link
+        target: ENTRY/INSTRUMENT/DETECTOR/data
+        via: [T1, T5, T10]
+        provisional: [Q2, Q8]
+      translation:
+        node: link
+        target: ENTRY/INSTRUMENT/DETECTOR/translation
+        via: [T1, T5, T10]
+        provisional: [Q2, Q8]
+    via: [T1, T6]
+    provisional: [Q1]
+  sample_1:
+    node: group
+    class: NXsample
+    occurs: {min: 1, max: 1}
+    children:
+      name:
+        node: dataset
+        occurs: {min: 0, max: 1}
+        type: NX_CHAR
+        via: [T1, T6]
+        provisional: [Q1]
+      transformations:
+        node: group
+        class: NXtransformations
+        doc: |-
+          This must contain two fields with the x and y motors that are linked via the
+          dependency tree according to the real-life motor layout dependency.
+          For raster scans x and y will have shape (npts_x, npts_y)
+          For arbitrary scans x and y will be (npts_x*npts_y,)
+          An attribute with the units for each motor is required.
+        attributes:
+          vector:
+            occurs: {min: 1}
+            type: NX_NUMBER
+            via: [T1, T6]
+            provisional: [Q1]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      geometry_1:
+        node: group
+        class: NXcollection
+        occurs: {min: 1, max: 1}
+        children:
+          translation:
+            node: link
+            target: ENTRY/INSTRUMENT/DETECTOR/translation
+            via: [T1, T5, T10]
+            provisional: [Q2, Q8]
+        via: [T1, T6]
+        provisional: [Q1]
+    via: [T1, T6]
+    provisional: [Q1]
+via: [T8]

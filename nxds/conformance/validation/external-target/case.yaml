@@ -1,0 +1,6 @@
+description: >
+  A link target in another file, walked before the link (§9.8): the
+  monochromator is an external link into `other.h5`; `/entry/zdata/energy`
+  (a soft link, after the instrument in walk order) points to the energy there,
+  whose assignment is found again by file and address: no LINK.
+capabilities: []

@@ -1,0 +1,3 @@
+description: Partial mode turns findings about absent objects into INCOMPLETE.
+partial: true
+capabilities: [partial]

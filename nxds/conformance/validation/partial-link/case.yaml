@@ -1,0 +1,6 @@
+description: >
+  Partial mode (§11) with a dangling link: the monochromator is not written yet,
+  so `/entry/data/energy` points to nothing (LINK → INCOMPLETE) and the
+  instrument is missing (MISSING → INCOMPLETE).
+partial: true
+capabilities: [partial]

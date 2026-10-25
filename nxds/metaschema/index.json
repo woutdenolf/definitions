@@ -1,0 +1,120 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "index.json",
+ "title": "NXDS index",
+ "description": "Everything a validator needs besides the resolved files (spec §6.5). Written by hand.",
+ "type": "object",
+ "additionalProperties": false,
+ "required": ["nxds", "release", "revision", "names", "unit_symbols", "profiles", "codes", "classes"],
+ "properties": {
+  "nxds": {"type": "string"},
+  "release": {"type": "string"},
+  "revision": {"type": "integer", "minimum": 1},
+  "features": {"type": "array", "items": {"type": "string"}, "description": "features outside the core used by any class (§6.4)"},
+  "decisions": {"type": "object", "additionalProperties": {"type": "string"}, "description": "the open questions Q1, Q2, …"},
+  "statuses": {"type": "object", "additionalProperties": {"type": "string"}, "description": "meaning of each class status (documentation only)"},
+  "types": {"type": "object", "additionalProperties": {"$ref": "#/$defs/type"}},
+  "units": {"type": "object", "additionalProperties": {"$ref": "#/$defs/units_category"}},
+  "names": {"$ref": "#/$defs/names"},
+  "unit_symbols": {"$ref": "#/$defs/unit_symbols"},
+  "profiles": {"type": "object", "additionalProperties": {"$ref": "#/$defs/profile"}},
+  "codes": {"type": "object", "additionalProperties": {"$ref": "#/$defs/code"}},
+  "classes": {"type": "object", "additionalProperties": {"$ref": "#/$defs/class"}}
+ },
+ "$defs": {
+  "strings": {"type": "array", "items": {"type": "string"}},
+  "dimensions": {"type": "object", "additionalProperties": {"type": "integer"}, "description": "base dimension → power"},
+  "type": {
+   "type": "object",
+   "additionalProperties": false,
+   "required": ["variety"],
+   "properties": {
+    "variety": {"enum": ["atomic", "list", "union"]},
+    "base": {"type": "string"},
+    "builtins": {"$ref": "#/$defs/strings"},
+    "members": {"$ref": "#/$defs/strings"},
+    "length": {"type": "integer", "minimum": 0},
+    "min_value": {"type": "number"},
+    "doc": {"type": "string"}
+   }
+  },
+  "units_category": {
+   "type": "object",
+   "additionalProperties": false,
+   "properties": {
+    "members": {"$ref": "#/$defs/strings"},
+    "examples": {"$ref": "#/$defs/strings"},
+    "dimensions": {"type": "array", "items": {"$ref": "#/$defs/dimensions"}, "description": "alternatives; absent: any unit string"},
+    "empty": {"type": "boolean", "description": "an empty unit string is accepted (§14)"},
+    "doc": {"type": "string"}
+   }
+  },
+  "names": {
+   "type": "object",
+   "additionalProperties": false,
+   "required": ["item_pattern", "item_max_length", "class_pattern"],
+   "properties": {
+    "item_pattern": {"type": "string", "description": "I-Regexp, implicitly anchored (§4.3)"},
+    "item_max_length": {"type": ["integer", "null"]},
+    "class_pattern": {"type": "string"},
+    "target_pattern": {"type": "string"}
+   }
+  },
+  "unit_symbols": {
+   "type": "object",
+   "additionalProperties": false,
+   "required": ["prefixes", "prefixed", "plain"],
+   "properties": {
+    "prefixes": {"type": "object", "additionalProperties": {"type": "integer"}, "description": "SI prefix → power of ten"},
+    "prefixed": {"type": "object", "additionalProperties": {"$ref": "#/$defs/dimensions"}, "description": "symbols that take a prefix"},
+    "plain": {"type": "object", "additionalProperties": {"$ref": "#/$defs/dimensions"}}
+   }
+  },
+  "profile": {
+   "type": "object",
+   "additionalProperties": false,
+   "required": ["name", "class_attribute", "units_attribute", "root_class", "entry_points", "dispatch_dataset", "release_attribute", "link_target_attribute", "placeholder_characters", "stopped_attribute", "stopped_value", "links", "storage"],
+   "properties": {
+    "name": {"type": "string"},
+    "class_attribute": {"type": "string"},
+    "units_attribute": {"type": "string"},
+    "root_class": {"type": "string"},
+    "entry_points": {"$ref": "#/$defs/strings"},
+    "dispatch_dataset": {"type": "string"},
+    "release_attribute": {"type": "string"},
+    "link_target_attribute": {"type": "string"},
+    "placeholder_characters": {"type": "string", "description": "a regular-expression character class (Q3)"},
+    "stopped_attribute": {"type": "string"},
+    "stopped_value": {"type": "string"},
+    "links": {"type": "object", "additionalProperties": {"type": "string"}},
+    "storage": {"type": "object", "additionalProperties": {"$ref": "#/$defs/strings"}, "description": "data type → accepted storage types; every type listed (§13.1)"}
+   }
+  },
+  "severity": {"enum": ["E", "W", "I"]},
+  "code": {
+   "type": "object",
+   "additionalProperties": false,
+   "required": ["severity", "path", "partial", "doc"],
+   "properties": {
+    "severity": {"$ref": "#/$defs/severity"},
+    "exceptions": {"type": "object", "additionalProperties": {"$ref": "#/$defs/severity"}, "description": "condition → the severity used instead (scalar_against_length_1, stopped_entry, undeclared_error, expect)"},
+    "path": {"type": "string", "description": "where the finding is reported"},
+    "partial": {"enum": ["kept", "always", "growing", "missing", "dangling", "absent"], "description": "when partial mode reports it as INCOMPLETE"},
+    "tier": {"type": "string"},
+    "doc": {"type": "string"}
+   }
+  },
+  "class": {
+   "type": "object",
+   "additionalProperties": false,
+   "required": ["category", "status"],
+   "properties": {
+    "category": {"enum": ["base", "application"]},
+    "status": {"enum": ["base", "application", "contributed", "dormant", "local"]},
+    "extends": {"type": "string"},
+    "describes": {"type": "string", "description": "present: an application definition"},
+    "specialisations": {"type": "integer", "minimum": 0}
+   }
+  }
+ }
+}

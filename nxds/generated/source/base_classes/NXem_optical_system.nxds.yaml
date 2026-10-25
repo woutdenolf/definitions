@@ -1,0 +1,177 @@
+nxds: '0.1'
+class: NXem_optical_system
+category: base
+extends: NXobject
+doc: Base class for qualifying an electron optical system.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  camera_length:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_LENGTH}
+    doc: |-
+      Distance which is present between the specimen surface and the detector plane.
+
+      This concept is related to term `Camera Length`_ of the EMglossary standard.
+
+      .. _Camera Length: https://purls.helmholtz-metadaten.de/emg/EMG_00000008
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  magnification:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_DIMENSIONLESS}
+    doc: |-
+      The factor of enlargement of the apparent size,
+      not the physical size, of an object.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  defocus:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_LENGTH}
+    doc: |-
+      The defocus aberration constant (oftentimes referred to as c_1_0).
+      See respective details in :ref:`NXaberration` class instances.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  semi_convergence_angle:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_ANGLE}
+    doc: |-
+      The angle which is given by the semi-opening angle of the cone in a convergent
+      beam.
+
+      This concept is related to term `Convergence Angle`_ of the EMglossary standard.
+
+      .. _Convergence Angle: https://purls.helmholtz-metadaten.de/emg/EMG_00000010
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  field_of_view:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_LENGTH}
+    doc: |-
+      The extent of the observable parts of the specimen given the current
+      magnification and other settings of the instrument.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  working_distance:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_LENGTH}
+    doc: |-
+      Distance which is determined along the optical axis within the column from (1) the
+      lower end of the final optical element between the source and the specimen stage;
+      to (2) the point where the beam is focused.
+
+      This concept is related to term `Working Distance`_ of the EMglossary standard.
+
+      .. _Working Distance: https://purls.helmholtz-metadaten.de/emg/EMG_00000050
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  probe:
+    node: dataset
+    type: NX_NUMBER
+    shape: [2]
+    doc: |-
+      Geometry of the cross-section formed when the primary beam shines onto the
+      specimen surface. Reported as length of the semiaxes of the ellipsoidal
+      cross-section with semiaxes values sorted by decreasing length.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  probe_current:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_CURRENT}
+    doc: |-
+      Electrical current which arrives at the specimen.
+
+      This concept is related to term `Probe Current`_ of the EMglossary standard.
+
+      .. _Probe Current: https://purls.helmholtz-metadaten.de/emg/EMG_00000041
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  dose_management:
+    node: dataset
+    type: NX_CHAR
+    doc: |-
+      Specify further details how incipient electron or ion dose was quantified
+      (using beam_current, probe_current).
+
+      `Reference <https://doi.org/10.1017/S1551929522000840>`_ discusses
+      an approach for (electron) dose monitoring in an electron microscope.
+
+      The unit of the nominal dose rate is e-/(angstrom^2*s).
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  dose_rate:
+    node: dataset
+    type: NX_NUMBER
+    units: {fixed: 1/(angstrom^2*s)}
+    doc: Nominal dose rate.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  rotation:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_ANGLE}
+    doc: |-
+      In the process of passing through an :ref:`NXelectromagnetic_lens` electrons are typically accelerated
+      on a helical path about the optical axis. This causes an image rotation whose strength
+      is affected by the magnification.
+
+      Microscopes may be equipped with compensation methods (implemented in hardware
+      or software) that reduce but not necessarily eliminate this rotation.
+
+      See  `L. Reimer <https://doi.org/10.1007/978-3-540-38967-5>`_ for details.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  focal_length:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_LENGTH}
+    doc: |-
+      Distance which lies between the principal plane of the lens and the focal point
+      along the optical axis.
+
+      This concept is related to term `Focal Length`_ of the EMglossary standard.
+
+      .. _Focal Length: https://purls.helmholtz-metadaten.de/emg/EMG_00000029
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  tilt_correction:
+    node: dataset
+    type: NX_BOOLEAN
+    doc: |-
+      Details about an imaging setting used during acquisition to correct perspective
+      distortion when imaging a tilted surface or cross section.
+
+      This concept is related to term `Tilt Correction`_ of the EMglossary standard.
+
+      .. _Tilt Correction: https://purls.helmholtz-metadaten.de/emg/EMG_00000047
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  dynamic_focus_correction:
+    node: dataset
+    type: NX_BOOLEAN
+    doc: |-
+      Details about a dynamic focus correction used.
+
+      This concept is related to term `Dynamic Focus Correction`_ of the EMglossary standard.
+
+      .. _Dynamic Focus Correction: https://purls.helmholtz-metadaten.de/emg/EMG_00000016
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  dynamic_refocusing:
+    node: dataset
+    type: NX_CHAR
+    doc: |-
+      Details about a workflow used to keep the specimen in focus by automatic means.
+
+      This concept is related to term `Dynamic Refocusing`_ of the EMglossary standard.
+
+      .. _Dynamic Refocusing: https://purls.helmholtz-metadaten.de/emg/EMG_00000017
+    via: [T1, T4, T7]
+    provisional: [Q1]

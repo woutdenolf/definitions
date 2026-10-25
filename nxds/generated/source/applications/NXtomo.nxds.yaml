@@ -1,0 +1,235 @@
+nxds: '0.1'
+class: NXtomo
+category: application
+describes: NXroot
+doc: |-
+  This is the application definition for x-ray or neutron tomography raw data.
+
+  In tomography
+  a number of dark field images are measured, some bright field images and, of course the sample.
+  In order to distinguish between them images carry a image_key.
+defaults: {min: 1, binding: true, type: NX_CHAR}
+symbols:
+  nFrames: {doc: Number of frames}
+  xSize: {doc: Number of pixels in X direction}
+  ySize: {doc: Number of pixels in Y direction}
+children:
+  ENTRY:
+    node: group
+    name: {any: true}
+    class: NXentry
+    children:
+      title:
+        node: dataset
+        occurs: {min: 0, max: 1}
+        via: [T0, T1, T6]
+        provisional: [Q1]
+      start_time:
+        node: dataset
+        occurs: {min: 0, max: 1}
+        type: NX_DATE_TIME
+        via: [T1, T6]
+        provisional: [Q1]
+      end_time:
+        node: dataset
+        occurs: {min: 0, max: 1}
+        type: NX_DATE_TIME
+        via: [T1, T6]
+        provisional: [Q1]
+      definition:
+        node: dataset
+        enum: [NXtomo]
+        doc: 'Official NeXus NXDL schema to which this file conforms '
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      instrument:
+        node: group
+        class: NXinstrument
+        children:
+          SOURCE:
+            node: group
+            name: {any: true}
+            class: NXsource
+            occurs: {min: 0, max: 1}
+            children:
+              type:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                via: [T0, T1, T6]
+                provisional: [Q1]
+              name:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                via: [T0, T1, T6]
+                provisional: [Q1]
+              probe:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                enum: [neutron, x-ray, electron]
+                via: [T0, T1, T6]
+                provisional: [Q1]
+            via: [T1, T2, T6]
+            provisional: [Q1, Q11]
+          detector:
+            node: group
+            class: NXdetector
+            children:
+              data:
+                node: dataset
+                type: NX_INT
+                shape: [nFrames, xSize, ySize]
+                attributes:
+                  signal:
+                    occurs: {min: 0}
+                    type: NX_POSINT
+                    enum: ['1']
+                    via: [T19]
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              image_key:
+                node: dataset
+                type: NX_INT
+                shape: [nFrames]
+                doc: |-
+                  In order
+                  to distinguish between sample projections, dark and flat
+                  images, a magic number is recorded per frame.
+                  The key is as follows:
+
+                  * projection = 0
+                  * flat field = 1
+                  * dark field = 2
+                  * invalid = 3
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              x_pixel_size:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_FLOAT
+                units: {category: NX_LENGTH}
+                via: [T1, T6]
+                provisional: [Q1]
+              y_pixel_size:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_FLOAT
+                units: {category: NX_LENGTH}
+                via: [T1, T6]
+                provisional: [Q1]
+              distance:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_FLOAT
+                units: {category: NX_LENGTH}
+                doc: Distance between detector and sample
+                via: [T1, T6]
+                provisional: [Q1]
+              x_rotation_axis_pixel_position:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_FLOAT
+                via: [T1, T6]
+                provisional: [Q1]
+              y_rotation_axis_pixel_position:
+                node: dataset
+                occurs: {min: 0, max: 1}
+                type: NX_FLOAT
+                via: [T1, T6]
+                provisional: [Q1]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      sample:
+        node: group
+        class: NXsample
+        children:
+          name:
+            node: dataset
+            doc: Descriptive name of sample
+            via: [T0, T1, T5, T7]
+            provisional: [Q1, Q2]
+          rotation_angle:
+            node: dataset
+            type: NX_FLOAT
+            shape: [nFrames]
+            units: {category: NX_ANGLE}
+            doc: |-
+              In practice this axis is always aligned along one pixel direction on the detector and usually vertical.
+              There are experiments with horizontal rotation axes, so this would need to be indicated somehow.
+              For now the best way for that is an open question.
+            attributes:
+              axis:
+                occurs: {min: 0}
+                type: NX_POSINT
+                enum: ['1']
+                via: [T19]
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+          x_translation:
+            node: dataset
+            occurs: {min: 0, max: 1}
+            type: NX_FLOAT
+            shape: [nFrames]
+            units: {category: NX_LENGTH}
+            via: [T1, T6, T9]
+            provisional: [Q1]
+          y_translation:
+            node: dataset
+            occurs: {min: 0, max: 1}
+            type: NX_FLOAT
+            shape: [nFrames]
+            units: {category: NX_LENGTH}
+            via: [T1, T6, T9]
+            provisional: [Q1]
+          z_translation:
+            node: dataset
+            occurs: {min: 0, max: 1}
+            type: NX_FLOAT
+            shape: [nFrames]
+            units: {category: NX_LENGTH}
+            via: [T1, T6, T9]
+            provisional: [Q1]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      control:
+        node: group
+        class: NXmonitor
+        occurs: {min: 0, max: 1}
+        children:
+          data:
+            node: dataset
+            type: NX_FLOAT
+            shape: [nFrames]
+            units: {category: NX_ANY}
+            doc: |-
+              Total integral monitor counts for each measured frame. Allows a to correction for
+              fluctuations in the beam between frames.
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+        via: [T1, T6]
+        provisional: [Q1]
+      data:
+        node: group
+        class: NXdata
+        children:
+          data:
+            node: link
+            target: ENTRY/INSTRUMENT/detector/data
+            via: [T1, T5, T10]
+            provisional: [Q2, Q8]
+          rotation_angle:
+            node: link
+            target: ENTRY/SAMPLE/rotation_angle
+            via: [T1, T5, T10]
+            provisional: [Q2, Q8]
+          image_key:
+            node: link
+            target: ENTRY/INSTRUMENT/detector/image_key
+            via: [T1, T5, T10]
+            provisional: [Q2, Q8]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+    via: [T1, T2, T5, T7]
+    provisional: [Q1, Q2, Q11]
+via: [T8]

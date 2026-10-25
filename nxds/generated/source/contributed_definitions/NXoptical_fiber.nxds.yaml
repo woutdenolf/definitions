@@ -1,0 +1,208 @@
+nxds: '0.1'
+class: NXoptical_fiber
+category: base
+extends: NXcomponent
+doc: |-
+  An optical fiber, e.g. glass fiber.
+
+  Specify the quantities that define the fiber. Fiber optics are described in
+  detail [here](https://www.photonics.com/Article.aspx?AID=25151&PID=4), for
+  example.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+symbols:
+  N_spectrum_core:
+    doc: |-
+      Length of the spectrum vector (e.g. wavelength or energy) for which the
+      refractive index of the core material is given.
+  N_spectrum_clad:
+    doc: |-
+      Length of the spectrum vector (e.g. wavelength or energy) for which the
+      refractive index of the cladding material is given.
+  N_spectrum_attenuation:
+    doc: |-
+      Length of the spectrum vector (e.g. wavelength or energy) for which the
+      attenuation curve is given.
+children:
+  description:
+    node: dataset
+    occurs: {min: 0}
+    recommended: true
+    doc: |-
+      Descriptive name or brief description of the fiber, e.g. by stating its
+      dimension. The dimension of a fiber can be given as 60/100/200 which
+      refers to a core diameter of 60 micron, a clad diameter of 100 micron,
+      and a coating diameter of 200 micron.
+    via: [T0, T1, T6, T7]
+    provisional: [Q1]
+  type:
+    node: dataset
+    enum: [single mode, multimode graded index, multimode step index]
+    doc: |-
+      Type/mode of the fiber. Modes of fiber transmission are shown in
+      Fig. 5 [here](https://www.photonics.com/Article.aspx?AID=25151&PID=4).
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  dispersion_type:
+    node: dataset
+    enum:
+      values:
+      - {value: modal}
+      - {value: material}
+      - {value: chromatic}
+      open: true
+    doc: Type of dispersion.
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  dispersion:
+    node: dataset
+    type: NX_FLOAT
+    shape: [N_spectrum_core]
+    units: {category: NX_TIME}
+    doc: |-
+      Spectrum-dependent (or refractive index-dependent) dispersion of the
+      fiber. Specify in ps/nm*km.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  core:
+    node: group
+    class: NXsample
+    doc: Core of the fiber, i.e. the part of the fiber which transmits the light.
+    children:
+      material:
+        node: dataset
+        doc: Specify the material of the core of the fiber.
+        via: [T0, T1, T4, T7]
+        provisional: [Q1]
+      diameter:
+        node: dataset
+        type: NX_FLOAT
+        units: {category: NX_LENGTH}
+        doc: Core diameter of the fiber (e.g. given in micrometer).
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      index_of_refraction:
+        node: dataset
+        type: NX_FLOAT
+        shape: [2, N_spectrum_core]
+        units: {category: NX_UNITLESS}
+        doc: |-
+          Complex index of refraction of the fiber. Specify at given wavelength
+          (or energy, wavenumber etc.) values.
+        via: [T1, T4, T7, T9]
+        provisional: [Q1]
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  cladding:
+    node: group
+    class: NXsample
+    doc: Core of the fiber, i.e. the part of the fiber which transmits the light.
+    children:
+      material:
+        node: dataset
+        doc: Specify the material of the core of the fiber.
+        via: [T0, T1, T4, T7]
+        provisional: [Q1]
+      diameter:
+        node: dataset
+        type: NX_FLOAT
+        units: {category: NX_LENGTH}
+        doc: Clad diameter of the fiber (e.g. given in micrometer).
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      index_of_refraction:
+        node: dataset
+        type: NX_FLOAT
+        shape: [2, N_spectrum_clad]
+        units: {category: NX_UNITLESS}
+        doc: |-
+          Complex index of refraction of the fiber. Specify at given wavelength
+          (or energy, wavenumber etc.) values.
+        via: [T1, T4, T7, T9]
+        provisional: [Q1]
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  coating:
+    node: group
+    class: NXsample
+    doc: Coating of the fiber.
+    children:
+      material:
+        node: dataset
+        doc: Specify the material of the coating of the fiber.
+        via: [T0, T1, T4, T7]
+        provisional: [Q1]
+      diameter:
+        node: dataset
+        type: NX_FLOAT
+        units: {category: NX_LENGTH}
+        doc: Outer diameter of the fiber (e.g. given in micrometer).
+        via: [T1, T4, T7]
+        provisional: [Q1]
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  length:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    doc: Length of the fiber.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  spectral_range:
+    node: dataset
+    occurs: {min: 0}
+    recommended: true
+    type: NX_FLOAT
+    shape: [2]
+    units: {category: NX_ANY}
+    doc: |-
+      Spectral range for which the fiber is designed. Enter the minimum and
+      maximum values (lower and upper limit) of the wavelength range.
+    attributes:
+      units:
+        doc: |-
+          Unit of spectral array (e.g. nanometer or angstrom for wavelength, or
+          electronvolt for energy etc.).
+        via: [T0, T1, T4]
+    via: [T1, T6, T7, T9]
+    provisional: [Q1]
+  transfer_rate:
+    node: dataset
+    type: NX_FLOAT
+    units: {fixed: GB/s}
+    doc: Transfer rate of the fiber (in GB per second).
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  numerical_aperture:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_UNITLESS}
+    doc: Numerical aperture (NA) of the fiber.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  attenuation:
+    node: dataset
+    type: NX_FLOAT
+    shape: [N_spectrum_attenuation]
+    units: {fixed: dB/km}
+    doc: Wavelength-dependent attenuation of the fiber (specify in dB/km).
+    attributes:
+      units:
+        enum: [dB/km]
+        doc: Use dB/km.
+        via: [T0, T1, T4]
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  power_loss:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_UNITLESS}
+    doc: Power loss of the fiber in percentage.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  acceptance_angle:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_ANGLE}
+    doc: Acceptance angle of the fiber.
+    via: [T1, T4, T7]
+    provisional: [Q1]

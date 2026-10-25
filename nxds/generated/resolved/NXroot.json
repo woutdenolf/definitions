@@ -1,0 +1,47 @@
+{
+ "definition": {
+  "attributes": [
+    {"declared_by": "NXobject", "docs": ["NXobject@default", "NXroot@default"], "id": "default", "name": {"exact": "default"}, "names_child": "group", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "refined_by": ["NXroot"], "type": "NX_CHAR", "via": ["T0", "T1", "T4", "T13"]},
+    {"declared_by": "NXroot", "docs": ["NXroot@file_time"], "id": "file_time", "name": {"exact": "file_time"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_DATE_TIME", "via": ["T1", "T4"]},
+    {"declared_by": "NXroot", "docs": ["NXroot@file_name"], "id": "file_name", "name": {"exact": "file_name"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4"]},
+    {"declared_by": "NXroot", "docs": ["NXroot@file_update_time"], "id": "file_update_time", "name": {"exact": "file_update_time"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_DATE_TIME", "via": ["T1", "T4"]},
+    {"declared_by": "NXroot", "deprecated": "NAPI is frozen.", "docs": ["NXroot@NeXus_version"], "id": "NeXus_version", "name": {"exact": "NeXus_version"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T3b", "T4"]},
+    {"declared_by": "NXroot", "docs": ["NXroot@NeXus_repository"], "id": "NeXus_repository", "name": {"exact": "NeXus_repository"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T3b", "T4"]},
+    {"declared_by": "NXroot", "docs": ["NXroot@NeXus_release"], "id": "NeXus_release", "name": {"exact": "NeXus_release"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T3b", "T4"]},
+    {"declared_by": "NXroot", "docs": ["NXroot@HDF_version"], "id": "HDF_version", "name": {"exact": "HDF_version"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T3b", "T4"]},
+    {"declared_by": "NXroot", "docs": ["NXroot@HDF5_Version"], "id": "HDF5_Version", "name": {"exact": "HDF5_Version"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T3b", "T4"]},
+    {"declared_by": "NXroot", "docs": ["NXroot@XML_version"], "id": "XML_version", "name": {"exact": "XML_version"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T3b", "T4"]},
+    {"declared_by": "NXroot", "docs": ["NXroot@h5py_version"], "id": "h5py_version", "name": {"exact": "h5py_version"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4"]},
+    {"declared_by": "NXroot", "docs": ["NXroot@creator"], "id": "creator", "name": {"exact": "creator"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4"]},
+    {"declared_by": "NXroot", "docs": ["NXroot@creator_version"], "id": "creator_version", "name": {"exact": "creator_version"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4"]}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/COLLECTION"},
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"node": "group", "ref": "NXobject/LOG"},
+    {"node": "group", "ref": "NXobject/NOTE"},
+    {"node": "group", "ref": "NXobject/PARAMETERS"},
+    {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+    {"node": "dataset", "ref": "NXobject/identifierNAME"},
+    {"class": "NXentry", "declared_by": "NXroot", "docs": ["NXroot/ENTRY"], "id": "ENTRY", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 1}, "provisional": ["Q1", "Q11"], "recommended": false, "via": ["T1", "T2", "T6", "T7"]}
+  ],
+  "class": "NXroot",
+  "extends": "NXobject",
+  "lossy": [],
+  "provisional": [],
+  "require": [],
+  "source": "base_classes/NXroot.nxdl.xml",
+  "status": "base",
+  "symbols": [],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"},
+  "via": ["T8"]
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {}
+}

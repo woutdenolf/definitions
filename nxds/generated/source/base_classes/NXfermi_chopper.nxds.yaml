@@ -1,0 +1,117 @@
+nxds: '0.1'
+class: NXfermi_chopper
+category: base
+extends: NXcomponent
+doc: A Fermi chopper, possibly with curved slits.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  type:
+    node: dataset
+    doc: Fermi chopper type
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  rotation_speed:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_FREQUENCY}
+    doc: chopper rotation speed
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  radius:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    doc: radius of chopper
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  slit:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    doc: width of an individual slit
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  r_slit:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    doc: radius of curvature of slits
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  number:
+    node: dataset
+    type: NX_INT
+    units: {category: NX_UNITLESS}
+    doc: number of slits
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  height:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    doc: input beam height
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  width:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    doc: input beam width
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  distance:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    doc: distance. Note, it is recommended to use NXtransformations instead.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  wavelength:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_WAVELENGTH}
+    doc: Wavelength transmitted by chopper
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  energy:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_ENERGY}
+    doc: energy selected
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  GEOMETRY:
+    node: group
+    name: {any: true}
+    class: NXgeometry
+    deprecated: Use the field `depends_on` and :ref:`NXtransformations` to position the chopper
+      and NXoff_geometry to describe its shape instead
+    doc: geometry of the fermi chopper
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  absorbing_material:
+    node: dataset
+    doc: absorbing material
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  transmitting_material:
+    node: dataset
+    doc: transmitting material
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  OFF_GEOMETRY:
+    node: group
+    name: {any: true}
+    class: NXoff_geometry
+    occurs: {min: 0}
+    doc: This group describes the shape of the beam line component
+    via: [T1, T2, T6, T7]
+    provisional: [Q1, Q11]
+  depends_on:
+    node: dataset
+    type: NX_CHAR
+    doc: |-
+      .. todo::
+      Add a definition for the reference point of a fermi chopper.
+    via: [T1, T4, T7]
+    provisional: [Q1]

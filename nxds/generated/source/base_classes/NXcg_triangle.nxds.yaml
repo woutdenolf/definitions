@@ -1,0 +1,65 @@
+nxds: '0.1'
+class: NXcg_triangle
+category: base
+extends: NXcg_primitive
+doc: Computational geometry description of a set of triangles.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+symbols:
+  d:
+    doc: The dimensionality, which has to be at least 2.
+  c:
+    doc: The cardinality of the set, i.e. the number of triangles.
+  n_unique:
+    doc: The number of unique vertices supporting the triangles.
+children:
+  number_of_unique_vertices:
+    node: dataset
+    type: NX_INT
+    units: {category: NX_UNITLESS}
+    doc: Number of unique vertices in the triangle set.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  triangles:
+    node: group
+    class: NXcg_face_list_data_structure
+    doc: |-
+      Combined storage of all primitives of all triangles.
+
+      This description resembles the typical representation of primitives
+      in file formats such as OFF, PLY, VTK, or STL.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  triangleID:
+    node: group
+    name: {template: 'triangle{ID}'}
+    class: NXcg_face_list_data_structure
+    doc: |-
+      Individual storage of each triangle.
+      Users are advised that using such individual storage of primitives
+      may be less storage efficient than creating a combined storage.
+    via: [T1, T3, T4, T7]
+    provisional: [Q1, Q3]
+  edge_length:
+    node: dataset
+    type: NX_NUMBER
+    shape: [c, 3]
+    units: {category: NX_LENGTH}
+    doc: |-
+      Length of the edges of each triangle.
+
+      For each triangle values are reported via traversing
+      the vertices in the sequence as these are defined.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  interior_angle:
+    node: dataset
+    type: NX_NUMBER
+    shape: [c, 3]
+    units: {category: NX_ANGLE}
+    doc: |-
+      Interior angles of each triangle.
+
+      For each triangle values are reported for the angle opposite
+      to the respective edges in the sequence how vertices are defined.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]

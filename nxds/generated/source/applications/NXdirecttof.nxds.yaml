@@ -1,0 +1,83 @@
+nxds: '0.1'
+class: NXdirecttof
+category: application
+extends: NXtofraw
+describes: NXroot
+doc: This is a application definition for raw data from a direct geometry TOF spectrometer
+defaults: {min: 1, binding: true, type: NX_CHAR}
+children:
+  ENTRY:
+    node: group
+    name: {any: true}
+    class: NXentry
+    children:
+      title:
+        node: dataset
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      start_time:
+        node: dataset
+        type: NX_DATE_TIME
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      definition:
+        node: dataset
+        enum: [NXdirecttof]
+        doc: 'Official NeXus NXDL schema to which this file conforms '
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      INSTRUMENT:
+        node: group
+        name: {any: true}
+        class: NXinstrument
+        doc: |-
+          We definitely want the rotation_speed and energy of the chopper. Thus either
+          a fermi_chopper or a disk_chopper group is required.
+        children:
+          fermi_chopper:
+            node: group
+            class: NXfermi_chopper
+            occurs: {min: 0}
+            children:
+              rotation_speed:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_FREQUENCY}
+                doc: chopper rotation speed
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              energy:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_ENERGY}
+                doc: energy selected
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          disk_chopper:
+            node: group
+            class: NXdisk_chopper
+            occurs: {min: 0}
+            children:
+              rotation_speed:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_FREQUENCY}
+                doc: chopper rotation speed
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              energy:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_ENERGY}
+                doc: energy selected
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T6, T7]
+            provisional: [Q1]
+        via: [T1, T2, T5, T7]
+        provisional: [Q1, Q2, Q11]
+    via: [T1, T2, T5, T7]
+    provisional: [Q1, Q2, Q11]
+via: [T8]

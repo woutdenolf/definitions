@@ -1,0 +1,88 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/COLLECTION"},
+    {"class": "NXdata", "declared_by": "NXobject", "docs": ["NXspm_scan_pattern/DATA"], "id": "DATA", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q11"], "recommended": false, "refined_by": ["NXspm_scan_pattern"], "specialisation": "NXspm_scan_pattern/DATA", "via": ["T1", "T2", "T4", "T6", "T7"]},
+    {"node": "group", "ref": "NXobject/LOG"},
+    {"node": "group", "ref": "NXobject/NOTE"},
+    {"node": "group", "ref": "NXobject/PARAMETERS"},
+    {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+    {"node": "dataset", "ref": "NXobject/identifierNAME"},
+    {"declared_by": "NXspm_scan_pattern", "docs": ["NXspm_scan_pattern/scan_speedN"], "id": "scan_speedN", "name": {"template": "scan_speed{N}"}, "node": "dataset", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q3"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_ANY"}, "via": ["T1", "T3", "T4", "T7"]},
+    {"declared_by": "NXspm_scan_pattern", "docs": ["NXspm_scan_pattern/forward_speedN"], "id": "forward_speedN", "name": {"template": "forward_speed{N}"}, "node": "dataset", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q3"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_ANY"}, "via": ["T1", "T3", "T4", "T7"]},
+    {"declared_by": "NXspm_scan_pattern", "docs": ["NXspm_scan_pattern/backward_speedN"], "id": "backward_speedN", "name": {"template": "backward_speed{N}"}, "node": "dataset", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q3"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_ANY"}, "via": ["T1", "T3", "T4", "T7"]},
+    {"declared_by": "NXspm_scan_pattern", "docs": ["NXspm_scan_pattern/channelNAME"], "id": "channelNAME", "name": {"template": "channel{NAME}"}, "node": "dataset", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q3"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T3", "T4", "T7"]},
+    {"declared_by": "NXspm_scan_pattern", "docs": ["NXspm_scan_pattern/scan_pointsN"], "id": "scan_pointsN", "name": {"template": "scan_points{N}"}, "node": "dataset", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q3"], "recommended": false, "type": "NX_NUMBER", "via": ["T1", "T3", "T4", "T7"]},
+    {"declared_by": "NXspm_scan_pattern", "docs": ["NXspm_scan_pattern/steppingN"], "id": "steppingN", "name": {"template": "stepping{N}"}, "node": "dataset", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q3"], "recommended": false, "type": "NX_NUMBER", "via": ["T1", "T3", "T4", "T7"]},
+    {"declared_by": "NXspm_scan_pattern", "docs": ["NXspm_scan_pattern/step_sizeN"], "id": "step_sizeN", "name": {"template": "step_size{N}"}, "node": "dataset", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q3"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_ANY"}, "via": ["T1", "T3", "T4", "T7"]},
+    {"declared_by": "NXspm_scan_pattern", "docs": ["NXspm_scan_pattern/continuousN"], "id": "continuousN", "name": {"template": "continuous{N}"}, "node": "dataset", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q3"], "recommended": false, "type": "NX_BOOLEAN", "via": ["T1", "T3", "T4", "T7"]},
+    {"declared_by": "NXspm_scan_pattern", "docs": ["NXspm_scan_pattern/oscillating"], "id": "oscillating", "name": {"exact": "oscillating"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_BOOLEAN", "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXspm_scan_pattern", "docs": ["NXspm_scan_pattern/oscillation_frequency"], "id": "oscillation_frequency", "name": {"exact": "oscillation_frequency"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXspm_scan_pattern", "docs": ["NXspm_scan_pattern/number_of_trajectory_points"], "id": "number_of_trajectory_points", "name": {"exact": "number_of_trajectory_points"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXspm_scan_pattern", "docs": ["NXspm_scan_pattern/trajectory_points"], "id": "trajectory_points", "name": {"exact": "trajectory_points"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["nTraj", "nD"], "symbols": {"nD": "NXspm_scan_pattern", "nTraj": "NXspm_scan_pattern"}}, "type": "NX_NUMBER", "via": ["T1", "T4", "T7", "T9"]},
+    {"declared_by": "NXspm_scan_pattern", "docs": ["NXspm_scan_pattern/spiral_radiusN"], "id": "spiral_radiusN", "name": {"template": "spiral_radius{N}"}, "node": "dataset", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q3"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_ANY"}, "via": ["T1", "T3", "T4", "T7"]}
+  ],
+  "class": "NXspm_scan_pattern",
+  "extends": "NXobject",
+  "lossy": [],
+  "provisional": [],
+  "require": [],
+  "source": "contributed_definitions/NXspm_scan_pattern.nxdl.xml",
+  "status": "contributed",
+  "symbols": [],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"},
+  "via": []
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {
+  "NXspm_scan_pattern/DATA": {
+   "attributes": [
+     {"ref": "NXobject@default"},
+     {"ref": "NXdata@signal"},
+     {"ref": "NXdata@auxiliary_signals"},
+     {"ref": "NXdata@default_slice"},
+     {"ref": "NXdata@AXISNAME_indices"},
+     {"ref": "NXdata@axes"}
+   ],
+   "children": [
+     {"node": "group", "ref": "NXobject/COLLECTION"},
+     {"node": "group", "ref": "NXobject/DATA"},
+     {"node": "group", "ref": "NXobject/LOG"},
+     {"node": "group", "ref": "NXobject/NOTE"},
+     {"node": "group", "ref": "NXobject/PARAMETERS"},
+     {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+     {"node": "dataset", "ref": "NXdata/FIELDNAME_errors"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+     {"node": "dataset", "ref": "NXobject/identifierNAME"},
+     {"attributes": [{"declared_by": "NXdata", "docs": ["NXdata/AXISNAME@long_name"], "id": "long_name", "name": {"exact": "long_name"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4"]}, {"declared_by": "NXdata", "docs": ["NXdata/AXISNAME@units"], "id": "units", "name": {"exact": "units"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4"]}, {"declared_by": "NXdata", "docs": ["NXdata/AXISNAME@distribution"], "id": "distribution", "name": {"exact": "distribution"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_BOOLEAN", "via": ["T1", "T4"]}, {"declared_by": "NXdata", "docs": ["NXdata/AXISNAME@first_good"], "id": "first_good", "name": {"exact": "first_good"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_INT", "via": ["T1", "T4"]}, {"declared_by": "NXdata", "docs": ["NXdata/AXISNAME@last_good"], "id": "last_good", "name": {"exact": "last_good"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_INT", "via": ["T1", "T4"]}, {"declared_by": "NXdata", "deprecated": "Use the group ``axes`` attribute   (NIAC2014)", "docs": ["NXdata/AXISNAME@axis"], "id": "axis", "name": {"exact": "axis"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_POSINT", "via": ["T1", "T4"]}], "declared_by": "NXdata", "docs": ["NXdata/AXISNAME", "NXspm_scan_pattern/DATA/AXISNAME"], "id": "AXISNAME", "name": {"any": true}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q3"], "recommended": false, "refined_by": ["NXspm_scan_pattern"], "type": "NX_CHAR_OR_NUMBER", "units": {"category": "NX_ANY"}, "via": ["T1", "T3", "T4", "T7", "T13"]},
+     {"attributes": [{"declared_by": "NXdata", "deprecated": "Use the group ``signal`` attribute   (NIAC2014)", "docs": ["NXdata/DATA@signal"], "id": "signal", "name": {"exact": "signal"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_POSINT", "via": ["T1", "T4"]}, {"declared_by": "NXdata", "deprecated": "Use the group ``axes`` attribute   (NIAC2014)", "docs": ["NXdata/DATA@axes"], "id": "axes", "name": {"exact": "axes"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4"]}, {"declared_by": "NXdata", "docs": ["NXdata/DATA@long_name"], "id": "long_name", "name": {"exact": "long_name"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4"]}], "declared_by": "NXdata", "docs": ["NXdata/DATA", "NXspm_scan_pattern/DATA/DATA"], "id": "DATA", "name": {"any": true}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q3", "Q5"], "recommended": false, "refined_by": ["NXspm_scan_pattern"], "shape": {"binding": false, "rank": "dataRank", "symbols": {"dataRank": "NXdata"}}, "type": "NX_NUMBER", "units": {"category": "NX_ANY"}, "via": ["T1", "T3", "T4", "T7", "T9", "T9d", "T13"]},
+     {"node": "dataset", "ref": "NXdata/errors"},
+     {"node": "dataset", "ref": "NXdata/FIELDNAME_scaling_factor"},
+     {"node": "dataset", "ref": "NXdata/FIELDNAME_offset"},
+     {"node": "dataset", "ref": "NXdata/scaling_factor"},
+     {"node": "dataset", "ref": "NXdata/offset"},
+     {"node": "dataset", "ref": "NXdata/title"},
+     {"node": "dataset", "ref": "NXdata/x"},
+     {"node": "dataset", "ref": "NXdata/y"},
+     {"node": "dataset", "ref": "NXdata/z"}
+   ],
+   "class": "NXdata",
+   "declared_by": "NXspm_scan_pattern",
+   "id": "NXspm_scan_pattern/DATA",
+   "require": [],
+   "symbols": [],
+   "undeclared": {"attribute": "ignore", "dataset": "ignore", "group": "report"}
+  }
+ }
+}

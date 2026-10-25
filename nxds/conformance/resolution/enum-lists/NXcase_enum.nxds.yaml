@@ -1,0 +1,20 @@
+nxds: "0.1"
+class: NXcase_enum
+category: application
+describes: NXroot
+doc: Enumerations with list values (whole array) and scalar values (each element).
+defaults: {min: 1, binding: true}
+children:
+  ENTRY:
+    node: group
+    class: NXentry
+    name: {any: true}
+    children:
+      definition: {node: dataset, enum: [NXcase_enum]}
+      DATA:
+        node: group
+        class: NXdata
+        name: {any: true}
+        attributes:
+          axes: {enum: [[".", "x"]]}
+          flags: {type: NX_CHAR, shape: [null], enum: [a, b], occurs: {min: 0}}

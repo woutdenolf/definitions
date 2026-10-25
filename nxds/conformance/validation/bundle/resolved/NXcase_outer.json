@@ -1,0 +1,65 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"},
+    {"ref": "NXroot@NeXus_release"}
+  ],
+  "category": "application",
+  "children": [
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"class": "NXentry", "declared_by": "NXroot", "id": "ENTRY", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 1}, "provisional": ["Q1"], "recommended": false, "refined_by": ["NXcase_outer"], "specialisation": "NXcase_outer/ENTRY"}
+  ],
+  "class": "NXcase_outer",
+  "describes": "NXroot",
+  "lossy": [],
+  "provisional": [],
+  "require": [],
+  "source": "subentry/NXcase_outer.nxds.yaml",
+  "status": "local",
+  "symbols": [],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"},
+  "via": []
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {
+  "NXcase_outer/ENTRY": {
+   "attributes": [
+     {"ref": "NXobject@default"}
+   ],
+   "children": [
+     {"node": "group", "ref": "NXobject/DATA"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+     {"declared_by": "NXentry", "enum": {"open": false, "values": [{"value": "NXcase_outer"}]}, "id": "definition", "name": {"exact": "definition"}, "node": "dataset", "occurs": {"max": 1, "min": 1}, "provisional": ["Q1"], "recommended": false, "refined_by": ["NXcase_outer"], "type": "NX_CHAR"},
+     {"node": "dataset", "ref": "NXentry/title"},
+     {"node": "dataset", "ref": "NXentry/start_time"},
+     {"node": "group", "ref": "NXentry/INSTRUMENT"},
+     {"class": "NXsubentry", "declared_by": "NXcase_outer", "id": "SUBENTRY", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 1}, "provisional": ["Q1"], "recommended": false, "specialisation": "NXcase_outer/ENTRY/SUBENTRY"}
+   ],
+   "class": "NXentry",
+   "declared_by": "NXcase_outer",
+   "id": "NXcase_outer/ENTRY",
+   "require": [],
+   "symbols": [],
+   "undeclared": {"attribute": "report", "dataset": "report", "group": "report"}
+  },
+  "NXcase_outer/ENTRY/SUBENTRY": {
+   "attributes": [
+     {"ref": "NXobject@default"}
+   ],
+   "children": [
+     {"node": "group", "ref": "NXobject/DATA"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+     {"declared_by": "NXsubentry", "enum": {"open": false, "values": [{"value": "NXcase_inner"}]}, "id": "definition", "name": {"exact": "definition"}, "node": "dataset", "occurs": {"max": 1, "min": 1}, "provisional": ["Q1"], "recommended": false, "refined_by": ["NXcase_outer"], "type": "NX_CHAR"},
+     {"node": "dataset", "ref": "NXsubentry/value"}
+   ],
+   "class": "NXsubentry",
+   "declared_by": "NXcase_outer",
+   "id": "NXcase_outer/ENTRY/SUBENTRY",
+   "require": [],
+   "symbols": [],
+   "undeclared": {"attribute": "report", "dataset": "report", "group": "report"}
+  }
+ }
+}

@@ -1,0 +1,6 @@
+description: >
+  Label paths (§4.6): `ENTRY/INSTRUMENT/MONOCHROMATOR/wavelength` reaches
+  `wavelength` in the specialisation of `monochromator`, which refines
+  `MONOCHROMATOR` (as NXtomo's `ENTRY/INSTRUMENT/detector/data`). Identity
+  (§5.1): the link member `temperature` refines the inherited dataset member.
+covers: [target, refines, identity]

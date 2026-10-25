@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition name="NXcase_name_fit" extends="NXobject" type="group" category="application"
+            xmlns="http://definition.nexusformat.org/nxdl/3.1">
+  <doc>Fixed names that fit inherited free and template members (T18).</doc>
+  <group type="NXentry">
+    <field name="definition"><enumeration><item value="NXcase_name_fit"/></enumeration></field>
+    <group type="NXinstrument">
+      <group name="monochromator" type="NXmonochromator"/>
+      <group name="counter" type="NXcounter">
+        <field name="i0_counts"/>
+      </group>
+    </group>
+  </group>
+</definition>

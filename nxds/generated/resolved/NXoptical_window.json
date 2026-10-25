@@ -1,0 +1,88 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/COLLECTION"},
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"node": "group", "ref": "NXobject/LOG"},
+    {"node": "group", "ref": "NXaperture/NOTE"},
+    {"node": "group", "ref": "NXobject/PARAMETERS"},
+    {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+    {"node": "dataset", "ref": "NXobject/identifierNAME"},
+    {"node": "dataset", "ref": "NXcomponent/applied"},
+    {"node": "dataset", "ref": "NXcomponent/name"},
+    {"node": "dataset", "ref": "NXaperture/description"},
+    {"node": "dataset", "ref": "NXcomponent/inputs"},
+    {"node": "dataset", "ref": "NXcomponent/outputs"},
+    {"node": "group", "ref": "NXcomponent/FABRICATION"},
+    {"node": "group", "ref": "NXcomponent/PROGRAM"},
+    {"node": "group", "ref": "NXcomponent/ENVIRONMENT"},
+    {"node": "dataset", "ref": "NXaperture/depends_on"},
+    {"node": "group", "ref": "NXcomponent/TRANSFORMATIONS"},
+    {"node": "group", "ref": "NXaperture/OFF_GEOMETRY"},
+    {"node": "group", "ref": "NXaperture/POSITIONER"},
+    {"node": "group", "ref": "NXaperture/GEOMETRY"},
+    {"node": "group", "ref": "NXaperture/BLADE_GEOMETRY"},
+    {"declared_by": "NXaperture", "docs": ["NXaperture/material", "NXoptical_window/material"], "enum": {"open": true, "values": [{"value": "quartz"}, {"value": "diamond"}, {"value": "calcium fluoride"}, {"value": "zinc selenide"}, {"value": "thallium bromoiodide"}, {"value": "alkali halide compound"}, {"value": "Mylar"}, {"value": "other"}]}, "id": "material", "name": {"exact": "material"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "refined_by": ["NXoptical_window"], "type": "NX_CHAR", "via": ["T0", "T1", "T4", "T7"]},
+    {"node": "dataset", "ref": "NXaperture/shape"},
+    {"node": "dataset", "ref": "NXaperture/size"},
+    {"declared_by": "NXoptical_window", "docs": ["NXoptical_window/window_effects_corrected"], "id": "window_effects_corrected", "name": {"exact": "window_effects_corrected"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_BOOLEAN", "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXoptical_window", "docs": ["NXoptical_window/window_effects_type"], "enum": {"open": true, "values": [{"value": "interference effects"}, {"value": "light absorption"}, {"value": "light scattering"}, {"value": "other"}]}, "id": "window_effects_type", "name": {"exact": "window_effects_type"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4", "T7"]},
+    {"class": "NXprocess", "declared_by": "NXoptical_window", "docs": ["NXoptical_window/window_correction"], "id": "window_correction", "name": {"exact": "window_correction"}, "node": "group", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "specialisation": "NXoptical_window/window_correction", "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXoptical_window", "docs": ["NXoptical_window/material_other"], "id": "material_other", "name": {"exact": "material_other"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXoptical_window", "docs": ["NXoptical_window/thickness"], "id": "thickness", "name": {"exact": "thickness"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_FLOAT", "units": {"category": "NX_LENGTH"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXoptical_window", "docs": ["NXoptical_window/orientation_angle"], "id": "orientation_angle", "name": {"exact": "orientation_angle"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_FLOAT", "units": {"category": "NX_ANGLE"}, "via": ["T1", "T4", "T7"]}
+  ],
+  "class": "NXoptical_window",
+  "extends": "NXaperture",
+  "lossy": [],
+  "provisional": [],
+  "require": [],
+  "source": "base_classes/NXoptical_window.nxdl.xml",
+  "status": "base",
+  "symbols": [],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"},
+  "via": []
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {
+  "NXoptical_window/window_correction": {
+   "attributes": [
+     {"ref": "NXobject@default"}
+   ],
+   "children": [
+     {"node": "group", "ref": "NXobject/COLLECTION"},
+     {"node": "group", "ref": "NXprocess/DATA"},
+     {"node": "group", "ref": "NXobject/LOG"},
+     {"node": "group", "ref": "NXprocess/NOTE"},
+     {"node": "group", "ref": "NXprocess/PARAMETERS"},
+     {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+     {"node": "dataset", "ref": "NXobject/identifierNAME"},
+     {"node": "dataset", "ref": "NXprocess/program"},
+     {"node": "dataset", "ref": "NXprocess/sequence_index"},
+     {"node": "dataset", "ref": "NXprocess/version"},
+     {"node": "dataset", "ref": "NXprocess/date"},
+     {"declared_by": "NXoptical_window", "docs": ["NXoptical_window/window_correction/procedure"], "id": "procedure", "name": {"exact": "procedure"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4", "T7"]},
+     {"declared_by": "NXoptical_window", "docs": ["NXoptical_window/window_correction/reference_data_link"], "id": "reference_data_link", "name": {"exact": "reference_data_link"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "via": ["T1", "T4", "T7"]}
+   ],
+   "class": "NXprocess",
+   "declared_by": "NXoptical_window",
+   "id": "NXoptical_window/window_correction",
+   "require": [],
+   "symbols": [],
+   "undeclared": {"attribute": "report", "dataset": "report", "group": "report"}
+  }
+ }
+}

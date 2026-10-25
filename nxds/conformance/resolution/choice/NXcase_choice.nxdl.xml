@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition name="NXcase_choice" extends="NXobject" type="group" category="application"
+            xmlns="http://definition.nexusformat.org/nxdl/3.1">
+  <doc>A choice between two classes for one name (T11).</doc>
+  <group type="NXentry">
+    <field name="definition"><enumeration><item value="NXcase_choice"/></enumeration></field>
+    <choice name="shape">
+      <group type="NXcase_box"/>
+      <group type="NXcase_cylinder"/>
+    </choice>
+  </group>
+</definition>

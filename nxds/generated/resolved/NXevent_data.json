@@ -1,0 +1,41 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/COLLECTION"},
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"node": "group", "ref": "NXobject/LOG"},
+    {"node": "group", "ref": "NXobject/NOTE"},
+    {"node": "group", "ref": "NXobject/PARAMETERS"},
+    {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+    {"node": "dataset", "ref": "NXobject/identifierNAME"},
+    {"declared_by": "NXevent_data", "docs": ["NXevent_data/event_time_offset"], "id": "event_time_offset", "name": {"exact": "event_time_offset"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["i"], "symbols": {"i": "NXevent_data"}}, "type": "NX_NUMBER", "units": {"category": "NX_TIME_OF_FLIGHT"}, "via": ["T1", "T4", "T7", "T9"]},
+    {"declared_by": "NXevent_data", "docs": ["NXevent_data/event_id"], "id": "event_id", "name": {"exact": "event_id"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["i"], "symbols": {"i": "NXevent_data"}}, "type": "NX_INT", "units": {"category": "NX_DIMENSIONLESS"}, "via": ["T1", "T4", "T7", "T9"]},
+    {"attributes": [{"declared_by": "NXevent_data", "docs": ["NXevent_data/event_time_zero@offset"], "id": "offset", "name": {"exact": "offset"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_DATE_TIME", "via": ["T1", "T4"]}], "declared_by": "NXevent_data", "docs": ["NXevent_data/event_time_zero"], "id": "event_time_zero", "name": {"exact": "event_time_zero"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["j"], "symbols": {"j": "NXevent_data"}}, "type": "NX_NUMBER", "units": {"category": "NX_TIME"}, "via": ["T1", "T4", "T7", "T9"]},
+    {"declared_by": "NXevent_data", "docs": ["NXevent_data/event_index"], "id": "event_index", "name": {"exact": "event_index"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["j"], "symbols": {"j": "NXevent_data"}}, "type": "NX_INT", "units": {"category": "NX_DIMENSIONLESS"}, "via": ["T1", "T4", "T7", "T9"]},
+    {"declared_by": "NXevent_data", "docs": ["NXevent_data/pulse_height"], "id": "pulse_height", "name": {"exact": "pulse_height"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["i", "k"], "symbols": {"i": "NXevent_data", "k": "NXevent_data"}}, "type": "NX_FLOAT", "units": {"category": "NX_DIMENSIONLESS"}, "via": ["T1", "T4", "T7", "T9"]},
+    {"attributes": [{"declared_by": "NXevent_data", "id": "start", "name": {"exact": "start"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_DATE_TIME", "via": ["T1", "T4"]}], "declared_by": "NXevent_data", "docs": ["NXevent_data/cue_timestamp_zero"], "id": "cue_timestamp_zero", "name": {"exact": "cue_timestamp_zero"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_DATE_TIME", "units": {"category": "NX_TIME"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXevent_data", "docs": ["NXevent_data/cue_index"], "id": "cue_index", "name": {"exact": "cue_index"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_INT", "via": ["T1", "T4", "T7"]}
+  ],
+  "class": "NXevent_data",
+  "extends": "NXobject",
+  "lossy": [],
+  "provisional": [],
+  "require": [],
+  "source": "base_classes/NXevent_data.nxdl.xml",
+  "status": "base",
+  "symbols": [],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"},
+  "via": []
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {}
+}

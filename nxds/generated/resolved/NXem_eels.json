@@ -1,0 +1,101 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/COLLECTION"},
+    {"node": "group", "ref": "NXprocess/DATA"},
+    {"node": "group", "ref": "NXobject/LOG"},
+    {"node": "group", "ref": "NXprocess/NOTE"},
+    {"node": "group", "ref": "NXprocess/PARAMETERS"},
+    {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+    {"node": "dataset", "ref": "NXobject/identifierNAME"},
+    {"node": "dataset", "ref": "NXprocess/program"},
+    {"node": "dataset", "ref": "NXprocess/sequence_index"},
+    {"node": "dataset", "ref": "NXprocess/version"},
+    {"node": "dataset", "ref": "NXprocess/date"},
+    {"class": "NXprocess", "declared_by": "NXem_eels", "docs": ["NXem_eels/zlp_correction"], "id": "zlp_correction", "name": {"exact": "zlp_correction"}, "node": "group", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "specialisation": "NXem_eels/zlp_correction", "via": ["T1", "T4", "T7"]},
+    {"class": "NXprocess", "declared_by": "NXem_eels", "docs": ["NXem_eels/indexing"], "id": "indexing", "name": {"exact": "indexing"}, "node": "group", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "specialisation": "NXem_eels/indexing", "via": ["T1", "T4", "T7"]}
+  ],
+  "class": "NXem_eels",
+  "extends": "NXprocess",
+  "lossy": [],
+  "provisional": [],
+  "require": [],
+  "source": "base_classes/NXem_eels.nxdl.xml",
+  "status": "base",
+  "symbols": [],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"},
+  "via": []
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {
+  "NXem_eels/indexing": {
+   "attributes": [
+     {"ref": "NXobject@default"}
+   ],
+   "children": [
+     {"node": "group", "ref": "NXobject/COLLECTION"},
+     {"node": "group", "ref": "NXprocess/DATA"},
+     {"node": "group", "ref": "NXobject/LOG"},
+     {"node": "group", "ref": "NXprocess/NOTE"},
+     {"node": "group", "ref": "NXprocess/PARAMETERS"},
+     {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+     {"node": "dataset", "ref": "NXobject/identifierNAME"},
+     {"node": "dataset", "ref": "NXprocess/program"},
+     {"node": "dataset", "ref": "NXprocess/sequence_index"},
+     {"node": "dataset", "ref": "NXprocess/version"},
+     {"node": "dataset", "ref": "NXprocess/date"},
+     {"class": "NXprogram", "declared_by": "NXem_eels", "docs": ["NXem_eels/indexing/PROGRAM"], "id": "PROGRAM", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q11"], "recommended": false, "via": ["T1", "T2", "T4", "T7"]},
+     {"class": "NXpeak", "declared_by": "NXem_eels", "docs": ["NXem_eels/indexing/PEAK"], "id": "PEAK", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q11"], "recommended": false, "via": ["T1", "T2", "T4", "T7"]},
+     {"class": "NXspectrum", "declared_by": "NXem_eels", "docs": ["NXem_eels/indexing/SPECTRUM"], "id": "SPECTRUM", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q11"], "recommended": false, "via": ["T1", "T2", "T4", "T7"]}
+   ],
+   "class": "NXprocess",
+   "declared_by": "NXem_eels",
+   "id": "NXem_eels/indexing",
+   "require": [],
+   "symbols": [],
+   "undeclared": {"attribute": "report", "dataset": "report", "group": "report"}
+  },
+  "NXem_eels/zlp_correction": {
+   "attributes": [
+     {"ref": "NXobject@default"}
+   ],
+   "children": [
+     {"node": "group", "ref": "NXobject/COLLECTION"},
+     {"node": "group", "ref": "NXprocess/DATA"},
+     {"node": "group", "ref": "NXobject/LOG"},
+     {"node": "group", "ref": "NXprocess/NOTE"},
+     {"node": "group", "ref": "NXprocess/PARAMETERS"},
+     {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+     {"node": "dataset", "ref": "NXobject/identifierNAME"},
+     {"node": "dataset", "ref": "NXprocess/program"},
+     {"node": "dataset", "ref": "NXprocess/sequence_index"},
+     {"node": "dataset", "ref": "NXprocess/version"},
+     {"node": "dataset", "ref": "NXprocess/date"},
+     {"class": "NXprogram", "declared_by": "NXem_eels", "docs": ["NXem_eels/zlp_correction/PROGRAM"], "id": "PROGRAM", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q11"], "recommended": false, "via": ["T1", "T2", "T4", "T7"]}
+   ],
+   "class": "NXprocess",
+   "declared_by": "NXem_eels",
+   "id": "NXem_eels/zlp_correction",
+   "require": [],
+   "symbols": [],
+   "undeclared": {"attribute": "report", "dataset": "report", "group": "report"}
+  }
+ }
+}

@@ -1,0 +1,125 @@
+nxds: '0.1'
+class: NXsimilarity_grouping
+category: base
+extends: NXobject
+doc: |-
+  Base class to store results obtained from applying a similarity grouping (clustering) algorithm.
+
+  Similarity grouping algorithms are segmentation or machine learning algorithms for
+  partitioning the members of a set of objects (e.g. geometric primitives) into
+  (sub-)groups aka features of different kind/type. A plethora of algorithms exists.
+
+  This base class considers metadata and results of having a similarity grouping
+  algorithm applied to a set in which objects are either categorized as noise
+  or belonging to a cluster, i.e. members of a cluster.
+  The algorithm assigns each similarity group (feature/cluster) at least one
+  identifier (numerical or categorical labels) to distinguish different cluster.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+symbols:
+  c: {doc: Cardinality of the set.}
+  n_lbl_num: {doc: Number of numerical labels per object.}
+  n_lbl_cat:
+    doc: Number of categorical labels per object.
+  n_features:
+    doc: Total number of similarity groups aka features/clusters.
+children:
+  cardinality:
+    node: dataset
+    type: NX_POSINT
+    units: {category: NX_UNITLESS}
+    doc: Number of members in the set which gets partitioned into features.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  number_of_numeric_labels:
+    node: dataset
+    type: NX_UINT
+    units: {category: NX_UNITLESS}
+    doc: How many numerical labels does each feature have.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  number_of_categorical_labels:
+    node: dataset
+    type: NX_UINT
+    units: {category: NX_UNITLESS}
+    doc: How many categorical labels does each feature have.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  index_offset:
+    node: dataset
+    type: NX_INT
+    units: {category: NX_UNITLESS}
+    doc: |-
+      Which numerical index is the first to be used to label a feature.
+
+      The value should be chosen in such a way that special values can be resolved:
+      * index_offset - 1 indicates that an object belongs to no cluster.
+      * index_offset - 2 indicates that an object belongs to the noise category.
+      Setting for instance index_offset to 1 recovers the commonly used
+      case that objects of the noise category get values to -1 and unassigned
+      points to 0. Numerical identifier have to be strictly increasing.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  numerical_label:
+    node: dataset
+    type: NX_INT
+    shape: [c, n_lbl_num]
+    units: {category: NX_UNITLESS}
+    doc: |-
+      Matrix of numerical label for each member in the set.
+      For classical clustering algorithms this can for instance
+      encode the indices_cluster.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  categorical_label:
+    node: dataset
+    type: NX_CHAR
+    shape: [c, n_lbl_cat]
+    doc: Matrix of categorical attribute data for each member in the set.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  statistics:
+    node: group
+    class: NXprocess
+    doc: |-
+      In addition to the detailed storage which objects were grouped to which
+      feature/group summary statistics are stored under this group.
+    children:
+      unassigned:
+        node: dataset
+        type: NX_UINT
+        units: {category: NX_UNITLESS}
+        doc: Total number of features categorized as unassigned.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      noise:
+        node: dataset
+        type: NX_UINT
+        units: {category: NX_UNITLESS}
+        doc: Total number of features categorized as noise.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      total:
+        node: dataset
+        type: NX_UINT
+        units: {category: NX_UNITLESS}
+        doc: Total number of features.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      indices_cluster:
+        node: dataset
+        type: NX_INT
+        shape: [n_features]
+        units: {category: NX_UNITLESS}
+        doc: Array of numerical identifier of each feature.
+        via: [T1, T4, T7, T9]
+        provisional: [Q1]
+      member_count:
+        node: dataset
+        type: NX_UINT
+        shape: [n_features, n_lbl_num]
+        units: {category: NX_UNITLESS}
+        doc: Array of number of objects for each feature.
+        via: [T1, T4, T7, T9]
+        provisional: [Q1]
+    via: [T1, T4, T7]
+    provisional: [Q1]

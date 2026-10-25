@@ -1,0 +1,48 @@
+nxds: '0.1'
+class: NXapm_paraprobe_tool_process
+category: base
+extends: NXprocess
+doc: Base class documenting a processing step within a tool of the paraprobe-toolbox.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+symbols:
+  n_mask: {doc: The number of entries in the mask.}
+children:
+  description:
+    node: dataset
+    type: NX_CHAR
+    doc: Possibility for leaving a free-text description about this analysis.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  window:
+    node: group
+    class: NXcs_filter_boolean_mask
+    doc: A bitmask which identifies all ions considered in the analysis.
+    children:
+      number_of_ions:
+        node: dataset
+        type: NX_UINT
+        units: {category: NX_UNITLESS}
+        doc: |-
+          Number of ions covered by the mask.
+          By default, the total number of ions in the dataset.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      bitdepth:
+        node: dataset
+        type: NX_UINT
+        units: {category: NX_UNITLESS}
+        doc: Number of bits assumed matching on a default datatype.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      mask:
+        node: dataset
+        type: NX_UINT
+        shape: [n_mask]
+        units: {category: NX_UNITLESS}
+        doc: |-
+          The mask. The length of the mask is an integer multiple of bitdepth.
+          In such case, padded bits are set to 0.
+        via: [T1, T4, T7, T9]
+        provisional: [Q1]
+    via: [T1, T4, T7]
+    provisional: [Q1]

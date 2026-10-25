@@ -1,0 +1,47 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"},
+    {"ref": "NXroot@NeXus_release"}
+  ],
+  "category": "application",
+  "children": [
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"class": "NXentry", "declared_by": "NXroot", "id": "ENTRY", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 1}, "recommended": false, "refined_by": ["NXcase_symbols"], "specialisation": "NXcase_symbols/ENTRY"}
+  ],
+  "class": "NXcase_symbols",
+  "describes": "NXroot",
+  "lossy": [],
+  "require": [],
+  "status": "local",
+  "symbols": ["n"],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"}
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {
+  "NXcase_symbols/ENTRY": {
+   "attributes": [
+     {"ref": "NXobject@default"}
+   ],
+   "children": [
+     {"node": "group", "ref": "NXobject/DATA"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+     {"declared_by": "NXentry", "enum": {"open": false, "values": [{"value": "NXcase_symbols"}]}, "id": "definition", "name": {"exact": "definition"}, "node": "dataset", "occurs": {"max": 1, "min": 1}, "recommended": false, "refined_by": ["NXcase_symbols"], "type": "NX_CHAR"},
+     {"node": "dataset", "ref": "NXentry/title"},
+     {"node": "dataset", "ref": "NXentry/start_time"},
+     {"node": "group", "ref": "NXentry/INSTRUMENT"},
+     {"declared_by": "NXcase_symbols", "id": "x", "name": {"exact": "x"}, "node": "dataset", "occurs": {"max": 1, "min": 1}, "recommended": false, "shape": {"binding": true, "dims": ["n"], "symbols": {"n": "NXcase_symbols"}}, "type": "NX_FLOAT"},
+     {"declared_by": "NXcase_symbols", "id": "y", "name": {"exact": "y"}, "node": "dataset", "occurs": {"max": 1, "min": 1}, "recommended": false, "shape": {"binding": true, "dims": ["n"], "symbols": {"n": "NXcase_symbols"}}, "type": "NX_FLOAT"},
+     {"declared_by": "NXcase_symbols", "id": "xy", "name": {"exact": "xy"}, "node": "dataset", "occurs": {"max": 1, "min": 1}, "recommended": false, "shape": {"binding": true, "dims": [{"expr": "2*n"}], "symbols": {"n": "NXcase_symbols"}}, "type": "NX_FLOAT"}
+   ],
+   "class": "NXentry",
+   "declared_by": "NXcase_symbols",
+   "id": "NXcase_symbols/ENTRY",
+   "require": [],
+   "symbols": [],
+   "undeclared": {"attribute": "report", "dataset": "report", "group": "report"}
+  }
+ }
+}

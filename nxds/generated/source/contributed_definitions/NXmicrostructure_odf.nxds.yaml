@@ -1,0 +1,223 @@
+nxds: '0.1'
+class: NXmicrostructure_odf
+category: base
+extends: NXprocess
+doc: |-
+  Base class to store an orientation distribution function (ODF).
+
+  An orientation distribution function is a probability distribution that details how
+  much volume of material has a specific orientation. An ODF is computed from
+  pole figure data in a computational process called `pole figure inversion <https://doi.org/10.1107/S0021889808030112>`_.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+symbols:
+  n_varphi_two:
+    doc: |-
+      Number of pixel per varphi section plot along the :math:`\varphi_2` slow
+      direction.
+  n_capital_phi:
+    doc: Number of pixel per varphi section plot along the :math:`\Phi` fast direction.
+  n_varphi_one:
+    doc: |-
+      Number of pixel per varphi section plot along the :math:`\varphi_1` fastest
+      direction.
+  k:
+    doc: Number of local maxima evaluated in the component analysis.
+  n_pos:
+    doc: Number of sampled positions in orientation space.
+children:
+  configuration:
+    node: group
+    class: NXparameters
+    doc: Details about the algorithm used for computing the ODF.
+    children:
+      crystal_symmetry_point_group:
+        node: dataset
+        type: NX_CHAR
+        doc: |-
+          Point group of the crystal structure of the phase for which the here documented
+          phase-dependent ODF was computed following the notation of the
+          International Table of Crystallography.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      specimen_symmetry_point_group:
+        node: dataset
+        type: NX_CHAR
+        doc: |-
+          Point group assumed for additionally considered sample symmetries
+          following the notation of the International Table of Crystallography.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      kernel_halfwidth:
+        node: dataset
+        type: NX_NUMBER
+        units: {category: NX_ANGLE}
+        doc: Halfwidth of the kernel.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      kernel_name:
+        node: dataset
+        type: NX_CHAR
+        doc: Name of the kernel.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      resolution:
+        node: dataset
+        type: NX_NUMBER
+        units: {category: NX_ANGLE}
+        doc: Resolution of the kernel.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  characteristics:
+    node: group
+    class: NXprocess
+    doc: Group to store descriptors for a rough classification of an ODF.
+    children:
+      texture_index:
+        node: dataset
+        type: NX_FLOAT
+        units: {category: NX_DIMENSIONLESS}
+        doc: |-
+          The texture index :math:`t = \int_{\mathcal{SO(3)}} f(R)^{2}dR` with :math:`f(R)`, denoting the ODF
+          is evaluated in orientation space :math:`\mathcal{SO(3)}`.
+
+          The higher it is the texture index the sharper it is the ODF.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  kth_extrema:
+    node: group
+    class: NXprocess
+    doc: Group to store descriptors and summary statistics for extrema of the ODF.
+    children:
+      extrema:
+        node: dataset
+        type: NX_CHAR
+        enum: [minima, maxima]
+        doc: |-
+          Minima or maxima, if extrema is set to minima values for location and volume_fraction
+          are sorted in increasing order. If extrema is set to maxima values for location and
+          volume_fraction are sorted in decreasing order. Therefore, the global extremum is
+          always the first entry in location and volume_fraction.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      kth:
+        node: dataset
+        type: NX_UINT
+        units: {category: NX_UNITLESS}
+        doc: Number of local extrema evaluated
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      theta:
+        node: dataset
+        type: NX_NUMBER
+        units: {category: NX_ANGLE}
+        doc: |-
+          Disorientation threshold within which intensity of the ODF
+          is integrated for the component analysis.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      location:
+        node: dataset
+        type: NX_NUMBER
+        shape: [k, 3]
+        units: {category: NX_ANGLE}
+        doc: |-
+          Euler angle representation :math:`\varphi_1`, :math:`\Phi`, :math:`\varphi_2` of the
+          kth-most maxima in decreasing order of the intensity maximum.
+        via: [T1, T4, T7, T9]
+        provisional: [Q1]
+      volume_fraction:
+        node: dataset
+        type: NX_NUMBER
+        shape: [k]
+        units: {category: NX_ANY}
+        doc: |-
+          Integrated ODF intensity within a theta angular region of the orientation space :math:`SO3`
+          about each location (obeying symmetries) as specified for each location.
+        via: [T1, T4, T7, T9]
+        provisional: [Q1]
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  sampling:
+    node: group
+    class: NXprocess
+    doc: The ODF intensity values (weights) as sampled with a software.
+    children:
+      resolution:
+        node: dataset
+        type: NX_NUMBER
+        units: {category: NX_ANGLE}
+        doc: Sampling resolution
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      euler:
+        node: dataset
+        type: NX_NUMBER
+        shape: [n_pos, 3]
+        units: {category: NX_ANGLE}
+        doc: |-
+          Bunge-Euler (i.e. ZXZ convention) locations of each position
+          in orientation space for which a weight was sampled.
+        via: [T1, T4, T7, T9]
+        provisional: [Q1]
+      weight:
+        node: dataset
+        type: NX_NUMBER
+        shape: [n_pos]
+        units: {category: NX_DIMENSIONLESS}
+        doc: Weight at each sampled position following the order in euler.
+        via: [T1, T4, T7, T9]
+        provisional: [Q1]
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  phi_two_plot:
+    node: group
+    class: NXdata
+    doc: |-
+      Visualization of the ODF intensity as discretized orthogonal sections through
+      orientation space parameterized using Bunge-Euler angles.
+
+      This is one example of typical default plots used in the texture community in materials engineering.
+
+      Mind that the orientation space is a distorted space when it using an Euler angle parameterization.
+      Therefore, equivalent orientations show intensity contributions in eventually multiple locations.
+    children:
+      intensity:
+        node: dataset
+        type: NX_NUMBER
+        shape: [n_varphi_two, n_capital_phi, n_varphi_one]
+        units: {category: NX_DIMENSIONLESS}
+        doc: |-
+          ODF intensity at probed locations relative to the intensity of the null model of
+          a random texture.
+        via: [T1, T4, T7, T9]
+        provisional: [Q1]
+      varphi_one:
+        node: dataset
+        type: NX_NUMBER
+        shape: [n_varphi_one]
+        units: {category: NX_ANGLE}
+        doc: Pixel center angular position along the :math:`\varphi_1` direction.
+        via: [T1, T4, T7, T9]
+        provisional: [Q1]
+      capital_phi:
+        node: dataset
+        type: NX_NUMBER
+        shape: [n_capital_phi]
+        units: {category: NX_ANGLE}
+        doc: Pixel center angular position along the :math:`\Phi` direction.
+        via: [T1, T4, T7, T9]
+        provisional: [Q1]
+      varphi_two:
+        node: dataset
+        type: NX_NUMBER
+        shape: [n_varphi_two]
+        units: {category: NX_ANGLE}
+        doc: Pixel center angular position along the :math:`\varphi_2` direction.
+        via: [T1, T4, T7, T9]
+        provisional: [Q1]
+    via: [T1, T4, T7]
+    provisional: [Q1]

@@ -1,0 +1,18 @@
+nxds: '0.1'
+class: NXem_measurement
+category: base
+extends: NXobject
+doc: Base class for documenting a measurement with an electron microscope.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  instrument:
+    node: group
+    class: NXem_instrument
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  eventID:
+    node: group
+    name: {template: 'event{ID}'}
+    class: NXem_event_data
+    via: [T1, T3, T4, T7]
+    provisional: [Q1, Q3]

@@ -1,0 +1,83 @@
+nxds: '0.1'
+class: NXbeam_transfer_matrix_table
+category: base
+extends: NXobject
+doc: |-
+  Contains data structures of an experimental optical setup (i.e., multiple
+  transfer matrix tables).   These data structures are used to relate physical
+  properties of two beams (NXbeam) which have one common optical component
+  (NXcomponent) (one specific transfer matrix).
+  One of these beams is an input beam and the other one is an output beam.
+
+  The data describes the change of beam properties, e.g. the intensity of a
+  beam is reduced because the transmission coefficient of the beam device is
+  lower than 1.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+symbols:
+  N_variables:
+    doc: Length of the array associated to the data type.
+children:
+  datatype_N:
+    node: dataset
+    name: {template: 'datatype_{N}'}
+    enum: [aperture, focal length, orientation, jones matrix]
+    doc: |-
+      Select which type of data was recorded, for example aperture and
+      focal length.
+      It is possible to have multiple selections. This selection defines
+      how many columns (N_variables) are stored in the data array.
+      N in the name, is the index number in which order the given
+      property is listed.
+    via: [T0, T1, T3, T4, T7]
+    provisional: [Q1, Q3]
+  matrix_elements:
+    node: dataset
+    shape: [N_variables]
+    doc: |-
+      Please list in this array the column and row names used in your actual data.
+      That is in the case of aperture ['diameter'] or focal length ['focal_length_value']
+      and for orientation matrix ['OM1', 'OM2', 'OM3'] or for jones matrix
+      ['JM1','JM2']
+    via: [T0, T1, T4, T7, T9]
+    provisional: [Q1]
+  TRANSFER_MATRIX:
+    node: dataset
+    name: {any: true}
+    type: NX_NUMBER
+    shape: [N_variables, N_variables]
+    doc: |-
+      Contains the datastructure which relates beam properties of an
+      input and output beam as result of the input beam interaction
+      with the beam device.
+
+      Transfer matrix relationship between N input beams and M output beams.
+      It contains a table with the relevant matrices to be used for different
+      transmitted properties (such as polarization, intensity, phase).
+
+      Data structure for all transfermatrices of a beam device in a setup.
+      For each combination of N input and M output beams and for L physical
+      concept (i.e. beam intensity), one matrix can be defined.
+
+      In this way, the transfer matrix table has the dimension NxM.
+
+      For each entry, in this transfer matrix, there are L formalisms.
+      Each formalism has the dimension math:`dim(L_i)xdim(L_i)`,
+      whereby math:`L_i` is the specific physical concept (Intensity, polarization, direction).
+
+      A beamsplitter with two input laser beams can have a total of
+      four transfermatrices (2 Input x 2 Output).
+
+      The dimension of the transfer matrix depends on the parameters.
+      Examples are:
+      1x1 for intensity/power
+      2x2 for jones formalism
+      3x3 for direction
+    attributes:
+      input:
+        doc: Specific name of input beam which the transfer matrix table is related to.
+        via: [T0, T1, T4]
+      output:
+        doc: Specific name of output beam which the transfer matrix table is related to.
+        via: [T0, T1, T4]
+    via: [T1, T3, T4, T7, T9]
+    provisional: [Q1, Q3]

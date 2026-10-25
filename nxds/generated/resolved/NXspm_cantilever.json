@@ -1,0 +1,38 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/COLLECTION"},
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"node": "group", "ref": "NXobject/LOG"},
+    {"node": "group", "ref": "NXobject/NOTE"},
+    {"node": "group", "ref": "NXobject/PARAMETERS"},
+    {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+    {"node": "dataset", "ref": "NXobject/identifierNAME"},
+    {"class": "NXspm_cantilever_oscillator", "declared_by": "NXspm_cantilever", "docs": ["NXspm_cantilever/cantilever_oscillator"], "id": "cantilever_oscillator", "name": {"exact": "cantilever_oscillator"}, "node": "group", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "via": ["T1", "T4", "T7"]},
+    {"class": "NXspm_cantilever_config", "declared_by": "NXspm_cantilever", "docs": ["NXspm_cantilever/cantilever_config"], "id": "cantilever_config", "name": {"exact": "cantilever_config"}, "node": "group", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "via": ["T1", "T4", "T7"]},
+    {"class": "NXpositioner", "declared_by": "NXspm_cantilever", "docs": ["NXspm_cantilever/phase_positioner"], "id": "phase_positioner", "name": {"exact": "phase_positioner"}, "node": "group", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "via": ["T1", "T4", "T7"]},
+    {"class": "NXpositioner", "declared_by": "NXspm_cantilever", "docs": ["NXspm_cantilever/amplitude_positioner"], "id": "amplitude_positioner", "name": {"exact": "amplitude_positioner"}, "node": "group", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "via": ["T1", "T4", "T7"]}
+  ],
+  "class": "NXspm_cantilever",
+  "extends": "NXobject",
+  "lossy": [],
+  "provisional": [],
+  "require": [],
+  "source": "contributed_definitions/NXspm_cantilever.nxdl.xml",
+  "status": "contributed",
+  "symbols": [],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"},
+  "via": []
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {}
+}

@@ -1,0 +1,6 @@
+description: >
+  `expect` (§8.8): no group follows NXcase_require, which requires at least one:
+  NO-DEFINITION E at the root, member `NXcase_require`; the I finding without
+  `expect` is not reported.
+expect: NXcase_require
+capabilities: []

@@ -1,0 +1,9 @@
+{
+ "nxds": "0.1",
+ "texts": {
+  "NXdemo_counter_phase3": "Demo: a counter with several channels.",
+  "NXdemo_counter_phase3/CHANNEL_counts": "Counts of one channel, for example ``i0_counts``.",
+  "NXdemo_counter_phase3/SENSOR": "Any sensor read out with the counter.",
+  "NXdemo_counter_phase3/mode": "Counting mode."
+ }
+}

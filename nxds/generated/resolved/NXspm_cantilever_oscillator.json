@@ -1,0 +1,45 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/COLLECTION"},
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"node": "group", "ref": "NXobject/LOG"},
+    {"node": "group", "ref": "NXobject/NOTE"},
+    {"node": "group", "ref": "NXobject/PARAMETERS"},
+    {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+    {"node": "dataset", "ref": "NXobject/identifierNAME"},
+    {"declared_by": "NXspm_cantilever_oscillator", "docs": ["NXspm_cantilever_oscillator/reference_amplitude"], "id": "reference_amplitude", "name": {"exact": "reference_amplitude"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_LENGTH"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXspm_cantilever_oscillator", "docs": ["NXspm_cantilever_oscillator/reference_frequency"], "id": "reference_frequency", "name": {"exact": "reference_frequency"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_FREQUENCY"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXspm_cantilever_oscillator", "docs": ["NXspm_cantilever_oscillator/reference_phase"], "id": "reference_phase", "name": {"exact": "reference_phase"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_ANGLE"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXspm_cantilever_oscillator", "docs": ["NXspm_cantilever_oscillator/frequency_harmonic"], "id": "frequency_harmonic", "name": {"exact": "frequency_harmonic"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_DIMENSIONLESS"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXspm_cantilever_oscillator", "docs": ["NXspm_cantilever_oscillator/phase_shift"], "id": "phase_shift", "name": {"exact": "phase_shift"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_ANGLE"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXspm_cantilever_oscillator", "docs": ["NXspm_cantilever_oscillator/frequency_shift"], "id": "frequency_shift", "name": {"exact": "frequency_shift"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_FREQUENCY"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXspm_cantilever_oscillator", "docs": ["NXspm_cantilever_oscillator/frequency_cutoff"], "id": "frequency_cutoff", "name": {"exact": "frequency_cutoff"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_FREQUENCY"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXspm_cantilever_oscillator", "docs": ["NXspm_cantilever_oscillator/frequency_bandwidth"], "id": "frequency_bandwidth", "name": {"exact": "frequency_bandwidth"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_FREQUENCY"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXspm_cantilever_oscillator", "docs": ["NXspm_cantilever_oscillator/target_amplitude"], "id": "target_amplitude", "name": {"exact": "target_amplitude"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_LENGTH"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXspm_cantilever_oscillator", "docs": ["NXspm_cantilever_oscillator/target_frequency"], "id": "target_frequency", "name": {"exact": "target_frequency"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_FREQUENCY"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXspm_cantilever_oscillator", "docs": ["NXspm_cantilever_oscillator/active_frequency"], "id": "active_frequency", "name": {"exact": "active_frequency"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_FREQUENCY"}, "via": ["T1", "T4", "T7"]}
+  ],
+  "class": "NXspm_cantilever_oscillator",
+  "extends": "NXobject",
+  "lossy": [],
+  "provisional": [],
+  "require": [],
+  "source": "contributed_definitions/NXspm_cantilever_oscillator.nxdl.xml",
+  "status": "contributed",
+  "symbols": [],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"},
+  "via": []
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {}
+}

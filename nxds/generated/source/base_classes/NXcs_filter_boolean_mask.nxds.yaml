@@ -1,0 +1,63 @@
+nxds: '0.1'
+class: NXcs_filter_boolean_mask
+category: base
+extends: NXobject
+doc: |-
+  Base class for packing and unpacking booleans.
+
+  The field mask should be constructed from packing a vector of booleans
+  (a bitfield) into unsigned integers with bytesize bitdepth. Padding to
+  an integer number of such integers is assumed.
+
+  Thereby, this base class can be used to inform software about necessary modulo
+  operations to decode the mask to recover e.g. set membership of objects in sets
+  whose membership has been encoded as a vector of booleans.
+
+  This is useful e.g. when processing object sets such as point cloud data.
+  If e.g. a spatial filter has been applied to a set of points, we may wish to document
+  memory-space efficiently which points were analyzed. An array of boolean values
+  is one option to achieve this. A value is true if the point is included and false otherwise.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+symbols:
+  n_objs:
+    doc: Number of entries (e.g. number of points or objects).
+  bitdepth:
+    doc: Number of bits assumed for the container datatype used.
+  n_total:
+    doc: Length of mask considering the eventual need for padding.
+children:
+  depends_on:
+    node: dataset
+    type: NX_CHAR
+    doc: |-
+      Possibility to refer to which set this mask applies.
+
+      If depends_on is not provided, it is assumed that the mask
+      applies to its direct parent.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  number_of_objects:
+    node: dataset
+    type: NX_UINT
+    units: {category: NX_UNITLESS}
+    doc: Number of objects represented by the mask.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  bitdepth:
+    node: dataset
+    type: NX_UINT
+    units: {category: NX_UNITLESS}
+    doc: |-
+      Number of bits assumed matching on a default datatype.
+      (e.g. 8 bits for a C-style uint8).
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  mask:
+    node: dataset
+    type: NX_UINT
+    units: {category: NX_UNITLESS}
+    doc: |-
+      The content of the mask. If padding is used,
+      padding bits have to be set to 0.
+    via: [T1, T4, T7]
+    provisional: [Q1]

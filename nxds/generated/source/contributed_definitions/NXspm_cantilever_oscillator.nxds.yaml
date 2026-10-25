@@ -1,0 +1,108 @@
+nxds: '0.1'
+class: NXspm_cantilever_oscillator
+category: base
+extends: NXobject
+doc: |-
+  In generally speaking a cantilever resembles a leaf-spring which can be treated as a
+  harmonic oscillator as a first approximation.
+
+  Note: If any field data in this group comes in an array as input or output in the scan process they will
+  be stored in NXdata in scan_control group.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  reference_amplitude:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_LENGTH}
+    doc: |-
+      The reference amplitude (also called drive amplitude) of the cantilever.
+      This is the amplitude of the cantilever oscillation when no external forces are acting on it.
+
+      Note: At least one from reference_amplitude, reference_frequency, or reference_phase is expected.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  reference_frequency:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_FREQUENCY}
+    doc: |-
+      The reference frequency (also called drive frequency or resonance frequency) of
+      the cantilever.
+
+      Note: At least one from reference_amplitude, reference_frequency, or reference_phase is expected.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  reference_phase:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_ANGLE}
+    doc: |-
+      The reference phase of the cantilever oscillator.
+
+      Note: At least one from reference_amplitude, reference_frequency, or reference_phase is expected.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  frequency_harmonic:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_DIMENSIONLESS}
+    doc: |-
+      The harmonic (e.g., second harmonic of the fundamental frequency) frequency of
+      the cantilever.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  phase_shift:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_ANGLE}
+    doc: |-
+      The phase difference between the reference signal of cantilever and response
+      signal.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  frequency_shift:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_FREQUENCY}
+    doc: Shift in the resonance frequency of the cantilever.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  frequency_cutoff:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_FREQUENCY}
+    doc: The cutoff frequency of the cantilever.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  frequency_bandwidth:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_FREQUENCY}
+    doc: The bandwidth of the resonance frequency.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  target_amplitude:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_LENGTH}
+    doc: |-
+      The target amplitude of the cantilever to scan on each scan point.
+      This field is same as the reference amplitude in the non-contact mode.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  target_frequency:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_FREQUENCY}
+    doc: |-
+      The target frequency of the cantilever to scan on each scan point.
+      This field is same as the reference frequency in the non-contact mode
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  active_frequency:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_FREQUENCY}
+    doc: The active frequency of the cantilever to start the experiment.
+    via: [T1, T4, T7]
+    provisional: [Q1]

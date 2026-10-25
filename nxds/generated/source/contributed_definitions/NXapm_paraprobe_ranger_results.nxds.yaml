@@ -1,0 +1,54 @@
+nxds: '0.1'
+class: NXapm_paraprobe_ranger_results
+category: application
+extends: NXapm_paraprobe_tool_results
+describes: NXroot
+doc: |-
+  Application definition for results files of the paraprobe-ranger tool.
+
+  The tool paraprobe-ranger evaluates how mass-to-charge-state-ratio
+  values map on (molecular) ion types.
+defaults: {min: 1, binding: true, type: NX_CHAR}
+symbols:
+  n_ions:
+    doc: The total number of ions in the reconstructed volume.
+children:
+  ENTRY:
+    node: group
+    name: {any: true}
+    class: NXentry
+    occurs: {min: 1, max: 1}
+    children:
+      definition:
+        node: dataset
+        type: NX_CHAR
+        enum: [NXapm_paraprobe_ranger_results]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      iontypesID:
+        node: group
+        name: {template: 'iontypes{ID}'}
+        class: NXapm_paraprobe_tool_process
+        occurs: {min: 1, max: unbounded}
+        doc: |-
+          The tool loads ranging definitions from the configuration file and
+          evaluates for each ion to which iontype it matches.
+          If an ion matches on no type, the ion is assume of the default
+          *unknown_type*. In this case, the value *iontypes* is 0.
+          In other cases the value is larger than 0.
+        children:
+          iontypes:
+            node: dataset
+            type: NX_UINT
+            shape: [n_ions]
+            units: {category: NX_UNITLESS}
+            doc: |-
+              The iontype (identifier) for each ion that was best matching,
+              stored in the order of the evaporation sequence ID.
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+        via: [T1, T3, T6]
+        provisional: [Q1, Q3]
+    via: [T1, T2, T6]
+    provisional: [Q1, Q11]
+via: [T8]

@@ -1,0 +1,59 @@
+nxds: '0.1'
+class: NXdeflector
+category: base
+extends: NXcomponent
+doc: Component of an electron analyzer that deflects the paths of electrons. This includes
+  electrostatic and electromagnetic deflectors.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  type:
+    node: dataset
+    type: NX_CHAR
+    enum: [dipole, quadrupole, hexapole, octupole]
+    doc: Qualitative type of deflector with respect to the number of pole pieces.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  name:
+    node: dataset
+    type: NX_CHAR
+    doc: |-
+      Colloquial or short name for the deflector. For manufacturer names and
+      identifiers use ``NXfabrication`` and ``identifierNAME``.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  voltage:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_VOLTAGE}
+    doc: |-
+      Excitation voltage of the deflector. For dipoles it is a single number.
+      For higher order multipoles, it is an array.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  current:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_CURRENT}
+    doc: |-
+      Excitation current of the deflector. For dipoles it is a single number. For
+      higher orders, it is an array.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  offset_x:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_LENGTH}
+    doc: |-
+      Spatial offset of the deflector in x direction (perpendicular to
+      ```offset_y```).
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  offset_y:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_LENGTH}
+    doc: |-
+      Spatial offset of the deflector in y direction (perpendicular to
+      ```offset_x```).
+    via: [T1, T4, T7]
+    provisional: [Q1]

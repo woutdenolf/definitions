@@ -1,0 +1,26 @@
+nxds: "0.1"
+class: NXcase_subclass
+category: application
+describes: NXroot
+doc: A specialised member whose objects may be of a subclass (§8.6).
+defaults: {min: 1, binding: true}
+children:
+  ENTRY:
+    node: group
+    class: NXentry
+    name: {any: true}
+    children:
+      definition: {node: dataset, enum: [NXcase_subclass]}
+      CRATE:
+        node: group
+        class: NXcase_crate
+        name: {any: true}
+        children:
+          size: {node: dataset}
+      DATA:
+        node: group
+        class: NXdata
+        name: {any: true}
+        occurs: {min: 0}
+        children:
+          size: {node: link, target: ENTRY/CRATE/size}

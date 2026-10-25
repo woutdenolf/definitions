@@ -1,0 +1,6 @@
+description: >
+  Name-fit refinement (T18, Q4), for NXDL sources only: a fixed name written in
+  an application definition becomes a member with `refines` of the inherited
+  free or template member it fits, placed right after it, and inherits its
+  type, units and maximum (§3.1). `monochromator` refines `MONOCHROMATOR`.
+covers: [T18, refines, name.template, name.any]

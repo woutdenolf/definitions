@@ -1,0 +1,214 @@
+nxds: '0.1'
+class: NXcalibration
+category: base
+extends: NXprocess
+doc: Subclass of NXprocess to describe post-processing calibrations.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+symbols:
+  ncal:
+    doc: Number of points of the calibrated and uncalibrated axes
+attributes:
+  default:
+    doc: |-
+      .. index:: plotting
+
+      Declares which child group contains a path leading
+      to a :ref:`NXdata` group.
+
+      It is recommended (as of NIAC2014) to use this attribute
+      to help define the path to the default dataset to be plotted.
+      See https://www.nexusformat.org/2014_How_to_find_default_data.html
+      for a summary of the discussion.
+    via: [T0, T1, T4]
+children:
+  description:
+    node: dataset
+    type: NX_CHAR
+    doc: A description of the procedures employed.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  physical_quantity:
+    node: dataset
+    doc: |-
+      The physical quantity of the calibration, e.g.,
+      energy, momentum, time, etc.
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  identifier_calibration_method:
+    node: dataset
+    type: NX_CHAR
+    doc: |-
+      A digital persistent identifier (e.g., DOI, ISO standard) referring to a detailed description of a
+      calibration method but no actual calibration data.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  identifier_calibration_reference:
+    node: dataset
+    type: NX_CHAR
+    doc: |-
+      A digital persistent identifier (e.g., a DOI) referring to a publicly available calibration measurement
+      used for this instrument, e.g., a measurement of a known standard containing calibration information.
+      The axis values may be copied or linked in the appropriate NXcalibration fields for reference.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  calibration_object:
+    node: group
+    class: NXnote
+    doc: |-
+      A file serialization of a calibration which may not be publicly available (externally from the NeXus file).
+
+      This metadata can be a documentation of the source (file) or database (entry) from which pieces
+      of information have been extracted for consumption (e.g. in a research data management system (RDMS)).
+      It is also possible to include the actual file by using the `file` field.
+
+      The axis values may be copied or linked in the appropriate NXcalibration fields for reference.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  last_process:
+    node: dataset
+    type: NX_CHAR
+    doc: Indicates the name of the last operation applied in the NXprocess sequence.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  applied:
+    node: dataset
+    type: NX_BOOLEAN
+    doc: Has the calibration been applied?
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  original_axis:
+    node: dataset
+    type: NX_FLOAT
+    shape: [ncal]
+    units: {category: NX_ANY}
+    doc: Array containing the data coordinates in the original uncalibrated axis
+    attributes:
+      symbol:
+        doc: |-
+          The symbol of the axis to be used in the fit_function, e.g., `energy`, `E`.
+          This should comply to the following naming rules (similar to python's naming rules):
+
+          * A variable name must start with a letter or the underscore character
+          * A variable name cannot start with a number
+          * A variable name can only contain alpha-numeric characters and underscores (A-z, 0-9, and _ )
+          * Variable names are case-sensitive (age, Age and AGE are three different variables)
+        via: [T0, T1, T4]
+      input_path:
+        doc: |-
+          The path from which this data is derived, e.g., raw detector axis.
+          Should be a valid NeXus path name, e.g., /entry/instrument/detector/raw.
+        via: [T0, T1, T4]
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  fit_formula_inputs:
+    node: group
+    class: NXparameters
+    doc: Additional input axis to be used in the formula.
+    children:
+      PARAMETER:
+        node: dataset
+        name: {any: true}
+        doc: |-
+          The name of each ``PARAMETER`` is used as the symbol to be used in the ``fit_formula_description``, i.e.,
+          if the field name is `my_field` you should refer to this axis by `my_field` in the ``fit_formula_description``.
+        attributes:
+          input_path:
+            doc: |-
+              The path from which this data is derived, e.g., raw detector axis.
+              Should be a valid NeXus path name, e.g., /entry/instrument/detector/raw.
+            via: [T0, T1, T4]
+        via: [T0, T1, T3, T4, T7]
+        provisional: [Q1, Q3]
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  calibration_parameters:
+    node: group
+    class: NXparameters
+    doc: |-
+      Fit coefficients to be used in ``fit_formula_description``.
+
+      As an example, for nonlinear energy calibrations, e.g. in a time-of-flight (TOF) detector, a polynomial
+      function is fitted to a set of features (peaks) at well defined energy positions to determine
+      E(TOF). Here we can store the fit coefficients for that procedure.
+    children:
+      aN:
+        node: dataset
+        name: {template: 'a{N}'}
+        type: NX_NUMBER
+        doc: |-
+          Use a0, a1, ..., an for the coefficients of a polynomial fit, corresponding to the values in the
+          ``fit_formula_description``.
+        via: [T1, T3, T4, T7]
+        provisional: [Q1, Q3]
+      scaling_factor:
+        node: dataset
+        type: NX_FLOAT
+        units: {category: NX_ANY}
+        doc: |-
+          For linear calibration. Scaling parameter.
+          This should yield the relation `calibrated_axis` = (`original_axis` + `offset`) * `scaling_factor`.
+
+          For a more detailed description of scaling factors, see
+          :ref:`/NXdata/FIELDNAME_scaling_factor </NXdata/FIELDNAME_scaling_factor-field>`.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      offset:
+        node: dataset
+        type: NX_FLOAT
+        units: {category: NX_ANY}
+        doc: |-
+          For linear calibration. Offset parameter.
+          This should yield the relation `calibrated_axis` = (`original_axis` + `offset`) * `scaling_factor`.
+
+          For a more detailed description of offset, see
+          :ref:`/NXdata/FIELDNAME_offset </NXdata/FIELDNAME_offset-field>`.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  fit_formula_description:
+    node: dataset
+    type: NX_CHAR
+    doc: |-
+      Here we can store a description of the formula used for the fit function.
+
+      For polynomial fits, use a0, a1, ..., an for the coefficients, corresponding to the values in the
+      coefficients group. Use x0, x1, ..., xm for the mth position in the `original_axis` field.
+
+      If there is the symbol attribute specified for the `original_axis` this may be used instead of x.
+      If you want to use the whole axis use `x`.
+
+      Alternate axis can also be available as specified by the `fit_formula_inputs` group.
+      The data should then be referred here by the `SYMBOL` name, e.g., for a field
+      name ``my_field`` in ``fit_formula_inputs``, it should be referred here by ``my_field`` or ``my_field0``
+      if you want to read the zeroth element of the array.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  mapping_MAPPING:
+    node: dataset
+    name: {template: 'mapping_{MAPPING}'}
+    type: NX_FLOAT
+    doc: |-
+      Mapping data for calibration.
+
+      This can be used to map data points from uncalibrated to calibrated values,
+      i.e., by multiplying each point in the input axis by the corresponding point in the mapping data.
+    via: [T1, T3, T4, T7]
+    provisional: [Q1, Q3]
+  calibrated_axis:
+    node: dataset
+    type: NX_FLOAT
+    shape: [ncal]
+    units: {category: NX_ANY}
+    doc: An array representing the axis after calibration, matching the data length
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  DATA:
+    node: group
+    name: {any: true}
+    class: NXdata
+    doc: |-
+      Any data acquired/used during the calibration that does not fit the `NX_FLOAT` fields above.
+      NXdata groups can be used for multidimensional data which are relevant to the calibration
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]

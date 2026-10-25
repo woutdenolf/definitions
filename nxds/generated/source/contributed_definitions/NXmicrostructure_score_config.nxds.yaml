@@ -1,0 +1,907 @@
+nxds: '0.1'
+class: NXmicrostructure_score_config
+category: application
+describes: NXroot
+doc: |-
+  Application definition to configure a simulation with the SCORE model.
+
+  * `M. Kühbach et al. <https://doi.org/10.1016/j.actamat.2016.01.068>`_
+  * `M. Diehl et al. <https://doi.org/10.1088/1361-651X/ab51bd>`_
+defaults: {min: 1, binding: true, type: NX_CHAR}
+symbols:
+  n_dg_ori:
+    doc: Number of Bunge-Euler angle triplets for deformed grains.
+  n_rx_ori:
+    doc: Number of Bunge-Euler angle triplets for recrystallization nuclei.
+  n_ori:
+    doc: Number of texture components to analyze.
+  n_drag:
+    doc: Number of support points for the linearized drag profile.
+  n_temp:
+    doc: Number of support points for the desired time-temperature profile.
+  n_defrag:
+    doc: |-
+      Number of entries when to defragment i.e. garbage collect the memory holding
+      state information for recrystallized cells.
+  n_snapshot:
+    doc: Number of entries when to collect snapshots of the evolving microstructure.
+  n_su:
+    doc: Number of solitary unit domains to export.
+  d: {doc: Dimensionality of the simulation.}
+children:
+  ENTRY:
+    node: group
+    name: {any: true}
+    class: NXentry
+    children:
+      definition:
+        node: dataset
+        type: NX_CHAR
+        enum: [NXmicrostructure_score_config]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      identifier_simulation:
+        node: dataset
+        type: NX_UINT
+        doc: An alias to refer to this simulation.
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      description:
+        node: dataset
+        occurs: {min: 0}
+        type: NX_CHAR
+        doc: Discouraged free-text field to add further details to the computation.
+        via: [T1, T6, T7]
+        provisional: [Q1]
+      start_time:
+        node: dataset
+        type: NX_DATE_TIME
+        doc: |-
+          ISO 8601 time code with local time zone offset to UTC information
+          included when the configuration file was created.
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      profiling:
+        node: group
+        class: NXcs_profiling
+        occurs: {min: 0}
+        via: [T1, T6, T7]
+        provisional: [Q1]
+      userID:
+        node: group
+        name: {template: 'user{ID}'}
+        class: NXuser
+        occurs: {min: 0, max: unbounded}
+        via: [T1, T3, T6]
+        provisional: [Q1, Q3]
+      sample:
+        node: group
+        class: NXsample
+        occurs: {min: 0}
+        recommended: true
+        children:
+          dimensionality:
+            node: dataset
+            type: NX_POSINT
+            units: {category: NX_UNITLESS}
+            enum: ['1', '2', '3']
+            doc: Dimensionality of the simulation.
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          is_simulation:
+            node: dataset
+            type: NX_CHAR
+            enum: [experiment, simulation]
+            doc: A qualifier whether the sample is a real one or a virtual one.
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          atom_types:
+            node: dataset
+            type: NX_CHAR
+            doc: |-
+              List of comma-separated elements from the periodic table that are
+              contained in the specimen. If the specimen substance has multiple
+              components, all elements from each component must be included in
+              `atom_types`.
+
+              The purpose of the field is to offer research data management systems an
+              opportunity to parse the relevant elements without having to interpret
+              these from other sources.
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T6, T7]
+        provisional: [Q1]
+      program1:
+        node: group
+        class: NXprogram
+        occurs: {min: 0}
+        recommended: true
+        doc: Name of the program whereby this config file was created.
+        children:
+          program:
+            node: dataset
+            type: NX_CHAR
+            attributes:
+              version:
+                type: NX_CHAR
+                via: [T1, T5]
+                provisional: [Q2]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T6, T7]
+        provisional: [Q1]
+      environment:
+        node: group
+        class: NXcollection
+        occurs: {min: 0}
+        recommended: true
+        doc: Programs and libraries representing the computational environment
+        children:
+          programID:
+            node: group
+            name: {template: 'program{ID}'}
+            class: NXprogram
+            occurs: {min: 1, max: unbounded}
+            children:
+              program:
+                node: dataset
+                type: NX_CHAR
+                attributes:
+                  version:
+                    type: NX_CHAR
+                    via: [T1, T5]
+                    provisional: [Q2]
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T3, T6]
+            provisional: [Q1, Q3]
+        via: [T1, T6, T7]
+        provisional: [Q1]
+      material:
+        node: group
+        class: NXparameters
+        doc: |-
+          (Mechanical) properties of the material which scale the
+          amount of stored (elastic) energy in the system and
+          thus mainly affect recrystallization kinetics.
+        children:
+          shear_modulus:
+            node: dataset
+            type: NX_FLOAT
+            units: {category: NX_PRESSURE}
+            doc: Reference shear modulus at zero Kelvin.
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          burgers_vector:
+            node: dataset
+            type: NX_FLOAT
+            units: {category: NX_LENGTH}
+            doc: Magnitude of the Burgers vector at zero Kelvin.
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          melting_temperature:
+            node: dataset
+            type: NX_FLOAT
+            units: {category: NX_TEMPERATURE}
+            doc: Melting temperature
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      deformation:
+        node: group
+        class: NXparameters
+        doc: |-
+          Details about the geometry and properties of the polycrystal that represents the
+          starting configuration (typically a deformed microstructure) for the simulation.
+        children:
+          model:
+            node: dataset
+            type: NX_CHAR
+            enum: [cuboidal, poisson_voronoi, ebsd, damask]
+            doc: |-
+              Which model should be used to generate a starting microstructure.
+
+              * cuboidal, a regular array of equally-shaped cuboidal grains
+              * poisson_voronoi, a discretized Poisson Voronoi tessellation
+              * ebsd, a microstructure synthesized based on a simulated or a measured EBSD orientation map
+              * damask, the result of a simulation from `DAMASK <https://damask-multiphysics.org>`_.
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          extent:
+            node: dataset
+            type: NX_FLOAT
+            shape: [3]
+            units: {category: NX_LENGTH}
+            doc: |-
+              Extent of each deformed grain in voxel along the
+              x, y, and z direction when model is cuboidal.
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+          diameter:
+            node: dataset
+            type: NX_FLOAT
+            units: {category: NX_LENGTH}
+            doc: Average spherical diameter when model is poisson_voronoi.
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          ensemble:
+            node: group
+            class: NXparameters
+            occurs: {min: 0}
+            doc: |-
+              Settings for instantiating properties of deformed grains when model is cuboidal
+              or poisson.
+            children:
+              bunge_euler:
+                node: dataset
+                type: NX_FLOAT
+                shape: [n_dg_ori, 3]
+                units: {category: NX_ANGLE}
+                doc: |-
+                  Set of Bunge-Euler orientations (:math:`\varphi_1`, :math:`\Phi`, :math:`\varphi_2` )
+                  out of which the orientations of deformed grains are sampled.
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              stored_energy:
+                node: dataset
+                type: NX_FLOAT
+                shape: [n_dg_ori]
+                units: {category: NX_ANY}
+                doc: |-
+                  Set of stored elastic energy quantified as a dislocation density which is assigned
+                  to deformed grains with orientations from bunge_euler with index queries matching
+                  for the bunge_euler and stored_energy fields.
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          ebsd:
+            node: group
+            class: NXnote
+            occurs: {min: 0}
+            doc: |-
+              Settings for instantiating properties of deformed grains from an
+              EBSD orientation map when model is cuboidal or poisson.
+            children:
+              file_name:
+                node: dataset
+                type: NX_CHAR
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              algorithm:
+                node: dataset
+                type: NX_CHAR
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              checksum:
+                node: dataset
+                type: NX_CHAR
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              stepsize:
+                node: dataset
+                type: NX_FLOAT
+                shape: [d]
+                units: {category: NX_LENGTH}
+                doc: |-
+                  Extent of the pixel of the EBSD orientation mapping assuming square-shaped pixels
+                  or cube-shaped voxels respectively.
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          damask:
+            node: group
+            class: NXnote
+            occurs: {min: 0}
+            doc: |-
+              Settings for instantiating properties of deformed grains and nuclei when model
+              is damask.
+            children:
+              file_name:
+                node: dataset
+                type: NX_CHAR
+                doc: |-
+                  Name of the DREAM.3D HDF5 file that was instantiated from the
+                  a previously performed DAMASK simulation.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              algorithm:
+                node: dataset
+                type: NX_CHAR
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              checksum:
+                node: dataset
+                type: NX_CHAR
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T6, T7]
+            provisional: [Q1]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      nucleation:
+        node: group
+        class: NXparameters
+        doc: |-
+          Phenomenological model according to which recrystallization nuclei
+          are placed into the domain. Studying the growth of these nuclei
+          is the main purpose of a SCORE simulation.
+        children:
+          spatial_distribution:
+            node: dataset
+            type: NX_CHAR
+            enum: [csr, damask]
+            doc: |-
+              According to which model will the nuclei become distributed spatially:
+
+              * csr, complete spatial randomness
+              * custom, implementation-specific
+              * gb, nuclei placed at grain boundaries
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          incubation_time:
+            node: dataset
+            type: NX_CHAR
+            enum: [site_saturation]
+            doc: |-
+              According to which model will the nuclei start to grow:
+
+              * site_saturation, instantaneously
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          orientation:
+            node: dataset
+            type: NX_CHAR
+            enum: [ensemble, random, damask]
+            doc: |-
+              According to which model will the nuclei get their orientation assigned:
+
+              * ensemble, picking randomly one from ensemble/bunge_euler
+              * random, picking randomly on the SO3
+              * damask, picking based on information provided in deformation/damask
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          ensemble:
+            node: group
+            class: NXparameters
+            doc: Settings for instantiating properties of nuclei for recrystallizing grains.
+            children:
+              bunge_euler:
+                node: dataset
+                type: NX_FLOAT
+                shape: [n_rx_ori, 3]
+                units: {category: NX_ANGLE}
+                doc: |-
+                  Set of Bunge-Euler orientations (:math:`\varphi_1`, :math:`\Phi`, :math:`\varphi_2` )
+                  out of which the orientations of nuclei/recrystallized grains are sampled.
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              incubation_time:
+                node: dataset
+                type: NX_FLOAT
+                shape: [n_rx_ori]
+                units: {category: NX_TIME}
+                doc: |-
+                  Incubation time which is assigned to deformed grains with orientations from bunge_euler
+                  with index queries matching for the bunge_euler and stored_energy fields.
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      grain_boundary_mobility:
+        node: group
+        class: NXparameters
+        doc: |-
+          Model for the assumed mobility of grain boundaries with different disorientation
+          implemented as a parameterized Turnbull's model for thermally-activated
+          grain boundary migration.
+        children:
+          model:
+            node: dataset
+            type: NX_CHAR
+            enum: [sebald_gottstein, rollett_holm]
+            doc: |-
+              Which type of fundamental model for the grain boundary mobility.
+
+              Grain boundaries with disorientation angle smaller than 15 degree are considered
+              as low-angle grain boundaries. Other grain boundaries are high-angle boundaries.
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          sebald_gottstein:
+            node: group
+            class: NXparameters
+            occurs: {min: 0}
+            doc: Parameter of the Sebald-Gottstein migration model.
+            children:
+              lagb_pre_factor:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_ANY}
+                doc: Pre-exponential factor for low-angle grain boundaries.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              lagb_enthalpy:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_ANY}
+                doc: Migration activation enthalpy for low-angle grain boundaries.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              hagb_pre_factor:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_ANY}
+                doc: Pre-exponential factor for high-angle grain boundaries.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              hagb_enthalpy:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_ANY}
+                doc: Migration activation enthalpy for high-angle grain boundaries.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              special_pre_factor:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_ANY}
+                doc: |-
+                  Pre-exponential factor for high-angle grain boundaries which in
+                  bicrystal or other tailored experiments showed a particular high
+                  mobility.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              special_enthalpy:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_ANY}
+                doc: |-
+                  Migration activation enthalpy for high-angle grain boundaries which in
+                  bicrystal or other tailored experiments showed a particular high
+                  mobility.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          rollett_holm:
+            node: group
+            class: NXparameters
+            doc: Parameter of the Rollett-Holm migration model.
+            children:
+              pre_factor:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_ANY}
+                doc: Pre-exponential factor for the fastest grain boundary in the system.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              enthalpy:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_ANY}
+                doc: Migration activation enthalpy for the fastest grain boundary in the system.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              c1:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_DIMENSIONLESS}
+                doc: Mobility scaling factor :math:`c_1`. Typically 0.99 or higher but not
+                  1.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              c2:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_UNITLESS}
+                doc: Mobility scaling factor :math:`c_2`. Typically 5.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              c3:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_UNITLESS}
+                doc: Mobility scaling factor :math:`c_3`. Typically 9.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      stored_energy_recovery:
+        node: group
+        class: NXparameters
+        doc: Time-dependent reduction of the stored energy to account for recovery effects.
+        children:
+          model:
+            node: dataset
+            type: NX_CHAR
+            enum: [none]
+            doc: Which type of recovery model.
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      dispersoid_drag:
+        node: group
+        class: NXparameters
+        doc: |-
+          Reduction of the grain boundary migration speed due to the presence of dispersoids
+          through which the total grain boundary area of the recrystallization front can be reduced
+          while the boundary is arrested at the dispersoids.
+        children:
+          model:
+            node: dataset
+            type: NX_CHAR
+            enum: [none, zener_smith]
+            doc: Which type of drag model.
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          zener_smith:
+            node: group
+            class: NXparameters
+            doc: Parameter of the Zener-Smith drag model when model is zener_smith.
+            children:
+              pre_factor:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_UNITLESS}
+                doc: Configuration-dependent constant which factorizes the drag pressure.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              surface_energy:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_ANY}
+                doc: |-
+                  Average surface energy of the grain-boundary-dispersoid-surface configuration
+                  which factorizes the drag pressure.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              radius_evolution:
+                node: group
+                class: NXdata
+                doc: Assumed dispersoid mean radius-time profile
+                attributes:
+                  signal:
+                    type: NX_CHAR
+                    via: [T1, T5]
+                    provisional: [Q2]
+                  axes:
+                    type: NX_CHAR
+                    via: [T1, T5]
+                    provisional: [Q2]
+                  time_indices:
+                    type: NX_UINT
+                    via: [T1, T5]
+                    provisional: [Q2]
+                  radius_indices:
+                    type: NX_UINT
+                    via: [T1, T5]
+                    provisional: [Q2]
+                children:
+                  title:
+                    node: dataset
+                    type: NX_CHAR
+                    via: [T1, T5, T7]
+                    provisional: [Q1, Q2]
+                  time:
+                    node: dataset
+                    type: NX_FLOAT
+                    shape: [n_drag]
+                    units: {category: NX_TIME}
+                    doc: |-
+                      Support point of the linearized curve of simulated time matching
+                      a specific support point of the average dispersoid radius.
+                    attributes:
+                      long_name:
+                        type: NX_CHAR
+                        via: [T1, T5]
+                        provisional: [Q2]
+                    via: [T1, T5, T7, T9]
+                    provisional: [Q1, Q2]
+                  radius:
+                    node: dataset
+                    type: NX_FLOAT
+                    shape: [n_drag]
+                    units: {category: NX_LENGTH}
+                    doc: Support point of the linearized curve of the average dispersoid radius.
+                    attributes:
+                      long_name:
+                        type: NX_CHAR
+                        via: [T1, T5]
+                        provisional: [Q2]
+                    via: [T1, T5, T7, T9]
+                    provisional: [Q1, Q2]
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      component_analysis:
+        node: group
+        class: NXparameters
+        children:
+          name:
+            node: dataset
+            type: NX_CHAR
+            shape: [n_ori]
+            doc: Given name of a texture component.
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+          bunge_euler:
+            node: dataset
+            type: NX_FLOAT
+            shape: [n_ori, 3]
+            units: {category: NX_ANGLE}
+            doc: |-
+              Bunge-Euler angle representation :math:`\varphi_1`, :math:`\Phi`, :math:`\varphi_2` of the
+              of texture components in sequence of the name field.
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+          theta:
+            node: dataset
+            type: NX_FLOAT
+            shape: [n_ori]
+            units: {category: NX_ANGLE}
+            doc: |-
+              Integration radius that constraints the theta angular region of the orientation space (SO3)
+              about each central location (obeying symmetries) as specified by bunge_euler indexed in
+              the same sequence as the bunge_euler and name fields.
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      time_temperature:
+        node: group
+        class: NXdata
+        doc: Desired simulated time-temperature profile
+        attributes:
+          signal:
+            type: NX_CHAR
+            via: [T1, T5]
+            provisional: [Q2]
+          axes:
+            type: NX_CHAR
+            via: [T1, T5]
+            provisional: [Q2]
+          time_indices:
+            type: NX_UINT
+            via: [T1, T5]
+            provisional: [Q2]
+          temperature_indices:
+            type: NX_UINT
+            via: [T1, T5]
+            provisional: [Q2]
+        children:
+          title:
+            node: dataset
+            type: NX_CHAR
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          time:
+            node: dataset
+            type: NX_FLOAT
+            shape: [n_temp]
+            units: {category: NX_TIME}
+            doc: |-
+              Support point of the linearized curve of simulated time matching
+              a specific support point of the temperature.
+            attributes:
+              long_name:
+                type: NX_CHAR
+                via: [T1, T5]
+                provisional: [Q2]
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+          temperature:
+            node: dataset
+            type: NX_FLOAT
+            shape: [n_temp]
+            units: {category: NX_TEMPERATURE}
+            doc: Support point of the linearized curve of the temperature.
+            attributes:
+              long_name:
+                type: NX_CHAR
+                via: [T1, T5]
+                provisional: [Q2]
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      discretization:
+        node: group
+        class: NXmicrostructure
+        doc: |-
+          Relevant data to instantiate a starting configuration that is typically
+          a microstructure in deformed conditions where (elastic) energy is stored
+          in the form of crystal defects (mostly dislocations). The SCORE model
+          does not resolve individual dislocations but works with one
+          homogenized mean-field density per grain. For simulations that are
+          instantiated from EBSD datasets or crystal plasticity simulations
+          individual values are available for each voxel that may be used as is
+          for each voxel or may need a pre-processing of the data to coarse-grain
+          material point-specific values to values averaged per deformed grain.
+        children:
+          grid:
+            node: group
+            class: NXcg_grid
+            children:
+              extent:
+                node: dataset
+                type: NX_UINT
+                shape: [3]
+                units: {category: NX_UNITLESS}
+                doc: |-
+                  Extend of each CA domain in voxel along the x, y, and z direction.
+                  Deformation of sheet material is assumed.
+                  The x axis is assumed pointing along the rolling direction.
+                  The y axis is assumed pointing along the transverse direction.
+                  The z axis is assumed pointing along the normal direction.
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              cell_dimensions:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_LENGTH}
+                doc: |-
+                  Edge length of the material point that in SCORE
+                  is discretized via equisized cubic voxels.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      numerics:
+        node: group
+        class: NXparameters
+        doc: |-
+          Criteria which enable to stop the simulation in a controlled manner
+          and assure a stable numerical integration.
+          Whichever criterion is fulfilled first stops the simulation.
+        children:
+          max_x:
+            node: dataset
+            type: NX_FLOAT
+            units: {category: NX_DIMENSIONLESS}
+            doc: Maximum recrystallized volume fraction.
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          max_time:
+            node: dataset
+            type: NX_FLOAT
+            units: {category: NX_TIME}
+            doc: Maximum simulated physical time.
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          max_iteration:
+            node: dataset
+            type: NX_UINT
+            units: {category: NX_UNITLESS}
+            doc: Maximum number of iteration steps.
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          max_delta_x:
+            node: dataset
+            type: NX_FLOAT
+            units: {category: NX_DIMENSIONLESS}
+            doc: |-
+              Maximum fraction equivalent to the migration of the
+              fastest grain boundary in the system how much a cell
+              may be consumed in a single iteration.
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          x_set:
+            node: dataset
+            type: NX_FLOAT
+            shape: [n_snapshot]
+            units: {category: NX_DIMENSIONLESS}
+            doc: |-
+              List of target values at which recrystallized volume fractions the state
+              of the CA is evaluated and stored. The code documents summary statistics
+              like recrystallized volume fraction for each iteration and the volume of each
+              grain. Furthermore, snapshots of the microstructure are stored.
+              These can take much disk space though because SCORE is able to evolve CA
+              with up to :math:`1600^3` cells. Snapshot data document the current microstructure
+              including the assignment of grains and cells surplus the state of the
+              recrystallization front.
+
+              Despite these, data about the cells that define the recrystallization front make up
+              for approximately one order of magnitude less cells than present in the domain.
+              For the cells in this front, though, more data have to be collected
+              than just a grain identifier.
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+          cell_cache:
+            node: group
+            class: NXparameters
+            doc: |-
+              Parameter which control the memory management
+              of cells in the recrystallization front.
+            children:
+              initial:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_UNITLESS}
+                doc: |-
+                  Fraction of the total number of cells in the CA which
+                  should initially be allocated for offering storage for
+                  cells making up the recrystallization front.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              realloc:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_UNITLESS}
+                doc: |-
+                  By how much more times should the already allocated memory
+                  be increased to offer space for storing states of cells
+                  in the recrystallization front.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              defragment:
+                node: dataset
+                type: NX_BOOLEAN
+                doc: |-
+                  Should the cache for cells in the recrystallization front
+                  be defragmented on-the-fly or not.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              defragment_x:
+                node: dataset
+                type: NX_FLOAT
+                shape: [n_defrag]
+                units: {category: NX_DIMENSIONLESS}
+                doc: |-
+                  Target values at which recrystallized volume fraction the cache
+                  for cells in the recrystallization front will be defragmented
+                  on-the-fly. Defragmentation packs active cells closer into
+                  main memory to reduce cache misses in subsequent evaluations
+                  of the recrystallization front.
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      solitary_unit:
+        node: group
+        class: NXparameters
+        children:
+          apply:
+            node: dataset
+            type: NX_BOOLEAN
+            doc: |-
+              Perform a statistical analyses of the results as it was proposed
+              by M. Kühbach (solitary unit model ensemble approach).
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          number_of_domains:
+            node: dataset
+            type: NX_UINT
+            units: {category: NX_UNITLESS}
+            doc: |-
+              How many independent cellular automaton domains
+              should be instantiated.
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          rediscretization:
+            node: dataset
+            type: NX_UINT
+            units: {category: NX_UNITLESS}
+            doc: |-
+              Into how many time steps should the real time interval be discretized upon
+              during post-processing the results with the solitary unit modeling approach.
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+    via: [T1, T2, T5, T7]
+    provisional: [Q1, Q2, Q11]
+via: [T8]

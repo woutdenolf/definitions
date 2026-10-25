@@ -1,0 +1,33 @@
+{
+ "definition": {
+  "attributes": [
+    {"declared_by": "NXobject", "docs": ["NXobject@default"], "id": "default", "name": {"exact": "default"}, "names_child": "group", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4", "T13"]}
+  ],
+  "category": "base",
+  "children": [
+    {"class": "NXcollection", "declared_by": "NXobject", "id": "COLLECTION", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q11"], "recommended": false, "via": ["T1", "T2", "T6", "T7"]},
+    {"class": "NXdata", "declared_by": "NXobject", "id": "DATA", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q11"], "recommended": false, "via": ["T1", "T2", "T6", "T7"]},
+    {"class": "NXlog", "declared_by": "NXobject", "id": "LOG", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q11"], "recommended": false, "via": ["T1", "T2", "T6", "T7"]},
+    {"class": "NXnote", "declared_by": "NXobject", "id": "NOTE", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q11"], "recommended": false, "via": ["T1", "T2", "T6", "T7"]},
+    {"class": "NXparameters", "declared_by": "NXobject", "id": "PARAMETERS", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q11"], "recommended": false, "via": ["T1", "T2", "T6", "T7"]},
+    {"class": "NXlog", "declared_by": "NXobject", "docs": ["NXobject/GROUPNAME_log"], "id": "GROUPNAME_log", "name": {"template": "{GROUPNAME}_log"}, "node": "group", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q3"], "recommended": false, "via": ["T1", "T3", "T6", "T7"]},
+    {"declared_by": "NXobject", "docs": ["NXobject/FIELDNAME_set"], "id": "FIELDNAME_set", "name": {"template": "{FIELDNAME}_set"}, "node": "dataset", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q3"], "recommended": false, "type": "NX_NUMBER", "via": ["T1", "T3", "T6", "T7"]},
+    {"declared_by": "NXobject", "docs": ["NXobject/FIELDNAME_errors"], "id": "FIELDNAME_errors", "name": {"template": "{FIELDNAME}_errors"}, "node": "dataset", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q3"], "recommended": false, "type": "NX_NUMBER", "via": ["T1", "T3", "T6", "T7"]},
+    {"declared_by": "NXobject", "docs": ["NXobject/FIELDNAME_weights"], "id": "FIELDNAME_weights", "name": {"template": "{FIELDNAME}_weights"}, "node": "dataset", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q3"], "recommended": false, "type": "NX_NUMBER", "via": ["T1", "T3", "T6", "T7"]},
+    {"declared_by": "NXobject", "docs": ["NXobject/FIELDNAME_mask"], "id": "FIELDNAME_mask", "name": {"template": "{FIELDNAME}_mask"}, "node": "dataset", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q3"], "recommended": false, "type": "NX_BOOLEAN", "via": ["T1", "T3", "T6", "T7"]},
+    {"attributes": [{"declared_by": "NXobject", "docs": ["NXobject/identifierNAME@type"], "enum": {"open": true, "values": [{"value": "ARK"}, {"value": "DOI"}, {"value": "Hdl"}, {"value": "IGSN"}, {"value": "ISNI"}, {"value": "ISSN"}, {"value": "ISSN-L"}, {"value": "ORCID"}, {"value": "PURL"}, {"value": "ROR"}, {"value": "URL"}, {"value": "URN"}]}, "id": "type", "name": {"exact": "type"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4"]}], "declared_by": "NXobject", "docs": ["NXobject/identifierNAME"], "id": "identifierNAME", "name": {"template": "identifier{NAME}"}, "node": "dataset", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q3"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T3", "T4", "T7"]}
+  ],
+  "class": "NXobject",
+  "lossy": [],
+  "provisional": [],
+  "require": [],
+  "source": "base_classes/NXobject.nxdl.xml",
+  "status": "base",
+  "symbols": [],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"},
+  "via": []
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {}
+}

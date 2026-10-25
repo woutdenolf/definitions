@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition name="NXcase_nxdl" extends="NXobject" type="group" category="application"
+            xmlns="http://definition.nexusformat.org/nxdl/3.1">
+  <symbols><symbol name="n"><doc>length</doc></symbol></symbols>
+  <group type="NXentry">
+    <field name="definition"><enumeration><item value="NXcase_nxdl"/></enumeration></field>
+    <field name="title" recommended="true"/>
+    <field name="start_time" optional="true"/>
+    <group type="NXinstrument">
+      <group name="monochromator" type="NXmonochromator">
+        <field name="energy" type="NX_FLOAT" units="NX_ENERGY">
+          <dimensions rank="1"><dim index="1" value="n"/></dimensions>
+        </field>
+      </group>
+    </group>
+    <group type="NXdata">
+      <attribute name="signal"/>
+      <link name="energy" target="/NXentry/NXinstrument/monochromator:NXmonochromator/energy"/>
+    </group>
+  </group>
+</definition>

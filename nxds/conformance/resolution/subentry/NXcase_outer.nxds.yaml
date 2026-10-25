@@ -1,0 +1,19 @@
+nxds: "0.1"
+class: NXcase_outer
+category: application
+describes: NXroot
+doc: An entry with a subentry that follows another definition (§8.3).
+defaults: {min: 1, binding: true}
+children:
+  ENTRY:
+    node: group
+    class: NXentry
+    name: {any: true}
+    children:
+      definition: {node: dataset, enum: [NXcase_outer]}
+      SUBENTRY:
+        node: group
+        class: NXsubentry
+        name: {any: true}
+        children:
+          definition: {node: dataset, enum: [NXcase_inner]}

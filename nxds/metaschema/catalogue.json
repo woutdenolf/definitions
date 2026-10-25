@@ -1,0 +1,26 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "catalogue.json",
+ "title": "NXDS bundle catalogue (nxds-index.json)",
+ "description": "Every published bundle with its release, revision and status (spec §12.3). Written by hand.",
+ "type": "object",
+ "additionalProperties": false,
+ "required": ["bundles"],
+ "properties": {
+  "nxds": {"type": "string"},
+  "bundles": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["release", "revision", "status", "path"],
+    "properties": {
+     "release": {"type": "string"},
+     "revision": {"type": "integer", "minimum": 1},
+     "status": {"enum": ["current", "superseded", "withdrawn"]},
+     "path": {"type": "string", "description": "bundle file or directory, relative to the catalogue"}
+    }
+   }
+  }
+ }
+}

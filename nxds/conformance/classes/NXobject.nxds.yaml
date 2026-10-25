@@ -1,0 +1,10 @@
+nxds: "0.1"
+class: NXobject
+category: base
+doc: Minimal NXobject for the conformance suite.
+defaults: {min: 0, binding: false}
+attributes:
+  default: {type: NX_CHAR, names_child: group}
+children:
+  DATA: {node: group, class: NXdata, name: {any: true}}
+  FIELDNAME_errors: {node: dataset, type: NX_NUMBER, name: {template: "{FIELDNAME}_errors"}}

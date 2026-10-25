@@ -1,0 +1,38 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/COLLECTION"},
+    {"class": "NXdata", "declared_by": "NXobject", "docs": ["NXprocess/DATA"], "id": "DATA", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q11"], "recommended": false, "refined_by": ["NXprocess"], "via": ["T1", "T2", "T4", "T6", "T7"]},
+    {"node": "group", "ref": "NXobject/LOG"},
+    {"class": "NXnote", "declared_by": "NXobject", "docs": ["NXprocess/NOTE"], "id": "NOTE", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q11"], "recommended": false, "refined_by": ["NXprocess"], "via": ["T1", "T2", "T4", "T6", "T7"]},
+    {"class": "NXparameters", "declared_by": "NXobject", "docs": ["NXprocess/PARAMETERS"], "id": "PARAMETERS", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q11"], "recommended": false, "refined_by": ["NXprocess"], "via": ["T1", "T2", "T4", "T6", "T7"]},
+    {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+    {"node": "dataset", "ref": "NXobject/identifierNAME"},
+    {"declared_by": "NXprocess", "docs": ["NXprocess/program"], "id": "program", "name": {"exact": "program"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXprocess", "docs": ["NXprocess/sequence_index"], "id": "sequence_index", "name": {"exact": "sequence_index"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_POSINT", "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXprocess", "docs": ["NXprocess/version"], "id": "version", "name": {"exact": "version"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXprocess", "docs": ["NXprocess/date"], "id": "date", "name": {"exact": "date"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_DATE_TIME", "via": ["T1", "T4", "T7"]}
+  ],
+  "class": "NXprocess",
+  "extends": "NXobject",
+  "lossy": [],
+  "provisional": [],
+  "require": [],
+  "source": "base_classes/NXprocess.nxdl.xml",
+  "status": "base",
+  "symbols": [],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"},
+  "via": []
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {}
+}

@@ -1,0 +1,631 @@
+nxds: '0.1'
+class: NXapm_compositionspace_results
+category: application
+describes: NXroot
+doc: |-
+  Application definition for results of the CompositionSpace tool used in atom probe.
+
+  * `A. Saxena et al. <https://www.github.com/eisenforschung/CompositionSpace.git>`_
+
+  This is an application definition for the common NFDI-MatWerk/FAIRmat infrastructure
+  use case IUC09 that explores how to improve the organization and results storage of the
+  CompositionSpace software using NeXus.
+defaults: {min: 1, binding: true, type: NX_CHAR}
+symbols:
+  grid_dim: {doc: The dimensionality of the grid.}
+  n_voxels: {doc: Total number of voxels.}
+  n_ions:
+    doc: Total number of ions in the reconstructed dataset.
+children:
+  ENTRY:
+    node: group
+    name: {any: true}
+    class: NXentry
+    occurs: {min: 1, max: 1}
+    children:
+      definition:
+        node: dataset
+        type: NX_CHAR
+        enum: [NXapm_compositionspace_results]
+        attributes:
+          version:
+            occurs: {min: 0}
+            type: NX_CHAR
+            via: [T1, T6]
+            provisional: [Q1]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      identifier_analysis:
+        node: dataset
+        occurs: {min: 0}
+        recommended: true
+        type: NX_UINT
+        via: [T1, T6, T7]
+        provisional: [Q1]
+      profiling:
+        node: group
+        class: NXcs_profiling
+        occurs: {min: 0}
+        children:
+          current_working_directory:
+            node: dataset
+            occurs: {min: 0}
+            recommended: true
+            type: NX_CHAR
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          start_time:
+            node: dataset
+            occurs: {min: 0}
+            recommended: true
+            type: NX_DATE_TIME
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          end_time:
+            node: dataset
+            occurs: {min: 0}
+            recommended: true
+            type: NX_DATE_TIME
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          total_elapsed_time:
+            node: dataset
+            type: NX_NUMBER
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T6, T7]
+        provisional: [Q1]
+      program1:
+        node: group
+        class: NXprogram
+        occurs: {min: 1, max: unbounded}
+        children:
+          program:
+            node: dataset
+            type: NX_CHAR
+            attributes:
+              version:
+                type: NX_CHAR
+                via: [T1, T5]
+                provisional: [Q2]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T6]
+        provisional: [Q1]
+      environment:
+        node: group
+        class: NXcollection
+        occurs: {min: 0}
+        recommended: true
+        doc: Programs and libraries representing the computational environment
+        children:
+          PROGRAM:
+            node: group
+            name: {any: true}
+            class: NXprogram
+            occurs: {min: 1, max: unbounded}
+            children:
+              program:
+                node: dataset
+                type: NX_CHAR
+                attributes:
+                  version:
+                    type: NX_CHAR
+                    via: [T1, T5]
+                    provisional: [Q2]
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T2, T6]
+            provisional: [Q1, Q11]
+        via: [T1, T6, T7]
+        provisional: [Q1]
+      config:
+        node: group
+        class: NXnote
+        doc: Configuration file that was used in this analysis.
+        children:
+          file_name:
+            node: dataset
+            type: NX_CHAR
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          algorithm:
+            node: dataset
+            occurs: {min: 0}
+            recommended: true
+            type: NX_CHAR
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          checksum:
+            node: dataset
+            occurs: {min: 0}
+            recommended: true
+            type: NX_CHAR
+            via: [T1, T6, T7]
+            provisional: [Q1]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      userID:
+        node: group
+        name: {template: 'user{ID}'}
+        class: NXuser
+        occurs: {min: 0}
+        via: [T1, T3, T6, T7]
+        provisional: [Q1, Q3]
+      specimen:
+        node: group
+        class: NXsample
+        occurs: {min: 0}
+        recommended: true
+        doc: |-
+          Contextualize back to the specimen from which the
+          dataset was collected that was here analyzed with
+          CompositionSpace tool.
+        children:
+          is_simulation:
+            node: dataset
+            type: NX_BOOLEAN
+            doc: |-
+              True, if the specimen that the reconstructed dataset
+              describes is a simulated one.
+              False, if the specimen that the reconstructed dataset
+              describes is a real one.
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          atom_types:
+            node: dataset
+            type: NX_CHAR
+            doc: |-
+              List of comma-separated elements from the periodic table that are
+              contained in the specimen. If the specimen substance has multiple
+              components, all elements from each component must be included in
+              `atom_types`.
+
+              The purpose of the field is to offer research data management systems an
+              opportunity to parse the relevant elements without having to interpret
+              these from the resources pointed to by identifier_parent or walk through
+              eventually deeply nested groups in data instances.
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T6, T7]
+        provisional: [Q1]
+      voxelization:
+        node: group
+        class: NXprocess
+        occurs: {min: 0, max: 1}
+        doc: |-
+          Step during which the point cloud is discretized to compute element-specific composition fields.
+          Iontypes are atomically decomposed to correctly account for the multiplicity of each element that
+          was ranged for each ion.
+
+          Using a discretization grid that is larger than the average distance between reconstructed ion positions
+          reduces computational costs. This is the key idea of the CompositionSpace tool compared to other methods
+          used in atom probe for characterizing microstructural features that use the ion position data directly.
+        children:
+          sequence_index:
+            node: dataset
+            type: NX_POSINT
+            enum: ['1']
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          grid:
+            node: group
+            class: NXcg_grid
+            children:
+              dimensionality:
+                node: dataset
+                type: NX_POSINT
+                enum: ['3']
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              cardinality:
+                node: dataset
+                type: NX_POSINT
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              origin:
+                node: dataset
+                type: NX_NUMBER
+                shape: [grid_dim]
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              symmetry:
+                node: dataset
+                type: NX_CHAR
+                enum: [cubic]
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              cell_dimensions:
+                node: dataset
+                type: NX_NUMBER
+                shape: [grid_dim]
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              extent:
+                node: dataset
+                type: NX_POSINT
+                shape: [grid_dim]
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              index_offset:
+                node: dataset
+                type: NX_INT
+                units: {category: NX_UNITLESS}
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              position:
+                node: dataset
+                type: NX_NUMBER
+                shape: [n_voxels, grid_dim]
+                units: {category: NX_LENGTH}
+                doc: Position of each cell in Euclidean space.
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              coordinate:
+                node: dataset
+                type: NX_INT
+                shape: [n_voxels, grid_dim]
+                units: {category: NX_DIMENSIONLESS}
+                doc: Discrete coordinate of each voxel.
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              indices_voxel:
+                node: dataset
+                type: NX_INT
+                shape: [n_ions]
+                units: {category: NX_UNITLESS}
+                doc: For each ion, the identifier of the voxel into which the ion binned.
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          weight:
+            node: dataset
+            type: NX_NUMBER
+            shape: [n_voxels]
+            units: {category: NX_UNITLESS}
+            doc: |-
+              Total number of weight (counts for discretization with a rectangular transfer function)
+              for the occupancy of each voxel with atoms.
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+          ionID:
+            node: group
+            name: {template: 'ion{ID}'}
+            class: NXatom
+            occurs: {min: 1, max: unbounded}
+            children:
+              name:
+                node: dataset
+                type: NX_CHAR
+                doc: Chemical symbol of the element from the periodic table.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              weight:
+                node: dataset
+                type: NX_NUMBER
+                shape: [n_voxels]
+                units: {category: NX_UNITLESS}
+                doc: |-
+                  Element-specific weight (counts for discretization with a rectangular transfer function)
+                  for the occupancy of each voxel with atoms of this element.
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+            via: [T1, T3, T6]
+            provisional: [Q1, Q3]
+        via: [T1, T6]
+        provisional: [Q1]
+      autophase:
+        node: group
+        class: NXprocess
+        occurs: {min: 0, max: 1}
+        doc: |-
+          Optional step during which the subsequent segmentation step is prepared to
+          improve the segmentation.
+        children:
+          sequence_index:
+            node: dataset
+            type: NX_POSINT
+            enum: ['2']
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          result:
+            node: group
+            class: NXdata
+            attributes:
+              signal:
+                type: NX_CHAR
+                via: [T1, T5]
+                provisional: [Q2]
+              axes:
+                type: NX_CHAR
+                via: [T1, T5]
+                provisional: [Q2]
+              AXISNAME_indices:
+                name: {template: '{AXISNAME}_indices'}
+                type: NX_UINT
+                via: [T1, T3, T5]
+                provisional: [Q2, Q3]
+            children:
+              title:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                type: NX_CHAR
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              axis_feature_indices:
+                node: dataset
+                type: NX_UINT
+                shape: [i]
+                units: {category: NX_DIMENSIONLESS}
+                doc: Element identifier stored sorted in descending order of feature importance.
+                attributes:
+                  long_name:
+                    type: NX_CHAR
+                    doc: Axis caption
+                    via: [T1, T5]
+                    provisional: [Q2]
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              axis_feature_importance:
+                node: dataset
+                type: NX_FLOAT
+                shape: [i]
+                units: {category: NX_DIMENSIONLESS}
+                doc: |-
+                  Element relative feature importance stored sorted in descending order of feature
+                  importance.
+                attributes:
+                  long_name:
+                    type: NX_CHAR
+                    doc: Axis caption
+                    via: [T1, T5]
+                    provisional: [Q2]
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T6]
+        provisional: [Q1]
+      segmentation:
+        node: group
+        class: NXprocess
+        occurs: {min: 0, max: 1}
+        doc: |-
+          Step during which the voxel set is segmented into voxel sets with different
+          chemical composition.
+        children:
+          pca:
+            node: group
+            class: NXprocess
+            occurs: {min: 1, max: 1}
+            doc: PCA in the chemical space (essentially composition correlation analyses).
+            children:
+              sequence_index:
+                node: dataset
+                type: NX_POSINT
+                enum: ['2', '3']
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              result:
+                node: group
+                class: NXdata
+                attributes:
+                  signal:
+                    type: NX_CHAR
+                    via: [T1, T5]
+                    provisional: [Q2]
+                  axes:
+                    type: NX_CHAR
+                    via: [T1, T5]
+                    provisional: [Q2]
+                  AXISNAME_indices:
+                    name: {template: '{AXISNAME}_indices'}
+                    type: NX_UINT
+                    via: [T1, T3, T5]
+                    provisional: [Q2, Q3]
+                children:
+                  title:
+                    node: dataset
+                    occurs: {min: 0}
+                    recommended: true
+                    type: NX_CHAR
+                    via: [T1, T6, T7]
+                    provisional: [Q1]
+                  axis_explained_variance:
+                    node: dataset
+                    type: NX_FLOAT
+                    shape: [i]
+                    units: {category: NX_DIMENSIONLESS}
+                    doc: Explained variance values
+                    via: [T1, T5, T7, T9]
+                    provisional: [Q1, Q2]
+                  axis_pca_dimension:
+                    node: dataset
+                    type: NX_UINT
+                    shape: [i]
+                    units: {category: NX_UNITLESS}
+                    doc: |-
+                      Elements identifier matching those from ENTRY/voxelization/ionID
+                      used during the principal component analysis.
+                    via: [T1, T5, T7, T9]
+                    provisional: [Q1, Q2]
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T6]
+            provisional: [Q1]
+          ic_opt:
+            node: group
+            class: NXprocess
+            doc: Information criterion minimization.
+            children:
+              sequence_index:
+                node: dataset
+                type: NX_POSINT
+                enum: ['3', '4']
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              cluster_analysisID:
+                node: group
+                name: {template: 'cluster_analysis{ID}'}
+                class: NXprocess
+                doc: Results of the Gaussian mixture analysis for n_components equal to n_ic_cluster.
+                children:
+                  n_ic_cluster:
+                    node: dataset
+                    type: NX_UINT
+                    units: {category: NX_UNITLESS}
+                    doc: n_components argument of the Gaussian mixture model.
+                    via: [T1, T5, T7]
+                    provisional: [Q1, Q2]
+                  y_pred:
+                    node: dataset
+                    type: NX_UINT
+                    shape: [n_voxels]
+                    units: {category: NX_UNITLESS}
+                    doc: y_pred return values of the computation.
+                    via: [T1, T5, T7, T9]
+                    provisional: [Q1, Q2]
+                via: [T1, T3, T5, T7]
+                provisional: [Q1, Q2, Q3]
+              result:
+                node: group
+                class: NXdata
+                doc: Information criterion as a function of number of n_ic_cluster aka dimensions.
+                attributes:
+                  signal:
+                    type: NX_CHAR
+                    via: [T1, T5]
+                    provisional: [Q2]
+                  axes:
+                    type: NX_CHAR
+                    via: [T1, T5]
+                    provisional: [Q2]
+                  AXISNAME_indices:
+                    name: {template: '{AXISNAME}_indices'}
+                    type: NX_UINT
+                    via: [T1, T3, T5]
+                    provisional: [Q2, Q3]
+                children:
+                  title:
+                    node: dataset
+                    occurs: {min: 0}
+                    recommended: true
+                    type: NX_CHAR
+                    via: [T1, T6, T7]
+                    provisional: [Q1]
+                  axis_aic:
+                    node: dataset
+                    occurs: {min: 0}
+                    recommended: true
+                    type: NX_FLOAT
+                    shape: [i]
+                    units: {category: NX_ANY}
+                    doc: Akaike information criterion values
+                    via: [T1, T6, T7, T9]
+                    provisional: [Q1]
+                  axis_bic:
+                    node: dataset
+                    type: NX_FLOAT
+                    shape: [i]
+                    units: {category: NX_UNITLESS}
+                    doc: Bayes information criterion values
+                    via: [T1, T5, T7, T9]
+                    provisional: [Q1, Q2]
+                  axis_dimension:
+                    node: dataset
+                    type: NX_UINT
+                    shape: [i]
+                    units: {category: NX_UNITLESS}
+                    doc: Actual n_ic_cluster values used
+                    via: [T1, T5, T7, T9]
+                    provisional: [Q1, Q2]
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T6]
+        provisional: [Q1]
+      clustering:
+        node: group
+        class: NXprocess
+        occurs: {min: 0, max: 1}
+        doc: |-
+          Step during which the chemically segmented voxel sets are analyzed for their spatial organization
+          into different spatial clusters of voxels in the same chemical set but representing individual objects.
+          The objects are constructed from blobs of neighboring voxels.
+          The objects are not necessarily watertight or topologically closed.
+        children:
+          sequence_index:
+            node: dataset
+            type: NX_POSINT
+            enum: ['4', '5']
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          ic_opt:
+            node: group
+            class: NXprocess
+            doc: Respective DBScan clustering result for each segmentation/ic_opt case.
+            children:
+              cluster_analysisID:
+                node: group
+                name: {template: 'cluster_analysis{ID}'}
+                class: NXprocess
+                occurs: {min: 0, max: unbounded}
+                children:
+                  dbscanID:
+                    node: group
+                    name: {template: 'dbscan{ID}'}
+                    class: NXprocess
+                    occurs: {min: 1, max: unbounded}
+                    children:
+                      epsilon:
+                        node: dataset
+                        type: NX_FLOAT
+                        units: {category: NX_LENGTH}
+                        doc: |-
+                          The maximum distance between voxel pairs in a neighborhood
+                          to be considered connected.
+                        via: [T1, T5, T7]
+                        provisional: [Q1, Q2]
+                      min_samples:
+                        node: dataset
+                        type: NX_UINT
+                        units: {category: NX_UNITLESS}
+                        doc: |-
+                          The number of voxels in a neighborhood for a voxel to be considered as a core
+                          point.
+                        via: [T1, T5, T7]
+                        provisional: [Q1, Q2]
+                      label:
+                        node: dataset
+                        type: NX_INT
+                        shape: [k]
+                        units: {category: NX_UNITLESS}
+                        doc: Raw label return values
+                        via: [T1, T5, T7, T9]
+                        provisional: [Q1, Q2]
+                      voxel:
+                        node: dataset
+                        type: NX_UINT
+                        shape: [n_voxels]
+                        units: {category: NX_UNITLESS}
+                        doc: |-
+                          Voxel identifier
+
+                          Using these identifiers correlated element-wise with the values in the label array
+                          specifies for which voxel in the grid clusters from this process were found.
+                        via: [T1, T5, T7, T9]
+                        provisional: [Q1, Q2]
+                    via: [T1, T3, T6]
+                    provisional: [Q1, Q3]
+                via: [T1, T3, T6]
+                provisional: [Q1, Q3]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T6]
+        provisional: [Q1]
+    via: [T1, T2, T6]
+    provisional: [Q1, Q11]
+via: [T8]

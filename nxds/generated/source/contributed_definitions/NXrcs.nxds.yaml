@@ -1,0 +1,85 @@
+nxds: '0.1'
+class: NXrcs
+category: base
+extends: NXobject
+doc: |-
+  A base class for the Real Time Control System (RCS).
+
+  A real time control system (RCS) is a reference architecture model
+  used to design highly task intensive software systems and computing
+  control systems.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  name:
+    node: dataset
+    type: NX_CHAR
+    doc: The name of the real-time control system.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  fabrication:
+    node: group
+    class: NXfabrication
+    doc: The fabrication information.
+    children:
+      model:
+        node: dataset
+        type: NX_CHAR_OR_NUMBER
+        via: [T1, T4, T7]
+        provisional: [Q1]
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  description:
+    node: dataset
+    type: NX_CHAR
+    doc: The description of the real-time control system.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  type:
+    node: dataset
+    type: NX_CHAR
+    doc: The type of the real-time control system.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  frequency:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_FREQUENCY}
+    doc: |-
+      The frequency of the real-time controller system which indicated the number of close-loop process
+      (gathering data, process data and update system) control cycles per unit time.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  measurement_time:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_TIME}
+    doc: |-
+      The time of data measuring in a data lifecycle or process
+      cycle.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  acquisition_time:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_TIME}
+    doc: |-
+      Data acquisition time in single data lifecycle or process
+      cycle of the real-time control system.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  animation_time:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_TIME}
+    doc: |-
+      The time of data animation of single in a data lifecycle or process
+      cycle.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  indication_time:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_TIME}
+    doc: The time of data indication of the end of process.
+    via: [T1, T4, T7]
+    provisional: [Q1]

@@ -1,0 +1,201 @@
+nxds: '0.1'
+class: NXarpes
+category: application
+describes: NXroot
+doc: |-
+  This is an application definition for angular resolved photo electron spectroscopy.
+
+  It has been drawn up with hemispherical electron analysers in mind.
+
+  This definition is a legacy support for older NXarpes experiments.
+  There is, however, a newer definition to collect data & metadata
+  for general photoemission experiments, called :ref:`NXmpes`,
+  as well as a specialization for ARPES experiments, called :ref:`NXmpes_arpes`."
+defaults: {min: 1, binding: true, type: NX_CHAR}
+children:
+  ENTRY:
+    node: group
+    name: {any: true}
+    class: NXentry
+    children:
+      title:
+        node: dataset
+        type: NX_CHAR
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      start_time:
+        node: dataset
+        type: NX_DATE_TIME
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      definition:
+        node: dataset
+        enum: [NXarpes]
+        doc: Official NeXus NXDL schema to which this file conforms.
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      INSTRUMENT:
+        node: group
+        name: {any: true}
+        class: NXinstrument
+        children:
+          SOURCE:
+            node: group
+            name: {any: true}
+            class: NXsource
+            children:
+              type:
+                node: dataset
+                type: NX_CHAR
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              name:
+                node: dataset
+                type: NX_CHAR
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              probe:
+                node: dataset
+                enum: [x-ray]
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T2, T5, T7]
+            provisional: [Q1, Q2, Q11]
+          monochromator:
+            node: group
+            class: NXmonochromator
+            children:
+              energy:
+                node: dataset
+                type: NX_NUMBER
+                units: {category: NX_ENERGY}
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          analyser:
+            node: group
+            class: NXdetector
+            children:
+              data:
+                node: dataset
+                type: NX_NUMBER
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              lens_mode:
+                node: dataset
+                type: NX_CHAR
+                doc: setting for the electron analyser lens
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              acquisition_mode:
+                node: dataset
+                enum: [swept, fixed]
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+              entrance_slit_shape:
+                node: dataset
+                enum: [curved, straight]
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+              entrance_slit_setting:
+                node: dataset
+                type: NX_NUMBER
+                units: {category: NX_ANY}
+                doc: dial setting of the entrance slit
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              entrance_slit_size:
+                node: dataset
+                type: NX_NUMBER
+                units: {category: NX_LENGTH}
+                doc: size of the entrance slit
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              pass_energy:
+                node: dataset
+                type: NX_NUMBER
+                units: {category: NX_ENERGY}
+                doc: energy of the electrons on the mean path of the analyser
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              time_per_channel:
+                node: dataset
+                type: NX_NUMBER
+                units: {category: NX_TIME}
+                doc: 'todo: define more clearly'
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              angles:
+                node: dataset
+                type: NX_NUMBER
+                units: {category: NX_ANGLE}
+                doc: |-
+                  Angular axis of the analyser data
+                  which dimension the axis applies to is defined
+                  using the normal NXdata methods.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              energies:
+                node: dataset
+                type: NX_NUMBER
+                units: {category: NX_ENERGY}
+                doc: |-
+                  Energy axis of the analyser data
+                  which dimension the axis applies to is defined
+                  using the normal NXdata methods.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              sensor_size:
+                node: dataset
+                type: NX_INT
+                shape: [2]
+                doc: number of raw active elements in each dimension
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              region_origin:
+                node: dataset
+                type: NX_INT
+                shape: [2]
+                doc: origin of rectangular region selected for readout
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              region_size:
+                node: dataset
+                type: NX_INT
+                shape: [2]
+                doc: size of rectangular region selected for readout
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T2, T5, T7]
+        provisional: [Q1, Q2, Q11]
+      SAMPLE:
+        node: group
+        name: {any: true}
+        class: NXsample
+        children:
+          name:
+            node: dataset
+            type: NX_CHAR
+            doc: Descriptive name of sample
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          temperature:
+            node: dataset
+            type: NX_NUMBER
+            units: {category: NX_TEMPERATURE}
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T2, T5, T7]
+        provisional: [Q1, Q2, Q11]
+      DATA:
+        node: group
+        name: {any: true}
+        class: NXdata
+        via: [T1, T2, T5, T7]
+        provisional: [Q1, Q2, Q11]
+    via: [T1, T2, T5, T7]
+    provisional: [Q1, Q2, Q11]
+via: [T8]

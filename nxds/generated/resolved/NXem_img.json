@@ -1,0 +1,74 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/COLLECTION"},
+    {"node": "group", "ref": "NXprocess/DATA"},
+    {"node": "group", "ref": "NXobject/LOG"},
+    {"node": "group", "ref": "NXprocess/NOTE"},
+    {"node": "group", "ref": "NXprocess/PARAMETERS"},
+    {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+    {"node": "dataset", "ref": "NXobject/identifierNAME"},
+    {"node": "dataset", "ref": "NXprocess/program"},
+    {"node": "dataset", "ref": "NXprocess/sequence_index"},
+    {"node": "dataset", "ref": "NXprocess/version"},
+    {"node": "dataset", "ref": "NXprocess/date"},
+    {"class": "NXimage", "declared_by": "NXem_img", "id": "IMAGE", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q11"], "recommended": false, "specialisation": "NXem_img/IMAGE", "via": ["T1", "T2", "T4", "T7"]}
+  ],
+  "class": "NXem_img",
+  "extends": "NXprocess",
+  "lossy": [],
+  "provisional": [],
+  "require": [],
+  "source": "base_classes/NXem_img.nxdl.xml",
+  "status": "base",
+  "symbols": [],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"},
+  "via": []
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {
+  "NXem_img/IMAGE": {
+   "attributes": [
+     {"ref": "NXobject@default"}
+   ],
+   "children": [
+     {"node": "group", "ref": "NXobject/COLLECTION"},
+     {"node": "group", "ref": "NXobject/DATA"},
+     {"node": "group", "ref": "NXimage/image_1d"},
+     {"node": "group", "ref": "NXimage/image_2d"},
+     {"node": "group", "ref": "NXimage/image_3d"},
+     {"node": "group", "ref": "NXimage/image_4d"},
+     {"node": "group", "ref": "NXimage/stack_1d"},
+     {"node": "group", "ref": "NXimage/stack_2d"},
+     {"node": "group", "ref": "NXimage/stack_3d"},
+     {"node": "group", "ref": "NXobject/LOG"},
+     {"node": "group", "ref": "NXobject/NOTE"},
+     {"node": "group", "ref": "NXobject/PARAMETERS"},
+     {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+     {"node": "dataset", "ref": "NXobject/identifierNAME"},
+     {"node": "group", "ref": "NXimage/PROCESS"},
+     {"declared_by": "NXem_img", "docs": ["NXem_img/IMAGE/imaging_mode"], "enum": {"open": true, "values": [{"value": "secondary_electron"}, {"value": "backscattered_electron"}, {"value": "annular_dark_field"}, {"value": "cathodoluminescence"}]}, "id": "imaging_mode", "name": {"exact": "imaging_mode"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4", "T7"]},
+     {"declared_by": "NXem_img", "docs": ["NXem_img/IMAGE/half_angle_interval"], "id": "half_angle_interval", "name": {"exact": "half_angle_interval"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": [2]}, "type": "NX_NUMBER", "units": {"category": "NX_ANGLE"}, "via": ["T1", "T4", "T7", "T9"]}
+   ],
+   "class": "NXimage",
+   "declared_by": "NXem_img",
+   "id": "NXem_img/IMAGE",
+   "require": [],
+   "symbols": [],
+   "undeclared": {"attribute": "report", "dataset": "report", "group": "report"}
+  }
+ }
+}

@@ -1,0 +1,9 @@
+nxds: "0.1"
+class: NXcase_lidded_crate
+category: base
+extends: NXcase_crate
+defaults: {min: 0, binding: false}
+children:
+  lid: {node: dataset, type: NX_FLOAT}
+attributes:
+  colour: {type: NX_CHAR, enum: [red, green]}

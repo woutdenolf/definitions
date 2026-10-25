@@ -1,0 +1,90 @@
+nxds: '0.1'
+class: NXpositioner
+category: base
+extends: NXcomponent
+doc: 'A generic positioner such as a motor or piezo-electric transducer.  '
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  name:
+    node: dataset
+    doc: symbolic or mnemonic name (one word)
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  description:
+    node: dataset
+    doc: description of positioner
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  value:
+    node: dataset
+    type: NX_NUMBER
+    shape: [n]
+    units: {category: NX_ANY}
+    doc: best known value of positioner - need [n] as may be scanned
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  raw_value:
+    node: dataset
+    type: NX_NUMBER
+    shape: [n]
+    units: {category: NX_ANY}
+    doc: raw value of positioner - need [n] as may be scanned
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  target_value:
+    node: dataset
+    type: NX_NUMBER
+    shape: [n]
+    units: {category: NX_ANY}
+    doc: targeted (commanded) value of positioner - need [n] as may be scanned
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  tolerance:
+    node: dataset
+    type: NX_NUMBER
+    shape: [n]
+    units: {category: NX_ANY}
+    doc: maximum allowable difference between target_value and value
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  soft_limit_min:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_ANY}
+    doc: minimum allowed limit to set value
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  soft_limit_max:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_ANY}
+    doc: maximum allowed limit to set value
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  velocity:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_ANY}
+    doc: velocity of the positioner (distance moved per unit time)
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  acceleration_time:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_ANY}
+    doc: time to ramp the velocity up to full speed
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  controller_record:
+    node: dataset
+    doc: Hardware device record, e.g. EPICS process variable, taco/tango ...
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  depends_on:
+    node: dataset
+    type: NX_CHAR
+    doc: |-
+      .. todo::
+      Add a definition for the reference point of a positioner.
+    via: [T1, T4, T7]
+    provisional: [Q1]

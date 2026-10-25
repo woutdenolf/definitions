@@ -1,0 +1,218 @@
+nxds: '0.1'
+class: NXfilter
+category: base
+extends: NXcomponent
+doc: |-
+  For band pass beam filters.
+
+  If uncertain whether to use :ref:`NXfilter` (band-pass filter)
+  or :ref:`NXattenuator` (reduces beam intensity), then use
+  :ref:`NXattenuator`.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  GEOMETRY:
+    node: group
+    name: {any: true}
+    class: NXgeometry
+    deprecated: Use the field `depends_on` and :ref:`NXtransformations` to filter the beamstop
+      and NXoff_geometry to describe its shape instead
+    doc: Geometry of the filter
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  description:
+    node: dataset
+    doc: |
+      Composition of the filter.  Chemical formula can be specified separately.
+
+      This field was changed (2010-11-17) from an enumeration to
+      a string since common usage showed a wider variety of use
+      than a simple list.  These are the items in the list at
+      the time of the change: Beryllium | Pyrolytic Graphite |
+      Graphite | Sapphire | Silicon | Supermirror.
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  status:
+    node: dataset
+    enum:
+      values:
+      - {value: in, doc: in the beam}
+      - {value: out, doc: out of the beam}
+    doc: position with respect to in or out of the beam (choice of only "in" or "out")
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  transmission:
+    node: group
+    class: NXdata
+    doc: Wavelength transmission profile of filter
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  temperature:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_TEMPERATURE}
+    doc: average/nominal filter temperature
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  temperature_log:
+    node: group
+    class: NXlog
+    doc: Linked temperature_log for the filter
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  thickness:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    doc: Thickness of the filter
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  density:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_MASS_DENSITY}
+    doc: mass density of the filter
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  chemical_formula:
+    node: dataset
+    doc: |-
+      The chemical formula specified using CIF conventions.
+      Abbreviated version of CIF standard:
+
+      * Only recognized element symbols may be used.
+      * Each element symbol is followed by a 'count' number. A count of '1' may be omitted.
+      * A space or parenthesis must separate each cluster of (element symbol + count).
+      * Where a group of elements is enclosed in parentheses, the multiplier for the
+        group must follow the closing parentheses. That is, all element and group
+        multipliers are assumed to be printed as subscripted numbers.
+      * Unless the elements are ordered in a manner that corresponds to their chemical
+        structure, the order of the elements within any group or moiety depends on
+        whether or not carbon is present.
+      * If carbon is present, the order should be:
+
+        * C, then H, then the other elements in alphabetical order of their symbol.
+        * If carbon is not present, the elements are listed purely in alphabetic order of their symbol.
+
+      * This is the *Hill* system used by Chemical Abstracts.
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  sensor_type:
+    node: group
+    class: NXsensor
+    doc: Sensor(s)used to monitor the filter temperature
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  unit_cell_a:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    doc: 'Unit cell lattice parameter: length of side a'
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  unit_cell_b:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    doc: 'Unit cell lattice parameter: length of side b'
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  unit_cell_c:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    doc: 'Unit cell lattice parameter: length of side c'
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  unit_cell_alpha:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_ANGLE}
+    doc: 'Unit cell lattice parameter: angle alpha'
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  unit_cell_beta:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_ANGLE}
+    doc: 'Unit cell lattice parameter: angle beta'
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  unit_cell_gamma:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_ANGLE}
+    doc: 'Unit cell lattice parameter: angle gamma'
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  unit_cell_volume:
+    node: dataset
+    type: NX_FLOAT
+    shape: [n_comp]
+    units: {category: NX_VOLUME}
+    doc: Unit cell
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  orientation_matrix:
+    node: dataset
+    type: NX_FLOAT
+    shape: [n_comp, 3, 3]
+    doc: |-
+      Orientation matrix of single crystal filter using Busing-Levy convention:
+      W. R. Busing and H. A. Levy (1967). Acta Cryst. 22, 457-464
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  m_value:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_DIMENSIONLESS}
+    doc: m value of supermirror filter
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  substrate_material:
+    node: dataset
+    doc: substrate material of supermirror filter
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  substrate_thickness:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    doc: substrate thickness of supermirror filter
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  coating_material:
+    node: dataset
+    doc: coating material of supermirror filter
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  substrate_roughness:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    doc: substrate roughness (RMS) of supermirror filter
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  coating_roughness:
+    node: dataset
+    type: NX_FLOAT
+    shape: [nsurf]
+    units: {category: NX_LENGTH}
+    doc: coating roughness (RMS) of supermirror filter
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  OFF_GEOMETRY:
+    node: group
+    name: {any: true}
+    class: NXoff_geometry
+    occurs: {min: 0}
+    doc: This group describes the shape of the beam line component
+    via: [T1, T2, T6, T7]
+    provisional: [Q1, Q11]
+  depends_on:
+    node: dataset
+    type: NX_CHAR
+    doc: |-
+      .. todo::
+      Add a definition for the reference point of a filter.
+    via: [T1, T4, T7]
+    provisional: [Q1]

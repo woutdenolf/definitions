@@ -1,0 +1,7 @@
+description: >
+  Dispatch (§8): each entry is checked against the application definition its
+  `definition` names, and only that one; the root is checked against the
+  root-level members of both. `/entry2` fails the constraint of NXcase_require
+  only; `/entry3` names no application definition (UNKNOWN-DEFINITION) and is
+  checked against NXentry.
+capabilities: []

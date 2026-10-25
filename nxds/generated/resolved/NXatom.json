@@ -1,0 +1,47 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/COLLECTION"},
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"node": "group", "ref": "NXobject/LOG"},
+    {"node": "group", "ref": "NXobject/NOTE"},
+    {"node": "group", "ref": "NXobject/PARAMETERS"},
+    {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+    {"node": "dataset", "ref": "NXobject/identifierNAME"},
+    {"attributes": [{"declared_by": "NXobject", "docs": ["NXobject/identifierNAME@type"], "enum": {"open": true, "values": [{"value": "ARK"}, {"value": "DOI"}, {"value": "Hdl"}, {"value": "IGSN"}, {"value": "ISNI"}, {"value": "ISSN"}, {"value": "ISSN-L"}, {"value": "ORCID"}, {"value": "PURL"}, {"value": "ROR"}, {"value": "URL"}, {"value": "URN"}]}, "id": "type", "name": {"exact": "type"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4"]}], "declared_by": "NXatom", "docs": ["NXobject/identifierNAME", "NXatom/identifier_chemical"], "enum": {"open": false, "values": [{"value": "inchi"}]}, "id": "identifier_chemical", "name": {"exact": "identifier_chemical"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q3", "Q4"], "recommended": false, "refines": "identifierNAME", "type": "NX_CHAR", "via": ["T1", "T3", "T4", "T7", "T18"]},
+    {"declared_by": "NXatom", "docs": ["NXatom/name"], "id": "name", "name": {"exact": "name"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXatom", "docs": ["NXatom/id"], "id": "id", "name": {"exact": "id"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_UINT", "units": {"category": "NX_UNITLESS"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXatom", "docs": ["NXatom/charge"], "id": "charge", "name": {"exact": "charge"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_CHARGE"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXatom", "docs": ["NXatom/charge_state"], "id": "charge_state", "name": {"exact": "charge_state"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_UNITLESS"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXatom", "docs": ["NXatom/volume"], "id": "volume", "name": {"exact": "volume"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_VOLUME"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXatom", "docs": ["NXatom/indices"], "id": "indices", "name": {"exact": "indices"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["n_pos"], "symbols": {"n_pos": "NXatom"}}, "type": "NX_CHAR", "via": ["T1", "T4", "T7", "T9"]},
+    {"declared_by": "NXatom", "docs": ["NXatom/type"], "id": "type", "name": {"exact": "type"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["n_pos"], "symbols": {"n_pos": "NXatom"}}, "type": "NX_UINT", "units": {"category": "NX_UNITLESS"}, "via": ["T1", "T4", "T7", "T9"]},
+    {"attributes": [{"declared_by": "NXatom", "docs": ["NXatom/position@depends_on"], "id": "depends_on", "name": {"exact": "depends_on"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4"]}], "declared_by": "NXatom", "docs": ["NXatom/position"], "id": "position", "name": {"exact": "position"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["n_pos", "d"], "symbols": {"d": "NXatom", "n_pos": "NXatom"}}, "type": "NX_NUMBER", "units": {"category": "NX_ANY"}, "via": ["T1", "T4", "T7", "T9"]},
+    {"declared_by": "NXatom", "docs": ["NXatom/occupancy"], "id": "occupancy", "name": {"exact": "occupancy"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["n_pos"], "symbols": {"n_pos": "NXatom"}}, "type": "NX_NUMBER", "units": {"category": "NX_DIMENSIONLESS"}, "via": ["T1", "T4", "T7", "T9"]},
+    {"declared_by": "NXatom", "docs": ["NXatom/nuclide_hash"], "id": "nuclide_hash", "name": {"exact": "nuclide_hash"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["n_ivec_max"], "symbols": {"n_ivec_max": "NXatom"}}, "type": "NX_UINT", "units": {"category": "NX_UNITLESS"}, "via": ["T1", "T4", "T7", "T9"]},
+    {"declared_by": "NXatom", "docs": ["NXatom/nuclide_list"], "id": "nuclide_list", "name": {"exact": "nuclide_list"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["n_ivec_max", 2], "symbols": {"n_ivec_max": "NXatom"}}, "type": "NX_UINT", "units": {"category": "NX_UNITLESS"}, "via": ["T1", "T4", "T7", "T9"]},
+    {"declared_by": "NXatom", "docs": ["NXatom/mass_to_charge_range"], "id": "mass_to_charge_range", "name": {"exact": "mass_to_charge_range"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["n_ranges", 2], "symbols": {"n_ranges": "NXatom"}}, "type": "NX_NUMBER", "units": {"category": "NX_ANY"}, "via": ["T1", "T4", "T7", "T9"]}
+  ],
+  "class": "NXatom",
+  "extends": "NXobject",
+  "lossy": [],
+  "provisional": [],
+  "require": [],
+  "source": "base_classes/NXatom.nxdl.xml",
+  "status": "base",
+  "symbols": ["d", "n_ivec_max", "n_pos", "n_ranges"],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"},
+  "via": []
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {}
+}

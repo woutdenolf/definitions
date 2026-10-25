@@ -1,0 +1,37 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/COLLECTION"},
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"node": "group", "ref": "NXobject/LOG"},
+    {"node": "group", "ref": "NXobject/NOTE"},
+    {"node": "group", "ref": "NXobject/PARAMETERS"},
+    {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+    {"node": "dataset", "ref": "NXobject/identifierNAME"},
+    {"declared_by": "NXquadric", "docs": ["NXquadric/parameters"], "id": "parameters", "name": {"exact": "parameters"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": [10]}, "type": "NX_NUMBER", "units": {"category": "NX_PER_LENGTH"}, "via": ["T1", "T4", "T7", "T9"]},
+    {"declared_by": "NXquadric", "docs": ["NXquadric/surface_type"], "enum": {"open": false, "values": [{"value": "ELLIPSOID"}, {"value": "ELLIPTIC_PARABOLOID"}, {"value": "HYPERBOLIC_PARABOLOID"}, {"value": "ELLIPTIC_HYPERBOLOID_OF_1_SHEET"}, {"value": "ELLIPTIC_HYPERBOLOID_OF_2_SHEETS"}, {"value": "ELLIPTIC_CONE"}, {"value": "ELLIPTIC_CYLINDER"}, {"value": "HYPERBOLIC_CYLINDER"}, {"value": "PARABOLIC_CYLINDER"}, {"value": "SPHEROID"}, {"value": "SPHERE"}, {"value": "PARABOLOID"}, {"value": "HYPERBOLOID_1_SHEET"}, {"value": "HYPERBOLOID_2_SHEET"}, {"value": "CONE"}, {"value": "CYLINDER"}, {"value": "PLANE"}, {"value": "IMAGINARY"}, {"value": "UNKNOWN"}]}, "id": "surface_type", "name": {"exact": "surface_type"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T6"]},
+    {"declared_by": "NXquadric", "docs": ["NXquadric/depends_on"], "id": "depends_on", "name": {"exact": "depends_on"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T6"]}
+  ],
+  "class": "NXquadric",
+  "extends": "NXobject",
+  "lossy": [],
+  "provisional": [],
+  "require": [],
+  "source": "contributed_definitions/NXquadric.nxdl.xml",
+  "status": "contributed",
+  "symbols": [],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"},
+  "via": []
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {}
+}

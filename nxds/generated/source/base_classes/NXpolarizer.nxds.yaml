@@ -1,0 +1,40 @@
+nxds: '0.1'
+class: NXpolarizer
+category: base
+extends: NXcomponent
+doc: A spin polarizer.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  type:
+    node: dataset
+    doc: 'one of these values: "crystal", "supermirror", "3He"'
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  composition:
+    node: dataset
+    doc: description of the composition of the polarizing material
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  reflection:
+    node: dataset
+    type: NX_INT
+    shape: [3]
+    units: {category: NX_UNITLESS}
+    doc: '[hkl] values of nominal reflection'
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  efficiency:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_DIMENSIONLESS}
+    doc: polarizing efficiency
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  depends_on:
+    node: dataset
+    type: NX_CHAR
+    doc: |-
+      .. todo::
+      Add a definition for the reference point of a polarizer.
+    via: [T1, T4, T7]
+    provisional: [Q1]

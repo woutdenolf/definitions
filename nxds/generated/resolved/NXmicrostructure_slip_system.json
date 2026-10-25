@@ -1,0 +1,38 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/COLLECTION"},
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"node": "group", "ref": "NXobject/LOG"},
+    {"node": "group", "ref": "NXobject/NOTE"},
+    {"node": "group", "ref": "NXobject/PARAMETERS"},
+    {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+    {"node": "dataset", "ref": "NXobject/identifierNAME"},
+    {"declared_by": "NXmicrostructure_slip_system", "docs": ["NXmicrostructure_slip_system/lattice_type"], "enum": {"open": false, "values": [{"value": "triclinic"}, {"value": "monoclinic"}, {"value": "orthorhombic"}, {"value": "tetragonal"}, {"value": "trigonal"}, {"value": "hexagonal"}, {"value": "cubic"}]}, "id": "lattice_type", "name": {"exact": "lattice_type"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXmicrostructure_slip_system", "docs": ["NXmicrostructure_slip_system/miller_plane"], "id": "miller_plane", "name": {"exact": "miller_plane"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["n", "i"], "symbols": {"i": "NXmicrostructure_slip_system", "n": "NXmicrostructure_slip_system"}}, "type": "NX_NUMBER", "units": {"category": "NX_UNITLESS"}, "via": ["T1", "T4", "T7", "T9"]},
+    {"declared_by": "NXmicrostructure_slip_system", "docs": ["NXmicrostructure_slip_system/miller_direction"], "id": "miller_direction", "name": {"exact": "miller_direction"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["n", "m"], "symbols": {"m": "NXmicrostructure_slip_system", "n": "NXmicrostructure_slip_system"}}, "type": "NX_NUMBER", "units": {"category": "NX_UNITLESS"}, "via": ["T1", "T4", "T7", "T9"]},
+    {"declared_by": "NXmicrostructure_slip_system", "docs": ["NXmicrostructure_slip_system/is_specific"], "id": "is_specific", "name": {"exact": "is_specific"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["n"], "symbols": {"n": "NXmicrostructure_slip_system"}}, "type": "NX_BOOLEAN", "units": {"category": "NX_UNITLESS"}, "via": ["T1", "T4", "T7", "T9"]}
+  ],
+  "class": "NXmicrostructure_slip_system",
+  "extends": "NXobject",
+  "lossy": [],
+  "provisional": [],
+  "require": [],
+  "source": "contributed_definitions/NXmicrostructure_slip_system.nxdl.xml",
+  "status": "contributed",
+  "symbols": ["m", "n"],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"},
+  "via": []
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {}
+}

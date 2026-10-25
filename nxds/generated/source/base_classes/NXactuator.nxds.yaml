@@ -1,0 +1,77 @@
+nxds: '0.1'
+class: NXactuator
+category: base
+extends: NXcomponent
+doc: |-
+  An actuator used to control an external condition.
+
+  The condition itself is described in :ref:`NXenvironment`.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  name:
+    node: dataset
+    doc: Name of the actuator
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  short_name:
+    node: dataset
+    doc: Short name of actuator used e.g. on monitor display program
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  actuation_target:
+    node: dataset
+    doc: |-
+      The physical component on which this actuator acts.
+      This should be a path in the NeXus tree structure.
+      For example, this could be an instance of NXsample or a device on NXinstrument.
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  physical_quantity:
+    node: dataset
+    doc: |-
+      Name for the physical quantity effected by the actuation
+
+      Examples:
+      temperature | pH | magnetic_field | electric_field | current | conductivity | resistance | voltage |
+      pressure | flow | stress | strain | shear | surface_pressure
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  type:
+    node: dataset
+    doc: |-
+      The type of hardware used for the actuation.
+
+      Examples (suggestions, but not restrictions):
+
+      :Temperature: laser | gas lamp | filament | resistive
+      :Pressure: anvil cell
+      :Voltage: potentiostat
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  outputVALUE:
+    node: dataset
+    name: {template: 'output{VALUE}'}
+    type: NX_NUMBER
+    units: {category: NX_ANY}
+    doc: |-
+      Any output that the actuator produces.
+      For example, a heater can have the field output_power(NX_NUMBER).
+    via: [T1, T3, T4, T7]
+    provisional: [Q1, Q3]
+  PID_CONTROLLER:
+    node: group
+    name: {any: true}
+    class: NXpid_controller
+    doc: |-
+      If the actuator is PID-controlled, the settings of the PID controller can be
+      stored here.
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  ENVIRONMENT:
+    node: group
+    name: {any: true}
+    class: NXenvironment
+    occurs: {max: 0}
+    doc: NXactuator cannot have NXenvironments
+    via: [T1, T2, T4]
+    provisional: [Q11]

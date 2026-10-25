@@ -1,0 +1,96 @@
+nxds: '0.1'
+class: NXbeam_stop
+category: base
+extends: NXcomponent
+doc: |-
+  A device that blocks the beam completely, usually to protect a detector.
+
+  Beamstops and their positions are important for SANS
+  and SAXS experiments.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  GEOMETRY:
+    node: group
+    name: {any: true}
+    class: NXgeometry
+    deprecated: Use the field `depends_on` and :ref:`NXtransformations` to position the beamstop
+      and NXoff_geometry to describe its shape instead
+    doc: engineering shape, orientation and position of the beam stop.
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  description:
+    node: dataset
+    enum: [circular, rectangular]
+    doc: description of beamstop
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  OFF_GEOMETRY:
+    node: group
+    name: {any: true}
+    class: NXoff_geometry
+    occurs: {min: 0}
+    doc: This group describes the shape of the beam line component
+    via: [T1, T2, T6, T7]
+    provisional: [Q1, Q11]
+  CYLINDRICAL_GEOMETRY:
+    node: group
+    name: {any: true}
+    class: NXcylindrical_geometry
+    occurs: {min: 0}
+    doc: |-
+      This group is an alternative to NXoff_geometry for describing the shape
+      of the beam stop.
+    via: [T1, T2, T6, T7]
+    provisional: [Q1, Q11]
+  size:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    doc: |-
+      Size of beamstop. If this is not sufficient to describe the beam stop use
+      NXoff_geometry instead.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  x:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    doc: |-
+      x position of the beamstop in relation to the detector.
+      Note, it is recommended to use NXtransformations instead.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  y:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    doc: |-
+      y position of the beamstop in relation to the detector.
+      Note, it is recommended to use NXtransformations instead.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  distance_to_detector:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    doc: |-
+      distance of the beamstop to the detector.
+      Note, it is recommended to use NXtransformations instead.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  status:
+    node: dataset
+    enum: [in, out]
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  depends_on:
+    node: dataset
+    type: NX_CHAR
+    doc: |-
+      The reference point of the beam stop is its center in the x and y axis. The reference point on the z axis is the
+      surface of the beam stop pointing towards the source.
+
+      .. image:: beam_stop/beam_stop.png
+        :width: 40%
+    via: [T1, T4, T7]
+    provisional: [Q1]

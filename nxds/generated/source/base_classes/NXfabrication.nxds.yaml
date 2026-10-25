@@ -1,0 +1,49 @@
+nxds: '0.1'
+class: NXfabrication
+category: base
+extends: NXobject
+doc: Details about a component as it is defined by its manufacturer.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  vendor:
+    node: dataset
+    type: NX_CHAR
+    doc: Company name of the manufacturer.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  model:
+    node: dataset
+    type: NX_CHAR
+    doc: Version or model of the component named by the manufacturer.
+    attributes:
+      version:
+        type: NX_CHAR
+        doc: |-
+          If it is possible that different versions exist, the value in this field should be made
+          specific enough to resolve the version.
+        via: [T1, T4]
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  serial_number:
+    node: dataset
+    type: NX_CHAR
+    doc: Serial number of the component.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  construction_date:
+    node: dataset
+    type: NX_DATE_TIME
+    doc: |-
+      Datetime of component's initial construction. This refers to the date of
+      first measurement after new construction or to the relocation date,
+      if it describes a multicomponent/custom-build setup.
+      Just the year is often sufficient, but if a full date/time is used,
+      it is recommended to add an explicit time zone.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  capability:
+    node: dataset
+    type: NX_CHAR
+    doc: Free-text list of functionalities which the component offers.
+    via: [T1, T4, T7]
+    provisional: [Q1]

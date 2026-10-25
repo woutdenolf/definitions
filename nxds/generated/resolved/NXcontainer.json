@@ -1,0 +1,52 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/COLLECTION"},
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"node": "group", "ref": "NXobject/LOG"},
+    {"node": "group", "ref": "NXobject/NOTE"},
+    {"node": "group", "ref": "NXobject/PARAMETERS"},
+    {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+    {"node": "dataset", "ref": "NXobject/identifierNAME"},
+    {"node": "dataset", "ref": "NXcomponent/applied"},
+    {"declared_by": "NXcomponent", "docs": ["NXcomponent/name", "NXcontainer/name"], "id": "name", "name": {"exact": "name"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "refined_by": ["NXcontainer"], "type": "NX_CHAR", "via": ["T0", "T1", "T4", "T7"]},
+    {"declared_by": "NXcomponent", "docs": ["NXcomponent/description", "NXcontainer/description"], "id": "description", "name": {"exact": "description"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "refined_by": ["NXcontainer"], "type": "NX_CHAR", "via": ["T0", "T1", "T4", "T7"]},
+    {"node": "dataset", "ref": "NXcomponent/inputs"},
+    {"node": "dataset", "ref": "NXcomponent/outputs"},
+    {"node": "group", "ref": "NXcomponent/FABRICATION"},
+    {"node": "group", "ref": "NXcomponent/PROGRAM"},
+    {"node": "group", "ref": "NXcomponent/ENVIRONMENT"},
+    {"node": "dataset", "ref": "NXcomponent/depends_on"},
+    {"node": "group", "ref": "NXcomponent/TRANSFORMATIONS"},
+    {"class": "NXtransformations", "declared_by": "NXcontainer", "docs": ["NXcomponent/TRANSFORMATIONS", "NXcontainer/orientation"], "id": "orientation", "name": {"exact": "orientation"}, "node": "group", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q4", "Q11"], "recommended": false, "refines": "TRANSFORMATIONS", "via": ["T1", "T2", "T4", "T7", "T18"]},
+    {"declared_by": "NXcontainer", "docs": ["NXcontainer/chemical_formula"], "id": "chemical_formula", "name": {"exact": "chemical_formula"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4", "T7"]},
+    {"declared_by": "NXcontainer", "docs": ["NXcontainer/density"], "id": "density", "name": {"exact": "density"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["n_comp"], "symbols": {"n_comp": "NXcontainer"}}, "type": "NX_FLOAT", "units": {"category": "NX_MASS_DENSITY"}, "via": ["T1", "T4", "T7", "T9"]},
+    {"declared_by": "NXcontainer", "docs": ["NXcontainer/packing_fraction"], "id": "packing_fraction", "name": {"exact": "packing_fraction"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["n_comp"], "symbols": {"n_comp": "NXcontainer"}}, "type": "NX_FLOAT", "units": {"category": "NX_UNITLESS"}, "via": ["T1", "T4", "T7", "T9"]},
+    {"declared_by": "NXcontainer", "docs": ["NXcontainer/relative_molecular_mass"], "id": "relative_molecular_mass", "name": {"exact": "relative_molecular_mass"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["n_comp"], "symbols": {"n_comp": "NXcontainer"}}, "type": "NX_FLOAT", "units": {"category": "NX_MASS"}, "via": ["T1", "T4", "T7", "T9"]},
+    {"class": "NXbeam", "declared_by": "NXcontainer", "docs": ["NXcontainer/beam"], "id": "beam", "name": {"exact": "beam"}, "node": "group", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "via": ["T1", "T4", "T7"]},
+    {"class": "NXshape", "declared_by": "NXcontainer", "docs": ["NXcontainer/shape"], "id": "shape", "name": {"exact": "shape"}, "node": "group", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXcontainer", "docs": ["NXcontainer/reference_measurement"], "id": "reference_measurement", "name": {"exact": "reference_measurement"}, "node": "link", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q8"], "recommended": false, "target": "/ENTRY", "via": ["T1", "T4", "T10"]}
+  ],
+  "class": "NXcontainer",
+  "extends": "NXcomponent",
+  "lossy": [],
+  "provisional": [],
+  "require": [],
+  "source": "contributed_definitions/NXcontainer.nxdl.xml",
+  "status": "contributed",
+  "symbols": [],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"},
+  "via": []
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {}
+}

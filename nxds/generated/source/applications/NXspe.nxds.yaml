@@ -1,0 +1,156 @@
+nxds: '0.1'
+class: NXspe
+category: application
+describes: NXroot
+doc: 'NXSPE Inelastic Format.  Application definition for NXSPE file format. '
+defaults: {min: 1, binding: true, type: NX_CHAR}
+children:
+  ENTRY:
+    node: group
+    name: {any: true}
+    class: NXentry
+    children:
+      program_name:
+        node: dataset
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      definition:
+        node: dataset
+        enum: [NXspe]
+        doc: Official NeXus NXDL schema to which this file conforms.
+        attributes:
+          version:
+            via: [T0, T1, T5]
+            provisional: [Q2]
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      NXSPE_info:
+        node: group
+        class: NXcollection
+        children:
+          fixed_energy:
+            node: dataset
+            type: NX_FLOAT
+            units: {category: NX_ENERGY}
+            doc: The fixed energy used for this file.
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          ki_over_kf_scaling:
+            node: dataset
+            type: NX_BOOLEAN
+            doc: Indicates whether ki/kf scaling has been applied or not.
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          psi:
+            node: dataset
+            type: NX_FLOAT
+            units: {category: NX_ANGLE}
+            doc: Orientation angle as expected in DCS-MSlice
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T3b, T5, T7]
+        provisional: [Q1, Q2]
+      data:
+        node: group
+        class: NXdata
+        children:
+          azimuthal:
+            node: dataset
+            type: NX_FLOAT
+            units: {category: NX_ANGLE}
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          azimuthal_width:
+            node: dataset
+            type: NX_FLOAT
+            units: {category: NX_ANGLE}
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          polar:
+            node: dataset
+            type: NX_FLOAT
+            units: {category: NX_ANGLE}
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          polar_width:
+            node: dataset
+            type: NX_FLOAT
+            units: {category: NX_ANGLE}
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          distance:
+            node: dataset
+            type: NX_FLOAT
+            units: {category: NX_LENGTH}
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          data:
+            node: dataset
+            type: NX_NUMBER
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          error:
+            node: dataset
+            type: NX_NUMBER
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          energy:
+            node: dataset
+            type: NX_FLOAT
+            units: {category: NX_ENERGY}
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      INSTRUMENT:
+        node: group
+        name: {any: true}
+        class: NXinstrument
+        children:
+          name:
+            node: dataset
+            type: NX_CHAR
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          FERMI_CHOPPER:
+            node: group
+            name: {any: true}
+            class: NXfermi_chopper
+            children:
+              energy:
+                node: dataset
+                type: NX_NUMBER
+                units: {category: NX_ENERGY}
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T2, T5, T7]
+            provisional: [Q1, Q2, Q11]
+        via: [T1, T2, T5, T7]
+        provisional: [Q1, Q2, Q11]
+      SAMPLE:
+        node: group
+        name: {any: true}
+        class: NXsample
+        children:
+          rotation_angle:
+            node: dataset
+            type: NX_NUMBER
+            units: {category: NX_ANGLE}
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          seblock:
+            node: dataset
+            type: NX_CHAR
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          temperature:
+            node: dataset
+            type: NX_NUMBER
+            units: {category: NX_TEMPERATURE}
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T2, T5, T7]
+        provisional: [Q1, Q2, Q11]
+    via: [T1, T2, T5, T7]
+    provisional: [Q1, Q2, Q11]
+via: [T8]

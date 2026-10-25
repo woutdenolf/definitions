@@ -1,0 +1,40 @@
+nxds: '0.1'
+class: NXsolid_geometry
+category: base
+extends: NXobject
+doc: |-
+  The head node for constructively defined geometry.
+
+  * `S. Ghebi <https://doi.org/10.1007/978-1-84800-115-2>`_
+  * `L. H. Laidlaw <https://doi.org/10.1145/15886.15904>`_
+
+  for an introduction into the topic of modeling shapes with constructive
+  solid geometry (CSG).
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  QUADRIC:
+    node: group
+    name: {any: true}
+    class: NXquadric
+    occurs: {min: 0}
+    doc: Instances of :ref:`NXquadric` making up elements of the geometry.
+    via: [T1, T2, T6, T7]
+    provisional: [Q1, Q11]
+  OFF_GEOMETRY:
+    node: group
+    name: {any: true}
+    class: NXoff_geometry
+    occurs: {min: 0}
+    doc: Instances of :ref:`NXoff_geometry` making up elements of the geometry.
+    via: [T1, T2, T6, T7]
+    provisional: [Q1, Q11]
+  CSG:
+    node: group
+    name: {any: true}
+    class: NXcsg
+    occurs: {min: 0}
+    doc: |-
+      The geometries defined, made up of e.g. instances of :ref:`NXquadric`, :ref:`NXoff_geometry`,
+      or instances of other base classes that define geometries.
+    via: [T1, T2, T6, T7]
+    provisional: [Q1, Q11]

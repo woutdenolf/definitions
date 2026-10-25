@@ -1,0 +1,89 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/COLLECTION"},
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"node": "group", "ref": "NXobject/LOG"},
+    {"node": "group", "ref": "NXobject/NOTE"},
+    {"node": "group", "ref": "NXobject/PARAMETERS"},
+    {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+    {"node": "dataset", "ref": "NXobject/identifierNAME"},
+    {"declared_by": "NXspm_cantilever_config", "docs": ["NXspm_cantilever_config/cantilever_coating"], "id": "cantilever_coating", "name": {"exact": "cantilever_coating"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4", "T7"]},
+    {"declared_by": "NXspm_cantilever_config", "docs": ["NXspm_cantilever_config/curvature_radiusN"], "id": "curvature_radiusN", "name": {"template": "curvature_radius{N}"}, "node": "dataset", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q3"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_ANY"}, "via": ["T1", "T3", "T4", "T7"]},
+    {"declared_by": "NXspm_cantilever_config", "docs": ["NXspm_cantilever_config/cantilever_type"], "id": "cantilever_type", "name": {"exact": "cantilever_type"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4", "T7"]},
+    {"declared_by": "NXspm_cantilever_config", "docs": ["NXspm_cantilever_config/cantilever_length"], "id": "cantilever_length", "name": {"exact": "cantilever_length"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_LENGTH"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXspm_cantilever_config", "docs": ["NXspm_cantilever_config/cantilever_width"], "id": "cantilever_width", "name": {"exact": "cantilever_width"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_LENGTH"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXspm_cantilever_config", "docs": ["NXspm_cantilever_config/cantilever_thickness"], "id": "cantilever_thickness", "name": {"exact": "cantilever_thickness"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_LENGTH"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXspm_cantilever_config", "docs": ["NXspm_cantilever_config/resonance_frequency"], "id": "resonance_frequency", "name": {"exact": "resonance_frequency"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_FREQUENCY"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXspm_cantilever_config", "docs": ["NXspm_cantilever_config/amplitude_excitation"], "id": "amplitude_excitation", "name": {"exact": "amplitude_excitation"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_ANY"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXspm_cantilever_config", "docs": ["NXspm_cantilever_config/fermi_level"], "id": "fermi_level", "name": {"exact": "fermi_level"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_VOLTAGE"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXspm_cantilever_config", "docs": ["NXspm_cantilever_config/resonance_amplitude"], "id": "resonance_amplitude", "name": {"exact": "resonance_amplitude"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_LENGTH"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXspm_cantilever_config", "docs": ["NXspm_cantilever_config/spring_constant"], "id": "spring_constant", "name": {"exact": "spring_constant"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_ANY"}, "via": ["T1", "T4", "T7"]},
+    {"class": "NXcalibration", "declared_by": "NXspm_cantilever_config", "docs": ["NXspm_cantilever_config/CALIBRATION"], "id": "CALIBRATION", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q11"], "recommended": false, "specialisation": "NXspm_cantilever_config/CALIBRATION", "via": ["T1", "T2", "T4", "T7"]}
+  ],
+  "class": "NXspm_cantilever_config",
+  "extends": "NXobject",
+  "lossy": [],
+  "provisional": [],
+  "require": [],
+  "source": "contributed_definitions/NXspm_cantilever_config.nxdl.xml",
+  "status": "contributed",
+  "symbols": [],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"},
+  "via": []
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {
+  "NXspm_cantilever_config/CALIBRATION": {
+   "attributes": [
+     {"ref": "NXcalibration@default"}
+   ],
+   "children": [
+     {"node": "group", "ref": "NXobject/COLLECTION"},
+     {"node": "group", "ref": "NXcalibration/DATA"},
+     {"node": "group", "ref": "NXobject/LOG"},
+     {"node": "group", "ref": "NXprocess/NOTE"},
+     {"node": "group", "ref": "NXcalibration/calibration_object"},
+     {"node": "group", "ref": "NXprocess/PARAMETERS"},
+     {"node": "group", "ref": "NXcalibration/fit_formula_inputs"},
+     {"node": "group", "ref": "NXcalibration/calibration_parameters"},
+     {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+     {"node": "dataset", "ref": "NXobject/identifierNAME"},
+     {"node": "dataset", "ref": "NXcalibration/identifier_calibration_method"},
+     {"node": "dataset", "ref": "NXcalibration/identifier_calibration_reference"},
+     {"node": "dataset", "ref": "NXprocess/program"},
+     {"node": "dataset", "ref": "NXprocess/sequence_index"},
+     {"node": "dataset", "ref": "NXprocess/version"},
+     {"node": "dataset", "ref": "NXprocess/date"},
+     {"node": "dataset", "ref": "NXcalibration/description"},
+     {"node": "dataset", "ref": "NXcalibration/physical_quantity"},
+     {"node": "dataset", "ref": "NXcalibration/last_process"},
+     {"node": "dataset", "ref": "NXcalibration/applied"},
+     {"node": "dataset", "ref": "NXcalibration/original_axis"},
+     {"node": "dataset", "ref": "NXcalibration/fit_formula_description"},
+     {"node": "dataset", "ref": "NXcalibration/mapping_MAPPING"},
+     {"node": "dataset", "ref": "NXcalibration/calibrated_axis"},
+     {"declared_by": "NXspm_cantilever_config", "docs": ["NXspm_cantilever_config/CALIBRATION/sensitivity"], "id": "sensitivity", "name": {"exact": "sensitivity"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_ANY"}, "via": ["T1", "T4", "T7"]}
+   ],
+   "class": "NXcalibration",
+   "declared_by": "NXspm_cantilever_config",
+   "id": "NXspm_cantilever_config/CALIBRATION",
+   "require": [],
+   "symbols": [],
+   "undeclared": {"attribute": "report", "dataset": "report", "group": "report"}
+  }
+ }
+}

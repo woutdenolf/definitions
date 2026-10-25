@@ -1,0 +1,728 @@
+nxds: '0.1'
+class: NXmicrostructure_score_results
+category: application
+describes: NXroot
+doc: |-
+  Application definition for storing results of the SCORE cellular automata model.
+
+  The SCORE cellular automata model for primary recrystallization is an example
+  of a typical materials engineering application used within the field of so-called
+  Integral Computational Materials Engineering (ICME) whereby one can simulate
+  the evolution of microstructures.
+
+  Specifically the SCORE model can be used to simulate the growth of nuclei during
+  static recrystallization. The model is described in the literature:
+
+  * `M. Kühbach et al. <https://doi.org/10.1016/j.actamat.2016.01.068>`_
+  * `C. Haase et al. <https://doi.org/10.1016/j.actamat.2015.08.057>`_
+  * `M. Diehl et al. <https://doi.org/10.1088/1361-651X/ab51bd>`_
+defaults: {min: 1, binding: true, type: NX_CHAR}
+symbols:
+  n_summary_stats:
+    doc: The total number of summary statistic log entries
+  n_b:
+    doc: |-
+      Number of boundaries of the bounding box or primitive about the computational
+      domain
+  n_p:
+    doc: Number of parameter required for chosen orientation parameterization
+  n_tex: {doc: Number of texture components identified}
+  d: {doc: Dimensionality}
+  c: {doc: Cardinality}
+  n_front:
+    doc: Number of active cells in the (recrystallization) front
+  n_grains:
+    doc: Number of grains in the computer simulation
+children:
+  ENTRY:
+    node: group
+    name: {any: true}
+    class: NXentry
+    children:
+      definition:
+        node: dataset
+        type: NX_CHAR
+        enum: [NXmicrostructure_score_results]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      identifier_simulation:
+        node: dataset
+        type: NX_UINT
+        doc: Simulation ID as an alias to refer to this simulation.
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      config:
+        node: group
+        class: NXnote
+        doc: |-
+          Configuration file with the parameterization of the
+          SCORE model that was used for this simulation.
+        children:
+          file_name:
+            node: dataset
+            type: NX_CHAR
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          algorithm:
+            node: dataset
+            type: NX_CHAR
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          checksum:
+            node: dataset
+            type: NX_CHAR
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      description:
+        node: dataset
+        occurs: {min: 0}
+        type: NX_CHAR
+        doc: Discouraged free-text field to add further details to the computation.
+        via: [T1, T6, T7]
+        provisional: [Q1]
+      start_time:
+        node: dataset
+        type: NX_DATE_TIME
+        doc: |-
+          ISO 8601 time code with local time zone offset to UTC information
+          included when the simulation was started.
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      end_time:
+        node: dataset
+        occurs: {min: 0}
+        recommended: true
+        type: NX_DATE_TIME
+        doc: |-
+          ISO 8601 time code with local time zone offset to UTC information
+          included when the simulation ended.
+        via: [T1, T6, T7]
+        provisional: [Q1]
+      profiling:
+        node: group
+        class: NXcs_profiling
+        occurs: {min: 0}
+        via: [T1, T6, T7]
+        provisional: [Q1]
+      program1:
+        node: group
+        class: NXprogram
+        doc: Name of the program with which the simulation was performed.
+        children:
+          program:
+            node: dataset
+            type: NX_CHAR
+            attributes:
+              version:
+                via: [T0, T1, T5]
+                provisional: [Q2]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      environment:
+        node: group
+        class: NXcollection
+        occurs: {min: 0}
+        doc: Programs and libraries representing the computational environment
+        children:
+          programID:
+            node: group
+            name: {template: 'program{ID}'}
+            class: NXprogram
+            occurs: {min: 1, max: unbounded}
+            children:
+              program:
+                node: dataset
+                type: NX_CHAR
+                attributes:
+                  version:
+                    type: NX_CHAR
+                    via: [T1, T5]
+                    provisional: [Q2]
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T3, T6]
+            provisional: [Q1, Q3]
+        via: [T1, T6, T7]
+        provisional: [Q1]
+      sample_reference_frame:
+        node: group
+        class: NXcoordinate_system
+        children:
+          type:
+            node: dataset
+            enum: [cartesian]
+            via: [T0, T1, T5, T7]
+            provisional: [Q1, Q2]
+          handedness:
+            node: dataset
+            enum: [right_handed]
+            via: [T0, T1, T5, T7]
+            provisional: [Q1, Q2]
+          origin:
+            node: dataset
+            enum: [front_bottom_left]
+            via: [T0, T1, T5, T7]
+            provisional: [Q1, Q2]
+          x_alias:
+            node: dataset
+            enum: [rolling_direction]
+            via: [T0, T1, T5, T7]
+            provisional: [Q1, Q2]
+          x_direction:
+            node: dataset
+            enum: [east]
+            via: [T0, T1, T5, T7]
+            provisional: [Q1, Q2]
+          y_alias:
+            node: dataset
+            enum: [transverse_direction]
+            via: [T0, T1, T5, T7]
+            provisional: [Q1, Q2]
+          y_direction:
+            node: dataset
+            enum: [in]
+            via: [T0, T1, T5, T7]
+            provisional: [Q1, Q2]
+          z_alias:
+            node: dataset
+            enum: [normal direction]
+            via: [T0, T1, T5, T7]
+            provisional: [Q1, Q2]
+          z_direction:
+            node: dataset
+            enum: [north]
+            via: [T0, T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      discretization:
+        node: group
+        class: NXmicrostructure
+        occurs: {min: 1, max: 1}
+        children:
+          grid:
+            node: group
+            class: NXcg_grid
+            children:
+              dimensionality:
+                node: dataset
+                type: NX_POSINT
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              cardinality:
+                node: dataset
+                type: NX_POSINT
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              origin:
+                node: dataset
+                type: NX_NUMBER
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              symmetry:
+                node: dataset
+                type: NX_CHAR
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              cell_dimensions:
+                node: dataset
+                type: NX_NUMBER
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              extent:
+                node: dataset
+                type: NX_UINT
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              index_offset:
+                node: dataset
+                type: NX_INT
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          boundary:
+            node: group
+            class: NXcg_hexahedron
+            doc: A tight bounding box or sphere or bounding primitive about the grid.
+            children:
+              number_of_boundaries:
+                node: dataset
+                type: NX_UINT
+                units: {category: NX_UNITLESS}
+                doc: |-
+                  How many distinct boundaries are distinguished?
+                  Most grids discretize a cubic or cuboidal region. In this case
+                  six sides can be distinguished, each making an own boundary.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              boundary_conditions:
+                node: dataset
+                type: NX_INT
+                shape: [6]
+                units: {category: NX_UNITLESS}
+                doc: |-
+                  The boundary conditions for each boundary:
+
+                  * 0 - undefined
+                  * 1 - open
+                  * 2 - periodic
+                  * 3 - mirror
+                  * 4 - von Neumann
+                  * 5 - Dirichlet
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              boundaries:
+                node: dataset
+                shape: [6]
+                doc: |-
+                  Name of the boundaries. Left, right, front, back, bottom, top,
+                  The field must have as many entries as there are number_of_boundaries.
+                via: [T0, T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T6]
+        provisional: [Q1]
+      spatiotemporalID:
+        node: group
+        name: {template: 'spatiotemporal{ID}'}
+        class: NXprocess
+        occurs: {min: 1, max: unbounded}
+        doc: |-
+          Documentation of the spatiotemporal evolution for each CA domain.
+
+          SCORE is a hybrid parallelized code that can evolve multiple replicas
+          in parallel. The set of replicas is distributed across MPI processes.
+          Each such replica is then evolved via OpenMP multi-threading.
+        children:
+          summary_statistics:
+            node: group
+            class: NXprocess
+            doc: |-
+              Summary quantities which are the result of some post-processing of the snapshot data
+              (averaging, integrating, interpolating) happening for practical and performance reasons
+              during the simulation. Place used for storing descriptors from continuum mechanics
+              and thermodynamics at the scale of the entire ROI.
+            children:
+              kinetics:
+                node: group
+                class: NXdata
+                occurs: {min: 0}
+                recommended: true
+                doc: Evolution of the recrystallized volume fraction over time.
+                attributes:
+                  signal:
+                    type: NX_CHAR
+                    via: [T1, T5]
+                    provisional: [Q2]
+                  axes:
+                    type: NX_CHAR
+                    via: [T1, T5]
+                    provisional: [Q2]
+                  time_indices:
+                    type: NX_UINT
+                    via: [T1, T5]
+                    provisional: [Q2]
+                  iteration_indices:
+                    occurs: {min: 0}
+                    type: NX_UINT
+                    via: [T1, T6]
+                    provisional: [Q1]
+                  temperature_indices:
+                    occurs: {min: 0}
+                    type: NX_UINT
+                    via: [T1, T6]
+                    provisional: [Q1]
+                  x_indices:
+                    type: NX_UINT
+                    via: [T1, T5]
+                    provisional: [Q2]
+                children:
+                  title:
+                    node: dataset
+                    occurs: {min: 0}
+                    recommended: true
+                    type: NX_CHAR
+                    via: [T1, T6, T7]
+                    provisional: [Q1]
+                  time:
+                    node: dataset
+                    type: NX_FLOAT
+                    shape: [n_summary_stats]
+                    units: {category: NX_TIME}
+                    doc: |-
+                      Evolution of the physical time not to be confused with wall-clock time or
+                      profiling data.
+                    via: [T1, T5, T7, T9]
+                    provisional: [Q1, Q2]
+                  iteration:
+                    node: dataset
+                    type: NX_INT
+                    shape: [n_summary_stats]
+                    units: {category: NX_UNITLESS}
+                    doc: Iteration or increment counter.
+                    via: [T1, T5, T7, T9]
+                    provisional: [Q1, Q2]
+                  temperature:
+                    node: dataset
+                    type: NX_FLOAT
+                    shape: [n_summary_stats]
+                    units: {category: NX_TEMPERATURE}
+                    doc: Evolution of the simulated temperature over time.
+                    via: [T1, T5, T7, T9]
+                    provisional: [Q1, Q2]
+                  x:
+                    node: dataset
+                    type: NX_FLOAT
+                    shape: [n_summary_stats]
+                    units: {category: NX_DIMENSIONLESS}
+                    doc: Recrystallized volume fraction.
+                    via: [T1, T5, T7, T9]
+                    provisional: [Q1, Q2]
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              stress:
+                node: group
+                class: NXdata
+                occurs: {min: 0}
+                children:
+                  type:
+                    node: dataset
+                    type: NX_CHAR
+                    enum: [cauchy]
+                    doc: Which type of stress.
+                    via: [T1, T5, T7]
+                    provisional: [Q1, Q2]
+                  tensor:
+                    node: dataset
+                    type: NX_FLOAT
+                    shape: [n_summary_stats, 3, 3]
+                    units: {category: NX_ANY}
+                    doc: Applied external stress tensor on the ROI.
+                    via: [T1, T5, T7, T9]
+                    provisional: [Q1, Q2]
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              strain:
+                node: group
+                class: NXdata
+                occurs: {min: 0}
+                children:
+                  type:
+                    node: dataset
+                    type: NX_CHAR
+                    doc: Which type of strain.
+                    via: [T1, T5, T7]
+                    provisional: [Q1, Q2]
+                  tensor:
+                    node: dataset
+                    type: NX_FLOAT
+                    shape: [n_summary_stats, 3, 3]
+                    units: {category: NX_ANY}
+                    doc: Applied external strain tensor on the ROI.
+                    via: [T1, T5, T7, T9]
+                    provisional: [Q1, Q2]
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              deformation_gradient:
+                node: group
+                class: NXprocess
+                occurs: {min: 0}
+                children:
+                  type:
+                    node: dataset
+                    enum: [piola]
+                    doc: Which type of deformation gradient.
+                    via: [T0, T1, T5, T7]
+                    provisional: [Q1, Q2]
+                  tensor:
+                    node: dataset
+                    type: NX_FLOAT
+                    shape: [n_summary_stats, 3, 3]
+                    units: {category: NX_ANY}
+                    doc: Applied deformation gradient tensor on the ROI.
+                    via: [T1, T5, T7, T9]
+                    provisional: [Q1, Q2]
+                via: [T1, T6, T7]
+                provisional: [Q1]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          microstructureID:
+            node: group
+            name: {template: 'microstructure{ID}'}
+            class: NXmicrostructure
+            occurs: {min: 1, max: unbounded}
+            children:
+              time:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_TIME}
+                doc: Simulated physical time for this snapshot.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              iteration:
+                node: dataset
+                type: NX_UINT
+                units: {category: NX_UNITLESS}
+                doc: Iteration or increment counter of this snapshot.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              temperature:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_TEMPERATURE}
+                doc: Simulated temperature for this snapshot.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              x:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_DIMENSIONLESS}
+                doc: |-
+                  Current recrystallized volume fraction (taking fractional infections into
+                  account).
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              x_set:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_DIMENSIONLESS}
+                doc: |-
+                  Target value for which a snapshot was requested for the recrystallized volume
+                  fraction.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              grid:
+                node: group
+                class: NXcg_grid
+                occurs: {min: 0}
+                recommended: true
+                children:
+                  indices_crystal:
+                    node: dataset
+                    occurs: {min: 0}
+                    recommended: true
+                    type: NX_INT
+                    shape: [n_x, n_y, n_z]
+                    units: {category: NX_UNITLESS}
+                    doc: Index for each crystal whereby its metadata can be retrieved.
+                    via: [T1, T6, T7, T9]
+                    provisional: [Q1]
+                  thread_id:
+                    node: dataset
+                    occurs: {min: 0}
+                    type: NX_UINT
+                    shape: [n_x, n_y, n_z]
+                    units: {category: NX_UNITLESS}
+                    doc: Identifier of the OpenMP thread that processed this part of the grid.
+                    via: [T1, T6, T7, T9]
+                    provisional: [Q1]
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              crystals:
+                node: group
+                class: NXmicrostructure_feature
+                children:
+                  representation:
+                    node: dataset
+                    occurs: {min: 0}
+                    recommended: true
+                    type: NX_CHAR
+                    via: [T1, T6, T7]
+                    provisional: [Q1]
+                  number_of_crystals:
+                    node: dataset
+                    occurs: {min: 0}
+                    recommended: true
+                    type: NX_UINT
+                    via: [T1, T6, T7]
+                    provisional: [Q1]
+                  number_of_phases:
+                    node: dataset
+                    occurs: {min: 0}
+                    recommended: true
+                    type: NX_UINT
+                    via: [T1, T6, T7]
+                    provisional: [Q1]
+                  index_offset_crystal:
+                    node: dataset
+                    occurs: {min: 0}
+                    recommended: true
+                    type: NX_INT
+                    via: [T1, T6, T7]
+                    provisional: [Q1]
+                  indices_crystal:
+                    node: dataset
+                    occurs: {min: 0}
+                    recommended: true
+                    type: NX_INT
+                    shape: [n_grains]
+                    via: [T1, T6, T7, T9]
+                    provisional: [Q1]
+                  index_offset_phase:
+                    node: dataset
+                    occurs: {min: 0}
+                    recommended: true
+                    type: NX_INT
+                    via: [T1, T6, T7]
+                    provisional: [Q1]
+                  indices_phase:
+                    node: dataset
+                    occurs: {min: 0}
+                    recommended: true
+                    type: NX_INT
+                    shape: [n_grains]
+                    via: [T1, T6, T7, T9]
+                    provisional: [Q1]
+                  volume:
+                    node: dataset
+                    type: NX_FLOAT
+                    shape: [n_grains]
+                    units: {category: NX_VOLUME}
+                    doc: Volume of each grain (partially transformed cells are accounted for).
+                    via: [T1, T5, T7, T9]
+                    provisional: [Q1, Q2]
+                  bunge_euler:
+                    node: dataset
+                    type: NX_FLOAT
+                    shape: [n_grains, 3]
+                    units: {category: NX_ANGLE}
+                    doc: Bunge-Euler angle triplets for each grain.
+                    via: [T1, T5, T7, T9]
+                    provisional: [Q1, Q2]
+                  dislocation_density:
+                    node: dataset
+                    occurs: {min: 0}
+                    recommended: true
+                    type: NX_FLOAT
+                    shape: [n_grains]
+                    units: {category: NX_ANY}
+                    doc: |-
+                      Current value for the dislocation density as a measure of the remaining
+                      stored energy in assumed crystal defects inside each grain.
+                    via: [T1, T6, T7, T9]
+                    provisional: [Q1]
+                  is_deformed:
+                    node: dataset
+                    occurs: {min: 0}
+                    recommended: true
+                    type: NX_BOOLEAN
+                    shape: [n_grains]
+                    doc: Is the grain deformed.
+                    via: [T1, T6, T7, T9]
+                    provisional: [Q1]
+                  is_recrystallized:
+                    node: dataset
+                    occurs: {min: 0}
+                    recommended: true
+                    type: NX_BOOLEAN
+                    shape: [n_grains]
+                    doc: Is the grain recrystallized.
+                    via: [T1, T6, T7, T9]
+                    provisional: [Q1]
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              recrystallization_front:
+                node: group
+                class: NXmicrostructure_feature
+                occurs: {min: 0}
+                recommended: true
+                doc: |-
+                  Details about those cells which in this time step
+                  represent the discrete recrystallization front.
+
+                  Each CA is processed by a team of OpenMP threads.
+                children:
+                  halo_region:
+                    node: dataset
+                    occurs: {min: 0}
+                    type: NX_UINT
+                    shape: [n_front]
+                    units: {category: NX_UNITLESS}
+                    doc: |-
+                      Which cells are currently in a halo region of threads.
+
+                      The halo region is a layer of cells about the sub-domain
+                      of the simulation grid evolved by a thread.
+                    via: [T1, T6, T7, T9]
+                    provisional: [Q1]
+                  mobility_weight:
+                    node: dataset
+                    occurs: {min: 0}
+                    recommended: true
+                    type: NX_FLOAT
+                    shape: [n_front]
+                    units: {category: NX_UNITLESS}
+                    doc: |-
+                      So-called mobility weight which is a scaling factor to control the
+                      mobility of the grain boundary that is modelled sweeping cells that
+                      make the discrete recrystallization front.
+                    via: [T1, T6, T7, T9]
+                    provisional: [Q1]
+                  coordinate:
+                    node: dataset
+                    occurs: {min: 0}
+                    recommended: true
+                    type: NX_NUMBER
+                    shape: [n_front, 3]
+                    units: {category: NX_UNITLESS}
+                    doc: The x, y, z grid coordinates of each cell in the recrystallization
+                      front.
+                    via: [T1, T6, T7, T9]
+                    provisional: [Q1]
+                  deformed_grain_id:
+                    node: dataset
+                    occurs: {min: 0}
+                    recommended: true
+                    type: NX_UINT
+                    shape: [n_front]
+                    units: {category: NX_UNITLESS}
+                    doc: Grain identifier assigned to each cell in the recrystallization front.
+                    via: [T1, T6, T7, T9]
+                    provisional: [Q1]
+                  recrystallized_grain_id:
+                    node: dataset
+                    occurs: {min: 0}
+                    recommended: true
+                    type: NX_UINT
+                    shape: [n_front]
+                    units: {category: NX_UNITLESS}
+                    doc: |-
+                      Grain identifier assigned to each nucleus which affected that cell in the
+                      recrystallization front.
+                    via: [T1, T6, T7, T9]
+                    provisional: [Q1]
+                  thread_id:
+                    node: dataset
+                    occurs: {min: 0}
+                    type: NX_UINT
+                    shape: [n_front]
+                    units: {category: NX_UNITLESS}
+                    doc: |-
+                      Identifier of the OpenMP thread processing each cell in the recrystallization
+                      front.
+                    via: [T1, T6, T7, T9]
+                    provisional: [Q1]
+                  infection_direction:
+                    node: dataset
+                    occurs: {min: 0}
+                    type: NX_UINT
+                    shape: [n_front]
+                    units: {category: NX_UNITLESS}
+                    doc: Hint about the direction from which the cell was infected.
+                    via: [T1, T6, T7, T9]
+                    provisional: [Q1]
+                via: [T1, T6, T7]
+                provisional: [Q1]
+            via: [T1, T3, T6]
+            provisional: [Q1, Q3]
+        via: [T1, T3, T6]
+        provisional: [Q1, Q3]
+    via: [T1, T2, T5, T7]
+    provisional: [Q1, Q2, Q11]
+via: [T8]

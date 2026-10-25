@@ -1,0 +1,90 @@
+nxds: '0.1'
+class: NXmoderator
+category: base
+extends: NXcomponent
+doc: A neutron moderator
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  GEOMETRY:
+    node: group
+    name: {any: true}
+    class: NXgeometry
+    deprecated: Use the field `depends_on` and :ref:`NXtransformations` to position the moderator
+      and NXoff_geometry to describe its shape instead
+    doc: '"Engineering" position of moderator'
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  distance:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    doc: |-
+      Effective distance as seen by measuring radiation.
+      Note, it is recommended to use NXtransformations instead.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  type:
+    node: dataset
+    enum: [H20, D20, Liquid H2, Liquid CH4, Liquid D2, Solid D2, C, Solid CH4, Solid H2]
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  poison_depth:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  coupled:
+    node: dataset
+    type: NX_BOOLEAN
+    doc: whether the moderator is coupled
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  coupling_material:
+    node: dataset
+    doc: The material used for coupling. Usually Cd.
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  poison_material:
+    node: dataset
+    enum: [Gd, Cd]
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  temperature:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_TEMPERATURE}
+    doc: average/nominal moderator temperature
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  temperature_log:
+    node: group
+    class: NXlog
+    doc: log file of moderator temperature
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  pulse_shape:
+    node: group
+    class: NXdata
+    doc: moderator pulse shape
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  OFF_GEOMETRY:
+    node: group
+    name: {any: true}
+    class: NXoff_geometry
+    occurs: {min: 0}
+    doc: This group describes the shape of the moderator
+    via: [T1, T2, T6, T7]
+    provisional: [Q1, Q11]
+  depends_on:
+    node: dataset
+    type: NX_CHAR
+    doc: |-
+      The reference point of the moderator is its center in the x and y axis. The reference point on the z axis is the
+      surface of the moderator pointing towards the source (the negative part of the z axis).
+
+      .. image:: moderator/moderator.png
+        :width: 40%
+    via: [T1, T4, T7]
+    provisional: [Q1]

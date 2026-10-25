@@ -1,0 +1,59 @@
+nxds: '0.1'
+class: NXxlaue
+category: application
+extends: NXxrot
+describes: NXroot
+doc: |-
+  raw data from a single crystal laue camera, extends :ref:`NXxrot`
+
+  This is the application definition for raw data from a single crystal laue
+  camera. It extends :ref:`NXxrot`.
+defaults: {min: 1, binding: true, type: NX_CHAR}
+symbols:
+  nE: {doc: Number of energies}
+children:
+  ENTRY:
+    node: group
+    name: {any: true}
+    class: NXentry
+    children:
+      definition:
+        node: dataset
+        enum: [NXxlaue]
+        doc: 'Official NeXus NXDL schema to which this file conforms '
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      instrument:
+        node: group
+        class: NXinstrument
+        children:
+          source:
+            node: group
+            class: NXsource
+            children:
+              distribution:
+                node: group
+                class: NXdata
+                doc: This is the wavelength distribution of the beam
+                children:
+                  data:
+                    node: dataset
+                    shape: [nE]
+                    doc: expect  ``signal=1 axes="energy"``
+                    via: [T0, T1, T5, T7, T9]
+                    provisional: [Q1, Q2]
+                  wavelength:
+                    node: dataset
+                    shape: [nE]
+                    units: {category: NX_WAVELENGTH}
+                    via: [T0, T1, T5, T7, T9]
+                    provisional: [Q1, Q2]
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+    via: [T1, T2, T5, T7]
+    provisional: [Q1, Q2, Q11]
+via: [T8]

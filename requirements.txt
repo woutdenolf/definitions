@@ -16,6 +16,9 @@ h5py
 # Testing
 pytest
 
+# NXDS (nxds_tools: compiler, resolver, validator)
+-e ./nxds_tools
+
 # Code style and auto-formatting
 black==26.3.1
 flake8==7.3

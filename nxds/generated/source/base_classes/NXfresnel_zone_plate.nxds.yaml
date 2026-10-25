@@ -1,0 +1,96 @@
+nxds: '0.1'
+class: NXfresnel_zone_plate
+category: base
+extends: NXcomponent
+doc: A fresnel zone plate
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  focus_parameters:
+    node: dataset
+    type: NX_FLOAT
+    shape: [null]
+    doc: |-
+      list of polynomial coefficients describing the focal length of the zone plate, in increasing powers of photon energy,
+      that describes the focal length of the zone plate (in microns) at an X-ray photon energy (in electron volts).
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  outer_diameter:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  outermost_zone_width:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  central_stop_diameter:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  fabrication:
+    node: dataset
+    enum: [etched, plated, zone doubled, other]
+    doc: how the zone plate was manufactured
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  zone_height:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  zone_material:
+    node: dataset
+    doc: Material of the zones themselves
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  zone_support_material:
+    node: dataset
+    doc: Material present between the zones. This is usually only present for the "zone doubled"
+      fabrication process
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  central_stop_material:
+    node: dataset
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  central_stop_thickness:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  mask_thickness:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  mask_material:
+    node: dataset
+    doc: If no mask is present, set mask_thickness to 0 and omit the mask_material field
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  support_membrane_material:
+    node: dataset
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  support_membrane_thickness:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  depends_on:
+    node: dataset
+    type: NX_CHAR
+    doc: |-
+      .. todo::
+      Add a definition for the reference point of a fresnel zone plate.
+    via: [T1, T4, T7]
+    provisional: [Q1]

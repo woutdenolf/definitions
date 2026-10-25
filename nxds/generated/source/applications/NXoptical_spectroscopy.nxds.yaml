@@ -1,0 +1,1515 @@
+nxds: '0.1'
+class: NXoptical_spectroscopy
+category: application
+describes: NXroot
+doc: |-
+  A general application definition of optical spectroscopy elements, which may
+  be used as a template to derive specialized optical spectroscopy experiments.
+
+  Possible specializations are ellipsometry, Raman spectroscopy, photoluminescence,
+  reflectivity/transmission spectroscopy.
+
+  A general optical experiment consists of (i) a light/photon source, (ii) a sample,
+  (iii) a detector.
+
+  For any free-text descriptions, it is recommended to use English, as this ensures
+  the most FAIR (Findable, Accessible, Interoperable, and Reusable) representation of the information.
+defaults: {min: 1, binding: true, type: NX_CHAR}
+symbols:
+  N_spectrum:
+    doc: |-
+      Length of the spectrum array (e.g. wavelength or energy) of the measured
+      data.
+  N_measurements:
+    doc: |-
+      Number of measurements (1st dimension of measured data arrays). This is
+      equal to the number of parameters scanned. For example, if the experiment
+      was performed at three different temperatures and two different pressures
+      N_measurements = 2*3 = 6.
+children:
+  ENTRY:
+    node: group
+    name: {any: true}
+    class: NXentry
+    children:
+      definition:
+        node: dataset
+        enum: [NXoptical_spectroscopy]
+        doc: An application definition describing a general optical experiment.
+        attributes:
+          version:
+            doc: |-
+              Version number to identify which definition of this application
+              definition was used for this entry/data.
+            via: [T0, T1, T5]
+            provisional: [Q2]
+          URL:
+            doc: |-
+              URL where to find further material (documentation, examples) relevant
+              to the application definition.
+            via: [T0, T1, T3b, T5]
+            provisional: [Q2]
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      title:
+        node: dataset
+        occurs: {min: 0}
+        recommended: true
+        via: [T0, T1, T6, T7]
+        provisional: [Q1]
+      start_time:
+        node: dataset
+        occurs: {min: 0}
+        recommended: true
+        type: NX_DATE_TIME
+        doc: |-
+          Datetime of the start of the measurement.
+          Should be a ISO8601 date/time stamp. It is recommended to add an explicit time zone,
+          otherwise, the local time zone is assumed per ISO8601.
+
+          It is required to enter at least one of both measurement times, either "start_time" or "end_time".
+        via: [T1, T6, T7]
+        provisional: [Q1]
+      end_time:
+        node: dataset
+        occurs: {min: 0}
+        recommended: true
+        type: NX_DATE_TIME
+        doc: |-
+          Datetime of the end of the measurement.
+          Should be a ISO8601 date/time stamp. It is recommended to add an explicit time zone,
+          otherwise the local time zone is assumed per ISO8601.
+
+          It is required to enter at least one of both measurement times, either "start_time" or "end_time".
+        via: [T1, T6, T7]
+        provisional: [Q1]
+      identifier_experiment:
+        node: dataset
+        occurs: {min: 0}
+        recommended: true
+        via: [T0, T1, T6, T7]
+        provisional: [Q1]
+      experiment_description:
+        node: dataset
+        occurs: {min: 0}
+        doc: |-
+          An optional free-text description of the experiment.
+
+          Users are strongly advised to parameterize the description of their experiment
+          by using respective groups and fields and base classes instead of writing prose
+          into this field.
+
+          The reason is that such a free-text field is difficult to machine-interpret.
+          The motivation behind keeping this field for now is to learn how far the
+          current base classes need extension based on user feedback.
+        via: [T0, T1, T6, T7]
+        provisional: [Q1]
+      experiment_type:
+        node: dataset
+        enum:
+          values:
+          - {value: photoluminescence}
+          - {value: transmission spectroscopy}
+          - {value: reflection spectroscopy}
+          open: true
+        doc: |-
+          Specify the type of the optical experiment.
+
+          Use another term if none of these methods are suitable. You may specify
+          fundamental characteristics or properties in the experimental sub-type.
+
+          For Raman spectroscopy or ellipsometry use the respective specializations
+          of NXoptical_spectroscopy.
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      experiment_sub_type:
+        node: dataset
+        occurs: {min: 0}
+        enum:
+          values:
+          - {value: time resolved}
+          - {value: imaging}
+          - {value: pump-probe}
+          open: true
+        doc: |-
+          Specify a special property or characteristic of the experiment, which specifies
+          the generic experiment type.
+        via: [T0, T1, T6, T7]
+        provisional: [Q1]
+      beam_ref_frame:
+        node: group
+        class: NXcoordinate_system
+        occurs: {min: 0}
+        children:
+          depends_on:
+            node: dataset
+            type: NX_CHAR
+            doc: |-
+              This refers to the coordinate system along the beam path. The origin and
+              base is defined at z=0, where the incident beam hits the sample at the surface.
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          TRANSFORMATIONS:
+            node: group
+            name: {any: true}
+            class: NXtransformations
+            doc: |-
+              This is the default NeXus coordinate system (McStas), if the transformation
+              does not change the coordinate system at all - i.e. it is unity.
+              Otherwise, by this a respective transformation of the beam
+              reference frame to the default reference frame could be made. i.e.
+              exchange of x and z coordinate, rotation of respective coordinates
+              towards each other.
+            via: [T1, T2, T5, T7]
+            provisional: [Q1, Q2, Q11]
+        via: [T1, T6, T7]
+        provisional: [Q1]
+      sample_normal_ref_frame:
+        node: group
+        class: NXcoordinate_system
+        occurs: {min: 0}
+        children:
+          depends_on:
+            node: dataset
+            type: NX_CHAR
+            doc: |-
+              Link to transformations defining the sample-normal base coordinate system,
+              which is defined such that the positive z-axis is parallel to the sample normal,
+              and the x-y-plane lies inside the sample surface.
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          TRANSFORMATIONS:
+            node: group
+            name: {any: true}
+            class: NXtransformations
+            doc: |-
+              Set of transformations, describing the orientation of the sample-normal coordinate system
+              with respect to the beam coordinate system (.).
+            via: [T1, T2, T5, T7]
+            provisional: [Q1, Q2, Q11]
+        via: [T1, T6, T7]
+        provisional: [Q1]
+      USER:
+        node: group
+        name: {any: true}
+        class: NXuser
+        occurs: {min: 0, max: unbounded}
+        doc: |-
+          Contact information and eventually details of at persons who
+          performed the measurements. This can be for example the principal
+          investigator or student. Examples are: name, affiliation, address, telephone
+          number, email, role as well as identifiers such as orcid or similar.
+          It is recommended to add multiple users if relevant.
+
+          Due to data privacy concerns, there is no minimum requirement.
+          If no user with specific name is allowed to be given, it is required to
+          assign at least an affiliation
+        via: [T1, T2, T6]
+        provisional: [Q1, Q11]
+      INSTRUMENT:
+        node: group
+        name: {any: true}
+        class: NXinstrument
+        doc: |-
+          Devices or elements of the optical spectroscopy setup described with its
+          properties and general information.
+
+          This includes for example:
+          - The beam device's or instrument's model, company, serial number, construction year, etc.
+          - Used software or code
+          - Experiment descriptive parameters as reference frames, resolution, calibration
+          - Photon beams with their respective properties such as angles and polarization
+          - Various optical beam path devices, which interact, manipulate or measure optical beams
+          - Characteristics of the medium surrounding the sample
+          - "Beam devices" for a beam path description
+          - Stages(NXmanipulator)
+          - Sensors and actuators to control or measure sample or beam properties
+        children:
+          beam_TYPE:
+            node: group
+            name: {template: 'beam_{TYPE}'}
+            class: NXbeam
+            occurs: {min: 1, max: unbounded}
+            doc: |-
+              This can be used to describe properties of a photon beam.
+              A beam can be connected to components, via their
+              "inputs" and "outputs".
+
+              It is required to define at least one incident beam which is incident
+              to the sample. You may specify if this beam parameters are actually measured
+              or just nominal.
+              If this beam is the output of a source, chose the same
+              name appendix as for the NXsource instance (e.g. TYPE=532nm)
+            children:
+              parameter_reliability:
+                node: dataset
+                enum: [measured, nominal]
+                doc: |-
+                  Select the reliability of the respective beam characteristics. Either,
+                  the parameters are measured via another device or method or just given
+                  nominally via the properties of a light source properties (532nm, 100mW).
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+              incident_wavelength:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                type: NX_NUMBER
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              incident_wavelength_spread:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                type: NX_NUMBER
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              incident_polarization:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                type: NX_NUMBER
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              extent:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                type: NX_FLOAT
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              associated_source:
+                node: dataset
+                occurs: {min: 0}
+                type: NX_CHAR
+                doc: |-
+                  The path to the device which emitted this beam (light source or frequency doubler).
+
+                  This parameter is recommended, if the previous optical element is a photon source.
+                  In this way, the properties of the laser or light source can be described
+                  and associated.
+                  The beam should be named with the same appendix as the source, e.g.,
+                  for TYPE=532nmlaser, there should be both a NXsource named
+                  "source_532nmlaser" and a NXbeam named "beam_532nmlaser".
+
+                  Example: /entry/instrument/source_532nmlaser
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              beam_polarization_type:
+                node: dataset
+                occurs: {min: 0}
+                enum: [linear, circular, elliptically, unpolarized]
+                via: [T0, T1, T6, T7]
+                provisional: [Q1]
+              linear_beam_sample_polarization:
+                node: dataset
+                occurs: {min: 0}
+                type: NX_NUMBER
+                units: {category: NX_ANGLE}
+                doc: |-
+                  Angle of the linear polarized light, with respect to a fixed arbitrary
+                  defined 0° position. Note that the zero reference should be a direction vector for a
+                  :ref:`reference_plane </NXbeam/TRANSFORMATIONS/reference_plane-field>`
+                  normal in an :ref:`NXtransformations` group within :ref:`NXbeam`.
+                  This can be used if no definition of respective
+                  coordinate systems for beam and sample normal is done. If coordinate systems
+                  are defined, refer to beam "incident_polarization".
+                via: [T1, T6, T7]
+                provisional: [Q1]
+            via: [T1, T3, T6]
+            provisional: [Q1, Q3]
+          detector_TYPE:
+            node: group
+            name: {template: 'detector_{TYPE}'}
+            class: NXdetector
+            occurs: {min: 1, max: unbounded}
+            children:
+              detector_channel_type:
+                node: dataset
+                enum: [single-channel, multichannel]
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+              detector_type:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                enum:
+                  values:
+                  - {value: CCD}
+                  - {value: photomultiplier}
+                  - {value: photodiode}
+                  - {value: avalanche-photodiode}
+                  - {value: streak camera}
+                  - {value: bolometer}
+                  - {value: golay detectors}
+                  - {value: pyroelectric detector}
+                  - {value: deuterated triglycine sulphate}
+                  open: true
+                doc: Description of the detector type.
+                via: [T0, T1, T6, T7]
+                provisional: [Q1]
+              raw_data:
+                node: group
+                class: NXdata
+                occurs: {min: 0}
+                recommended: true
+                doc: |-
+                  Contains the raw data collected by the detector before calibration.
+                  The data which is considered raw might change from experiment to experiment
+                  due to hardware pre-processing of the data.
+                  This field ideally collects the data with the lowest level of processing
+                  possible.
+                attributes:
+                  signal:
+                    enum: [raw]
+                    via: [T0, T1, T5]
+                    provisional: [Q2]
+                children:
+                  raw:
+                    node: dataset
+                    type: NX_NUMBER
+                    doc: Raw data before calibration.
+                    via: [T1, T5, T7]
+                    provisional: [Q1, Q2]
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              additional_detector_hardware:
+                node: dataset
+                occurs: {min: 0}
+                doc: |-
+                  Specify respective hardware which was used for the detector. For
+                  example special electronics required for time-correlated single photon
+                  counting (TCSPC).
+                via: [T0, T1, T6, T7]
+                provisional: [Q1]
+              device_information:
+                node: group
+                class: NXfabrication
+                occurs: {min: 0}
+                recommended: true
+                via: [T1, T6, T7]
+                provisional: [Q1]
+            via: [T1, T3, T6]
+            provisional: [Q1, Q3]
+          source_TYPE:
+            node: group
+            name: {template: 'source_{TYPE}'}
+            class: NXsource
+            occurs: {min: 0}
+            recommended: true
+            children:
+              type:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                enum:
+                  values:
+                  - {value: Synchrotron X-ray Source}
+                  - {value: Rotating Anode X-ray}
+                  - {value: Fixed Tube X-ray}
+                  - {value: UV Laser}
+                  - {value: Optical Laser}
+                  - {value: Laser}
+                  - {value: Dye-Laser}
+                  - {value: Broadband Tunable Light Source}
+                  - {value: Halogen lamp}
+                  - {value: LED}
+                  - {value: Mercury Cadmium Telluride}
+                  - {value: Deuterium Lamp}
+                  - {value: Xenon Lamp}
+                  - {value: Globar}
+                  open: true
+                via: [T0, T1, T6, T7]
+                provisional: [Q1]
+              name:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                via: [T0, T1, T6, T7]
+                provisional: [Q1]
+              standard:
+                node: dataset
+                occurs: {min: 0}
+                doc: If available, name/ID/norm of the light source standard.
+                via: [T0, T1, T6, T7]
+                provisional: [Q1]
+              device_information:
+                node: group
+                class: NXfabrication
+                occurs: {min: 0}
+                recommended: true
+                doc: Details about the device information.
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              associated_beam:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                type: NX_CHAR
+                doc: |-
+                  The path to a beam emitted by this source.
+                  Should be named with the same appendix, e.g.,
+                  for TYPE=532nmlaser, there should as well be
+                  a NXbeam named "beam_532nmlaser" together with this source
+                  instance named "source_532nmlaser"
+
+                  Example: /entry/instrument/beam_532nmlaser
+                via: [T1, T6, T7]
+                provisional: [Q1]
+            via: [T1, T3, T6, T7]
+            provisional: [Q1, Q3]
+          MONOCHROMATOR:
+            node: group
+            name: {any: true}
+            class: NXmonochromator
+            occurs: {min: 0}
+            recommended: true
+            children:
+              device_information:
+                node: group
+                class: NXfabrication
+                occurs: {min: 0}
+                recommended: true
+                via: [T1, T6, T7]
+                provisional: [Q1]
+            via: [T1, T2, T6, T7]
+            provisional: [Q1, Q11]
+          angle_reference_frame:
+            node: dataset
+            occurs: {min: 0}
+            recommended: true
+            enum: [beam centered, sample-normal centered]
+            doc: |-
+              Defines the reference frame which is used to describe the sample orientation
+              with respect to the beam directions.
+
+              A beam centered description is the default and uses 4 angles(similar to XRD):
+                - Omega (angle between sample surface and incident beam)
+                - 2Theta (angle between the transmitted beam and the detection beam)
+                - Chi (sample tilt angle, angle between plane#1 and the surface normal,
+                      plane#1 = spanned by incidence beam and detection
+                      and detection. If Chi=0°, then plane#1 is the plane of
+                      incidence in reflection setups)
+                - Phi (inplane rotation of sample, rotation axis is the samples
+                      surface normal)
+
+
+              A sample normal centered description is possible as well:
+                - angle of incidence (angle between incident beam and sample surface)
+                - angle of detection (angle between detection beam and sample surface)
+                - angle of incident and detection beam
+                - angle of in-plane sample rotation (direction along the sample's surface normal)
+            via: [T0, T1, T6, T7]
+            provisional: [Q1]
+          omega:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_NUMBER
+            units: {category: NX_ANGLE}
+            doc: Angle between sample incident beam and sample surface.
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          twotheta:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_NUMBER
+            units: {category: NX_ANGLE}
+            doc: Angle between incident and detection beam
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          chi:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_NUMBER
+            units: {category: NX_ANGLE}
+            doc: |-
+              Sample tilt between sample normal, and the plane spanned by detection and
+              incident beam.
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          phi:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_NUMBER
+            units: {category: NX_ANGLE}
+            doc: Inplane rotation of the sample, with rotation axis along sample normal.
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          angle_of_incidence:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_NUMBER
+            units: {category: NX_ANGLE}
+            doc: |-
+              Angle(s) of the incident beam vs. the normal of the bottom reflective
+              (substrate) surface in the sample. These two directions span the plane
+              of incidence.
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          angle_of_detection:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_NUMBER
+            units: {category: NX_ANGLE}
+            doc: |-
+              Detection angle(s) of the beam reflected or scattered off the sample
+              vs. the normal of the bottom reflective (substrate) surface in the
+              sample if not equal to the angle(s) of incidence.
+              These two directions span the plane of detection.
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          angle_of_incident_and_detection_beam:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_NUMBER
+            units: {category: NX_ANGLE}
+            doc: |-
+              Angle between the incident and detection beam.
+              If angle_of_detection + angle_of_incidence = angle_of_incident_and_detection_beam,
+              then the setup is a reflection setup.
+              If angle_of_detection + angle_of_incidence != angle_of_incident_and_detection_beam
+              then the setup may be a light scattering setup.
+              (i.e. 90° + 90° != 90°, i.e. incident and detection beam in the sample surface, but
+              the angle source-sample-detector is 90°)
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          angle_of_in_plane_sample_rotation:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_NUMBER
+            units: {category: NX_ANGLE}
+            doc: |-
+              Angle of the inplane orientation of the sample. This might be an arbitrary,
+              angle without specific relation to the sample symmetry,
+              of the angle to a specific sample property (i.e. crystallographic axis or sample
+              shape such as wafer flat)
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          generic_beam_sample_angle_TYPE:
+            node: group
+            name: {template: 'generic_beam_sample_angle_{TYPE}'}
+            class: NXtransformations
+            occurs: {min: 0}
+            recommended: true
+            doc: |-
+              Set of transformations, describing the relative orientation of different
+              parts of the experiment (beams or sample). You may select one of the specified
+              angles for incident and detection beam or sample, and then use polar and azimuthal
+              angles to define the direction via spherical coordinates.
+              This allows consistent definition between different coordinate system.
+              You may refer to self defined coordinate system as well.
+
+
+              If "angle_reference_frame = beam centered", then this coordinate system is used:
+              McStas system (NeXus default)
+              (https://manual.nexusformat.org/design.html#mcstas-and-nxgeometry-system)
+
+              i.e. the z-coordinate math:`[0,0,1]` is along the incident beam direction and
+              the x-coordinate math:`[1,0,0]` is in the horizontal plane. Hence, usually math:`[0,1,0]`
+              is vertically oriented.
+
+              If "angle_reference_frame = sample-normal centered", then this coordinate
+              system is used
+              z - math:`[0,0,1]` along sample surface normal
+              x - math:`[1,0,0]` defined by sample surface projected incident beam.
+              y - math:`[0,1,0]` in the sample surface, orthogonal to z and x.
+              For this case, x may be ill defined, if the incident beam is perpendicular
+              to the sample surface. In this case, use the beam centered description.
+            children:
+              type:
+                node: dataset
+                enum: [incident beam, detection beam, sample]
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+              polar:
+                node: dataset
+                type: NX_NUMBER
+                units: {category: NX_ANGLE}
+                doc: Rotation about the y axis (polar rotation within the sample plane).
+                attributes:
+                  transformation_type:
+                    enum: [rotation]
+                    via: [T0, T1, T5]
+                    provisional: [Q2]
+                  vector:
+                    enum: ['[0, 1, 0]']
+                    via: [T0, T1, T5]
+                    provisional: [Q2]
+                  depends_on:
+                    doc: |-
+                      Path to a transformation that places the sample surface
+                      into the origin of the arpes_geometry coordinate system.
+                    via: [T0, T1, T5]
+                    provisional: [Q2]
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              azimuth:
+                node: dataset
+                type: NX_NUMBER
+                units: {category: NX_ANGLE}
+                doc: Rotation about the z axis (azimuthal rotation within the sample plane).
+                attributes:
+                  transformation_type:
+                    enum: [rotation]
+                    via: [T0, T1, T5]
+                    provisional: [Q2]
+                  vector:
+                    enum: ['[0, 0, 1]']
+                    via: [T0, T1, T5]
+                    provisional: [Q2]
+                  depends_on:
+                    enum: [offset_tilt]
+                    via: [T0, T1, T5]
+                    provisional: [Q2]
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T3, T6, T7]
+            provisional: [Q1, Q3]
+          lateral_focal_point_offset:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_NUMBER
+            units: {category: NX_LENGTH}
+            doc: |-
+              Specify if there is a lateral offset on the sample surface, between the focal
+              points of the incident beam and the detection beam.
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          COMPONENT:
+            node: group
+            name: {any: true}
+            class: NXcomponent
+            occurs: {min: 0, max: unbounded}
+            doc: |-
+              Optical components along the optical beam path.
+
+              Every object which interacts or modifies optical beam properties,
+              may be a component, e.g. Filter, Window, Beamsplitter, Photon Source,
+              Detector, etc,
+            via: [T1, T2, T6]
+            provisional: [Q1, Q11]
+          OPTICAL_LENS:
+            node: group
+            name: {any: true}
+            class: NXoptical_lens
+            occurs: {min: 0}
+            doc: |-
+              This is the optical element used to focus or collect light. This may
+              be a generic lens or microcope objectives which are used for the
+              Raman scattering process.
+            children:
+              type:
+                node: dataset
+                enum:
+                  values:
+                  - {value: objective}
+                  - {value: lens}
+                  - {value: glass fiber}
+                  - {value: none}
+                  open: true
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+              device_information:
+                node: group
+                class: NXfabrication
+                occurs: {min: 0}
+                via: [T1, T6, T7]
+                provisional: [Q1]
+            via: [T1, T2, T6, T7]
+            provisional: [Q1, Q11]
+          WAVEPLATE:
+            node: group
+            name: {any: true}
+            class: NXwaveplate
+            occurs: {min: 0}
+            via: [T1, T2, T6, T7]
+            provisional: [Q1, Q11]
+          OPTICAL_WINDOW:
+            node: group
+            name: {any: true}
+            class: NXoptical_window
+            occurs: {min: 0}
+            via: [T1, T2, T6, T7]
+            provisional: [Q1, Q11]
+          polfilter_TYPE:
+            node: group
+            name: {template: 'polfilter_{TYPE}'}
+            class: NXcomponent
+            occurs: {min: 0}
+            doc: |-
+              Polarization filter to prepare light to be measured or to be incident
+              on the sample.
+              Generic polarization filter properties may be implemented via NXfilter_pol
+              at a later stage.
+            children:
+              filter_mechanism:
+                node: dataset
+                occurs: {min: 0}
+                type: NX_CHAR
+                enum:
+                  values:
+                  - {value: polarization by Fresnel reflection}
+                  - {value: birefringent polarizers}
+                  - {value: thin film polarizers}
+                  - {value: wire-grid polarizers}
+                  open: true
+                doc: |-
+                  Physical principle of the polarization filter used to create a
+                  defined incident or scattered light state.
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              specific_polarization_filter_type:
+                node: dataset
+                occurs: {min: 0}
+                type: NX_CHAR
+                doc: |-
+                  Specific name or type of the polarizer used.
+
+                  Free text, for example: Glan-Thompson, Glan-Taylor, Rochon Prism, Wollaston
+                  Polarizer...
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              device_information:
+                node: group
+                class: NXfabrication
+                occurs: {min: 0}
+                via: [T1, T6, T7]
+                provisional: [Q1]
+            via: [T1, T3, T6, T7]
+            provisional: [Q1, Q3]
+          spectralfilter_TYPE:
+            node: group
+            name: {template: 'spectralfilter_{TYPE}'}
+            class: NXcomponent
+            occurs: {min: 0}
+            doc: Spectral filter used to modify properties of the scattered or incident light.
+            children:
+              filter_type:
+                node: dataset
+                occurs: {min: 0}
+                enum:
+                  values:
+                  - value: long-pass filter
+                    doc: Blocks shorter wavelengths and transmits longer wavelengths.
+                  - value: short-pass filter
+                    doc: Blocks longer wavelengths and transmits shorter wavelengths.
+                  - value: notch filter
+                    doc: Blocks a narrow wavelength band while transmitting others.
+                  - value: reflection filter
+                    doc: Reflects certain wavelength ranges instead of absorbing them.
+                  - value: neutral density filter
+                    doc: Reduces light intensity uniformly across all wavelengths.
+                  open: true
+                doc: |-
+                  Type of laser-line filter used to suppress the laser, if measurements
+                  close to the laser-line are performed.
+                via: [T0, T1, T6, T7]
+                provisional: [Q1]
+              intended_use:
+                node: dataset
+                occurs: {min: 0}
+                enum:
+                  values:
+                  - {value: laser line cleanup}
+                  - {value: raylight line removal}
+                  - {value: spectral filtering}
+                  - {value: intensity manipulation}
+                  open: true
+                doc: |-
+                  Type of laser-line filter used to suppress the laser, if measurements
+                  close to the laser-line are performed.
+                via: [T0, T1, T6, T7]
+                provisional: [Q1]
+              filter_characteristics:
+                node: group
+                class: NXdata
+                occurs: {min: 0}
+                doc: |-
+                  Properties of the spectral filter such as wavelength dependent transmission
+                  or reflectivity.
+                attributes:
+                  characteristics_type:
+                    occurs: {min: 0}
+                    enum: [transmission, reflection]
+                    doc: |-
+                      Which property is used to form the spectral properties of light,
+                      i.e. transmission or reflection properties.
+                    via: [T0, T1, T6]
+                    provisional: [Q1]
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              device_information:
+                node: group
+                class: NXfabrication
+                occurs: {min: 0}
+                via: [T1, T6, T7]
+                provisional: [Q1]
+            via: [T1, T3, T6, T7]
+            provisional: [Q1, Q3]
+          BEAM_TRANSFER_MATRIX_TABLE:
+            node: group
+            name: {any: true}
+            class: NXbeam_transfer_matrix_table
+            occurs: {min: 0}
+            doc: |-
+              Allows description of beam properties via matrices, which relate ingoing with
+              outgoing beam properties.
+            via: [T1, T2, T6, T7]
+            provisional: [Q1, Q11]
+          sample_stage:
+            node: group
+            class: NXmanipulator
+            occurs: {min: 0}
+            doc: |-
+              Sample stage (or manipulator) for positioning of the sample. This should
+              only contain the spatial orientation of movement.
+            children:
+              stage_type:
+                node: dataset
+                occurs: {min: 0}
+                enum:
+                  values:
+                  - {value: manual stage}
+                  - {value: scanning stage}
+                  - {value: liquid stage}
+                  - {value: gas cell}
+                  - {value: cryostat}
+                  - {value: heater}
+                  open: true
+                doc: Specify the type of the sample stage.
+                via: [T0, T1, T6, T7]
+                provisional: [Q1]
+              transformations:
+                node: group
+                class: NXtransformations
+                occurs: {min: 0}
+                doc: |-
+                  This allows a description of the stages relation or orientation and
+                  position with respect to the sample or beam, if an laboratory or
+                  an stage coordinate system is defined.
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              beam_sample_relation:
+                node: dataset
+                occurs: {min: 0}
+                doc: |-
+                  Description of relation of the beam with the sample. How does the
+                  sample hit the beam, e.g. 'center of sample, long edge parallel
+                  to the plane of incidence'.
+                  This is redundant if a full orientation description is done via the
+                  stage's "transformations" entry.
+                via: [T0, T1, T6, T7]
+                provisional: [Q1]
+              device_information:
+                node: group
+                class: NXfabrication
+                occurs: {min: 0}
+                via: [T1, T6, T7]
+                provisional: [Q1]
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          temperature_sensor:
+            node: group
+            class: NXsensor
+            occurs: {min: 0}
+            recommended: true
+            children:
+              name:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                via: [T0, T1, T6, T7]
+                provisional: [Q1]
+              measurement:
+                node: dataset
+                enum: [temperature]
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+              type:
+                node: dataset
+                occurs: {min: 0}
+                via: [T0, T1, T6, T7]
+                provisional: [Q1]
+              value:
+                node: dataset
+                type: NX_FLOAT
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              device_information:
+                node: group
+                class: NXfabrication
+                occurs: {min: 0}
+                via: [T1, T6, T7]
+                provisional: [Q1]
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          temp_control_TYPE:
+            node: group
+            name: {template: 'temp_control_{TYPE}'}
+            class: NXactuator
+            occurs: {min: 0}
+            doc: |-
+              Type of control for the sample temperature. Replace TYPE by "cryostat" or
+              "heater" to specify it.
+            children:
+              name:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                via: [T0, T1, T6, T7]
+                provisional: [Q1]
+              physical_quantity:
+                node: dataset
+                enum: [temperature]
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+              cooler_or_heater:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                enum: [cooler, heater]
+                via: [T0, T1, T6, T7]
+                provisional: [Q1]
+              type:
+                node: dataset
+                occurs: {min: 0}
+                doc: Hardware used for actuation, i.e. laser, gas lamp, filament, resistive
+                via: [T0, T1, T6, T7]
+                provisional: [Q1]
+              PID_CONTROLLER:
+                node: group
+                name: {any: true}
+                class: NXpid_controller
+                occurs: {min: 0}
+                recommended: true
+                children:
+                  setpoint:
+                    node: dataset
+                    occurs: {min: 0}
+                    recommended: true
+                    type: NX_FLOAT
+                    via: [T1, T6, T7]
+                    provisional: [Q1]
+                via: [T1, T2, T6, T7]
+                provisional: [Q1, Q11]
+              device_information:
+                node: group
+                class: NXfabrication
+                occurs: {min: 0}
+                via: [T1, T6, T7]
+                provisional: [Q1]
+            via: [T1, T3, T6, T7]
+            provisional: [Q1, Q3]
+          device_information:
+            node: group
+            class: NXfabrication
+            occurs: {min: 0}
+            recommended: true
+            doc: |-
+              General device information of the optical spectroscopy setup, if
+              suitable (e.g. for a tabletop spectrometer or other non-custom build setups).
+              For custom build setups, this may be limited to the construction year.
+            children:
+              vendor:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                via: [T0, T1, T6, T7]
+                provisional: [Q1]
+              model:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                via: [T0, T1, T6, T7]
+                provisional: [Q1]
+              identifier:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                via: [T0, T1, T6, T7]
+                provisional: [Q1]
+              construction_year:
+                node: dataset
+                occurs: {min: 0}
+                type: NX_DATE_TIME
+                via: [T1, T6, T7]
+                provisional: [Q1]
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          software_TYPE:
+            node: group
+            name: {template: 'software_{TYPE}'}
+            class: NXprogram
+            occurs: {min: 0}
+            recommended: true
+            children:
+              program:
+                node: dataset
+                doc: |-
+                  Commercial or otherwise defined given name of the program that was
+                  used to control any parts of the optical spectroscopy setup.
+                  The uppercase TYPE should be replaced by a specification name, i.e.
+                  "software_detector" or "software_stage" to specify the respective
+                  program or software components.
+                attributes:
+                  version:
+                    occurs: {min: 0}
+                    recommended: true
+                    doc: |-
+                      Either version with build number, commit hash, or description of a
+                      (online) repository where the source code of the program and build
+                      instructions can be found so that the program can be configured in
+                      such a way that result files can be created ideally in a
+                      deterministic manner.
+                    via: [T0, T1, T6]
+                    provisional: [Q1]
+                  URL:
+                    occurs: {min: 0}
+                    doc: |-
+                      Description of the software by persistent resource, where the program,
+                      code, script etc. can be found.
+                    via: [T0, T1, T3b, T6]
+                    provisional: [Q1]
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T3, T6, T7]
+            provisional: [Q1, Q3]
+          instrument_calibration_DEVICE:
+            node: group
+            name: {template: 'instrument_calibration_{DEVICE}'}
+            class: NXcalibration
+            occurs: {min: 0}
+            recommended: true
+            doc: |-
+              Pre-calibration of an arbitrary device of the instrumental setup, which
+              has the name DEVICE. You can specify here how, at which time by which method
+              the calibration was done. As well the accuracy and a link to the calibration
+              dataset.
+            children:
+              device_path:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                doc: |-
+                  Path to the device, which was calibrated.
+                  Example: entry/instrument/DEVICE
+                via: [T0, T1, T6, T7]
+                provisional: [Q1]
+              calibration_accuracy:
+                node: group
+                class: NXdata
+                occurs: {min: 0}
+                doc: |-
+                  Provide data about the determined accuracy of the device, this may
+                  may be a single value or a dataset like wavelength error vs. wavelength etc.
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              calibration_status:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                type: NX_CHAR
+                enum: [calibration time provided, no calibration, within 1 hour, within 1
+                    day, within 1 week]
+                doc: |-
+                  Was a calibration performed? If yes, when was it done? If the
+                  calibration time is provided, it should be specified in
+                  calibration_time.
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              calibration_time:
+                node: dataset
+                occurs: {min: 0}
+                type: NX_DATE_TIME
+                doc: |-
+                  If calibration status is 'calibration time provided', specify the
+                  ISO8601 date when calibration was last performed before this
+                  measurement. UTC offset should be specified.
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              DATA:
+                node: group
+                name: {any: true}
+                class: NXdata
+                occurs: {min: 0}
+                doc: |-
+                  Generic data which does not fit to the 'NX_FLOAT' fields in NXproces.
+                  This can be for example the instrument response function.
+                via: [T1, T2, T6, T7]
+                provisional: [Q1, Q11]
+            via: [T1, T3, T6, T7]
+            provisional: [Q1, Q3]
+          wavelength_resolution:
+            node: group
+            class: NXresolution
+            occurs: {min: 0}
+            doc: The overall resolution of the optical instrument.
+            children:
+              physical_quantity:
+                node: dataset
+                enum: [wavelength]
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+              type:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                via: [T0, T1, T6, T7]
+                provisional: [Q1]
+              resolution:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_WAVELENGTH}
+                doc: Minimum distinguishable wavelength separation of peaks in spectra.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T6, T7]
+            provisional: [Q1]
+        via: [T1, T2, T5, T7]
+        provisional: [Q1, Q2, Q11]
+      SAMPLE:
+        node: group
+        name: {any: true}
+        class: NXsample
+        doc: |-
+          Properties of the sample, such as sample type, layer structure,
+          chemical formula, atom types, its history etc.
+          Information about the sample stage and sample environment should be
+          described in ENTRY/INSTRUMENT/sample_stage.
+        children:
+          name:
+            node: dataset
+            via: [T0, T1, T5, T7]
+            provisional: [Q1, Q2]
+          sample_id:
+            node: dataset
+            occurs: {min: 0}
+            recommended: true
+            doc: Locally unique ID of the sample, used in the research institute or group.
+            via: [T0, T1, T6, T7]
+            provisional: [Q1]
+          physical_form:
+            node: dataset
+            occurs: {min: 0}
+            recommended: true
+            doc: |-
+              State the form of the sample, examples are:
+              thin film, single crystal, poly crystal, amorphous, single layer,
+              multi layer, liquid, gas, pellet, powder.
+              Generic properties of liquids or gases see NXsample properties.
+            via: [T0, T1, T6, T7]
+            provisional: [Q1]
+          description:
+            node: dataset
+            occurs: {min: 0}
+            doc: Free text description of the sample.
+            via: [T0, T1, T6, T7]
+            provisional: [Q1]
+          chemical_formula:
+            node: dataset
+            occurs: {min: 0}
+            recommended: true
+            doc: |-
+              Chemical formula of the sample. Use the Hill system (explained here:
+              https://en.wikipedia.org/wiki/Chemical_formula#Hill_system) to write
+              the chemical formula. In case the sample consists of several layers,
+              this should be a list of the chemical formulas of the individual
+              layers, where the first entry is the chemical formula of the top
+              layer (the one on the front surface, on which the light incident).
+              The order must be consistent with layer_structure
+            via: [T0, T1, T6, T7]
+            provisional: [Q1]
+          atom_types:
+            node: dataset
+            occurs: {min: 0}
+            doc: |-
+              List of comma-separated elements from the periodic table that are
+              contained in the sample. If the sample substance has multiple
+              components, all elements from each component must be included in
+              'atom_types'.
+            via: [T0, T1, T6, T7]
+            provisional: [Q1]
+          preparation_date:
+            node: dataset
+            occurs: {min: 0}
+            recommended: true
+            type: NX_DATE_TIME
+            doc: |-
+              ISO 8601 time code with local time zone offset to UTC information
+              when the specimen was prepared.
+
+              Ideally, report the end of the preparation, i.e. the last known timestamp when
+              the measured specimen surface was actively prepared.
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          history:
+            node: group
+            class: NXhistory
+            occurs: {min: 0}
+            recommended: true
+            doc: A set of activities that occurred to the sample prior to/during the experiment.
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          temperature_env:
+            node: group
+            class: NXenvironment
+            occurs: {min: 0}
+            recommended: true
+            doc: Sample temperature (either controlled or just measured).
+            children:
+              temperature_nominal:
+                node: dataset
+                occurs: {min: 0}
+                enum:
+                  values:
+                  - {value: room temperature}
+                  - {value: liquid helium temperature}
+                  - {value: liquid nitrogen temperature}
+                  open: true
+                doc: |-
+                  If no sensor was available for the determination of temperature, selected
+                  a nominal value which represents approximately the situation of sample temperature.
+                via: [T0, T1, T6, T7]
+                provisional: [Q1]
+              temperature_sensor:
+                node: group
+                class: NXsensor
+                occurs: {min: 0}
+                recommended: true
+                doc: |-
+                  Temperature sensor measuring the sample temperature.
+                  This should be a link to /entry/instrument/manipulator/temperature_sensor.
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              sample_heater:
+                node: group
+                class: NXactuator
+                occurs: {min: 0}
+                doc: |-
+                  Device to heat the sample.
+                  This should be a link to /entry/instrument/manipulator/sample_heater.
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              sample_cooler:
+                node: group
+                class: NXactuator
+                occurs: {min: 0}
+                doc: |-
+                  Device for cooling the sample (Cryostat, Airflow cooler, etc.).
+                  This should be a link to /entry/instrument/manipulator/cryostat.
+                via: [T1, T6, T7]
+                provisional: [Q1]
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          ENVIRONMENT:
+            node: group
+            name: {any: true}
+            class: NXenvironment
+            occurs: {min: 0}
+            doc: |-
+              Arbitrary sample property which may be varied during the experiment
+              and controlled by a device. Examples are pressure, voltage, magnetic field etc.
+              Similar to the temperature description of the sample.
+            children:
+              sample_medium:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                enum:
+                  values:
+                  - {value: air}
+                  - {value: vacuum}
+                  - {value: inert atmosphere}
+                  - {value: oxidising atmosphere}
+                  - {value: reducing atmosphere}
+                  - {value: sealed can}
+                  - {value: water}
+                  open: true
+                doc: Medium, in which the sample is placed.
+                via: [T0, T1, T6, T7]
+                provisional: [Q1]
+              sample_medium_refractive_indices:
+                node: dataset
+                occurs: {min: 0}
+                type: NX_FLOAT
+                shape: [2, N_spectrum]
+                units: {category: NX_UNITLESS}
+                doc: |-
+                  Array of pairs of complex refractive indices n + ik of the medium
+                  for every measured spectral point/wavelength/energy.
+                  Only necessary if the measurement was performed not in air, or
+                  something very well known, e.g. high purity water.
+                via: [T1, T6, T7, T9]
+                provisional: [Q1]
+            via: [T1, T2, T6, T7]
+            provisional: [Q1, Q11]
+          thickness:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_NUMBER
+            units: {category: NX_LENGTH}
+            doc: |-
+              (Measured) sample thickness.
+
+              The information is recorded to qualify if the light used was likely
+              able to shine through the sample.
+
+              In this case the value should be set to the actual thickness of
+              the specimen viewed for an illumination situation where the nominal
+              surface normal of the specimen is parallel to the optical axis.
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          thickness_determination:
+            node: dataset
+            occurs: {min: 0}
+            doc: |-
+              If a thickness if given, please specify how this thickness was estimated or
+              determined.
+            via: [T0, T1, T6, T7]
+            provisional: [Q1]
+          layer_structure:
+            node: dataset
+            occurs: {min: 0}
+            doc: |-
+              Qualitative description of the layer structure for the sample,
+              starting with the top layer (i.e. the one on the front surface, on
+              which the light incident), e.g. native oxide/bulk substrate, or
+              Si/native oxide/thermal oxide/polymer/peptide.
+            via: [T0, T1, T6, T7]
+            provisional: [Q1]
+          sample_orientation:
+            node: dataset
+            occurs: {min: 0}
+            doc: |-
+              Specify the sample orientation, how is its sample normal oriented
+              relative in the laboratory reference frame, incident beam reference
+              frame.
+            via: [T0, T1, T6, T7]
+            provisional: [Q1]
+          substrate:
+            node: dataset
+            occurs: {min: 0}
+            recommended: true
+            doc: |-
+              If the sample is grown or fixed on a substrate, specify this here by
+              a free text description.
+            via: [T0, T1, T6, T7]
+            provisional: [Q1]
+        via: [T1, T2, T5, T7]
+        provisional: [Q1, Q2, Q11]
+      DATA:
+        node: group
+        name: {any: true}
+        class: NXdata
+        doc: |-
+          Here generic types of data may be saved. This may refer to data derived
+          from single or multiple raw measurements (i.e. several intensities are
+          evaluated for different parameters: ellipsometry -> psi and delta) -
+          i.e. non-raw data.
+          As well plottable data may be stored/linked here, which provides the most suitable
+          representation of the data (for the respective community).
+
+          You may provide multiple instances of NXdata
+        attributes:
+          axes:
+            doc: Spectrum, i.e. x-axis of the data (e.g. wavelength, energy etc.)
+            via: [T0, T1, T5]
+            provisional: [Q2]
+          signal:
+            doc: Spectrum, i.e. y-axis of the data (e.g. counts, intensity)
+            via: [T0, T1, T5]
+            provisional: [Q2]
+        via: [T1, T2, T5, T7]
+        provisional: [Q1, Q2, Q11]
+      measurement_data_calibration_TYPE:
+        node: group
+        name: {template: 'measurement_data_calibration_{TYPE}'}
+        class: NXprocess
+        occurs: {min: 0}
+        recommended: true
+        children:
+          wavelength_calibration:
+            node: group
+            class: NXcalibration
+            occurs: {min: 0}
+            children:
+              calibrated_axis:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                type: NX_FLOAT
+                doc: Calibrated wavelength axis.
+                via: [T1, T6, T7]
+                provisional: [Q1]
+            via: [T1, T6, T7]
+            provisional: [Q1]
+        via: [T1, T3, T6, T7]
+        provisional: [Q1, Q3]
+      derived_parameters:
+        node: group
+        class: NXprocess
+        occurs: {min: 0}
+        doc: Parameters that are derived from the measured data.
+        children:
+          depolarization:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_NUMBER
+            shape: [N_measurements, 1, N_spectrum]
+            units: {category: NX_UNITLESS}
+            doc: Light loss due to depolarization as a value in [0-1].
+            via: [T1, T6, T7, T9]
+            provisional: [Q1]
+          jones_quality_factor:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_NUMBER
+            shape: [N_measurements, 1, N_spectrum]
+            units: {category: NX_UNITLESS}
+            doc: Jones quality factor.
+            via: [T1, T6, T7, T9]
+            provisional: [Q1]
+          reflectivity:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_NUMBER
+            shape: [N_measurements, 1, N_spectrum]
+            units: {category: NX_UNITLESS}
+            doc: Reflectivity.
+            via: [T1, T6, T7, T9]
+            provisional: [Q1]
+          transmittance:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_NUMBER
+            shape: [N_measurements, 1, N_spectrum]
+            units: {category: NX_UNITLESS}
+            doc: Transmittance.
+            via: [T1, T6, T7, T9]
+            provisional: [Q1]
+          ANALYSIS_program:
+            node: group
+            name: {template: '{ANALYSIS}_program'}
+            class: NXprogram
+            occurs: {min: 0}
+            children:
+              program:
+                node: dataset
+                doc: |-
+                  Commercial or otherwise defined given name of the program that was
+                  used to generate or calculate the derived parameters.
+                  If home written, one can provide the actual steps in the NOTE
+                  subfield here.
+                attributes:
+                  version:
+                    via: [T0, T1, T5]
+                    provisional: [Q2]
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T3, T6, T7]
+            provisional: [Q1, Q3]
+        via: [T1, T6, T7]
+        provisional: [Q1]
+    via: [T1, T2, T5, T7]
+    provisional: [Q1, Q2, Q11]
+via: [T8]

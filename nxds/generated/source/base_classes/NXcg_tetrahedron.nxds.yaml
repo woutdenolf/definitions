@@ -1,0 +1,51 @@
+nxds: '0.1'
+class: NXcg_tetrahedron
+category: base
+extends: NXcg_primitive
+doc: |-
+  Computational geometry description of a set of tetrahedra.
+
+  Among hexahedral elements, tetrahedral elements are one of the most
+  frequently used geometric primitive for meshing and describing volumetric
+  objects in continuum-field simulations.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+symbols:
+  c:
+    doc: The cardinality of the set, i.e. the number of tetrahedra.
+children:
+  face_area:
+    node: dataset
+    type: NX_NUMBER
+    shape: [c, 4]
+    units: {category: NX_AREA}
+    doc: Area of each of the four triangular faces of each tetrahedron.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  edge_length:
+    node: dataset
+    type: NX_NUMBER
+    shape: [c, 6]
+    units: {category: NX_LENGTH}
+    doc: Length of each edge of each tetrahedron.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  tetrahedra:
+    node: group
+    class: NXcg_face_list_data_structure
+    doc: Combined storage of all primitives of all tetrahedra.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  tetrahedronID:
+    node: group
+    name: {template: 'tetrahedron{ID}'}
+    class: NXcg_face_list_data_structure
+    doc: Individual storage of each tetrahedron.
+    via: [T1, T3, T4, T7]
+    provisional: [Q1, Q3]
+  tetrahedron_half_edgeID:
+    node: group
+    name: {template: 'tetrahedron_half_edge{ID}'}
+    class: NXcg_half_edge_data_structure
+    doc: Individual storage of each tetrahedron as a graph.
+    via: [T1, T3, T4, T7]
+    provisional: [Q1, Q3]

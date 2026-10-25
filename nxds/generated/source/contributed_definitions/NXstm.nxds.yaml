@@ -1,0 +1,252 @@
+nxds: '0.1'
+class: NXstm
+category: application
+extends: NXspm
+describes: NXroot
+doc: An application definition to describe Scanning Tunneling Microscopy (STM).
+defaults: {min: 1, binding: true, type: NX_CHAR}
+children:
+  ENTRY:
+    node: group
+    name: {any: true}
+    class: NXentry
+    children:
+      definition:
+        node: dataset
+        enum: [NXstm]
+        doc: Name of the definition that is used for the STM technique.
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      scan_mode:
+        node: dataset
+        enum: [constant height, constant current]
+        doc: |-
+          The mode of the scan that is performed. Two commonly used modes  are constant
+          height mode and constant current mode.
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      experiment_technique:
+        node: dataset
+        enum: [STM]
+        doc: The specific to STM experiment.
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      INSTRUMENT:
+        node: group
+        name: {any: true}
+        class: NXinstrument
+        children:
+          lockin_amplifier:
+            node: group
+            class: NXlockin
+            doc: |-
+              The lock-in amplifier information. The device is being used to extract
+              the very weak signal buried in noisy signals.
+            children:
+              modulation_signal:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                units: {category: NX_UNITLESS}
+                doc: The type of the signal (voltage or current) subject to modulation.
+                via: [T0, T1, T6, T7]
+                provisional: [Q1]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          SCAN_ENVIRONMENT:
+            node: group
+            name: {any: true}
+            class: NXenvironment
+            doc: |-
+              The environment information for stm or sts experiment.
+
+              Note: At least one field from head_temperature, cryo_bottom_temperature and cryo_shield_temperature must be provided.
+            children:
+              SPM_SCAN_CONTROL:
+                node: group
+                name: {any: true}
+                class: NXspm_scan_control
+                doc: |-
+                  The scan control information like scan region or phase space, e.g. pattern of scan
+                  (e.g. mesh), scanner speed, etc.
+                via: [T1, T2, T5, T7]
+                provisional: [Q1, Q2, Q11]
+              lockin_status:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                type: NX_BOOLEAN
+                doc: |-
+                  The status of the lock-in amplifier. It is well established convention that for topographic measurements
+                  lockin amplifier is turned off state while current scan lockin amplifier is turned on.
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              head_temperature_sensor:
+                node: group
+                class: NXsensor
+                occurs: {min: 0}
+                doc: |-
+                  This should be a link to
+                  /entry/instrument/head_temperature_sensor
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              cryo_bottom_temperature_sensor:
+                node: group
+                class: NXsensor
+                occurs: {min: 0}
+                doc: |-
+                  This should be a link to
+                  /entry/instrument/cryo_bottom_temperature_sensor
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              cryo_shield_temperature_sensor:
+                node: group
+                class: NXsensor
+                occurs: {min: 0}
+                doc: |-
+                  This should be a link to
+                  /entry/instrument/cryo_shield_temperature_sensor
+                via: [T1, T6, T7]
+                provisional: [Q1]
+            via: [T1, T3, T5, T7]
+            provisional: [Q1, Q2, Q3]
+          bias_spectroscopy_environment:
+            node: group
+            class: NXenvironment
+            occurs: {min: 0}
+            doc: |-
+              To explain bias and current behavior (sweep measurement) due to voltage
+              applied to the sample.
+            via: [T1, T6, T7]
+            provisional: [Q1]
+        via: [T1, T2, T5, T7]
+        provisional: [Q1, Q2, Q11]
+      reproducibility_indicators:
+        node: group
+        class: NXcollection
+        occurs: {min: 0}
+        doc: |-
+          The group's concepts hold the link to the related concepts that define the
+          reproducibility of the STM experiment.
+        children:
+          current:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_NUMBER
+            doc: |-
+              The tunneling current between tip and sample after application of bias voltage.
+              This should be a link to
+              /entry/instrument/current_sensor/current
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          current_offset:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_NUMBER
+            doc: |-
+              The offset in tunneling current between tip and sample after application of bias voltage.
+              This should be a link to
+              /entry/instrument/current_sensor/current_offset
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          BIAS_SWEEP:
+            node: group
+            class: NXspm_scan_control
+            occurs: {min: 0}
+            doc: |-
+              Bias sweep measurement in bias spectroscopy.
+              This should be a link to
+              /entry/instrument/bias_spectroscopy_environment/bias_spectroscopy/bias_sweep
+            via: [T1, T3b, T6, T7]
+            provisional: [Q1]
+          modulation_signal_type:
+            node: dataset
+            occurs: {min: 0}
+            doc: |-
+              This is the signal on which the modulation voltage or current will be added.
+              This should be a link to
+              /entry/instrument/phase_lock_loop/modulation_signal
+            via: [T0, T1, T6, T7]
+            provisional: [Q1]
+          reference_frequency:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_NUMBER
+            doc: |-
+              The frequency of the sine modulation that is used as a carrier signal of input signal in lock-in.
+
+              This should be a link to
+              /entry/instrument/lockin_amplifier/reference_frequency
+            via: [T1, T6, T7]
+            provisional: [Q1]
+        via: [T1, T6, T7]
+        provisional: [Q1]
+      resolution_indicators:
+        node: group
+        class: NXcollection
+        occurs: {min: 0}
+        doc: |-
+          The group's concepts hold the link to the related concepts that define the
+          resolution of the STM experiment.
+        children:
+          head_temperature:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_NUMBER
+            doc: |-
+              This should be a link to
+              /entry/instrument/scan_environment/head_temperature
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          cryo_bottom_temperature:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_NUMBER
+            doc: |-
+              This should be a link to
+              /entry/instrument/scan_environment/cryo_bottom_temperature
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          cryo_shield_temperature:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_NUMBER
+            doc: |-
+              This should be a link to
+              /entry/instrument/scan_environment/cryo_shield_temperature
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          BIAS_SWEEP:
+            node: group
+            name: {any: true}
+            class: NXspm_scan_control
+            occurs: {min: 0}
+            doc: |-
+              This should be a link to
+              /entry/instrument/bias_spectroscopy_environment/bias_spectroscopy/bias_sweep
+            via: [T1, T3, T6, T7]
+            provisional: [Q1, Q3]
+          modulation_signal_type:
+            node: dataset
+            occurs: {min: 0}
+            doc: |-
+              This is the signal on which the modulation voltage or current will be added.
+              This should be a link to
+              /entry/instrument/lockin_amplifier/modulation_signal_type
+            via: [T0, T1, T6, T7]
+            provisional: [Q1]
+          reference_frequency:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_NUMBER
+            doc: |-
+              The frequency of the sine modulation that is used to modulate the signal in lock-in.
+              This should be a link to
+              /entry/instrument/lockin_amplifier/reference_frequency
+            via: [T1, T6, T7]
+            provisional: [Q1]
+        via: [T1, T6, T7]
+        provisional: [Q1]
+    via: [T1, T2, T5, T7]
+    provisional: [Q1, Q2, Q11]
+via: [T8]

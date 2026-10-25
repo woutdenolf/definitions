@@ -1,0 +1,102 @@
+nxds: '0.1'
+class: NXxasproc
+category: application
+describes: NXroot
+doc: Processed data from XAS. This is energy versus I(incoming)/I(absorbed).
+defaults: {min: 1, binding: true, type: NX_CHAR}
+symbols:
+  nP: {doc: Number of points}
+children:
+  ENTRY:
+    node: group
+    name: {any: true}
+    class: NXentry
+    children:
+      title:
+        node: dataset
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      definition:
+        node: dataset
+        enum: [NXxasproc]
+        doc: 'Official NeXus NXDL schema to which this file conforms '
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      SAMPLE:
+        node: group
+        name: {any: true}
+        class: NXsample
+        children:
+          name:
+            node: dataset
+            doc: Descriptive name of sample
+            via: [T0, T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T2, T5, T7]
+        provisional: [Q1, Q2, Q11]
+      XAS_data_reduction:
+        node: group
+        class: NXprocess
+        children:
+          program:
+            node: dataset
+            type: NX_CHAR
+            doc: Name of the program used for reconstruction
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          version:
+            node: dataset
+            type: NX_CHAR
+            doc: Version of the program used
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          date:
+            node: dataset
+            type: NX_DATE_TIME
+            doc: Date and time of reconstruction processing.
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          parameters:
+            node: group
+            class: NXparameters
+            children:
+              raw_file:
+                node: dataset
+                type: NX_CHAR
+                doc: Original raw data file this data was derived from
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T3b, T5, T7]
+        provisional: [Q1, Q2]
+      DATA:
+        node: group
+        name: {any: true}
+        class: NXdata
+        children:
+          energy:
+            node: dataset
+            shape: [nP]
+            attributes:
+              axis:
+                occurs: {min: 0}
+                type: NX_POSINT
+                enum: ['1']
+                via: [T19]
+            via: [T0, T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+          data:
+            node: dataset
+            type: NX_FLOAT
+            shape: [nP]
+            doc: |-
+              This is corrected and calibrated I(incoming)/I(absorbed). So it is the absorption.
+              Expect attribute  ``signal=1``
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+        via: [T1, T2, T5, T7]
+        provisional: [Q1, Q2, Q11]
+    via: [T1, T2, T5, T7]
+    provisional: [Q1, Q2, Q11]
+via: [T8]

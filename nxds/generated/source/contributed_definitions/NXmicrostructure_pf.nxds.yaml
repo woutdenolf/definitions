@@ -1,0 +1,96 @@
+nxds: '0.1'
+class: NXmicrostructure_pf
+category: base
+extends: NXprocess
+doc: |-
+  Base class to store a pole figure (PF) computation.
+
+  A pole figure is the X-ray diffraction intensity for specific integrated
+  peaks for a hemispherical illumination of a real or virtual specimen.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+symbols:
+  n_y:
+    doc: Number of pixel per pole figure in the slow direction.
+  n_x:
+    doc: Number of pixel per pole figure in the fast direction.
+children:
+  configuration:
+    node: group
+    class: NXparameters
+    doc: Details about the algorithm that was used to compute the pole figure.
+    children:
+      crystal_symmetry_point_group:
+        node: dataset
+        type: NX_CHAR
+        doc: |-
+          Point group of the crystal structure of the phase for which the pole figure was
+          computed following the notation of the International Table of Crystallography.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      specimen_symmetry_point_group:
+        node: dataset
+        type: NX_CHAR
+        doc: |-
+          Point group of assumed sample symmetries following the
+          notation of the International Table of Crystallography.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      halfwidth:
+        node: dataset
+        type: NX_NUMBER
+        units: {category: NX_ANGLE}
+        doc: Halfwidth of the kernel.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      miller_indices:
+        node: dataset
+        type: NX_CHAR
+        doc: |-
+          Miller (:math:`(hkl)[uvw]`) or Miller-Bravais indices used to specify the pole
+          figure.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      resolution:
+        node: dataset
+        type: NX_NUMBER
+        units: {category: NX_ANGLE}
+        doc: Resolution of the kernel.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  pf:
+    node: group
+    class: NXdata
+    doc: Pole figure.
+    children:
+      intensity:
+        node: dataset
+        type: NX_NUMBER
+        shape: [n_y, n_x]
+        units: {category: NX_UNITLESS}
+        doc: Pole figure intensity.
+        via: [T1, T4, T7, T9]
+        provisional: [Q1]
+      axis_y:
+        node: dataset
+        type: NX_NUMBER
+        shape: [n_y]
+        units: {category: NX_ANY}
+        doc: |-
+          Pixel center along y direction in the equatorial plane of
+          a stereographic projection of the unit sphere.
+        via: [T1, T4, T7, T9]
+        provisional: [Q1]
+      axis_x:
+        node: dataset
+        type: NX_NUMBER
+        shape: [n_x]
+        units: {category: NX_ANY}
+        doc: |-
+          Pixel center along x direction in the equatorial plane of
+          a stereographic projection of the unit sphere.
+        via: [T1, T4, T7, T9]
+        provisional: [Q1]
+    via: [T1, T4, T7]
+    provisional: [Q1]

@@ -1,0 +1,4 @@
+description: >
+  Symbols in shapes (§4.4): `shape.symbols` names the class declaring each
+  symbol; an expression `2*n`.
+covers: [shape.symbols, shape.expr]

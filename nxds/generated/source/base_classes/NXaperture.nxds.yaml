@@ -1,0 +1,97 @@
+nxds: '0.1'
+class: NXaperture
+category: base
+extends: NXcomponent
+doc: |-
+  A beamline aperture.
+
+  Note, the group was incorrectly documented as deprecated, but it is not and it is in common use.
+
+  You can specify the geometry of the aperture using either NXoff_geometry or for simpler geometry shape and size.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  depends_on:
+    node: dataset
+    type: NX_CHAR
+    doc: |-
+      The reference point of the aperture is its center in the x and y axis. The reference point on the z axis is the
+      surface of the aperture pointing towards the source.
+
+      In complex (asymmetric) geometries an NXoff_geometry group can be used to provide an unambiguous reference.
+
+      .. image:: aperture/aperture.png
+          :width: 40%
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  OFF_GEOMETRY:
+    node: group
+    name: {any: true}
+    class: NXoff_geometry
+    doc: Use this group to describe the shape of the aperture.
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  POSITIONER:
+    node: group
+    name: {any: true}
+    class: NXpositioner
+    doc: Stores the raw positions of aperture motors.
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  GEOMETRY:
+    node: group
+    name: {any: true}
+    class: NXgeometry
+    deprecated: Use the field `depends_on` and :ref:`NXtransformations` to position the aperture
+      and :ref:`NXoff_geometry` to describe its shape
+    doc: |-
+      Location and shape of aperture
+
+      .. TODO: documentation needs improvement, contributions welcome
+
+          * description of terms is poor and leaves much to interpretation
+          * Describe what is meant by translation _here_ and ...
+          * Similar throughout base classes
+          * Some base classes do this much better
+          * Such as where is the gap written?
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  BLADE_GEOMETRY:
+    node: group
+    class: NXgeometry
+    deprecated: Use :ref:`NXoff_geometry` instead to describe the shape of the aperture
+    doc: location and shape of each blade
+    via: [T1, T3b, T4, T7]
+    provisional: [Q1]
+  material:
+    node: dataset
+    doc: Absorbing material of the aperture
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  description:
+    node: dataset
+    doc: Description of aperture
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  shape:
+    node: dataset
+    enum: [straight slit, curved slit, pinhole, circle, square, hexagon, octagon, bladed,
+      open, grid]
+    doc: Shape of the aperture.
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  size:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_LENGTH}
+    doc: |-
+      The relevant dimension for the aperture, i.e. slit width, pinhole and iris
+      diameter
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  NOTE:
+    node: group
+    name: {any: true}
+    class: NXnote
+    doc: Describe any additional information in a note.
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]

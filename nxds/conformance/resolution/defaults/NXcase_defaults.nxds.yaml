@@ -1,0 +1,23 @@
+nxds: "0.1"
+class: NXcase_defaults
+category: application
+describes: NXroot
+defaults: {min: 1, binding: true}
+symbols:
+  n: {}
+children:
+  ENTRY:
+    node: group
+    class: NXentry
+    name: {any: true}
+    children:
+      definition: {node: dataset, enum: [NXcase_defaults]}
+      title: {node: dataset, occurs: {min: 0}, recommended: true}
+      DATA:
+        node: group
+        class: NXdata
+        name: {any: true}
+        attributes:
+          signal: {enum: [y]}
+        children:
+          y: {node: dataset, type: NX_FLOAT, shape: [n]}

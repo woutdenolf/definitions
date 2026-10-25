@@ -1,0 +1,5 @@
+description: >
+  Objects assigned to a member with `refines` count towards the refined
+  member (§5.2, §9.1): `i0_counts` and the template `{CHANNEL}_counts` (max 2)
+  (`i2_counts`, `i3_counts`) together have three objects (TOO-MANY).
+capabilities: []

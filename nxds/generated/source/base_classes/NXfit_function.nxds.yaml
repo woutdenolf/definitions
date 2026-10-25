@@ -1,0 +1,60 @@
+nxds: '0.1'
+class: NXfit_function
+category: base
+extends: NXobject
+doc: |-
+  This describes a fit function that is used to fit data to any functional form.
+
+  A fit function is used to describe a set of data :math:`y_k, k = 1 ... M`,  which are collected as a function
+  of one or more independent variables :math:`x` at the points :math:`x_k`. The fit function :math:`f` describes
+  these data in an approximate way as :math:`y_k \approx f(a_0, . . . a_n, x_k)`,
+  where :math:`a_i, i = 0 . . . n` are the *fit parameters* (which are stored the instances of ``NXfit_parameter``).
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  function_type:
+    node: dataset
+    doc: |-
+      Type of function used.
+
+      Examples include "Gaussian" and "Lorentzian". In case a complicated functions, the the functional
+      form of the function should be given by the ``formula_description`` field . The user is also encouraged
+      to use the ``description`` field for describing the fit function in a human-readable way.
+
+      Application definitions may limit the allowed fit functions by using an enumeration for the ``function_type`` field.
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  description:
+    node: dataset
+    doc: |-
+      Human-readable short description of this fit function.
+      Software tools may use this field to write their local description of the fit function.
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  formula_description:
+    node: dataset
+    doc: |-
+      Description of the mathematical formula of the function, taking into account the
+      instances of ``TERM`` in ``fit_parameters``.
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  fit_parameters:
+    node: group
+    class: NXparameters
+    children:
+      PARAMETER:
+        node: dataset
+        name: {any: true}
+        type: NX_CHAR_OR_NUMBER
+        units: {category: NX_ANY}
+        doc: |-
+          A parameter for a fit function. This would typically be
+          a variable that is optimized in a fit.
+        attributes:
+          description:
+            type: NX_CHAR
+            doc: A description of what this parameter represents.
+            via: [T1, T4]
+        via: [T1, T3, T4, T7]
+        provisional: [Q1, Q3]
+    via: [T1, T4, T7]
+    provisional: [Q1]

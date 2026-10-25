@@ -1,0 +1,39 @@
+nxds: '0.1'
+class: NXsubsampling_filter
+category: base
+extends: NXparameters
+doc: |-
+  Base class of a filter to sample members in a set based on their indices.
+
+  The filter defines three parameters: The minimum, the increment, and the maximum
+  index of values to include of a sequence :math:`[i_0, i_0 + 1, i_0 + 2, \ldots, i_0 + \mathcal{N}] with i_0 \in \mathcal{Z}`
+  of indices. The increment controls which n-th index (value) to take.
+
+  Take as an example a dataset with 100 indices (aka entries). Assume that the indices start at zero,
+  i.e., index_offset is 0. Assume further that min, increment, max are set to 0, 1, and 99, respectively.
+  In this case the filter will yield all indices. Setting min, increment, max to 0, 2, and 99, respectively
+  will yield each second index value. Setting min, increment, max to 90, 3, and 99 respectively will yield
+  each third index value beginning from index values 90 up to 99.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  min:
+    node: dataset
+    type: NX_INT
+    units: {category: NX_UNITLESS}
+    doc: Minimum index.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  increment:
+    node: dataset
+    type: NX_INT
+    units: {category: NX_UNITLESS}
+    doc: Increment.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  max:
+    node: dataset
+    type: NX_INT
+    units: {category: NX_UNITLESS}
+    doc: Maximum index.
+    via: [T1, T4, T7]
+    provisional: [Q1]

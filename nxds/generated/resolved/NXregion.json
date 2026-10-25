@@ -1,0 +1,44 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"},
+    {"declared_by": "NXregion", "docs": ["NXregion@region_type"], "enum": {"open": false, "values": [{"value": "rectangular"}]}, "id": "region_type", "name": {"exact": "region_type"}, "occurs": {"max": 1, "min": 1}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T6"]}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/COLLECTION"},
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"class": "NXdata", "declared_by": "NXregion", "docs": ["NXregion/downsampled"], "id": "downsampled", "name": {"exact": "downsampled"}, "node": "group", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q4", "Q11"], "recommended": false, "refines": "DATA", "via": ["T1", "T2", "T4", "T6", "T7", "T18"]},
+    {"class": "NXdata", "declared_by": "NXregion", "docs": ["NXregion/statistics"], "id": "statistics", "name": {"exact": "statistics"}, "node": "group", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q4", "Q11"], "recommended": false, "refines": "DATA", "via": ["T1", "T2", "T4", "T6", "T7", "T18"]},
+    {"node": "group", "ref": "NXobject/LOG"},
+    {"node": "group", "ref": "NXobject/NOTE"},
+    {"node": "group", "ref": "NXobject/PARAMETERS"},
+    {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+    {"declared_by": "NXregion", "docs": ["NXobject/FIELDNAME_mask", "NXregion/parent_mask"], "id": "parent_mask", "name": {"exact": "parent_mask"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q3", "Q4"], "recommended": false, "refines": "FIELDNAME_mask", "type": "NX_BOOLEAN", "via": ["T0", "T1", "T3", "T4", "T6", "T7", "T18"]},
+    {"node": "dataset", "ref": "NXobject/identifierNAME"},
+    {"declared_by": "NXregion", "docs": ["NXregion/parent"], "id": "parent", "name": {"exact": "parent"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4", "T7"]},
+    {"declared_by": "NXregion", "docs": ["NXregion/start"], "id": "start", "name": {"exact": "start"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": true, "shape": {"binding": false, "dims": ["R"], "symbols": {"R": "NXregion"}}, "type": "NX_NUMBER", "via": ["T1", "T6", "T7", "T9"]},
+    {"declared_by": "NXregion", "docs": ["NXregion/count"], "id": "count", "name": {"exact": "count"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": true, "shape": {"binding": false, "dims": ["R"], "symbols": {"R": "NXregion"}}, "type": "NX_INT", "via": ["T1", "T6", "T7", "T9"]},
+    {"declared_by": "NXregion", "docs": ["NXregion/stride"], "id": "stride", "name": {"exact": "stride"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["R"], "symbols": {"R": "NXregion"}}, "type": "NX_INT", "via": ["T1", "T4", "T7", "T9"]},
+    {"declared_by": "NXregion", "docs": ["NXregion/block"], "id": "block", "name": {"exact": "block"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["R"], "symbols": {"R": "NXregion"}}, "type": "NX_INT", "via": ["T1", "T4", "T7", "T9"]},
+    {"declared_by": "NXregion", "docs": ["NXregion/scale"], "id": "scale", "name": {"exact": "scale"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["R"], "symbols": {"R": "NXregion"}}, "type": "NX_NUMBER", "via": ["T1", "T4", "T7", "T9"]}
+  ],
+  "class": "NXregion",
+  "extends": "NXobject",
+  "lossy": [],
+  "provisional": [],
+  "require": [],
+  "source": "contributed_definitions/NXregion.nxdl.xml",
+  "status": "contributed",
+  "symbols": ["O", "R"],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"},
+  "via": []
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {}
+}

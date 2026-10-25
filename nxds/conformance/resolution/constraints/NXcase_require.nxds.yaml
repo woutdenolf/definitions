@@ -1,0 +1,21 @@
+nxds: "0.1"
+class: NXcase_require
+category: application
+describes: NXroot
+defaults: {min: 1, binding: true}
+children:
+  ENTRY:
+    node: group
+    class: NXentry
+    name: {any: true}
+    children:
+      definition: {node: dataset, enum: [NXcase_require]}
+      DATA:
+        node: group
+        class: NXdata
+        name: {any: true}
+        children:
+          mu: {node: dataset, type: NX_FLOAT, occurs: {min: 0}}
+          fluo: {node: dataset, type: NX_FLOAT, occurs: {min: 0}}
+        require:
+          at_least_one_of: [mu, fluo]

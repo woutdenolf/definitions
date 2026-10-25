@@ -1,0 +1,203 @@
+nxds: '0.1'
+class: NXguide
+category: base
+extends: NXcomponent
+doc: |-
+  A neutron optical element to direct the path of the beam.
+
+  :ref:`NXguide` is used by neutron instruments to describe
+  a guide consists of several mirrors building a shape through which
+  neutrons can be guided or directed. The simplest such form is box shaped
+  although elliptical guides are gaining in popularity.
+  The individual parts of a guide usually have common characteristics
+  but there are cases where they are different.
+  For example,  a neutron guide might consist of 2 or 4 coated walls or
+  a supermirror bender with multiple, coated vanes.
+
+  To describe polarizing supermirrors such as used in neutron reflection,
+  it may be necessary to revise this definition of :ref:`NXguide`
+  to include :ref:`NXpolarizer` and/or :ref:`NXmirror`.
+
+  When even greater complexity exists in the definition of what
+  constitutes a *guide*,  it has been suggested that :ref:`NXguide`
+  be redefined as a :ref:`NXcollection` of :ref:`NXmirror` each
+  having their own :ref:`NXgeometry` describing their location(s).
+
+  For the more general case when describing mirrors, consider using
+  :ref:`NXmirror`.
+
+  NOTE: The NeXus International Advisory Committee welcomes
+  comments for revision and improvement of
+  this definition of :ref:`NXguide`.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+symbols:
+  nsurf: {doc: number of reflecting surfaces}
+  nwl: {doc: number of wavelengths}
+children:
+  GEOMETRY:
+    node: group
+    name: {any: true}
+    class: NXgeometry
+    deprecated: Use the field `depends_on` and :ref:`NXtransformations` to position the guid
+      and NXoff_geometry to describe its shape instead
+    doc: 'TODO:  Explain what this NXgeometry group means.  What is intended here?'
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  description:
+    node: dataset
+    doc: A description of this particular instance of ``NXguide``.
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  incident_angle:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_ANGLE}
+    doc: 'TODO: documentation needed'
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  reflectivity:
+    node: group
+    class: NXdata
+    doc: Reflectivity as function of reflecting surface and wavelength
+    attributes:
+      signal:
+        enum: [data]
+        via: [T0, T1, T4]
+      axes:
+        enum: [surface wavelength]
+        via: [T0, T1, T4]
+      surface_indices:
+        enum: ['0']
+        via: [T0, T1, T4]
+      wavelength_indices:
+        enum: ['1']
+        via: [T0, T1, T4]
+    children:
+      data:
+        node: dataset
+        type: NX_NUMBER
+        shape: [nsurf, nwl]
+        doc: reflectivity of each surface as a function of wavelength
+        via: [T1, T4, T7, T9]
+        provisional: [Q1]
+      surface:
+        node: dataset
+        type: NX_NUMBER
+        shape: [nsurf]
+        units: {category: NX_ANY}
+        doc: |-
+          List of surfaces.  Probably best to use index
+          numbers but the specification is very loose.
+        via: [T1, T4, T7, T9]
+        provisional: [Q1]
+      wavelength:
+        node: dataset
+        type: NX_NUMBER
+        shape: [nwl]
+        units: {category: NX_WAVELENGTH}
+        doc: wavelengths at which reflectivity was measured
+        via: [T1, T4, T7, T9]
+        provisional: [Q1]
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  bend_angle_x:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_ANGLE}
+    doc: 'TODO: documentation needed'
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  bend_angle_y:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_ANGLE}
+    doc: 'TODO: documentation needed'
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  interior_atmosphere:
+    node: dataset
+    enum: [vacuum, helium, argon]
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  external_material:
+    node: dataset
+    doc: external material outside substrate
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  m_value:
+    node: dataset
+    type: NX_FLOAT
+    shape: [nsurf]
+    doc: |-
+      The ``m`` value for a supermirror, which defines the supermirror
+      regime in multiples of the critical angle of Nickel.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  substrate_material:
+    node: dataset
+    type: NX_FLOAT
+    shape: [nsurf]
+    doc: 'TODO: documentation needed'
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  substrate_thickness:
+    node: dataset
+    type: NX_FLOAT
+    shape: [nsurf]
+    units: {category: NX_LENGTH}
+    doc: 'TODO: documentation needed'
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  coating_material:
+    node: dataset
+    type: NX_FLOAT
+    shape: [nsurf]
+    doc: 'TODO: documentation needed'
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  substrate_roughness:
+    node: dataset
+    type: NX_FLOAT
+    shape: [nsurf]
+    units: {category: NX_LENGTH}
+    doc: 'TODO: documentation needed'
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  coating_roughness:
+    node: dataset
+    type: NX_FLOAT
+    shape: [nsurf]
+    units: {category: NX_LENGTH}
+    doc: 'TODO: documentation needed'
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  number_sections:
+    node: dataset
+    type: NX_INT
+    units: {category: NX_UNITLESS}
+    doc: |-
+      number of substrate sections (also called ``nsurf`` as an
+      index in the ``NXguide`` specification)
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  OFF_GEOMETRY:
+    node: group
+    name: {any: true}
+    class: NXoff_geometry
+    occurs: {min: 0}
+    doc: This group describes the shape of the beam line component
+    via: [T1, T2, T6, T7]
+    provisional: [Q1, Q11]
+  depends_on:
+    node: dataset
+    type: NX_CHAR
+    doc: |-
+      The entry opening of the guide lies on the reference plane. The center of the opening on that plane is
+      the reference point on the x and y axis. The reference plane is orthogonal to the z axis and is the
+      reference point along the z axis. Given no bend in the guide, it is parallel with z axis and extends
+      in the positive direction of the z axis.
+
+      .. image:: guide/guide.png
+        :width: 40%
+    via: [T1, T4, T7]
+    provisional: [Q1]

@@ -1,0 +1,36 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/COLLECTION"},
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"node": "group", "ref": "NXobject/LOG"},
+    {"node": "group", "ref": "NXobject/NOTE"},
+    {"node": "group", "ref": "NXobject/PARAMETERS"},
+    {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+    {"node": "dataset", "ref": "NXobject/identifierNAME"},
+    {"declared_by": "NXcg_unit_normal", "docs": ["NXcg_unit_normal/normals"], "id": "normals", "name": {"exact": "normals"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["c", "d"], "symbols": {"c": "NXcg_unit_normal", "d": "NXcg_unit_normal"}}, "type": "NX_NUMBER", "units": {"category": "NX_LENGTH"}, "via": ["T1", "T4", "T7", "T9"]},
+    {"declared_by": "NXcg_unit_normal", "docs": ["NXcg_unit_normal/orientation"], "id": "orientation", "name": {"exact": "orientation"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["c"], "symbols": {"c": "NXcg_unit_normal"}}, "type": "NX_INT", "units": {"category": "NX_UNITLESS"}, "via": ["T1", "T4", "T7", "T9"]}
+  ],
+  "class": "NXcg_unit_normal",
+  "extends": "NXobject",
+  "lossy": [],
+  "provisional": [],
+  "require": [],
+  "source": "base_classes/NXcg_unit_normal.nxdl.xml",
+  "status": "base",
+  "symbols": ["c", "d"],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"},
+  "via": []
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {}
+}

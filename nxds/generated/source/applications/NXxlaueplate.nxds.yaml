@@ -1,0 +1,45 @@
+nxds: '0.1'
+class: NXxlaueplate
+category: application
+extends: NXxlaue
+describes: NXroot
+doc: |-
+  raw data from a single crystal Laue camera, extends :ref:`NXxlaue`
+
+  This is the application definition for raw data from a single crystal Laue
+  camera with an image plate as a detector. It extends :ref:`NXxlaue`.
+defaults: {min: 1, binding: true, type: NX_CHAR}
+children:
+  ENTRY:
+    node: group
+    name: {any: true}
+    class: NXentry
+    children:
+      definition:
+        node: dataset
+        enum: [NXxlaueplate]
+        doc: 'Official NeXus NXDL schema to which this file conforms '
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      instrument:
+        node: group
+        class: NXinstrument
+        children:
+          detector:
+            node: group
+            class: NXdetector
+            children:
+              diameter:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_LENGTH}
+                doc: The diameter of a cylindrical detector
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+    via: [T1, T2, T5, T7]
+    provisional: [Q1, Q2, Q11]
+via: [T8]

@@ -1,0 +1,64 @@
+nxds: '0.1'
+class: NXprocess
+category: base
+extends: NXobject
+doc: |-
+  The :ref:`NXprocess` class describes an operation used to
+  process data as part of an analysis workflow, providing
+  information such as the software used, the date of the
+  operation, the input parameters, and the resulting data.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  program:
+    node: dataset
+    type: NX_CHAR
+    doc: Name of the program used
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  sequence_index:
+    node: dataset
+    type: NX_POSINT
+    doc: |-
+      Sequence index of processing, for determining the order of
+      multiple **NXprocess** steps. Starts with 1.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  version:
+    node: dataset
+    type: NX_CHAR
+    doc: Version of the program used
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  date:
+    node: dataset
+    type: NX_DATE_TIME
+    doc: Date and time of processing.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  NOTE:
+    node: group
+    name: {any: true}
+    class: NXnote
+    doc: |-
+      The note will contain information about how the data was
+      processed or anything about the data provenance. The
+      contents of the note can be anything that the processing
+      code can understand, or simple text.
+
+      The name will be numbered to allow for ordering of steps.
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  PARAMETERS:
+    node: group
+    name: {any: true}
+    class: NXparameters
+    doc: Parameters used in performing the data analysis.
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  DATA:
+    node: group
+    name: {any: true}
+    class: NXdata
+    doc: The data resulting from the operation.
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]

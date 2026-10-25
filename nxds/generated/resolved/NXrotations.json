@@ -1,0 +1,48 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/COLLECTION"},
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"node": "group", "ref": "NXobject/LOG"},
+    {"node": "group", "ref": "NXobject/NOTE"},
+    {"node": "group", "ref": "NXobject/PARAMETERS"},
+    {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+    {"node": "dataset", "ref": "NXobject/identifierNAME"},
+    {"declared_by": "NXrotations", "docs": ["NXrotations/reference_frame"], "id": "reference_frame", "name": {"exact": "reference_frame"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXrotations", "docs": ["NXrotations/crystal_symmetry"], "id": "crystal_symmetry", "name": {"exact": "crystal_symmetry"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["n_phases"], "symbols": {"n_phases": "NXrotations"}}, "type": "NX_CHAR", "via": ["T1", "T4", "T7", "T9"]},
+    {"declared_by": "NXrotations", "docs": ["NXrotations/sample_symmetry"], "id": "sample_symmetry", "name": {"exact": "sample_symmetry"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["n_phases"], "symbols": {"n_phases": "NXrotations"}}, "type": "NX_CHAR", "via": ["T1", "T4", "T7", "T9"]},
+    {"declared_by": "NXrotations", "docs": ["NXrotations/rotation_quaternion"], "id": "rotation_quaternion", "name": {"exact": "rotation_quaternion"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["c", 4], "symbols": {"c": "NXrotations"}}, "type": "NX_NUMBER", "units": {"category": "NX_DIMENSIONLESS"}, "via": ["T1", "T4", "T7", "T9"]},
+    {"declared_by": "NXrotations", "docs": ["NXrotations/rotation_euler"], "id": "rotation_euler", "name": {"exact": "rotation_euler"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["c", 3], "symbols": {"c": "NXrotations"}}, "type": "NX_NUMBER", "units": {"category": "NX_ANGLE"}, "via": ["T1", "T4", "T7", "T9"]},
+    {"declared_by": "NXrotations", "docs": ["NXrotations/is_antipodal"], "id": "is_antipodal", "name": {"exact": "is_antipodal"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["c"], "symbols": {"c": "NXrotations"}}, "type": "NX_BOOLEAN", "via": ["T1", "T4", "T7", "T9"]},
+    {"declared_by": "NXrotations", "docs": ["NXrotations/orientation_quaternion"], "id": "orientation_quaternion", "name": {"exact": "orientation_quaternion"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["c", 4], "symbols": {"c": "NXrotations"}}, "type": "NX_NUMBER", "units": {"category": "NX_DIMENSIONLESS"}, "via": ["T1", "T4", "T7", "T9"]},
+    {"declared_by": "NXrotations", "docs": ["NXrotations/orientation_euler"], "id": "orientation_euler", "name": {"exact": "orientation_euler"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["c", 3], "symbols": {"c": "NXrotations"}}, "type": "NX_NUMBER", "units": {"category": "NX_ANGLE"}, "via": ["T1", "T4", "T7", "T9"]},
+    {"declared_by": "NXrotations", "docs": ["NXrotations/misorientation_quaternion"], "id": "misorientation_quaternion", "name": {"exact": "misorientation_quaternion"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["c", 4], "symbols": {"c": "NXrotations"}}, "type": "NX_NUMBER", "units": {"category": "NX_DIMENSIONLESS"}, "via": ["T1", "T4", "T7", "T9"]},
+    {"declared_by": "NXrotations", "docs": ["NXrotations/misorientation_angle"], "id": "misorientation_angle", "name": {"exact": "misorientation_angle"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["c"], "symbols": {"c": "NXrotations"}}, "type": "NX_NUMBER", "units": {"category": "NX_ANGLE"}, "via": ["T1", "T4", "T7", "T9"]},
+    {"declared_by": "NXrotations", "docs": ["NXrotations/misorientation_axis"], "id": "misorientation_axis", "name": {"exact": "misorientation_axis"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["c", 3], "symbols": {"c": "NXrotations"}}, "type": "NX_NUMBER", "units": {"category": "NX_DIMENSIONLESS"}, "via": ["T1", "T4", "T7", "T9"]},
+    {"declared_by": "NXrotations", "docs": ["NXrotations/disorientation_quaternion"], "id": "disorientation_quaternion", "name": {"exact": "disorientation_quaternion"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["c", 4], "symbols": {"c": "NXrotations"}}, "type": "NX_NUMBER", "units": {"category": "NX_DIMENSIONLESS"}, "via": ["T1", "T4", "T7", "T9"]},
+    {"declared_by": "NXrotations", "docs": ["NXrotations/disorientation_angle"], "id": "disorientation_angle", "name": {"exact": "disorientation_angle"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["c"], "symbols": {"c": "NXrotations"}}, "type": "NX_NUMBER", "units": {"category": "NX_ANGLE"}, "via": ["T1", "T4", "T7", "T9"]},
+    {"declared_by": "NXrotations", "docs": ["NXrotations/disorientation_axis"], "id": "disorientation_axis", "name": {"exact": "disorientation_axis"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["c", 3], "symbols": {"c": "NXrotations"}}, "type": "NX_NUMBER", "units": {"category": "NX_DIMENSIONLESS"}, "via": ["T1", "T4", "T7", "T9"]}
+  ],
+  "class": "NXrotations",
+  "extends": "NXobject",
+  "lossy": [],
+  "provisional": [],
+  "require": [],
+  "source": "base_classes/NXrotations.nxdl.xml",
+  "status": "base",
+  "symbols": ["c", "n_phases"],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"},
+  "via": []
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {}
+}

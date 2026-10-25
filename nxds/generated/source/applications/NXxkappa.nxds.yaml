@@ -1,0 +1,134 @@
+nxds: '0.1'
+class: NXxkappa
+category: application
+extends: NXxbase
+describes: NXroot
+doc: |-
+  raw data from a kappa geometry (CAD4) single crystal diffractometer, extends :ref:`NXxbase`
+
+  This is the application definition for raw data from a kappa geometry
+  (CAD4) single crystal
+  diffractometer. It extends :ref:`NXxbase`, so the full definition is
+  the content of :ref:`NXxbase` plus the
+  data defined here.
+defaults: {min: 1, binding: true, type: NX_CHAR}
+symbols:
+  nP: {doc: Number of points}
+children:
+  ENTRY:
+    node: group
+    name: {any: true}
+    class: NXentry
+    children:
+      definition:
+        node: dataset
+        enum: [NXxkappa]
+        doc: 'Official NeXus NXDL schema to which this file conforms '
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      instrument:
+        node: group
+        class: NXinstrument
+        children:
+          detector:
+            node: group
+            class: NXdetector
+            children:
+              polar_angle:
+                node: dataset
+                type: NX_FLOAT
+                shape: [nP]
+                units: {category: NX_ANGLE}
+                doc: The polar_angle (two theta) at each scan point
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      sample:
+        node: group
+        class: NXsample
+        children:
+          rotation_angle:
+            node: dataset
+            type: NX_FLOAT
+            shape: [nP]
+            units: {category: NX_ANGLE}
+            doc: |-
+              This is an array holding the sample rotation angle at each
+              scan point
+            attributes:
+              axis:
+                occurs: {min: 0}
+                type: NX_POSINT
+                enum: ['1']
+                via: [T19]
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+          kappa:
+            node: dataset
+            type: NX_FLOAT
+            shape: [nP]
+            units: {category: NX_ANGLE}
+            doc: This is an array holding the kappa angle at each scan point
+            attributes:
+              axis:
+                occurs: {min: 0}
+                type: NX_POSINT
+                enum: ['1']
+                via: [T19]
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+          phi:
+            node: dataset
+            type: NX_FLOAT
+            shape: [nP]
+            units: {category: NX_ANGLE}
+            doc: This is an array holding the phi angle at each scan point
+            attributes:
+              axis:
+                occurs: {min: 0}
+                type: NX_POSINT
+                enum: ['1']
+                via: [T19]
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+          alpha:
+            node: dataset
+            type: NX_FLOAT
+            units: {category: NX_ANGLE}
+            doc: 'This holds the inclination angle of the kappa arm. '
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      name:
+        node: group
+        class: NXdata
+        children:
+          polar_angle:
+            node: link
+            target: ENTRY/INSTRUMENT/DETECTOR/polar_angle
+            via: [T1, T5, T10]
+            provisional: [Q2, Q8]
+          rotation_angle:
+            node: link
+            target: ENTRY/SAMPLE/rotation_angle
+            via: [T1, T5, T10]
+            provisional: [Q2, Q8]
+          kappa:
+            node: link
+            target: ENTRY/SAMPLE/kappa
+            via: [T1, T5, T10]
+            provisional: [Q2, Q8]
+          phi:
+            node: link
+            target: ENTRY/SAMPLE/phi
+            via: [T1, T5, T10]
+            provisional: [Q2, Q8]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+    via: [T1, T2, T5, T7]
+    provisional: [Q1, Q2, Q11]
+via: [T8]

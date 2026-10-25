@@ -1,0 +1,3 @@
+{"code": "RECOMMENDED", "severity": "W", "path": "/entry", "member": "NXdemo_phase1/ENTRY/title", "bundle": "v2026.01-r1"}
+{"code": "MISSING", "severity": "E", "path": "/entry/data", "member": "NXdemo_phase1/ENTRY/DATA@signal", "bundle": "v2026.01-r1", "message": "0 of at least 1"}
+{"code": "SHAPE", "severity": "E", "path": "/entry", "member": "NXdemo_phase1#nE", "bundle": "v2026.01-r1", "message": "/entry/data/mu: 57, /entry/instrument/counter/i0_counts: 57, /entry/instrument/monochromator/energy: 200"}

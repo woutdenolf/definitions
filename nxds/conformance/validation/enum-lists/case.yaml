@@ -1,0 +1,5 @@
+description: >
+  Enumerations (§4.5): `@axes` has the list value `[".", "x"]`, which applies to
+  the whole array (ENUM for `["x", "."]`); `@flags` has scalar values, which
+  apply to each element (ENUM for `["a", "c"]`).
+capabilities: []

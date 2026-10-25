@@ -1,0 +1,145 @@
+nxds: '0.1'
+class: NXspm_scan_control
+category: base
+extends: NXobject
+doc: |-
+  A scan is performed inside an N-dimensional phase space, where each dimension can correspond not only to real space coordinates (x,y) but also to any other parameter. This class contains detailed information about controlling the scan in such a phase space (or its subspace).
+
+  scan_types:
+  Trajectory: A list of N-dimensional sequential vectors describes the trajectory line for a full scan.
+  Mesh: For each dimension a range and a direction are chosen. When a scan along a dimension is done, a single step in the next dimension is taken, and then the scan in the previous dimension is repeated. As such we can speak about the fastest and the slowest scan axes.
+  Snake: Similar to a mesh scan but with the scanning direction reversed after each line.
+  Spiral: A scan taken along a spiral trajectory.
+  Linear: A scan where the scanning will be performed along a single independent axis.
+  Tilt: At each step, a proportional movement is done in all dimensions (an special case of Trajectory scan).
+
+  Scan_control_types:
+  Stepping: At each step, a movement to the next point is performed; correction (for example backlash) or active regulation (feedback loop) may or may not be applied. After the movement is done, the measurement is performed without the movement.
+  Continuous: The scanning of each line in an N-dimensional phase space is done without stopping; measurements are done simultaneously with the movement.
+  Oscillating: Scanning over a scan point continuously and then moving to start scanning at the next position.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  scan_time_start:
+    node: dataset
+    type: NX_DATE_TIME
+    units: {category: NX_TIME}
+    doc: The start time of the scan.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  scan_time_end:
+    node: dataset
+    type: NX_DATE_TIME
+    units: {category: NX_TIME}
+    doc: The end time of the scan.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  independent_scan_axes:
+    node: dataset
+    doc: |-
+      An array of scan axes which are controlled independently of each other.
+      (e.g. X, Y, Z, or other physical dimensions)
+
+      The array elements are in the order of axes of the scan from the fastest to the slowest.
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  scan_resolutionN:
+    node: dataset
+    name: {template: 'scan_resolution{N}'}
+    type: NX_NUMBER
+    units: {category: NX_ANY}
+    doc: |-
+      Define the scan resolution along each dimension as the number of steps per unit of the dimension parameters.
+
+      Rename the field according to the name of the independent dimension (e.g. scan_resolution_x, scan_resolution_voltage).
+    via: [T1, T3, T4, T7]
+    provisional: [Q1, Q3]
+  accuracyN:
+    node: dataset
+    name: {template: 'accuracy{N}'}
+    type: NX_NUMBER
+    units: {category: NX_LENGTH}
+    doc: Define the accuracy of the scan probe.
+    via: [T1, T3, T4, T7]
+    provisional: [Q1, Q3]
+  scan_type:
+    node: dataset
+    enum: [trajectory, mesh, snake, spiral, linear, tilt]
+    doc: This group specifies how the trajectory of the scan is defined.
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  scan_control_type:
+    node: dataset
+    enum: [stepping, continuous, oscillating]
+    doc: This string describes how the scan was performed.
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  scan_region:
+    node: group
+    class: NXspm_scan_region
+    doc: |-
+      The scan region is the area of phase space or sub-phase space where the scan is
+      performed. The region could be N-dimensional and is defined by the minimum and
+      maximum values of the scan axes.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  meshSCAN:
+    node: group
+    name: {template: 'mesh{SCAN}'}
+    class: NXspm_scan_pattern
+    doc: |-
+      For each dimension a range and a direction are chosen. When a scan along a dimension is done,
+      a single step in the next dimension is taken, and then the scan in the previous dimension is
+      repeated. As such we can speak about the fastest and the slowest scan axes.
+    via: [T1, T3, T4, T7]
+    provisional: [Q1, Q3]
+  spiralSCAN:
+    node: group
+    name: {template: 'spiral{SCAN}'}
+    class: NXspm_scan_pattern
+    doc: To define the spiral or circular scan, use this group.
+    children:
+      spiral_radiusN:
+        node: dataset
+        name: {template: 'spiral_radius{N}'}
+        type: NX_NUMBER
+        units: {category: NX_ANY}
+        doc: |-
+          Define the radius of the spiral circle of scanning.
+
+          Rename the field, according to the circle order, the nearest circle to the center is 0.
+        via: [T1, T3, T4, T7]
+        provisional: [Q1, Q3]
+      scan_pointsN:
+        node: dataset
+        name: {template: 'scan_points{N}'}
+        type: NX_NUMBER
+        doc: |-
+          Define the total number of points in a given circle scan to be performed.
+
+          Rename the field, according to the circle order, the nearest circle to the center
+          is 0 (e.g. scan_points_2).
+        via: [T1, T3, T4, T7]
+        provisional: [Q1, Q3]
+    via: [T1, T3, T4, T7]
+    provisional: [Q1, Q3]
+  snakeSCAN:
+    node: group
+    name: {template: 'snake{SCAN}'}
+    class: NXspm_scan_pattern
+    doc: To define the snake scan, use this group.
+    via: [T1, T3, T4, T7]
+    provisional: [Q1, Q3]
+  trajSCAN:
+    node: group
+    name: {template: 'traj{SCAN}'}
+    class: NXspm_scan_pattern
+    doc: To define the trajectory scan, use this group.
+    via: [T1, T3, T4, T7]
+    provisional: [Q1, Q3]
+  linearSCAN:
+    node: group
+    name: {template: 'linear{SCAN}'}
+    class: NXspm_scan_pattern
+    doc: To define the linear scan, use this group.
+    via: [T1, T3, T4, T7]
+    provisional: [Q1, Q3]

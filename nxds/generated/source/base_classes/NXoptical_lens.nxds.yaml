@@ -1,0 +1,184 @@
+nxds: '0.1'
+class: NXoptical_lens
+category: base
+extends: NXcomponent
+doc: Description of an optical lens.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+symbols:
+  N_spectrum:
+    doc: |-
+      Size of the wavelength array for which the refractive index of the material
+      is given.
+  N_spectrum_coating:
+    doc: |-
+      Size of the wavelength array for which the refractive index of the coating
+      is given.
+  N_spectrum_RT:
+    doc: |-
+      Size of the wavelength array for which the reflectance or transmission of
+      the lens is given.
+children:
+  type:
+    node: dataset
+    enum:
+      values:
+      - {value: biconcave}
+      - {value: plano-concave}
+      - {value: convexo-concave}
+      - {value: biconvex}
+      - {value: plano-convex}
+      - {value: concavo-convex}
+      - {value: Fresnel lens}
+      open: true
+    doc: Type of the lens (e.g. concave, convex etc.).
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  chromatic:
+    node: dataset
+    type: NX_BOOLEAN
+    doc: Is it a chromatic lens?
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  lens_diameter:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_LENGTH}
+    doc: Diameter of the lens.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  substrate:
+    node: group
+    class: NXsample
+    doc: |-
+      Properties of the substrate material of the lens. If the lens has a
+      coating specify the coating material and its properties in 'coating'.
+    children:
+      substrate_material:
+        node: dataset
+        doc: Specify the substrate material of the lens.
+        via: [T0, T1, T4, T7]
+        provisional: [Q1]
+      substrate_thickness:
+        node: dataset
+        type: NX_NUMBER
+        units: {category: NX_LENGTH}
+        doc: Thickness of the lens substrate at the optical axis.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      index_of_refraction:
+        node: dataset
+        type: NX_NUMBER
+        shape: [2, N_spectrum]
+        units: {category: NX_UNITLESS}
+        doc: |-
+          Complex index of refraction of the lens material. Specify at given
+          wavelength (or energy, wavenumber etc.) values.
+        via: [T1, T4, T7, T9]
+        provisional: [Q1]
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  COATING:
+    node: group
+    name: {any: true}
+    class: NXsample
+    doc: |-
+      If the lens has a coating describe the material and its properties.
+      Some basic information can be found e.g. [here]
+      (https://www.opto-e.com/basics/reflection-transmission-and-coatings).
+      If the back and front side of the lens are coated with different
+      materials, use separate COATING(NXsample) fields to describe the coatings
+      on the front and back side, respectively. For example:
+      coating_front(NXsample) and coating_back(NXsample).
+    children:
+      coating_type:
+        node: dataset
+        doc: |-
+          Specify the coating type (e.g. dielectric, anti-reflection (AR),
+          multilayer coating etc.).
+        via: [T0, T1, T4, T7]
+        provisional: [Q1]
+      coating_material:
+        node: dataset
+        doc: Describe the coating material (e.g. MgF2).
+        via: [T0, T1, T4, T7]
+        provisional: [Q1]
+      coating_thickness:
+        node: dataset
+        type: NX_NUMBER
+        units: {category: NX_LENGTH}
+        doc: Thickness of the coating.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      index_of_refraction_coating:
+        node: dataset
+        type: NX_NUMBER
+        shape: [2, N_spectrum_coating]
+        units: {category: NX_UNITLESS}
+        doc: |-
+          Complex index of refraction of the coating. Specify at given spectral
+          values (wavelength, energy, wavenumber etc.).
+        via: [T1, T4, T7, T9]
+        provisional: [Q1]
+    via: [T1, T3, T4, T7]
+    provisional: [Q1, Q3]
+  reflectance:
+    node: dataset
+    shape: [N_spectrum_RT]
+    units: {category: NX_UNITLESS}
+    doc: Reflectance of the lens at given spectral values.
+    via: [T0, T1, T4, T7, T9]
+    provisional: [Q1]
+  transmission:
+    node: dataset
+    shape: [N_spectrum_RT]
+    units: {category: NX_UNITLESS}
+    doc: Transmission of the lens at given spectral values.
+    via: [T0, T1, T4, T7, T9]
+    provisional: [Q1]
+  focal_length:
+    node: dataset
+    occurs: {min: 0}
+    recommended: true
+    type: NX_NUMBER
+    shape: [2]
+    units: {category: NX_LENGTH}
+    doc: |-
+      Focal length of the lens on the front side (first value), i.e. where the
+      beam is incident, and on the back side (second value).
+    via: [T1, T6, T7, T9]
+    provisional: [Q1]
+  curvature_radius_FACE:
+    node: dataset
+    name: {template: 'curvature_radius_{FACE}'}
+    occurs: {min: 0}
+    recommended: true
+    type: NX_NUMBER
+    units: {category: NX_LENGTH}
+    doc: |-
+      Curvature radius of the lens.
+      Instead of 'FACE' in the name of this field, the user is advised to
+      specify for which surface (e.g. front or back) the curvature is provided:
+      e.g. curvature_radius_front or curvature_radius_back. The front face is the surface on
+      which the light beam is incident, while the back face is the one from
+      which the light beam exits the lens.
+    via: [T1, T3, T6, T7]
+    provisional: [Q1, Q3]
+  Abbe_number:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_UNITLESS}
+    doc: Abbe number (or V-number) of the lens.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  numerical_aperture:
+    node: dataset
+    type: NX_NUMBER
+    doc: The numerical aperture of the lens.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  magnification:
+    node: dataset
+    type: NX_FLOAT
+    doc: Magnification of the lens
+    via: [T1, T4, T7]
+    provisional: [Q1]

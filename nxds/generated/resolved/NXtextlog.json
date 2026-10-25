@@ -1,0 +1,40 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/COLLECTION"},
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"node": "group", "ref": "NXobject/LOG"},
+    {"node": "group", "ref": "NXobject/NOTE"},
+    {"node": "group", "ref": "NXobject/PARAMETERS"},
+    {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+    {"node": "dataset", "ref": "NXobject/identifierNAME"},
+    {"attributes": [{"declared_by": "NXtextlog", "id": "start", "name": {"exact": "start"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_DATE_TIME", "via": ["T1", "T4"]}, {"declared_by": "NXtextlog", "id": "scaling_factor", "name": {"exact": "scaling_factor"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "via": ["T1", "T4"]}], "declared_by": "NXtextlog", "docs": ["NXtextlog/time"], "id": "time", "name": {"exact": "time"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["n"], "symbols": {"n": "NXtextlog"}}, "type": "NX_NUMBER", "units": {"category": "NX_TIME"}, "via": ["T1", "T4", "T7", "T9"]},
+    {"attributes": [{"declared_by": "NXtextlog", "docs": ["NXtextlog/value@separator"], "id": "separator", "name": {"exact": "separator"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4"]}], "declared_by": "NXtextlog", "docs": ["NXtextlog/value"], "id": "value", "name": {"exact": "value"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["n"], "symbols": {"n": "NXtextlog"}}, "type": "NX_CHAR", "via": ["T1", "T4", "T7", "T9"]},
+    {"declared_by": "NXtextlog", "docs": ["NXtextlog/description"], "id": "description", "name": {"exact": "description"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4", "T7"]},
+    {"declared_by": "NXtextlog", "docs": ["NXtextlog/duration"], "id": "duration", "name": {"exact": "duration"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_FLOAT", "units": {"category": "NX_ANY"}, "via": ["T1", "T4", "T7"]},
+    {"attributes": [{"declared_by": "NXtextlog", "docs": ["NXtextlog/cue_timestamp_zero@start"], "id": "start", "name": {"exact": "start"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_DATE_TIME", "via": ["T1", "T4"]}, {"declared_by": "NXtextlog", "docs": ["NXtextlog/cue_timestamp_zero@scaling_factor"], "id": "scaling_factor", "name": {"exact": "scaling_factor"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "via": ["T1", "T4"]}], "declared_by": "NXtextlog", "docs": ["NXtextlog/cue_timestamp_zero"], "id": "cue_timestamp_zero", "name": {"exact": "cue_timestamp_zero"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_TIME"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXtextlog", "docs": ["NXtextlog/cue_index"], "id": "cue_index", "name": {"exact": "cue_index"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_INT", "via": ["T1", "T4", "T7"]}
+  ],
+  "class": "NXtextlog",
+  "extends": "NXobject",
+  "lossy": [],
+  "provisional": [],
+  "require": [],
+  "source": "contributed_definitions/NXtextlog.nxdl.xml",
+  "status": "contributed",
+  "symbols": ["n"],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"},
+  "via": []
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {}
+}

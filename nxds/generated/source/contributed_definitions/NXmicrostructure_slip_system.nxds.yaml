@@ -1,0 +1,46 @@
+nxds: '0.1'
+class: NXmicrostructure_slip_system
+category: base
+extends: NXobject
+doc: Base class for describing a set of crystallographic slip systems.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+symbols:
+  n: {doc: Number of slip systems.}
+  m:
+    doc: Number of indices used for reporting Miller (3) or Miller-Bravais indices (4).
+children:
+  lattice_type:
+    node: dataset
+    type: NX_CHAR
+    enum: [triclinic, monoclinic, orthorhombic, tetragonal, trigonal, hexagonal, cubic]
+    doc: Bravais lattice type
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  miller_plane:
+    node: dataset
+    type: NX_NUMBER
+    shape: [n, i]
+    units: {category: NX_UNITLESS}
+    doc: Array of Miller indices which describe the crystallographic planes.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  miller_direction:
+    node: dataset
+    type: NX_NUMBER
+    shape: [n, m]
+    units: {category: NX_UNITLESS}
+    doc: |-
+      Array of Miller or Miller-Bravais indices that describe the crystallographic
+      direction.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  is_specific:
+    node: dataset
+    type: NX_BOOLEAN
+    shape: [n]
+    units: {category: NX_UNITLESS}
+    doc: |-
+      For each slip system a marker whether the Miller indices refer to a specific slip system
+      or to a set of equivalent crystallographic slip systems.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]

@@ -1,0 +1,2989 @@
+{
+ "classes": {
+  "NXaberration": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXactivity": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXactuator": {
+   "category": "base",
+   "extends": "NXcomponent",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXafm": {
+   "category": "application",
+   "describes": "NXroot",
+   "extends": "NXspm",
+   "specialisations": 8,
+   "status": "contributed"
+  },
+  "NXamplifier": {
+   "category": "base",
+   "extends": "NXcomponent",
+   "specialisations": 0,
+   "status": "contributed"
+  },
+  "NXaperture": {
+   "category": "base",
+   "extends": "NXcomponent",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXapm": {
+   "category": "application",
+   "describes": "NXroot",
+   "specialisations": 99,
+   "status": "application"
+  },
+  "NXapm_charge_state_analysis": {
+   "category": "base",
+   "extends": "NXprocess",
+   "specialisations": 1,
+   "status": "base"
+  },
+  "NXapm_compositionspace_config": {
+   "category": "application",
+   "describes": "NXroot",
+   "specialisations": 9,
+   "status": "contributed"
+  },
+  "NXapm_compositionspace_results": {
+   "category": "application",
+   "describes": "NXroot",
+   "specialisations": 22,
+   "status": "contributed"
+  },
+  "NXapm_event_data": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXapm_instrument": {
+   "category": "base",
+   "extends": "NXinstrument",
+   "specialisations": 11,
+   "status": "base"
+  },
+  "NXapm_measurement": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXapm_paraprobe_clusterer_config": {
+   "category": "application",
+   "describes": "NXroot",
+   "extends": "NXapm_paraprobe_tool_config",
+   "specialisations": 8,
+   "status": "contributed"
+  },
+  "NXapm_paraprobe_clusterer_results": {
+   "category": "application",
+   "describes": "NXroot",
+   "extends": "NXapm_paraprobe_tool_results",
+   "specialisations": 4,
+   "status": "contributed"
+  },
+  "NXapm_paraprobe_distancer_config": {
+   "category": "application",
+   "describes": "NXroot",
+   "extends": "NXapm_paraprobe_tool_config",
+   "specialisations": 4,
+   "status": "contributed"
+  },
+  "NXapm_paraprobe_distancer_results": {
+   "category": "application",
+   "describes": "NXroot",
+   "extends": "NXapm_paraprobe_tool_results",
+   "specialisations": 4,
+   "status": "contributed"
+  },
+  "NXapm_paraprobe_intersector_config": {
+   "category": "application",
+   "describes": "NXroot",
+   "extends": "NXapm_paraprobe_tool_config",
+   "specialisations": 6,
+   "status": "contributed"
+  },
+  "NXapm_paraprobe_intersector_results": {
+   "category": "application",
+   "describes": "NXroot",
+   "extends": "NXapm_paraprobe_tool_results",
+   "specialisations": 3,
+   "status": "contributed"
+  },
+  "NXapm_paraprobe_nanochem_config": {
+   "category": "application",
+   "describes": "NXroot",
+   "extends": "NXapm_paraprobe_tool_config",
+   "specialisations": 19,
+   "status": "contributed"
+  },
+  "NXapm_paraprobe_nanochem_results": {
+   "category": "application",
+   "describes": "NXroot",
+   "extends": "NXapm_paraprobe_tool_results",
+   "specialisations": 29,
+   "status": "contributed"
+  },
+  "NXapm_paraprobe_ranger_config": {
+   "category": "application",
+   "describes": "NXroot",
+   "extends": "NXapm_paraprobe_tool_config",
+   "specialisations": 1,
+   "status": "contributed"
+  },
+  "NXapm_paraprobe_ranger_results": {
+   "category": "application",
+   "describes": "NXroot",
+   "extends": "NXapm_paraprobe_tool_results",
+   "specialisations": 2,
+   "status": "contributed"
+  },
+  "NXapm_paraprobe_selector_config": {
+   "category": "application",
+   "describes": "NXroot",
+   "extends": "NXapm_paraprobe_tool_config",
+   "specialisations": 1,
+   "status": "contributed"
+  },
+  "NXapm_paraprobe_selector_results": {
+   "category": "application",
+   "describes": "NXroot",
+   "extends": "NXapm_paraprobe_tool_results",
+   "specialisations": 1,
+   "status": "contributed"
+  },
+  "NXapm_paraprobe_spatstat_config": {
+   "category": "application",
+   "describes": "NXroot",
+   "extends": "NXapm_paraprobe_tool_config",
+   "specialisations": 8,
+   "status": "contributed"
+  },
+  "NXapm_paraprobe_spatstat_results": {
+   "category": "application",
+   "describes": "NXroot",
+   "extends": "NXapm_paraprobe_tool_results",
+   "specialisations": 4,
+   "status": "contributed"
+  },
+  "NXapm_paraprobe_surfacer_config": {
+   "category": "application",
+   "describes": "NXroot",
+   "extends": "NXapm_paraprobe_tool_config",
+   "specialisations": 3,
+   "status": "contributed"
+  },
+  "NXapm_paraprobe_surfacer_results": {
+   "category": "application",
+   "describes": "NXroot",
+   "extends": "NXapm_paraprobe_tool_results",
+   "specialisations": 8,
+   "status": "contributed"
+  },
+  "NXapm_paraprobe_tessellator_config": {
+   "category": "application",
+   "describes": "NXroot",
+   "extends": "NXapm_paraprobe_tool_config",
+   "specialisations": 3,
+   "status": "contributed"
+  },
+  "NXapm_paraprobe_tessellator_results": {
+   "category": "application",
+   "describes": "NXroot",
+   "extends": "NXapm_paraprobe_tool_results",
+   "specialisations": 12,
+   "status": "contributed"
+  },
+  "NXapm_paraprobe_tool_common": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 1,
+   "status": "contributed"
+  },
+  "NXapm_paraprobe_tool_config": {
+   "category": "application",
+   "describes": "NXroot",
+   "specialisations": 16,
+   "status": "contributed"
+  },
+  "NXapm_paraprobe_tool_parameters": {
+   "category": "base",
+   "extends": "NXparameters",
+   "specialisations": 3,
+   "status": "contributed"
+  },
+  "NXapm_paraprobe_tool_process": {
+   "category": "base",
+   "extends": "NXprocess",
+   "specialisations": 1,
+   "status": "contributed"
+  },
+  "NXapm_paraprobe_tool_results": {
+   "category": "application",
+   "describes": "NXroot",
+   "specialisations": 9,
+   "status": "contributed"
+  },
+  "NXapm_ranging": {
+   "category": "base",
+   "extends": "NXprocess",
+   "specialisations": 4,
+   "status": "base"
+  },
+  "NXapm_reconstruction": {
+   "category": "base",
+   "extends": "NXprocess",
+   "specialisations": 3,
+   "status": "base"
+  },
+  "NXapm_simulation": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXarchive": {
+   "category": "application",
+   "describes": "NXroot",
+   "specialisations": 5,
+   "status": "application"
+  },
+  "NXarpes": {
+   "category": "application",
+   "describes": "NXroot",
+   "specialisations": 6,
+   "status": "application"
+  },
+  "NXatom": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXattenuator": {
+   "category": "base",
+   "extends": "NXcomponent",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXazint1d": {
+   "category": "application",
+   "describes": "NXroot",
+   "specialisations": 7,
+   "status": "application"
+  },
+  "NXazint2d": {
+   "category": "application",
+   "describes": "NXroot",
+   "specialisations": 7,
+   "status": "application"
+  },
+  "NXbeam": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 1,
+   "status": "base"
+  },
+  "NXbeam_splitter": {
+   "category": "base",
+   "extends": "NXcomponent",
+   "specialisations": 3,
+   "status": "contributed"
+  },
+  "NXbeam_stop": {
+   "category": "base",
+   "extends": "NXcomponent",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXbeam_transfer_matrix_table": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXbending_magnet": {
+   "category": "base",
+   "extends": "NXcomponent",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXcalibration": {
+   "category": "base",
+   "extends": "NXprocess",
+   "specialisations": 2,
+   "status": "base"
+  },
+  "NXcanSAS": {
+   "category": "application",
+   "describes": "NXroot",
+   "specialisations": 12,
+   "status": "application"
+  },
+  "NXcapillary": {
+   "category": "base",
+   "extends": "NXcomponent",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXcg_alpha_complex": {
+   "category": "base",
+   "extends": "NXcg_primitive",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXcg_cylinder": {
+   "category": "base",
+   "extends": "NXcg_primitive",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXcg_ellipsoid": {
+   "category": "base",
+   "extends": "NXcg_primitive",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXcg_face_list_data_structure": {
+   "category": "base",
+   "extends": "NXcg_primitive",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXcg_grid": {
+   "category": "base",
+   "extends": "NXcg_primitive",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXcg_half_edge_data_structure": {
+   "category": "base",
+   "extends": "NXcg_primitive",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXcg_hexahedron": {
+   "category": "base",
+   "extends": "NXcg_primitive",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXcg_parallelogram": {
+   "category": "base",
+   "extends": "NXcg_primitive",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXcg_point": {
+   "category": "base",
+   "extends": "NXcg_primitive",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXcg_polygon": {
+   "category": "base",
+   "extends": "NXcg_primitive",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXcg_polyhedron": {
+   "category": "base",
+   "extends": "NXcg_primitive",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXcg_polyline": {
+   "category": "base",
+   "extends": "NXcg_primitive",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXcg_primitive": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXcg_roi": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXcg_tetrahedron": {
+   "category": "base",
+   "extends": "NXcg_primitive",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXcg_triangle": {
+   "category": "base",
+   "extends": "NXcg_primitive",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXcg_unit_normal": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXchemical_composition": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 1,
+   "status": "base"
+  },
+  "NXcircuit": {
+   "category": "base",
+   "extends": "NXcomponent",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXcite": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXcollection": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXcollectioncolumn": {
+   "category": "base",
+   "extends": "NXcomponent",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXcollimator": {
+   "category": "base",
+   "extends": "NXcomponent",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXcomponent": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXcontainer": {
+   "category": "base",
+   "extends": "NXcomponent",
+   "specialisations": 0,
+   "status": "contributed"
+  },
+  "NXcoordinate_system": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXcorrector_cs": {
+   "category": "base",
+   "extends": "NXcomponent",
+   "specialisations": 1,
+   "status": "base"
+  },
+  "NXcrystal": {
+   "category": "base",
+   "extends": "NXcomponent",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXcs_computer": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXcs_filter_boolean_mask": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXcs_memory": {
+   "category": "base",
+   "extends": "NXcomponent",
+   "specialisations": 1,
+   "status": "base"
+  },
+  "NXcs_prng": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXcs_processor": {
+   "category": "base",
+   "extends": "NXcomponent",
+   "specialisations": 1,
+   "status": "base"
+  },
+  "NXcs_profiling": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXcs_profiling_event": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXcs_storage": {
+   "category": "base",
+   "extends": "NXcomponent",
+   "specialisations": 1,
+   "status": "base"
+  },
+  "NXcsg": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "contributed"
+  },
+  "NXcxi_ptycho": {
+   "category": "application",
+   "describes": "NXroot",
+   "specialisations": 12,
+   "status": "contributed"
+  },
+  "NXcylindrical_geometry": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXdata": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXdeflector": {
+   "category": "base",
+   "extends": "NXcomponent",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXdelocalization": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 1,
+   "status": "contributed"
+  },
+  "NXdetector": {
+   "category": "base",
+   "extends": "NXcomponent",
+   "specialisations": 1,
+   "status": "base"
+  },
+  "NXdetector_channel": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXdetector_group": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXdetector_module": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXdirecttof": {
+   "category": "application",
+   "describes": "NXroot",
+   "extends": "NXtofraw",
+   "specialisations": 4,
+   "status": "application"
+  },
+  "NXdisk_chopper": {
+   "category": "base",
+   "extends": "NXcomponent",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXdispersion": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "contributed"
+  },
+  "NXdispersion_function": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 1,
+   "status": "contributed"
+  },
+  "NXdispersion_repeated_parameter": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "contributed"
+  },
+  "NXdispersion_single_parameter": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "contributed"
+  },
+  "NXdispersion_table": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "contributed"
+  },
+  "NXdispersive_material": {
+   "category": "application",
+   "describes": "NXroot",
+   "specialisations": 18,
+   "status": "contributed"
+  },
+  "NXdistortion": {
+   "category": "base",
+   "extends": "NXprocess",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXebeam_column": {
+   "category": "base",
+   "extends": "NXcomponent",
+   "specialisations": 4,
+   "status": "base"
+  },
+  "NXelectromagnetic_lens": {
+   "category": "base",
+   "extends": "NXcomponent",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXelectron_detector": {
+   "category": "base",
+   "extends": "NXdetector",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXelectronanalyzer": {
+   "category": "base",
+   "extends": "NXcomponent",
+   "specialisations": 5,
+   "status": "base"
+  },
+  "NXelectrostatic_kicker": {
+   "category": "base",
+   "extends": "NXcomponent",
+   "specialisations": 2,
+   "status": "contributed"
+  },
+  "NXellipsometry": {
+   "category": "application",
+   "describes": "NXroot",
+   "extends": "NXoptical_spectroscopy",
+   "specialisations": 7,
+   "status": "application"
+  },
+  "NXem": {
+   "category": "application",
+   "describes": "NXroot",
+   "specialisations": 171,
+   "status": "application"
+  },
+  "NXem_calorimetry": {
+   "category": "application",
+   "describes": "NXroot",
+   "specialisations": 15,
+   "status": "contributed"
+  },
+  "NXem_ebsd": {
+   "category": "base",
+   "extends": "NXprocess",
+   "specialisations": 8,
+   "status": "base"
+  },
+  "NXem_eds": {
+   "category": "base",
+   "extends": "NXprocess",
+   "specialisations": 6,
+   "status": "base"
+  },
+  "NXem_eels": {
+   "category": "base",
+   "extends": "NXprocess",
+   "specialisations": 2,
+   "status": "base"
+  },
+  "NXem_event_data": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXem_img": {
+   "category": "base",
+   "extends": "NXprocess",
+   "specialisations": 1,
+   "status": "base"
+  },
+  "NXem_instrument": {
+   "category": "base",
+   "extends": "NXinstrument",
+   "specialisations": 1,
+   "status": "base"
+  },
+  "NXem_interaction_volume": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXem_measurement": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXem_optical_system": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXem_simulation": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXenergydispersion": {
+   "category": "base",
+   "extends": "NXcomponent",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXentry": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 1,
+   "status": "base"
+  },
+  "NXenvironment": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXevent_data": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXfabrication": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXfermi_chopper": {
+   "category": "base",
+   "extends": "NXcomponent",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXfilter": {
+   "category": "base",
+   "extends": "NXcomponent",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXfit": {
+   "category": "base",
+   "extends": "NXprocess",
+   "specialisations": 4,
+   "status": "base"
+  },
+  "NXfit_function": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 1,
+   "status": "base"
+  },
+  "NXflipper": {
+   "category": "base",
+   "extends": "NXcomponent",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXfluo": {
+   "category": "application",
+   "describes": "NXroot",
+   "specialisations": 8,
+   "status": "application"
+  },
+  "NXfresnel_zone_plate": {
+   "category": "base",
+   "extends": "NXcomponent",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXgeometry": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXgrating": {
+   "category": "base",
+   "extends": "NXcomponent",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXguide": {
+   "category": "base",
+   "extends": "NXcomponent",
+   "specialisations": 1,
+   "status": "base"
+  },
+  "NXhistory": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXibeam_column": {
+   "category": "base",
+   "extends": "NXcomponent",
+   "specialisations": 1,
+   "status": "base"
+  },
+  "NXimage": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 9,
+   "status": "base"
+  },
+  "NXindirecttof": {
+   "category": "application",
+   "describes": "NXroot",
+   "extends": "NXtofraw",
+   "specialisations": 3,
+   "status": "application"
+  },
+  "NXinsertion_device": {
+   "category": "base",
+   "extends": "NXcomponent",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXinstrument": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXiqproc": {
+   "category": "application",
+   "describes": "NXroot",
+   "specialisations": 7,
+   "status": "application"
+  },
+  "NXisocontour": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "contributed"
+  },
+  "NXiv_temp": {
+   "category": "application",
+   "describes": "NXroot",
+   "extends": "NXsensor_scan",
+   "specialisations": 5,
+   "status": "contributed"
+  },
+  "NXlauetof": {
+   "category": "application",
+   "describes": "NXroot",
+   "specialisations": 6,
+   "status": "application"
+  },
+  "NXlockin": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "contributed"
+  },
+  "NXlog": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXmagnetic_kicker": {
+   "category": "base",
+   "extends": "NXcomponent",
+   "specialisations": 2,
+   "status": "contributed"
+  },
+  "NXmanipulator": {
+   "category": "base",
+   "extends": "NXcomponent",
+   "specialisations": 16,
+   "status": "base"
+  },
+  "NXmatch_filter": {
+   "category": "base",
+   "extends": "NXparameters",
+   "specialisations": 0,
+   "status": "contributed"
+  },
+  "NXmicrostructure": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 6,
+   "status": "contributed"
+  },
+  "NXmicrostructure_feature": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "contributed"
+  },
+  "NXmicrostructure_ipf": {
+   "category": "base",
+   "extends": "NXprocess",
+   "specialisations": 2,
+   "status": "contributed"
+  },
+  "NXmicrostructure_kanapy_results": {
+   "category": "application",
+   "describes": "NXroot",
+   "specialisations": 9,
+   "status": "contributed"
+  },
+  "NXmicrostructure_mtex_config": {
+   "category": "base",
+   "extends": "NXparameters",
+   "specialisations": 6,
+   "status": "contributed"
+  },
+  "NXmicrostructure_odf": {
+   "category": "base",
+   "extends": "NXprocess",
+   "specialisations": 5,
+   "status": "contributed"
+  },
+  "NXmicrostructure_pf": {
+   "category": "base",
+   "extends": "NXprocess",
+   "specialisations": 2,
+   "status": "contributed"
+  },
+  "NXmicrostructure_score_config": {
+   "category": "application",
+   "describes": "NXroot",
+   "specialisations": 26,
+   "status": "contributed"
+  },
+  "NXmicrostructure_score_results": {
+   "category": "application",
+   "describes": "NXroot",
+   "specialisations": 19,
+   "status": "contributed"
+  },
+  "NXmicrostructure_slip_system": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "contributed"
+  },
+  "NXmirror": {
+   "category": "base",
+   "extends": "NXcomponent",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXmoderator": {
+   "category": "base",
+   "extends": "NXcomponent",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXmonitor": {
+   "category": "base",
+   "extends": "NXcomponent",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXmonochromator": {
+   "category": "base",
+   "extends": "NXcomponent",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXmonopd": {
+   "category": "application",
+   "describes": "NXroot",
+   "specialisations": 8,
+   "status": "application"
+  },
+  "NXmpes": {
+   "category": "application",
+   "describes": "NXroot",
+   "specialisations": 54,
+   "status": "application"
+  },
+  "NXmpes_arpes": {
+   "category": "application",
+   "describes": "NXroot",
+   "extends": "NXmpes",
+   "specialisations": 13,
+   "status": "application"
+  },
+  "NXmx": {
+   "category": "application",
+   "describes": "NXroot",
+   "specialisations": 10,
+   "status": "application"
+  },
+  "NXnote": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXobject": {
+   "category": "base",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXoff_geometry": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXoptical_fiber": {
+   "category": "base",
+   "extends": "NXcomponent",
+   "specialisations": 3,
+   "status": "contributed"
+  },
+  "NXoptical_lens": {
+   "category": "base",
+   "extends": "NXcomponent",
+   "specialisations": 2,
+   "status": "base"
+  },
+  "NXoptical_polarizer": {
+   "category": "base",
+   "extends": "NXcomponent",
+   "specialisations": 3,
+   "status": "contributed"
+  },
+  "NXoptical_spectroscopy": {
+   "category": "application",
+   "describes": "NXroot",
+   "specialisations": 30,
+   "status": "application"
+  },
+  "NXoptical_window": {
+   "category": "base",
+   "extends": "NXaperture",
+   "specialisations": 1,
+   "status": "base"
+  },
+  "NXorientation": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXparameters": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXpdb": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXpeak": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 1,
+   "status": "base"
+  },
+  "NXphase": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXphase_lock_loop": {
+   "category": "base",
+   "extends": "NXcomponent",
+   "specialisations": 4,
+   "status": "contributed"
+  },
+  "NXpid_controller": {
+   "category": "base",
+   "extends": "NXcomponent",
+   "specialisations": 2,
+   "status": "base"
+  },
+  "NXpinhole": {
+   "category": "base",
+   "extends": "NXcomponent",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXpolarizer": {
+   "category": "base",
+   "extends": "NXcomponent",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXpositioner": {
+   "category": "base",
+   "extends": "NXcomponent",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXprocess": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXprogram": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXpump": {
+   "category": "base",
+   "extends": "NXcomponent",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXquadric": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "contributed"
+  },
+  "NXquadrupole_magnet": {
+   "category": "base",
+   "extends": "NXcomponent",
+   "specialisations": 2,
+   "status": "contributed"
+  },
+  "NXraman": {
+   "category": "application",
+   "describes": "NXroot",
+   "extends": "NXoptical_spectroscopy",
+   "specialisations": 3,
+   "status": "application"
+  },
+  "NXrcs": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 1,
+   "status": "contributed"
+  },
+  "NXreflections": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXrefscan": {
+   "category": "application",
+   "describes": "NXroot",
+   "specialisations": 8,
+   "status": "application"
+  },
+  "NXreftof": {
+   "category": "application",
+   "describes": "NXroot",
+   "specialisations": 7,
+   "status": "application"
+  },
+  "NXregion": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "contributed"
+  },
+  "NXregistration": {
+   "category": "base",
+   "extends": "NXprocess",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXresolution": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXroi_process": {
+   "category": "base",
+   "extends": "NXprocess",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXroot": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXrotations": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXsample": {
+   "category": "base",
+   "extends": "NXcomponent",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXsample_component": {
+   "category": "base",
+   "extends": "NXcomponent",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXsas": {
+   "category": "application",
+   "describes": "NXroot",
+   "specialisations": 11,
+   "status": "application"
+  },
+  "NXsastof": {
+   "category": "application",
+   "describes": "NXroot",
+   "specialisations": 10,
+   "status": "application"
+  },
+  "NXscan": {
+   "category": "application",
+   "describes": "NXroot",
+   "specialisations": 6,
+   "status": "application"
+  },
+  "NXscan_controller": {
+   "category": "base",
+   "extends": "NXcomponent",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXsensor": {
+   "category": "base",
+   "extends": "NXcomponent",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXsensor_scan": {
+   "category": "application",
+   "describes": "NXroot",
+   "specialisations": 7,
+   "status": "contributed"
+  },
+  "NXseparator": {
+   "category": "base",
+   "extends": "NXcomponent",
+   "specialisations": 4,
+   "status": "contributed"
+  },
+  "NXshape": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXsimilarity_grouping": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 1,
+   "status": "contributed"
+  },
+  "NXslit": {
+   "category": "base",
+   "extends": "NXcomponent",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXsnsevent": {
+   "category": "application",
+   "describes": "NXroot",
+   "specialisations": 30,
+   "status": "contributed"
+  },
+  "NXsnshisto": {
+   "category": "application",
+   "describes": "NXroot",
+   "specialisations": 30,
+   "status": "contributed"
+  },
+  "NXsolenoid_magnet": {
+   "category": "base",
+   "extends": "NXcomponent",
+   "specialisations": 2,
+   "status": "contributed"
+  },
+  "NXsolid_geometry": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "contributed"
+  },
+  "NXsource": {
+   "category": "base",
+   "extends": "NXcomponent",
+   "specialisations": 1,
+   "status": "base"
+  },
+  "NXspatial_filter": {
+   "category": "base",
+   "extends": "NXparameters",
+   "specialisations": 0,
+   "status": "contributed"
+  },
+  "NXspe": {
+   "category": "application",
+   "describes": "NXroot",
+   "specialisations": 6,
+   "status": "application"
+  },
+  "NXspectrum": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 9,
+   "status": "base"
+  },
+  "NXspin_rotator": {
+   "category": "base",
+   "extends": "NXcomponent",
+   "specialisations": 4,
+   "status": "contributed"
+  },
+  "NXspindispersion": {
+   "category": "base",
+   "extends": "NXcomponent",
+   "specialisations": 1,
+   "status": "base"
+  },
+  "NXspm": {
+   "category": "application",
+   "describes": "NXroot",
+   "extends": "NXsensor_scan",
+   "specialisations": 32,
+   "status": "contributed"
+  },
+  "NXspm_bias_spectroscopy": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 6,
+   "status": "contributed"
+  },
+  "NXspm_cantilever": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "contributed"
+  },
+  "NXspm_cantilever_config": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 1,
+   "status": "contributed"
+  },
+  "NXspm_cantilever_oscillator": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "contributed"
+  },
+  "NXspm_piezo_config": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 3,
+   "status": "contributed"
+  },
+  "NXspm_piezo_sensor": {
+   "category": "base",
+   "extends": "NXsensor",
+   "specialisations": 0,
+   "status": "contributed"
+  },
+  "NXspm_piezoelectric_material": {
+   "category": "base",
+   "extends": "NXcrystal",
+   "specialisations": 0,
+   "status": "contributed"
+  },
+  "NXspm_positioner": {
+   "category": "base",
+   "extends": "NXpositioner",
+   "specialisations": 2,
+   "status": "contributed"
+  },
+  "NXspm_scan_control": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 1,
+   "status": "contributed"
+  },
+  "NXspm_scan_pattern": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 1,
+   "status": "contributed"
+  },
+  "NXspm_scan_region": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "contributed"
+  },
+  "NXspm_temperature_sensor": {
+   "category": "base",
+   "extends": "NXsensor",
+   "specialisations": 3,
+   "status": "contributed"
+  },
+  "NXsqom": {
+   "category": "application",
+   "describes": "NXroot",
+   "specialisations": 7,
+   "status": "application"
+  },
+  "NXstm": {
+   "category": "application",
+   "describes": "NXroot",
+   "extends": "NXspm",
+   "specialisations": 6,
+   "status": "contributed"
+  },
+  "NXstress": {
+   "category": "application",
+   "describes": "NXroot",
+   "specialisations": 15,
+   "status": "application"
+  },
+  "NXsts": {
+   "category": "application",
+   "describes": "NXroot",
+   "extends": "NXspm",
+   "specialisations": 8,
+   "status": "contributed"
+  },
+  "NXstxm": {
+   "category": "application",
+   "describes": "NXroot",
+   "specialisations": 11,
+   "status": "application"
+  },
+  "NXsubentry": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 1,
+   "status": "base"
+  },
+  "NXsubsampling_filter": {
+   "category": "base",
+   "extends": "NXparameters",
+   "specialisations": 0,
+   "status": "contributed"
+  },
+  "NXsubstance": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "contributed"
+  },
+  "NXtas": {
+   "category": "application",
+   "describes": "NXroot",
+   "specialisations": 9,
+   "status": "application"
+  },
+  "NXtextlog": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "contributed"
+  },
+  "NXtofnpd": {
+   "category": "application",
+   "describes": "NXroot",
+   "specialisations": 7,
+   "status": "application"
+  },
+  "NXtofraw": {
+   "category": "application",
+   "describes": "NXroot",
+   "specialisations": 7,
+   "status": "application"
+  },
+  "NXtofsingle": {
+   "category": "application",
+   "describes": "NXroot",
+   "specialisations": 7,
+   "status": "application"
+  },
+  "NXtomo": {
+   "category": "application",
+   "describes": "NXroot",
+   "specialisations": 7,
+   "status": "application"
+  },
+  "NXtomophase": {
+   "category": "application",
+   "describes": "NXroot",
+   "specialisations": 9,
+   "status": "application"
+  },
+  "NXtomoproc": {
+   "category": "application",
+   "describes": "NXroot",
+   "specialisations": 7,
+   "status": "application"
+  },
+  "NXtransformations": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXtranslation": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXtransmission": {
+   "category": "application",
+   "describes": "NXroot",
+   "specialisations": 16,
+   "status": "contributed"
+  },
+  "NXunit_cell": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXuser": {
+   "category": "base",
+   "extends": "NXobject",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXvelocity_selector": {
+   "category": "base",
+   "extends": "NXcomponent",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXwaveplate": {
+   "category": "base",
+   "extends": "NXcomponent",
+   "specialisations": 2,
+   "status": "base"
+  },
+  "NXxas": {
+   "category": "application",
+   "describes": "NXroot",
+   "specialisations": 9,
+   "status": "application"
+  },
+  "NXxasproc": {
+   "category": "application",
+   "describes": "NXroot",
+   "specialisations": 5,
+   "status": "application"
+  },
+  "NXxbase": {
+   "category": "application",
+   "describes": "NXroot",
+   "specialisations": 8,
+   "status": "application"
+  },
+  "NXxeuler": {
+   "category": "application",
+   "describes": "NXroot",
+   "extends": "NXxbase",
+   "specialisations": 5,
+   "status": "application"
+  },
+  "NXxkappa": {
+   "category": "application",
+   "describes": "NXroot",
+   "extends": "NXxbase",
+   "specialisations": 5,
+   "status": "application"
+  },
+  "NXxlaue": {
+   "category": "application",
+   "describes": "NXroot",
+   "extends": "NXxrot",
+   "specialisations": 4,
+   "status": "application"
+  },
+  "NXxlaueplate": {
+   "category": "application",
+   "describes": "NXroot",
+   "extends": "NXxlaue",
+   "specialisations": 3,
+   "status": "application"
+  },
+  "NXxnb": {
+   "category": "application",
+   "describes": "NXroot",
+   "extends": "NXxbase",
+   "specialisations": 5,
+   "status": "application"
+  },
+  "NXxpcs": {
+   "category": "application",
+   "describes": "NXroot",
+   "specialisations": 8,
+   "status": "contributed"
+  },
+  "NXxps": {
+   "category": "application",
+   "describes": "NXroot",
+   "extends": "NXmpes",
+   "specialisations": 24,
+   "status": "application"
+  },
+  "NXxraylens": {
+   "category": "base",
+   "extends": "NXcomponent",
+   "specialisations": 0,
+   "status": "base"
+  },
+  "NXxrd": {
+   "category": "application",
+   "describes": "NXroot",
+   "extends": "NXmonopd",
+   "specialisations": 5,
+   "status": "contributed"
+  },
+  "NXxrd_pan": {
+   "category": "application",
+   "describes": "NXroot",
+   "extends": "NXxrd",
+   "specialisations": 10,
+   "status": "contributed"
+  },
+  "NXxrot": {
+   "category": "application",
+   "describes": "NXroot",
+   "extends": "NXxbase",
+   "specialisations": 6,
+   "status": "application"
+  }
+ },
+ "codes": {
+  "BUNDLE": {
+   "doc": "the bundle used, when not taken from the file",
+   "exceptions": {},
+   "partial": "kept",
+   "path": "the root",
+   "severity": "I",
+   "tier": "M"
+  },
+  "CLASS": {
+   "doc": "a group assigned by an exact name has a class that does not fit",
+   "exceptions": {},
+   "partial": "kept",
+   "path": "the object",
+   "severity": "E",
+   "tier": "M"
+  },
+  "CONSTRAINT": {
+   "doc": "at_least_one_of, exactly_one_of, at_most_one_of, all_or_none; attribute length or rank",
+   "exceptions": {},
+   "partial": "missing",
+   "path": "the group; for attribute length and rank the object that owns the attribute",
+   "severity": "E",
+   "tier": "M"
+  },
+  "DEPRECATED": {
+   "doc": "a deprecated member or value is used",
+   "exceptions": {},
+   "partial": "kept",
+   "path": "the object",
+   "severity": "W",
+   "tier": "M"
+  },
+  "ENUM": {
+   "doc": "a value outside a closed enumeration",
+   "exceptions": {},
+   "partial": "kept",
+   "path": "the object",
+   "severity": "E",
+   "tier": "S"
+  },
+  "ENUM-OPEN": {
+   "doc": "a value outside an open enumeration",
+   "exceptions": {},
+   "partial": "kept",
+   "path": "the object",
+   "severity": "W",
+   "tier": "S"
+  },
+  "INCOMPLETE": {
+   "doc": "partial mode: a finding that may go away once writing is done; the message names the replaced code",
+   "exceptions": {},
+   "partial": "kept",
+   "path": "as the replaced code",
+   "severity": "I",
+   "tier": "M"
+  },
+  "LINK": {
+   "doc": "a dangling link, or a link whose object is not assigned to its target member",
+   "exceptions": {},
+   "partial": "dangling",
+   "path": "the link",
+   "severity": "E",
+   "tier": "M"
+  },
+  "MISSING": {
+   "doc": "fewer objects than min (one finding per member and parent)",
+   "exceptions": {},
+   "partial": "always",
+   "path": "the parent",
+   "severity": "E",
+   "tier": "M"
+  },
+  "NAME": {
+   "doc": "a name outside the name rules",
+   "exceptions": {},
+   "partial": "kept",
+   "path": "the object",
+   "severity": "W",
+   "tier": "M"
+  },
+  "NO-CLASS": {
+   "doc": "a group (not the root) has no class",
+   "exceptions": {},
+   "partial": "always",
+   "path": "the object",
+   "severity": "W",
+   "tier": "M"
+  },
+  "NO-DEFINITION": {
+   "doc": "no group is dispatched (not reported with expect); E with expect: fewer groups follow the expected definition than it requires",
+   "exceptions": {
+    "expect": "E"
+   },
+   "partial": "always",
+   "path": "the root",
+   "severity": "I",
+   "tier": "S"
+  },
+  "RECOMMENDED": {
+   "doc": "a recommended member is absent",
+   "exceptions": {},
+   "partial": "always",
+   "path": "the parent",
+   "severity": "W",
+   "tier": "M"
+  },
+  "REF": {
+   "doc": "a role or names_child attribute names no child, or a child of the wrong kind",
+   "exceptions": {},
+   "partial": "always",
+   "path": "the attribute",
+   "severity": "E",
+   "tier": "M"
+  },
+  "SHAPE": {
+   "doc": "rank, dimension or symbol; W for a scalar against length 1, and for symbol conflicts in an entry marked stopped (Q10)",
+   "exceptions": {
+    "scalar_against_length_1": "W",
+    "stopped_entry": "W"
+   },
+   "partial": "growing",
+   "path": "the object; the entry (or /) for symbols",
+   "severity": "E",
+   "tier": "M"
+  },
+  "SKIPPED": {
+   "doc": "a check not done (read error, unknown feature, tier F)",
+   "exceptions": {},
+   "partial": "kept",
+   "path": "the object",
+   "severity": "I",
+   "tier": "M"
+  },
+  "TOO-MANY": {
+   "doc": "more objects than max; max 0 means forbidden",
+   "exceptions": {},
+   "partial": "kept",
+   "path": "the parent",
+   "severity": "E",
+   "tier": "M"
+  },
+  "TYPE": {
+   "doc": "storage type not accepted, or a value check failed (NX_POSINT, NX_BOOLEAN, NX_DATE_TIME; tier S); a definition that is not one text value",
+   "exceptions": {},
+   "partial": "kept",
+   "path": "the object",
+   "severity": "E",
+   "tier": "M"
+  },
+  "UNDECLARED": {
+   "doc": "an object no member declares; E with undeclared: error",
+   "exceptions": {
+    "undeclared_error": "E"
+   },
+   "partial": "kept",
+   "path": "the object",
+   "severity": "I",
+   "tier": "M"
+  },
+  "UNITS": {
+   "doc": "units attribute absent, not understood, or of a dimension outside the category",
+   "exceptions": {},
+   "partial": "absent",
+   "path": "the dataset",
+   "severity": "W",
+   "tier": "M"
+  },
+  "UNKNOWN-CLASS": {
+   "doc": "a class not in the bundle; its content is undeclared",
+   "exceptions": {},
+   "partial": "kept",
+   "path": "the group",
+   "severity": "W",
+   "tier": "M"
+  },
+  "UNKNOWN-DEFINITION": {
+   "doc": "a definition that is not an application definition of the bundle",
+   "exceptions": {},
+   "partial": "kept",
+   "path": "the definition dataset",
+   "severity": "W",
+   "tier": "S"
+  },
+  "UNKNOWN-RELEASE": {
+   "doc": "a release the validator does not have",
+   "exceptions": {},
+   "partial": "kept",
+   "path": "the root",
+   "severity": "W",
+   "tier": "M"
+  }
+ },
+ "decisions": {
+  "Q1": "Occurrence defaults and precedence (minOccurs, optional, recommended)",
+  "Q10": "A standard way to mark an entry as aborted or incomplete",
+  "Q11": "Ids: a dataset member and a group member may share an id",
+  "Q12": "The rules of NXdata and NXobject written in the manual become roles and names_child (T13): DATA named by @signal, AXISNAME by @axes, @auxiliary_signals names datasets, @default names a group; AXISNAME_indices and the other rules of the manual are not checked",
+  "Q13": "Reserved prefixes and suffixes (not checked: NXDS states no rule for them)",
+  "Q14": "A free-named member of a specialisation applies to every object it matches (a free-named NXdata member of an entry specialisation applies to every NXdata group of that entry)",
+  "Q2": "Attributes and links are required by default in an application definition",
+  "Q3": "Placeholder characters; may a placeholder be empty; template priority",
+  "Q4": "Refinement: override or extend; subclasses where a superclass is expected; name-fit",
+  "Q5": "Are shapes binding; scope of a symbol",
+  "Q6": "Severities of findings",
+  "Q7": "NeXus type to storage types",
+  "Q8": "Links: by storage or by content; is a copy acceptable",
+  "Q9": "Dispatch: entry points, definition, NXsubentry, root-level members"
+ },
+ "features": [],
+ "names": {
+  "class_pattern": "NX.+",
+  "item_max_length": 63,
+  "item_pattern": "[a-zA-Z0-9_]([a-zA-Z0-9_.]*[a-zA-Z0-9_])?",
+  "target_pattern": "(/[a-zA-Z_][\\w_]*(:[a-zA-Z_][\\w_]*)?)+"
+ },
+ "nxds": "0.1",
+ "profiles": {
+  "hdf5": {
+   "class_attribute": "NX_class",
+   "dispatch_dataset": "definition",
+   "entry_points": [
+    "NXentry",
+    "NXsubentry"
+   ],
+   "link_target_attribute": "target",
+   "links": {
+    "external": "link",
+    "hard": "an object with several paths whose target attribute names one of them: every other path is a link to it; without such an attribute all paths are ordinary objects (Q8)",
+    "soft": "link"
+   },
+   "name": "hdf5",
+   "placeholder_characters": "[a-zA-Z0-9_.]",
+   "release_attribute": "NeXus_release",
+   "root_class": "NXroot",
+   "stopped_attribute": "status",
+   "stopped_value": "aborted",
+   "storage": {
+    "ISO8601": [
+     "string"
+    ],
+    "NX_BINARY": [
+     "uint8"
+    ],
+    "NX_BOOLEAN": [
+     "bool",
+     "int8",
+     "uint8"
+    ],
+    "NX_CCOMPLEX": [
+     "complex64",
+     "complex128",
+     "compound-2-floats"
+    ],
+    "NX_CHAR": [
+     "string"
+    ],
+    "NX_CHAR_OR_NUMBER": [
+     "int8",
+     "int16",
+     "int32",
+     "int64",
+     "uint8",
+     "uint16",
+     "uint32",
+     "uint64",
+     "float16",
+     "float32",
+     "float64",
+     "string"
+    ],
+    "NX_COMPLEX": [
+     "complex64",
+     "complex128",
+     "compound-2-floats"
+    ],
+    "NX_DATE_TIME": [
+     "string"
+    ],
+    "NX_FLOAT": [
+     "float16",
+     "float32",
+     "float64"
+    ],
+    "NX_INT": [
+     "int8",
+     "int16",
+     "int32",
+     "int64",
+     "uint8",
+     "uint16",
+     "uint32",
+     "uint64"
+    ],
+    "NX_NUMBER": [
+     "int8",
+     "int16",
+     "int32",
+     "int64",
+     "uint8",
+     "uint16",
+     "uint32",
+     "uint64",
+     "float16",
+     "float32",
+     "float64"
+    ],
+    "NX_PCOMPLEX": [
+     "complex64",
+     "complex128",
+     "compound-2-floats"
+    ],
+    "NX_POSINT": [
+     "int8",
+     "int16",
+     "int32",
+     "int64",
+     "uint8",
+     "uint16",
+     "uint32",
+     "uint64"
+    ],
+    "NX_QUATERNION": [
+     "float16",
+     "float32",
+     "float64"
+    ],
+    "NX_UINT": [
+     "uint8",
+     "uint16",
+     "uint32",
+     "uint64"
+    ]
+   },
+   "units_attribute": "units"
+  }
+ },
+ "release": "v2026.01",
+ "revision": 1,
+ "statuses": {
+  "application": "in applications/",
+  "base": "in base_classes/",
+  "contributed": "in contributed_definitions/",
+  "dormant": "in a dormant or stagnant subdirectory",
+  "local": "in a class directory given in addition to the repository; not released"
+ },
+ "types": {
+  "ISO8601": {
+   "base": "xs:dateTime",
+   "builtins": [
+    "xs:dateTime"
+   ],
+   "doc": "ISO8601 date/time stamp.\nIt is recommended to add an explicit time zone,\notherwise the local time zone *is assumed* per ISO8601.\nThe norm is that if there is no time zone, it is assumed\nlocal time, however, when a file moves from one country to\nanother it is undefined. If the local time zone is written,\nthe ambiguity is gone.",
+   "members": [],
+   "variety": "atomic"
+  },
+  "NX_BINARY": {
+   "base": "xs:unsignedByte",
+   "builtins": [
+    "xs:unsignedByte",
+    "xs:unsignedShort",
+    "xs:unsignedInt",
+    "xs:unsignedLong",
+    "xs:nonNegativeInteger",
+    "xs:integer",
+    "xs:decimal"
+   ],
+   "doc": "any representation of binary data - if text, line terminator is [CR][LF]",
+   "members": [],
+   "min_value": 0.0,
+   "variety": "atomic"
+  },
+  "NX_BOOLEAN": {
+   "base": "xs:boolean",
+   "builtins": [
+    "xs:boolean"
+   ],
+   "doc": "true/false value ( true | 1 | false | 0 )",
+   "members": [],
+   "variety": "atomic"
+  },
+  "NX_CCOMPLEX": {
+   "base": "xs:double",
+   "builtins": [],
+   "doc": "Compound type cartesian representation of complex numbers (real and\nimaginary parts) in NeXus.",
+   "length": 2,
+   "members": [],
+   "variety": "list"
+  },
+  "NX_CHAR": {
+   "base": "xs:string",
+   "builtins": [
+    "xs:string"
+   ],
+   "doc": "A string of characters. The preferred string encoding is :index:`UTF-8`. \nThis is the default field type.",
+   "members": [],
+   "variety": "atomic"
+  },
+  "NX_CHAR_OR_NUMBER": {
+   "builtins": [],
+   "doc": "Any valid character string or NeXus number representation",
+   "members": [
+    "NX_NUMBER",
+    "NX_CHAR"
+   ],
+   "variety": "union"
+  },
+  "NX_COMPLEX": {
+   "builtins": [],
+   "doc": "Compound type representation of complex numbers (either\ncartesian or polar form) in NeXus.",
+   "members": [
+    "NX_CCOMPLEX",
+    "NX_PCOMPLEX"
+   ],
+   "variety": "union"
+  },
+  "NX_DATE_TIME": {
+   "base": "ISO8601",
+   "builtins": [
+    "xs:dateTime"
+   ],
+   "doc": "Alias for the ``ISO8601`` date/time stamp.\nIt is recommended to add an explicit time zone,\notherwise the local time zone is assumed per ISO8601.",
+   "members": [],
+   "variety": "atomic"
+  },
+  "NX_FLOAT": {
+   "base": "xs:float",
+   "builtins": [
+    "xs:float"
+   ],
+   "doc": "any representation of a floating point number",
+   "members": [],
+   "variety": "atomic"
+  },
+  "NX_INT": {
+   "base": "xs:integer",
+   "builtins": [
+    "xs:integer",
+    "xs:decimal"
+   ],
+   "doc": "any representation of an integer number",
+   "members": [],
+   "variety": "atomic"
+  },
+  "NX_NUMBER": {
+   "builtins": [],
+   "doc": "any valid NeXus number representation",
+   "members": [
+    "NX_INT",
+    "NX_UINT",
+    "NX_POSINT",
+    "NX_FLOAT"
+   ],
+   "variety": "union"
+  },
+  "NX_PCOMPLEX": {
+   "base": "xs:double",
+   "builtins": [],
+   "doc": "Compound type polar representation of complex numbers \n(amplitude and phase *in radians*) in NeXus.",
+   "length": 2,
+   "members": [],
+   "variety": "list"
+  },
+  "NX_POSINT": {
+   "base": "xs:positiveInteger",
+   "builtins": [
+    "xs:positiveInteger",
+    "xs:nonNegativeInteger",
+    "xs:integer",
+    "xs:decimal"
+   ],
+   "doc": "any representation of a positive integer number (greater than zero)",
+   "members": [],
+   "min_value": 1.0,
+   "variety": "atomic"
+  },
+  "NX_QUATERNION": {
+   "base": "xs:double",
+   "builtins": [],
+   "doc": "Compound type representation of quaternion numbers \n(real,i,j,k) in NeXus.",
+   "length": 4,
+   "members": [],
+   "variety": "list"
+  },
+  "NX_UINT": {
+   "base": "xs:unsignedInt",
+   "builtins": [
+    "xs:unsignedInt",
+    "xs:unsignedLong",
+    "xs:nonNegativeInteger",
+    "xs:integer",
+    "xs:decimal"
+   ],
+   "doc": "any representation of an unsigned integer number (includes zero)",
+   "members": [],
+   "min_value": 0.0,
+   "variety": "atomic"
+  }
+ },
+ "unit_symbols": {
+  "plain": {
+   "%": {},
+   "A0": {
+    "length": 1
+   },
+   "Angstrom": {
+    "length": 1
+   },
+   "Byte": {},
+   "GB": {},
+   "MB": {},
+   "Torr": {
+    "length": -1,
+    "mass": 1,
+    "time": -2
+   },
+   "amu": {
+    "mass": 1
+   },
+   "angstrom": {
+    "length": 1
+   },
+   "arcmin": {
+    "angle": 1
+   },
+   "arcsec": {
+    "angle": 1
+   },
+   "atm": {
+    "length": -1,
+    "mass": 1,
+    "time": -2
+   },
+   "bit": {},
+   "byte": {},
+   "celsius": {
+    "temperature": 1
+   },
+   "count": {},
+   "counts": {},
+   "cts": {},
+   "d": {
+    "time": 1
+   },
+   "dB": {},
+   "day": {
+    "time": 1
+   },
+   "db": {},
+   "deg": {
+    "angle": 1
+   },
+   "degC": {
+    "temperature": 1
+   },
+   "degF": {
+    "temperature": 1
+   },
+   "degree": {
+    "angle": 1
+   },
+   "degrees": {
+    "angle": 1
+   },
+   "e": {
+    "current": 1,
+    "time": 1
+   },
+   "ft": {
+    "length": 1
+   },
+   "h": {
+    "time": 1
+   },
+   "hour": {
+    "time": 1
+   },
+   "in": {
+    "length": 1
+   },
+   "inch": {
+    "length": 1
+   },
+   "kB": {},
+   "mbar": {
+    "length": -1,
+    "mass": 1,
+    "time": -2
+   },
+   "micron": {
+    "length": 1
+   },
+   "min": {
+    "time": 1
+   },
+   "minute": {
+    "time": 1
+   },
+   "percent": {},
+   "photons": {},
+   "pixel": {},
+   "pixels": {},
+   "ppm": {},
+   "psi": {
+    "length": -1,
+    "mass": 1,
+    "time": -2
+   },
+   "pulses": {},
+   "rpm": {
+    "angle": 1,
+    "time": -1
+   },
+   "torr": {
+    "length": -1,
+    "mass": 1,
+    "time": -2
+   },
+   "Å": {
+    "length": 1
+   }
+  },
+  "prefixed": {
+   "A": {
+    "current": 1
+   },
+   "B": {},
+   "Bq": {
+    "time": -1
+   },
+   "C": {
+    "current": 1,
+    "time": 1
+   },
+   "Da": {
+    "mass": 1
+   },
+   "F": {
+    "current": 2,
+    "length": -2,
+    "mass": -1,
+    "time": 4
+   },
+   "Gy": {
+    "length": 2,
+    "time": -2
+   },
+   "H": {
+    "current": -2,
+    "length": 2,
+    "mass": 1,
+    "time": -2
+   },
+   "Hz": {
+    "time": -1
+   },
+   "J": {
+    "length": 2,
+    "mass": 1,
+    "time": -2
+   },
+   "K": {
+    "temperature": 1
+   },
+   "L": {
+    "length": 3
+   },
+   "N": {
+    "length": 1,
+    "mass": 1,
+    "time": -2
+   },
+   "Ohm": {
+    "current": -2,
+    "length": 2,
+    "mass": 1,
+    "time": -3
+   },
+   "Pa": {
+    "length": -1,
+    "mass": 1,
+    "time": -2
+   },
+   "S": {
+    "current": 2,
+    "length": -2,
+    "mass": -1,
+    "time": 3
+   },
+   "Sv": {
+    "length": 2,
+    "time": -2
+   },
+   "T": {
+    "current": -1,
+    "mass": 1,
+    "time": -2
+   },
+   "V": {
+    "current": -1,
+    "length": 2,
+    "mass": 1,
+    "time": -3
+   },
+   "W": {
+    "length": 2,
+    "mass": 1,
+    "time": -3
+   },
+   "Wb": {
+    "current": -1,
+    "length": 2,
+    "mass": 1,
+    "time": -2
+   },
+   "ampere": {
+    "current": 1
+   },
+   "b": {
+    "length": 2
+   },
+   "bar": {
+    "length": -1,
+    "mass": 1,
+    "time": -2
+   },
+   "barn": {
+    "length": 2
+   },
+   "barns": {
+    "length": 2
+   },
+   "cd": {
+    "luminosity": 1
+   },
+   "eV": {
+    "length": 2,
+    "mass": 1,
+    "time": -2
+   },
+   "g": {
+    "mass": 1
+   },
+   "gram": {
+    "mass": 1
+   },
+   "kelvin": {
+    "temperature": 1
+   },
+   "l": {
+    "length": 3
+   },
+   "lm": {
+    "angle": 2,
+    "luminosity": 1
+   },
+   "lx": {
+    "angle": 2,
+    "length": -2,
+    "luminosity": 1
+   },
+   "m": {
+    "length": 1
+   },
+   "meter": {
+    "length": 1
+   },
+   "metre": {
+    "length": 1
+   },
+   "mol": {
+    "amount": 1
+   },
+   "ohm": {
+    "current": -2,
+    "length": 2,
+    "mass": 1,
+    "time": -3
+   },
+   "rad": {
+    "angle": 1
+   },
+   "radian": {
+    "angle": 1
+   },
+   "s": {
+    "time": 1
+   },
+   "second": {
+    "time": 1
+   },
+   "sr": {
+    "angle": 2
+   },
+   "steradian": {
+    "angle": 2
+   },
+   "u": {
+    "mass": 1
+   }
+  },
+  "prefixes": {
+   "E": 18,
+   "G": 9,
+   "M": 6,
+   "P": 15,
+   "T": 12,
+   "Y": 24,
+   "Z": 21,
+   "a": -18,
+   "c": -2,
+   "d": -1,
+   "da": 1,
+   "f": -15,
+   "h": 2,
+   "k": 3,
+   "m": -3,
+   "n": -9,
+   "p": -12,
+   "u": -6,
+   "y": -24,
+   "z": -21,
+   "µ": -6,
+   "μ": -6
+  }
+ },
+ "units": {
+  "NX_ANGLE": {
+   "dimensions": [
+    {
+     "angle": 1
+    }
+   ],
+   "doc": "units of angle",
+   "empty": false,
+   "examples": [
+    "rad",
+    "deg"
+   ],
+   "members": []
+  },
+  "NX_ANY": {
+   "doc": "units for things like logs that aren't picky on units",
+   "empty": true,
+   "examples": [],
+   "members": []
+  },
+  "NX_AREA": {
+   "dimensions": [
+    {
+     "length": 2
+    }
+   ],
+   "doc": "units of area",
+   "empty": false,
+   "examples": [
+    "m^2",
+    "barns"
+   ],
+   "members": []
+  },
+  "NX_CHARGE": {
+   "dimensions": [
+    {
+     "current": 1,
+     "time": 1
+    }
+   ],
+   "doc": "units of electrical charge",
+   "empty": false,
+   "examples": [
+    "C"
+   ],
+   "members": []
+  },
+  "NX_COUNT": {
+   "dimensions": [
+    {}
+   ],
+   "doc": "units of quantity of item(s) such as number of photons,\nneutrons, pulses, or other counting events",
+   "empty": true,
+   "examples": [
+    ""
+   ],
+   "members": []
+  },
+  "NX_CROSS_SECTION": {
+   "dimensions": [
+    {
+     "length": 2
+    }
+   ],
+   "doc": "units of area (alias of NX_AREA)",
+   "empty": false,
+   "examples": [
+    "barn"
+   ],
+   "members": [
+    "NX_AREA"
+   ]
+  },
+  "NX_CURRENT": {
+   "dimensions": [
+    {
+     "current": 1
+    }
+   ],
+   "doc": "units of electrical current",
+   "empty": false,
+   "examples": [
+    "A"
+   ],
+   "members": []
+  },
+  "NX_DIMENSIONLESS": {
+   "dimensions": [
+    {}
+   ],
+   "doc": "units for fields where the units cancel out\n(NOTE: not the same as NX_UNITLESS)",
+   "empty": true,
+   "examples": [
+    "m/m"
+   ],
+   "members": []
+  },
+  "NX_EMITTANCE": {
+   "dimensions": [
+    {
+     "angle": 1,
+     "length": 1
+    }
+   ],
+   "doc": "units of emittance (``length * angle``) of a\nradiation source",
+   "empty": false,
+   "examples": [
+    "nm*rad"
+   ],
+   "members": []
+  },
+  "NX_ENERGY": {
+   "dimensions": [
+    {
+     "length": 2,
+     "mass": 1,
+     "time": -2
+    }
+   ],
+   "doc": "units of energy",
+   "empty": false,
+   "examples": [
+    "J",
+    "keV"
+   ],
+   "members": []
+  },
+  "NX_FLUX": {
+   "dimensions": [
+    {
+     "length": -2,
+     "time": -1
+    }
+   ],
+   "doc": "units of flux",
+   "empty": false,
+   "examples": [
+    "1/s/cm^2"
+   ],
+   "members": []
+  },
+  "NX_FREQUENCY": {
+   "dimensions": [
+    {
+     "time": -1
+    }
+   ],
+   "doc": "units of frequency",
+   "empty": false,
+   "examples": [
+    "Hz"
+   ],
+   "members": []
+  },
+  "NX_LENGTH": {
+   "dimensions": [
+    {
+     "length": 1
+    }
+   ],
+   "doc": "units of length",
+   "empty": false,
+   "examples": [
+    "m"
+   ],
+   "members": []
+  },
+  "NX_MASS": {
+   "dimensions": [
+    {
+     "mass": 1
+    }
+   ],
+   "doc": "units of mass",
+   "empty": false,
+   "examples": [
+    "g"
+   ],
+   "members": []
+  },
+  "NX_MASS_DENSITY": {
+   "dimensions": [
+    {
+     "length": -3,
+     "mass": 1
+    }
+   ],
+   "doc": "units of mass density",
+   "empty": false,
+   "examples": [
+    "g/cm^3"
+   ],
+   "members": []
+  },
+  "NX_MOLECULAR_WEIGHT": {
+   "dimensions": [
+    {
+     "amount": -1,
+     "mass": 1
+    }
+   ],
+   "doc": "units of molecular weight",
+   "empty": false,
+   "examples": [
+    "g/mol"
+   ],
+   "members": []
+  },
+  "NX_PERIOD": {
+   "dimensions": [
+    {
+     "time": 1
+    }
+   ],
+   "doc": "units of time, period of pulsed source\n(alias to `NX_TIME`)",
+   "empty": false,
+   "examples": [
+    "us"
+   ],
+   "members": []
+  },
+  "NX_PER_AREA": {
+   "dimensions": [
+    {
+     "length": -2
+    }
+   ],
+   "doc": "units of 1/length^2",
+   "empty": false,
+   "examples": [
+    "1/m^2"
+   ],
+   "members": []
+  },
+  "NX_PER_LENGTH": {
+   "dimensions": [
+    {
+     "length": -1
+    }
+   ],
+   "doc": "units of 1/length",
+   "empty": false,
+   "examples": [
+    "1/m"
+   ],
+   "members": []
+  },
+  "NX_POWER": {
+   "dimensions": [
+    {
+     "length": 2,
+     "mass": 1,
+     "time": -3
+    }
+   ],
+   "doc": "units of power",
+   "empty": false,
+   "examples": [
+    "W"
+   ],
+   "members": []
+  },
+  "NX_PRESSURE": {
+   "dimensions": [
+    {
+     "length": -1,
+     "mass": 1,
+     "time": -2
+    }
+   ],
+   "doc": "units of pressure",
+   "empty": false,
+   "examples": [
+    "Pa"
+   ],
+   "members": []
+  },
+  "NX_PULSES": {
+   "dimensions": [
+    {}
+   ],
+   "doc": "DEPRECATED: see NX_COUNT\n\nunits of clock pulses (alias to `NX_NUMBER`)",
+   "empty": false,
+   "examples": [
+    ""
+   ],
+   "members": []
+  },
+  "NX_SCATTERING_LENGTH_DENSITY": {
+   "dimensions": [
+    {
+     "length": -2
+    }
+   ],
+   "doc": "units of scattering length density",
+   "empty": false,
+   "examples": [
+    "m/m^3"
+   ],
+   "members": []
+  },
+  "NX_SOLID_ANGLE": {
+   "dimensions": [
+    {
+     "angle": 2
+    }
+   ],
+   "doc": "units of solid angle",
+   "empty": false,
+   "examples": [
+    "sr",
+    "steradian"
+   ],
+   "members": []
+  },
+  "NX_TEMPERATURE": {
+   "dimensions": [
+    {
+     "temperature": 1
+    }
+   ],
+   "doc": "units of temperature",
+   "empty": false,
+   "examples": [
+    "K"
+   ],
+   "members": []
+  },
+  "NX_TIME": {
+   "dimensions": [
+    {
+     "time": 1
+    }
+   ],
+   "doc": "units of time",
+   "empty": false,
+   "examples": [
+    "s"
+   ],
+   "members": []
+  },
+  "NX_TIME_OF_FLIGHT": {
+   "dimensions": [
+    {
+     "time": 1
+    }
+   ],
+   "doc": "units of (neutron) time of flight\n(alias to `NX_TIME`)",
+   "empty": false,
+   "examples": [
+    "s"
+   ],
+   "members": []
+  },
+  "NX_TRANSFORMATION": {
+   "dimensions": [
+    {
+     "length": 1
+    },
+    {
+     "angle": 1
+    },
+    {}
+   ],
+   "doc": "units of the specified transformation\n\ncould be any of these: ``NX_LENGTH``, ``NX_ANGLE``, or ``NX_UNITLESS``\n\nThere will be one or more transformations defined by one or more fields\nfor each transformation.  The units type ``NX_TRANSFORMATION`` designates the\nparticular axis generating a transformation (e.g. a rotation axis or a translation\naxis or a general axis).   ``NX_TRANSFORMATION`` designates the\nunits will be appropriate to the type of transformation,\nindicated in the :ref:`NXtransformations` base class\nby the ``transformation_type`` value:\n\n* ``NX_LENGTH`` for ``translation``\n* ``NX_ANGLE`` for ``rotation`` \n* ``NX_UNITLESS`` for axes for which no transformation type is specified.",
+   "empty": false,
+   "examples": [],
+   "members": [
+    "NX_LENGTH",
+    "NX_ANGLE",
+    "NX_UNITLESS"
+   ]
+  },
+  "NX_UNITLESS": {
+   "dimensions": [
+    {}
+   ],
+   "doc": "for fields that don't have a unit (e.g. hkl) so that they don't\ninherit the wrong units (NOTE: not the same as NX_DIMENSIONLESS)",
+   "empty": true,
+   "examples": [
+    ""
+   ],
+   "members": []
+  },
+  "NX_VOLTAGE": {
+   "dimensions": [
+    {
+     "current": -1,
+     "length": 2,
+     "mass": 1,
+     "time": -3
+    }
+   ],
+   "doc": "units of voltage",
+   "empty": false,
+   "examples": [
+    "V"
+   ],
+   "members": []
+  },
+  "NX_VOLUME": {
+   "dimensions": [
+    {
+     "length": 3
+    }
+   ],
+   "doc": "units of volume",
+   "empty": false,
+   "examples": [
+    "m^3"
+   ],
+   "members": []
+  },
+  "NX_WAVELENGTH": {
+   "dimensions": [
+    {
+     "length": 1
+    }
+   ],
+   "doc": "units of wavelength",
+   "empty": false,
+   "examples": [
+    "angstrom"
+   ],
+   "members": []
+  },
+  "NX_WAVENUMBER": {
+   "dimensions": [
+    {
+     "length": -1
+    }
+   ],
+   "doc": "units of wavenumber or Q",
+   "empty": false,
+   "examples": [
+    "1/nm",
+    "1/angstrom"
+   ],
+   "members": []
+  }
+ }
+}

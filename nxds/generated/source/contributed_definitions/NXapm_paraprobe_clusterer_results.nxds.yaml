@@ -1,0 +1,254 @@
+nxds: '0.1'
+class: NXapm_paraprobe_clusterer_results
+category: application
+extends: NXapm_paraprobe_tool_results
+describes: NXroot
+doc: |-
+  Application definition for a results file of the paraprobe-clusterer tool.
+
+  The tool paraprobe-clusterer evaluates how points cluster in space.
+defaults: {min: 1, binding: true, type: NX_CHAR}
+symbols:
+  n_ions:
+    doc: The total number of ions in the reconstruction.
+  n_feat: {doc: Number of clusters found.}
+children:
+  ENTRY:
+    node: group
+    name: {any: true}
+    class: NXentry
+    occurs: {min: 1, max: 1}
+    children:
+      definition:
+        node: dataset
+        type: NX_CHAR
+        enum: [NXapm_paraprobe_clusterer_results]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      cameca_to_nexus:
+        node: group
+        class: NXapm_paraprobe_tool_process
+        occurs: {min: 0}
+        via: [T1, T6, T7]
+        provisional: [Q1]
+      cluster_analysisID:
+        node: group
+        name: {template: 'cluster_analysis{ID}'}
+        class: NXapm_paraprobe_tool_process
+        occurs: {min: 0, max: unbounded}
+        children:
+          dbscanID:
+            node: group
+            name: {template: 'dbscan{ID}'}
+            class: NXsimilarity_grouping
+            occurs: {min: 0, max: unbounded}
+            doc: Results of a DBScan clustering analysis.
+            children:
+              eps:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_LENGTH}
+                doc: The epsilon (eps) parameter used.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              min_pts:
+                node: dataset
+                type: NX_UINT
+                units: {category: NX_UNITLESS}
+                doc: The minimum points (min_pts) parameter used.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              cardinality:
+                node: dataset
+                type: NX_POSINT
+                units: {category: NX_UNITLESS}
+                doc: |-
+                  Number of members in the set which is partitioned into features.
+                  Specifically, this is the total number of targets filtered from the
+                  dataset, i.e. typically the number of clusters which is usually not and
+                  for sure not necessarily the total number of ions in the dataset.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              index_offset:
+                node: dataset
+                type: NX_INT
+                units: {category: NX_UNITLESS}
+                doc: |-
+                  Which identifier is the first to be used to label a cluster.
+
+                  The value should be chosen in such a way that special values can be resolved:
+                  * index_offset - 1 indicates an object belongs to no cluster.
+                  * index_offset - 2 indicates an object belongs to the noise category.
+
+                  Setting for instance index_offset to 1 recovers the commonly used
+                  case that objects of the noise category get the value of -1 and points of the
+                  unassigned category get the value 0.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              targets:
+                node: dataset
+                type: NX_UINT
+                shape: [i]
+                units: {category: NX_UNITLESS}
+                doc: |-
+                  The evaporation (sequence) id (aka evaporation_id) to figure out
+                  which ions from the reconstruction were considered targets. The length
+                  of this array is not necessarily n_ions.
+                  Instead, it is the value of cardinality.
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              number_of_solutions:
+                node: dataset
+                occurs: {min: 0}
+                type: NX_UINT
+                shape: [i]
+                units: {category: NX_UNITLESS}
+                doc: |-
+                  The number of solutions found for each target. Typically,
+                  this value is 1 in which case the field can be omitted.
+                  Otherwise, this array is the concatenated set of values of solution
+                  tuples for each target that can be used to decode model_labels,
+                  core_sample_indices, and weight.
+                via: [T1, T6, T7, T9]
+                provisional: [Q1]
+              model_label:
+                node: dataset
+                occurs: {min: 0}
+                type: NX_INT
+                shape: [k]
+                units: {category: NX_UNITLESS}
+                doc: |-
+                  The raw labels from the DBScan clustering backend process.
+                  The length of this array is not necessarily n_ions.
+                  Instead, it is typically the value of cardinality provided that each
+                  target has only one associated cluster. If targets are assigned to
+                  multiple cluster this array is as long as the total number of solutions
+                  found and
+                via: [T1, T6, T7, T9]
+                provisional: [Q1]
+              core_sample_indices:
+                node: dataset
+                occurs: {min: 0}
+                type: NX_INT
+                shape: [k]
+                units: {category: NX_UNITLESS}
+                doc: |-
+                  The raw array of core sample indices which specify which of the
+                  targets are core points.
+                via: [T1, T6, T7, T9]
+                provisional: [Q1]
+              numerical_label:
+                node: dataset
+                type: NX_UINT
+                shape: [k]
+                units: {category: NX_UNITLESS}
+                doc: Numerical label for each target (member in the set) aka cluster identifier.
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              categorical_label:
+                node: dataset
+                occurs: {min: 0}
+                type: NX_CHAR
+                shape: [k]
+                doc: Categorical label(s) for each target (member in the set) aka cluster
+                  name(s).
+                via: [T1, T6, T7, T9]
+                provisional: [Q1]
+              weight:
+                node: dataset
+                occurs: {min: 0}
+                type: NX_NUMBER
+                shape: [k]
+                units: {category: NX_UNITLESS}
+                doc: |-
+                  Weights for each target that specifies how probable the target is assigned to
+                  a specific cluster.
+
+                  For the DBScan algorithm and atom probe tomography this value is the
+                  multiplicity of each ion with respect to the cluster. That is how many times
+                  should the position of the ion be accounted for because the ion is e.g. a
+                  molecular ion with several elements or nuclides of requested type.
+                via: [T1, T6, T7, T9]
+                provisional: [Q1]
+              is_noise:
+                node: dataset
+                occurs: {min: 0}
+                type: NX_BOOLEAN
+                shape: [k]
+                doc: Are targets assigned to the noise category or not.
+                via: [T1, T6, T7, T9]
+                provisional: [Q1]
+              is_core:
+                node: dataset
+                occurs: {min: 0}
+                type: NX_BOOLEAN
+                shape: [k]
+                doc: Are targets assumed a core point.
+                via: [T1, T6, T7, T9]
+                provisional: [Q1]
+              statistics:
+                node: group
+                class: NXprocess
+                occurs: {min: 0}
+                recommended: true
+                doc: |-
+                  In addition to the detailed storage which members were grouped to which
+                  feature here summary statistics are stored that communicate e.g. how many
+                  cluster were found.
+                children:
+                  number_of_targets:
+                    node: dataset
+                    type: NX_UINT
+                    units: {category: NX_UNITLESS}
+                    doc: |-
+                      Total number of targets in the set, i.e. ions that were filtered
+                      and considered in this cluster analysis.
+                    via: [T1, T5, T7]
+                    provisional: [Q1, Q2]
+                  number_of_noise_members:
+                    node: dataset
+                    type: NX_UINT
+                    units: {category: NX_UNITLESS}
+                    doc: Total number of members in the set which are categorized as noise.
+                    via: [T1, T5, T7]
+                    provisional: [Q1, Q2]
+                  number_of_core_members:
+                    node: dataset
+                    type: NX_UINT
+                    units: {category: NX_UNITLESS}
+                    doc: Total number of members in the set which are categorized as a core
+                      point.
+                    via: [T1, T5, T7]
+                    provisional: [Q1, Q2]
+                  number_of_features:
+                    node: dataset
+                    type: NX_UINT
+                    units: {category: NX_UNITLESS}
+                    doc: Total number of clusters (excluding noise and unassigned).
+                    via: [T1, T5, T7]
+                    provisional: [Q1, Q2]
+                  indices_feature:
+                    node: dataset
+                    type: NX_INT
+                    shape: [n_feat]
+                    units: {category: NX_UNITLESS}
+                    doc: Numerical identifier of each feature aka cluster_id.
+                    via: [T1, T5, T7, T9]
+                    provisional: [Q1, Q2]
+                  number_of_members:
+                    node: dataset
+                    type: NX_UINT
+                    shape: [n_feat]
+                    units: {category: NX_UNITLESS}
+                    doc: Number of members for each feature.
+                    via: [T1, T5, T7, T9]
+                    provisional: [Q1, Q2]
+                via: [T1, T6, T7]
+                provisional: [Q1]
+            via: [T1, T3, T6]
+            provisional: [Q1, Q3]
+        via: [T1, T3, T6]
+        provisional: [Q1, Q3]
+    via: [T1, T2, T6]
+    provisional: [Q1, Q11]
+via: [T8]

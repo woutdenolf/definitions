@@ -1,0 +1,31 @@
+nxds: '0.1'
+class: NXem_simulation
+category: base
+extends: NXobject
+doc: Base class for documenting a simulation of electron beam-matter interaction.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  PROGRAM:
+    node: group
+    name: {any: true}
+    class: NXprogram
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  PARAMETERS:
+    node: group
+    name: {any: true}
+    class: NXparameters
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  PROCESS:
+    node: group
+    name: {any: true}
+    class: NXprocess
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  DATA:
+    node: group
+    name: {any: true}
+    class: NXdata
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]

@@ -1,0 +1,238 @@
+nxds: '0.1'
+class: NXxbase
+category: application
+describes: NXroot
+doc: This definition covers the common parts of all monochromatic single crystal raw data
+  application definitions.
+defaults: {min: 1, binding: true, type: NX_CHAR}
+symbols:
+  nP: {doc: Number of points}
+  nXPixels: {doc: Number of X pixels}
+  nYPixels: {doc: Number of Y pixels}
+children:
+  ENTRY:
+    node: group
+    name: {any: true}
+    class: NXentry
+    children:
+      title:
+        node: dataset
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      start_time:
+        node: dataset
+        type: NX_DATE_TIME
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      definition:
+        node: dataset
+        enum: [NXxbase]
+        doc: 'Official NeXus NXDL schema to which this file conforms '
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      instrument:
+        node: group
+        class: NXinstrument
+        children:
+          source:
+            node: group
+            class: NXsource
+            children:
+              type:
+                node: dataset
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+              name:
+                node: dataset
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+              probe:
+                node: dataset
+                enum: [neutron, x-ray, electron]
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          monochromator:
+            node: group
+            class: NXmonochromator
+            children:
+              wavelength:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_WAVELENGTH}
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          detector:
+            node: group
+            class: NXdetector
+            occurs: {max: unbounded}
+            doc: |-
+              The name of the group is detector if there is only one detector,
+              if there are several,  names have to be detector1,
+              detector2, ...detectorn.
+            children:
+              data:
+                node: dataset
+                type: NX_INT
+                shape: [nP, nXPixels, nYPixels]
+                doc: |-
+                  The area detector data, the first dimension is always the
+                  number of scan points, the second and third are the number
+                  of pixels in x and y. The origin is always assumed to be
+                  in the center of the detector. maxOccurs is limited to the
+                  the number of detectors on your instrument.
+                attributes:
+                  signal:
+                    type: NX_POSINT
+                    enum: ['1']
+                    via: [T1, T5]
+                    provisional: [Q2]
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              x_pixel_size:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_LENGTH}
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              y_pixel_size:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_LENGTH}
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              distance:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_LENGTH}
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              frame_start_number:
+                node: dataset
+                type: NX_INT
+                doc: |-
+                  This is the start number of the first frame of a scan. In PX one often scans a couple
+                  of frames on a give sample, then does something else, then returns to the same sample
+                  and scans some more frames. Each time with a new data file.
+                  This number helps concatenating such measurements.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T5]
+            provisional: [Q2]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      sample:
+        node: group
+        class: NXsample
+        children:
+          name:
+            node: dataset
+            type: NX_CHAR
+            doc: Descriptive name of sample
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          orientation_matrix:
+            node: dataset
+            type: NX_FLOAT
+            shape: [3, 3]
+            doc: |-
+              The orientation matrix according to Busing and
+              Levy conventions. This is not strictly necessary as
+              the UB can always be derived from the data.  But
+              let us bow to common usage which includes the
+              UB nearly always.
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+          unit_cell:
+            node: dataset
+            type: NX_FLOAT
+            shape: [6]
+            doc: |-
+              The unit cell, a, b, c, alpha, beta, gamma.
+              Again, not strictly necessary, but normally written.
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+          temperature:
+            node: dataset
+            type: NX_FLOAT
+            shape: [nP]
+            doc: The sample temperature or whatever sensor represents this value best
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+          x_translation:
+            node: dataset
+            type: NX_FLOAT
+            units: {category: NX_LENGTH}
+            doc: Translation of the sample along the X-direction of the laboratory coordinate
+              system
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          y_translation:
+            node: dataset
+            type: NX_FLOAT
+            units: {category: NX_LENGTH}
+            doc: Translation of the sample along the Y-direction of the laboratory coordinate
+              system
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          distance:
+            node: dataset
+            type: NX_FLOAT
+            units: {category: NX_LENGTH}
+            doc: Translation of the sample along the Z-direction of the laboratory coordinate
+              system
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      control:
+        node: group
+        class: NXmonitor
+        children:
+          mode:
+            node: dataset
+            enum: [monitor, timer]
+            doc: |-
+              Count to a preset value based on either clock time (timer)
+              or received monitor counts (monitor).
+            via: [T0, T1, T5, T7]
+            provisional: [Q1, Q2]
+          preset:
+            node: dataset
+            type: NX_FLOAT
+            doc: preset value for time or monitor
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          integral:
+            node: dataset
+            type: NX_FLOAT
+            units: {category: NX_ANY}
+            doc: Total integral monitor counts
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      DATA:
+        node: group
+        name: {any: true}
+        class: NXdata
+        doc: |-
+          The name of this group id data if there is only
+          one detector; if there are several the names will
+          be data1, data2, data3 and will point
+          to the corresponding detector groups in the
+          instrument hierarchy.
+        children:
+          data:
+            node: link
+            target: ENTRY/INSTRUMENT/DETECTOR/data
+            via: [T1, T5, T10]
+            provisional: [Q2, Q8]
+        via: [T1, T2, T5, T7]
+        provisional: [Q1, Q2, Q11]
+    via: [T1, T2, T5, T7]
+    provisional: [Q1, Q2, Q11]
+via: [T8]

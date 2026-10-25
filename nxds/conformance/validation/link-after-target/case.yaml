@@ -1,0 +1,5 @@
+description: >
+  A link after its target in walk order (§9.8): `/entry/zdata/energy` points to
+  `/entry/instrument/monochromator/energy`, walked before it inside a dispatched
+  entry; the target's assignment is found again: no LINK.
+capabilities: []

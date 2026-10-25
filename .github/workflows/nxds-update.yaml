@@ -1,0 +1,96 @@
+name: NXDS update
+
+# Keep nxds/generated up to date in pull requests, so authors never have to run
+# `make nxds` themselves.
+# - Pull requests from a branch of this repository: the generated files are
+#   regenerated and committed to the pull request by github-actions.
+# - Pull requests from a fork: GitHub does not allow pushing to a fork, so the
+#   updated files are uploaded as a patch and the author (or a maintainer)
+#   applies it with `git apply nxds-generated.patch`, or runs `make nxds`.
+# - Main branch: if a merged pull request left the files out of date, a
+#   follow-up pull request with the updated files is opened.
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  pull-requests: write
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  update:
+    name: Update nxds/generated
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the pull request branch
+        if: github.event_name == 'pull_request'
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+
+      - name: Checkout the main branch
+        if: github.event_name == 'push'
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install nxds_tools
+        run: python -m pip install ./nxds_tools
+
+      - name: Regenerate
+        run: make nxds PYTHON=python
+
+      - name: Anything to update?
+        id: changes
+        run: |
+          git add --intent-to-add nxds/generated nxds/metaschema
+          if [ -n "$(git status --porcelain nxds/generated nxds/metaschema)" ]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Commit to the pull request (branch of this repository)
+        if: github.event_name == 'pull_request' && steps.changes.outputs.changed == 'true' && github.event.pull_request.head.repo.full_name == github.repository
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add nxds/generated nxds/metaschema
+          git commit -m "Update nxds/generated"
+          git push
+
+      - name: Patch for a pull request from a fork
+        if: github.event_name == 'pull_request' && steps.changes.outputs.changed == 'true' && github.event.pull_request.head.repo.full_name != github.repository
+        run: |
+          git add nxds/generated nxds/metaschema
+          git diff --cached > nxds-generated.patch
+          echo "::notice::nxds/generated is out of date. Download the artifact 'nxds-generated' and run 'git apply nxds-generated.patch', or run 'make nxds', and commit."
+
+      - uses: actions/upload-artifact@v4
+        if: github.event_name == 'pull_request' && steps.changes.outputs.changed == 'true' && github.event.pull_request.head.repo.full_name != github.repository
+        with:
+          name: nxds-generated
+          path: nxds-generated.patch
+
+      - name: Follow-up pull request on the main branch
+        if: github.event_name == 'push' && steps.changes.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: nxds-generated-update
+          commit-message: Update nxds/generated
+          title: Update nxds/generated
+          body: Generated files that a merged pull request left out of date (`make nxds`).
+          add-paths: |
+            nxds/generated
+            nxds/metaschema

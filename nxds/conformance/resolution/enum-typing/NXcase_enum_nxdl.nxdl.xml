@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition name="NXcase_enum_nxdl" extends="NXobject" type="group" category="application"
+            xmlns="http://definition.nexusformat.org/nxdl/3.1">
+  <doc>Enumerations of members whose type and shape are inherited (§5.2.7).</doc>
+  <group type="NXentry">
+    <field name="definition"><enumeration><item value="NXcase_enum_nxdl"/></enumeration></field>
+    <group type="NXcase_probe" name="probe">
+      <field name="mode"><enumeration><item value="3"/><item value="5"/></enumeration></field>
+      <field name="labels"><enumeration><item value="a b"/></enumeration></field>
+      <field name="direction"><enumeration><item value="[0, 0, 1]"/></enumeration></field>
+    </group>
+  </group>
+</definition>

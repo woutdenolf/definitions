@@ -1,0 +1,3 @@
+{"code": "SHAPE", "severity": "E", "path": "/entry1", "member": "NXcase_symbols#n"}
+{"code": "SHAPE", "severity": "W", "path": "/entry2", "member": "NXcase_symbols#n"}
+{"code": "SHAPE", "severity": "W", "path": "/entry3", "member": "NXcase_symbols#n"}

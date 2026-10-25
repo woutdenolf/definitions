@@ -1,0 +1,49 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/COLLECTION"},
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"node": "group", "ref": "NXobject/LOG"},
+    {"node": "group", "ref": "NXobject/NOTE"},
+    {"node": "group", "ref": "NXobject/PARAMETERS"},
+    {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+    {"node": "dataset", "ref": "NXobject/identifierNAME"},
+    {"declared_by": "NXem_optical_system", "docs": ["NXem_optical_system/camera_length"], "id": "camera_length", "name": {"exact": "camera_length"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_LENGTH"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXem_optical_system", "docs": ["NXem_optical_system/magnification"], "id": "magnification", "name": {"exact": "magnification"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_DIMENSIONLESS"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXem_optical_system", "docs": ["NXem_optical_system/defocus"], "id": "defocus", "name": {"exact": "defocus"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_LENGTH"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXem_optical_system", "docs": ["NXem_optical_system/semi_convergence_angle"], "id": "semi_convergence_angle", "name": {"exact": "semi_convergence_angle"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_ANGLE"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXem_optical_system", "docs": ["NXem_optical_system/field_of_view"], "id": "field_of_view", "name": {"exact": "field_of_view"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_LENGTH"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXem_optical_system", "docs": ["NXem_optical_system/working_distance"], "id": "working_distance", "name": {"exact": "working_distance"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_LENGTH"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXem_optical_system", "docs": ["NXem_optical_system/probe"], "id": "probe", "name": {"exact": "probe"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": [2]}, "type": "NX_NUMBER", "via": ["T1", "T4", "T7", "T9"]},
+    {"declared_by": "NXem_optical_system", "docs": ["NXem_optical_system/probe_current"], "id": "probe_current", "name": {"exact": "probe_current"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_CURRENT"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXem_optical_system", "docs": ["NXem_optical_system/dose_management"], "id": "dose_management", "name": {"exact": "dose_management"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXem_optical_system", "docs": ["NXem_optical_system/dose_rate"], "id": "dose_rate", "name": {"exact": "dose_rate"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"fixed": "1/(angstrom^2*s)"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXem_optical_system", "docs": ["NXem_optical_system/rotation"], "id": "rotation", "name": {"exact": "rotation"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_ANGLE"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXem_optical_system", "docs": ["NXem_optical_system/focal_length"], "id": "focal_length", "name": {"exact": "focal_length"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_LENGTH"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXem_optical_system", "docs": ["NXem_optical_system/tilt_correction"], "id": "tilt_correction", "name": {"exact": "tilt_correction"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_BOOLEAN", "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXem_optical_system", "docs": ["NXem_optical_system/dynamic_focus_correction"], "id": "dynamic_focus_correction", "name": {"exact": "dynamic_focus_correction"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_BOOLEAN", "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXem_optical_system", "docs": ["NXem_optical_system/dynamic_refocusing"], "id": "dynamic_refocusing", "name": {"exact": "dynamic_refocusing"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4", "T7"]}
+  ],
+  "class": "NXem_optical_system",
+  "extends": "NXobject",
+  "lossy": [],
+  "provisional": [],
+  "require": [],
+  "source": "base_classes/NXem_optical_system.nxdl.xml",
+  "status": "base",
+  "symbols": [],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"},
+  "via": []
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {}
+}

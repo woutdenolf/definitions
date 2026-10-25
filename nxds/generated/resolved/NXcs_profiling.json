@@ -1,0 +1,44 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/COLLECTION"},
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"node": "group", "ref": "NXobject/LOG"},
+    {"node": "group", "ref": "NXobject/NOTE"},
+    {"node": "group", "ref": "NXobject/PARAMETERS"},
+    {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+    {"node": "dataset", "ref": "NXobject/identifierNAME"},
+    {"declared_by": "NXcs_profiling", "docs": ["NXcs_profiling/current_working_directory"], "id": "current_working_directory", "name": {"exact": "current_working_directory"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXcs_profiling", "docs": ["NXcs_profiling/command_line_call"], "id": "command_line_call", "name": {"exact": "command_line_call"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXcs_profiling", "docs": ["NXcs_profiling/start_time"], "id": "start_time", "name": {"exact": "start_time"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_DATE_TIME", "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXcs_profiling", "docs": ["NXcs_profiling/end_time"], "id": "end_time", "name": {"exact": "end_time"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_DATE_TIME", "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXcs_profiling", "docs": ["NXcs_profiling/total_elapsed_time"], "id": "total_elapsed_time", "name": {"exact": "total_elapsed_time"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_TIME"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXcs_profiling", "docs": ["NXcs_profiling/max_processes"], "id": "max_processes", "name": {"exact": "max_processes"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_UINT", "units": {"category": "NX_UNITLESS"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXcs_profiling", "docs": ["NXcs_profiling/max_threads"], "id": "max_threads", "name": {"exact": "max_threads"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_UINT", "units": {"category": "NX_UNITLESS"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXcs_profiling", "docs": ["NXcs_profiling/max_gpus"], "id": "max_gpus", "name": {"exact": "max_gpus"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_UINT", "units": {"category": "NX_UNITLESS"}, "via": ["T1", "T4", "T7"]},
+    {"class": "NXcs_computer", "declared_by": "NXcs_profiling", "docs": ["NXcs_profiling/CS_COMPUTER"], "id": "CS_COMPUTER", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q11"], "recommended": false, "via": ["T1", "T2", "T4", "T7"]},
+    {"class": "NXcs_profiling_event", "declared_by": "NXcs_profiling", "docs": ["NXcs_profiling/eventID"], "id": "eventID", "name": {"template": "event{ID}"}, "node": "group", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q3"], "recommended": false, "via": ["T1", "T3", "T4", "T7"]}
+  ],
+  "class": "NXcs_profiling",
+  "extends": "NXobject",
+  "lossy": [],
+  "provisional": [],
+  "require": [],
+  "source": "base_classes/NXcs_profiling.nxdl.xml",
+  "status": "base",
+  "symbols": [],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"},
+  "via": []
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {}
+}

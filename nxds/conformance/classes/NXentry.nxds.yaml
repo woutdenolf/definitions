@@ -1,0 +1,10 @@
+nxds: "0.1"
+class: NXentry
+category: base
+extends: NXobject
+defaults: {min: 0, binding: false}
+children:
+  definition: {node: dataset, type: NX_CHAR}
+  title: {node: dataset, type: NX_CHAR}
+  start_time: {node: dataset, type: NX_DATE_TIME}
+  INSTRUMENT: {node: group, class: NXinstrument, name: {any: true}}

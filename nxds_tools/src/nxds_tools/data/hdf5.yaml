@@ -1,0 +1,35 @@
+# The HDF5 storage profile (spec §12). Data, published in the index.
+# placeholder_characters is added from the name rules of nxdl.xsd (Q3), and
+# storage is completed for every data type of the index (spec §13.1).
+name: hdf5
+class_attribute: NX_class
+units_attribute: units
+root_class: NXroot
+entry_points: [NXentry, NXsubentry]
+dispatch_dataset: definition
+release_attribute: NeXus_release
+link_target_attribute: target
+# Q10 (proposed): an entry whose scan was stopped early
+stopped_attribute: status
+stopped_value: aborted
+links:
+  soft: link
+  external: link
+  # spec §12.1
+  hard: "an object with several paths whose target attribute names one of them: every other path is a link to it; without such an attribute all paths are ordinary objects (Q8)"
+storage:
+  # Q7 (spec §13.1): storage types accepted for each atomic NeXus type; a union
+  # accepts the storage of its members, a type with a base and no own entry that
+  # of its base. The index lists every type with these rules applied.
+  NX_FLOAT: [float16, float32, float64]
+  NX_INT: [int8, int16, int32, int64, uint8, uint16, uint32, uint64]
+  NX_UINT: [uint8, uint16, uint32, uint64]
+  NX_POSINT: [int8, int16, int32, int64, uint8, uint16, uint32, uint64]
+  NX_BOOLEAN: [bool, int8, uint8]
+  NX_CHAR: [string]
+  ISO8601: [string]
+  NX_DATE_TIME: [string]
+  NX_BINARY: [uint8]
+  NX_CCOMPLEX: [complex64, complex128, compound-2-floats]
+  NX_PCOMPLEX: [complex64, complex128, compound-2-floats]
+  NX_QUATERNION: [float16, float32, float64]

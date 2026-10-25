@@ -1,0 +1,46 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"},
+    {"ref": "NXroot@NeXus_release"}
+  ],
+  "category": "application",
+  "children": [
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"class": "NXentry", "declared_by": "NXroot", "id": "ENTRY", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 1}, "recommended": false, "refined_by": ["NXcase_choice"], "specialisation": "NXcase_choice/ENTRY"}
+  ],
+  "class": "NXcase_choice",
+  "describes": "NXroot",
+  "lossy": [],
+  "require": [],
+  "status": "local",
+  "symbols": [],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"}
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {
+  "NXcase_choice/ENTRY": {
+   "attributes": [
+     {"ref": "NXobject@default"}
+   ],
+   "children": [
+     {"node": "group", "ref": "NXobject/DATA"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+     {"declared_by": "NXentry", "enum": {"open": false, "values": [{"value": "NXcase_choice"}]}, "id": "definition", "name": {"exact": "definition"}, "node": "dataset", "occurs": {"max": 1, "min": 1}, "recommended": false, "refined_by": ["NXcase_choice"], "type": "NX_CHAR"},
+     {"node": "dataset", "ref": "NXentry/title"},
+     {"node": "dataset", "ref": "NXentry/start_time"},
+     {"node": "group", "ref": "NXentry/INSTRUMENT"},
+     {"class": "NXcase_box", "declared_by": "NXcase_choice", "id": "shape_CASE_BOX", "name": {"exact": "shape"}, "node": "group", "occurs": {"max": 1, "min": 0}, "recommended": false},
+     {"class": "NXcase_cylinder", "declared_by": "NXcase_choice", "id": "shape_CASE_CYLINDER", "name": {"exact": "shape"}, "node": "group", "occurs": {"max": 1, "min": 0}, "recommended": false}
+   ],
+   "class": "NXentry",
+   "declared_by": "NXcase_choice",
+   "id": "NXcase_choice/ENTRY",
+   "require": [{"exactly_one_of": ["shape_CASE_BOX", "shape_CASE_CYLINDER"]}],
+   "symbols": [],
+   "undeclared": {"attribute": "report", "dataset": "report", "group": "report"}
+  }
+ }
+}

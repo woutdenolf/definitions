@@ -1,0 +1,43 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/COLLECTION"},
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"node": "group", "ref": "NXobject/LOG"},
+    {"node": "group", "ref": "NXobject/NOTE"},
+    {"node": "group", "ref": "NXobject/PARAMETERS"},
+    {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+    {"node": "dataset", "ref": "NXobject/identifierNAME"},
+    {"attributes": [{"declared_by": "NXobject", "docs": ["NXobject/identifierNAME@type"], "enum": {"open": true, "values": [{"value": "ARK"}, {"value": "DOI"}, {"value": "Hdl"}, {"value": "IGSN"}, {"value": "ISNI"}, {"value": "ISSN"}, {"value": "ISSN-L"}, {"value": "ORCID"}, {"value": "PURL"}, {"value": "ROR"}, {"value": "URL"}, {"value": "URN"}]}, "id": "type", "name": {"exact": "type"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4"]}], "declared_by": "NXem_event_data", "docs": ["NXobject/identifierNAME", "NXem_event_data/identifier_event"], "id": "identifier_event", "name": {"exact": "identifier_event"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q3", "Q4"], "recommended": false, "refines": "identifierNAME", "type": "NX_INT", "units": {"category": "NX_UNITLESS"}, "via": ["T1", "T3", "T4", "T7", "T18"]},
+    {"attributes": [{"declared_by": "NXobject", "docs": ["NXobject/identifierNAME@type"], "enum": {"open": true, "values": [{"value": "ARK"}, {"value": "DOI"}, {"value": "Hdl"}, {"value": "IGSN"}, {"value": "ISNI"}, {"value": "ISSN"}, {"value": "ISSN-L"}, {"value": "ORCID"}, {"value": "PURL"}, {"value": "ROR"}, {"value": "URL"}, {"value": "URN"}]}, "id": "type", "name": {"exact": "type"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4"]}], "declared_by": "NXem_event_data", "docs": ["NXobject/identifierNAME", "NXem_event_data/identifier_sample"], "id": "identifier_sample", "name": {"exact": "identifier_sample"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q3", "Q4"], "recommended": false, "refines": "identifierNAME", "type": "NX_CHAR", "units": {"category": "NX_UNITLESS"}, "via": ["T1", "T3", "T4", "T7", "T18"]},
+    {"declared_by": "NXem_event_data", "docs": ["NXem_event_data/start_time"], "id": "start_time", "name": {"exact": "start_time"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_DATE_TIME", "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXem_event_data", "docs": ["NXem_event_data/end_time"], "id": "end_time", "name": {"exact": "end_time"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_DATE_TIME", "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXem_event_data", "docs": ["NXem_event_data/type"], "id": "type", "name": {"exact": "type"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4", "T7"]},
+    {"class": "NXuser", "declared_by": "NXem_event_data", "id": "USER", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q11"], "recommended": false, "via": ["T1", "T2", "T4", "T7"]},
+    {"class": "NXem_instrument", "declared_by": "NXem_event_data", "id": "EM_INSTRUMENT", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q11"], "recommended": false, "via": ["T1", "T2", "T4", "T7"]},
+    {"class": "NXimage", "declared_by": "NXem_event_data", "id": "IMAGE", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q11"], "recommended": false, "via": ["T1", "T2", "T4", "T7"]},
+    {"class": "NXspectrum", "declared_by": "NXem_event_data", "id": "SPECTRUM", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q11"], "recommended": false, "via": ["T1", "T2", "T4", "T7"]}
+  ],
+  "class": "NXem_event_data",
+  "extends": "NXobject",
+  "lossy": [],
+  "provisional": [],
+  "require": [],
+  "source": "base_classes/NXem_event_data.nxdl.xml",
+  "status": "base",
+  "symbols": [],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"},
+  "via": []
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {}
+}

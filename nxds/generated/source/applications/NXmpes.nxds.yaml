@@ -1,0 +1,2457 @@
+nxds: '0.1'
+class: NXmpes
+category: application
+describes: NXroot
+doc: |-
+  This is the most general application definition for
+  photoemission experiments.
+
+  Groups and fields are named according to the
+  `ISO 18115-1:2023`_ specification as well as the `IUPAC Recommendations 2020`_.
+
+  .. _ISO 18115-1:2023: https://www.iso.org/standard/74811.html
+  .. _IUPAC Recommendations 2020: https://doi.org/10.1515/pac-2019-0404
+defaults: {min: 1, binding: true, type: NX_CHAR}
+symbols:
+  n_transmission_function:
+    doc: Number of data points in the transmission function.
+children:
+  ENTRY:
+    node: group
+    name: {any: true}
+    class: NXentry
+    children:
+      definition:
+        node: dataset
+        enum: [NXmpes]
+        attributes:
+          version:
+            via: [T0, T1, T5]
+            provisional: [Q2]
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      title:
+        node: dataset
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      start_time:
+        node: dataset
+        type: NX_DATE_TIME
+        doc: |-
+          Datetime of the start of the measurement.
+          Should be an ISO8601 date/time stamp. It is recommended to add an explicit time zone,
+          otherwise the local time zone is assumed per ISO8601.
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      end_time:
+        node: dataset
+        occurs: {min: 0}
+        recommended: true
+        type: NX_DATE_TIME
+        doc: |-
+          Datetime of the end of the measurement.
+          Should be a ISO8601 date/time stamp. It is recommended to add an explicit time zone,
+          otherwise the local time zone is assumed per ISO8601.
+        via: [T1, T6, T7]
+        provisional: [Q1]
+      method:
+        node: dataset
+        occurs: {min: 0}
+        recommended: true
+        doc: |-
+          Name of the experimental method.
+
+          If applicable, this name should match the terms given by `Clause 11`_ of
+          the `ISO 18115-1:2023`_ specification.
+
+          Examples include:
+              * X-ray photoelectron spectroscopy (XPS)
+              * angle-resolved X-ray photoelectron spectroscopy (ARXPS)
+              * ultraviolet photoelectron spectroscopy (UPS)
+              * angle-resolved photoelectron spectroscopy (ARPES)
+              * hard X-ray photoemission spectroscopy (HAXPES)
+              * near ambient pressure X-ray photoelectron spectroscopy (NAPXPS)
+              * photoelectron emission microscopy (PEEM)
+              * electron spectroscopy for chemical analysis (ESCA)
+              * time-resolved angle-resolved X-ray photoelectron spectroscopy (trARPES)
+              * spin-resolved angle-resolved X-ray photoelectron spectroscopy (spin-ARPES)
+              * momentum microscopy
+
+          .. _ISO 18115-1:2023: https://www.iso.org/standard/74811.html
+          .. _Clause 11: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:sec:11
+        via: [T0, T1, T6, T7]
+        provisional: [Q1]
+      transitions:
+        node: dataset
+        occurs: {min: 0}
+        doc: |-
+          Array of strings representing the electronic core levels and Auger transitions probed in this
+          MPES experiment.
+
+          In order for experiments to be comparable, the notation must follow a strict convention.
+
+          **For core levels:**
+
+          - The element symbol (chemical symbol) is written first.
+          - It is followed by a whitespace and then the electronic level (e.g., "1s", "2p", "3d", etc.)
+          - Fine-structure splitting levels must include the total angular momentum quantum number **J**,
+            written as a fraction after the orbital label (e.g., "3d5/2", "4f7/2").
+          - When relevant, fine-structure levels should be specified. If multiple fine-structure levels are
+            probed, they should either be given explicitly or the generic level (e.g., "3d", "4f") can be used.
+
+          Examples of correct core level notation:
+
+          - "C 1s"
+          - "O 1s"
+          - "Fe 2p"
+          - "Fe 2p3/2"
+          - "Fe 2p1/2"
+          - "Au 4f"
+          - "Au 4f5/2"
+          - "Au 4f7/2"
+
+          **For Auger transitions:**
+
+          - The element symbol (chemical symbol) is written first.
+          - It is followed by a whitespace and the Auger transitions, which can include:
+
+            - Explicit transitions (e.g., "KLL", "LMM") without fine-structure splitting
+            - Explicit transitions (e.g., "KL1L2", "LM1M2") with fine-structure splitting
+            - Simplified valence notation (e.g., "KVV", "KLV").
+            - Combinations of the above (e.g. "KL1V").
+
+          Examples of correct Auger transition notation:
+
+          - "C KLL"
+          - "O KLL"
+          - "O KVV"
+          - "O KL1L2"
+
+          **Additional Allowed Entries:**
+
+          Besides specific core levels and Auger transitions, the following broader spectral
+          regions can also be listed:
+
+          - "Fermi Edge"
+          - "Valence Band"
+          - "Survey"
+
+          **Incorrect Notation Examples (Do Not Use):**
+
+          - "C1s" (missing space)
+          - "O-1s" (incorrect separator)
+          - "Fe2p" (missing space)
+          - "Au4f7/2" (missing space)
+          - "O-KVV" (incorrect separator)
+          - "Fe 2p_3/2" (incorrect underscore)
+          - "Fe 2p 3/2" (extra space between "p" and "3/2")
+        via: [T0, T1, T6, T7]
+        provisional: [Q1]
+      COORDINATE_SYSTEM:
+        node: group
+        name: {any: true}
+        class: NXcoordinate_system
+        occurs: {min: 0}
+        doc: |-
+          Description of one coordinate systems that are specific to the setup
+          and the measurement geometry.
+
+          Multiple coordinate systems can be used if necessary.
+        via: [T1, T2, T6, T7]
+        provisional: [Q1, Q11]
+      USER:
+        node: group
+        name: {any: true}
+        class: NXuser
+        occurs: {min: 0}
+        recommended: true
+        doc: |-
+          Contact information of at least the user of the instrument or the investigator
+          who performed this experiment. Adding multiple users if relevant is recommended.
+        children:
+          name:
+            node: dataset
+            doc: Name of the user.
+            via: [T0, T1, T5, T7]
+            provisional: [Q1, Q2]
+          affiliation:
+            node: dataset
+            doc: |-
+              Name of the affiliation of the user at the time when the experiment was
+              performed.
+            via: [T0, T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T2, T6, T7]
+        provisional: [Q1, Q11]
+      INSTRUMENT:
+        node: group
+        name: {any: true}
+        class: NXinstrument
+        doc: |-
+          Description of the photoemission spectrometer and its individual parts.
+
+          This concept is related to term `12.58`_ of the ISO 18115-1:2023 standard.
+
+          .. _12.58: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:12.58
+        children:
+          energy_resolution:
+            node: group
+            class: NXresolution
+            occurs: {min: 0}
+            doc: Overall energy resolution of the photoemission instrument.
+            children:
+              physical_quantity:
+                node: dataset
+                enum: [energy]
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+              type:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                via: [T0, T1, T6, T7]
+                provisional: [Q1]
+              resolution:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_ENERGY}
+                doc: |-
+                  Minimum distinguishable energy separation in the energy spectra.
+
+                  This concept is related to term `10.24`_ of the ISO 18115-1:2023 standard.
+
+                  .. _10.24: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:10.24
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              relative_resolution:
+                node: dataset
+                occurs: {min: 0}
+                type: NX_FLOAT
+                doc: |-
+                  Ratio of the energy resolution of the photoemission spectrometer at a specified energy
+                  value to that energy value.
+
+                  This concept is related to term `10.7 ff.`_ of the ISO 18115-1:2023 standard.
+
+                  .. _10.7 ff.: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:10.7
+                via: [T1, T6, T7]
+                provisional: [Q1]
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          RESOLUTION:
+            node: group
+            name: {any: true}
+            class: NXresolution
+            occurs: {min: 0}
+            doc: |-
+              Any further resolution information about the instrument. For example, the angular
+              resolution of the instrument if the spectrometer is angle-resolving.
+            via: [T1, T2, T6, T7]
+            provisional: [Q1, Q11]
+          device_information:
+            node: group
+            class: NXfabrication
+            occurs: {min: 0}
+            recommended: true
+            children:
+              vendor:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                via: [T0, T1, T6, T7]
+                provisional: [Q1]
+              model:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                via: [T0, T1, T6, T7]
+                provisional: [Q1]
+              identifier:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                via: [T0, T1, T6, T7]
+                provisional: [Q1]
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          source_probe:
+            node: group
+            class: NXsource
+            occurs: {min: 0}
+            recommended: true
+            doc: |-
+              The source used to generate the :ref:`beam_probe </NXmpes/ENTRY/INSTRUMENT/beam_probe-group>`.
+
+              Properties refer strictly to parameters of the source, not of the output beam. For example,
+              the energy of the source is not the optical power of the beam, but the energy of the electron beam
+              in a synchrotron or similar.
+            children:
+              type:
+                node: dataset
+                enum:
+                  values:
+                  - {value: Synchrotron X-ray Source}
+                  - {value: Rotating Anode X-ray}
+                  - {value: Fixed Tube X-ray}
+                  - {value: UV Laser}
+                  - {value: Free-Electron Laser}
+                  - {value: Optical Laser}
+                  - {value: UV Plasma Source}
+                  - {value: Metal Jet X-ray}
+                  - {value: HHG laser}
+                  - {value: UV lamp}
+                  - {value: Monochromatized electron source}
+                  open: true
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+              name:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                via: [T0, T1, T6, T7]
+                provisional: [Q1]
+              probe:
+                node: dataset
+                occurs: {min: 0}
+                via: [T0, T1, T6, T7]
+                provisional: [Q1]
+              device_information:
+                node: group
+                class: NXfabrication
+                occurs: {min: 0}
+                recommended: true
+                children:
+                  vendor:
+                    node: dataset
+                    occurs: {min: 0}
+                    recommended: true
+                    via: [T0, T1, T6, T7]
+                    provisional: [Q1]
+                  model:
+                    node: dataset
+                    occurs: {min: 0}
+                    recommended: true
+                    via: [T0, T1, T6, T7]
+                    provisional: [Q1]
+                  identifier:
+                    node: dataset
+                    occurs: {min: 0}
+                    recommended: true
+                    via: [T0, T1, T6, T7]
+                    provisional: [Q1]
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              associated_beam:
+                node: dataset
+                type: NX_CHAR
+                doc: |-
+                  A reference to a beam emitted by this source.
+                  Should be named with the same suffix, e.g.,
+                  for ``source_probe`` it should refer to ``beam_probe``.
+
+                  Example:
+                    * /entry/instrument/source_probe/associated_beam = /entry/instrument/beam_probe
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          source_pump:
+            node: group
+            class: NXsource
+            occurs: {min: 0}
+            doc: |-
+              The source used to generate the :ref:`beam_pump </NXmpes/ENTRY/INSTRUMENT/beam_pump-group>`
+              in pump-probe experiments.
+
+              Properties refer strictly to parameters of the source, not of the output beam.
+            children:
+              type:
+                node: dataset
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+              name:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                via: [T0, T1, T6, T7]
+                provisional: [Q1]
+              probe:
+                node: dataset
+                occurs: {min: 0}
+                via: [T0, T1, T6, T7]
+                provisional: [Q1]
+              device_information:
+                node: group
+                class: NXfabrication
+                occurs: {min: 0}
+                recommended: true
+                children:
+                  vendor:
+                    node: dataset
+                    occurs: {min: 0}
+                    recommended: true
+                    via: [T0, T1, T6, T7]
+                    provisional: [Q1]
+                  model:
+                    node: dataset
+                    occurs: {min: 0}
+                    recommended: true
+                    via: [T0, T1, T6, T7]
+                    provisional: [Q1]
+                  identifier:
+                    node: dataset
+                    occurs: {min: 0}
+                    recommended: true
+                    via: [T0, T1, T6, T7]
+                    provisional: [Q1]
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              associated_beam:
+                node: dataset
+                type: NX_CHAR
+                doc: |-
+                  A reference to a beam emitted by this source.
+                  Should be named with the same suffix, e.g.,
+                  for ``source_pump`` it should refer to ``beam_pump``.
+
+                  Example:
+                    * /entry/instrument/source_pump/associated_beam = /entry/instrument/beam_pump
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          source_TYPE:
+            node: group
+            name: {template: 'source_{TYPE}'}
+            class: NXsource
+            occurs: {min: 0}
+            doc: |-
+              Any other source used to generate a beam.
+
+              This group is to be used for any additional beams that are not described by
+              :ref:`source_probe </NXmpes/ENTRY/INSTRUMENT/source_probe-group>` or
+              :ref:`source_pump </NXmpes/ENTRY/INSTRUMENT/source_pump-group>`.
+
+              Examples could be a low energy electron source for charge neutralization
+              (see also :ref:`flood_gun </NXmpes/ENTRY/INSTRUMENT/flood_gun-group>`)
+              or an additional laser source.
+
+              Properties refer strictly to parameters of the source, not of the output beam.
+
+              Note that the uppercase notation in ``source_TYPE`` means that multiple sources can
+              be provided. The uppercase part can be substituted with any string that consists
+              of alphanumeric characters, including both uppercase and lowercase letters from A to Z
+              and numerical digits from 0 to 9. For example, in pump-probe experiments, it is possible
+              to have both a ``source_laser`` and a ``source_electron``.
+            children:
+              type:
+                node: dataset
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+              name:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                via: [T0, T1, T6, T7]
+                provisional: [Q1]
+              probe:
+                node: dataset
+                occurs: {min: 0}
+                via: [T0, T1, T6, T7]
+                provisional: [Q1]
+              device_information:
+                node: group
+                class: NXfabrication
+                occurs: {min: 0}
+                recommended: true
+                children:
+                  vendor:
+                    node: dataset
+                    occurs: {min: 0}
+                    recommended: true
+                    via: [T0, T1, T6, T7]
+                    provisional: [Q1]
+                  model:
+                    node: dataset
+                    occurs: {min: 0}
+                    recommended: true
+                    via: [T0, T1, T6, T7]
+                    provisional: [Q1]
+                  identifier:
+                    node: dataset
+                    occurs: {min: 0}
+                    recommended: true
+                    via: [T0, T1, T6, T7]
+                    provisional: [Q1]
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              associated_beam:
+                node: dataset
+                type: NX_CHAR
+                doc: |-
+                  A reference to a beam emitted by this source.
+                  Should be named with the same suffix, e.g.,
+                  for ``source_laser`` it should refer to ``beam_laser``.
+
+                  Example:
+                    * /entry/instrument/source_laser/associated_beam = /entry/instrument/beam_laser
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T3, T6, T7]
+            provisional: [Q1, Q3]
+          beam_probe:
+            node: group
+            class: NXbeam
+            doc: |-
+              Properties of the probe beam at a given location.
+
+              This is the beam that is used to facilitate the photoemission during MPES
+              experiments.
+            children:
+              distance:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                type: NX_FLOAT
+                units: {category: NX_LENGTH}
+                doc: |-
+                  Distance between the point where the current NXbeam instance is evaluating
+                  the beam properties and the point where the beam interacts with the sample.
+                  For photoemission, the latter is the point where the the centre of the beam
+                  touches the sample surface.
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              incident_energy:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_ENERGY}
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              incident_energy_spread:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                type: NX_NUMBER
+                units: {category: NX_ENERGY}
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              incident_polarization:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                type: NX_NUMBER
+                units: {category: NX_ANY}
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              extent:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                type: NX_FLOAT
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              associated_source:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                type: NX_CHAR
+                doc: |-
+                  The source that emitted this beam.
+                  Should be named with the same suffix, e.g.,
+                  for ``beam_probe`` it should refer to ``source_probe``.
+                  This should be specified if an associated source exists.
+
+                  Example:
+                    * /entry/instrument/beam_probe/associated_source = /entry/instrument/source_probe
+                via: [T1, T6, T7]
+                provisional: [Q1]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          beam_pump:
+            node: group
+            class: NXbeam
+            occurs: {min: 0}
+            doc: |-
+              Properties of the pump beam at a given location.
+
+              In pump-probe experiments, this is the beam that excites the system,
+              initiating a change in its state. It sets the timing for the experiment
+              by defining time zero in a pump-probe setup.
+            children:
+              distance:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                type: NX_FLOAT
+                units: {category: NX_LENGTH}
+                doc: |-
+                  Distance between the point where the current NXbeam instance is evaluating
+                  the beam properties and the point where the beam interacts with the sample.
+                  For photoemission, the latter is the point where the the centre of the beam
+                  touches the sample surface.
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              incident_energy:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_ENERGY}
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              incident_energy_spread:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                type: NX_NUMBER
+                units: {category: NX_ENERGY}
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              incident_polarization:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                type: NX_NUMBER
+                units: {category: NX_ANY}
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              extent:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                type: NX_FLOAT
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              associated_source:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                type: NX_CHAR
+                doc: |-
+                  The source that emitted this beam.
+                  Should be named with the same suffix, e.g.,
+                  for ``beam_pump`` it should refer to ``source_pump``.
+                  This should be specified if an associated source exists.
+
+                  Example:
+                    * /entry/instrument/beam_pump/associated_source = /entry/instrument/source_pump
+                via: [T1, T6, T7]
+                provisional: [Q1]
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          beam_TYPE:
+            node: group
+            name: {template: 'beam_{TYPE}'}
+            class: NXbeam
+            occurs: {min: 0}
+            doc: |-
+              Properties of any other beam at a given location.
+
+              This group is to be used for any additional beams that are not described by
+              :ref:`beam_probe </NXmpes/ENTRY/INSTRUMENT/beam_probe-group>` or
+              :ref:`beam_pump </NXmpes/ENTRY/INSTRUMENT/beam_pump-group>`.
+
+              Should be named with the same suffix as ``source_TYPE``, e.g.,
+              for ``source_laser`` it should refer to ``beam_laser``.
+            children:
+              distance:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                type: NX_FLOAT
+                units: {category: NX_LENGTH}
+                doc: |-
+                  Distance between the point where the current NXbeam instance is evaluating
+                  the beam properties and the point where the beam interacts with the sample.
+                  For photoemission, the latter is the point where the the centre of the beam
+                  touches the sample surface.
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              incident_energy:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_ENERGY}
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              incident_energy_spread:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                type: NX_NUMBER
+                units: {category: NX_ENERGY}
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              incident_polarization:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                type: NX_NUMBER
+                units: {category: NX_ANY}
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              extent:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                type: NX_FLOAT
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              associated_source:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                type: NX_CHAR
+                doc: |-
+                  The source that emitted this beam.
+                  Should be named with the same suffix, e.g.,
+                  for ``beam_laser`` it should refer to ``source_laser``.
+                  This should be specified if an associated source exists.
+
+                  Example:
+                    * /entry/instrument/beam_laser/associated_source = /entry/instrument/source_laser
+                via: [T1, T6, T7]
+                provisional: [Q1]
+            via: [T1, T3, T6, T7]
+            provisional: [Q1, Q3]
+          ELECTRONANALYZER:
+            node: group
+            name: {any: true}
+            class: NXelectronanalyzer
+            children:
+              device_information:
+                node: group
+                class: NXfabrication
+                occurs: {min: 0}
+                recommended: true
+                children:
+                  vendor:
+                    node: dataset
+                    occurs: {min: 0}
+                    recommended: true
+                    via: [T0, T1, T6, T7]
+                    provisional: [Q1]
+                  model:
+                    node: dataset
+                    occurs: {min: 0}
+                    recommended: true
+                    via: [T0, T1, T6, T7]
+                    provisional: [Q1]
+                  identifier:
+                    node: dataset
+                    occurs: {min: 0}
+                    recommended: true
+                    via: [T0, T1, T6, T7]
+                    provisional: [Q1]
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              description:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                via: [T0, T1, T6, T7]
+                provisional: [Q1]
+              work_function:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                type: NX_FLOAT
+                units: {category: NX_ENERGY}
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              energy_resolution:
+                node: group
+                class: NXresolution
+                occurs: {min: 0}
+                children:
+                  type:
+                    node: dataset
+                    occurs: {min: 0}
+                    recommended: true
+                    via: [T0, T1, T6, T7]
+                    provisional: [Q1]
+                  physical_quantity:
+                    node: dataset
+                    enum: [energy]
+                    via: [T0, T1, T5, T7]
+                    provisional: [Q1, Q2]
+                  resolution:
+                    node: dataset
+                    type: NX_FLOAT
+                    via: [T1, T5, T7]
+                    provisional: [Q1, Q2]
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              fast_axes:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                via: [T0, T1, T6, T7]
+                provisional: [Q1]
+              slow_axes:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                via: [T0, T1, T6, T7]
+                provisional: [Q1]
+              transmission_function:
+                node: group
+                class: NXdata
+                occurs: {min: 0}
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              COLLECTIONCOLUMN:
+                node: group
+                name: {any: true}
+                class: NXcollectioncolumn
+                children:
+                  scheme:
+                    node: dataset
+                    enum: [angular dispersive, spatial dispersive, momentum dispersive, non-dispersive]
+                    doc: Scheme of the electron collection column.
+                    via: [T0, T1, T5, T7]
+                    provisional: [Q1, Q2]
+                  lens_mode:
+                    node: dataset
+                    occurs: {min: 0}
+                    recommended: true
+                    via: [T0, T1, T6, T7]
+                    provisional: [Q1]
+                  projection:
+                    node: dataset
+                    occurs: {min: 0}
+                    recommended: true
+                    via: [T0, T1, T6, T7]
+                    provisional: [Q1]
+                  angular_acceptance:
+                    node: dataset
+                    occurs: {min: 0}
+                    type: NX_FLOAT
+                    via: [T1, T6, T7]
+                    provisional: [Q1]
+                  spatial_acceptance:
+                    node: dataset
+                    occurs: {min: 0}
+                    type: NX_FLOAT
+                    via: [T1, T6, T7]
+                    provisional: [Q1]
+                  field_aperture:
+                    node: group
+                    class: NXaperture
+                    occurs: {min: 0}
+                    doc: |-
+                      The size and position of the field aperture inserted in the column. To add
+                      additional or other apertures use the APERTURE group of NXcollectioncolumn.
+                    via: [T1, T6, T7]
+                    provisional: [Q1]
+                  contrast_aperture:
+                    node: group
+                    class: NXaperture
+                    occurs: {min: 0}
+                    doc: |-
+                      The size and position of the contrast aperture inserted in the column. To add
+                      additional or other apertures use the APERTURE group of NXcollectioncolumn.
+                    via: [T1, T6, T7]
+                    provisional: [Q1]
+                  iris:
+                    node: group
+                    class: NXaperture
+                    occurs: {min: 0}
+                    doc: |-
+                      Size, position and shape of the iris inserted in the column.
+
+                      The iris is an aperture in the lens with a variable diameter which can reduce the number of
+                      electrons entering the analyzer.
+
+                      To add additional or other slits use the APERTURE group of NXcollectioncolumn.
+                    via: [T1, T6, T7]
+                    provisional: [Q1]
+                  device_information:
+                    node: group
+                    class: NXfabrication
+                    occurs: {min: 0}
+                    recommended: true
+                    children:
+                      vendor:
+                        node: dataset
+                        occurs: {min: 0}
+                        recommended: true
+                        via: [T0, T1, T6, T7]
+                        provisional: [Q1]
+                      model:
+                        node: dataset
+                        occurs: {min: 0}
+                        recommended: true
+                        via: [T0, T1, T6, T7]
+                        provisional: [Q1]
+                      identifier:
+                        node: dataset
+                        occurs: {min: 0}
+                        recommended: true
+                        via: [T0, T1, T6, T7]
+                        provisional: [Q1]
+                    via: [T1, T6, T7]
+                    provisional: [Q1]
+                via: [T1, T2, T5, T7]
+                provisional: [Q1, Q2, Q11]
+              ENERGYDISPERSION:
+                node: group
+                name: {any: true}
+                class: NXenergydispersion
+                children:
+                  scheme:
+                    node: dataset
+                    enum: [tof, hemispherical, double hemispherical, cylindrical mirror, display
+                        mirror, retarding grid]
+                    via: [T0, T1, T5, T7]
+                    provisional: [Q1, Q2]
+                  pass_energy:
+                    node: dataset
+                    occurs: {min: 0}
+                    recommended: true
+                    type: NX_FLOAT
+                    units: {category: NX_ENERGY}
+                    doc: |-
+                      Only one of ``pass_energy`` or ``drift_energy`` should be supplied. ``pass_energy`` should be used when working
+                      with hemispherical analyzers.
+                    via: [T1, T6, T7]
+                    provisional: [Q1]
+                  drift_energy:
+                    node: dataset
+                    occurs: {min: 0}
+                    recommended: true
+                    type: NX_FLOAT
+                    units: {category: NX_ENERGY}
+                    doc: |-
+                      Only one of ``pass_energy`` or ``drift_energy`` should be supplied. ``drift_energy`` should be used if a TOF is used in the
+                      energy dispersive part of the electron analyzer.
+                    via: [T1, T6, T7]
+                    provisional: [Q1]
+                  energy_scan_mode:
+                    node: dataset
+                    occurs: {min: 0}
+                    recommended: true
+                    via: [T0, T1, T6, T7]
+                    provisional: [Q1]
+                  entrance_slit:
+                    node: group
+                    class: NXaperture
+                    occurs: {min: 0}
+                    doc: |-
+                      Size, position and shape of the entrance slit in dispersive analyzers.
+
+                      To add additional or other slits use the APERTURE group of NXenergydispersion.
+                    via: [T1, T6, T7]
+                    provisional: [Q1]
+                  exit_slit:
+                    node: group
+                    class: NXaperture
+                    occurs: {min: 0}
+                    doc: |-
+                      Size, position and shape of the exit slit in dispersive analyzers.
+
+                      To add additional or other slits use the APERTURE group of NXenergydispersion.
+                    via: [T1, T6, T7]
+                    provisional: [Q1]
+                  device_information:
+                    node: group
+                    class: NXfabrication
+                    occurs: {min: 0}
+                    recommended: true
+                    children:
+                      vendor:
+                        node: dataset
+                        occurs: {min: 0}
+                        recommended: true
+                        via: [T0, T1, T6, T7]
+                        provisional: [Q1]
+                      model:
+                        node: dataset
+                        occurs: {min: 0}
+                        recommended: true
+                        via: [T0, T1, T6, T7]
+                        provisional: [Q1]
+                      identifier:
+                        node: dataset
+                        occurs: {min: 0}
+                        recommended: true
+                        via: [T0, T1, T6, T7]
+                        provisional: [Q1]
+                    via: [T1, T6, T7]
+                    provisional: [Q1]
+                via: [T1, T2, T5, T7]
+                provisional: [Q1, Q2, Q11]
+              ELECTRON_DETECTOR:
+                node: group
+                name: {any: true}
+                class: NXelectron_detector
+                children:
+                  amplifier_type:
+                    node: dataset
+                    occurs: {min: 0}
+                    recommended: true
+                    enum: [MCP, channeltron]
+                    doc: Type of electron amplifier in the first amplification step.
+                    via: [T0, T1, T6, T7]
+                    provisional: [Q1]
+                  detector_type:
+                    node: dataset
+                    occurs: {min: 0}
+                    recommended: true
+                    enum: [DLD, Phosphor+CCD, Phosphor+CMOS, ECMOS, Anode, Multi-anode]
+                    doc: Description of the detector type.
+                    via: [T0, T1, T6, T7]
+                    provisional: [Q1]
+                  device_information:
+                    node: group
+                    class: NXfabrication
+                    occurs: {min: 0}
+                    recommended: true
+                    children:
+                      vendor:
+                        node: dataset
+                        occurs: {min: 0}
+                        recommended: true
+                        via: [T0, T1, T6, T7]
+                        provisional: [Q1]
+                      model:
+                        node: dataset
+                        occurs: {min: 0}
+                        recommended: true
+                        via: [T0, T1, T6, T7]
+                        provisional: [Q1]
+                      identifier:
+                        node: dataset
+                        occurs: {min: 0}
+                        recommended: true
+                        via: [T0, T1, T6, T7]
+                        provisional: [Q1]
+                    via: [T1, T6, T7]
+                    provisional: [Q1]
+                  raw_data:
+                    node: group
+                    class: NXdata
+                    occurs: {min: 0}
+                    recommended: true
+                    doc: |-
+                      Contains the raw data collected by the detector before calibration.
+                      The data which is considered raw might change from experiment to experiment
+                      due to hardware pre-processing of the data.
+                      This group ideally collects the data with the lowest level of processing
+                      possible.
+
+                      Axes should be named according to the conventions defined below. Note that this
+                      list is a glossary with explicitly named axis names, which is only intended to
+                      cover the most common measurement axes and is therefore not complete. It is
+                      possible to add axes with other names at any time.
+                    attributes:
+                      signal:
+                        enum: [raw]
+                        via: [T0, T1, T5]
+                        provisional: [Q2]
+                    children:
+                      raw:
+                        node: dataset
+                        type: NX_NUMBER
+                        doc: Raw data before calibration.
+                        via: [T1, T5, T7]
+                        provisional: [Q1, Q2]
+                      pixel_x:
+                        node: dataset
+                        occurs: {min: 0}
+                        type: NX_POSINT
+                        doc: Detector pixel number in x direction.
+                        via: [T1, T6, T7]
+                        provisional: [Q1]
+                      pixel_y:
+                        node: dataset
+                        occurs: {min: 0}
+                        type: NX_POSINT
+                        doc: Detector pixel number in y direction.
+                        via: [T1, T6, T7]
+                        provisional: [Q1]
+                      energy:
+                        node: dataset
+                        occurs: {min: 0}
+                        recommended: true
+                        type: NX_NUMBER
+                        units: {category: NX_ENERGY}
+                        doc: (Un)calibrated energy axis.
+                        attributes:
+                          type:
+                            type: NX_CHAR
+                            enum:
+                              values:
+                              - value: kinetic
+                                doc: |-
+                                  (Un)calibrated kinetic energy axis.
+
+                                  This concept is related to term `3.35`_ of the ISO 18115-1:2023 standard.
+
+                                  .. _3.35: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:3.35
+                              - value: binding
+                                doc: |-
+                                  (Un)calibrated binding energy axis.
+
+                                  This concept is related to term `12.16`_ of the ISO 18115-1:2023 standard.
+
+                                  .. _12.16: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:12.16
+                            doc: The energy can be either stored as kinetic or as binding
+                              energy.
+                            via: [T1, T5]
+                            provisional: [Q2]
+                        via: [T1, T6, T7]
+                        provisional: [Q1]
+                      photon_energy:
+                        node: dataset
+                        occurs: {min: 0}
+                        type: NX_NUMBER
+                        units: {category: NX_ENERGY}
+                        doc: |-
+                          (Un)calibrated photon energy of the incoming probe beam.
+
+                          Could be a link to /entry/instrument/beam_probe/incident_energy.
+                        via: [T1, T6, T7]
+                        provisional: [Q1]
+                      kx:
+                        node: dataset
+                        occurs: {min: 0}
+                        type: NX_NUMBER
+                        units: {category: NX_WAVENUMBER}
+                        doc: |-
+                          (Un)calibrated k-space coordinate in x direction. It is envisioned that the axes in
+                          momentum space are named ``kx``, ``ky``, and ``kz``. Typically, the vectors in
+                          momentum space are defined such that ``kx`` and ``ky`` comprise the parallel
+                          component, while ``kz`` is the perpendicular component.
+
+                          It is also possible to define ``k_parallel`` and ``k_perpendicular`` for the parallel
+                          and perpendicular momenta, respectively.
+
+                          Units are typically 1/angstrom.
+                        via: [T1, T6, T7]
+                        provisional: [Q1]
+                      ky:
+                        node: dataset
+                        occurs: {min: 0}
+                        type: NX_NUMBER
+                        units: {category: NX_WAVENUMBER}
+                        doc: |-
+                          (Un)calibrated k-space coordinate in y direction. For more information, see the
+                          definition of the :ref:`kx </NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYZER/ELECTRON_DETECTOR/raw_data/kx-field>`
+                          axis.
+                        via: [T1, T6, T7]
+                        provisional: [Q1]
+                      kz:
+                        node: dataset
+                        occurs: {min: 0}
+                        type: NX_NUMBER
+                        units: {category: NX_WAVENUMBER}
+                        doc: |-
+                          (Un)calibrated k-space coordinate in z direction. For more information, see the
+                          definition of the :ref:`kx </NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYZER/ELECTRON_DETECTOR/raw_data/kx-field>`
+                          axis.
+                        via: [T1, T6, T7]
+                        provisional: [Q1]
+                      k_parallel:
+                        node: dataset
+                        occurs: {min: 0}
+                        type: NX_NUMBER
+                        units: {category: NX_WAVENUMBER}
+                        doc: |-
+                          (Un)calibrated parallel component in k-space.
+
+                          ``k_parallel`` and :ref:`k_perpendicular </NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYZER/ELECTRON_DETECTOR/raw_data/k_perpendicular-field>`
+                          describe how the electron's wave vector ``k`` is split into components relative
+                          to the surface.
+
+                          ``k_parallel`` is the component of the electron's wave vector that is parallel to
+                          the surface. It is conserved during the photoemission process. This means that the
+                          electron's momentum along the surface inside the material is directly related to
+                          its measured momentum outside the material.
+
+                          Units are typically 1/angstrom.
+                        via: [T1, T6, T7]
+                        provisional: [Q1]
+                      k_perpendicular:
+                        node: dataset
+                        occurs: {min: 0}
+                        type: NX_NUMBER
+                        units: {category: NX_WAVENUMBER}
+                        doc: |-
+                          (Un)calibrated perpendicular component in k-space.
+
+                          ``k_perpendicular`` is the component that is normal (perpendicular) to the surface.
+                          It is not conserved during photoemission because the electron experiences a potential
+                          change when it exits the  material into vacuum. To determine ``k_perpendicular``
+                          inside the material, one typically needs to estimate the inner potential :math:`\phi_0`,
+                          which accounts for the energy shift due to the material's work function and electronic
+                          structure.
+
+                          Units are typically 1/angstrom.
+                        via: [T1, T6, T7]
+                        provisional: [Q1]
+                      angular0:
+                        node: dataset
+                        occurs: {min: 0}
+                        type: NX_NUMBER
+                        units: {category: NX_ANGLE}
+                        doc: |-
+                          First (un)calibrated angular coordinate. It is envisioned that the axes in angular space
+                          are named ``angular0`` and ``angular1``.
+
+                          The angular axes should be named in order of decreasing speed, i.e., ``angular0``
+                          should be the fastest scan axis and ``angular1`` should be the slow-axis angular
+                          coordinate. However, ``angular0`` may also be second slowest axis if the measurement
+                          is angularly integrated and ``angular1`` could also be the second fastest axis in the
+                          case of simultaneous dispersion in two angular dimensions.
+                        via: [T1, T6, T7]
+                        provisional: [Q1]
+                      angular1:
+                        node: dataset
+                        occurs: {min: 0}
+                        type: NX_NUMBER
+                        units: {category: NX_ANGLE}
+                        doc: |-
+                          Second (un)calibrated angular coordinate.
+
+                          For more information, see the
+                          definition of the :ref:`angular0 </NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYZER/ELECTRON_DETECTOR/raw_data/angular0-field>`
+                          axis.
+
+                          This is typically the slower scan axis compared to ``angular0``.
+                        via: [T1, T6, T7]
+                        provisional: [Q1]
+                      spatial0:
+                        node: dataset
+                        occurs: {min: 0}
+                        type: NX_NUMBER
+                        units: {category: NX_LENGTH}
+                        doc: |-
+                          First (un)calibrated spatial coordinate. It is envisioned that the axes in regular space
+                          are named ``spatial0`` and ``spatial1``.
+
+                          The spatial axes should be named in order of decreasing speed, i.e., ``spatial0``
+                          should be the fastest scan axis and `spatial1`` should be the slow-axis spatial
+                          coordinate. However, ``spatial`` may also be second slow axis if the measurement
+                          is spatially integrated and ``spatial1`` could also be the second fast axis in the
+                          case of simultaneous dispersion in two spatial dimensions.
+                        via: [T1, T6, T7]
+                        provisional: [Q1]
+                      spatial1:
+                        node: dataset
+                        occurs: {min: 0}
+                        type: NX_NUMBER
+                        units: {category: NX_LENGTH}
+                        doc: |-
+                          Second (un)calibrated spatial coordinate.
+
+                          For more information, see the
+                          definition of the :ref:`spatial0 </NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYZER/ELECTRON_DETECTOR/raw_data/spatial0-field>`
+                          axis.
+
+                          This is typically the slower scan axis compared to ``spatial0``.
+                        via: [T1, T6, T7]
+                        provisional: [Q1]
+                      delay:
+                        node: dataset
+                        occurs: {min: 0}
+                        type: NX_NUMBER
+                        units: {category: NX_TIME}
+                        doc: |-
+                          (Un)calibrated delay time. This is to be used for time-resolved pump-probe experiments
+                          and describes the delay between :ref:`beam_pump </NXmpes/ENTRY/INSTRUMENT/beam_pump-group>`
+                          and :ref:`beam_probe </NXmpes/ENTRY/INSTRUMENT/beam_probe-group>`.
+                        via: [T1, T6, T7]
+                        provisional: [Q1]
+                      temperature:
+                        node: dataset
+                        occurs: {min: 0}
+                        type: NX_NUMBER
+                        units: {category: NX_TIME}
+                        doc: |-
+                          (Un)calibrated temperature axis in case of experiments where the temperature was
+                          scanned. This is typically the sample temperature and could be linked from
+                          /entry/sample/temperature_env/temperature_sensor/value.
+                        via: [T1, T6, T7]
+                        provisional: [Q1]
+                    via: [T1, T6, T7]
+                    provisional: [Q1]
+                via: [T1, T2, T5, T7]
+                provisional: [Q1, Q2, Q11]
+            via: [T1, T2, T5, T7]
+            provisional: [Q1, Q2, Q11]
+          MANIPULATOR:
+            node: group
+            name: {any: true}
+            class: NXmanipulator
+            occurs: {min: 0}
+            doc: Manipulator for positioning of the sample.
+            children:
+              temperature_sensor:
+                node: group
+                class: NXsensor
+                occurs: {min: 0}
+                recommended: true
+                children:
+                  name:
+                    node: dataset
+                    occurs: {min: 0}
+                    recommended: true
+                    via: [T0, T1, T6, T7]
+                    provisional: [Q1]
+                  measurement:
+                    node: dataset
+                    enum: [temperature]
+                    via: [T0, T1, T5, T7]
+                    provisional: [Q1, Q2]
+                  type:
+                    node: dataset
+                    occurs: {min: 0}
+                    via: [T0, T1, T6, T7]
+                    provisional: [Q1]
+                  value:
+                    node: dataset
+                    type: NX_FLOAT
+                    via: [T1, T5, T7]
+                    provisional: [Q1, Q2]
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              sample_heater:
+                node: group
+                class: NXactuator
+                occurs: {min: 0}
+                children:
+                  name:
+                    node: dataset
+                    occurs: {min: 0}
+                    recommended: true
+                    via: [T0, T1, T6, T7]
+                    provisional: [Q1]
+                  actuation_target:
+                    node: dataset
+                    enum: [temperature]
+                    via: [T0, T1, T5, T7]
+                    provisional: [Q1, Q2]
+                  type:
+                    node: dataset
+                    occurs: {min: 0}
+                    via: [T0, T1, T6, T7]
+                    provisional: [Q1]
+                  output_heater_power:
+                    node: dataset
+                    occurs: {min: 0}
+                    recommended: true
+                    type: NX_FLOAT
+                    via: [T1, T6, T7]
+                    provisional: [Q1]
+                  PID_CONTROLLER:
+                    node: group
+                    name: {any: true}
+                    class: NXpid_controller
+                    occurs: {min: 0}
+                    recommended: true
+                    children:
+                      setpoint:
+                        node: dataset
+                        occurs: {min: 0}
+                        recommended: true
+                        type: NX_FLOAT
+                        units: {category: NX_TEMPERATURE}
+                        via: [T1, T6, T7]
+                        provisional: [Q1]
+                    via: [T1, T2, T6, T7]
+                    provisional: [Q1, Q11]
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              cryostat:
+                node: group
+                class: NXactuator
+                occurs: {min: 0}
+                children:
+                  name:
+                    node: dataset
+                    occurs: {min: 0}
+                    recommended: true
+                    via: [T0, T1, T6, T7]
+                    provisional: [Q1]
+                  actuation_target:
+                    node: dataset
+                    enum: [temperature]
+                    via: [T0, T1, T5, T7]
+                    provisional: [Q1, Q2]
+                  type:
+                    node: dataset
+                    occurs: {min: 0}
+                    via: [T0, T1, T6, T7]
+                    provisional: [Q1]
+                  PID_CONTROLLER:
+                    node: group
+                    name: {any: true}
+                    class: NXpid_controller
+                    children:
+                      setpoint:
+                        node: dataset
+                        occurs: {min: 0}
+                        recommended: true
+                        type: NX_FLOAT
+                        units: {category: NX_TEMPERATURE}
+                        via: [T1, T6, T7]
+                        provisional: [Q1]
+                    via: [T1, T2, T5, T7]
+                    provisional: [Q1, Q2, Q11]
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              drain_current_ammeter:
+                node: group
+                class: NXsensor
+                occurs: {min: 0}
+                children:
+                  name:
+                    node: dataset
+                    occurs: {min: 0}
+                    recommended: true
+                    via: [T0, T1, T6, T7]
+                    provisional: [Q1]
+                  measurement:
+                    node: dataset
+                    enum: [current]
+                    via: [T0, T1, T5, T7]
+                    provisional: [Q1, Q2]
+                  type:
+                    node: dataset
+                    occurs: {min: 0}
+                    via: [T0, T1, T6, T7]
+                    provisional: [Q1]
+                  value:
+                    node: dataset
+                    type: NX_FLOAT
+                    via: [T1, T5, T7]
+                    provisional: [Q1, Q2]
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              sample_bias_voltmeter:
+                node: group
+                class: NXsensor
+                occurs: {min: 0}
+                recommended: true
+                children:
+                  name:
+                    node: dataset
+                    occurs: {min: 0}
+                    recommended: true
+                    via: [T0, T1, T6, T7]
+                    provisional: [Q1]
+                  measurement:
+                    node: dataset
+                    enum: [voltage]
+                    via: [T0, T1, T5, T7]
+                    provisional: [Q1, Q2]
+                  type:
+                    node: dataset
+                    occurs: {min: 0}
+                    via: [T0, T1, T6, T7]
+                    provisional: [Q1]
+                  value:
+                    node: dataset
+                    type: NX_FLOAT
+                    via: [T1, T5, T7]
+                    provisional: [Q1, Q2]
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              sample_bias_potentiostat:
+                node: group
+                class: NXactuator
+                occurs: {min: 0}
+                recommended: true
+                children:
+                  name:
+                    node: dataset
+                    occurs: {min: 0}
+                    recommended: true
+                    via: [T0, T1, T6, T7]
+                    provisional: [Q1]
+                  actuation_target:
+                    node: dataset
+                    enum: [voltage]
+                    via: [T0, T1, T5, T7]
+                    provisional: [Q1, Q2]
+                  type:
+                    node: dataset
+                    occurs: {min: 0}
+                    via: [T0, T1, T6, T7]
+                    provisional: [Q1]
+                  PID_CONTROLLER:
+                    node: group
+                    name: {any: true}
+                    class: NXpid_controller
+                    occurs: {min: 0}
+                    recommended: true
+                    children:
+                      setpoint:
+                        node: dataset
+                        occurs: {min: 0}
+                        recommended: true
+                        type: NX_FLOAT
+                        units: {category: NX_VOLTAGE}
+                        via: [T1, T6, T7]
+                        provisional: [Q1]
+                    via: [T1, T2, T6, T7]
+                    provisional: [Q1, Q11]
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              device_information:
+                node: group
+                class: NXfabrication
+                occurs: {min: 0}
+                recommended: true
+                children:
+                  vendor:
+                    node: dataset
+                    occurs: {min: 0}
+                    recommended: true
+                    via: [T0, T1, T6, T7]
+                    provisional: [Q1]
+                  model:
+                    node: dataset
+                    occurs: {min: 0}
+                    recommended: true
+                    via: [T0, T1, T6, T7]
+                    provisional: [Q1]
+                  identifier:
+                    node: dataset
+                    occurs: {min: 0}
+                    recommended: true
+                    via: [T0, T1, T6, T7]
+                    provisional: [Q1]
+                via: [T1, T6, T7]
+                provisional: [Q1]
+            via: [T1, T2, T6, T7]
+            provisional: [Q1, Q11]
+          pressure_gauge:
+            node: group
+            class: NXsensor
+            occurs: {min: 0}
+            recommended: true
+            doc: Device to measure the gas pressure in the instrument.
+            children:
+              name:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                via: [T0, T1, T6, T7]
+                provisional: [Q1]
+              measurement:
+                node: dataset
+                enum: [pressure]
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+              type:
+                node: dataset
+                occurs: {min: 0}
+                via: [T0, T1, T6, T7]
+                provisional: [Q1]
+              value:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_PRESSURE}
+                doc: |-
+                  In case of a single or averaged gas pressure measurement, this is the scalar gas pressure.
+                  It can also be an 1D array of measured pressures (without time stamps).
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              value_log:
+                node: group
+                class: NXlog
+                occurs: {min: 0}
+                children:
+                  value:
+                    node: dataset
+                    type: NX_NUMBER
+                    units: {category: NX_PRESSURE}
+                    doc: |-
+                      In the case of an experiment in which the gas pressure changes and is recorded,
+                      this is an array of length m of gas pressures.
+                    via: [T1, T5, T7]
+                    provisional: [Q1, Q2]
+                via: [T1, T6, T7]
+                provisional: [Q1]
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          flood_gun:
+            node: group
+            class: NXactuator
+            occurs: {min: 0}
+            doc: Device to bring low-energy electrons to the sample for charge neutralization
+            children:
+              name:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                via: [T0, T1, T6, T7]
+                provisional: [Q1]
+              actuation_target:
+                node: dataset
+                enum: [current]
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+              type:
+                node: dataset
+                occurs: {min: 0}
+                via: [T0, T1, T6, T7]
+                provisional: [Q1]
+              current:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                type: NX_FLOAT
+                units: {category: NX_CURRENT}
+                doc: |-
+                  In case of a fixed or averaged electron current, this is the scalar current.
+                  It can also be an 1D array of output current (without time stamps).
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              current_log:
+                node: group
+                class: NXlog
+                occurs: {min: 0}
+                children:
+                  value:
+                    node: dataset
+                    type: NX_NUMBER
+                    units: {category: NX_CURRENT}
+                    doc: |-
+                      In the case of an experiment in which the electron current is changed and
+                      recorded with time stamps, this is an array of length m of current setpoints.
+                    via: [T1, T5, T7]
+                    provisional: [Q1, Q2]
+                via: [T1, T6, T7]
+                provisional: [Q1]
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          monochromator_TYPE:
+            node: group
+            name: {template: 'monochromator_{TYPE}'}
+            class: NXmonochromator
+            occurs: {min: 0}
+            doc: |-
+              If any of the beams is monochromatized, an ``NXmonochromator`` can be used to describe
+              the properties of the monochromator.
+            children:
+              energy:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                type: NX_FLOAT
+                units: {category: NX_ENERGY}
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              associated_beam:
+                node: dataset
+                doc: |-
+                  A reference to a beam emitted by this source.
+                  Should be named with the same suffix, e.g.,
+                  for ``monochromator_probe`` it should refer to ``beam_probe``.
+
+                  Example:
+                    * /entry/instrument/monochromator_probe/associated_beam = /entry/instrument/beam_probe
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T3, T6, T7]
+            provisional: [Q1, Q3]
+          INSERTION_DEVICE:
+            node: group
+            name: {any: true}
+            class: NXinsertion_device
+            occurs: {min: 0}
+            doc: Insertion device if synchrotron radiation is used for the MPES experiment.
+            via: [T1, T2, T6, T7]
+            provisional: [Q1, Q11]
+          history:
+            node: group
+            class: NXhistory
+            occurs: {min: 0}
+            doc: |-
+              A set of activities that occurred to the instrument prior to/during the photoemission
+              experiment, including any activities performed on the individual instrument parts.
+              This group can be used to describe the preparation of the instrument prior to the
+              experiment, e.g. the cleaning procedure for a spin filter crystal.
+            via: [T1, T6, T7]
+            provisional: [Q1]
+        via: [T1, T2, T5, T7]
+        provisional: [Q1, Q2, Q11]
+      energy_axis_calibration:
+        node: group
+        class: NXcalibration
+        occurs: {min: 0}
+        recommended: true
+        doc: |-
+          Calibration event on the energy axis.
+
+          For XPS, the calibration should ideally be performed according to
+          `ISO 15472:2010`_ specification.
+
+          .. _ISO 15472:2010: https://www.iso.org/standard/74811.html
+        children:
+          physical_quantity:
+            node: dataset
+            enum: [energy]
+            via: [T0, T1, T5, T7]
+            provisional: [Q1, Q2]
+          calibrated_axis:
+            node: dataset
+            type: NX_FLOAT
+            units: {category: NX_ENERGY}
+            doc: This is the calibrated energy axis to be used for data plotting.
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T6, T7]
+        provisional: [Q1]
+      AXIS_axis_calibration:
+        node: group
+        name: {template: '{AXIS}_axis_calibration'}
+        class: NXcalibration
+        occurs: {min: 0}
+        doc: |-
+          Calibration event for one of the axes in the
+          :ref:`NXdata </NXmpes/ENTRY/data-group>`.
+
+          The naming of these calibrations should follow those in the
+          :ref:`NXdata </NXmpes/ENTRY/data-group>`. For example,
+          for the momentum axis ``kx``, the corresponding calibration should
+          be called ``kx_axis_calibration``.
+        children:
+          calibrated_axis:
+            node: dataset
+            occurs: {min: 0}
+            recommended: true
+            type: NX_FLOAT
+            via: [T1, T6, T7]
+            provisional: [Q1]
+        via: [T1, T3, T6, T7]
+        provisional: [Q1, Q3]
+      energy_referencing:
+        node: group
+        class: NXcalibration
+        occurs: {min: 0}
+        doc: |-
+          For energy referencing, the measured energies are corrected for the charging potential
+          (i.e., the electrical potential of the surface region of an insulating sample, caused by
+          irradiation) such that those energies correspond to a sample with no surface charge.
+          Usually, the energy axis is adjusted by shifting all energies uniformly until one
+          well-defined emission line peak (or the Fermi edge) is located at a known _correct_ energy.
+
+          This concept is related to term `12.74 ff.`_ of the ISO 18115-1:2023 standard.
+
+          .. _12.74 ff.: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:12.74
+        children:
+          physical_quantity:
+            node: dataset
+            enum: [energy]
+            via: [T0, T1, T5, T7]
+            provisional: [Q1, Q2]
+          level:
+            node: dataset
+            occurs: {min: 0}
+            recommended: true
+            doc: |-
+              Electronic core or valence level that was used for the calibration.
+
+              This should be single string defining the core or valence level that was used for
+              energy referencing.
+
+              The notation should be the same as the one described in the
+              :ref:`NXmpes/ENTRY/transitions </NXmpes/ENTRY/transitions-field>` field.
+            via: [T0, T1, T6, T7]
+            provisional: [Q1]
+          reference_peak:
+            node: dataset
+            occurs: {min: 0}
+            recommended: true
+            doc: |-
+              Reference peak that was used for the calibration.
+
+              For example: adventitious carbon | C-C | metallic Au | elemental Si | Fermi edge | vacuum level
+            via: [T0, T1, T6, T7]
+            provisional: [Q1]
+          binding_energy:
+            node: dataset
+            occurs: {min: 0}
+            recommended: true
+            type: NX_FLOAT
+            units: {category: NX_ENERGY}
+            doc: |-
+              The binding energy (in units of eV) that the specified emission line appeared at,
+              after adjusting the binding energy scale.
+
+              This concept is related to term `12.16`_ of the ISO 18115-1:2023 standard.
+
+              .. _12.16: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:12.16
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          offset:
+            node: dataset
+            occurs: {min: 0}
+            recommended: true
+            type: NX_FLOAT
+            units: {category: NX_ENERGY}
+            doc: |-
+              Offset between measured binding energy and calibrated binding energy of the
+              emission line.
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          calibrated_axis:
+            node: dataset
+            occurs: {min: 0}
+            recommended: true
+            type: NX_FLOAT
+            units: {category: NX_ENERGY}
+            doc: |-
+              This is the calibrated energy axis to be used for data plotting.
+
+              This could be a link to /entry/data/energy.
+            via: [T1, T6, T7]
+            provisional: [Q1]
+        via: [T1, T6, T7]
+        provisional: [Q1]
+      transmission_correction:
+        node: group
+        class: NXcalibration
+        occurs: {min: 0}
+        doc: |-
+          In the transmission correction, each intensity measurement for electrons of a given
+          kinetic energy is multiplied by the corresponding value in the relative_intensity
+          field of the transmission_function. This calibration procedure is used to account for
+          energy-dependent transmission efficiencies in certain lens modes.
+        children:
+          transmission_function:
+            node: group
+            class: NXdata
+            occurs: {min: 0}
+            recommended: true
+            doc: |-
+              Transmission function of the electron analyzer.
+
+              The transmission function (TF) specifies the detection efficiency for electrons of
+              different kinetic energy passing through the electron analyzer.
+
+              This can be a link to /entry/instrument/electronanalyzer/transmission_function.
+            attributes:
+              signal:
+                enum: [relative_intensity]
+                via: [T0, T1, T5]
+                provisional: [Q2]
+              axes:
+                enum: ['[''kinetic_energy'']']
+                via: [T0, T1, T5]
+                provisional: [Q2]
+            children:
+              kinetic_energy:
+                node: dataset
+                type: NX_FLOAT
+                shape: [n_transmission_function]
+                units: {category: NX_ENERGY}
+                doc: Kinetic energy values
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              relative_intensity:
+                node: dataset
+                type: NX_FLOAT
+                shape: [n_transmission_function]
+                units: {category: NX_UNITLESS}
+                doc: Relative transmission efficiency for the given kinetic energies
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+            via: [T1, T6, T7]
+            provisional: [Q1]
+        via: [T1, T6, T7]
+        provisional: [Q1]
+      REGISTRATION:
+        node: group
+        name: {any: true}
+        class: NXregistration
+        occurs: {min: 0}
+        doc: |-
+          Describes the operations of image registration (i.e. affine transformations like
+          rotations or translations).
+        via: [T1, T2, T6, T7]
+        provisional: [Q1, Q11]
+      DISTORTION:
+        node: group
+        name: {any: true}
+        class: NXdistortion
+        occurs: {min: 0}
+        doc: Describes the operations of image distortion correction.
+        via: [T1, T2, T6, T7]
+        provisional: [Q1, Q11]
+      CALIBRATION:
+        node: group
+        name: {any: true}
+        class: NXcalibration
+        occurs: {min: 0}
+        doc: |-
+          Any further calibration procedures. For example, a calibration event for the photoemission
+          counts (e.g., by dividing by some base line intensity :math:`I_0`.).
+        via: [T1, T2, T6, T7]
+        provisional: [Q1, Q11]
+      FIT:
+        node: group
+        name: {any: true}
+        class: NXfit
+        occurs: {min: 0}
+        doc: Any fit procedures.
+        via: [T1, T2, T6, T7]
+        provisional: [Q1, Q11]
+      SAMPLE:
+        node: group
+        name: {any: true}
+        class: NXsample
+        children:
+          name:
+            node: dataset
+            via: [T0, T1, T5, T7]
+            provisional: [Q1, Q2]
+          identifier:
+            node: dataset
+            occurs: {min: 0}
+            recommended: true
+            via: [T0, T1, T6, T7]
+            provisional: [Q1]
+          chemical_formula:
+            node: dataset
+            occurs: {min: 0}
+            recommended: true
+            via: [T0, T1, T6, T7]
+            provisional: [Q1]
+          atom_types:
+            node: dataset
+            occurs: {min: 0}
+            recommended: true
+            doc: |-
+              Array of comma-separated elements from the periodic table
+              that are contained in the sample.
+              If the sample substance has multiple components, all
+              elements from each component must be included in `atom_types`.
+            via: [T0, T1, T6, T7]
+            provisional: [Q1]
+          physical_form:
+            node: dataset
+            occurs: {min: 0}
+            recommended: true
+            via: [T0, T1, T6, T7]
+            provisional: [Q1]
+          situation:
+            node: dataset
+            occurs: {min: 0}
+            recommended: true
+            enum: [vacuum, inert atmosphere, oxidizing atmosphere, reducing atmosphere]
+            via: [T0, T1, T6, T7]
+            provisional: [Q1]
+          history:
+            node: group
+            class: NXhistory
+            occurs: {min: 0}
+            recommended: true
+            doc: |-
+              A set of activities that occurred to the sample prior to/during photoemission
+              experiment.
+            children:
+              sample_preparation:
+                node: group
+                class: NXactivity
+                occurs: {min: 0}
+                recommended: true
+                doc: |-
+                  Details about the sample preparation for the photoemission experiment (e.g. UHV cleaving,
+                  in-situ growth, sputtering/annealing, etc.).
+                children:
+                  start_time:
+                    node: dataset
+                    type: NX_DATE_TIME
+                    via: [T1, T5, T7]
+                    provisional: [Q1, Q2]
+                  end_time:
+                    node: dataset
+                    occurs: {min: 0}
+                    recommended: true
+                    type: NX_DATE_TIME
+                    via: [T1, T6, T7]
+                    provisional: [Q1]
+                  method:
+                    node: dataset
+                    occurs: {min: 0}
+                    recommended: true
+                    doc: |-
+                      Details about the method of sample preparation before the photoemission
+                      experiment.
+                    via: [T0, T1, T6, T7]
+                    provisional: [Q1]
+                via: [T1, T6, T7]
+                provisional: [Q1]
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          temperature_env:
+            node: group
+            class: NXenvironment
+            occurs: {min: 0}
+            recommended: true
+            doc: |-
+              Sample temperature (either controlled or just measured) and actuators/sensors
+              controlling/measuring it.
+            children:
+              temperature_sensor:
+                node: group
+                class: NXsensor
+                occurs: {min: 0}
+                recommended: true
+                doc: |-
+                  Temperature sensor measuring the sample temperature.
+
+                  In most cases, this can be a link to /entry/instrument/manipulator/temperature_sensor
+                  if a manipulator is present in the instrument.
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              sample_heater:
+                node: group
+                class: NXactuator
+                occurs: {min: 0}
+                doc: |-
+                  Device to heat the sample.
+
+                  In most cases, this can be a link to /entry/instrument/manipulator/sample_heater
+                  if a manipulator is present in the instrument.
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              cryostat:
+                node: group
+                class: NXactuator
+                occurs: {min: 0}
+                doc: |-
+                  Cryostat for cooling the sample.
+
+                  In most cases, this can be a link to /entry/instrument/manipulator/cryostat
+                  if a manipulator is present in the instrument.
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              value:
+                node: dataset
+                occurs: {min: 0}
+                type: NX_FLOAT
+                units: {category: NX_TEMPERATURE}
+                doc: |-
+                  This is to be used if there is no actuator/sensor that controls/measures
+                  the temperature.
+
+                  An example would be a room temperature experiment where the temperature is
+                  not actively measured, but rather estimated.
+
+                  Note that this method for recording the temperature is not advised, but using
+                  NXsensor and NXactuator is strongly recommended instead.
+                via: [T1, T6, T7]
+                provisional: [Q1]
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          gas_pressure_env:
+            node: group
+            class: NXenvironment
+            occurs: {min: 0}
+            recommended: true
+            doc: |-
+              Gas pressure surrounding the sample and actuators/sensors controlling/measuring
+              it.
+            children:
+              pressure_gauge:
+                node: group
+                class: NXsensor
+                occurs: {min: 0}
+                recommended: true
+                doc: |-
+                  Gauge measuring the gas pressure.
+
+                  In most cases, this can be a link to /entry/instrument/pressure_gauge or to another
+                  NXsensor measuring gas pressure (typically, the gauge in closest proximity to the
+                  sample) if such a pressure gauge is present in the instrument.
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              value:
+                node: dataset
+                occurs: {min: 0}
+                type: NX_FLOAT
+                units: {category: NX_PRESSURE}
+                doc: |-
+                  This is to be used if there is no actuator/sensor that controls/measures
+                  the gas pressure around the sample. An example would be a UHV experiment where the
+                  gas pressure is not monitored.
+
+                  Note that this method for recording the gas pressure is not advised, but using
+                  NXsensor and NXactuator is strongly recommended instead.
+                via: [T1, T6, T7]
+                provisional: [Q1]
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          bias_env:
+            node: group
+            class: NXenvironment
+            occurs: {min: 0}
+            recommended: true
+            doc: |-
+              Bias of the sample with respect to analyzer ground and actuators/sensors
+              controlling/measuring it.
+
+              This concept is related to term `8.41`_ of the ISO 18115-1:2023 standard.
+
+              .. _8.41: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:8.41
+            children:
+              voltmeter:
+                node: group
+                class: NXsensor
+                occurs: {min: 0}
+                recommended: true
+                doc: |-
+                  Sensor measuring the applied voltage.
+
+                  In most cases, this can be a link to /entry/instrument/manipulator/sample_bias_voltmeter
+                  if a manipulator is present in the instrument.
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              potentiostat:
+                node: group
+                class: NXactuator
+                occurs: {min: 0}
+                doc: |-
+                  Actuator applying a voltage to sample and sample holder.
+
+                  In most cases, this can be a link to /entry/instrument/manipulator/sample_bias_potentiostat
+                  if a manipulator is present in the instrument.
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              value:
+                node: dataset
+                occurs: {min: 0}
+                type: NX_FLOAT
+                units: {category: NX_VOLTAGE}
+                doc: |-
+                  This is to be used if there is no actuator/sensor that controls/measures
+                  the bias.
+
+                  Note that this method for recording the bias is not advised, but using
+                  NXsensor and NXactuator is strongly recommended instead.
+                via: [T1, T6, T7]
+                provisional: [Q1]
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          drain_current_env:
+            node: group
+            class: NXenvironment
+            occurs: {min: 0}
+            doc: Drain current of the sample and sample holder.
+            children:
+              ammeter:
+                node: group
+                class: NXsensor
+                occurs: {min: 0}
+                recommended: true
+                doc: |-
+                  Ammeter measuring the drain current of the sample and sample holder.
+
+                  In most cases, this can be a link to /entry/instrument/manipulator/drain_current_ammeter
+                  if a manipulator is present in the instrument.
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              value:
+                node: dataset
+                occurs: {min: 0}
+                type: NX_FLOAT
+                units: {category: NX_CURRENT}
+                doc: |-
+                  This is to be used if there is no actuator/sensor that controls/measures
+                  the drain current.
+
+                  Note that this method for recording the drain current is not advised, but using
+                  NXsensor and NXactuator is strongly recommended instead.
+                via: [T1, T6, T7]
+                provisional: [Q1]
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          flood_gun_current_env:
+            node: group
+            class: NXenvironment
+            occurs: {min: 0}
+            doc: |-
+              Current of low-energy electrons to the sample (for charge neutralization) and
+              actuators/sensors controlling/measuring it.
+            children:
+              flood_gun:
+                node: group
+                class: NXactuator
+                occurs: {min: 0}
+                recommended: true
+                doc: |-
+                  Flood gun creating a current of low-energy electrons.
+
+                  In most cases this can be a link to /entry/instrument/flood_gun
+                  if a flood_gun is present in the instrument.
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              value:
+                node: dataset
+                occurs: {min: 0}
+                type: NX_FLOAT
+                units: {category: NX_CURRENT}
+                doc: |-
+                  This is to be used if there is no actuator/sensor that controls/measures
+                  the flood_gun_current.
+
+                  Note that this method for recording the flood gun current is not advised, but using
+                  NXsensor and NXactuator is strongly recommended instead.
+                via: [T1, T6, T7]
+                provisional: [Q1]
+            via: [T1, T6, T7]
+            provisional: [Q1]
+        via: [T1, T2, T5, T7]
+        provisional: [Q1, Q2, Q11]
+      DATA:
+        node: group
+        name: {any: true}
+        class: NXdata
+        doc: |-
+          The NXdata group containing a view on the measured data.
+
+          This NXdata group contains a collection of the main relevant fields (axes).
+          Axes should be named according to the conventions defined below. Note that this
+          list is a glossary with explicitly named axis names, which is only intended to cover
+          the most common measurement axes and is therefore not complete. It is possible to add
+          axes with other names at any time.
+
+          In NXmpes, it is recommended to provide an energy axis.
+        attributes:
+          signal:
+            enum: [data]
+            via: [T0, T1, T5]
+            provisional: [Q2]
+          energy_indices:
+            occurs: {min: 0}
+            recommended: true
+            type: NX_INT
+            via: [T1, T6]
+            provisional: [Q1]
+        children:
+          data:
+            node: dataset
+            type: NX_NUMBER
+            units: {category: NX_ANY}
+            doc: |-
+              Represents a measure of one- or more-dimensional photoemission counts, where the
+              varied axis may be for example energy, momentum, spatial coordinate, pump-probe
+              delay, spin index, temperature, etc. The axes traces should be linked to the
+              actual encoder position in NXinstrument or calibrated axes in NXprocess (or classes
+              inheriting from NXprocess).
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          energy:
+            node: dataset
+            occurs: {min: 0}
+            recommended: true
+            type: NX_NUMBER
+            units: {category: NX_ENERGY}
+            doc: Calibrated axis for the energy of the measured electrons.
+            attributes:
+              type:
+                type: NX_CHAR
+                enum:
+                  values:
+                  - value: kinetic
+                    doc: |-
+                      Calibrated kinetic energy axis.
+
+                      In case the kinetic energy axis is referenced to the Fermi level :math:`E_F`
+                      (e.g., in entry/process/energy_referencing), kinetic energies :math:`E` are
+                      provided as :math:`E-E_F`.
+
+                      This concept is related to term `3.35`_ of the ISO 18115-1:2023 standard.
+
+                      .. _3.35: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:3.35
+                  - value: binding
+                    doc: |-
+                      Calibrated binding energy axis.
+
+                      This concept is related to term `12.16`_ of the ISO 18115-1:2023 standard.
+
+                      .. _12.16: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:12.16
+                doc: The energy can be either stored as kinetic or as binding energy.
+                via: [T1, T5]
+                provisional: [Q2]
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          photon_energy:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_NUMBER
+            units: {category: NX_ENERGY}
+            doc: |-
+              Calibrated photon energy of the incoming probe beam.
+
+              Could be a link to /entry/instrument/beam_probe/incident_energy.
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          kx:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_NUMBER
+            units: {category: NX_WAVENUMBER}
+            doc: |-
+              Calibrated k-space coordinate in x direction. It is envisioned that the axes in
+              momentum space are named ``kx``, ``ky``, and ``kz``. Typically, the vectors in
+              momentum space are defined such that ``kx`` and ``ky`` comprise the parallel
+              component, while ``kz`` is the perpendicular component.
+
+              It is also possible to define ``k_parallel`` and ``k_perp`` for the parallel
+              and perpendicular momenta, respectively.
+
+              Units are typically 1/angstrom.
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          ky:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_NUMBER
+            units: {category: NX_WAVENUMBER}
+            doc: |-
+              Calibrated k-space coordinate in y direction. For more information, see the
+              definition of the :ref:`kx </NXmpes/ENTRY/DATA/kx-field>`
+              axis.
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          kz:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_NUMBER
+            units: {category: NX_WAVENUMBER}
+            doc: |-
+              Calibrated k-space coordinate in z direction. For more information, see the
+              definition of the :ref:`kx </NXmpes/ENTRY/DATA/kx-field>`
+              axis.
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          k_parallel:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_NUMBER
+            units: {category: NX_WAVENUMBER}
+            doc: |-
+              Calibrated parallel component in k-space.
+
+              ``k_parallel`` and :ref:`k_perpendicular </NXmpes/ENTRY/DATA/k_perpendicular-field>`
+              describe how the electron's wave vector ``k`` is split into components relative
+              to the surface.
+
+              ``k_parallel`` is the component of the electron's wave vector that is parallel to
+              the surface. It is conserved during the photoemission process. This means that the
+              electron's momentum along the surface inside the material is directly related to
+              its measured momentum outside the material.
+
+              Units are typically 1/angstrom.
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          k_perpendicular:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_NUMBER
+            units: {category: NX_WAVENUMBER}
+            doc: |-
+              Calibrated perpendicular component in k-space.
+
+              ``k_perpendicular`` is the component that is normal (perpendicular) to the surface.
+              It is not conserved during photoemission because the electron experiences a potential
+              change when it exits the  material into vacuum. To determine ``k_perpendicular``
+              inside the material, one typically needs to estimate the inner potential :math:`V_0`,
+              which accounts for the energy shift due to the material's work function and electronic
+              structure.
+
+              Units are typically 1/angstrom.
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          angular0:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_NUMBER
+            units: {category: NX_ANGLE}
+            doc: |-
+              First calibrated angular coordinate. It is envisioned that the axes in angular space
+              are named ``angular0`` and ``angular1``.
+
+              The angular axes should be named in order of decreasing speed, i.e., ``angular0``
+              should be the fastest scan axis and ``angular1`` should be the slow-axis angular
+              coordinate. However, ``angular0`` may also be second slow axis if the measurement
+              is angularly integrated and ``angular1`` could also be the second fast axis in the
+              case of simultaneous dispersion in two angular dimensions.
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          angular1:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_NUMBER
+            units: {category: NX_ANGLE}
+            doc: |-
+              Second calibrated angular coordinate.
+
+              For more information, see the
+              definition of the :ref:`angular0 </NXmpes/ENTRY/DATA/angular0-field>`
+              axis.
+
+              This is typically the slower scan axis compared to ``angular0``.
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          spatial0:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_NUMBER
+            units: {category: NX_LENGTH}
+            doc: |-
+              First calibrated spatial coordinate. It is envisioned that the axes in angular space
+              are named ``spatial0`` and ``spatial1``.
+
+              The spatial axes should be named in order of decreasing speed, i.e., ``spatial0``
+              should be the fastest scan axis and `spatial1`` should be the slow-axis spatial
+              coordinate. However, ``spatial`` may also be second slow axis if the measurement
+              is spatially integrated and ``spatial1`` could also be the second fast axis in the
+              case of simultaneous dispersion in two spatial dimensions.
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          spatial1:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_NUMBER
+            units: {category: NX_LENGTH}
+            doc: |-
+              Second calibrated spatial coordinate.
+
+              For more information, see the
+              definition of the :ref:`spatial0 </NXmpes/ENTRY/DATA/spatial0-field>`
+              axis.
+
+              This is typically the slower scan axis compared to ``spatial0``.
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          delay:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_NUMBER
+            units: {category: NX_TIME}
+            doc: |-
+              Calibrated pump-probe delay time. Could be a link to
+              /entry/instrument/beam_pump/pulse_delay.
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          temperature:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_NUMBER
+            units: {category: NX_TIME}
+            doc: |-
+              Calibrated temperature axis in case of experiments where the temperature was
+              scanned. This is typically the sample temperature and could be linked from
+              /entry/sample/temperature_env/temperature_sensor/value.
+            via: [T1, T6, T7]
+            provisional: [Q1]
+        via: [T1, T2, T5, T7]
+        provisional: [Q1, Q2, Q11]
+    via: [T1, T2, T5, T7]
+    provisional: [Q1, Q2, Q11]
+via: [T8]

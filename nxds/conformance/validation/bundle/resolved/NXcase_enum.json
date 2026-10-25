@@ -1,0 +1,67 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"},
+    {"ref": "NXroot@NeXus_release"}
+  ],
+  "category": "application",
+  "children": [
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"class": "NXentry", "declared_by": "NXroot", "id": "ENTRY", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 1}, "provisional": ["Q1"], "recommended": false, "refined_by": ["NXcase_enum"], "specialisation": "NXcase_enum/ENTRY"}
+  ],
+  "class": "NXcase_enum",
+  "describes": "NXroot",
+  "lossy": [],
+  "provisional": [],
+  "require": [],
+  "source": "enum-lists/NXcase_enum.nxds.yaml",
+  "status": "local",
+  "symbols": [],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"},
+  "via": []
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {
+  "NXcase_enum/ENTRY": {
+   "attributes": [
+     {"ref": "NXobject@default"}
+   ],
+   "children": [
+     {"class": "NXdata", "declared_by": "NXobject", "id": "DATA", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 1}, "provisional": ["Q1"], "recommended": false, "refined_by": ["NXcase_enum"], "specialisation": "NXcase_enum/ENTRY/DATA"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+     {"declared_by": "NXentry", "enum": {"open": false, "values": [{"value": "NXcase_enum"}]}, "id": "definition", "name": {"exact": "definition"}, "node": "dataset", "occurs": {"max": 1, "min": 1}, "provisional": ["Q1"], "recommended": false, "refined_by": ["NXcase_enum"], "type": "NX_CHAR"},
+     {"node": "dataset", "ref": "NXentry/title"},
+     {"node": "dataset", "ref": "NXentry/start_time"},
+     {"node": "group", "ref": "NXentry/INSTRUMENT"}
+   ],
+   "class": "NXentry",
+   "declared_by": "NXcase_enum",
+   "id": "NXcase_enum/ENTRY",
+   "require": [],
+   "symbols": [],
+   "undeclared": {"attribute": "report", "dataset": "report", "group": "report"}
+  },
+  "NXcase_enum/ENTRY/DATA": {
+   "attributes": [
+     {"ref": "NXobject@default"},
+     {"ref": "NXdata@signal"},
+     {"declared_by": "NXdata", "enum": {"open": false, "values": [{"value": [".", "x"]}]}, "id": "axes", "name": {"exact": "axes"}, "occurs": {"max": 1, "min": 1}, "provisional": ["Q1"], "recommended": false, "refined_by": ["NXcase_enum"], "type": "NX_CHAR"},
+     {"declared_by": "NXcase_enum", "enum": {"open": false, "values": [{"value": "a"}, {"value": "b"}]}, "id": "flags", "name": {"exact": "flags"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": true, "dims": [null]}, "type": "NX_CHAR"}
+   ],
+   "children": [
+     {"node": "group", "ref": "NXobject/DATA"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+     {"node": "dataset", "ref": "NXdata/DATA"},
+     {"node": "dataset", "ref": "NXdata/AXISNAME"}
+   ],
+   "class": "NXdata",
+   "declared_by": "NXcase_enum",
+   "id": "NXcase_enum/ENTRY/DATA",
+   "require": [],
+   "symbols": [],
+   "undeclared": {"attribute": "report", "dataset": "report", "group": "report"}
+  }
+ }
+}

@@ -1,0 +1,304 @@
+nxds: '0.1'
+class: NXmicrostructure_kanapy_results
+category: application
+describes: NXroot
+doc: |-
+  Application definition for the microstructure generator kanapy from ICAMS Bochum.
+
+  * `A. Hartmeier et al. <https://joss.theoj.org/papers/10.21105/joss.01732>`_
+
+  A draft application definition to support discussion within the infrastructure use case IUC07 of the
+  NFDI-MatWerk consortium of the German NFDI working on a data model for documenting simulations
+  of spatiotemporal microstructure evolution with scientific software from this community.
+defaults: {min: 1, binding: true, type: NX_CHAR}
+symbols:
+  n_z:
+    doc: Number of material points along the z axis of the domain.
+  n_y:
+    doc: Number of material points along the y axis of the domain.
+  n_x:
+    doc: Number of material points along the x axis of the domain.
+  c: {doc: Number of crystals.}
+children:
+  ENTRY:
+    node: group
+    name: {any: true}
+    class: NXentry
+    children:
+      definition:
+        node: dataset
+        type: NX_CHAR
+        enum: [NXmicrostructure_kanapy_results]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      description:
+        node: dataset
+        type: NX_CHAR
+        doc: Discouraged free-text field to add further details to the computation.
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      start_time:
+        node: dataset
+        type: NX_DATE_TIME
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      end_time:
+        node: dataset
+        occurs: {min: 0}
+        recommended: true
+        type: NX_DATE_TIME
+        via: [T1, T6, T7]
+        provisional: [Q1]
+      profiling:
+        node: group
+        class: NXcs_profiling
+        occurs: {min: 0}
+        via: [T1, T6, T7]
+        provisional: [Q1]
+      USER:
+        node: group
+        name: {any: true}
+        class: NXuser
+        occurs: {min: 0, max: unbounded}
+        via: [T1, T2, T6]
+        provisional: [Q1, Q11]
+      program1:
+        node: group
+        class: NXprogram
+        children:
+          program:
+            node: dataset
+            type: NX_CHAR
+            attributes:
+              version:
+                type: NX_CHAR
+                via: [T1, T5]
+                provisional: [Q2]
+              url:
+                occurs: {min: 0}
+                recommended: true
+                type: NX_CHAR
+                via: [T1, T6]
+                provisional: [Q1]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      program2:
+        node: group
+        class: NXprogram
+        children:
+          program:
+            node: dataset
+            type: NX_CHAR
+            attributes:
+              version:
+                type: NX_CHAR
+                via: [T1, T5]
+                provisional: [Q2]
+              url:
+                occurs: {min: 0}
+                recommended: true
+                type: NX_CHAR
+                via: [T1, T6]
+                provisional: [Q1]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      environment:
+        node: group
+        class: NXcollection
+        occurs: {min: 0}
+        doc: Programs and libraries representing the computational environment
+        children:
+          PROGRAM:
+            node: group
+            name: {any: true}
+            class: NXprogram
+            occurs: {min: 1, max: unbounded}
+            children:
+              program:
+                node: dataset
+                type: NX_CHAR
+                attributes:
+                  version:
+                    type: NX_CHAR
+                    via: [T1, T5]
+                    provisional: [Q2]
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T2, T6]
+            provisional: [Q1, Q11]
+        via: [T1, T6, T7]
+        provisional: [Q1]
+      microstructureID:
+        node: group
+        name: {template: 'microstructure{ID}'}
+        class: NXmicrostructure
+        occurs: {min: 1, max: unbounded}
+        children:
+          grid:
+            node: group
+            class: NXcg_grid
+            children:
+              extent:
+                node: dataset
+                type: NX_UINT
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              cell_dimensions:
+                node: dataset
+                type: NX_NUMBER
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              origin:
+                node: dataset
+                type: NX_NUMBER
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              symmetry:
+                node: dataset
+                type: NX_CHAR
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              structure:
+                node: group
+                class: NXdata
+                doc: Default plot showing the grid.
+                attributes:
+                  signal:
+                    type: NX_CHAR
+                    via: [T1, T5]
+                    provisional: [Q2]
+                  axes:
+                    type: NX_CHAR
+                    via: [T1, T5]
+                    provisional: [Q2]
+                  AXISNAME_indices:
+                    name: {template: '{AXISNAME}_indices'}
+                    type: NX_UINT
+                    via: [T1, T3, T5]
+                    provisional: [Q2, Q3]
+                children:
+                  title:
+                    node: dataset
+                    type: NX_CHAR
+                    via: [T1, T5, T7]
+                    provisional: [Q1, Q2]
+                  indices_crystal:
+                    node: dataset
+                    type: NX_INT
+                    units: {category: NX_UNITLESS}
+                    doc: Crystal identifier that was assigned to each material point.
+                    via: [T1, T5, T7]
+                    provisional: [Q1, Q2]
+                  z:
+                    node: dataset
+                    occurs: {min: 0}
+                    type: NX_NUMBER
+                    shape: [n_y]
+                    units: {category: NX_LENGTH}
+                    doc: Material point barycenter coordinate along z direction.
+                    attributes:
+                      long_name:
+                        type: NX_CHAR
+                        doc: Coordinate along z direction.
+                        via: [T1, T5]
+                        provisional: [Q2]
+                    via: [T1, T6, T7, T9]
+                    provisional: [Q1]
+                  y:
+                    node: dataset
+                    type: NX_NUMBER
+                    shape: [n_y]
+                    units: {category: NX_LENGTH}
+                    doc: Material point barycenter coordinate along y direction.
+                    attributes:
+                      long_name:
+                        type: NX_CHAR
+                        doc: Coordinate along y direction.
+                        via: [T1, T5]
+                        provisional: [Q2]
+                    via: [T1, T5, T7, T9]
+                    provisional: [Q1, Q2]
+                  x:
+                    node: dataset
+                    type: NX_NUMBER
+                    shape: [n_x]
+                    units: {category: NX_LENGTH}
+                    doc: Material point barycenter coordinate along x direction.
+                    attributes:
+                      long_name:
+                        type: NX_CHAR
+                        doc: Coordinate along x direction.
+                        via: [T1, T5]
+                        provisional: [Q2]
+                    via: [T1, T5, T7, T9]
+                    provisional: [Q1, Q2]
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          crystals:
+            node: group
+            class: NXmicrostructure_feature
+            children:
+              reference:
+                node: dataset
+                type: NX_CHAR
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              number_of_crystals:
+                node: dataset
+                type: NX_UINT
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              number_of_phases:
+                node: dataset
+                type: NX_UINT
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              indices_crystal:
+                node: dataset
+                type: NX_INT
+                shape: [c]
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              indices_phase:
+                node: dataset
+                type: NX_INT
+                shape: [c]
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+              area:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                type: NX_NUMBER
+                shape: [c]
+                via: [T1, T6, T7, T9]
+                provisional: [Q1]
+              volume:
+                node: dataset
+                occurs: {min: 0}
+                recommended: true
+                type: NX_NUMBER
+                shape: [c]
+                via: [T1, T6, T7, T9]
+                provisional: [Q1]
+              bunge_euler:
+                node: dataset
+                type: NX_FLOAT
+                shape: [c, 3]
+                units: {category: NX_ANGLE}
+                doc: Bunge-Euler angle orientation of each crystal.
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T3, T6]
+        provisional: [Q1, Q3]
+    via: [T1, T2, T5, T7]
+    provisional: [Q1, Q2, Q11]
+via: [T8]

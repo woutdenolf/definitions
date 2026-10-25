@@ -1,0 +1,26 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"},
+    {"declared_by": "NXdata", "id": "signal", "name": {"exact": "signal"}, "occurs": {"max": 1, "min": 0}, "recommended": false, "type": "NX_CHAR"},
+    {"declared_by": "NXdata", "id": "axes", "name": {"exact": "axes"}, "occurs": {"max": 1, "min": 0}, "recommended": false, "type": "NX_CHAR"}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"declared_by": "NXdata", "id": "DATA", "name": {"ref": "@signal"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "recommended": false, "type": "NX_NUMBER"},
+    {"declared_by": "NXdata", "id": "AXISNAME", "name": {"ref": "@axes"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "recommended": false, "type": "NX_CHAR_OR_NUMBER"}
+  ],
+  "class": "NXdata",
+  "extends": "NXobject",
+  "lossy": [],
+  "require": [],
+  "status": "local",
+  "symbols": [],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"}
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {}
+}

@@ -1,0 +1,33 @@
+nxds: '0.1'
+class: NXapm_paraprobe_selector_results
+category: application
+extends: NXapm_paraprobe_tool_results
+describes: NXroot
+doc: Application definition for a results file of the paraprobe-selector tool.
+defaults: {min: 1, binding: true, type: NX_CHAR}
+symbols:
+  n_ions:
+    doc: The total number of ions in the reconstruction.
+children:
+  ENTRY:
+    node: group
+    name: {any: true}
+    class: NXentry
+    occurs: {min: 1, max: 1}
+    children:
+      definition:
+        node: dataset
+        type: NX_CHAR
+        enum: [NXapm_paraprobe_selector_results]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      roiID:
+        node: group
+        name: {template: 'roi{ID}'}
+        class: NXapm_paraprobe_tool_process
+        occurs: {min: 1, max: unbounded}
+        via: [T1, T3, T6]
+        provisional: [Q1, Q3]
+    via: [T1, T2, T6]
+    provisional: [Q1, Q11]
+via: [T8]

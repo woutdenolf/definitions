@@ -1,0 +1,233 @@
+nxds: '0.1'
+class: NXoptical_polarizer
+category: base
+extends: NXcomponent
+doc: |-
+  An optical polarizer.
+
+  Information on the properties of polarizer is provided e.g.
+  [here](https://www.rp-photonics.com/polarizers.html).
+defaults: {min: 0, binding: false, type: NX_CHAR}
+symbols:
+  N_spectrum:
+    doc: |-
+      Size of the wavelength array for which the refractive index of the material
+      and/or coating is given.
+  N_spectrum_RT:
+    doc: |-
+      Size of the wavelength array for which the reflectance or transmission of
+      the polarizer is given.
+children:
+  type:
+    node: dataset
+    enum:
+      values:
+      - {value: dichroic}
+      - {value: linear}
+      - {value: circular}
+      - {value: Glan-Thompson prism}
+      - {value: Nicol prism}
+      - {value: Glan-Taylor prism}
+      - {value: Glan-Focault prism}
+      - {value: Wollaston prism}
+      - {value: Normarski prism}
+      - {value: Senarmont prism}
+      - {value: thin-film polarizer}
+      - {value: wire grid polarizer}
+      open: true
+    doc: Type of the polarizer
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  polarizer_angle:
+    node: dataset
+    occurs: {min: 0}
+    recommended: true
+    type: NX_NUMBER
+    units: {category: NX_ANGLE}
+    doc: Angle of the polarizer.
+    via: [T1, T6, T7]
+    provisional: [Q1]
+  acceptance_angle:
+    node: dataset
+    occurs: {min: 0}
+    recommended: true
+    type: NX_NUMBER
+    shape: [2]
+    units: {category: NX_ANGLE}
+    doc: Acceptance angle of the polarizer (range).
+    via: [T1, T6, T7, T9]
+    provisional: [Q1]
+  SHAPE:
+    node: group
+    name: {any: true}
+    class: NXshape
+    occurs: {min: 0}
+    recommended: true
+    doc: |-
+      Describe the geometry (shape, dimension etc.) of the device.
+      Specify the dimensions in 'SHAPE/size'. A sketch of the device should be
+      provided in the 'sketch(NXdata)' field to clarify (i) the shape and
+      dimensions of the device, and (ii) the input and outputs (i.e. the
+      direction of the incoming and outcoming (split) beams).
+    children:
+      shape:
+        node: dataset
+        enum:
+          values:
+          - {value: cube}
+          - {value: cylinder}
+          - {value: plate}
+          - {value: prism}
+          - {value: wedged}
+          - {value: other}
+          open: true
+        doc: Describe the shape (plate, cube, wedged, prism etc.).
+        via: [T0, T1, T4, T7]
+        provisional: [Q1]
+      sketch:
+        node: group
+        class: NXdata
+        doc: |-
+          Sketch of the device showing its geometry. The paths of the
+          incoming and outgoing beam should be illustrated and labelled (0 for
+          the incoming beam, and 1, 2,..., N_outputs for the outputs).
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      size:
+        node: dataset
+        shape: [N_objects, N_shapepar]
+        doc: |-
+          Physical extent of the device. The device might be made up of one or
+          more objects (NX_objects). The meaning and location of the axes used
+          will vary according to the value of the 'shape' variable. 'N_shapepar'
+          defines how many parameters:
+
+          * For 'cube' the parameters are (width, length).
+          * For 'cylinder' the parameters are (diameter, length).
+          * For 'plate' the parameters are (width, height, length).
+          * For 'prism' the parameters are (width, height, length).
+          * For 'wedged' the parameters are (width, height, shortest length).
+            The wedge angle should be provided in 'SHAPE/wedge_angle'.
+          * For 'other' the parameters may be (A, B, C, ...) with the labels
+            defined in the sketch plotted in 'SHAPE/sketch'.
+        via: [T0, T1, T4, T7, T9]
+        provisional: [Q1]
+      wedge_angle:
+        node: dataset
+        type: NX_FLOAT
+        units: {category: NX_ANGLE}
+        doc: Wedge angle if 'shape' is 'wedged'.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+    via: [T1, T2, T6, T7]
+    provisional: [Q1, Q11]
+  wavelength_range:
+    node: dataset
+    occurs: {min: 0}
+    recommended: true
+    type: NX_FLOAT
+    shape: [2]
+    units: {category: NX_WAVELENGTH}
+    doc: |-
+      Wavelength range for which the polarizer is designed. Enter the minimum
+      and maximum wavelength (lower and upper limit) of the range.
+    via: [T1, T6, T7, T9]
+    provisional: [Q1]
+  substrate:
+    node: group
+    class: NXsample
+    doc: |-
+      Properties of the substrate material of the polarizer. If the device has
+      a coating specify the coating material and its properties in ``COATING``.
+    children:
+      substrate_material:
+        node: dataset
+        doc: Specify the substrate material of the polarizer.
+        via: [T0, T1, T4, T7]
+        provisional: [Q1]
+      substrate_thickness:
+        node: dataset
+        type: NX_FLOAT
+        units: {category: NX_LENGTH}
+        doc: Thickness of the polarizer substrate.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      index_of_refraction:
+        node: dataset
+        type: NX_FLOAT
+        shape: [2, N_spectrum]
+        units: {category: NX_UNITLESS}
+        doc: |-
+          Complex index of refraction of the polarizer material. Specify at given
+          spectral values (wavelength, energy, wavenumber etc.).
+        via: [T1, T4, T7, T9]
+        provisional: [Q1]
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  coatingTYPE:
+    node: group
+    name: {template: 'coating{TYPE}'}
+    class: NXsample
+    doc: |-
+      If the device has a coating describe the material and its properties.
+      Some basic information can be found e.g. [here]
+      (https://www.opto-e.com/basics/reflection-transmission-and-coatings).
+      If the back and front side of the polarizer are coated with different
+      materials, you may define two coatings (e.g. coating_front and
+      coating_back).
+    children:
+      type:
+        node: dataset
+        doc: |-
+          Specify the coating type (e.g. dielectric, anti-reflection (AR),
+          multilayer coating etc.).
+        via: [T0, T1, T4, T7]
+        provisional: [Q1]
+      material:
+        node: dataset
+        doc: Describe the coating material (e.g. MgF2).
+        via: [T0, T1, T4, T7]
+        provisional: [Q1]
+      thickness:
+        node: dataset
+        type: NX_FLOAT
+        units: {category: NX_LENGTH}
+        doc: Thickness of the coating.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      index_of_refraction_coating:
+        node: dataset
+        type: NX_FLOAT
+        shape: [2, N_spectrum_coating]
+        units: {category: NX_UNITLESS}
+        doc: |-
+          Complex index of refraction of the coating. Specify at given spectral
+          values (wavelength, energy, wavenumber etc.).
+        via: [T1, T4, T7, T9]
+        provisional: [Q1]
+    via: [T1, T3, T4, T7]
+    provisional: [Q1, Q3]
+  extinction_ratio:
+    node: dataset
+    type: NX_FLOAT
+    shape: [N_spectrum]
+    units: {category: NX_UNITLESS}
+    doc: Extinction ratio (maximum to minimum transmission).
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  reflection:
+    node: dataset
+    type: NX_FLOAT
+    shape: [N_spectrum_RT]
+    units: {category: NX_UNITLESS}
+    doc: Reflection of the polarizer at given wavelength values.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  transmission:
+    node: dataset
+    type: NX_FLOAT
+    shape: [N_spectrum_RT]
+    units: {category: NX_UNITLESS}
+    doc: Transmission of the polarizer at given wavelength values.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]

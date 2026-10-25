@@ -1,0 +1,25 @@
+nxds: "0.1"
+class: NXcase_refines
+category: application
+describes: NXroot
+doc: An NXDS class writes `refines` itself (§5.2); NXDS has no name-fit.
+defaults: {min: 1, binding: true}
+children:
+  ENTRY:
+    node: group
+    class: NXentry
+    name: {any: true}
+    children:
+      definition: {node: dataset, enum: [NXcase_refines]}
+      INSTRUMENT:
+        node: group
+        class: NXinstrument
+        name: {any: true}
+        children:
+          counter:
+            node: group
+            class: NXcounter
+            children:
+              CHANNEL_counts: {node: dataset, occurs: {min: 0, max: 2}}
+              i0_counts: {node: dataset, refines: CHANNEL_counts}
+              i1_counts: {node: dataset, occurs: {min: 0}}

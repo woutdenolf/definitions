@@ -1,0 +1,10 @@
+# NXDS build report
+
+errors: 0, warnings: 0, infos: 2
+
+## Counts by code
+info     round-trip-ok                    2
+
+## Problems
+INFO [round-trip-ok] phase2/NXdemo_counter_phase2.nxds.yaml: NXDS → NXDL → NXDS gives the same resolved form
+INFO [round-trip-ok] phase2/NXdemo_phase2.nxds.yaml: NXDS → NXDL → NXDS gives the same resolved form

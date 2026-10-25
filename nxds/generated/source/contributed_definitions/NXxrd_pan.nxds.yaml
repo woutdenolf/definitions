@@ -1,0 +1,430 @@
+nxds: '0.1'
+class: NXxrd_pan
+category: application
+extends: NXxrd
+describes: NXroot
+doc: |-
+  NXxrd_pan is a specialization of NXxrd with extra properties
+  for the PANalytical XRD data format.
+defaults: {min: 1, binding: true, type: NX_CHAR}
+children:
+  ENTRY:
+    node: group
+    name: {any: true}
+    class: NXentry
+    children:
+      data_file:
+        node: dataset
+        occurs: {min: 0}
+        doc: Name of the data file.
+        via: [T0, T1, T6, T7]
+        provisional: [Q1]
+      measurement_type:
+        node: dataset
+        doc: Type of measurement.
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      definition:
+        node: dataset
+        enum: [NXxrd_pan]
+        doc: Official NeXus NXDL schema to which this file conforms.
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      method:
+        node: dataset
+        enum:
+          values:
+          - {value: X-Ray Diffraction (XRD)}
+          open: true
+        doc: |-
+          Method used to collect the data
+          default='X-Ray Diffraction (XRD)'
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      INSTRUMENT:
+        node: group
+        name: {any: true}
+        class: NXinstrument
+        children:
+          SOURCE:
+            node: group
+            name: {any: true}
+            class: NXsource
+            children:
+              xray_tube_material:
+                node: dataset
+                enum:
+                  values:
+                  - {value: Cu}
+                  - {value: Cr}
+                  - {value: Mo}
+                  - {value: Fe}
+                  - {value: Ag}
+                  - {value: In}
+                  - {value: Ga}
+                  open: true
+                doc: Type of the X-ray tube.
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+              xray_tube_current:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_CURRENT}
+                doc: Current of the X-ray tube.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              xray_tube_voltage:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_VOLTAGE}
+                doc: Voltage of the X-ray tube.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              k_alpha_one:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_WAVELENGTH}
+                doc: Wavelength of the K\u03b1 1 line.
+                attributes:
+                  units:
+                    enum:
+                      values:
+                      - {value: angstrom}
+                      open: true
+                    via: [T0, T1, T5]
+                    provisional: [Q2]
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              k_alpha_two:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_WAVELENGTH}
+                doc: Wavelength of the K\u03b1 2 line.
+                attributes:
+                  units:
+                    enum:
+                      values:
+                      - {value: angstrom}
+                      open: true
+                    via: [T0, T1, T5]
+                    provisional: [Q2]
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              ratio_k_alphatwo_k_alphaone:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_DIMENSIONLESS}
+                doc: K\u03b1 2/K\u03b1 1 intensity ratio.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              kbeta:
+                node: dataset
+                occurs: {min: 0}
+                type: NX_FLOAT
+                units: {category: NX_WAVELENGTH}
+                doc: Wavelength of the K\u00df line.
+                attributes:
+                  units:
+                    enum:
+                      values:
+                      - {value: angstrom}
+                      open: true
+                    via: [T0, T1, T5]
+                    provisional: [Q2]
+                via: [T1, T6, T7]
+                provisional: [Q1]
+              source_peak_wavelength:
+                node: dataset
+                occurs: {min: 0}
+                type: NX_FLOAT
+                units: {category: NX_WAVELENGTH}
+                doc: Wavelength of the X-ray source. Used to convert from 2-theta to Q.
+                via: [T1, T6, T7]
+                provisional: [Q1]
+            via: [T1, T2, T5, T7]
+            provisional: [Q1, Q2, Q11]
+          DETECTOR:
+            node: group
+            name: {any: true}
+            class: NXdetector
+            children:
+              scan_axis:
+                node: dataset
+                doc: Axis scanned.
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+              scan_mode:
+                node: dataset
+                doc: Mode of scan.
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+              integration_time:
+                node: dataset
+                occurs: {min: 0}
+                type: NX_FLOAT
+                units: {category: NX_TIME}
+                doc: Integration time per channel.
+                via: [T1, T6, T7]
+                provisional: [Q1]
+            via: [T1, T2, T5, T7]
+            provisional: [Q1, Q2, Q11]
+        via: [T1, T2, T5, T7]
+        provisional: [Q1, Q2, Q11]
+      experiment_config:
+        node: group
+        class: NXobject
+        occurs: {min: 0}
+        doc: Collect user inputs e.g. name or path of the input file.
+        children:
+          two_theta:
+            node: group
+            class: NXobject
+            children:
+              start:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_ANGLE}
+                doc: Starting value of the diffraction angle.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              end:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_ANGLE}
+                doc: Ending value of the diffraction angle.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              step:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_ANGLE}
+                doc: Minimum step size in-between two diffraction angles.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          omega:
+            node: group
+            class: NXobject
+            children:
+              start:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_ANGLE}
+                doc: Starting value of the incident angle.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              end:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_ANGLE}
+                doc: Ending value of the incident angle.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              step:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_ANGLE}
+                doc: Minimum step size in the between two incident angles.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          beam_attenuation_factors:
+            node: dataset
+            doc: Beam attenuation factors over the path.
+            via: [T0, T1, T5, T7]
+            provisional: [Q1, Q2]
+          goniometer_x:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_FLOAT
+            units: {category: NX_LENGTH}
+            doc: Goniometer position X.
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          goniometer_y:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_FLOAT
+            units: {category: NX_LENGTH}
+            doc: Goniometer position Y.
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          goniometer_z:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_FLOAT
+            units: {category: NX_LENGTH}
+            doc: Goniometer position Z
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          count_time:
+            node: dataset
+            type: NX_FLOAT
+            units: {category: NX_TIME}
+            doc: Total time of count.
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T6, T7]
+        provisional: [Q1]
+      experiment_result:
+        node: group
+        class: NXdata
+        doc: |-
+          All experiment results data such as scattering angle (2theta),
+          intensity, incident angle, scattering vector, etc will be stored here.
+        children:
+          intensity:
+            node: dataset
+            type: NX_FLOAT
+            shape: [nDet]
+            doc: Number of scattered electrons per unit time.
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+          two_theta:
+            node: dataset
+            type: NX_FLOAT
+            shape: [nDet]
+            units: {category: NX_ANGLE}
+            doc: Two-theta (scattering angle) of the diffractogram.
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+          omega:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_FLOAT
+            shape: [nDet]
+            units: {category: NX_ANGLE}
+            doc: Incident angle of the diffractogram.
+            via: [T1, T6, T7, T9]
+            provisional: [Q1]
+          phi:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_FLOAT
+            shape: [nDet]
+            units: {category: NX_ANGLE}
+            doc: The phi range of the diffractogram.
+            via: [T1, T6, T7, T9]
+            provisional: [Q1]
+          chi:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_FLOAT
+            shape: [nDet]
+            units: {category: NX_ANGLE}
+            doc: The chi range of the diffractogram
+            via: [T1, T6, T7, T9]
+            provisional: [Q1]
+          q_parallel:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_FLOAT
+            units: {category: NX_ANY}
+            doc: The scattering vector component, which is parallel to the sample surface.
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          q_perpendicular:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_FLOAT
+            units: {category: NX_ANY}
+            doc: The scattering vector component, which is perpendicular to the sample surface.
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          q_norm:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_FLOAT
+            units: {category: NX_ANY}
+            doc: |-
+              The norm value of the scattering vector, q. The scattering vector is defined as a
+              difference between the incident and scattered wave vectors.
+              For details: https://en.wikipedia.org/wiki/Powder_diffraction
+              and https://theory.labster.com/scattering-vector/
+            via: [T1, T6, T7]
+            provisional: [Q1]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      q_data:
+        node: group
+        class: NXdata
+        occurs: {min: 0}
+        doc: The desired view for scattering vectors.
+        children:
+          q:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_FLOAT
+            doc: |-
+              This concept corresponds to the norm value of the scattering vector(q).
+              The concept is the same as 'q_norm' of 'experiment_result'
+              and should be linked to /entry[ENTRY]/experiment_result/q_norm.
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          intensity:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_FLOAT
+            doc: |-
+              Number of scattered electrons per unit time at each scattering vector (q) value.
+              The concept is the same as the 'intensity' of experiment_result
+              and should be linked to /entry[ENTRY]/experiment_result/intensity.
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          q_parallel:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_FLOAT
+            doc: |-
+              The scattering vector (q) component, which is parallel to the sample surface.
+              This component is used in the Reciprocal Space Mapping (RSM) technique of
+              X-ray diffraction method.
+
+              The concept is the same as 'q_parallel' of experiment_result,
+              and should be linked to /entry[ENTRY]/experiment_result/q_parallel.
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          q_perpendicular:
+            node: dataset
+            occurs: {min: 0}
+            type: NX_FLOAT
+            doc: |-
+              The scattering vector component, which is perpendicular to the sample surface.
+
+              The concept is the same as  'q_perpendicular' of experiment_result,
+              and should be linked to /entry[ENTRY]/experiment_result/q_perpendicular.
+            via: [T1, T6, T7]
+            provisional: [Q1]
+        via: [T1, T6, T7]
+        provisional: [Q1]
+      SAMPLE:
+        node: group
+        name: {any: true}
+        class: NXsample
+        occurs: {min: 0}
+        doc: Description on sample.
+        children:
+          sample_mode:
+            node: dataset
+            doc: Mode of sample.
+            via: [T0, T1, T5, T7]
+            provisional: [Q1, Q2]
+          sample_id:
+            node: dataset
+            doc: Id of sample.
+            via: [T0, T1, T5, T7]
+            provisional: [Q1, Q2]
+          sample_name:
+            node: dataset
+            doc: |-
+              Usually in xrd sample are being analyzed, but sample might be identified by
+              assumed name or given name.
+            via: [T0, T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T2, T6, T7]
+        provisional: [Q1, Q11]
+    via: [T1, T2, T5, T7]
+    provisional: [Q1, Q2, Q11]
+via: [T8]

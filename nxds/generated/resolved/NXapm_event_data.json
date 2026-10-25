@@ -1,0 +1,40 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/COLLECTION"},
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"node": "group", "ref": "NXobject/LOG"},
+    {"node": "group", "ref": "NXobject/NOTE"},
+    {"node": "group", "ref": "NXobject/PARAMETERS"},
+    {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+    {"node": "dataset", "ref": "NXobject/identifierNAME"},
+    {"declared_by": "NXapm_event_data", "docs": ["NXapm_event_data/start_time"], "id": "start_time", "name": {"exact": "start_time"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_DATE_TIME", "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXapm_event_data", "docs": ["NXapm_event_data/end_time"], "id": "end_time", "name": {"exact": "end_time"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_DATE_TIME", "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXapm_event_data", "docs": ["NXapm_event_data/delta_time"], "id": "delta_time", "name": {"exact": "delta_time"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["p"], "symbols": {"p": "NXapm_event_data"}}, "type": "NX_NUMBER", "units": {"category": "NX_TIME"}, "via": ["T1", "T4", "T7", "T9"]},
+    {"declared_by": "NXapm_event_data", "docs": ["NXapm_event_data/pulse_id_offset"], "id": "pulse_id_offset", "name": {"exact": "pulse_id_offset"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_INT", "units": {"category": "NX_UNITLESS"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXapm_event_data", "docs": ["NXapm_event_data/pulse_id"], "id": "pulse_id", "name": {"exact": "pulse_id"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1", "Q5"], "recommended": false, "shape": {"binding": false, "dims": ["p"], "symbols": {"p": "NXapm_event_data"}}, "type": "NX_INT", "units": {"category": "NX_UNITLESS"}, "via": ["T1", "T4", "T7", "T9"]},
+    {"class": "NXapm_instrument", "declared_by": "NXapm_event_data", "docs": ["NXapm_event_data/instrument"], "id": "instrument", "name": {"exact": "instrument"}, "node": "group", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "via": ["T1", "T4", "T7"]}
+  ],
+  "class": "NXapm_event_data",
+  "extends": "NXobject",
+  "lossy": [],
+  "provisional": [],
+  "require": [],
+  "source": "base_classes/NXapm_event_data.nxdl.xml",
+  "status": "base",
+  "symbols": ["p"],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"},
+  "via": []
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {}
+}

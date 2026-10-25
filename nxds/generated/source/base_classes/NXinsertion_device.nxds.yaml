@@ -1,0 +1,121 @@
+nxds: '0.1'
+class: NXinsertion_device
+category: base
+extends: NXcomponent
+doc: An insertion device, as used in a synchrotron light source.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  type:
+    node: dataset
+    enum: [undulator, wiggler, wavelength_shifter]
+    doc: It is recommended (effective from 2025) to use the "wavelength_shifter" choice for
+      3-pole wigglers, while reserving the generic "wiggler" designation for extended multipole
+      wigglers.
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  gap:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    doc: separation between opposing pairs of magnetic poles
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  taper:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_ANGLE}
+    doc: angular of gap difference between upstream and downstream ends of the insertion device
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  phase:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_ANGLE}
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  poles:
+    node: dataset
+    type: NX_INT
+    units: {category: NX_UNITLESS}
+    doc: number of poles
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  magnetic_wavelength:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_WAVELENGTH}
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  k:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_DIMENSIONLESS}
+    doc: beam displacement parameter
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  length:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    doc: length of insertion device
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  power:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_POWER}
+    doc: total power delivered by insertion device
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  energy:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_ENERGY}
+    doc: energy of peak intensity in output spectrum
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  bandwidth:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_ENERGY}
+    doc: bandwidth of peak energy
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  harmonic:
+    node: dataset
+    type: NX_INT
+    units: {category: NX_UNITLESS}
+    doc: harmonic number of peak
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  spectrum:
+    node: group
+    class: NXdata
+    doc: spectrum of insertion device
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  GEOMETRY:
+    node: group
+    name: {any: true}
+    class: NXgeometry
+    deprecated: Use the field `depends_on` and :ref:`NXtransformations` to position the device
+      and NXoff_geometry to describe its shape instead
+    doc: '"Engineering" position of insertion device'
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  OFF_GEOMETRY:
+    node: group
+    name: {any: true}
+    class: NXoff_geometry
+    occurs: {min: 0}
+    doc: This group describes the shape of the beam line component
+    via: [T1, T2, T6, T7]
+    provisional: [Q1, Q11]
+  depends_on:
+    node: dataset
+    type: NX_CHAR
+    doc: |-
+      .. todo::
+      Add a definition for the reference point of a insertion device.
+    via: [T1, T4, T7]
+    provisional: [Q1]

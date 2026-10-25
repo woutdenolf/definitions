@@ -1,0 +1,27 @@
+# Finding codes (spec §10.3): severity and the conditions that change it, where
+# the finding is reported, and when partial mode (§11) reports it as INCOMPLETE.
+# Severities depend on Q6 (provisional): a NIAC decision changes this table,
+# never the code names.
+MISSING: {severity: E, path: the parent, partial: always, tier: M, doc: "fewer objects than min (one finding per member and parent)"}
+TOO-MANY: {severity: E, path: the parent, partial: kept, tier: M, doc: "more objects than max; max 0 means forbidden"}
+CLASS: {severity: E, path: the object, partial: kept, tier: M, doc: "a group assigned by an exact name has a class that does not fit"}
+NO-CLASS: {severity: W, path: the object, partial: always, tier: M, doc: "a group (not the root) has no class"}
+TYPE: {severity: E, path: the object, partial: kept, tier: M, doc: "storage type not accepted, or a value check failed (NX_POSINT, NX_BOOLEAN, NX_DATE_TIME; tier S); a definition that is not one text value"}
+SHAPE: {severity: E, exceptions: {scalar_against_length_1: W, stopped_entry: W}, path: "the object; the entry (or /) for symbols", partial: growing, tier: M, doc: "rank, dimension or symbol; W for a scalar against length 1, and for symbol conflicts in an entry marked stopped (Q10)"}
+ENUM: {severity: E, path: the object, partial: kept, tier: S, doc: "a value outside a closed enumeration"}
+ENUM-OPEN: {severity: W, path: the object, partial: kept, tier: S, doc: "a value outside an open enumeration"}
+REF: {severity: E, path: the attribute, partial: always, tier: M, doc: "a role or names_child attribute names no child, or a child of the wrong kind"}
+CONSTRAINT: {severity: E, path: "the group; for attribute length and rank the object that owns the attribute", partial: missing, tier: M, doc: "at_least_one_of, exactly_one_of, at_most_one_of, all_or_none; attribute length or rank"}
+LINK: {severity: E, path: the link, partial: dangling, tier: M, doc: "a dangling link, or a link whose object is not assigned to its target member"}
+RECOMMENDED: {severity: W, path: the parent, partial: always, tier: M, doc: "a recommended member is absent"}
+DEPRECATED: {severity: W, path: the object, partial: kept, tier: M, doc: "a deprecated member or value is used"}
+UNITS: {severity: W, path: the dataset, partial: absent, tier: M, doc: "units attribute absent, not understood, or of a dimension outside the category"}
+NAME: {severity: W, path: the object, partial: kept, tier: M, doc: "a name outside the name rules"}
+UNDECLARED: {severity: I, exceptions: {undeclared_error: E}, path: the object, partial: kept, tier: M, doc: "an object no member declares; E with undeclared: error"}
+NO-DEFINITION: {severity: I, exceptions: {expect: E}, path: the root, partial: always, tier: S, doc: "no group is dispatched (not reported with expect); E with expect: fewer groups follow the expected definition than it requires"}
+UNKNOWN-DEFINITION: {severity: W, path: the definition dataset, partial: kept, tier: S, doc: "a definition that is not an application definition of the bundle"}
+UNKNOWN-CLASS: {severity: W, path: the group, partial: kept, tier: M, doc: "a class not in the bundle; its content is undeclared"}
+UNKNOWN-RELEASE: {severity: W, path: the root, partial: kept, tier: M, doc: "a release the validator does not have"}
+SKIPPED: {severity: I, path: the object, partial: kept, tier: M, doc: "a check not done (read error, unknown feature, tier F)"}
+INCOMPLETE: {severity: I, path: as the replaced code, partial: kept, tier: M, doc: "partial mode: a finding that may go away once writing is done; the message names the replaced code"}
+BUNDLE: {severity: I, path: the root, partial: kept, tier: M, doc: "the bundle used, when not taken from the file"}

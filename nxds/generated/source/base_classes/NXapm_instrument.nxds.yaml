@@ -1,0 +1,479 @@
+nxds: '0.1'
+class: NXapm_instrument
+category: base
+extends: NXinstrument
+doc: |-
+  Base class for instrument-related details of a real or simulated
+  atom probe tomograph or field-ion microscope.
+
+  For collecting data and experiments which are simulations of an atom probe
+  microscope or a session with such instrument use the :ref:`NXapm` application definition
+  and the :ref:`NXapm_event_data` groups it provides.
+
+  This base class implements the concept of :ref:`NXapm` whereby (meta)data are distinguished
+  whether these typically change during a session, so-called dynamic, or not, so-called static metadata.
+  This design allows to store e.g. hardware related concepts only once instead of demanding
+  that each image or spectrum from the session needs to be stored also with the static metadata.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+symbols:
+  p:
+    doc: |-
+      Number of pulses collected in between start_time and end_time
+      inside a parent instance of :ref:`NXapm_event_data`.
+children:
+  type:
+    node: dataset
+    type: NX_CHAR
+    enum:
+      values:
+      - {value: Inspico}
+      - {value: 3DAP}
+      - {value: LAWATAP}
+      - {value: LEAP 3000 Si}
+      - {value: LEAP 3000X Si}
+      - {value: LEAP 3000 HR}
+      - {value: LEAP 3000X HR}
+      - {value: LEAP 4000 Si}
+      - {value: LEAP 4000X Si}
+      - {value: LEAP 4000 HR}
+      - {value: LEAP 4000X HR}
+      - {value: LEAP 5000 XS}
+      - {value: LEAP 5000 XR}
+      - {value: LEAP 5000 R}
+      - {value: EIKOS}
+      - {value: EIKOS-UV}
+      - {value: LEAP 6000 XR}
+      - {value: LEAP INVIZO}
+      - {value: Photonic AP}
+      - {value: TeraSAT}
+      - {value: TAPHR}
+      - {value: Modular AP}
+      - {value: Titanium APT}
+      - {value: Extreme UV APT}
+      open: true
+    doc: Which type of instrument.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  fabrication:
+    node: group
+    class: NXfabrication
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  location:
+    node: dataset
+    type: NX_CHAR
+    doc: |-
+      Location of the lab or place where the instrument is installed. Using GEOREF is
+      preferred.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  flight_path:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    doc: |-
+      Nominal flight path
+
+      The value can be extracted from the CAnalysis.CSpatial.fFlightPath
+      field of a CamecaRoot ROOT file.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  reflectron:
+    node: group
+    class: NXcomponent
+    doc: |-
+      Device which reduces ToF differences of ions in ToF experiments.
+
+      For atom probe the reflectron can be considered an energy compensation device.
+      Such a device can be realized technically e.g. with a Poschenrieder lens.
+
+      Consult the following U.S. patents for further details:
+
+      * 3863068 and 6740872 for the reflectron
+      * 8134119 for the curved reflectron
+    children:
+      applied:
+        node: dataset
+        type: NX_BOOLEAN
+        doc: Was the reflectron used?
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      voltage:
+        node: dataset
+        type: NX_FLOAT
+        units: {category: NX_VOLTAGE}
+        doc: The maximum voltage applied to the reflectron, relative to system ground.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  decelerate_electrode:
+    node: group
+    class: NXcomponent
+    doc: A counter electrode of the LEAP 6000 series atom probes.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  local_electrode:
+    node: group
+    class: NXcomponent
+    doc: |-
+      A local electrode guiding the ion flight path.
+      Also called counter or extraction electrode.
+    children:
+      voltage:
+        node: dataset
+        type: NX_FLOAT
+        units: {category: NX_VOLTAGE}
+        doc: Acceleration voltage
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      aperture_type:
+        node: dataset
+        type: NX_CHAR
+        enum: [n/a, conical, feedthrough, custom]
+        doc: |-
+          The type of aperture used when the local_electrode has an aperture or acts as an aperture
+          in addition to acting as an extraction electrode.
+
+          The local electrode is a component which combines functionalities
+          of :ref:`NXelectromagnetic_lens`, :ref:`NXaperture`, if not even :ref:`NXdeflector`:
+
+          * "n/a", use when no aperture is present in the experiment
+          * "conical", conical aperture with a circular hole
+          * "feedthrough", an aperture where the specimen protrudes through a circular hole
+          * "custom", a user modified aperture, which is otherwise non-standard
+        via: [T1, T4, T7]
+        provisional: [Q1]
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  ion_detector:
+    node: group
+    class: NXdetector
+    doc: Detector for taking raw time-of-flight and ion/hit impact positions data.
+    children:
+      signal_amplitude:
+        node: dataset
+        type: NX_FLOAT
+        shape: [p]
+        units: {category: NX_CURRENT}
+        doc: |-
+          Amplitude of the signal detected on the multi-channel plate (MCP).
+
+          This field should be used for storing the signal amplitude quantity
+          within ATO files when the detector was an MCP.
+
+          The ATO file format is used primarily by the atom probe group of the
+          GPM in Rouen, France.
+        via: [T1, T4, T7, T9]
+        provisional: [Q1]
+      mcp_efficiency:
+        node: dataset
+        type: NX_FLOAT
+        units: {category: NX_DIMENSIONLESS}
+        doc: |-
+          The value can be extracted from the CRunHeader.fMcpEfficiency
+          field of a CamecaRoot RHIT file.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      mesh_efficiency:
+        node: dataset
+        type: NX_FLOAT
+        units: {category: NX_DIMENSIONLESS}
+        doc: |-
+          The value can be extracted from the CRunHeader.fMeshEfficiency
+          field of a CamecaRoot RHIT file.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  pulser:
+    node: group
+    class: NXcomponent
+    doc: |-
+      Laser- and/or voltage-pulsing device to trigger ion removal.
+
+      When the base class NXapm_instrument is used in the NXapm
+      application definition, the values for the following fields:
+
+      * pulse_frequency
+      * pulse_fraction
+      * pulse_voltage
+      * pulse_number
+      * standing_voltage
+      * pulse_energy
+      * incidence_vector
+      * pinhole_position
+      * spot_position
+
+      should be recorded in the order of, and assumed associated,
+      with the pulse_id in an instance of :ref:`NXapm_event_data`.
+    children:
+      fabrication:
+        node: group
+        class: NXfabrication
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      pulse_mode:
+        node: dataset
+        type: NX_CHAR
+        enum:
+          values:
+          - {value: laser}
+          - {value: voltage}
+          - {value: laser_and_voltage}
+          open: true
+        doc: Detail whereby ion extraction is triggered methodologically.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      pulse_frequency:
+        node: dataset
+        type: NX_FLOAT
+        units: {category: NX_FREQUENCY}
+        doc: Frequency with which the pulser fire(s).
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      pulse_fraction:
+        node: dataset
+        type: NX_FLOAT
+        units: {category: NX_DIMENSIONLESS}
+        doc: |-
+          Fraction of the pulse_voltage that is applied in addition
+          to the standing_voltage at peak voltage of a pulse.
+
+          If a standing voltage is applied, this gives nominal pulse fraction
+          (as a function of standing voltage). Otherwise, this field should
+          not be present.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      pulse_voltage:
+        node: dataset
+        type: NX_FLOAT
+        units: {category: NX_VOLTAGE}
+        doc: Pulsed voltage, in laser pulsing mode this field can be omitted.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      pulse_number:
+        node: dataset
+        type: NX_UINT
+        units: {category: NX_UNITLESS}
+        doc: Absolute number of pulses starting from the beginning of the experiment.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      standing_voltage:
+        node: dataset
+        type: NX_FLOAT
+        units: {category: NX_VOLTAGE}
+        doc: |-
+          Direct current voltage between the specimen and the (local electrode) in
+          the case of local electrode atom probe (LEAP) instrument. Otherwise, the
+          standing voltage applied to the sample, relative to system ground.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      sourceID:
+        node: group
+        name: {template: 'source{ID}'}
+        class: NXsource
+        doc: |-
+          Group to store details about components that enable laser pulsing strategies.
+
+          When multiple sources are available, these should be named source1, source2;
+          the LEAP 6000 series instruments have two sources. The majority of instruments
+          still has one source. In this case the variable part "ID" can be omitted.
+          Consequently the group should be named "source" when writing instance data.
+
+          Atom probe microscopes use controlled laser, voltage, or a combination of pulsing
+          strategies to trigger ion extraction via exciting and eventual field evaporation
+          field emission of ion at the specimen surface.
+        children:
+          wavelength:
+            node: dataset
+            type: NX_FLOAT
+            units: {category: NX_WAVELENGTH}
+            doc: The wavelength of the radiation emitted by the source.
+            via: [T1, T4, T7]
+            provisional: [Q1]
+          power:
+            node: dataset
+            type: NX_FLOAT
+            units: {category: NX_POWER}
+            doc: Nominal power of the laser source while illuminating the specimen.
+            via: [T1, T4, T7]
+            provisional: [Q1]
+          pulse_energy:
+            node: dataset
+            type: NX_FLOAT
+            units: {category: NX_ENERGY}
+            doc: Average energy of the laser at peak of each pulse.
+            attributes:
+              logged_against:
+                type: NX_CHAR
+                doc: Path to pulse_id
+                via: [T1, T4]
+            via: [T1, T4, T7]
+            provisional: [Q1]
+          beamID:
+            node: group
+            name: {template: 'beam{ID}'}
+            class: NXbeam
+            doc: |-
+              Details about specific positions along the laser beam
+              which illuminates the (atom probe) specimen.
+            children:
+              incidence_vector:
+                node: dataset
+                type: NX_NUMBER
+                units: {category: NX_LENGTH}
+                doc: |-
+                  Track time-dependent settings over the course of the measurement
+                  how the laser beam shines on the specimen, i.e. the mean vector
+                  is parallel to the laser propagation direction.
+                via: [T1, T4, T7]
+                provisional: [Q1]
+              pinhole_position:
+                node: dataset
+                type: NX_NUMBER
+                units: {category: NX_LENGTH}
+                doc: |-
+                  Track time-dependent settings over the course of the measurement
+                  where the laser beam exits the focusing optics.
+                via: [T1, T4, T7]
+                provisional: [Q1]
+              spot_position:
+                node: dataset
+                type: NX_NUMBER
+                units: {category: NX_LENGTH}
+                doc: |-
+                  Track time-dependent settings over the course of the
+                  measurement where the laser hits the specimen.
+                via: [T1, T4, T7]
+                provisional: [Q1]
+            via: [T1, T3, T4, T7]
+            provisional: [Q1, Q3]
+          TRANSFORMATIONS:
+            node: group
+            name: {any: true}
+            class: NXtransformations
+            doc: |-
+              Affine transformations which describe the geometry how the
+              laser focusing optics/pinhole-attached coordinate system is
+              defined, how it has to be transformed so that it aligns with
+              the specimen coordinate system.
+            via: [T1, T2, T4, T7]
+            provisional: [Q1, Q11]
+        via: [T1, T3, T4, T7]
+        provisional: [Q1, Q3]
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  stage:
+    node: group
+    class: NXmanipulator
+    children:
+      temperature_sensor:
+        node: group
+        class: NXsensor
+        children:
+          value:
+            node: dataset
+            type: NX_FLOAT
+            doc: |-
+              The value can be extracted from the CRunHeader.CAnalysis.fSpecimenTemperature
+              field of a CamecaRoot RHIT file.
+            via: [T1, T4, T7]
+            provisional: [Q1]
+        via: [T1, T4, T7]
+        provisional: [Q1]
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  analysis_chamber:
+    node: group
+    class: NXcomponent
+    children:
+      flight_path:
+        node: dataset
+        type: NX_FLOAT
+        units: {category: NX_LENGTH}
+        doc: |-
+          The space inside the atom probe along which ions pass nominally
+          when they leave the specimen and travel to the detector.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      pressure_sensor:
+        node: group
+        class: NXsensor
+        children:
+          measurement:
+            node: dataset
+            type: NX_CHAR
+            enum: [pressure]
+            via: [T1, T4, T7]
+            provisional: [Q1]
+          value:
+            node: dataset
+            type: NX_FLOAT
+            units: {category: NX_PRESSURE}
+            doc: |-
+              The value can be extracted from the CRunHeader.CLasHeader.fAnalysisPressure
+              field of a CamecaRoot RHIT file.
+            via: [T1, T4, T7]
+            provisional: [Q1]
+        via: [T1, T4, T7]
+        provisional: [Q1]
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  buffer_chamber:
+    node: group
+    class: NXcomponent
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  load_lock_chamber:
+    node: group
+    class: NXcomponent
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  getter_pump:
+    node: group
+    class: NXpump
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  roughening_pump:
+    node: group
+    class: NXpump
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  turbomolecular_pump:
+    node: group
+    class: NXpump
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  comment:
+    node: dataset
+    type: NX_CHAR
+    doc: Free-text field for additional comments.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  control:
+    node: group
+    class: NXparameters
+    doc: |-
+      Relevant quantities during a measurement with a LEAP system as were
+      suggested by `T. Blum et al. <https://doi.org/10.1002/9781119227250.ch18>`_.
+    children:
+      evaporation_control:
+        node: dataset
+        type: NX_CHAR
+        doc: |-
+          Parameter that defines the rules and control loops whereby the pulser and
+          other components of the instrument are controlled during evaporation.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+      target_detection_rate:
+        node: dataset
+        type: NX_NUMBER
+        units: {category: NX_ANY}
+        doc: |-
+          Parameter that assure maintenance of a significant yet not too high
+          ion influx on the detector to avoid detection losses.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+    via: [T1, T4, T7]
+    provisional: [Q1]

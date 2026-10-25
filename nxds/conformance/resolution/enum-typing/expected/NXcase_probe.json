@@ -1,0 +1,25 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"declared_by": "NXcase_probe", "id": "mode", "name": {"exact": "mode"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "recommended": false, "type": "NX_INT"},
+    {"declared_by": "NXcase_probe", "id": "labels", "name": {"exact": "labels"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "recommended": false, "shape": {"binding": false, "dims": [2]}, "type": "NX_CHAR"},
+    {"declared_by": "NXcase_probe", "id": "direction", "name": {"exact": "direction"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "recommended": false, "shape": {"binding": false, "dims": [3]}, "type": "NX_NUMBER"}
+  ],
+  "class": "NXcase_probe",
+  "extends": "NXobject",
+  "lossy": [],
+  "require": [],
+  "status": "local",
+  "symbols": [],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"}
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {}
+}

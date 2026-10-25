@@ -1,0 +1,40 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/COLLECTION"},
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"node": "group", "ref": "NXobject/LOG"},
+    {"node": "group", "ref": "NXobject/NOTE"},
+    {"node": "group", "ref": "NXobject/PARAMETERS"},
+    {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+    {"node": "dataset", "ref": "NXobject/identifierNAME"},
+    {"declared_by": "NXdetector_module", "docs": ["NXdetector_module/data_origin"], "id": "data_origin", "name": {"exact": "data_origin"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_INT", "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXdetector_module", "docs": ["NXdetector_module/data_size"], "id": "data_size", "name": {"exact": "data_size"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_INT", "via": ["T1", "T4", "T7"]},
+    {"attributes": [{"declared_by": "NXdetector_module", "enum": {"open": false, "values": [{"value": "translation"}]}, "id": "transformation_type", "name": {"exact": "transformation_type"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4"]}, {"declared_by": "NXdetector_module", "docs": ["NXdetector_module/module_offset@vector"], "id": "vector", "name": {"exact": "vector"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "via": ["T1", "T4"]}, {"declared_by": "NXdetector_module", "docs": ["NXdetector_module/module_offset@offset"], "id": "offset", "name": {"exact": "offset"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "via": ["T1", "T4"]}, {"declared_by": "NXdetector_module", "docs": ["NXdetector_module/module_offset@offset_units"], "id": "offset_units", "name": {"exact": "offset_units"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4"]}, {"declared_by": "NXdetector_module", "docs": ["NXdetector_module/module_offset@depends_on"], "id": "depends_on", "name": {"exact": "depends_on"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4"]}], "declared_by": "NXdetector_module", "docs": ["NXdetector_module/module_offset"], "id": "module_offset", "name": {"exact": "module_offset"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_LENGTH"}, "via": ["T1", "T4", "T7"]},
+    {"attributes": [{"declared_by": "NXdetector_module", "enum": {"open": false, "values": [{"value": "translation"}]}, "id": "transformation_type", "name": {"exact": "transformation_type"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4"]}, {"declared_by": "NXdetector_module", "docs": ["NXdetector_module/fast_pixel_direction@vector"], "id": "vector", "name": {"exact": "vector"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "via": ["T1", "T4"]}, {"declared_by": "NXdetector_module", "docs": ["NXdetector_module/fast_pixel_direction@offset"], "id": "offset", "name": {"exact": "offset"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "via": ["T1", "T4"]}, {"declared_by": "NXdetector_module", "docs": ["NXdetector_module/fast_pixel_direction@offset_units"], "id": "offset_units", "name": {"exact": "offset_units"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4"]}, {"declared_by": "NXdetector_module", "docs": ["NXdetector_module/fast_pixel_direction@depends_on"], "id": "depends_on", "name": {"exact": "depends_on"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4"]}], "declared_by": "NXdetector_module", "docs": ["NXdetector_module/fast_pixel_direction"], "id": "fast_pixel_direction", "name": {"exact": "fast_pixel_direction"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_LENGTH"}, "via": ["T1", "T4", "T7"]},
+    {"attributes": [{"declared_by": "NXdetector_module", "enum": {"open": false, "values": [{"value": "translation"}]}, "id": "transformation_type", "name": {"exact": "transformation_type"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T0", "T1", "T4"]}, {"declared_by": "NXdetector_module", "docs": ["NXdetector_module/slow_pixel_direction@vector"], "id": "vector", "name": {"exact": "vector"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "via": ["T1", "T4"]}, {"declared_by": "NXdetector_module", "docs": ["NXdetector_module/slow_pixel_direction@offset"], "id": "offset", "name": {"exact": "offset"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "via": ["T1", "T4"]}, {"declared_by": "NXdetector_module", "docs": ["NXdetector_module/slow_pixel_direction@offset_units"], "id": "offset_units", "name": {"exact": "offset_units"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4"]}, {"declared_by": "NXdetector_module", "docs": ["NXdetector_module/slow_pixel_direction@depends_on"], "id": "depends_on", "name": {"exact": "depends_on"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4"]}], "declared_by": "NXdetector_module", "docs": ["NXdetector_module/slow_pixel_direction"], "id": "slow_pixel_direction", "name": {"exact": "slow_pixel_direction"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_NUMBER", "units": {"category": "NX_LENGTH"}, "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXdetector_module", "docs": ["NXdetector_module/depends_on"], "id": "depends_on", "name": {"exact": "depends_on"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4", "T7"]}
+  ],
+  "class": "NXdetector_module",
+  "extends": "NXobject",
+  "lossy": [],
+  "provisional": [],
+  "require": [],
+  "source": "base_classes/NXdetector_module.nxdl.xml",
+  "status": "base",
+  "symbols": [],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"},
+  "via": []
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {}
+}

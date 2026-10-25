@@ -1,0 +1,165 @@
+nxds: '0.1'
+class: NXmirror
+category: base
+extends: NXcomponent
+doc: A beamline mirror or supermirror.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  GEOMETRY:
+    node: group
+    name: {any: true}
+    class: NXgeometry
+    deprecated: Use the field `depends_on` and :ref:`NXtransformations` to position the mirror
+      and NXoff_geometry to describe its shape instead
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  type:
+    node: dataset
+    enum:
+      values:
+      - value: single
+        doc: mirror with a single material as a reflecting surface
+      - value: multi
+        doc: mirror with stacked, multiple layers as a reflecting surface
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  description:
+    node: dataset
+    doc: description of this mirror
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  incident_angle:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_ANGLE}
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  reflectivity:
+    node: group
+    class: NXdata
+    doc: Reflectivity as function of wavelength
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  bend_angle_x:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_ANGLE}
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  bend_angle_y:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_ANGLE}
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  interior_atmosphere:
+    node: dataset
+    enum: [vacuum, helium, argon]
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  external_material:
+    node: dataset
+    doc: external material outside substrate
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  m_value:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_UNITLESS}
+    doc: |-
+      The m value for a supermirror, which defines the supermirror
+      regime in multiples of the critical angle of Nickel.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  substrate_material:
+    node: dataset
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  substrate_density:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_MASS_DENSITY}
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  substrate_thickness:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  coating_material:
+    node: dataset
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  substrate_roughness:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  coating_roughness:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  even_layer_material:
+    node: dataset
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  even_layer_density:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_MASS_DENSITY}
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  odd_layer_material:
+    node: dataset
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  odd_layer_density:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_MASS_DENSITY}
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  layer_thickness:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_LENGTH}
+    doc: An array describing the thickness of each layer
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  shape:
+    node: group
+    class: NXshape
+    deprecated: Use NXoff_geometry instead
+    doc: A NXshape group describing the shape of the mirror
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  figure_data:
+    node: group
+    class: NXdata
+    doc: Numerical description of the surface figure of the mirror.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  OFF_GEOMETRY:
+    node: group
+    name: {any: true}
+    class: NXoff_geometry
+    occurs: {min: 0}
+    doc: This group describes the shape of the beam line component
+    via: [T1, T2, T6, T7]
+    provisional: [Q1, Q11]
+  depends_on:
+    node: dataset
+    type: NX_CHAR
+    doc: |-
+      Given a flat mirror, the reference plane is the plane which contains the "entry" surface of the mirror. The reference
+      point of the mirror in the x and y axis is the centre of the mirror on that plane. The reference plane is orthogonal
+      to the z axis and the location of this plane is the reference point on the z axis. The mirror faces negative z values.
+
+      .. image:: mirror/mirror.png
+        :width: 40%
+    via: [T1, T4, T7]
+    provisional: [Q1]

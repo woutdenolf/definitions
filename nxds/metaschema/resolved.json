@@ -1,0 +1,190 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "resolved.json",
+ "title": "NXDS resolved file",
+ "description": "The resolved form of one class and its specialisations (spec §6). Written by hand.",
+ "type": "object",
+ "additionalProperties": false,
+ "required": ["nxds", "requires", "definition", "specialisations"],
+ "properties": {
+  "nxds": {"type": "string"},
+  "requires": {"type": "array", "items": {"type": "string"}, "description": "features outside the core (§6.4); empty in 0.1"},
+  "definition": {"$ref": "#/$defs/class"},
+  "specialisations": {"type": "object", "additionalProperties": {"$ref": "#/$defs/specialisation"}}
+ },
+ "$defs": {
+  "strings": {"type": "array", "items": {"type": "string"}},
+  "name": {
+   "oneOf": [
+    {"type": "object", "additionalProperties": false, "required": ["exact"], "properties": {"exact": {"type": "string"}}},
+    {"type": "object", "additionalProperties": false, "required": ["template"], "properties": {"template": {"type": "string"}}},
+    {"type": "object", "additionalProperties": false, "required": ["any"], "properties": {"any": {"const": true}}},
+    {"type": "object", "additionalProperties": false, "required": ["ref"], "properties": {"ref": {"type": "string", "pattern": "^@"}}}
+   ]
+  },
+  "occurs": {
+   "type": "object",
+   "additionalProperties": false,
+   "required": ["min", "max"],
+   "properties": {
+    "min": {"type": "integer", "minimum": 0},
+    "max": {"oneOf": [{"type": "integer", "minimum": 0}, {"const": "unbounded"}]}
+   }
+  },
+  "scalar": {"type": ["string", "integer", "number", "boolean"]},
+  "enum": {
+   "type": "object",
+   "additionalProperties": false,
+   "required": ["values", "open"],
+   "properties": {
+    "open": {"type": "boolean"},
+    "values": {
+     "type": "array",
+     "items": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["value"],
+      "properties": {
+       "value": {
+        "description": "a scalar applies to each element, a list to the whole array (§4.5)",
+        "oneOf": [{"$ref": "#/$defs/scalar"}, {"type": "array", "items": {"$ref": "#/$defs/scalar"}}]
+       },
+       "doc": {"type": "string"},
+       "deprecated": {"type": "string"}
+      }
+     }
+    }
+   }
+  },
+  "expr": {"type": "object", "additionalProperties": false, "required": ["expr"], "properties": {"expr": {"type": "string"}}},
+  "dim_value": {"oneOf": [{"type": "integer", "minimum": 0}, {"type": "string"}, {"type": "null"}, {"$ref": "#/$defs/expr"}]},
+  "dim": {
+   "oneOf": [
+    {"$ref": "#/$defs/dim_value"},
+    {"type": "object", "additionalProperties": false, "required": ["optional"], "properties": {"optional": {"const": true}, "value": {"$ref": "#/$defs/dim_value"}}}
+   ]
+  },
+  "shape": {
+   "type": "object",
+   "additionalProperties": false,
+   "required": ["binding"],
+   "properties": {
+    "rank": {"oneOf": [{"type": "integer", "minimum": 0}, {"type": "string"}, {"$ref": "#/$defs/expr"}]},
+    "dims": {"type": "array", "items": {"$ref": "#/$defs/dim"}},
+    "binding": {"type": "boolean"},
+    "symbols": {"type": "object", "additionalProperties": {"type": "string"}, "description": "symbol → the class declaring it (§4.4)"}
+   }
+  },
+  "units": {
+   "oneOf": [
+    {"type": "object", "additionalProperties": false, "required": ["category"], "properties": {"category": {"type": "string"}}},
+    {"type": "object", "additionalProperties": false, "required": ["fixed"], "properties": {"fixed": {"type": "string"}}}
+   ]
+  },
+  "length": {
+   "oneOf": [
+    {"type": "integer", "minimum": 0},
+    {"type": "string"},
+    {"type": "object", "additionalProperties": false, "required": ["rank_of"], "properties": {"rank_of": {"type": "string"}}}
+   ]
+  },
+  "labels": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+  "constraint": {
+   "oneOf": [
+    {"type": "object", "additionalProperties": false, "required": ["at_least_one_of"], "properties": {"at_least_one_of": {"$ref": "#/$defs/labels"}}},
+    {"type": "object", "additionalProperties": false, "required": ["exactly_one_of"], "properties": {"exactly_one_of": {"$ref": "#/$defs/labels"}}},
+    {"type": "object", "additionalProperties": false, "required": ["at_most_one_of"], "properties": {"at_most_one_of": {"$ref": "#/$defs/labels"}}},
+    {"type": "object", "additionalProperties": false, "required": ["all_or_none"], "properties": {"all_or_none": {"$ref": "#/$defs/labels"}}}
+   ]
+  },
+  "policy": {"enum": ["report", "ignore", "error"]},
+  "undeclared": {
+   "type": "object",
+   "additionalProperties": false,
+   "required": ["group", "dataset", "attribute"],
+   "properties": {"group": {"$ref": "#/$defs/policy"}, "dataset": {"$ref": "#/$defs/policy"}, "attribute": {"$ref": "#/$defs/policy"}}
+  },
+  "member_ref": {
+   "description": "a member listed in full elsewhere: <scope>/<label path> (children, with node) or <scope>@<label> (attributes); the scope is the longest prefix that is a class name or a specialisation id (§6.3); never chained",
+   "type": "object",
+   "additionalProperties": false,
+   "required": ["ref"],
+   "properties": {"ref": {"type": "string"}, "node": {"enum": ["group", "dataset", "link"]}}
+  },
+  "member": {
+   "type": "object",
+   "required": ["id", "name", "occurs", "declared_by"],
+   "properties": {
+    "id": {"type": "string", "description": "the label"},
+    "name": {"$ref": "#/$defs/name"},
+    "occurs": {"$ref": "#/$defs/occurs"},
+    "recommended": {"type": "boolean"},
+    "type": {"type": "string"},
+    "shape": {"$ref": "#/$defs/shape"},
+    "units": {"$ref": "#/$defs/units"},
+    "enum": {"$ref": "#/$defs/enum"},
+    "length": {"$ref": "#/$defs/length"},
+    "rank": {"oneOf": [{"type": "integer", "minimum": 0}, {"type": "string"}]},
+    "names_child": {"enum": ["group", "dataset"]},
+    "deprecated": {"type": "string"},
+    "docs": {"$ref": "#/$defs/strings", "description": "keys of documentation texts, most derived last"},
+    "show": {"$ref": "#/$defs/strings"},
+    "declared_by": {"type": "string"},
+    "refined_by": {"$ref": "#/$defs/strings"},
+    "refines": {"type": "string"},
+    "provisional": {"$ref": "#/$defs/strings"},
+    "via": {"$ref": "#/$defs/strings"}
+   }
+  },
+  "attribute": {
+   "allOf": [{"$ref": "#/$defs/member"}],
+   "unevaluatedProperties": false
+  },
+  "child": {
+   "allOf": [{"$ref": "#/$defs/member"}],
+   "required": ["node"],
+   "properties": {
+    "node": {"enum": ["group", "dataset", "link"]},
+    "class": {"type": "string"},
+    "specialisation": {"type": "string"},
+    "attributes": {"type": "array", "items": {"$ref": "#/$defs/attribute"}},
+    "target": {"type": "string"}
+   },
+   "unevaluatedProperties": false
+  },
+  "group": {
+   "type": "object",
+   "required": ["class"],
+   "properties": {
+    "class": {"type": "string"},
+    "symbols": {"$ref": "#/$defs/strings"},
+    "attributes": {"type": "array", "items": {"oneOf": [{"$ref": "#/$defs/attribute"}, {"$ref": "#/$defs/member_ref"}]}},
+    "children": {"type": "array", "items": {"oneOf": [{"$ref": "#/$defs/child"}, {"$ref": "#/$defs/member_ref"}]}},
+    "require": {"type": "array", "items": {"$ref": "#/$defs/constraint"}},
+    "undeclared": {"$ref": "#/$defs/undeclared"}
+   }
+  },
+  "class": {
+   "allOf": [{"$ref": "#/$defs/group"}],
+   "required": ["category", "status", "source"],
+   "properties": {
+    "category": {"enum": ["base", "application"]},
+    "status": {"enum": ["base", "application", "contributed", "dormant", "local"]},
+    "extends": {"type": "string"},
+    "describes": {"type": "string"},
+    "deprecated": {"type": "string"},
+    "lossy": {"$ref": "#/$defs/strings"},
+    "source": {"type": "string"},
+    "provisional": {"$ref": "#/$defs/strings"},
+    "via": {"$ref": "#/$defs/strings"}
+   },
+   "unevaluatedProperties": false
+  },
+  "specialisation": {
+   "allOf": [{"$ref": "#/$defs/group"}],
+   "required": ["id", "declared_by"],
+   "properties": {"id": {"type": "string"}, "declared_by": {"type": "string"}},
+   "unevaluatedProperties": false
+  }
+ }
+}

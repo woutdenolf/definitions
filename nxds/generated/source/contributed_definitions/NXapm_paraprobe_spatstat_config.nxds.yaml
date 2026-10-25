@@ -1,0 +1,319 @@
+nxds: '0.1'
+class: NXapm_paraprobe_spatstat_config
+category: application
+extends: NXapm_paraprobe_tool_config
+describes: NXroot
+doc: |-
+  Application definition for a configuration file of the paraprobe-spatstat tool.
+
+  The tool paraprobe-spatstat evaluates spatial distribution functions.
+defaults: {min: 1, binding: true, type: NX_CHAR}
+symbols:
+  n_ivec_max:
+    doc: Maximum number of atoms per molecular ion. Should be 32 for paraprobe.
+  n_ion_source:
+    doc: Number of different source iontypes to distinguish.
+  n_ion_target:
+    doc: Number of different target iontypes to distinguish.
+children:
+  ENTRY:
+    node: group
+    name: {any: true}
+    class: NXentry
+    occurs: {min: 1, max: 1}
+    children:
+      definition:
+        node: dataset
+        type: NX_CHAR
+        enum: [NXapm_paraprobe_spatstat_config]
+        via: [T1, T5, T7]
+        provisional: [Q1, Q2]
+      spatial_statisticsID:
+        node: group
+        name: {template: 'spatial_statistics{ID}'}
+        class: NXapm_paraprobe_tool_parameters
+        occurs: {min: 1, max: unbounded}
+        children:
+          surface_distance:
+            node: group
+            class: NXnote
+            occurs: {min: 0}
+            children:
+              file_name:
+                node: dataset
+                type: NX_CHAR
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              checksum:
+                node: dataset
+                type: NX_CHAR
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              algorithm:
+                node: dataset
+                type: NX_CHAR
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              distance:
+                node: dataset
+                type: NX_CHAR
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              edge_distance:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_LENGTH}
+                doc: |-
+                  Threshold to define how far an ion has to lay at least from the edge
+                  of the dataset so that the ion can act as a source. This means that
+                  an ROI is placed at the location of the ion and its neighbors are
+                  analyzed how they contribute to the computed statistics.
+
+                  The edge_distance threshold can be combined with the feature_distance threshold. This threshold defines defines up to which distance to a
+                  microstructural feature an ROI is placed.
+
+                  The threshold is useful to process the dataset such that ROIs do
+                  not protrude out of the dataset as this would add bias.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          feature_distance:
+            node: group
+            class: NXnote
+            occurs: {min: 0}
+            doc: |-
+              Distance between each ion and triangulated mesh of microstructural features.
+              In addition to spatial filtering and considering how far ions lie to the
+              edge of the dataset, it is possible to restrict the analyses to a sub-set of
+              ions within a distance not farther away to a feature than the feature_distance
+              threshold value.
+            children:
+              file_name:
+                node: dataset
+                type: NX_CHAR
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              checksum:
+                node: dataset
+                type: NX_CHAR
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              algorithm:
+                node: dataset
+                type: NX_CHAR
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              distance:
+                node: dataset
+                type: NX_CHAR
+                doc: |-
+                  Absolute path in the (HDF5) file which points to the distance of each
+                  ion to the closest feature.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              feature_distance:
+                node: dataset
+                type: NX_FLOAT
+                units: {category: NX_LENGTH}
+                doc: |-
+                  Threshold to define how close an ion has to lay to a feature so that
+                  the ion can at all qualify as a source, i.e. that an ROI is placed
+                  at the location of the ion and its neighbors are then analyzed
+                  how they contribute to the computed statistics.
+
+                  Recall that this feature_distance threshold is used in combination
+                  with the edge_distance threshold when placing ROI about source ions.
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          randomize_iontypes:
+            node: dataset
+            type: NX_BOOLEAN
+            doc: |-
+              Specifies, if the iontypes are randomized for the point cloud or not.
+              Internally, paraprobe uses a sequentially executed deterministic MT19987
+              (MersenneTwister) pseudo-random number generator to shuffle the
+              iontypes randomly across the entire set of ions. That is the total
+              number of ions of either type remain the same but the information about
+              their location is randomized.
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          random_number_generator:
+            node: group
+            class: NXcs_prng
+            occurs: {min: 0}
+            recommended: true
+            children:
+              type:
+                node: dataset
+                type: NX_CHAR
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              seed:
+                node: dataset
+                type: NX_NUMBER
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+              warmup:
+                node: dataset
+                type: NX_NUMBER
+                via: [T1, T5, T7]
+                provisional: [Q1, Q2]
+            via: [T1, T6, T7]
+            provisional: [Q1]
+          ion_query_type_source:
+            node: dataset
+            type: NX_CHAR
+            enum: [resolve_all, resolve_unknown, resolve_ion, resolve_element, resolve_isotope]
+            doc: |-
+              How should the iontype be interpreted on the source-side, i.e.
+              all these ion positions where a regions-of-interest (ROI) around
+              so-called source ions will be placed. Different options exist
+              how iontypes are interpreted given an iontype represents
+              in general a (molecular) ion with different isotopes that have
+              individually different multiplicity.
+
+              The value resolve_all will set an ion active in the analysis regardless
+              of which iontype it is. Each active ion is accounted for once.
+
+              The value resolve_unknown will set an ion active when the ion is
+              of the UNKNOWNTYPE type. Each active ion is accounted for once.
+
+              The value resolve_ion will set an ion active if it is of the specific
+              iontype, irregardless of its elemental or isotopic details.
+              Each active ion is counted once.
+
+              The value resolve_element will set an ion active, and most importantly,
+              account for each as many times as the (molecular) ion contains
+              atoms of elements in the whitelist ion_query_isotope_vector.
+
+              The value resolve_isotope will set an ion active, and most importantly,
+              account for each as many times as the (molecular) ion contains
+              isotopes in the whitelist ion_query_isotope_vector.
+
+              In effect, ion_query_isotope_vector acts as a whitelist to filter
+              which ions are considered as source ions of the correlation statistics
+              and how the multiplicity of each ion will be factorized, i.e. how
+              often it is accounted for.
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          ion_query_nuclide_source:
+            node: dataset
+            type: NX_UINT
+            shape: [n_ion_source, n_ivec_max]
+            units: {category: NX_UNITLESS}
+            doc: |-
+              Matrix of isotope vectors, as many as rows as different candidates
+              for iontypes should be distinguished as possible source iontypes.
+              In the simplest case, the matrix contains only the proton number
+              of the element in the row, all other values set to zero.
+              Combined with ion_query_type_source set to resolve_element this will
+              recover usual spatial correlation statistics like the 1NN C-C
+              spatial statistics.
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+          ion_query_type_target:
+            node: dataset
+            type: NX_CHAR
+            enum: [resolve_all, resolve_unknown, resolve_ion, resolve_element, resolve_isotope]
+            doc: |-
+              Similarly as ion_query_type_source how should iontypes be interpreted
+              on the target-side, i.e. how many counts will be bookkept for ions
+              which are neighbors of source ions within or on the surface of each
+              inspection/ROI about each source ion.
+              Source ion in the center of the ROI are not accounted for during
+              counting the summary statistics.
+              For details about the resolve values consider the explanations in
+              ion_query_type_source. These account for ion_query_type_target as well.
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          ion_query_nuclide_target:
+            node: dataset
+            type: NX_UINT
+            shape: [n_ion_target, n_ivec_max]
+            units: {category: NX_UNITLESS}
+            doc: |-
+              Matrix of isotope vectors, as many as rows as different candidates for
+              iontypes to distinguish as possible targets. See additional comments
+              under ion_query_isotope_vector_source.
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+          statistics:
+            node: group
+            class: NXprocess
+            doc: Specifies which spatial statistics to compute.
+            children:
+              knn:
+                node: group
+                class: NXprocess
+                occurs: {min: 0, max: 1}
+                doc: Compute k-th nearest neighbour statistics.
+                children:
+                  kth:
+                    node: dataset
+                    type: NX_UINT
+                    units: {category: NX_UNITLESS}
+                    doc: Order k.
+                    via: [T1, T5, T7]
+                    provisional: [Q1, Q2]
+                  min:
+                    node: dataset
+                    type: NX_FLOAT
+                    units: {category: NX_LENGTH}
+                    doc: Minimum value of the histogram binning.
+                    via: [T1, T5, T7]
+                    provisional: [Q1, Q2]
+                  increment:
+                    node: dataset
+                    type: NX_FLOAT
+                    units: {category: NX_LENGTH}
+                    doc: Increment of the histogram binning.
+                    via: [T1, T5, T7]
+                    provisional: [Q1, Q2]
+                  max:
+                    node: dataset
+                    type: NX_FLOAT
+                    units: {category: NX_LENGTH}
+                    doc: Maximum value of the histogram binning.
+                    via: [T1, T5, T7]
+                    provisional: [Q1, Q2]
+                via: [T1, T6]
+                provisional: [Q1]
+              rdf:
+                node: group
+                class: NXprocess
+                occurs: {min: 0, max: 1}
+                doc: Compute radial distribution function.
+                children:
+                  min:
+                    node: dataset
+                    type: NX_FLOAT
+                    units: {category: NX_LENGTH}
+                    doc: Minimum value of the histogram binning.
+                    via: [T1, T5, T7]
+                    provisional: [Q1, Q2]
+                  increment:
+                    node: dataset
+                    type: NX_FLOAT
+                    units: {category: NX_LENGTH}
+                    doc: Increment value of the histogram binning.
+                    via: [T1, T5, T7]
+                    provisional: [Q1, Q2]
+                  max:
+                    node: dataset
+                    type: NX_FLOAT
+                    units: {category: NX_LENGTH}
+                    doc: Maximum value of the histogram binning.
+                    via: [T1, T5, T7]
+                    provisional: [Q1, Q2]
+                via: [T1, T6]
+                provisional: [Q1]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T3, T6]
+        provisional: [Q1, Q3]
+    via: [T1, T2, T6]
+    provisional: [Q1, Q11]
+via: [T8]

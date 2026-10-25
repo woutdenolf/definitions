@@ -1,0 +1,40 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/COLLECTION"},
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"node": "group", "ref": "NXobject/LOG"},
+    {"node": "group", "ref": "NXobject/NOTE"},
+    {"node": "group", "ref": "NXobject/PARAMETERS"},
+    {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+    {"node": "dataset", "ref": "NXobject/identifierNAME"},
+    {"declared_by": "NXcs_computer", "docs": ["NXcs_computer/name"], "id": "name", "name": {"exact": "name"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4", "T7"]},
+    {"attributes": [{"declared_by": "NXcs_computer", "docs": ["NXcs_computer/operating_system@version"], "id": "version", "name": {"exact": "version"}, "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4"]}], "declared_by": "NXcs_computer", "docs": ["NXcs_computer/operating_system"], "id": "operating_system", "name": {"exact": "operating_system"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4", "T7"]},
+    {"declared_by": "NXcs_computer", "docs": ["NXcs_computer/uuid"], "id": "uuid", "name": {"exact": "uuid"}, "node": "dataset", "occurs": {"max": 1, "min": 0}, "provisional": ["Q1"], "recommended": false, "type": "NX_CHAR", "via": ["T1", "T4", "T7"]},
+    {"class": "NXcs_processor", "declared_by": "NXcs_computer", "docs": ["NXcs_computer/processorID"], "id": "processorID", "name": {"template": "processor{ID}"}, "node": "group", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q3"], "recommended": false, "via": ["T1", "T3", "T4", "T7"]},
+    {"class": "NXcs_memory", "declared_by": "NXcs_computer", "docs": ["NXcs_computer/memoryID"], "id": "memoryID", "name": {"template": "memory{ID}"}, "node": "group", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q3"], "recommended": false, "via": ["T1", "T3", "T4", "T7"]},
+    {"class": "NXcs_storage", "declared_by": "NXcs_computer", "docs": ["NXcs_computer/storageID"], "id": "storageID", "name": {"template": "storage{ID}"}, "node": "group", "occurs": {"max": "unbounded", "min": 0}, "provisional": ["Q1", "Q3"], "recommended": false, "via": ["T1", "T3", "T4", "T7"]}
+  ],
+  "class": "NXcs_computer",
+  "extends": "NXobject",
+  "lossy": [],
+  "provisional": [],
+  "require": [],
+  "source": "base_classes/NXcs_computer.nxdl.xml",
+  "status": "base",
+  "symbols": [],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"},
+  "via": []
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {}
+}

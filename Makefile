@@ -16,7 +16,7 @@ YCONTRIB_NXDL_TARGETS = $(patsubst %.yaml,%.nxdl.xml,$(subst /nyaml/,/, $(wildca
 YAPPDEF_NXDL_TARGETS = $(patsubst %.yaml,%.nxdl.xml,$(subst /nyaml/,/, $(wildcard $(APPDEF_DIR)/nyaml/*.yaml)))
 
 
-.PHONY: help install style autoformat test clean prepare html pdf impatient-guide all local nxdl nyaml
+.PHONY: help install style autoformat test clean prepare html pdf impatient-guide all local nxdl nyaml nxds nxds-check nxds-docs nxds-legacy nxtest
 
 help ::
 	@echo ""
@@ -36,6 +36,11 @@ help ::
 	@echo "make local              (Developer use) Test, prepare and build the HTML manual."
 	@echo "make nxdl               Build NXDL files from NYAML files in nyaml subdirectories."
 	@echo "make nyaml              Build NYAML files to nyaml subdirectories from NXDL files."
+	@echo "make nxds               Compile and resolve all classes into nxds/generated (NXDS)."
+	@echo "make nxds-check         Compile and resolve all classes; fail on errors (NXDS)."
+	@echo "make nxds-legacy        All classes as NXDL in build/nxdl (NXDS classes generated)."
+	@echo "make nxtest             Validate all NXDL files (including generated ones)."
+	@echo "make nxds-docs          Build HTML class documentation from the resolved NXDS."
 	@echo ""
 	@echo "Note:  All builds of the manual will occur in the 'build/' directory."
 	@echo "   For a complete build, run 'make all' in the root directory."
@@ -55,8 +60,8 @@ autoformat ::
 	$(PYTHON) -m black .
 	$(PYTHON) -m isort .
 
-test ::
-	$(PYTHON) -m pytest dev_tools
+test :: nxds-legacy
+	NEXUS_DEF_PATH=$(NXDL_TREE) $(PYTHON) -m pytest dev_tools
 
 clean ::
 	$(RM) -rf $(BUILD_DIR)
@@ -64,8 +69,8 @@ clean ::
 	$(RM) -rf $(APPDEF_DIR)/$(NYAML_SUBDIR)
 	$(RM) -rf $(CONTRIB_DIR)/$(NYAML_SUBDIR)
 
-prepare ::
-	$(PYTHON) -m dev_tools manual --prepare --build-root $(BUILD_DIR)
+prepare :: nxds-legacy
+	NEXUS_DEF_PATH=$(NXDL_TREE) $(PYTHON) -m dev_tools manual --prepare --build-root $(BUILD_DIR)
 	$(PYTHON) -m dev_tools impatient --prepare --build-root $(BUILD_DIR)
 
 pdf ::
@@ -131,3 +136,28 @@ nyaml:
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #
 # For further information, see http://www.nexusformat.org
+
+# NXDS: compile NXDL, read NXDS classes, resolve, and write the generated files.
+# nxds_tools is an independent Python project in ./nxds_tools, installed by `make install`.
+NXDS_TOOLS = $(PYTHON) -m nxds_tools
+NXDS_GENERATED = nxds/generated
+# Branch nxds demonstrates phase 2; the pull request that brings phase 0 to main sets 0.
+NXDS_PHASE = 2
+# all classes as NXDL (NXDS classes generated) for tools that read only NXDL
+NXDL_TREE = $(abspath $(BUILD_DIR)/nxdl)
+
+nxds ::
+	$(NXDS_TOOLS) build --definitions . --out $(NXDS_GENERATED) --phase $(NXDS_PHASE)
+
+nxds-legacy ::
+	$(NXDS_TOOLS) legacy --definitions . --out $(NXDL_TREE)
+
+nxtest :: nxds-legacy
+	NEXUS_DEF_PATH=$(NXDL_TREE) $(PYTHON) -m dev_tools nxtest
+
+nxds-check ::
+	$(NXDS_TOOLS) check --definitions . --phase $(NXDS_PHASE)
+
+nxds-docs ::
+	$(NXDS_TOOLS) docs --definitions . --out $(BUILD_DIR)/nxds-docs/source
+	$(SPHINX) -b html -q $(BUILD_DIR)/nxds-docs/source $(BUILD_DIR)/nxds-docs/html

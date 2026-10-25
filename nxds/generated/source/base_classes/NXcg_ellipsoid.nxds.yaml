@@ -1,0 +1,49 @@
+nxds: '0.1'
+class: NXcg_ellipsoid
+category: base
+extends: NXcg_primitive
+doc: Computational geometry description of a set of ellipsoids.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+symbols:
+  d:
+    doc: The dimensionality of the space in which the members are assumed embedded.
+  c:
+    doc: The cardinality of the set, i.e. the number of members.
+children:
+  semi_axes_value:
+    node: dataset
+    type: NX_NUMBER
+    shape: [d]
+    units: {category: NX_LENGTH}
+    doc: |-
+      Length of the semi-axes (e.g. semi-major and semi-minor
+      respectively for an ellipse).
+
+      Use if all ellipsoids in the set have the same half-axes.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  semi_axes_values:
+    node: dataset
+    type: NX_NUMBER
+    shape: [c, d]
+    units: {category: NX_LENGTH}
+    doc: Length of the semi-axes if ellipsoids have individually different lengths.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  radius:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_LENGTH}
+    doc: In the case that all ellipsoids are spheres.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  radii:
+    node: dataset
+    type: NX_NUMBER
+    shape: [c]
+    units: {category: NX_LENGTH}
+    doc: |-
+      In the case that all ellipsoids are spheres whose radii differ.
+      For a mixture of spheres use semi_axes_values.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]

@@ -1,0 +1,73 @@
+name: NXDS
+
+# Compile every class to NXDS, resolve it, and check that the generated files
+# committed under nxds/generated are up to date.
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  nxds:
+    name: NXDS build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install nxds_tools
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install ./nxds_tools
+
+      - name: Build nxds/generated (fails on build errors; phase 2 - NXDS classes may only use what NXDL can express)
+        run: make nxds PYTHON=python
+
+      # The workflow "NXDS update" keeps the generated files up to date (pushes by
+      # github-actions do not trigger new checks), so being out of date is only reported.
+      - name: Generated files are committed
+        run: |
+          git add --intent-to-add nxds/generated nxds/metaschema
+          if [ -n "$(git status --porcelain nxds/generated nxds/metaschema)" ]; then
+            # Pull requests: the workflow "NXDS update" commits the files (or attaches a patch for forks).
+            # Main branch: the workflow "NXDS update" opens a follow-up pull request.
+            echo "::notice::nxds/generated is out of date; the workflow 'NXDS update' takes care of it"
+            git status --porcelain nxds/generated nxds/metaschema | head -50
+          fi
+
+      - name: Tests of nxds_tools
+        run: |
+          python -m pip install pytest
+          python -m pytest nxds_tools/tests
+
+      - name: Conformance suite
+        run: python nxds/conformance/run.py
+
+      - name: NXDL tree for tools that read only NXDL (NXDS classes generated)
+        run: make nxtest PYTHON=python
+
+      - name: Upload the report and the bundle
+        if: always()
+        run: python -m nxds_tools build --definitions . --out /tmp/nxds --bundle /tmp/nxds/nxds-bundle.zip --docs /tmp/nxds/docs --no-round-trip
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nxds
+          path: |
+            /tmp/nxds/nxds-bundle.zip
+            nxds/generated/report.txt

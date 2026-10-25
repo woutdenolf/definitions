@@ -1,0 +1,15 @@
+# NXDS build report
+
+errors: 0, warnings: 0, infos: 5
+
+## Counts by code
+info     lossy                            1
+info     round-trip                       3
+info     round-trip-ok                    1
+
+## Problems
+INFO [round-trip-ok] phase3/NXdemo_counter_phase3.nxds.yaml: NXDS → NXDL → NXDS gives the same resolved form
+INFO [lossy] phase3/NXdemo_phase3.nxds.yaml: generated NXDL loses require
+INFO [round-trip] phase3/NXdemo_phase3.nxds.yaml: /docs/NXdemo_phase3/ENTRY/DATA: only in the generated NXDL
+INFO [round-trip] phase3/NXdemo_phase3.nxds.yaml: /specialisations/NXdemo_phase3/ENTRY/DATA/require: [{'at_least_one_of': ['mu', 'fluo']}] != []
+INFO [round-trip] phase3/NXdemo_phase3.nxds.yaml: /specialisations/NXdemo_phase3/ENTRY/children[DATA]/docs: ['NXentry/DATA'] != ['NXentry/DATA', 'NXdemo_phase3/ENTRY/DATA']

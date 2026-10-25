@@ -1,0 +1,106 @@
+nxds: '0.1'
+class: NXcg_cylinder
+category: base
+extends: NXcg_primitive
+doc: |-
+  Computational geometry description of a set of cylinders or (truncated) cones.
+
+  The radius can either be defined in the radii field or by filling the upper_cap_radii
+  and lower_cap_radii fields respectively. The latter field case can
+  thus be used to represent (truncated) cones.
+
+  It is possible to define only one of the cap_radii fields
+  to represent half-open cylinder.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+symbols:
+  d:
+    doc: The dimensionality of the space in which the members are assumed embedded.
+  c:
+    doc: The cardinality of the set, i.e. the number of members.
+children:
+  height:
+    node: dataset
+    type: NX_NUMBER
+    shape: [c, d]
+    units: {category: NX_LENGTH}
+    doc: |-
+      A direction vector which is parallel to the cylinder/cone axis
+      and whose magnitude is the height of the cylinder/cone.
+
+      The upper_cap is assumed to represent the end while the
+      lower_cap is assumed to represent the start of the
+      respective cylinder instances when inspecting along the
+      direction vector.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  radius:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_LENGTH}
+    doc: Radius of the cylinder if all have the same radius.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  radii:
+    node: dataset
+    type: NX_NUMBER
+    shape: [c]
+    units: {category: NX_LENGTH}
+    doc: Radii of the cylinder.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  upper_cap_radii:
+    node: dataset
+    type: NX_NUMBER
+    shape: [c]
+    units: {category: NX_LENGTH}
+    doc: |-
+      Radii of the upper circular cap.
+
+      This field, combined with lower_cap_radius can be used to describe
+      (eventually truncated) circular cones.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  lower_cap_radii:
+    node: dataset
+    type: NX_NUMBER
+    shape: [c]
+    units: {category: NX_LENGTH}
+    doc: |-
+      Radii of the upper circular cap.
+
+      This field, combined with upper_cap_radius can be used to describe
+      (eventually truncated) circular cones.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  lateral_surface_area:
+    node: dataset
+    type: NX_NUMBER
+    shape: [c]
+    units: {category: NX_AREA}
+    doc: Lateral surface area of each cylinder.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  upper_cap_surface_area:
+    node: dataset
+    type: NX_NUMBER
+    shape: [c]
+    units: {category: NX_AREA}
+    doc: Area of the upper cap of each cylinder.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  lower_cap_surface_area:
+    node: dataset
+    type: NX_NUMBER
+    shape: [c]
+    units: {category: NX_AREA}
+    doc: Area of the lower cap of each cylinder.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  total_surface_area:
+    node: dataset
+    type: NX_NUMBER
+    shape: [c]
+    units: {category: NX_AREA}
+    doc: Sum of upper and lower cap area and lateral surface area of each cylinder.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]

@@ -1,0 +1,84 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"},
+    {"ref": "NXroot@NeXus_release"}
+  ],
+  "category": "application",
+  "children": [
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"class": "NXentry", "declared_by": "NXroot", "id": "ENTRY", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 1}, "provisional": ["Q1", "Q2", "Q11"], "recommended": false, "refined_by": ["NXcase_name_fit"], "specialisation": "NXcase_name_fit/ENTRY", "via": ["T1", "T2", "T5", "T7"]}
+  ],
+  "class": "NXcase_name_fit",
+  "describes": "NXroot",
+  "lossy": [],
+  "provisional": [],
+  "require": [],
+  "source": "name-fit/NXcase_name_fit.nxdl.xml",
+  "status": "local",
+  "symbols": [],
+  "undeclared": {"attribute": "report", "dataset": "report", "group": "report"},
+  "via": ["T8"]
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {
+  "NXcase_name_fit/ENTRY": {
+   "attributes": [
+     {"ref": "NXobject@default"}
+   ],
+   "children": [
+     {"node": "group", "ref": "NXobject/DATA"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+     {"declared_by": "NXentry", "enum": {"open": false, "values": [{"value": "NXcase_name_fit"}]}, "id": "definition", "name": {"exact": "definition"}, "node": "dataset", "occurs": {"max": 1, "min": 1}, "provisional": ["Q1", "Q2"], "recommended": false, "refined_by": ["NXcase_name_fit"], "type": "NX_CHAR", "via": ["T0", "T1", "T5", "T7"]},
+     {"node": "dataset", "ref": "NXentry/title"},
+     {"node": "dataset", "ref": "NXentry/start_time"},
+     {"class": "NXinstrument", "declared_by": "NXentry", "id": "INSTRUMENT", "name": {"any": true}, "node": "group", "occurs": {"max": "unbounded", "min": 1}, "provisional": ["Q1", "Q2", "Q11"], "recommended": false, "refined_by": ["NXcase_name_fit"], "specialisation": "NXcase_name_fit/ENTRY/INSTRUMENT", "via": ["T1", "T2", "T5", "T7"]}
+   ],
+   "class": "NXentry",
+   "declared_by": "NXcase_name_fit",
+   "id": "NXcase_name_fit/ENTRY",
+   "require": [],
+   "symbols": [],
+   "undeclared": {"attribute": "report", "dataset": "report", "group": "report"}
+  },
+  "NXcase_name_fit/ENTRY/INSTRUMENT": {
+   "attributes": [
+     {"ref": "NXobject@default"}
+   ],
+   "children": [
+     {"node": "group", "ref": "NXobject/DATA"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+     {"node": "group", "ref": "NXinstrument/MONOCHROMATOR"},
+     {"class": "NXmonochromator", "declared_by": "NXcase_name_fit", "id": "monochromator", "name": {"exact": "monochromator"}, "node": "group", "occurs": {"max": 1, "min": 1}, "provisional": ["Q1", "Q2", "Q4"], "recommended": false, "refines": "MONOCHROMATOR", "via": ["T1", "T5", "T7", "T18"]},
+     {"class": "NXcounter", "declared_by": "NXcase_name_fit", "id": "counter", "name": {"exact": "counter"}, "node": "group", "occurs": {"max": 1, "min": 1}, "provisional": ["Q1", "Q2"], "recommended": false, "specialisation": "NXcase_name_fit/ENTRY/INSTRUMENT/counter", "via": ["T1", "T5", "T7"]}
+   ],
+   "class": "NXinstrument",
+   "declared_by": "NXcase_name_fit",
+   "id": "NXcase_name_fit/ENTRY/INSTRUMENT",
+   "require": [],
+   "symbols": [],
+   "undeclared": {"attribute": "report", "dataset": "report", "group": "report"}
+  },
+  "NXcase_name_fit/ENTRY/INSTRUMENT/counter": {
+   "attributes": [
+     {"ref": "NXobject@default"}
+   ],
+   "children": [
+     {"node": "group", "ref": "NXobject/DATA"},
+     {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+     {"node": "dataset", "ref": "NXcounter/mode"},
+     {"node": "dataset", "ref": "NXcounter/CHANNEL_counts"},
+     {"declared_by": "NXcase_name_fit", "id": "i0_counts", "name": {"exact": "i0_counts"}, "node": "dataset", "occurs": {"max": 1, "min": 1}, "provisional": ["Q1", "Q2", "Q3", "Q4"], "recommended": false, "refines": "CHANNEL_counts", "type": "NX_INT", "units": {"category": "NX_COUNT"}, "via": ["T0", "T1", "T5", "T7", "T18"]},
+     {"node": "group", "ref": "NXcounter/SENSOR"}
+   ],
+   "class": "NXcounter",
+   "declared_by": "NXcase_name_fit",
+   "id": "NXcase_name_fit/ENTRY/INSTRUMENT/counter",
+   "require": [],
+   "symbols": [],
+   "undeclared": {"attribute": "report", "dataset": "report", "group": "report"}
+  }
+ }
+}

@@ -1,0 +1,34 @@
+{
+ "definition": {
+  "attributes": [
+    {"ref": "NXobject@default"}
+  ],
+  "category": "base",
+  "children": [
+    {"node": "group", "ref": "NXobject/COLLECTION"},
+    {"node": "group", "ref": "NXobject/DATA"},
+    {"node": "group", "ref": "NXobject/LOG"},
+    {"node": "group", "ref": "NXobject/NOTE"},
+    {"node": "group", "ref": "NXobject/PARAMETERS"},
+    {"node": "group", "ref": "NXobject/GROUPNAME_log"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_set"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_errors"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_weights"},
+    {"node": "dataset", "ref": "NXobject/FIELDNAME_mask"},
+    {"node": "dataset", "ref": "NXobject/identifierNAME"}
+  ],
+  "class": "NXpdb",
+  "extends": "NXobject",
+  "lossy": [],
+  "provisional": ["Q6"],
+  "require": [],
+  "source": "base_classes/NXpdb.nxdl.xml",
+  "status": "base",
+  "symbols": [],
+  "undeclared": {"attribute": "ignore", "dataset": "ignore", "group": "ignore"},
+  "via": ["T12"]
+ },
+ "nxds": "0.1",
+ "requires": [],
+ "specialisations": {}
+}

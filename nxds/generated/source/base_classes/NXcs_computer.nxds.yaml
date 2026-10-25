@@ -1,0 +1,58 @@
+nxds: '0.1'
+class: NXcs_computer
+category: base
+extends: NXobject
+doc: Base class for reporting the description of a computer
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  name:
+    node: dataset
+    type: NX_CHAR
+    doc: Given name/alias to the computing system, e.g. MyDesktop.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  operating_system:
+    node: dataset
+    type: NX_CHAR
+    doc: Name of the operating system, e.g. Windows, Linux, Mac, Android.
+    attributes:
+      version:
+        type: NX_CHAR
+        doc: |-
+          Version plus build number, commit hash, or description of an ever
+          persistent resource where the source code of the program and build
+          instructions can be found so that the program can be configured in
+          such a manner that the result file is ideally recreatable yielding
+          the same results.
+        via: [T1, T4]
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  uuid:
+    node: dataset
+    type: NX_CHAR
+    doc: |-
+      A globally unique persistent identifier of the computer, i.e.
+      the Universally Unique Identifier (UUID) of the computing node.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  processorID:
+    node: group
+    name: {template: 'processor{ID}'}
+    class: NXcs_processor
+    doc: Multiple instances should be named processor1, processor2, etc.
+    via: [T1, T3, T4, T7]
+    provisional: [Q1, Q3]
+  memoryID:
+    node: group
+    name: {template: 'memory{ID}'}
+    class: NXcs_memory
+    doc: Multiple instances should be named memory1, memory2, etc.
+    via: [T1, T3, T4, T7]
+    provisional: [Q1, Q3]
+  storageID:
+    node: group
+    name: {template: 'storage{ID}'}
+    class: NXcs_storage
+    doc: Multiple instances should be named storage1, storage2, etc.
+    via: [T1, T3, T4, T7]
+    provisional: [Q1, Q3]

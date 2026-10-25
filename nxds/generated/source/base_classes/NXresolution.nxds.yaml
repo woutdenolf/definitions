@@ -1,0 +1,94 @@
+nxds: '0.1'
+class: NXresolution
+category: base
+extends: NXobject
+doc: Describes the resolution of a physical quantity.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  physical_quantity:
+    node: dataset
+    doc: |-
+      The physical quantity of the resolution, e.g.,
+      energy, momentum, time, area, etc.
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  type:
+    node: dataset
+    enum: [estimated, derived, calibrated, other]
+    doc: The process by which the resolution was determined.
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  note:
+    node: group
+    class: NXnote
+    doc: Additional details of the estimate or description of the calibration procedure
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  resolution:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_ANY}
+    doc: The resolution of the physical quantity.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  resolution_errors:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_ANY}
+    doc: Standard deviation of the resolution of the physical quantity.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  relative_resolution:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_ANY}
+    doc: Ratio of the resolution at a specified measurand value to that measurand value.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  relative_resolution_errors:
+    node: dataset
+    type: NX_FLOAT
+    units: {category: NX_DIMENSIONLESS}
+    doc: Standard deviation of the relative resolution of the physical quantity.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  response_function:
+    node: group
+    class: NXdata
+    doc: |-
+      The response of the instrument or part of the instrument to a infinitesimally sharp input signal
+      along the physical quantity of this group.
+      This is also sometimes called instrument response function for time resolution or
+      point spread function for spatial response.
+      The resolution is typically determined by taking the full width at half maximum (FWHM)
+      of the response function.
+
+      This could have an AXISNAME field ```input``` (the input axis or grid of the response function)
+      and a ``DATA`` field ```magnitude```. Both of these should have the same unit. The dimensions
+      should match those of the :ref:`resolution </NXresolution/resolution-field>` field.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  formula_symbols:
+    node: group
+    class: NXparameters
+    doc: |-
+      Symbols linking to another path in the NeXus tree to be referred to from the
+      `resolution_formula_description` field. The ``TERM``  should be a valid path inside this application
+      definition, i.e., of the form /entry/instrument/my_part/my_field.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  resolution_formula_description:
+    node: dataset
+    type: NX_CHAR
+    doc: |-
+      A description of the resolution formula to determine the resolution from a set of symbols as
+      entered by the `formula_...` fields. This should be an english description of the math used.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  CALIBRATION:
+    node: group
+    name: {any: true}
+    class: NXcalibration
+    doc: For storing details and data of a calibration to derive a resolution from data.
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]

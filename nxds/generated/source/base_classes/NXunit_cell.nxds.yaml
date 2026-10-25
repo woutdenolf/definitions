@@ -1,0 +1,158 @@
+nxds: '0.1'
+class: NXunit_cell
+category: base
+extends: NXobject
+doc: |-
+  Base class to describe structural aspects of an arrangement of
+  atoms or ions including a crystallographic unit cell.
+
+  Following recommendations of `CIF <https://www.iucr.org/resources/cif/spec/version1.1>`_ and `International Tables of Crystallography <https://it.iucr.org/>`_.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+symbols:
+  d: {doc: Dimensionality of the lattice.}
+children:
+  reference_frame:
+    node: dataset
+    type: NX_CHAR
+    doc: |-
+      Path to a reference frame in which the unit cell is defined
+      to resolve ambiguity in cases when e.g. a different reference frame
+      than the NeXus default reference frame (McStas) was chosen.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  dimensionality:
+    node: dataset
+    type: NX_POSINT
+    enum: ['1', '2', '3']
+    doc: Dimensionality of the structure.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  a_b_c:
+    node: dataset
+    type: NX_NUMBER
+    shape: [d]
+    units: {category: NX_LENGTH}
+    doc: Geometry of the unit cell quantified via parameters a, b, and c.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  a:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_LENGTH}
+    doc: Geometry of the unit cell quantified individually via parameter a.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  b:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_LENGTH}
+    doc: Geometry of the unit cell quantified individually via parameter b.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  c:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_LENGTH}
+    doc: Geometry of the unit cell quantified individually via parameter c.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  alpha_beta_gamma:
+    node: dataset
+    type: NX_NUMBER
+    shape: [d]
+    units: {category: NX_ANGLE}
+    doc: Geometry of the unit cell quantified via parameters alpha, beta, and gamma.
+    via: [T1, T4, T7, T9]
+    provisional: [Q1]
+  alpha:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_ANGLE}
+    doc: Geometry of the unit cell quantified individually via parameter alpha.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  beta:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_ANGLE}
+    doc: Geometry of the unit cell quantified individually via parameter beta.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  gamma:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_ANGLE}
+    doc: Geometry of the unit cell quantified individually via parameter gamma.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  crystal_system:
+    node: dataset
+    type: NX_CHAR
+    enum: [triclinic, monoclinic, orthorhombic, tetragonal, rhombohedral, hexagonal, cubic]
+    doc: |-
+      Crystal system.
+
+      For a crystal system in 2D space monoclinic is an exact synonym for oblique.
+      For a crystal system in 2D space orthorhombic is an exact synonym for rectangular.
+      For a crystal system in 2D space tetragonal is an exact synonym for square.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  laue_group:
+    node: dataset
+    type: NX_CHAR
+    doc: Laue group using International Table of Crystallography notation.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  point_group:
+    node: dataset
+    type: NX_CHAR
+    doc: Point group using International Table of Crystallography notation.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  space_group:
+    node: dataset
+    type: NX_CHAR
+    doc: Space group from the International Table of Crystallography notation.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  is_centrosymmetric:
+    node: dataset
+    type: NX_BOOLEAN
+    doc: |-
+      True if space group is considered a centrosymmetric one.
+      False if space group is considered a non-centrosymmetric one.
+
+      Centrosymmetric has all types and combinations of symmetry elements
+      (translation, rotational axis, mirror planes, center of inversion)
+      Non-centrosymmetric compared to centrosymmetric is constrained (no inversion).
+      Chiral compared to non-centrosymmetric is constrained (no mirror planes).
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  is_chiral:
+    node: dataset
+    type: NX_BOOLEAN
+    doc: |-
+      True if space group is considered a chiral one.
+      False if space group is consider a non-chiral one.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  area:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_AREA}
+    doc: Area of the unit cell if dimensionality is 2.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  volume:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_VOLUME}
+    doc: Volume of the unit cell if dimensionality is 3.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  ATOM:
+    node: group
+    name: {any: true}
+    class: NXatom
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]

@@ -1,0 +1,4 @@
+description: >
+  An NXDL application definition: T2 (unnamed groups), T5/T6 (application
+  minimum, optional, recommended), T7, T9 (dimensions), T10 (link target).
+covers: [T2, T5, T6, T7, T9, T10]

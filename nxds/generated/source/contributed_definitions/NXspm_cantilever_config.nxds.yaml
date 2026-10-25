@@ -1,0 +1,107 @@
+nxds: '0.1'
+class: NXspm_cantilever_config
+category: base
+extends: NXobject
+doc: |-
+  This file defines the NXspm_cantilever_config base class, which contains configuration
+  information about the cantilever used in the AFM (atomic force microscopy) experiments.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  cantilever_coating:
+    node: dataset
+    doc: The coating material of the cantilever.
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  curvature_radiusN:
+    node: dataset
+    name: {template: 'curvature_radius{N}'}
+    type: NX_NUMBER
+    units: {category: NX_ANY}
+    doc: The radius of curvature of the cantilever tip. The (substring) N denotes X or Y.
+    via: [T1, T3, T4, T7]
+    provisional: [Q1, Q3]
+  cantilever_type:
+    node: dataset
+    doc: The shape of the cantilever as a general text, such as A-shape, beam, or arrow.
+    via: [T0, T1, T4, T7]
+    provisional: [Q1]
+  cantilever_length:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_LENGTH}
+    doc: Nominal length between base and end of the cantilever in micrometers.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  cantilever_width:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_LENGTH}
+    doc: Nominal width of the cantilever in microns.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  cantilever_thickness:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_LENGTH}
+    doc: Nominal thickness of the cantilever in microns.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  resonance_frequency:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_FREQUENCY}
+    doc: |-
+      Nominal free resonance frequency of the cantilever in air i.e., out of
+      interaction force.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  amplitude_excitation:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_ANY}
+    doc: |-
+      Either the drive amplitude in mv for the driving cantilever or the free-oscillation amplitude which is the
+      resulted movement amplitude without interaction to the surface.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  fermi_level:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_VOLTAGE}
+    doc: The Fermi level of the cantilever material.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  resonance_amplitude:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_LENGTH}
+    doc: |-
+      Nominal free resonance amplitude of the cantilever in air, in nm i.e., out of
+      interaction force.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  spring_constant:
+    node: dataset
+    type: NX_NUMBER
+    units: {category: NX_ANY}
+    doc: The spring constant coefficient of the cantilever.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  CALIBRATION:
+    node: group
+    name: {any: true}
+    class: NXcalibration
+    doc: The calibration information of the cantilever.
+    children:
+      sensitivity:
+        node: dataset
+        type: NX_NUMBER
+        units: {category: NX_ANY}
+        doc: |-
+          A force applied to the cantilever tip will cause a change in
+          cantilever's oscillation amplitude (in dynamic mode) or deflection of the cantilever.
+          The sensitivity of the cantilever is calculated as the ratio of this change to the force causing it.
+        via: [T1, T4, T7]
+        provisional: [Q1]
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]

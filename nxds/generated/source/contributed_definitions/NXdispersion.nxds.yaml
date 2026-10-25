@@ -1,0 +1,28 @@
+nxds: '0.1'
+class: NXdispersion
+category: base
+extends: NXobject
+doc: |-
+  A dispersion denoting a sum of different dispersions.
+  All NXdispersion_table and NXdispersion_function groups will be added together
+  to form a single dispersion.
+defaults: {min: 0, binding: false, type: NX_CHAR}
+children:
+  model_name:
+    node: dataset
+    type: NX_CHAR
+    doc: The name of the composite model.
+    via: [T1, T4, T7]
+    provisional: [Q1]
+  DISPERSION_TABLE:
+    node: group
+    name: {any: true}
+    class: NXdispersion_table
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]
+  DISPERSION_FUNCTION:
+    node: group
+    name: {any: true}
+    class: NXdispersion_function
+    via: [T1, T2, T4, T7]
+    provisional: [Q1, Q11]

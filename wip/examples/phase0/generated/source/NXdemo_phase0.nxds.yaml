@@ -1,0 +1,86 @@
+nxds: '0.1'
+class: NXdemo_phase0
+category: application
+describes: NXroot
+doc: 'Demo: absorption against energy.'
+defaults: {min: 1, binding: true, type: NX_CHAR}
+symbols:
+  nE: {doc: number of energies}
+children:
+  ENTRY:
+    node: group
+    name: {any: true}
+    class: NXentry
+    children:
+      definition:
+        node: dataset
+        enum: [NXdemo_phase0]
+        via: [T0, T1, T5, T7]
+        provisional: [Q1, Q2]
+      title:
+        node: dataset
+        occurs: {min: 0}
+        recommended: true
+        via: [T0, T1, T6, T7]
+        provisional: [Q1]
+      INSTRUMENT:
+        node: group
+        name: {any: true}
+        class: NXinstrument
+        children:
+          monochromator:
+            node: group
+            class: NXmonochromator
+            children:
+              energy:
+                node: dataset
+                type: NX_FLOAT
+                shape: [nE]
+                units: {category: NX_ENERGY}
+                via: [T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+          counter:
+            node: group
+            class: NXdemo_counter_phase0
+            children:
+              mode:
+                node: dataset
+                via: [T0, T1, T5, T7]
+                provisional: [Q1, Q2]
+              i0_counts:
+                node: dataset
+                shape: [nE]
+                via: [T0, T1, T5, T7, T9]
+                provisional: [Q1, Q2]
+            via: [T1, T5, T7]
+            provisional: [Q1, Q2]
+        via: [T1, T2, T5, T7]
+        provisional: [Q1, Q2, Q11]
+      DATA:
+        node: group
+        name: {any: true}
+        class: NXdata
+        attributes:
+          signal:
+            enum: [mu]
+            via: [T0, T1, T5]
+            provisional: [Q2]
+        children:
+          mu:
+            node: dataset
+            type: NX_FLOAT
+            shape: [nE]
+            via: [T1, T5, T7, T9]
+            provisional: [Q1, Q2]
+          energy:
+            node: link
+            target: ENTRY/INSTRUMENT/monochromator/energy
+            via: [T1, T5, T10]
+            provisional: [Q2, Q8]
+        via: [T1, T2, T5, T7]
+        provisional: [Q1, Q2, Q11]
+    via: [T1, T2, T5, T7]
+    provisional: [Q1, Q2, Q11]
+via: [T8]

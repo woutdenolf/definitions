@@ -1,0 +1,6 @@
+description: >
+  Roles (§7.4): `@signal` names a child that does not exist (REF, at the
+  attribute, member the role's, with a kind suffix because NXobject has a
+  group member DATA); `@axes` skips `.` and names `energy`, which fills the
+  role AXISNAME in addition to its own member.
+capabilities: []
